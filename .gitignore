@@ -34,3 +34,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# validation scripts (temporary development files)
+validate-schema.mjs
+validate-storage.mjs
+validate-rls.mjs
