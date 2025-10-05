@@ -39,3 +39,5 @@ next-env.d.ts
 validate-schema.mjs
 validate-storage.mjs
 validate-rls.mjs
+
+.vercel
