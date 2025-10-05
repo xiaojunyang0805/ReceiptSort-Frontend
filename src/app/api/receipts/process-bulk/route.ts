@@ -13,7 +13,7 @@ interface ProcessResult {
     merchant_name: string
     amount: number
     currency: string
-    receipt_date: string
+    receipt_date: string | null
     category: string
   }
   error?: string
