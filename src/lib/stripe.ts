@@ -1,0 +1,173 @@
+/**
+ * Stripe Integration Library
+ *
+ * Handles Stripe payment processing for credit purchases
+ */
+
+import Stripe from 'stripe'
+
+// Initialize Stripe with secret key
+// Use placeholder key during build if not set
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_placeholder', {
+  apiVersion: '2025-09-30.clover',
+  typescript: true,
+})
+
+/**
+ * Credit Package Definition
+ */
+export interface CreditPackage {
+  id: string
+  name: string
+  credits: number
+  price: number
+  priceId: string
+  description: string
+  popular?: boolean
+}
+
+/**
+ * Credit Packages
+ * Update priceId values with your actual Stripe Price IDs from dashboard
+ */
+export const CREDIT_PACKAGES: CreditPackage[] = [
+  {
+    id: 'starter',
+    name: 'Starter',
+    credits: 10,
+    price: 4.99,
+    priceId: process.env.STRIPE_PRICE_STARTER || 'price_starter',
+    description: 'Perfect for trying out the service',
+  },
+  {
+    id: 'basic',
+    name: 'Basic',
+    credits: 25,
+    price: 9.99,
+    priceId: process.env.STRIPE_PRICE_BASIC || 'price_basic',
+    description: 'Great for regular users',
+    popular: true,
+  },
+  {
+    id: 'pro',
+    name: 'Pro',
+    credits: 100,
+    price: 29.99,
+    priceId: process.env.STRIPE_PRICE_PRO || 'price_pro',
+    description: 'Best value for power users',
+  },
+  {
+    id: 'business',
+    name: 'Business',
+    credits: 500,
+    price: 99.99,
+    priceId: process.env.STRIPE_PRICE_BUSINESS || 'price_business',
+    description: 'For high-volume businesses',
+  },
+]
+
+/**
+ * Get package by ID
+ */
+export function getPackageById(packageId: string): CreditPackage | undefined {
+  return CREDIT_PACKAGES.find(pkg => pkg.id === packageId)
+}
+
+/**
+ * Create Stripe Checkout Session
+ *
+ * @param priceId - Stripe Price ID
+ * @param userId - User ID for metadata
+ * @param userEmail - User email for pre-filling
+ * @param packageId - Package ID for metadata
+ * @param credits - Number of credits for metadata
+ * @returns Stripe Checkout Session
+ */
+export async function createCheckoutSession(
+  priceId: string,
+  userId: string,
+  userEmail: string,
+  packageId: string,
+  credits: number
+): Promise<Stripe.Checkout.Session> {
+  const session = await stripe.checkout.sessions.create({
+    mode: 'payment',
+    line_items: [
+      {
+        price: priceId,
+        quantity: 1,
+      },
+    ],
+    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/credits?success=true&session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/credits?canceled=true`,
+    customer_email: userEmail,
+    metadata: {
+      user_id: userId,
+      package_id: packageId,
+      credits: credits.toString(),
+    },
+    payment_intent_data: {
+      metadata: {
+        user_id: userId,
+        package_id: packageId,
+        credits: credits.toString(),
+      },
+    },
+  })
+
+  return session
+}
+
+/**
+ * Construct Stripe Webhook Event
+ *
+ * @param body - Raw request body
+ * @param signature - Stripe signature from headers
+ * @returns Verified Stripe Event
+ */
+export function constructWebhookEvent(
+  body: string | Buffer,
+  signature: string
+): Stripe.Event {
+  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!
+
+  if (!webhookSecret) {
+    throw new Error('STRIPE_WEBHOOK_SECRET is not configured')
+  }
+
+  try {
+    const event = stripe.webhooks.constructEvent(
+      body,
+      signature,
+      webhookSecret
+    )
+    return event
+  } catch (err) {
+    const error = err as Error
+    throw new Error(`Webhook signature verification failed: ${error.message}`)
+  }
+}
+
+/**
+ * Retrieve Checkout Session
+ *
+ * @param sessionId - Stripe Checkout Session ID
+ * @returns Stripe Checkout Session with line items
+ */
+export async function retrieveCheckoutSession(
+  sessionId: string
+): Promise<Stripe.Checkout.Session> {
+  const session = await stripe.checkout.sessions.retrieve(sessionId, {
+    expand: ['line_items'],
+  })
+  return session
+}
+
+/**
+ * Get Stripe client (for advanced use cases)
+ */
+export function getStripeClient(): Stripe {
+  return stripe
+}
+
+export default stripe
