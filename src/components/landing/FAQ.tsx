@@ -115,7 +115,7 @@ export default function FAQ() {
             Still have questions?
           </h3>
           <p className="text-gray-600 mb-6 max-w-xl mx-auto">
-            Our support team is here to help. Get in touch and we'll respond within 24 hours.
+            Our support team is here to help. Get in touch and we&apos;ll respond within 24 hours.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
