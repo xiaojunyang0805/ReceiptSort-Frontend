@@ -4,6 +4,9 @@ import { FileText } from 'lucide-react'
 import Link from 'next/link'
 import { Hero } from '@/components/landing/Hero'
 import { Features } from '@/components/landing/Features'
+import { HowItWorks } from '@/components/landing/HowItWorks'
+import { SocialProof } from '@/components/landing/SocialProof'
+import FAQ from '@/components/landing/FAQ'
 
 export default async function HomePage() {
   return (
@@ -38,57 +41,13 @@ export default async function HomePage() {
       <Features />
 
       {/* How It Works */}
-      <section id="demo" className="container mx-auto px-4 py-16">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
-          <div className="space-y-8">
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
-                1
-              </div>
-              <div>
-                <h3 className="font-semibold mb-1">Sign up and get free credits</h3>
-                <p className="text-muted-foreground">
-                  Create your account and receive 10 free credits to get started
-                </p>
-              </div>
-            </div>
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
-                2
-              </div>
-              <div>
-                <h3 className="font-semibold mb-1">Upload your receipts</h3>
-                <p className="text-muted-foreground">
-                  Drag and drop receipt images or PDFs, or click to browse your files
-                </p>
-              </div>
-            </div>
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
-                3
-              </div>
-              <div>
-                <h3 className="font-semibold mb-1">AI processes your receipts</h3>
-                <p className="text-muted-foreground">
-                  Our AI extracts merchant, date, amount, and other key details automatically
-                </p>
-              </div>
-            </div>
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
-                4
-              </div>
-              <div>
-                <h3 className="font-semibold mb-1">Export and organize</h3>
-                <p className="text-muted-foreground">
-                  Download your organized receipts in your preferred format
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HowItWorks />
+
+      {/* Social Proof */}
+      <SocialProof />
+
+      {/* FAQ Section */}
+      <FAQ />
 
       {/* CTA Section */}
       <section className="container mx-auto px-4 py-16">
