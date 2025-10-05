@@ -114,3 +114,63 @@ Perfect! ✅ Successfully pushed to GitHub at xiaojunyang0805/receiptsort
   - Latest commit: "Day 1: Foundation - Auth + Database setup complete"
   - 38 files committed
 
+12:01, 05/10, 2025
+✅ Day 2.1 complete! I've successfully created the receipt upload functionality:
+  Created:
+  - ✅ src/components/dashboard/ReceiptUpload.tsx - Drag-and-drop upload component with:   
+    - React-dropzone integration for drag-and-drop
+    - Support for images (PNG, JPG, JPEG, WEBP) and PDF files
+    - Max 10MB file size validation
+    - Multiple file uploads at once
+    - Upload progress tracking for each file
+    - Image preview thumbnails
+    - File name and size display for PDFs
+    - Upload to Supabase Storage at receipts/{user_id}/{unique_filename}
+    - Database record creation for each upload
+    - Success/error toast notifications
+    - Disabled state during upload
+  - ✅ src/app/(dashboard)/upload/page.tsx - Upload page with:
+    - Instructions section explaining the upload process
+    - ReceiptUpload component
+    - Recent uploads list showing last 5 uploads with status badges
+
+  Features:
+  - File validation (type & size)
+  - Sequential upload with progress indicators
+  - Error handling for various failure scenarios
+  - Clean UI with upload queue display
+  - Status tracking (pending, uploading, success, error)
+
+12:09, 05/10, 2025
+✅ Fixed! I've replaced the messy default Next.js page with a proper landing page:
+  Created:
+  - Professional landing page with:
+    - Header with ReceiptSort branding and login/signup buttons
+    - Hero section: "Organize Your Receipts with AI"
+    - 3 feature cards: Easy Upload, AI Processing, Export Anywhere
+    - "How It Works" section with 4-step guide
+    - Call-to-action section
+    - Footer
+
+  Functionality:
+  - Redirects authenticated users to /dashboard automatically
+  - Clean, modern design using existing UI components
+  - Responsive layout
+
+12:16, 05/10, 2025
+Perfect! ✅ I've successfully added Google OAuth authentication to your app:
+  What was added:
+  - ✅ "Continue with Google" button on both login and signup pages
+  - ✅ Google OAuth flow using Supabase authentication
+  - ✅ OAuth callback handler at /auth/callback to complete the sign-in
+  - ✅ Visual divider ("Or continue with email") between OAuth and email/password
+  - ✅ Google logo in the button for better UX
+  - ✅ Loading states for both Google and email sign-in methods
+
+  Next steps to enable Google OAuth:
+  1. Go to your https://supabase.com/dashboard
+  2. Navigate to Authentication → Providers
+  3. Enable Google provider
+  4. Add your Google OAuth credentials (Client ID & Secret)
+  5. Set the redirect URL to: https://receiptsort.vercel.app/auth/callback
+
