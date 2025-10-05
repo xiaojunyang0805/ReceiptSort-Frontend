@@ -966,9 +966,8 @@ Summary of Implementation:
   4. Format choice - CSV or Excel with professional formatting
   5. Export history - Track all exports
 
-### Task 4.6: Testing and Optimization ✅
-**Date:** October 5, 2025
-
+20:30, 05/10, 2025
+Task 4.6: Testing and Optimization ✅
   1. Test Scripts Created ✅
   - Comprehensive test script (scripts/test-export.ts)
   - Test scenarios: 1, 10, 100 receipts
@@ -1051,4 +1050,77 @@ Summary of Implementation:
   8. Test with real receipt data
   9. Measure actual performance with 100 receipts
   10. Verify export history logging
+
+### Task 4.5: Export Options & Customization ✅
+**Date:** October 5, 2025
+
+  1. Export Templates Created ✅
+  - Standard template (all fields)
+  - QuickBooks template (QB-compatible format)
+    * Date, Vendor, Account, Amount, Tax, Payment Method, Memo
+  - Xero template (Xero-compatible format)
+    * Contact Name, Invoice Date, Due Date, Account Code, Description, Amount, Tax
+  - Simple template (minimal fields)
+    * Merchant, Amount, Date only
+  - Custom template (user-defined columns)
+
+  2. Template System Implementation ✅
+  - lib/export-templates.ts with template definitions
+  - Column mapping with mapReceiptToTemplate function
+  - Template preference saving (localStorage)
+  - Template preference loading on dialog open
+  - Flexible column configuration
+
+  3. CSV Export with Templates ✅
+  - Updated generateCSV to accept template parameter
+  - API accepts template_id and custom_columns
+  - Dynamic CSV generation based on template
+  - Column labels from template definition
+
+  4. ExportDialog Enhanced ✅
+  - Template dropdown for CSV exports
+  - Shows all available templates + Custom option
+  - Custom column selection with checkboxes
+  - Required fields marked and cannot be deselected
+  - Template preference automatically saved
+  - Last used template loads on dialog open
+
+  5. Custom Column Selection ✅
+  - Grid of checkboxes for all available columns
+  - Merchant, Amount, Date (required fields)
+  - Currency, Category, Tax, Payment Method, Notes (optional)
+  - Scroll area for large column lists
+  - Clear visual indication of required fields (*)
+
+  Templates Available:
+  - ✅ Standard: All 8 fields (default)
+  - ✅ QuickBooks: 7 fields in QB format
+  - ✅ Xero: 7 fields in Xero format
+  - ✅ Simple: 3 fields (merchant, amount, date)
+  - ✅ Custom: User selects from 8 available fields
+
+  Files Created:
+  - ✅ src/lib/export-templates.ts (template system)
+
+  Files Modified:
+  - ✅ src/lib/csv-generator.ts (template support)
+  - ✅ src/app/api/export/csv/route.ts (template params)
+  - ✅ src/components/dashboard/ExportDialog.tsx (template UI)
+
+  Features:
+  - ✅ Template selection for CSV exports
+  - ✅ Custom column picker
+  - ✅ Template preference persistence
+  - ✅ QuickBooks-compatible format
+  - ✅ Xero-compatible format
+  - ✅ Simplified export options
+  - ⏳ Export splitting (>1000 receipts) - future enhancement
+  - ⏳ ZIP file generation - future enhancement
+
+  Benefits:
+  - Users can export in formats compatible with their accounting software
+  - Flexible column selection for specific use cases
+  - Preferences saved for quick repeated exports
+  - Supports multiple accounting platforms (QB, Xero)
+  - Simple exports for basic needs
 

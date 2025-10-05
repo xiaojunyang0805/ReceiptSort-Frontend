@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   Dialog,
   DialogContent,
@@ -10,8 +10,16 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
+import { Label } from '@/components/ui/label'
+import { Checkbox } from '@/components/ui/checkbox'
 import { FileSpreadsheet, FileText, Loader2, Download } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
+import {
+  EXPORT_TEMPLATES,
+  AVAILABLE_COLUMNS,
+  saveTemplatePreference,
+  loadTemplatePreference,
+} from '@/lib/export-templates'
 
 interface ExportDialogProps {
   open: boolean
@@ -32,25 +40,59 @@ export default function ExportDialog({
   onExportComplete,
 }: ExportDialogProps) {
   const [selectedFormat, setSelectedFormat] = useState<ExportFormat>('excel')
+  const [selectedTemplate, setSelectedTemplate] = useState('standard')
+  const [customColumns, setCustomColumns] = useState<string[]>([
+    'merchant_name',
+    'total_amount',
+    'receipt_date',
+  ])
   const [isExporting, setIsExporting] = useState(false)
   const { toast } = useToast()
+
+  // Load saved template preference
+  useEffect(() => {
+    const preference = loadTemplatePreference()
+    if (preference) {
+      setSelectedTemplate(preference.templateId)
+      if (preference.customColumns.length > 0) {
+        setCustomColumns(preference.customColumns)
+      }
+    }
+  }, [])
 
   const handleExport = async () => {
     if (selectedIds.length === 0) return
 
     setIsExporting(true)
 
+    // Save template preference
+    saveTemplatePreference(selectedTemplate, customColumns)
+
     try {
       const endpoint = selectedFormat === 'csv' ? '/api/export/csv' : '/api/export/excel'
+
+      const requestBody: {
+        receipt_ids: string[]
+        template_id?: string
+        custom_columns?: string[]
+      } = {
+        receipt_ids: selectedIds,
+      }
+
+      // Add template info for CSV exports
+      if (selectedFormat === 'csv') {
+        requestBody.template_id = selectedTemplate
+        if (selectedTemplate === 'custom') {
+          requestBody.custom_columns = customColumns
+        }
+      }
 
       const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          receipt_ids: selectedIds,
-        }),
+        body: JSON.stringify(requestBody),
       })
 
       if (!response.ok) {
@@ -158,6 +200,61 @@ export default function ExportDialog({
               </div>
             </button>
           </div>
+
+          {/* Template Selection (CSV only) */}
+          {selectedFormat === 'csv' && (
+            <div className="space-y-2">
+              <Label>Export Template</Label>
+              <select
+                value={selectedTemplate}
+                onChange={(e) => setSelectedTemplate(e.target.value)}
+                className="w-full px-3 py-2 border rounded-md bg-background"
+                disabled={isExporting}
+              >
+                {EXPORT_TEMPLATES.map((template) => (
+                  <option key={template.id} value={template.id}>
+                    {template.name} - {template.description}
+                  </option>
+                ))}
+                <option value="custom">Custom - Choose columns</option>
+              </select>
+            </div>
+          )}
+
+          {/* Custom Column Selection */}
+          {selectedFormat === 'csv' && selectedTemplate === 'custom' && (
+            <div className="space-y-2">
+              <Label>Select Columns</Label>
+              <div className="grid grid-cols-2 gap-2 p-3 border rounded-md max-h-40 overflow-y-auto">
+                {AVAILABLE_COLUMNS.map((column) => (
+                  <div key={column.key} className="flex items-center space-x-2">
+                    <Checkbox
+                      id={`col-${column.key}`}
+                      checked={customColumns.includes(column.key)}
+                      onCheckedChange={(checked) => {
+                        if (checked) {
+                          setCustomColumns([...customColumns, column.key])
+                        } else if (!column.required) {
+                          setCustomColumns(customColumns.filter(k => k !== column.key))
+                        }
+                      }}
+                      disabled={column.required || isExporting}
+                    />
+                    <label
+                      htmlFor={`col-${column.key}`}
+                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
+                      {column.label}
+                      {column.required && <span className="text-red-500 ml-1">*</span>}
+                    </label>
+                  </div>
+                ))}
+              </div>
+              <p className="text-xs text-muted-foreground">
+                * Required fields cannot be deselected
+              </p>
+            </div>
+          )}
 
           {/* Warnings */}
           {selectedIds.length > MAX_EXPORT_RECEIPTS && (

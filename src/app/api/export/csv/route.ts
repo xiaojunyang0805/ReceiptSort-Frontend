@@ -1,9 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { generateCSV, generateCSVFilename } from '@/lib/csv-generator'
+import { getTemplate, createCustomTemplate } from '@/lib/export-templates'
 
 interface ExportRequest {
   receipt_ids: string[]
+  template_id?: string
+  custom_columns?: string[]
 }
 
 // Export limits
@@ -30,7 +33,7 @@ export async function POST(request: NextRequest) {
 
     // 2. Parse request body
     const body: ExportRequest = await request.json()
-    const { receipt_ids } = body
+    const { receipt_ids, template_id, custom_columns } = body
 
     if (!receipt_ids || !Array.isArray(receipt_ids) || receipt_ids.length === 0) {
       return NextResponse.json(
@@ -88,8 +91,19 @@ export async function POST(request: NextRequest) {
 
     console.log(`[CSV Export] Found ${completedReceipts.length} completed receipts`)
 
-    // 5. Generate CSV
-    const csv = generateCSV(completedReceipts)
+    // 5. Determine export template
+    let template
+    if (template_id === 'custom' && custom_columns) {
+      template = createCustomTemplate(custom_columns)
+    } else if (template_id) {
+      template = getTemplate(template_id)
+    }
+    // If no template or template not found, use default (STANDARD_TEMPLATE)
+
+    console.log(`[CSV Export] Using template: ${template?.name || 'Standard'}`)
+
+    // 6. Generate CSV
+    const csv = generateCSV(completedReceipts, template)
     const filename = generateCSVFilename()
 
     // 6. Record export in exports table (optional - create table if needed)

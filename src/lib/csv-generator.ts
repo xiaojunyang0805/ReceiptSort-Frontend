@@ -1,5 +1,6 @@
 import Papa from 'papaparse'
 import { format } from 'date-fns'
+import { ExportTemplate, mapReceiptToTemplate, STANDARD_TEMPLATE } from './export-templates'
 
 interface Receipt {
   id: string
@@ -15,24 +16,16 @@ interface Receipt {
   created_at: string
 }
 
-interface CSVRow {
-  Merchant: string
-  Amount: string
-  Currency: string
-  Date: string
-  Category: string
-  'Tax Amount': string
-  'Payment Method': string
-  Notes: string
-}
-
 /**
  * Generate CSV export from receipts
  *
  * @param receipts - Array of receipt records to export
+ * @param template - Optional export template (defaults to STANDARD_TEMPLATE)
  * @returns CSV string with header row
  */
-export function generateCSV(receipts: Receipt[]): string {
+export function generateCSV(receipts: Receipt[], template?: ExportTemplate): string {
+  const exportTemplate = template || STANDARD_TEMPLATE
+
   // Filter only completed receipts
   const completedReceipts = receipts.filter(r => r.processing_status === 'completed')
 
@@ -43,33 +36,18 @@ export function generateCSV(receipts: Receipt[]): string {
     return dateA - dateB
   })
 
-  // Transform to CSV rows
-  const csvData: CSVRow[] = sortedReceipts.map(receipt => ({
-    Merchant: receipt.merchant_name || '',
-    Amount: receipt.total_amount?.toFixed(2) || '0.00',
-    Currency: receipt.currency || '',
-    Date: receipt.receipt_date
-      ? format(new Date(receipt.receipt_date), 'MM/dd/yyyy')
-      : '',
-    Category: receipt.category || '',
-    'Tax Amount': receipt.tax_amount?.toFixed(2) || '',
-    'Payment Method': receipt.payment_method || '',
-    Notes: receipt.notes || '',
-  }))
+  // Transform to CSV rows using template
+  const csvData = sortedReceipts.map(receipt =>
+    mapReceiptToTemplate(receipt as unknown as Record<string, unknown>, exportTemplate)
+  )
+
+  // Get column labels from template
+  const columns = exportTemplate.columns.map(col => col.label)
 
   // Generate CSV using papaparse
   const csv = Papa.unparse(csvData, {
     header: true,
-    columns: [
-      'Merchant',
-      'Amount',
-      'Currency',
-      'Date',
-      'Category',
-      'Tax Amount',
-      'Payment Method',
-      'Notes',
-    ],
+    columns,
   })
 
   return csv
