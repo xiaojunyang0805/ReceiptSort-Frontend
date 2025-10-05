@@ -21,7 +21,7 @@ export async function Navbar() {
 
   const { data: profile } = await supabase
     .from('profiles')
-    .select('credits_remaining, full_name')
+    .select('credits, full_name')
     .eq('id', user?.id)
     .single()
 
@@ -49,7 +49,7 @@ export async function Navbar() {
           <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full">
             <span className="text-sm font-medium">Credits:</span>
             <span className="text-sm font-bold text-primary">
-              {profile?.credits_remaining ?? 0}
+              {profile?.credits ?? 0}
             </span>
           </div>
 
@@ -75,7 +75,7 @@ export async function Navbar() {
               <DropdownMenuSeparator />
               <DropdownMenuItem className="sm:hidden">
                 <span className="text-sm">
-                  Credits: {profile?.credits_remaining ?? 0}
+                  Credits: {profile?.credits ?? 0}
                 </span>
               </DropdownMenuItem>
               <DropdownMenuSeparator className="sm:hidden" />

@@ -84,7 +84,7 @@ export default async function DashboardPage() {
         </CardHeader>
         <CardContent>
           <div className="text-4xl font-bold text-primary">
-            {profile?.credits_remaining ?? 0}
+            {profile?.credits ?? 0}
           </div>
           <p className="text-sm text-muted-foreground mt-2">
             Credits remaining
