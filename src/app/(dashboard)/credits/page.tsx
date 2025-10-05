@@ -1,9 +1,9 @@
 import { createClient } from '@/lib/supabase/server'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { CreditCard } from 'lucide-react'
-import { CreditPackages } from '@/components/dashboard/CreditPackages'
 import { CreditHistory } from '@/components/dashboard/CreditHistory'
 import { SuccessMessage } from '@/components/dashboard/SuccessMessage'
+import { PurchaseToggle } from '@/components/dashboard/PurchaseToggle'
 
 interface CreditsPageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
@@ -66,8 +66,8 @@ export default async function CreditsPage({ searchParams }: CreditsPageProps) {
         </CardContent>
       </Card>
 
-      {/* Purchase Options */}
-      <CreditPackages />
+      {/* Purchase Options with Toggle */}
+      <PurchaseToggle />
 
       {/* Transaction History */}
       <CreditHistory />

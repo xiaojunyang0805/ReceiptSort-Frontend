@@ -27,6 +27,19 @@ export interface CreditPackage {
 }
 
 /**
+ * Subscription Plan Definition
+ */
+export interface SubscriptionPlan {
+  id: string
+  name: string
+  creditsPerMonth: number
+  pricePerMonth: number
+  priceId: string
+  description: string
+  popular?: boolean
+}
+
+/**
  * Credit Packages
  * Update priceId values with your actual Stripe Price IDs from dashboard
  */
@@ -67,10 +80,49 @@ export const CREDIT_PACKAGES: CreditPackage[] = [
 ]
 
 /**
+ * Subscription Plans
+ * Update priceId values with your actual Stripe Price IDs from dashboard
+ */
+export const SUBSCRIPTION_PLANS: SubscriptionPlan[] = [
+  {
+    id: 'basic',
+    name: 'Basic',
+    creditsPerMonth: 50,
+    pricePerMonth: 19,
+    priceId: process.env.STRIPE_PRICE_SUB_BASIC || 'price_sub_basic',
+    description: 'Perfect for regular users',
+  },
+  {
+    id: 'pro',
+    name: 'Pro',
+    creditsPerMonth: 200,
+    pricePerMonth: 39,
+    priceId: process.env.STRIPE_PRICE_SUB_PRO || 'price_sub_pro',
+    description: 'Best for power users',
+    popular: true,
+  },
+  {
+    id: 'business',
+    name: 'Business',
+    creditsPerMonth: 1000,
+    pricePerMonth: 99,
+    priceId: process.env.STRIPE_PRICE_SUB_BUSINESS || 'price_sub_business',
+    description: 'For high-volume businesses',
+  },
+]
+
+/**
  * Get package by ID
  */
 export function getPackageById(packageId: string): CreditPackage | undefined {
   return CREDIT_PACKAGES.find(pkg => pkg.id === packageId)
+}
+
+/**
+ * Get subscription plan by ID
+ */
+export function getPlanById(planId: string): SubscriptionPlan | undefined {
+  return SUBSCRIPTION_PLANS.find(plan => plan.id === planId)
 }
 
 /**
@@ -113,6 +165,68 @@ export async function createCheckoutSession(
         credits: credits.toString(),
       },
     },
+  })
+
+  return session
+}
+
+/**
+ * Create Stripe Subscription Checkout Session
+ *
+ * @param priceId - Stripe Price ID for subscription
+ * @param userId - User ID for metadata
+ * @param userEmail - User email for pre-filling
+ * @param planId - Plan ID for metadata
+ * @param creditsPerMonth - Number of credits per month
+ * @returns Stripe Checkout Session
+ */
+export async function createSubscriptionCheckoutSession(
+  priceId: string,
+  userId: string,
+  userEmail: string,
+  planId: string,
+  creditsPerMonth: number
+): Promise<Stripe.Checkout.Session> {
+  const session = await stripe.checkout.sessions.create({
+    mode: 'subscription',
+    line_items: [
+      {
+        price: priceId,
+        quantity: 1,
+      },
+    ],
+    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/credits?success=true&session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/credits?canceled=true`,
+    customer_email: userEmail,
+    metadata: {
+      user_id: userId,
+      plan_id: planId,
+      credits_per_month: creditsPerMonth.toString(),
+    },
+    subscription_data: {
+      metadata: {
+        user_id: userId,
+        plan_id: planId,
+        credits_per_month: creditsPerMonth.toString(),
+      },
+    },
+  })
+
+  return session
+}
+
+/**
+ * Create Stripe Customer Portal Session
+ *
+ * @param customerId - Stripe Customer ID
+ * @returns Stripe Portal Session
+ */
+export async function createPortalSession(
+  customerId: string
+): Promise<Stripe.BillingPortal.Session> {
+  const session = await stripe.billingPortal.sessions.create({
+    customer: customerId,
+    return_url: `${process.env.NEXT_PUBLIC_APP_URL}/credits`,
   })
 
   return session

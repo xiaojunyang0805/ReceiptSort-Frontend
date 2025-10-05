@@ -77,10 +77,33 @@ export async function POST(request: NextRequest) {
       }
 
       case 'invoice.payment_succeeded': {
-        // For future subscription support
         const invoice = event.data.object as Stripe.Invoice
         console.log(`[Webhook] Invoice payment succeeded: ${invoice.id}`)
-        // Handle subscription renewal when implemented
+
+        // Handle subscription renewal - add monthly credits
+        // Check if this is a subscription invoice
+        const subscriptionId = (invoice as unknown as { subscription?: string }).subscription
+        if (subscriptionId) {
+          await handleSubscriptionRenewal(invoice)
+        }
+        break
+      }
+
+      case 'customer.subscription.deleted': {
+        const subscription = event.data.object as Stripe.Subscription
+        console.log(`[Webhook] Subscription canceled: ${subscription.id}`)
+
+        // Update user profile to remove subscription info
+        await handleSubscriptionCanceled(subscription)
+        break
+      }
+
+      case 'customer.subscription.updated': {
+        const subscription = event.data.object as Stripe.Subscription
+        console.log(`[Webhook] Subscription updated: ${subscription.id}`)
+
+        // Update user profile with new subscription info
+        await handleSubscriptionUpdated(subscription)
         break
       }
 
@@ -169,6 +192,145 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   } catch (error) {
     console.error('[Webhook] Error handling checkout completion:', error)
     throw error // Re-throw to mark webhook as failed
+  }
+}
+
+/**
+ * Handle subscription renewal (invoice.payment_succeeded)
+ */
+async function handleSubscriptionRenewal(invoice: Stripe.Invoice) {
+  try {
+    // const subscription = invoice.subscription as string
+    const metadata = (invoice as unknown as { subscription_metadata?: Record<string, string> }).subscription_metadata || {}
+    const { user_id, credits_per_month } = metadata
+
+    if (!user_id || !credits_per_month) {
+      console.warn('[Webhook] Missing subscription metadata')
+      return
+    }
+
+    const creditsToAdd = parseInt(credits_per_month, 10)
+
+    console.log(`[Webhook] Adding ${creditsToAdd} monthly credits to user ${user_id}`)
+
+    // 1. Get current user credits
+    const { data: profile, error: fetchError } = await supabase
+      .from('profiles')
+      .select('credits')
+      .eq('id', user_id)
+      .single()
+
+    if (fetchError) {
+      throw new Error(`Failed to fetch user profile: ${fetchError.message}`)
+    }
+
+    const currentCredits = profile?.credits || 0
+    const newCredits = currentCredits + creditsToAdd
+
+    // 2. Update user credits
+    const { error: updateError } = await supabase
+      .from('profiles')
+      .update({ credits: newCredits })
+      .eq('id', user_id)
+
+    if (updateError) {
+      throw new Error(`Failed to update credits: ${updateError.message}`)
+    }
+
+    console.log(`[Webhook] Credits updated: ${currentCredits} -> ${newCredits}`)
+
+    // 3. Create credit transaction record
+    const paymentIntent = (invoice as unknown as { payment_intent?: string }).payment_intent
+    const { error: transactionError } = await supabase
+      .from('credit_transactions')
+      .insert({
+        user_id,
+        amount: creditsToAdd,
+        type: 'purchase',
+        description: `Monthly subscription credits`,
+        stripe_payment_intent: paymentIntent || null,
+      })
+
+    if (transactionError) {
+      console.error('[Webhook] Failed to create transaction record:', transactionError)
+    } else {
+      console.log(`[Webhook] Transaction record created for subscription renewal`)
+    }
+
+    console.log(`[Webhook] Subscription renewal processed for user ${user_id}`)
+  } catch (error) {
+    console.error('[Webhook] Error handling subscription renewal:', error)
+    throw error
+  }
+}
+
+/**
+ * Handle subscription cancellation (customer.subscription.deleted)
+ */
+async function handleSubscriptionCanceled(subscription: Stripe.Subscription) {
+  try {
+    const { user_id } = subscription.metadata || {}
+
+    if (!user_id) {
+      console.warn('[Webhook] Missing user_id in subscription metadata')
+      return
+    }
+
+    console.log(`[Webhook] Canceling subscription for user ${user_id}`)
+
+    // Update user profile to remove subscription info
+    const { error } = await supabase
+      .from('profiles')
+      .update({
+        stripe_customer_id: null,
+        stripe_subscription_id: null,
+        subscription_status: null,
+      })
+      .eq('id', user_id)
+
+    if (error) {
+      throw new Error(`Failed to update profile: ${error.message}`)
+    }
+
+    console.log(`[Webhook] Subscription canceled for user ${user_id}`)
+  } catch (error) {
+    console.error('[Webhook] Error handling subscription cancellation:', error)
+    throw error
+  }
+}
+
+/**
+ * Handle subscription update (customer.subscription.updated)
+ */
+async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
+  try {
+    const { user_id } = subscription.metadata || {}
+
+    if (!user_id) {
+      console.warn('[Webhook] Missing user_id in subscription metadata')
+      return
+    }
+
+    console.log(`[Webhook] Updating subscription for user ${user_id}`)
+
+    // Update user profile with subscription info
+    const { error } = await supabase
+      .from('profiles')
+      .update({
+        stripe_customer_id: subscription.customer as string,
+        stripe_subscription_id: subscription.id,
+        subscription_status: subscription.status,
+      })
+      .eq('id', user_id)
+
+    if (error) {
+      throw new Error(`Failed to update profile: ${error.message}`)
+    }
+
+    console.log(`[Webhook] Subscription updated for user ${user_id}: ${subscription.status}`)
+  } catch (error) {
+    console.error('[Webhook] Error handling subscription update:', error)
+    throw error
   }
 }
 
