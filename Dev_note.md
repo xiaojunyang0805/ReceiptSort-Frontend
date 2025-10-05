@@ -208,3 +208,28 @@ Perfect! ✅ I've successfully added Google OAuth authentication to your app:
   - ✅ Responsive design - Table on desktop, cards on mobile
   Routes created:
   - /dashboard/receipts - View all receipts page
+
+14:20, 05/10, 2025
+Task 2.3 complete. The ReceiptDetailModal is now fully integrated with ReceiptList - clicking "View Details" on any receipt (desktop or mobile) will open the modal with the receipt preview and editable form.
+
+14:35, 05/10, 2025
+Task 2.4 complete!
+  Summary:
+  ✅ Created API endpoint at app/api/receipts/[id]/view/route.ts:
+  - Verifies user authentication
+  - Confirms user owns the receipt
+  - Generates signed URL valid for 5 minutes
+  - Returns URL with expiration timestamp
+  ✅ Updated ReceiptDetailModal:
+  - Fetches signed URL when modal opens
+  - Displays loading/error states
+  - Auto-refreshes URL at 4.5 minutes (before expiration)
+  - Uses signed URLs for both image and PDF previews
+  - Includes retry button on errors
+  ✅ Security implemented:
+  - User ownership verification in API endpoint
+  - Private storage bucket (removed public URLs from ReceiptList)
+  - 5-minute URL expiration
+  - 403 Forbidden if user tries to access another user's receipt
+  The storage bucket is now fully private - all file access goes through signed URLs with proper authentication and authorization checks.
+

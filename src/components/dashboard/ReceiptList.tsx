@@ -165,7 +165,7 @@ export default function ReceiptList() {
             </p>
           </div>
           <Button asChild>
-            <a href="/dashboard/upload">Upload Receipt</a>
+            <a href="/upload">Upload Receipt</a>
           </Button>
         </div>
       </Card>

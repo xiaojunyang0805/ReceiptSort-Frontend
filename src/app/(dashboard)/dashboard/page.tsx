@@ -90,7 +90,7 @@ export default async function DashboardPage() {
             Credits remaining
           </p>
           <Button asChild className="mt-4">
-            <Link href="/dashboard/credits">Purchase More Credits</Link>
+            <Link href="/credits">Purchase More Credits</Link>
           </Button>
         </CardContent>
       </Card>
@@ -142,7 +142,7 @@ export default async function DashboardPage() {
           </CardHeader>
           <CardContent>
             <Button asChild size="lg">
-              <Link href="/dashboard/upload">
+              <Link href="/upload">
                 <Upload className="mr-2 h-4 w-4" />
                 Upload Your First Receipt
               </Link>

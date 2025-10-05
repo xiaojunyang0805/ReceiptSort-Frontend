@@ -7,10 +7,10 @@ import { Home, Upload, Receipt, Download, CreditCard } from 'lucide-react'
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: Home },
-  { name: 'Upload Receipts', href: '/dashboard/upload', icon: Upload },
-  { name: 'My Receipts', href: '/dashboard/receipts', icon: Receipt },
-  { name: 'Export', href: '/dashboard/export', icon: Download },
-  { name: 'Credits', href: '/dashboard/credits', icon: CreditCard },
+  { name: 'Upload Receipts', href: '/upload', icon: Upload },
+  { name: 'My Receipts', href: '/receipts', icon: Receipt },
+  { name: 'Export', href: '/export', icon: Download },
+  { name: 'Credits', href: '/credits', icon: CreditCard },
 ]
 
 interface SidebarProps {
