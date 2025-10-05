@@ -1,0 +1,11 @@
+filename,merchant_name,amount,currency,date,category,tax_amount,payment_method,confidence_score,processing_time_ms,success,error
+s01.webp,"BY 2 COFFEE",129.28,USD,2025-08-09,"Food & Dining",8.08,"Credit Card",0.95,6759,true,
+s02.png,"East Repair Inc.",154.06,USD,2019-02-11,"Transportation",9.06,"Bank Transfer",0.95,9143,true,
+s03.webp,"O'Reilly Auto Parts",19.48,USD,2025-02-12,"Transportation",,"Debit Card",0.95,8844,true,
+s04.png,"Post Office Ltd.",5.34,USD,2017-05-24,"Utilities",,"Debit Card",0.95,10329,true,
+s05.png,"Public's Store",20.1,USD,2020-11-02,"Food & Dining",0.39,"Credit Card",0.95,9063,true,
+s06.jpg,"Berghotel Grosse Scheidegg",54.5,CHF,2007-07-30,"Food & Dining",3.85,"Unknown",0.95,9108,true,
+s07.jpg,"SUPERMARKET",107.6,USD,null,"Food & Dining",,"Cash",0.7,8704,true,
+s08.jpg,"Restaurant Name",64.6,USD,2012-03-15,"Food & Dining",5.33,"Unknown",0.95,4615,true,
+s09.jpg,"GROCERY DEPOT",29.82,USD,2019-01-07,"Food & Dining",1.82,"Unknown",0.95,10610,true,
+s10.jpg,"SUPERMARKET",17.07,USD,2019-11-21,"Food & Dining",,"Debit Card",0.95,5671,true,

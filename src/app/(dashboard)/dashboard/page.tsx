@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button'
 import { CreditCard, FileText, Upload, Calendar } from 'lucide-react'
 import Link from 'next/link'
+import { ProcessAllButton } from '@/components/dashboard/ProcessAllButton'
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -44,14 +45,15 @@ export default async function DashboardPage() {
     .single()
 
   // Fetch pending receipts
-  const { count: pendingReceipts } = await supabase
+  const { data: pendingReceiptsData, count: pendingReceipts } = await supabase
     .from('receipts')
-    .select('*', { count: 'exact', head: true })
+    .select('id', { count: 'exact' })
     .eq('user_id', user?.id)
     .eq('processing_status', 'pending')
 
   const hasReceipts = (totalReceipts ?? 0) > 0
   const hasPendingReceipts = (pendingReceipts ?? 0) > 0
+  const pendingIds = (pendingReceiptsData ?? []).map(r => r.id)
 
   const lastExportDate = lastExport?.created_at
     ? new Date(lastExport.created_at).toLocaleDateString('en-US', {
@@ -154,13 +156,15 @@ export default async function DashboardPage() {
           <CardHeader>
             <CardTitle>Pending Receipts</CardTitle>
             <CardDescription>
-              You have {pendingReceipts} receipt(s) waiting to be processed
+              You have {pendingReceipts} receipt{pendingReceipts === 1 ? '' : 's'} waiting to be processed
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button size="lg">
-              Process All Pending ({pendingReceipts})
-            </Button>
+            <ProcessAllButton
+              pendingCount={pendingReceipts ?? 0}
+              pendingIds={pendingIds}
+              userCredits={profile?.credits ?? 0}
+            />
           </CardContent>
         </Card>
       ) : null}

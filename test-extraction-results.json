@@ -1,0 +1,162 @@
+[
+  {
+    "filename": "s01.webp",
+    "success": true,
+    "data": {
+      "merchant_name": "BY 2 COFFEE",
+      "amount": 129.28,
+      "currency": "USD",
+      "receipt_date": "2025-08-09",
+      "category": "Food & Dining",
+      "tax_amount": 8.08,
+      "payment_method": "Credit Card",
+      "confidence_score": 0.95,
+      "raw_text": "BY 2 COFFEE\nAugust 9th, 2025, 7:30 PM\nHoramavu, Bangalore\n--------------------------------\nThai Green Curry $45.00\nDolma Aunty’s Chicken Momos $38.00\nSoda (x2) $6.00\nDessert $12.00\n--------------------------------\nSUBTOTAL $101.00\nTAX $8.08\nTIP $20.20\n--------------------------------\nTOTAL $129.28\nCREDIT CARD\n(XXXX-XXXX-XX10-0202)"
+    },
+    "processingTime": 6759
+  },
+  {
+    "filename": "s02.png",
+    "success": true,
+    "data": {
+      "merchant_name": "East Repair Inc.",
+      "amount": 154.06,
+      "currency": "USD",
+      "receipt_date": "2019-02-11",
+      "category": "Transportation",
+      "tax_amount": 9.06,
+      "payment_method": "Bank Transfer",
+      "confidence_score": 0.95,
+      "raw_text": "East Repair Inc.\n1912 Harvest Lane\nNew York, NY 12210\nBILL TO\nJohn Smith\n2 Court Square\nNew York, NY 12210\nSHIP TO\nJohn Smith\n3787 Pineview Drive\nCambridge, MA 12210\nRECEIPT #\nUS-001\nRECEIPT DATE\n11/02/2019\nP.O.#\n2312/2019\nDUE DATE\n26/02/2019\nReceipt Total\nQTY\nDESCRIPTION\nUNIT PRICE\nAMOUNT\n1\nFront and rear brake cables\n100.00\n100.00\n2\nNew set of pedal arms\n15.00\n30.00\n3\nLabor 3hrs\n5.00\n15.00\nSubtotal\n145.00\nSales Tax 6.25%\n9.06\n$154.06\nPAYMENT INSTRUCTION\nPaypal email\nreceipt@gmail.com\nBank transfer\nRouting (ABC): 0560120214\nTERMS & CONDITIONS\nPayment is due within 15 days\nPlease make checks payable to: East Repair Inc."
+    },
+    "processingTime": 9143
+  },
+  {
+    "filename": "s03.webp",
+    "success": true,
+    "data": {
+      "merchant_name": "O'Reilly Auto Parts",
+      "amount": 19.48,
+      "currency": "USD",
+      "receipt_date": "2025-02-12",
+      "category": "Transportation",
+      "tax_amount": null,
+      "payment_method": "Debit Card",
+      "confidence_score": 0.95,
+      "raw_text": "O'Reilly AUTO PARTS\n885 MAIN STREET\nBILLINGS, MT 59105\n(406) 256-6546\nwww.oreillyauto.com\nStore hours:\nMon-Sat: 07:30 AM-09:00 PM\nSun: 08:00 AM-08:00 PM\nCounter #: 445099 Kelly\nDate: 02/12/2025 10:49 AM Drawer: 6\nInvoice #: 1549-457955 1549WS172\nWS 1012\nDSL ANTIGEL 8.49\nMANUFACTURER'S DEFECT WARRANTY\n87221\nGALANTIFREZ 10.99\n30 DAY LIMITED WARRANTY\nItems\nSub-Total 19.48\nTotal 19.48\nDB 7690 19.48"
+    },
+    "processingTime": 8844
+  },
+  {
+    "filename": "s04.png",
+    "success": true,
+    "data": {
+      "merchant_name": "Post Office Ltd.",
+      "amount": 5.34,
+      "currency": "USD",
+      "receipt_date": "2017-05-24",
+      "category": "Utilities",
+      "tax_amount": null,
+      "payment_method": "Debit Card",
+      "confidence_score": 0.95,
+      "raw_text": "Post Office Ltd. Your Receipt FAD: 012006\nKensington\n208 - 212 Kensington High Street\nLondon\nGreater London\nW8 7RG\nVAT REG No. 08 243 1700 02\nDate of Issue: 24/05/2017 09:46\nSESSION: 1-50557\nOne Item Sale 1 0 5.34 5.34\nTOTAL DUE TO POST OFFICE 5.34\nVisa Debit FROM CUSTOMER 5.34\nBALANCE 0.00\nPayment Retail\nBUSINESS DEBIT\nCard Number: **** **** **** 2030 Issue:\nICC\nCode: 060332 Ref No: 1081\nMerchant ID: 3291763\nAuthorisation: 000000\nTerminal ID: 000000031010\nTransaction ID: 000000000000000\nTransaction Date: 24/05/2017 PAN Seq No: 00\nTime of Payment: 24/05/2017 09:46\nAmount: £5.34\nYour account will be debited with the above amount. Cardholder PIN verified.\nTransaction confirmed.\nPlease retain for future reference"
+    },
+    "processingTime": 10329
+  },
+  {
+    "filename": "s05.png",
+    "success": true,
+    "data": {
+      "merchant_name": "Public's Store",
+      "amount": 20.1,
+      "currency": "USD",
+      "receipt_date": "2020-11-02",
+      "category": "Food & Dining",
+      "tax_amount": 0.39,
+      "payment_method": "Credit Card",
+      "confidence_score": 0.95,
+      "raw_text": "Public's Store\nStore Plaza\n1425 Store Drive\nJacksonville, FL, 32331\nTEL : +1 888 888 8888\n\nDRAGON FRUIT 3.99 F\nBANANAS\n2.28 lb @ 0.55/lb 1.25 F\nWHOLE CHICKEN 14.47 F\n\nOrder Total 19.71\nSales Tax 0.00\nFood Tax 0.39\nGrand Total 20.10\nCREDIT Payment 20.10\nChange 0.00\n\n-------------------------\nPRESTO\nTrace #: 124868\nReference #: 6969091034\nAcct #: XXXXXXXXXXXX9999\nPurchase #: VISA\nAmount #: 20.10\nAuth #: 186707\n\n-------------------------\nCREDIT CARD PURCHASE\n607539868888 VISA\nEntry Method: Chip Read\nMode: Issuer\n\nYour cashier was Eminem Martin\n11/02/2020 17:06 S2353 R2991 03134 C1208\n\nTogether, we'll get through this COVID-19 Situation.\n\nSuper Market"
+    },
+    "processingTime": 9063
+  },
+  {
+    "filename": "s06.jpg",
+    "success": true,
+    "data": {
+      "merchant_name": "Berghotel Grosse Scheidegg",
+      "amount": 54.5,
+      "currency": "CHF",
+      "receipt_date": "2007-07-30",
+      "category": "Food & Dining",
+      "tax_amount": 3.85,
+      "payment_method": "Unknown",
+      "confidence_score": 0.95,
+      "raw_text": "Berghotel Grosse Scheidegg\n3818 Grindelwald\nFamilie R.Müller\n\nRech.Nr. 4572 30.07.2007/13:29:17\nBar Tisch 7/01\n\n2xLatte Macchiato à 4.50 CHF 9.00\n1xGloki à 5.00 CHF 5.00\n1xSchweinschnitzel à 22.00 CHF 22.00\n1xChässpätzli à 18.50 CHF 18.50\n\nTotal : CHF 54.50\n\nIncl. 7.6% MwSt 54.50 CHF: 3.85\n\nEntspricht in Euro 36.33 EUR\nEs bediente Sie: Ursula\n\nMwSt Nr.: 430 234\nTel.: 033 853 67 16\nFax.: 033 853 67 19\n\nE-mail: grossescheidegg@bluewin.ch"
+    },
+    "processingTime": 9108
+  },
+  {
+    "filename": "s07.jpg",
+    "success": true,
+    "data": {
+      "merchant_name": "SUPERMARKET",
+      "amount": 107.6,
+      "currency": "USD",
+      "receipt_date": null,
+      "category": "Food & Dining",
+      "tax_amount": null,
+      "payment_method": "Cash",
+      "confidence_score": 0.7,
+      "raw_text": "SUPERMARKET\nLorem ipsum 258\nCity Index - 02025\nTel.: +456-468-987-02\n\nCashier: #3\nManager: Eric Steer\n\nName Qty Price\nLorem ipsum 1 $9.20\nLorem ipsum dolor sit 1 $19.20\nLorem ipsum dolor sit amet 1 $15.00\nLorem ipsum 1 $15.00\nLorem ipsum 1 $15.00\nLorem ipsum dolor sit 1 $15.00\nLorem ipsum 1 $19.20\n\nSub Total $107.60\nCASH $200.00\nCHANGE $92.40\n\nTHANK YOU!\nGlad to see you again!"
+    },
+    "processingTime": 8704
+  },
+  {
+    "filename": "s08.jpg",
+    "success": true,
+    "data": {
+      "merchant_name": "Restaurant Name",
+      "amount": 64.6,
+      "currency": "USD",
+      "receipt_date": "2012-03-15",
+      "category": "Food & Dining",
+      "tax_amount": 5.33,
+      "payment_method": "Unknown",
+      "confidence_score": 0.95,
+      "raw_text": "Restaurant Name\nAddress 1\nAddress 2\n\n3/15/12 6:06:44 PM Server: John\nTable: 201 Sec: S1 Guest: 1 Chk: #1111\n\n5 BLOODY MARY $ 40.75\n1 FRESH OYSTER $ 12.50\n\nSUBTOTAL $ 53.25\nTAX $ 5.33\nGRATUITY $ 6.00\nTOTAL $ 64.60\n\nThank You for Dining With Us!\nPlease Come Again"
+    },
+    "processingTime": 4615
+  },
+  {
+    "filename": "s09.jpg",
+    "success": true,
+    "data": {
+      "merchant_name": "GROCERY DEPOT",
+      "amount": 29.82,
+      "currency": "USD",
+      "receipt_date": "2019-01-07",
+      "category": "Food & Dining",
+      "tax_amount": 1.82,
+      "payment_method": "Unknown",
+      "confidence_score": 0.95,
+      "raw_text": "GROCERY DEPOT\n5000 GA-5\nDouglasville, GA 30135\n\nCashier: ENZO G.\n\nDELITE SKIM $10.36 TFA\n 4EA @ 2.59/EA\nWHOLEMILK $7.77 TFA\n 3EA @ 2.59/EA\nREDBULL $1.89 TFA\nSTRING CHEESE 16PK $7.98 TFA\n 2EA @ 3.99/EA\n\nSUBTOTAL $28.00\nTAX $1.82\nTOTAL $29.82\nTEND $29.82\nCHANGE DUE $0.00\n\nItem Count 10\n\nThanks!!!\n\nDate Time Lane Clerk Trans#\n01/07/2019 09:45 AM 4 101 3854"
+    },
+    "processingTime": 10610
+  },
+  {
+    "filename": "s10.jpg",
+    "success": true,
+    "data": {
+      "merchant_name": "SUPERMARKET",
+      "amount": 17.07,
+      "currency": "USD",
+      "receipt_date": "2019-11-21",
+      "category": "Food & Dining",
+      "tax_amount": null,
+      "payment_method": "Debit Card",
+      "confidence_score": 0.95,
+      "raw_text": "SUPERMARKET\n465 S Arroyo Pkwy\nPasadena, CA 91105\n1 DOZ FREE RANGE EGG $3.89\n1 GV ORGANIC MILK 2% $4.19\n1 SBUX FRENCH ROAST WL $8.99\nSUBTOTAL $17.07\nTOTAL $17.07\n$17.07\nPURCHASE $17.07\nVISA DEBIT 3991\nAuth #140987 Exp Date **/**\nLane #14 Cashier 1409\n11/21/2019 01:28 PMRef/Seq #140987\nMRCH 204650 Term=001 IC=CC\nEPS Sequence 934518\nITEM 1 H,STEPHIE\n11/21/2019 01:28 PM 4130 29 1041 2675"
+    },
+    "processingTime": 5671
+  }
+]

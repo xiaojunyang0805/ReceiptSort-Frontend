@@ -29,8 +29,11 @@ import {
   Play,
   FileText,
   Loader2,
+  CreditCard,
 } from 'lucide-react'
 import { formatDistanceToNow } from 'date-fns'
+import { toast } from 'sonner'
+import Link from 'next/link'
 
 interface Receipt {
   id: string
@@ -63,10 +66,13 @@ export default function ReceiptList() {
   const [statusFilter, setStatusFilter] = useState<string>('all')
   const [selectedReceipt, setSelectedReceipt] = useState<Receipt | null>(null)
   const [modalOpen, setModalOpen] = useState(false)
+  const [processingIds, setProcessingIds] = useState<Set<string>>(new Set())
+  const [userCredits, setUserCredits] = useState<number>(0)
   const supabase = createClient()
 
   useEffect(() => {
     fetchReceipts()
+    fetchUserCredits()
 
     // Set up real-time subscription
     const channel = supabase
@@ -109,6 +115,72 @@ export default function ReceiptList() {
       console.error('Error fetching receipts:', error)
     } finally {
       setLoading(false)
+    }
+  }
+
+  const fetchUserCredits = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) return
+
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('credits')
+        .eq('id', user.id)
+        .single()
+
+      if (error) throw error
+      setUserCredits(data?.credits ?? 0)
+    } catch (error) {
+      console.error('Error fetching user credits:', error)
+    }
+  }
+
+  const handleProcessReceipt = async (receiptId: string) => {
+    if (userCredits < 1) {
+      toast.error('Insufficient credits', {
+        description: 'You need at least 1 credit to process a receipt.',
+        action: {
+          label: 'Buy Credits',
+          onClick: () => window.location.href = '/credits',
+        },
+      })
+      return
+    }
+
+    setProcessingIds(prev => new Set(prev).add(receiptId))
+
+    try {
+      const response = await fetch(`/api/receipts/${receiptId}/process`, {
+        method: 'POST',
+      })
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to process receipt')
+      }
+
+      toast.success('Receipt processed successfully!', {
+        description: `Extracted: ${result.data.merchant_name} - $${result.data.amount}`,
+      })
+
+      // Update credits
+      setUserCredits(result.credits_remaining)
+
+      // Refetch receipts to update UI
+      await fetchReceipts()
+    } catch (error) {
+      console.error('Error processing receipt:', error)
+      toast.error('Failed to process receipt', {
+        description: error instanceof Error ? error.message : 'Unknown error',
+      })
+    } finally {
+      setProcessingIds(prev => {
+        const newSet = new Set(prev)
+        newSet.delete(receiptId)
+        return newSet
+      })
     }
   }
 
@@ -174,6 +246,30 @@ export default function ReceiptList() {
 
   return (
     <div className="space-y-4">
+      {/* Credit Warning */}
+      {userCredits < 5 && userCredits >= 0 && (
+        <Card className="bg-yellow-50 dark:bg-yellow-900/10 border-yellow-200 dark:border-yellow-900/50 p-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <CreditCard className="h-5 w-5 text-yellow-600 dark:text-yellow-500" />
+              <div>
+                <p className="font-medium text-yellow-900 dark:text-yellow-100">
+                  {userCredits === 0 ? 'Out of credits!' : 'Low on credits'}
+                </p>
+                <p className="text-sm text-yellow-700 dark:text-yellow-300">
+                  {userCredits === 0
+                    ? 'Purchase credits to process receipts'
+                    : `You have ${userCredits} credit${userCredits === 1 ? '' : 's'} remaining`}
+                </p>
+              </div>
+            </div>
+            <Button asChild variant="outline" className="border-yellow-600 text-yellow-600 hover:bg-yellow-100">
+              <Link href="/credits">Buy Credits</Link>
+            </Button>
+          </div>
+        </Card>
+      )}
+
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-4">
         <Input
@@ -263,15 +359,48 @@ export default function ReceiptList() {
                         View Details
                       </DropdownMenuItem>
                       {receipt.processing_status === 'pending' && (
-                        <DropdownMenuItem>
-                          <Play className="mr-2 h-4 w-4" />
-                          Process
+                        <DropdownMenuItem
+                          onClick={() => handleProcessReceipt(receipt.id)}
+                          disabled={userCredits < 1 || processingIds.has(receipt.id)}
+                        >
+                          {processingIds.has(receipt.id) ? (
+                            <>
+                              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                              Processing...
+                            </>
+                          ) : (
+                            <>
+                              <Play className="mr-2 h-4 w-4" />
+                              Process (1 credit)
+                            </>
+                          )}
                         </DropdownMenuItem>
                       )}
                       {receipt.processing_status === 'completed' && (
-                        <DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => {
+                          setSelectedReceipt(receipt)
+                          setModalOpen(true)
+                        }}>
                           <Edit className="mr-2 h-4 w-4" />
                           Edit Data
+                        </DropdownMenuItem>
+                      )}
+                      {receipt.processing_status === 'failed' && (
+                        <DropdownMenuItem
+                          onClick={() => handleProcessReceipt(receipt.id)}
+                          disabled={userCredits < 1 || processingIds.has(receipt.id)}
+                        >
+                          {processingIds.has(receipt.id) ? (
+                            <>
+                              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                              Retrying...
+                            </>
+                          ) : (
+                            <>
+                              <Play className="mr-2 h-4 w-4" />
+                              Retry (1 credit)
+                            </>
+                          )}
                         </DropdownMenuItem>
                       )}
                       <DropdownMenuItem
@@ -316,15 +445,48 @@ export default function ReceiptList() {
                         View Details
                       </DropdownMenuItem>
                       {receipt.processing_status === 'pending' && (
-                        <DropdownMenuItem>
-                          <Play className="mr-2 h-4 w-4" />
-                          Process
+                        <DropdownMenuItem
+                          onClick={() => handleProcessReceipt(receipt.id)}
+                          disabled={userCredits < 1 || processingIds.has(receipt.id)}
+                        >
+                          {processingIds.has(receipt.id) ? (
+                            <>
+                              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                              Processing...
+                            </>
+                          ) : (
+                            <>
+                              <Play className="mr-2 h-4 w-4" />
+                              Process (1 credit)
+                            </>
+                          )}
                         </DropdownMenuItem>
                       )}
                       {receipt.processing_status === 'completed' && (
-                        <DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => {
+                          setSelectedReceipt(receipt)
+                          setModalOpen(true)
+                        }}>
                           <Edit className="mr-2 h-4 w-4" />
                           Edit Data
+                        </DropdownMenuItem>
+                      )}
+                      {receipt.processing_status === 'failed' && (
+                        <DropdownMenuItem
+                          onClick={() => handleProcessReceipt(receipt.id)}
+                          disabled={userCredits < 1 || processingIds.has(receipt.id)}
+                        >
+                          {processingIds.has(receipt.id) ? (
+                            <>
+                              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                              Retrying...
+                            </>
+                          ) : (
+                            <>
+                              <Play className="mr-2 h-4 w-4" />
+                              Retry (1 credit)
+                            </>
+                          )}
                         </DropdownMenuItem>
                       )}
                       <DropdownMenuItem

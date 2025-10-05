@@ -21,9 +21,10 @@ import {
 import { Textarea } from '@/components/ui/textarea'
 import { Badge } from '@/components/ui/badge'
 import { toast } from 'sonner'
-import { Loader2, Save, Trash2, FileText } from 'lucide-react'
+import { Loader2, Save, Trash2, FileText, AlertTriangle, RefreshCw } from 'lucide-react'
 import Image from 'next/image'
 import { format } from 'date-fns'
+import { Alert, AlertDescription } from '@/components/ui/alert'
 
 interface Receipt {
   id: string
@@ -43,6 +44,8 @@ interface Receipt {
   payment_method?: string
   notes?: string
   confidence_score?: number
+  raw_ocr_text?: string
+  processing_error?: string
   created_at: string
   updated_at: string
 }
@@ -92,6 +95,7 @@ export default function ReceiptDetailModal({
   const [formData, setFormData] = useState<Partial<Receipt>>({})
   const [saving, setSaving] = useState(false)
   const [deleting, setDeleting] = useState(false)
+  const [retrying, setRetrying] = useState(false)
   const [signedUrl, setSignedUrl] = useState<string | null>(null)
   const [urlLoading, setUrlLoading] = useState(false)
   const [urlError, setUrlError] = useState<string | null>(null)
@@ -215,6 +219,31 @@ export default function ReceiptDetailModal({
     }
   }
 
+  const handleRetry = async () => {
+    if (!receipt) return
+
+    setRetrying(true)
+    try {
+      const response = await fetch(`/api/receipts/${receipt.id}/retry`, {
+        method: 'POST',
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to retry processing')
+      }
+
+      toast.success('Receipt processed successfully')
+      onUpdate?.()
+    } catch (error) {
+      console.error('Error retrying receipt:', error)
+      toast.error(error instanceof Error ? error.message : 'Failed to retry processing')
+    } finally {
+      setRetrying(false)
+    }
+  }
+
   const isEditable = receipt.processing_status === 'completed'
 
   return (
@@ -281,6 +310,57 @@ export default function ReceiptDetailModal({
 
           {/* Right: Editable Form */}
           <div className="space-y-4">
+            {/* Error Alert */}
+            {receipt.processing_status === 'failed' && receipt.processing_error && (
+              <Alert variant="destructive">
+                <AlertTriangle className="h-4 w-4" />
+                <AlertDescription>
+                  <div className="font-medium mb-1">Processing Failed</div>
+                  <div className="text-sm">{receipt.processing_error}</div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={handleRetry}
+                    disabled={retrying}
+                    className="mt-3"
+                  >
+                    {retrying ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Retrying...
+                      </>
+                    ) : (
+                      <>
+                        <RefreshCw className="mr-2 h-4 w-4" />
+                        Retry Processing
+                      </>
+                    )}
+                  </Button>
+                </AlertDescription>
+              </Alert>
+            )}
+
+            {/* Low Confidence Warning */}
+            {receipt.processing_status === 'completed' &&
+              receipt.confidence_score !== undefined &&
+              receipt.confidence_score < 0.7 && (
+                <Alert>
+                  <AlertTriangle className="h-4 w-4" />
+                  <AlertDescription>
+                    <div className="font-medium mb-1">Low Confidence Detection</div>
+                    <div className="text-sm">
+                      The AI had low confidence ({(receipt.confidence_score * 100).toFixed(0)}%)
+                      in the extracted data. Please verify all fields carefully.
+                    </div>
+                    {receipt.processing_error && (
+                      <div className="text-sm mt-2 text-muted-foreground">
+                        Warnings: {receipt.processing_error}
+                      </div>
+                    )}
+                  </AlertDescription>
+                </Alert>
+              )}
+
             <div>
               <Label htmlFor="merchant">Merchant Name</Label>
               <Input
