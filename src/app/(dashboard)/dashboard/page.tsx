@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { CreditCard, FileText, Upload, Calendar } from 'lucide-react'
 import Link from 'next/link'
 import { ProcessAllButton } from '@/components/dashboard/ProcessAllButton'
+import { LowCreditBanner } from '@/components/dashboard/LowCreditBanner'
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -65,6 +66,9 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-8 pb-20 md:pb-8">
+      {/* Low Credit Banner */}
+      <LowCreditBanner credits={profile?.credits ?? 0} />
+
       {/* Welcome Section */}
       <div>
         <h1 className="text-3xl font-bold tracking-tight">

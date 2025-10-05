@@ -46,12 +46,24 @@ export async function Navbar() {
         <div className="flex-1" />
 
         <div className="flex items-center gap-4">
-          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full">
-            <span className="text-sm font-medium">Credits:</span>
-            <span className="text-sm font-bold text-primary">
-              {profile?.credits ?? 0}
-            </span>
-          </div>
+          <Link href="/credits" className="hidden sm:block">
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full hover:bg-primary/20 transition-colors cursor-pointer">
+              <span className="text-sm font-medium">Credits:</span>
+              <span
+                className={`text-sm font-bold ${
+                  (profile?.credits ?? 0) === 0
+                    ? 'text-red-600'
+                    : (profile?.credits ?? 0) < 3
+                    ? 'text-red-600'
+                    : (profile?.credits ?? 0) <= 10
+                    ? 'text-yellow-600'
+                    : 'text-green-600'
+                }`}
+              >
+                {profile?.credits ?? 0}
+              </span>
+            </div>
+          </Link>
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
