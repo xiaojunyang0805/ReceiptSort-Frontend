@@ -30,10 +30,15 @@ import {
   FileText,
   Loader2,
   CreditCard,
+  Download,
 } from 'lucide-react'
 import { formatDistanceToNow } from 'date-fns'
 import { toast } from 'sonner'
 import Link from 'next/link'
+import { Checkbox } from '@/components/ui/checkbox'
+import ExportDialog from './ExportDialog'
+import ReceiptFilters, { ReceiptFiltersState, INITIAL_FILTERS } from './ReceiptFilters'
+import ExportPresets from './ExportPresets'
 
 interface Receipt {
   id: string
@@ -68,6 +73,11 @@ export default function ReceiptList() {
   const [modalOpen, setModalOpen] = useState(false)
   const [processingIds, setProcessingIds] = useState<Set<string>>(new Set())
   const [userCredits, setUserCredits] = useState<number>(0)
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set())
+  const [exportDialogOpen, setExportDialogOpen] = useState(false)
+  const [filters, setFilters] = useState<ReceiptFiltersState>(INITIAL_FILTERS)
+  const [appliedFilters, setAppliedFilters] = useState<ReceiptFiltersState>(INITIAL_FILTERS)
+  const [isExporting, setIsExporting] = useState(false)
   const supabase = createClient()
 
   useEffect(() => {
@@ -95,18 +105,44 @@ export default function ReceiptList() {
       supabase.removeChannel(channel)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [appliedFilters])
 
   const fetchReceipts = async () => {
     try {
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) return
 
-      const { data, error } = await supabase
+      let query = supabase
         .from('receipts')
         .select('*')
         .eq('user_id', user.id)
-        .order('created_at', { ascending: false })
+
+      // Apply filters
+      if (appliedFilters.dateFrom) {
+        query = query.gte('receipt_date', appliedFilters.dateFrom.toISOString())
+      }
+      if (appliedFilters.dateTo) {
+        query = query.lte('receipt_date', appliedFilters.dateTo.toISOString())
+      }
+      if (appliedFilters.categories.length > 0) {
+        query = query.in('category', appliedFilters.categories)
+      }
+      if (appliedFilters.statuses.length > 0) {
+        query = query.in('processing_status', appliedFilters.statuses)
+      }
+      if (appliedFilters.amountMin) {
+        query = query.gte('total_amount', parseFloat(appliedFilters.amountMin))
+      }
+      if (appliedFilters.amountMax) {
+        query = query.lte('total_amount', parseFloat(appliedFilters.amountMax))
+      }
+      if (appliedFilters.searchQuery) {
+        query = query.or(`merchant_name.ilike.%${appliedFilters.searchQuery}%,file_name.ilike.%${appliedFilters.searchQuery}%`)
+      }
+
+      query = query.order('created_at', { ascending: false })
+
+      const { data, error } = await query
 
       if (error) throw error
 
@@ -213,6 +249,87 @@ export default function ReceiptList() {
     return matchesSearch && matchesStatus
   })
 
+  // Checkbox handlers
+  const completedReceipts = filteredReceipts.filter(r => r.processing_status === 'completed')
+  const allCompletedSelected = completedReceipts.length > 0 && completedReceipts.every(r => selectedIds.has(r.id))
+
+  const handleSelectAll = () => {
+    if (allCompletedSelected) {
+      setSelectedIds(new Set())
+    } else {
+      setSelectedIds(new Set(completedReceipts.map(r => r.id)))
+    }
+  }
+
+  const handleSelectReceipt = (id: string) => {
+    const newSelected = new Set(selectedIds)
+    if (newSelected.has(id)) {
+      newSelected.delete(id)
+    } else {
+      newSelected.add(id)
+    }
+    setSelectedIds(newSelected)
+  }
+
+  const selectedCount = selectedIds.size
+
+  // Filter handlers
+  const handleApplyFilters = () => {
+    setAppliedFilters(filters)
+    setLoading(true)
+  }
+
+  const handleClearFilters = () => {
+    setFilters(INITIAL_FILTERS)
+    setAppliedFilters(INITIAL_FILTERS)
+    setLoading(true)
+  }
+
+  // Export preset handler
+  const handlePresetExport = async (dateFrom: Date, dateTo: Date, label: string) => {
+    setIsExporting(true)
+    try {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) return
+
+      // Fetch receipts with date filter
+      let query = supabase
+        .from('receipts')
+        .select('id')
+        .eq('user_id', user.id)
+        .eq('processing_status', 'completed')
+
+      if (dateFrom.getTime() !== 0) { // Not "All Time"
+        query = query.gte('receipt_date', dateFrom.toISOString())
+      }
+      query = query.lte('receipt_date', dateTo.toISOString())
+
+      const { data: receiptData, error } = await query
+
+      if (error) throw error
+
+      if (!receiptData || receiptData.length === 0) {
+        toast.error('No receipts found', {
+          description: `No completed receipts found for ${label}`,
+        })
+        return
+      }
+
+      const receiptIds = receiptData.map(r => r.id)
+
+      // Use existing export dialog but with pre-selected IDs
+      setSelectedIds(new Set(receiptIds))
+      setExportDialogOpen(true)
+    } catch (error) {
+      console.error('[Preset Export] Error:', error)
+      toast.error('Export failed', {
+        description: 'Failed to prepare export',
+      })
+    } finally {
+      setIsExporting(false)
+    }
+  }
+
   if (loading) {
     return (
       <div className="space-y-4">
@@ -270,10 +387,21 @@ export default function ReceiptList() {
         </Card>
       )}
 
-      {/* Filters */}
+      {/* Export Presets */}
+      <ExportPresets onExport={handlePresetExport} isExporting={isExporting} />
+
+      {/* Advanced Filters */}
+      <ReceiptFilters
+        filters={filters}
+        onFiltersChange={setFilters}
+        onApply={handleApplyFilters}
+        onClear={handleClearFilters}
+      />
+
+      {/* Search and Export Actions */}
       <div className="flex flex-col sm:flex-row gap-4">
         <Input
-          placeholder="Search by filename or merchant..."
+          placeholder="Quick search..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="sm:max-w-sm"
@@ -289,6 +417,16 @@ export default function ReceiptList() {
           <option value="completed">Completed</option>
           <option value="failed">Failed</option>
         </select>
+        {selectedCount > 0 && (
+          <Button
+            onClick={() => setExportDialogOpen(true)}
+            variant="default"
+            className="ml-auto"
+          >
+            <Download className="mr-2 h-4 w-4" />
+            Export Selected ({selectedCount})
+          </Button>
+        )}
       </div>
 
       {/* Desktop Table View */}
@@ -296,7 +434,13 @@ export default function ReceiptList() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-12"></TableHead>
+              <TableHead className="w-12">
+                <Checkbox
+                  checked={allCompletedSelected}
+                  onCheckedChange={handleSelectAll}
+                  disabled={completedReceipts.length === 0}
+                />
+              </TableHead>
               <TableHead>File Name</TableHead>
               <TableHead>Merchant</TableHead>
               <TableHead>Amount</TableHead>
@@ -311,9 +455,11 @@ export default function ReceiptList() {
             {filteredReceipts.map((receipt) => (
               <TableRow key={receipt.id}>
                 <TableCell>
-                  <div className="w-10 h-10 rounded bg-muted flex items-center justify-center">
-                    <FileText className="h-5 w-5 text-muted-foreground" />
-                  </div>
+                  <Checkbox
+                    checked={selectedIds.has(receipt.id)}
+                    onCheckedChange={() => handleSelectReceipt(receipt.id)}
+                    disabled={receipt.processing_status !== 'completed'}
+                  />
                 </TableCell>
                 <TableCell className="font-medium max-w-xs truncate">
                   {receipt.file_name}
@@ -543,6 +689,16 @@ export default function ReceiptList() {
         open={modalOpen}
         onOpenChange={setModalOpen}
         onUpdate={fetchReceipts}
+      />
+
+      <ExportDialog
+        open={exportDialogOpen}
+        onOpenChange={setExportDialogOpen}
+        selectedIds={Array.from(selectedIds)}
+        onExportComplete={() => {
+          setSelectedIds(new Set())
+          setExportDialogOpen(false)
+        }}
       />
     </div>
   )

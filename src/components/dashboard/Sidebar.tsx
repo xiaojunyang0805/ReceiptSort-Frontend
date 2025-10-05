@@ -9,7 +9,7 @@ const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: Home },
   { name: 'Upload Receipts', href: '/upload', icon: Upload },
   { name: 'My Receipts', href: '/receipts', icon: Receipt },
-  { name: 'Export', href: '/export', icon: Download },
+  { name: 'Export History', href: '/exports', icon: Download },
   { name: 'Credits', href: '/credits', icon: CreditCard },
 ]
 
