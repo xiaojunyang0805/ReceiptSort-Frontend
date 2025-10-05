@@ -194,3 +194,17 @@ Perfect! ✅ I've successfully added Google OAuth authentication to your app:
   - OAuth metadata differs: Email/password vs OAuth providers structure user data differently
   - Error handling matters: Added ON CONFLICT DO UPDATE and exception handling to prevent signup failures
 
+14:16, 05/10, 2025
+✅ Day 2.2 Complete! Receipt list view with real-time updates has been implemented and committed.
+  What was built:
+  - ✅ ReceiptList component with desktop table view and mobile card view
+  - ✅ Status badges with proper color coding
+  - ✅ Real-time subscriptions - list auto-updates when receipts change
+  - ✅ Search & filter - by filename, merchant, and status
+  - ✅ Actions dropdown - View, Process, Edit, Delete
+  - ✅ Empty state - "No receipts yet" with upload CTA
+  - ✅ Loading skeleton - Better UX while fetching
+  - ✅ Image thumbnails - Shows preview for images, icon for PDFs
+  - ✅ Responsive design - Table on desktop, cards on mobile
+  Routes created:
+  - /dashboard/receipts - View all receipts page

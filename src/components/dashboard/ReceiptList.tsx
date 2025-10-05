@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
+import ReceiptDetailModal from './ReceiptDetailModal'
 import {
   Table,
   TableBody,
@@ -29,7 +30,6 @@ import {
   FileText,
   Loader2,
 } from 'lucide-react'
-import Image from 'next/image'
 import { formatDistanceToNow } from 'date-fns'
 
 interface Receipt {
@@ -61,6 +61,8 @@ export default function ReceiptList() {
   const [loading, setLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState('')
   const [statusFilter, setStatusFilter] = useState<string>('all')
+  const [selectedReceipt, setSelectedReceipt] = useState<Receipt | null>(null)
+  const [modalOpen, setModalOpen] = useState(false)
   const supabase = createClient()
 
   useEffect(() => {
@@ -213,20 +215,9 @@ export default function ReceiptList() {
             {filteredReceipts.map((receipt) => (
               <TableRow key={receipt.id}>
                 <TableCell>
-                  {receipt.file_type.startsWith('image/') ? (
-                    <div className="w-10 h-10 relative rounded overflow-hidden bg-muted">
-                      <Image
-                        src={receipt.file_url}
-                        alt={receipt.file_name}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                  ) : (
-                    <div className="w-10 h-10 rounded bg-muted flex items-center justify-center">
-                      <FileText className="h-5 w-5 text-muted-foreground" />
-                    </div>
-                  )}
+                  <div className="w-10 h-10 rounded bg-muted flex items-center justify-center">
+                    <FileText className="h-5 w-5 text-muted-foreground" />
+                  </div>
                 </TableCell>
                 <TableCell className="font-medium max-w-xs truncate">
                   {receipt.file_name}
@@ -264,7 +255,10 @@ export default function ReceiptList() {
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                      <DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => {
+                        setSelectedReceipt(receipt)
+                        setModalOpen(true)
+                      }}>
                         <Eye className="mr-2 h-4 w-4" />
                         View Details
                       </DropdownMenuItem>
@@ -301,20 +295,9 @@ export default function ReceiptList() {
         {filteredReceipts.map((receipt) => (
           <Card key={receipt.id} className="p-4">
             <div className="flex items-start gap-4">
-              {receipt.file_type.startsWith('image/') ? (
-                <div className="w-16 h-16 relative rounded overflow-hidden bg-muted flex-shrink-0">
-                  <Image
-                    src={receipt.file_url}
-                    alt={receipt.file_name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              ) : (
-                <div className="w-16 h-16 rounded bg-muted flex items-center justify-center flex-shrink-0">
-                  <FileText className="h-8 w-8 text-muted-foreground" />
-                </div>
-              )}
+              <div className="w-16 h-16 rounded bg-muted flex items-center justify-center flex-shrink-0">
+                <FileText className="h-8 w-8 text-muted-foreground" />
+              </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-start justify-between gap-2">
                   <h3 className="font-medium truncate">{receipt.file_name}</h3>
@@ -325,7 +308,10 @@ export default function ReceiptList() {
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                      <DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => {
+                        setSelectedReceipt(receipt)
+                        setModalOpen(true)
+                      }}>
                         <Eye className="mr-2 h-4 w-4" />
                         View Details
                       </DropdownMenuItem>
@@ -389,6 +375,13 @@ export default function ReceiptList() {
           </p>
         </Card>
       )}
+
+      <ReceiptDetailModal
+        receipt={selectedReceipt}
+        open={modalOpen}
+        onOpenChange={setModalOpen}
+        onUpdate={fetchReceipts}
+      />
     </div>
   )
 }
