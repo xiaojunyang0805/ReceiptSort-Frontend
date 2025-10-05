@@ -174,3 +174,23 @@ Perfect! ✅ I've successfully added Google OAuth authentication to your app:
   4. Add your Google OAuth credentials (Client ID & Secret)
   5. Set the redirect URL to: https://receiptsort.vercel.app/auth/callback
 
+13:09, 05/10, 2025
+🔍 Debugging Reflection: Google OAuth Issues
+  Root Causes Identified:
+  1. Supabase Site URL misconfiguration ⭐ (Main issue)
+    - Supabase's "Site URL" was set to http://localhost:3000
+    - This overrides all OAuth redirect logic
+    - Fix: Changed to https://receiptsort.vercel.app in Supabase settings
+  2. Database trigger incompatibility with OAuth users
+    - Original trigger used new.email which works for email/password signup
+    - OAuth users store email in raw_user_meta_data->>'email'
+    - Fix: Enhanced trigger to extract email from multiple sources using COALESCE()
+  3. OAuth redirect URL in code
+    - Code used window.location.origin which is localhost during local dev
+    - Fix: Use NEXT_PUBLIC_URL env variable (set in Vercel)
+
+  Lessons Learned:
+  - Infrastructure > Code: The Site URL configuration in Supabase was the blocker, not the code
+  - OAuth metadata differs: Email/password vs OAuth providers structure user data differently
+  - Error handling matters: Added ON CONFLICT DO UPDATE and exception handling to prevent signup failures
+
