@@ -87,6 +87,12 @@ export default function ExportDialog({
         }
       }
 
+      console.log('[Export Dialog] Starting export:', {
+        format: selectedFormat,
+        receiptCount: selectedIds.length,
+        endpoint
+      })
+
       const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
@@ -95,10 +101,15 @@ export default function ExportDialog({
         body: JSON.stringify(requestBody),
       })
 
+      console.log('[Export Dialog] Response status:', response.status)
+
       if (!response.ok) {
         const error = await response.json()
+        console.error('[Export Dialog] Export failed:', error)
         throw new Error(error.error || 'Export failed')
       }
+
+      console.log('[Export Dialog] Export succeeded, downloading file...')
 
       // Download the file
       const blob = await response.blob()
