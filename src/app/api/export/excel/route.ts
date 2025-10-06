@@ -93,15 +93,27 @@ export async function POST(request: NextRequest) {
 
     // 6. Record export in exports table
     try {
-      await supabase.from('exports').insert({
+      const { error: insertError } = await supabase.from('exports').insert({
         user_id: user.id,
         export_type: 'excel',
         receipt_count: completedReceipts.length,
         file_name: filename,
       })
+
+      if (insertError) {
+        console.error('[Excel Export] Failed to save export record:', insertError)
+        console.error('[Excel Export] Insert error details:', {
+          message: insertError.message,
+          code: insertError.code,
+          details: insertError.details,
+          hint: insertError.hint
+        })
+      } else {
+        console.log('[Excel Export] Successfully saved export record')
+      }
     } catch (exportLogError) {
       // Don't fail the export if logging fails
-      console.warn('[Excel Export] Failed to log export:', exportLogError)
+      console.error('[Excel Export] Exception while logging export:', exportLogError)
     }
 
     console.log(`[Excel Export] Successfully generated ${filename} (${excelBuffer.length} bytes)`)

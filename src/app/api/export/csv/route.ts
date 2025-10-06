@@ -106,22 +106,34 @@ export async function POST(request: NextRequest) {
     const csv = generateCSV(completedReceipts, template)
     const filename = generateCSVFilename()
 
-    // 6. Record export in exports table (optional - create table if needed)
+    // 7. Record export in exports table
     try {
-      await supabase.from('exports').insert({
+      const { error: insertError } = await supabase.from('exports').insert({
         user_id: user.id,
         export_type: 'csv',
         receipt_count: completedReceipts.length,
         file_name: filename,
       })
+
+      if (insertError) {
+        console.error('[CSV Export] Failed to save export record:', insertError)
+        console.error('[CSV Export] Insert error details:', {
+          message: insertError.message,
+          code: insertError.code,
+          details: insertError.details,
+          hint: insertError.hint
+        })
+      } else {
+        console.log('[CSV Export] Successfully saved export record')
+      }
     } catch (exportLogError) {
       // Don't fail the export if logging fails
-      console.warn('[CSV Export] Failed to log export:', exportLogError)
+      console.error('[CSV Export] Exception while logging export:', exportLogError)
     }
 
     console.log(`[CSV Export] Successfully generated ${filename}`)
 
-    // 7. Return CSV file with proper headers
+    // 8. Return CSV file with proper headers
     return new NextResponse(csv, {
       status: 200,
       headers: {
