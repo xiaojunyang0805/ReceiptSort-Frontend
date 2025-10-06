@@ -93,61 +93,61 @@ export function Hero() {
           >
             <div className="relative">
               {/* Demo Container */}
-              <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-2xl">
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
                 {/* Receipt to Data Animation */}
-                <div className="space-y-6">
+                <div className="space-y-4">
                   {/* Step 1: Receipt */}
-                  <div className="bg-gray-50 rounded-lg p-6 shadow-md transform hover:scale-105 transition-transform border border-gray-200">
-                    <div className="text-gray-800 space-y-3">
-                      <div className="text-xs font-mono text-gray-500">RECEIPT</div>
-                      <div className="h-2 bg-gray-300 rounded w-3/4"></div>
-                      <div className="h-2 bg-gray-300 rounded w-1/2"></div>
-                      <div className="h-2 bg-gray-300 rounded w-2/3"></div>
-                      <div className="border-t border-dashed border-gray-400 pt-3 mt-3">
-                        <div className="h-3 bg-blue-600 rounded w-1/3"></div>
+                  <div className="bg-white rounded-lg p-5 shadow-sm border border-gray-100">
+                    <div className="text-gray-800 space-y-2.5">
+                      <div className="text-xs font-medium text-gray-400 uppercase tracking-wide">Receipt</div>
+                      <div className="h-2 bg-gray-100 rounded-full w-3/4"></div>
+                      <div className="h-2 bg-gray-100 rounded-full w-1/2"></div>
+                      <div className="h-2 bg-gray-100 rounded-full w-2/3"></div>
+                      <div className="border-t border-gray-100 pt-2.5 mt-2.5">
+                        <div className="h-2.5 bg-blue-500 rounded-full w-1/3"></div>
                       </div>
                     </div>
                   </div>
 
                   {/* Arrow */}
                   <div className="flex justify-center">
-                    <div className="text-blue-600 text-3xl animate-bounce">↓</div>
+                    <div className="text-blue-500 text-2xl">↓</div>
                   </div>
 
                   {/* Step 2: Extracted Data */}
-                  <div className="bg-blue-50 rounded-lg p-6 shadow-md transform hover:scale-105 transition-transform border border-blue-200">
+                  <div className="bg-blue-50/50 rounded-lg p-5 shadow-sm border border-blue-100/50">
                     <div className="text-gray-800 space-y-2">
-                      <div className="text-xs font-mono text-blue-600">EXTRACTED DATA</div>
+                      <div className="text-xs font-medium text-blue-600 uppercase tracking-wide">Extracted Data</div>
                       <div className="grid grid-cols-2 gap-2 text-sm">
-                        <div className="font-semibold">Merchant:</div>
-                        <div className="text-gray-600">Starbucks</div>
-                        <div className="font-semibold">Date:</div>
-                        <div className="text-gray-600">2025-10-05</div>
-                        <div className="font-semibold">Total:</div>
-                        <div className="text-blue-600 font-bold">$24.50</div>
+                        <div className="font-medium text-gray-600">Merchant:</div>
+                        <div className="text-gray-900">Starbucks</div>
+                        <div className="font-medium text-gray-600">Date:</div>
+                        <div className="text-gray-900">2025-10-05</div>
+                        <div className="font-medium text-gray-600">Total:</div>
+                        <div className="text-blue-600 font-semibold">$24.50</div>
                       </div>
                     </div>
                   </div>
 
                   {/* Arrow */}
                   <div className="flex justify-center">
-                    <div className="text-blue-600 text-3xl animate-bounce">↓</div>
+                    <div className="text-blue-500 text-2xl">↓</div>
                   </div>
 
                   {/* Step 3: Excel Download */}
-                  <div className="bg-green-500 rounded-lg p-6 shadow-md transform hover:scale-105 transition-transform">
-                    <div className="text-white text-center space-y-2">
+                  <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-lg p-5 shadow-sm">
+                    <div className="text-white text-center space-y-1.5">
                       <div className="text-2xl">📊</div>
-                      <div className="font-semibold">Download Excel</div>
-                      <div className="text-sm text-green-100">Ready in seconds</div>
+                      <div className="font-semibold text-sm">Download Excel</div>
+                      <div className="text-xs text-green-50">Ready in seconds</div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Floating Accent - Softer colors */}
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-200 rounded-full blur-3xl opacity-30 animate-pulse"></div>
-              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-blue-100 rounded-full blur-3xl opacity-30 animate-pulse delay-1000"></div>
+              {/* Floating Accent - Very subtle */}
+              <div className="absolute -top-6 -right-6 w-32 h-32 bg-blue-100 rounded-full blur-3xl opacity-20"></div>
+              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-indigo-100 rounded-full blur-3xl opacity-20"></div>
             </div>
           </div>
         </div>
