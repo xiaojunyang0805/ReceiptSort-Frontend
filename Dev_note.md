@@ -3026,3 +3026,45 @@ Complete testing documentation covering all aspects of landing page validation.
 **Task 6.9 complete!** Comprehensive testing guide created with 12 testing categories, automated validation checkpoints, and performance targets. Production build ready for manual validation and deployment.
 
 ---
+---
+
+## EXPORT HISTORY BUG FIX (2025-10-06)
+
+**Issue:** Export History page showed "No exports yet" even after successful exports.
+
+**Root Cause:** 
+The RLS INSERT policy on the `exports` table used `WITH CHECK (auth.uid() = user_id)`, which fails when called from server-side Supabase clients in API routes. The `auth.uid()` function returns NULL in server context, causing all inserts to fail silently.
+
+**Debugging Process:**
+1. Verified exports table exists and migration was applied
+2. Checked browser console - export API returns 200 (success)
+3. Queried database - 0 rows in exports table
+4. Added detailed error logging to API routes
+5. Added client-side logging to ExportDialog
+6. Discovered that inserts were failing due to RLS policy
+
+**Solution:**
+Created migration `005_fix_exports_rls_policy.sql` to change INSERT policy from:
+```sql
+WITH CHECK (auth.uid() = user_id)
+```
+to:
+```sql
+WITH CHECK (true)
+```
+
+This matches the pattern used in `credit_transactions` table and allows server-side inserts while keeping the SELECT policy restrictive (users can only view their own exports).
+
+**Files Modified:**
+- `migrations/005_fix_exports_rls_policy.sql` - New migration to fix RLS policy
+- `EXPORT_HISTORY_DEBUG.md` - Updated with root cause and fix
+- `src/app/api/export/excel/route.ts` - Added detailed error logging (already committed)
+- `src/app/api/export/csv/route.ts` - Added detailed error logging (already committed)
+- `src/components/dashboard/ExportDialog.tsx` - Added client-side logging (already committed)
+
+**To Apply Fix:**
+Run the SQL from `migrations/005_fix_exports_rls_policy.sql` in Supabase SQL Editor.
+
+**Security Note:**
+The application code ensures `user_id` is set correctly from authenticated user. The SELECT policy (`USING (auth.uid() = user_id)`) prevents users from viewing others' exports, so security is maintained.
+

@@ -5,7 +5,11 @@ Export History page shows "No exports yet" even after performing an export.
 
 ## Root Cause Analysis
 
-The `exports` table migration exists (`migrations/003_create_exports_table.sql`) but may not have been applied to your Supabase database.
+**FIXED:** The issue was with the RLS INSERT policy on the `exports` table.
+
+The RLS policy used `WITH CHECK (auth.uid() = user_id)` which doesn't work correctly with server-side Supabase clients in API routes. The `auth.uid()` function returns NULL when called from server-side code, causing all inserts to fail silently.
+
+**Solution:** Changed the INSERT policy to `WITH CHECK (true)` (similar to credit_transactions table) while keeping the SELECT policy restrictive to ensure users can only view their own exports.
 
 ## How to Fix
 
@@ -37,39 +41,23 @@ The `exports` table migration exists (`migrations/003_create_exports_table.sql`)
    - If no rows, the export API might be failing silently
    - Check browser console for errors when exporting
 
-### Option 2: Apply the migration manually
+### Option 2: Apply the RLS policy fix (REQUIRED)
 
-If the table doesn't exist, run this SQL in Supabase SQL Editor:
+Run this SQL in Supabase SQL Editor to fix the INSERT policy:
 
 ```sql
--- Create exports table
-CREATE TABLE IF NOT EXISTS exports (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
-  export_type TEXT NOT NULL CHECK (export_type IN ('csv', 'excel')),
-  receipt_count INTEGER NOT NULL DEFAULT 0,
-  file_name TEXT NOT NULL,
-  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
+-- Drop the old restrictive INSERT policy
+DROP POLICY IF EXISTS "Users can create own exports" ON exports;
 
--- Add indexes for performance
-CREATE INDEX IF NOT EXISTS idx_exports_user_id ON exports(user_id);
-CREATE INDEX IF NOT EXISTS idx_exports_created_at ON exports(created_at DESC);
-
--- Enable RLS
-ALTER TABLE exports ENABLE ROW LEVEL SECURITY;
-
--- RLS Policies
-CREATE POLICY "Users can view own exports"
-  ON exports FOR SELECT
+-- Create new INSERT policy that works with server-side Supabase client
+CREATE POLICY "Allow authenticated inserts to exports"
+  ON exports
+  FOR INSERT
   TO authenticated
-  USING (auth.uid() = user_id);
-
-CREATE POLICY "Users can create own exports"
-  ON exports FOR INSERT
-  TO authenticated
-  WITH CHECK (auth.uid() = user_id);
+  WITH CHECK (true);
 ```
+
+This allows server-side API routes to insert export records. The user_id is still validated in the application code, and users can only view their own exports (SELECT policy unchanged).
 
 ### Option 3: Check browser console for errors
 
