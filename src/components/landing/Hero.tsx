@@ -135,11 +135,11 @@ export function Hero() {
                   </div>
 
                   {/* Step 3: Excel Download */}
-                  <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-lg p-5 shadow-sm">
-                    <div className="text-white text-center space-y-1.5">
+                  <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-5 shadow-sm border border-green-100">
+                    <div className="text-center space-y-1.5">
                       <div className="text-2xl">📊</div>
-                      <div className="font-semibold text-sm">Download Excel</div>
-                      <div className="text-xs text-green-50">Ready in seconds</div>
+                      <div className="font-semibold text-sm text-green-700">Download Excel</div>
+                      <div className="text-xs text-green-600">Ready in seconds</div>
                     </div>
                   </div>
                 </div>
