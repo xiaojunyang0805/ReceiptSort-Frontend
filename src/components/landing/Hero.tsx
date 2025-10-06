@@ -20,27 +20,27 @@ export function Hero() {
   }
 
   return (
-    <section className="relative min-h-[90vh] flex items-center bg-gradient-to-br from-blue-600 via-blue-700 to-blue-900 overflow-hidden">
+    <section className="relative min-h-[90vh] flex items-center bg-gradient-to-br from-blue-50 via-white to-gray-50 overflow-hidden">
       {/* Background Pattern */}
-      <div className="absolute inset-0 bg-grid-white/10 bg-[size:20px_20px]" />
-      <div className="absolute inset-0 bg-gradient-to-t from-blue-900/50 to-transparent" />
+      <div className="absolute inset-0 bg-grid-slate-100 bg-[size:20px_20px]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-white" />
 
       <div className="container mx-auto px-4 py-20 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left: Text Content */}
           <div
-            className={`text-white space-y-8 transition-all duration-1000 ${
+            className={`space-y-8 transition-all duration-1000 ${
               mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
           >
             {/* Headline */}
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-gray-900">
               Stop Wasting Hours on{' '}
-              <span className="text-blue-200">Receipt Entry</span>
+              <span className="text-blue-600">Receipt Entry</span>
             </h1>
 
             {/* Subheadline */}
-            <p className="text-xl md:text-2xl text-blue-100 leading-relaxed">
+            <p className="text-xl md:text-2xl text-gray-600 leading-relaxed">
               Extract data from receipts in seconds with AI. Upload receipts → AI extracts data → Download Excel.
             </p>
 
@@ -49,7 +49,7 @@ export function Hero() {
               <Button
                 asChild
                 size="lg"
-                className="bg-white text-blue-600 hover:bg-blue-50 text-lg px-8 py-6 h-auto font-semibold shadow-xl hover:shadow-2xl transition-all"
+                className="bg-blue-600 text-white hover:bg-blue-700 text-lg px-8 py-6 h-auto font-semibold shadow-xl hover:shadow-2xl transition-all"
               >
                 <Link href="/signup">
                   Start Free
@@ -61,7 +61,7 @@ export function Hero() {
                 onClick={scrollToDemo}
                 size="lg"
                 variant="outline"
-                className="border-2 border-white text-white hover:bg-white/10 text-lg px-8 py-6 h-auto font-semibold"
+                className="border-2 border-gray-300 text-gray-700 hover:bg-gray-50 text-lg px-8 py-6 h-auto font-semibold"
               >
                 <Play className="h-5 w-5 mr-2" />
                 Watch Demo
@@ -71,16 +71,16 @@ export function Hero() {
             {/* Trust Elements */}
             <div className="grid sm:grid-cols-3 gap-4 pt-8 text-sm md:text-base">
               <div className="flex items-center gap-2">
-                <Check className="h-5 w-5 text-blue-200 flex-shrink-0" />
-                <span className="text-blue-100">10 free credits • No credit card</span>
+                <Check className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                <span className="text-gray-700">10 free credits • No credit card</span>
               </div>
               <div className="flex items-center gap-2">
-                <Check className="h-5 w-5 text-blue-200 flex-shrink-0" />
-                <span className="text-blue-100">95%+ accuracy • GDPR compliant</span>
+                <Check className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                <span className="text-gray-700">95%+ accuracy • GDPR compliant</span>
               </div>
               <div className="flex items-center gap-2">
-                <Check className="h-5 w-5 text-blue-200 flex-shrink-0" />
-                <span className="text-blue-100">Exports to Excel/CSV</span>
+                <Check className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                <span className="text-gray-700">Exports to Excel/CSV</span>
               </div>
             </div>
           </div>
@@ -93,31 +93,31 @@ export function Hero() {
           >
             <div className="relative">
               {/* Demo Container */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 shadow-2xl">
+              <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-2xl">
                 {/* Receipt to Data Animation */}
                 <div className="space-y-6">
                   {/* Step 1: Receipt */}
-                  <div className="bg-white/90 rounded-lg p-6 shadow-lg transform hover:scale-105 transition-transform">
+                  <div className="bg-gray-50 rounded-lg p-6 shadow-md transform hover:scale-105 transition-transform border border-gray-200">
                     <div className="text-gray-800 space-y-3">
                       <div className="text-xs font-mono text-gray-500">RECEIPT</div>
-                      <div className="h-2 bg-gray-200 rounded w-3/4"></div>
-                      <div className="h-2 bg-gray-200 rounded w-1/2"></div>
-                      <div className="h-2 bg-gray-200 rounded w-2/3"></div>
-                      <div className="border-t border-dashed border-gray-300 pt-3 mt-3">
-                        <div className="h-3 bg-blue-500 rounded w-1/3"></div>
+                      <div className="h-2 bg-gray-300 rounded w-3/4"></div>
+                      <div className="h-2 bg-gray-300 rounded w-1/2"></div>
+                      <div className="h-2 bg-gray-300 rounded w-2/3"></div>
+                      <div className="border-t border-dashed border-gray-400 pt-3 mt-3">
+                        <div className="h-3 bg-blue-600 rounded w-1/3"></div>
                       </div>
                     </div>
                   </div>
 
                   {/* Arrow */}
                   <div className="flex justify-center">
-                    <div className="text-white text-3xl animate-bounce">↓</div>
+                    <div className="text-blue-600 text-3xl animate-bounce">↓</div>
                   </div>
 
                   {/* Step 2: Extracted Data */}
-                  <div className="bg-white/90 rounded-lg p-6 shadow-lg transform hover:scale-105 transition-transform">
+                  <div className="bg-blue-50 rounded-lg p-6 shadow-md transform hover:scale-105 transition-transform border border-blue-200">
                     <div className="text-gray-800 space-y-2">
-                      <div className="text-xs font-mono text-gray-500">EXTRACTED DATA</div>
+                      <div className="text-xs font-mono text-blue-600">EXTRACTED DATA</div>
                       <div className="grid grid-cols-2 gap-2 text-sm">
                         <div className="font-semibold">Merchant:</div>
                         <div className="text-gray-600">Starbucks</div>
@@ -131,11 +131,11 @@ export function Hero() {
 
                   {/* Arrow */}
                   <div className="flex justify-center">
-                    <div className="text-white text-3xl animate-bounce">↓</div>
+                    <div className="text-blue-600 text-3xl animate-bounce">↓</div>
                   </div>
 
                   {/* Step 3: Excel Download */}
-                  <div className="bg-green-500 rounded-lg p-6 shadow-lg transform hover:scale-105 transition-transform">
+                  <div className="bg-green-500 rounded-lg p-6 shadow-md transform hover:scale-105 transition-transform">
                     <div className="text-white text-center space-y-2">
                       <div className="text-2xl">📊</div>
                       <div className="font-semibold">Download Excel</div>
@@ -145,18 +145,18 @@ export function Hero() {
                 </div>
               </div>
 
-              {/* Floating Accent */}
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-400 rounded-full blur-3xl opacity-50 animate-pulse"></div>
-              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-blue-300 rounded-full blur-3xl opacity-50 animate-pulse delay-1000"></div>
+              {/* Floating Accent - Softer colors */}
+              <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-200 rounded-full blur-3xl opacity-30 animate-pulse"></div>
+              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-blue-100 rounded-full blur-3xl opacity-30 animate-pulse delay-1000"></div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Bottom Wave */}
+      {/* Bottom Wave - Subtle */}
       <div className="absolute bottom-0 left-0 right-0">
         <svg
-          className="w-full h-24 text-background fill-current"
+          className="w-full h-24 text-white fill-current"
           viewBox="0 0 1200 120"
           preserveAspectRatio="none"
         >

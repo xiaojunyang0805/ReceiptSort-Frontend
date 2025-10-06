@@ -31,19 +31,15 @@ export default function Navbar() {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? 'bg-white shadow-md'
-          : 'bg-transparent'
+          : 'bg-white/80 backdrop-blur-md'
       }`}
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <FileText className={`h-6 w-6 transition-colors ${
-              isScrolled ? 'text-primary' : 'text-white'
-            }`} />
-            <span className={`text-xl font-bold transition-colors ${
-              isScrolled ? 'text-gray-900' : 'text-white'
-            }`}>
+            <FileText className="h-6 w-6 text-primary transition-colors" />
+            <span className="text-xl font-bold text-gray-900 transition-colors">
               ReceiptSorter
             </span>
           </Link>
@@ -52,33 +48,25 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-8">
             <button
               onClick={() => scrollToSection('features')}
-              className={`font-medium transition-colors hover:text-primary ${
-                isScrolled ? 'text-gray-600' : 'text-white/90'
-              }`}
+              className="font-medium text-gray-600 transition-colors hover:text-primary"
             >
               Features
             </button>
             <button
               onClick={() => scrollToSection('how-it-works')}
-              className={`font-medium transition-colors hover:text-primary ${
-                isScrolled ? 'text-gray-600' : 'text-white/90'
-              }`}
+              className="font-medium text-gray-600 transition-colors hover:text-primary"
             >
               How It Works
             </button>
             <Link
               href="/pricing"
-              className={`font-medium transition-colors hover:text-primary ${
-                isScrolled ? 'text-gray-600' : 'text-white/90'
-              }`}
+              className="font-medium text-gray-600 transition-colors hover:text-primary"
             >
               Pricing
             </Link>
             <button
               onClick={() => scrollToSection('faq')}
-              className={`font-medium transition-colors hover:text-primary ${
-                isScrolled ? 'text-gray-600' : 'text-white/90'
-              }`}
+              className="font-medium text-gray-600 transition-colors hover:text-primary"
             >
               FAQ
             </button>
@@ -89,13 +77,13 @@ export default function Navbar() {
             <Button
               asChild
               variant="ghost"
-              className={isScrolled ? 'text-gray-600 hover:text-primary' : 'text-white hover:bg-white/10'}
+              className="text-gray-600 hover:text-primary"
             >
               <Link href="/login">Sign In</Link>
             </Button>
             <Button
               asChild
-              className={isScrolled ? '' : 'bg-white text-blue-600 hover:bg-blue-50'}
+              className="bg-blue-600 text-white hover:bg-blue-700"
             >
               <Link href="/signup">Start Free</Link>
             </Button>
@@ -104,9 +92,7 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className={`md:hidden p-2 transition-colors ${
-              isScrolled ? 'text-gray-600' : 'text-white'
-            }`}
+            className="md:hidden p-2 text-gray-600 transition-colors"
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? (
