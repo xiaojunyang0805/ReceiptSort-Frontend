@@ -34,6 +34,17 @@ export default function ExportsPage() {
   const fetchExports = async () => {
     try {
       const supabase = createClient()
+
+      // First check if user is authenticated
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) {
+        console.error('[Exports] User not authenticated')
+        setIsLoading(false)
+        return
+      }
+
+      console.log('[Exports] Fetching exports for user:', user.id)
+
       const { data, error } = await supabase
         .from('exports')
         .select('*')
@@ -42,9 +53,16 @@ export default function ExportsPage() {
 
       if (error) {
         console.error('[Exports] Failed to fetch exports:', error)
+        console.error('[Exports] Error details:', {
+          message: error.message,
+          code: error.code,
+          details: error.details,
+          hint: error.hint
+        })
         return
       }
 
+      console.log('[Exports] Fetched exports:', data?.length || 0)
       setExports(data || [])
     } catch (error) {
       console.error('[Exports] Error fetching exports:', error)
