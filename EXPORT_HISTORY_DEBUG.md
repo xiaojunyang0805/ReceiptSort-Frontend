@@ -5,11 +5,16 @@ Export History page shows "No exports yet" even after performing an export.
 
 ## Root Cause Analysis
 
-**FIXED:** The issue was with the RLS INSERT policy on the `exports` table.
+**FIXED:** The issue was that the `exports` table was missing the `file_name` column.
 
-The RLS policy used `WITH CHECK (auth.uid() = user_id)` which doesn't work correctly with server-side Supabase clients in API routes. The `auth.uid()` function returns NULL when called from server-side code, causing all inserts to fail silently.
+The actual problem had TWO parts:
+1. **Missing Column:** The table in Supabase had columns `receipt_ids` and `file_size` instead of `file_name`. Migration 003 was never applied or the table was created manually with different structure.
+2. **RLS Policy:** The original INSERT policy used `WITH CHECK (auth.uid() = user_id)` which doesn't work with server-side API routes.
 
-**Solution:** Changed the INSERT policy to `WITH CHECK (true)` (similar to credit_transactions table) while keeping the SELECT policy restrictive to ensure users can only view their own exports.
+**Solution:**
+- Added `file_name` column to exports table (migration 006)
+- Changed INSERT policy to `WITH CHECK (true)` (migration 005)
+- Made `receipt_ids` and `file_size` nullable since API doesn't use them
 
 ## How to Fix
 

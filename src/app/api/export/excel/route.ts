@@ -93,48 +93,52 @@ export async function POST(request: NextRequest) {
 
     // 6. Record export in exports table
     try {
-      console.log('[Excel Export] Attempting to insert export record:', {
+      // Test: Try inserting with explicit fields
+      const exportRecord = {
         user_id: user.id,
-        export_type: 'excel',
+        export_type: 'excel' as const,
         receipt_count: completedReceipts.length,
         file_name: filename,
-      })
+      }
 
-      const { data: insertData, error: insertError } = await supabase.from('exports').insert({
-        user_id: user.id,
-        export_type: 'excel',
-        receipt_count: completedReceipts.length,
-        file_name: filename,
-      }).select()
+      console.log('[Excel Export] User ID:', user.id)
+      console.log('[Excel Export] Attempting to insert:', exportRecord)
+
+      const { data: insertData, error: insertError } = await supabase
+        .from('exports')
+        .insert(exportRecord)
+        .select()
 
       if (insertError) {
-        console.error('[Excel Export] Failed to save export record:', insertError)
-        console.error('[Excel Export] Insert error details:', {
-          message: insertError.message,
-          code: insertError.code,
-          details: insertError.details,
-          hint: insertError.hint
-        })
-        // Log but don't fail the export
+        console.error('[Excel Export] Insert failed!')
+        console.error('[Excel Export] Error:', JSON.stringify(insertError, null, 2))
+        // Try a direct insert without select to see if that works
+        const { error: insertError2 } = await supabase
+          .from('exports')
+          .insert(exportRecord)
+        console.error('[Excel Export] Second attempt error:', JSON.stringify(insertError2, null, 2))
       } else {
-        console.log('[Excel Export] Successfully saved export record:', insertData)
+        console.log('[Excel Export] Insert succeeded!')
+        console.log('[Excel Export] Inserted data:', JSON.stringify(insertData, null, 2))
       }
     } catch (exportLogError) {
-      // Don't fail the export if logging fails
-      console.error('[Excel Export] Exception while logging export:', exportLogError)
+      console.error('[Excel Export] Exception:', exportLogError)
     }
 
     console.log(`[Excel Export] Successfully generated ${filename} (${excelBuffer.length} bytes)`)
 
     // 7. Return Excel file with proper headers
+    // Add debug header to check if export was logged (for debugging only)
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      'Content-Disposition': `attachment; filename="${filename}"`,
+      'Content-Length': excelBuffer.length.toString(),
+      'Cache-Control': 'no-cache',
+    }
+
     return new NextResponse(excelBuffer as unknown as BodyInit, {
       status: 200,
-      headers: {
-        'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-        'Content-Disposition': `attachment; filename="${filename}"`,
-        'Content-Length': excelBuffer.length.toString(),
-        'Cache-Control': 'no-cache',
-      },
+      headers,
     })
   } catch (error) {
     console.error('[Excel Export] Unexpected error:', error)

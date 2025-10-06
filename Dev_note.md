@@ -3068,3 +3068,29 @@ Run the SQL from `migrations/005_fix_exports_rls_policy.sql` in Supabase SQL Edi
 **Security Note:**
 The application code ensures `user_id` is set correctly from authenticated user. The SELECT policy (`USING (auth.uid() = user_id)`) prevents users from viewing others' exports, so security is maintained.
 
+
+**UPDATE: Column Mismatch Found!**
+
+The actual root cause was a **column mismatch**:
+- API was trying to insert `file_name` column
+- Database table had `receipt_ids` and `file_size` columns instead
+- The migration 003 was never applied, or table was created manually
+
+**Actual Table Structure:**
+```
+id, user_id, export_type, receipt_count, receipt_ids (ARRAY), file_size, created_at
+```
+
+**Expected Structure (from migration 003):**
+```
+id, user_id, export_type, receipt_count, file_name, created_at
+```
+
+**Final Solution:**
+1. Added `file_name` column with migration 006
+2. Made `receipt_ids` and `file_size` nullable (API doesn't use them)
+3. Fixed RLS INSERT policy with migration 005
+
+**Files Created:**
+- `migrations/006_add_file_name_to_exports.sql` - Adds missing file_name column
+
