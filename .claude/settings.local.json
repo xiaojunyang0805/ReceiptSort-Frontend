@@ -10,7 +10,8 @@
       "Bash(npm run build:*)",
       "Bash(npm install:*)",
       "Bash(gh api:*)",
-      "Bash(npx vercel:*)"
+      "Bash(npx vercel:*)",
+      "Bash(move componentslandingFinalCTA.tsx srccomponentslandingFinalCTA.tsx)"
     ],
     "deny": [],
     "ask": []
