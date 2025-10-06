@@ -34,14 +34,16 @@ export function Hero() {
             }`}
           >
             {/* Headline */}
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-gray-900">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-gray-900">
               Stop Wasting Hours on{' '}
               <span className="text-blue-600">Receipt Entry</span>
             </h1>
 
             {/* Subheadline */}
-            <p className="text-xl md:text-2xl text-gray-600 leading-relaxed">
-              Extract data from receipts in seconds with AI. Upload receipts → AI extracts data → Download Excel.
+            <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
+              Extract data from receipts in seconds with AI.
+              <br />
+              Upload receipts → AI extracts data → Download Excel.
             </p>
 
             {/* CTAs */}
