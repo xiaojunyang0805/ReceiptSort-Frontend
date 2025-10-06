@@ -3094,3 +3094,108 @@ id, user_id, export_type, receipt_count, file_name, created_at
 **Files Created:**
 - `migrations/006_add_file_name_to_exports.sql` - Adds missing file_name column
 
+
+---
+
+## 2025-10-06: Stripe Payment Integration & Profile Page
+
+### Stripe Payment Setup
+**Completed full Stripe integration for credit purchases**
+
+1. **Account Structure:**
+   - Consolidated multiple Stripe accounts into single "SeeNano Technology B.V." account
+   - Using live API keys for production
+
+2. **Credit Packages Created:**
+   - Starter: 10 credits - $4.99 ($0.50/credit) - `price_1SFJ302Q25JDcEYXHccw9qBK`
+   - Basic: 25 credits - $9.99 ($0.40/credit) - `price_1SFJ352Q25JDcEYX3ZvKhlTC` ⭐ Best Value
+   - Pro: 100 credits - $29.99 ($0.30/credit) - `price_1SFJ3A2Q25JDcEYX4oIZ4jfd`
+   - Business: 500 credits - $99.99 ($0.20/credit) - `price_1SFJ3H2Q25JDcEYXgbXy1i16`
+
+3. **Environment Variables Set:**
+   ```
+   STRIPE_SECRET_KEY=sk_live_51SFHT62Q25JDcEYX...
+   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_51SFHT62Q25JDcEYX...
+   STRIPE_WEBHOOK_SECRET=whsec_w621XLL1QT8IAO6ER1KjjmPHzd2zhN1F
+   STRIPE_PRICE_STARTER=price_1SFJ302Q25JDcEYXHccw9qBK
+   STRIPE_PRICE_BASIC=price_1SFJ352Q25JDcEYX3ZvKhlTC
+   STRIPE_PRICE_PRO=price_1SFJ3A2Q25JDcEYX4oIZ4jfd
+   STRIPE_PRICE_BUSINESS=price_1SFJ3H2Q25JDcEYXgbXy1i16
+   ```
+
+4. **Webhook Configuration:**
+   - Endpoint: `https://receiptsort.vercel.app/api/stripe/webhook`
+   - Events: `checkout.session.completed`, `invoice.payment_succeeded`, `customer.subscription.created`, `customer.subscription.deleted`
+   - Webhook ID: `we_1SFItC2Q25JDcEYXywdCmunf`
+
+5. **Critical Fixes:**
+   - Hardcoded base URL in `src/lib/stripe.ts` to bypass environment variable issues at runtime
+   - Used `printf` instead of `echo` when adding env vars to Vercel to avoid newline characters
+   - Applied migration 004 to create proper `credit_transactions` table schema
+
+### Credit Transactions Table Issue & Fix
+
+**Problem:**
+- `credit_transactions` table existed but had wrong schema
+- Migration `004_create_credit_transactions_table.sql` was never applied to production database
+- Transaction history was empty despite successful payment
+
+**Solution:**
+Applied migration via Supabase SQL Editor:
+```sql
+DROP TABLE IF EXISTS credit_transactions CASCADE;
+CREATE TABLE credit_transactions (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  amount INTEGER NOT NULL,
+  type TEXT NOT NULL CHECK (type IN ('purchase', 'usage', 'refund', 'bonus')),
+  description TEXT NOT NULL,
+  stripe_session_id TEXT,
+  stripe_payment_intent TEXT,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+```
+
+### Payment Testing
+**First successful payment:**
+- Amount: €9.99
+- Credits purchased: 25 (Basic package)
+- Session ID: `cs_live_a1SkwoIH5QWSqVja2C75EhFmnKVKu4R30b09kpBUI8XLwYXMOzN91oIelh`
+- Payment Intent: `pi_3SFKSI2Q25JDcEYX0Lojllob`
+- Credits updated: 9 → 34 ✅
+- Transaction record created ✅
+
+### Profile Page Added
+**New Feature: User Profile Management**
+
+1. **Created Profile Page:**
+   - Route: `/dashboard/profile`
+   - File: `src/app/(dashboard)/dashboard/profile/page.tsx`
+
+2. **Created ProfileForm Component:**
+   - File: `src/components/dashboard/ProfileForm.tsx`
+   - Features:
+     - Display email (read-only)
+     - Edit full name
+     - View account information (User ID, creation date, last sign-in)
+     - Toast notifications for save confirmations
+
+3. **Functionality:**
+   - Loads user profile from Supabase
+   - Updates `profiles` table with new full name
+   - Shows account metadata for reference
+
+### Files Modified/Created:
+- `src/lib/stripe.ts` - Hardcoded base URL for checkout sessions
+- `migrations/004_create_credit_transactions_table.sql` - Applied to database
+- `src/app/(dashboard)/dashboard/profile/page.tsx` - New profile page
+- `src/components/dashboard/ProfileForm.tsx` - New profile form component
+- `FIX_TRANSACTIONS_TABLE.md` - Documentation for migration fix
+
+### Status:
+✅ Stripe payment integration fully functional
+✅ Credit purchases working end-to-end
+✅ Transaction history tracking operational
+✅ Profile page created and deployed
+✅ Production ready
+
