@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
-import Link from 'next/link'
+import { Link } from '@/lib/navigation'
 
 export async function Navbar() {
   const supabase = await createClient()

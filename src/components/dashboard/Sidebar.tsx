@@ -1,7 +1,7 @@
 'use client'
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { Link } from '@/lib/navigation'
+import { usePathname } from '@/lib/navigation'
 import { cn } from '@/lib/utils'
 import { Home, Upload, Receipt, Download, CreditCard } from 'lucide-react'
 

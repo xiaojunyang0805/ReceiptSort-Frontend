@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import Link from 'next/link';
+import { Link } from '@/lib/navigation';
 import { ArrowLeft } from 'lucide-react';
 
 export default function TermsOfServicePage() {

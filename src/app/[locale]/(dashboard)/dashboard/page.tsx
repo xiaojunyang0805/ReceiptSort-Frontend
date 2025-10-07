@@ -2,7 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { CreditCard, FileText, Upload, Calendar } from 'lucide-react'
-import Link from 'next/link'
+import { Link } from '@/lib/navigation'
 import { ProcessAllButton } from '@/components/dashboard/ProcessAllButton'
 import { LowCreditBanner } from '@/components/dashboard/LowCreditBanner'
 

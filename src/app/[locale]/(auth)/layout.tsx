@@ -1,11 +1,14 @@
 import { createClient } from '@/lib/supabase/server'
-import { redirect } from 'next/navigation'
+import { redirect } from '@/lib/navigation'
 
 export default async function AuthLayout({
   children,
+  params,
 }: {
   children: React.ReactNode
+  params: Promise<{ locale: string }>
 }) {
+  const { locale } = await params
   const supabase = await createClient()
   const {
     data: { user },
@@ -13,7 +16,7 @@ export default async function AuthLayout({
 
   // Redirect logged-in users to dashboard
   if (user) {
-    redirect('/dashboard')
+    redirect({ href: '/dashboard', locale })
   }
 
   return (

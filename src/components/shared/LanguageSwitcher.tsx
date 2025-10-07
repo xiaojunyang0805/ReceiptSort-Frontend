@@ -1,7 +1,7 @@
 'use client'
 
 import { useLocale } from 'next-intl'
-import { useRouter, usePathname } from 'next/navigation'
+import { useRouter, usePathname } from '@/lib/navigation'
 import { locales, localeNames } from '@/i18n/config'
 import {
   DropdownMenu,

@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import { Link } from '@/lib/navigation';
 import { FileText, Mail, Twitter, Linkedin } from 'lucide-react';
 
 export default function Footer() {
