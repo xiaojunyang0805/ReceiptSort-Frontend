@@ -1,21 +1,24 @@
+'use client'
+
 import { FileCheck, Target, Clock, Shield, Lock, CheckCircle2 } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
+import { useTranslations } from 'next-intl'
 
 const stats = [
   {
     icon: FileCheck,
     number: '10,000+',
-    label: 'Receipts Processed',
+    labelKey: 'receipts',
   },
   {
     icon: Target,
     number: '95%+',
-    label: 'Accuracy Rate',
+    labelKey: 'accuracy',
   },
   {
     icon: Clock,
     number: '5 Hours',
-    label: 'Saved Per Week',
+    labelKey: 'timeSaved',
   },
 ]
 
@@ -62,13 +65,15 @@ const trustBadges = [
 ]
 
 export function SocialProof() {
+  const t = useTranslations('socialProof')
+
   return (
     <section className="bg-muted/50 py-20">
       <div className="container mx-auto px-4">
         {/* Stats Section */}
         <div className="mb-20">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            Trusted by thousands of users
+            {t('title')}
           </h2>
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {stats.map((stat, index) => {
@@ -84,7 +89,7 @@ export function SocialProof() {
                     {stat.number}
                   </div>
                   <div className="text-muted-foreground font-medium">
-                    {stat.label}
+                    {t(`stats.${stat.labelKey}`)}
                   </div>
                 </div>
               )
@@ -95,7 +100,7 @@ export function SocialProof() {
         {/* Testimonials Section */}
         <div className="mb-16">
           <h3 className="text-2xl md:text-3xl font-bold text-center mb-12">
-            What our users say
+            {t('testimonials.title')}
           </h3>
           <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {testimonials.map((testimonial, index) => (

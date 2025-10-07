@@ -1,8 +1,13 @@
+'use client'
+
 import { Link } from '@/lib/navigation';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 export default function FinalCTA() {
+  const t = useTranslations('finalCTA')
+
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-primary via-primary/95 to-primary/90 py-20 sm:py-24">
       {/* Background decoration */}
@@ -13,12 +18,12 @@ export default function FinalCTA() {
         <div className="mx-auto max-w-3xl text-center">
           {/* Headline */}
           <h2 className="mb-4 text-3xl font-bold tracking-tight text-primary-foreground sm:text-4xl md:text-5xl">
-            Ready to save hours every week?
+            {t('title')}
           </h2>
 
           {/* Subheadline */}
           <p className="mb-8 text-lg text-primary-foreground/90 sm:text-xl">
-            Start with 10 free credits. No credit card required.
+            {t('subtitle')}
           </p>
 
           {/* CTA Buttons */}
@@ -30,7 +35,7 @@ export default function FinalCTA() {
               className="group h-12 px-8 text-base font-semibold shadow-xl transition-all hover:scale-105 hover:shadow-2xl"
             >
               <Link href="/signup">
-                Start Free
+                {t('button')}
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>

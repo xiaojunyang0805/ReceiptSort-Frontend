@@ -1,13 +1,16 @@
+'use client'
+
 import { Upload, Sparkles, Download, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Link } from '@/lib/navigation'
+import { useTranslations } from 'next-intl'
 
 const steps = [
   {
     number: '1',
     icon: Upload,
-    title: 'Upload Your Receipts',
-    description: 'Drag and drop receipt photos or PDFs. Works with any device.',
+    titleKey: 'upload.title',
+    descriptionKey: 'upload.description',
     visual: (
       <div className="bg-white rounded-lg p-6 shadow-lg">
         <div className="border-2 border-dashed border-primary/30 rounded-lg p-8 text-center">
@@ -20,8 +23,8 @@ const steps = [
   {
     number: '2',
     icon: Sparkles,
-    title: 'AI Extracts the Data',
-    description: 'Our AI reads your receipts and pulls out all the important information in seconds.',
+    titleKey: 'process.title',
+    descriptionKey: 'process.description',
     visual: (
       <div className="bg-white rounded-lg p-6 shadow-lg">
         <div className="space-y-3">
@@ -50,8 +53,8 @@ const steps = [
   {
     number: '3',
     icon: Download,
-    title: 'Download Your Spreadsheet',
-    description: 'Get a perfectly formatted Excel or CSV file ready for your accounting software.',
+    titleKey: 'export.title',
+    descriptionKey: 'export.description',
     visual: (
       <div className="bg-white rounded-lg p-6 shadow-lg">
         <div className="space-y-2">
@@ -78,11 +81,13 @@ const steps = [
 ]
 
 export function HowItWorks() {
+  const t = useTranslations('howItWorks')
+
   return (
     <section id="demo" className="container mx-auto px-4 py-20 bg-muted/30">
       <div className="text-center mb-16">
         <h2 className="text-4xl md:text-5xl font-bold mb-4">
-          Get organized in 3 simple steps
+          {t('subtitle')}
         </h2>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
           From receipt photo to organized spreadsheet in under a minute
@@ -118,11 +123,11 @@ export function HowItWorks() {
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-2xl font-bold">{step.title}</h3>
+                  <h3 className="text-2xl font-bold">{t(`steps.${step.titleKey}`)}</h3>
 
                   {/* Description */}
                   <p className="text-muted-foreground leading-relaxed">
-                    {step.description}
+                    {t(`steps.${step.descriptionKey}`)}
                   </p>
 
                   {/* Visual */}

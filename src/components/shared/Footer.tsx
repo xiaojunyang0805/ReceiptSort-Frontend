@@ -2,8 +2,12 @@
 
 import { Link } from '@/lib/navigation';
 import { FileText, Mail, Twitter, Linkedin } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 export default function Footer() {
+  const t = useTranslations('footer')
+  const tNav = useTranslations('navigation')
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -17,7 +21,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Column 1: Company */}
           <div>
-            <h3 className="font-semibold text-gray-900 mb-4">Company</h3>
+            <h3 className="font-semibold text-gray-900 mb-4">{t('company')}</h3>
             <ul className="space-y-3">
               <li>
                 <Link href="/contact" className="text-gray-600 hover:text-primary transition-colors">
@@ -31,7 +35,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/contact" className="text-gray-600 hover:text-primary transition-colors">
-                  Contact
+                  {tNav('contact')}
                 </Link>
               </li>
             </ul>
@@ -39,19 +43,19 @@ export default function Footer() {
 
           {/* Column 2: Product */}
           <div>
-            <h3 className="font-semibold text-gray-900 mb-4">Product</h3>
+            <h3 className="font-semibold text-gray-900 mb-4">{t('product')}</h3>
             <ul className="space-y-3">
               <li>
                 <button
                   onClick={() => scrollToSection('features')}
                   className="text-gray-600 hover:text-primary transition-colors"
                 >
-                  Features
+                  {tNav('features')}
                 </button>
               </li>
               <li>
                 <Link href="/pricing" className="text-gray-600 hover:text-primary transition-colors">
-                  Pricing
+                  {tNav('pricing')}
                 </Link>
               </li>
               <li>
@@ -59,7 +63,7 @@ export default function Footer() {
                   onClick={() => scrollToSection('how-it-works')}
                   className="text-gray-600 hover:text-primary transition-colors"
                 >
-                  How It Works
+                  {tNav('howItWorks')}
                 </button>
               </li>
               <li>
@@ -67,7 +71,7 @@ export default function Footer() {
                   onClick={() => scrollToSection('faq')}
                   className="text-gray-600 hover:text-primary transition-colors"
                 >
-                  FAQ
+                  {tNav('faq')}
                 </button>
               </li>
             </ul>
@@ -75,16 +79,16 @@ export default function Footer() {
 
           {/* Column 3: Legal */}
           <div>
-            <h3 className="font-semibold text-gray-900 mb-4">Legal</h3>
+            <h3 className="font-semibold text-gray-900 mb-4">{t('legal')}</h3>
             <ul className="space-y-3">
               <li>
                 <Link href="/privacy" className="text-gray-600 hover:text-primary transition-colors">
-                  Privacy Policy
+                  {t('privacyPolicy')}
                 </Link>
               </li>
               <li>
                 <Link href="/terms" className="text-gray-600 hover:text-primary transition-colors">
-                  Terms of Service
+                  {t('termsOfService')}
                 </Link>
               </li>
               <li>
@@ -144,7 +148,7 @@ export default function Footer() {
                 <span className="font-semibold text-gray-900">ReceiptSorter</span>
               </Link>
               <span className="text-sm text-gray-500">
-                © 2025 ReceiptSorter. All rights reserved.
+                © 2025 ReceiptSorter. {t('allRightsReserved')}.
               </span>
             </div>
 
