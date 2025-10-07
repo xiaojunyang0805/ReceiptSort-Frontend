@@ -3,8 +3,11 @@ import ReceiptUpload from '@/components/dashboard/ReceiptUpload'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { FileText, Clock } from 'lucide-react'
 import { formatDistanceToNow } from 'date-fns'
+import { getTranslations } from 'next-intl/server'
 
 export default async function UploadPage() {
+  const t = await getTranslations('dashboard')
+  const tHowItWorks = await getTranslations('howItWorks')
   const supabase = await createClient()
   const {
     data: { user },
@@ -22,22 +25,22 @@ export default async function UploadPage() {
     <div className="space-y-8 pb-20 md:pb-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Upload Receipts</h1>
+        <h1 className="text-3xl font-bold tracking-tight">{t('uploadSection.title')}</h1>
         <p className="text-muted-foreground mt-2">
-          Upload your receipt images or PDFs to get started
+          {t('uploadSection.dragDrop')}
         </p>
       </div>
 
       {/* Instructions */}
       <Card>
         <CardHeader>
-          <CardTitle>How it works</CardTitle>
-          <CardDescription>Follow these simple steps to upload your receipts</CardDescription>
+          <CardTitle>{tHowItWorks('title')}</CardTitle>
+          <CardDescription>{tHowItWorks('subtitle')}</CardDescription>
         </CardHeader>
         <CardContent>
           <ol className="list-decimal list-inside space-y-2 text-sm">
-            <li>Drag and drop your receipt files or click to browse</li>
-            <li>Supported formats: PNG, JPG, JPEG, WEBP, PDF (max 10MB each)</li>
+            <li>{tHowItWorks('steps.upload.description')}</li>
+            <li>{t('uploadSection.supported')}</li>
             <li>Upload multiple files at once for faster processing</li>
             <li>Your receipts will be securely stored and ready for AI processing</li>
             <li>Processing costs 1 credit per receipt</li>

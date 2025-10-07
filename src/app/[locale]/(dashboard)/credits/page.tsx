@@ -4,12 +4,14 @@ import { CreditCard } from 'lucide-react'
 import { CreditHistory } from '@/components/dashboard/CreditHistory'
 import { SuccessMessage } from '@/components/dashboard/SuccessMessage'
 import { PurchaseToggle } from '@/components/dashboard/PurchaseToggle'
+import { getTranslations } from 'next-intl/server'
 
 interface CreditsPageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
 export default async function CreditsPage({ searchParams }: CreditsPageProps) {
+  const t = await getTranslations('dashboard.credits')
   const supabase = await createClient()
   const {
     data: { user },
@@ -31,7 +33,7 @@ export default async function CreditsPage({ searchParams }: CreditsPageProps) {
   return (
     <div className="space-y-8 pb-20 md:pb-8">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Credits</h1>
+        <h1 className="text-3xl font-bold tracking-tight">{t('title')}</h1>
         <p className="text-muted-foreground mt-2">
           Manage your credits for processing receipts
         </p>
@@ -52,7 +54,7 @@ export default async function CreditsPage({ searchParams }: CreditsPageProps) {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <CreditCard className="h-5 w-5" />
-            Current Balance
+            {t('balance')}
           </CardTitle>
           <CardDescription>Your available credits</CardDescription>
         </CardHeader>
@@ -61,7 +63,7 @@ export default async function CreditsPage({ searchParams }: CreditsPageProps) {
             {profile?.credits ?? 0}
           </div>
           <p className="text-sm text-muted-foreground mt-2">
-            Credits remaining
+            {t('creditsRemaining')}
           </p>
         </CardContent>
       </Card>

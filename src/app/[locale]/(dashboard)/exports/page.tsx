@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
+import { useTranslations } from 'next-intl'
 import {
   Table,
   TableBody,
@@ -24,6 +25,8 @@ interface Export {
 }
 
 export default function ExportsPage() {
+  const t = useTranslations('dashboard.exports')
+  const tCommon = useTranslations('common')
   const [exports, setExports] = useState<Export[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
@@ -75,7 +78,7 @@ export default function ExportsPage() {
     return (
       <div className="container mx-auto py-8">
         <div className="flex items-center justify-center h-64">
-          <div className="text-muted-foreground">Loading exports...</div>
+          <div className="text-muted-foreground">{tCommon('loading')}</div>
         </div>
       </div>
     )
@@ -84,7 +87,7 @@ export default function ExportsPage() {
   return (
     <div className="container mx-auto py-8 space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">Export History</h1>
+        <h1 className="text-3xl font-bold">{t('title')}</h1>
         <p className="text-muted-foreground mt-2">
           View your past receipt exports
         </p>
@@ -95,7 +98,7 @@ export default function ExportsPage() {
           <div className="flex flex-col items-center gap-4">
             <Download className="h-12 w-12 text-muted-foreground" />
             <div>
-              <h3 className="font-medium text-lg">No exports yet</h3>
+              <h3 className="font-medium text-lg">{t('noExports')}</h3>
               <p className="text-muted-foreground mt-1">
                 Export receipts from the dashboard to see them here
               </p>
@@ -109,8 +112,8 @@ export default function ExportsPage() {
               <TableRow>
                 <TableHead>Type</TableHead>
                 <TableHead>File Name</TableHead>
-                <TableHead>Receipts</TableHead>
-                <TableHead>Created</TableHead>
+                <TableHead>{t('columns.receipts')}</TableHead>
+                <TableHead>{t('columns.date')}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
