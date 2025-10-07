@@ -19,11 +19,13 @@ const geistMono = localFont({
 
 export default async function LocaleLayout({
   children,
-  params: { locale }
+  params,
 }: {
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
+
   // Validate that the incoming locale is valid
   if (!locales.includes(locale as Locale)) {
     notFound();
@@ -36,7 +38,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <NextIntlClientProvider messages={messages}>
+        <NextIntlClientProvider messages={messages} locale={locale}>
           {children}
           <Toaster position="top-center" richColors />
         </NextIntlClientProvider>

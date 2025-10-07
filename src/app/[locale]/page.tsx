@@ -8,8 +8,9 @@ import Navbar from '@/components/shared/Navbar'
 import Footer from '@/components/shared/Footer'
 import { getTranslations } from 'next-intl/server'
 
-export async function generateMetadata({ params }: { params: { locale: string } }) {
-  const t = await getTranslations({ locale: params.locale, namespace: 'hero' })
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'hero' })
 
   return {
     title: 'ReceiptSorter - AI Receipt Data Extraction to Excel | Save Hours on Bookkeeping',
