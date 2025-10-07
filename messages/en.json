@@ -108,7 +108,49 @@
   },
   "faq": {
     "title": "Frequently Asked Questions",
-    "subtitle": "Everything you need to know about ReceiptSorter"
+    "subtitle": "Everything you need to know about ReceiptSorter",
+    "items": {
+      "accuracy": {
+        "question": "How accurate is the AI extraction?",
+        "answer": "Our AI achieves 95%+ accuracy on clear, standard receipts. You can always manually edit any extracted data before exporting."
+      },
+      "formats": {
+        "question": "What file formats do you support?",
+        "answer": "We support all common image formats (JPG, PNG, WebP) and PDF files up to 10MB."
+      },
+      "cost": {
+        "question": "How much does it cost?",
+        "answer": "We use a credit system. Each receipt costs 1 credit ($0.50). You can buy credits in packs (10 for $9.99, 50 for $24.99, etc.) or subscribe for better value."
+      },
+      "expiration": {
+        "question": "Do credits expire?",
+        "answer": "No, credits never expire. Use them whenever you need them."
+      },
+      "security": {
+        "question": "Is my data secure?",
+        "answer": "Yes. We use bank-level encryption (256-bit SSL), and your receipts are automatically deleted after 90 days. We never share your data."
+      },
+      "export": {
+        "question": "Can I export to QuickBooks or Xero?",
+        "answer": "Currently, we export to Excel and CSV formats which work with all major accounting software. Direct integrations coming soon."
+      },
+      "wrongExtraction": {
+        "question": "What if the extraction is wrong?",
+        "answer": "You can manually edit any extracted data before exporting. If extraction completely fails, we'll refund the credit."
+      },
+      "refunds": {
+        "question": "Do you offer refunds?",
+        "answer": "Yes, we offer a 30-day money-back guarantee on credit purchases if you're not satisfied."
+      },
+      "business": {
+        "question": "Can I use this for my business?",
+        "answer": "Absolutely! Many small businesses, freelancers, and accountants use ReceiptSorter for expense tracking and bookkeeping."
+      },
+      "software": {
+        "question": "Do I need to install any software?",
+        "answer": "No, ReceiptSorter is 100% web-based. Access it from any device with a web browser."
+      }
+    }
   },
   "finalCTA": {
     "title": "Ready to save hours on receipt management?",
