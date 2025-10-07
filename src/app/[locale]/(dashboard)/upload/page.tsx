@@ -57,9 +57,9 @@ export default async function UploadPage() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Clock className="h-5 w-5" />
-              Recent Uploads
+              {t('recentUploads.title')}
             </CardTitle>
-            <CardDescription>Your most recently uploaded receipts</CardDescription>
+            <CardDescription>{t('recentUploads.subtitle')}</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">

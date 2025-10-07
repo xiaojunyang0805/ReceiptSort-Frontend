@@ -39,6 +39,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 import ExportDialog from './ExportDialog'
 import ReceiptFilters, { ReceiptFiltersState, INITIAL_FILTERS } from './ReceiptFilters'
 import ExportPresets from './ExportPresets'
+import { useTranslations } from 'next-intl'
 
 interface Receipt {
   id: string
@@ -65,6 +66,7 @@ const statusConfig = {
 }
 
 export default function ReceiptList() {
+  const t = useTranslations('dashboard.receiptsPage')
   const [receipts, setReceipts] = useState<Receipt[]>([])
   const [loading, setLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState('')
@@ -401,7 +403,7 @@ export default function ReceiptList() {
       {/* Search and Export Actions */}
       <div className="flex flex-col sm:flex-row gap-4">
         <Input
-          placeholder="Quick search..."
+          placeholder={t('quickSearch')}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="sm:max-w-sm"
@@ -411,7 +413,7 @@ export default function ReceiptList() {
           onChange={(e) => setStatusFilter(e.target.value)}
           className="px-3 py-2 border rounded-md bg-background"
         >
-          <option value="all">All Status</option>
+          <option value="all">{t('allStatus')}</option>
           <option value="pending">Pending</option>
           <option value="processing">Processing</option>
           <option value="completed">Completed</option>

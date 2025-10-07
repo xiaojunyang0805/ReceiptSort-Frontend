@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 
 interface UploadFile {
   file: File
@@ -28,6 +29,7 @@ const ACCEPTED_FILE_TYPES = {
 }
 
 export default function ReceiptUpload() {
+  const t = useTranslations('dashboard.uploadSection')
   const [uploadFiles, setUploadFiles] = useState<UploadFile[]>([])
   const [isUploading, setIsUploading] = useState(false)
   const supabase = createClient()
@@ -210,16 +212,16 @@ export default function ReceiptUpload() {
 
           <div>
             <p className="text-lg font-semibold">
-              {isDragActive ? 'Drop files here' : 'Drop receipt files here'}
+              {isDragActive ? 'Drop files here' : t('dropHere')}
             </p>
             <p className="text-sm text-muted-foreground mt-1">
-              or click to browse
+              {t('clickToBrowse')}
             </p>
           </div>
 
           <div className="text-xs text-muted-foreground space-y-1">
-            <p>Supported formats: PNG, JPG, JPEG, WEBP, PDF</p>
-            <p>Maximum file size: 10MB per file</p>
+            <p>{t('supportedFormats')}</p>
+            <p>{t('maxFileSize')}</p>
           </div>
         </div>
       </Card>

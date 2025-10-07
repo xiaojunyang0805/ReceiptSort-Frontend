@@ -89,7 +89,7 @@ export default function ExportsPage() {
       <div>
         <h1 className="text-3xl font-bold">{t('title')}</h1>
         <p className="text-muted-foreground mt-2">
-          View your past receipt exports
+          {t('subtitle')}
         </p>
       </div>
 
@@ -110,7 +110,7 @@ export default function ExportsPage() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Type</TableHead>
+                <TableHead>{t('type')}</TableHead>
                 <TableHead>File Name</TableHead>
                 <TableHead>{t('columns.receipts')}</TableHead>
                 <TableHead>{t('columns.date')}</TableHead>
@@ -138,7 +138,7 @@ export default function ExportsPage() {
                   </TableCell>
                   <TableCell>
                     <span className="text-sm text-muted-foreground">
-                      {exportRecord.receipt_count} receipt{exportRecord.receipt_count === 1 ? '' : 's'}
+                      {exportRecord.receipt_count} {t('receipts')}
                     </span>
                   </TableCell>
                   <TableCell className="text-sm text-muted-foreground">
@@ -155,7 +155,7 @@ export default function ExportsPage() {
 
       {exports.length > 0 && (
         <div className="text-sm text-muted-foreground text-center">
-          Showing {exports.length} most recent export{exports.length === 1 ? '' : 's'}
+          {t('showingRecent', { count: exports.length })}
         </div>
       )}
     </div>

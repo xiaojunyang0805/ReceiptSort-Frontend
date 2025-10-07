@@ -178,26 +178,69 @@
   },
   "dashboard": {
     "welcome": "Bon retour",
+    "overview": {
+      "title": "Aperçu",
+      "subtitle": "Voici un aperçu de votre gestion des reçus"
+    },
     "uploadSection": {
       "title": "Télécharger des Reçus",
       "dragDrop": "Glissez-déposez des images de reçus ici",
+      "dropHere": "Déposez les fichiers de reçus ici",
+      "clickToBrowse": "ou cliquez pour parcourir",
       "or": "ou",
       "browse": "Parcourir les fichiers",
       "supported": "Supporte: JPG, PNG, PDF (max 10MB)",
+      "supportedFormats": "Formats supportés: PNG, JPG, JPEG, WEBP, PDF",
+      "maxFileSize": "Taille maximale du fichier: 10MB par fichier",
       "multipleFiles": "Téléchargez plusieurs fichiers à la fois pour un traitement plus rapide",
       "secureStorage": "Vos reçus seront stockés en toute sécurité et prêts pour le traitement par IA",
       "creditCost": "Le traitement coûte 1 crédit par reçu"
+    },
+    "stats": {
+      "allTimeProcessed": "Traités au total",
+      "receiptsUploaded": "Reçus téléchargés",
+      "mostRecentExport": "Dernière exportation"
+    },
+    "timePeriods": {
+      "thisMonth": "Ce Mois",
+      "lastMonth": "Mois Dernier",
+      "thisYear": "Cette Année",
+      "q1": "Q1",
+      "q2": "Q2",
+      "q3": "Q3",
+      "q4": "Q4",
+      "allTime": "Tout le Temps"
+    },
+    "timeAgo": {
+      "daysAgo": "jours",
+      "dayAgo": "jour",
+      "about17HoursAgo": "il y a environ 17 heures"
+    },
+    "recentUploads": {
+      "title": "Téléchargements Récents",
+      "subtitle": "Vos reçus les plus récemment téléchargés"
+    },
+    "receiptsPage": {
+      "title": "Reçus",
+      "subtitle": "Voir et gérer tous vos reçus téléchargés",
+      "quickExport": "Export Rapide",
+      "quickSearch": "Recherche rapide...",
+      "allStatus": "Tous les Statuts",
+      "show": "Afficher",
+      "filters": "Filtres"
     },
     "receiptsTable": {
       "title": "Vos Reçus",
       "noReceipts": "Aucun reçu pour le moment",
       "uploadFirst": "Téléchargez votre premier reçu pour commencer",
       "columns": {
+        "fileName": "Nom du Fichier",
         "date": "Date",
         "merchant": "Marchand",
         "amount": "Montant",
         "category": "Catégorie",
         "status": "Statut",
+        "uploaded": "Téléchargé",
         "actions": "Actions"
       },
       "status": {
@@ -211,18 +254,67 @@
       "title": "Crédits",
       "balance": "Solde Actuel",
       "creditsRemaining": "crédits restants",
+      "description": "Crédits disponibles pour le traitement des reçus",
       "buyCredits": "Acheter des Crédits",
       "history": "Historique des Crédits",
       "packages": {
         "title": "Choisissez un forfait",
         "credits": "crédits",
         "mostPopular": "Le Plus Populaire",
-        "bestValue": "Meilleur Rapport Qualité-Prix"
+        "bestValue": "Meilleur Rapport Qualité-Prix",
+        "basic": {
+          "name": "Basique",
+          "description": "Parfait pour une utilisation occasionnelle",
+          "features": [
+            "10 crédits de traitement de reçus",
+            "Extraction de données par IA",
+            "Export Excel & CSV",
+            "Support par e-mail",
+            "Les crédits n'expirent jamais"
+          ]
+        },
+        "popular": {
+          "name": "Populaire",
+          "description": "Idéal pour les petites entreprises",
+          "features": [
+            "50 crédits de traitement de reçus",
+            "Extraction de données par IA",
+            "Export Excel & CSV",
+            "Support prioritaire par e-mail",
+            "Les crédits n'expirent jamais",
+            "20% d'économies"
+          ]
+        },
+        "business": {
+          "name": "Entreprise",
+          "description": "Pour les utilisateurs à volume élevé",
+          "features": [
+            "200 crédits de traitement de reçus",
+            "Extraction de données par IA",
+            "Export Excel & CSV",
+            "Support prioritaire par e-mail",
+            "Les crédits n'expirent jamais",
+            "40% d'économies"
+          ]
+        }
+      },
+      "transactions": {
+        "title": "Historique des Transactions",
+        "subtitle": "Votre historique des transactions de crédits",
+        "purchase": "Achat",
+        "usage": "Utilisation",
+        "refund": "Remboursement",
+        "bonus": "Bonus",
+        "purchasedBasicPackage": "Forfait basique acheté"
       }
     },
     "exports": {
       "title": "Historique des Exportations",
+      "subtitle": "Voir vos exportations de reçus passées",
       "noExports": "Aucune exportation pour le moment",
+      "type": "Type",
+      "receipts": "reçus",
+      "showingRecent": "Affichage {count, plural, one {de la dernière exportation} other {des {count} dernières exportations}}",
       "columns": {
         "date": "Date d'Exportation",
         "receipts": "Reçus",

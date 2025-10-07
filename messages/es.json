@@ -178,26 +178,69 @@
   },
   "dashboard": {
     "welcome": "Bienvenido de nuevo",
+    "overview": {
+      "title": "Resumen",
+      "subtitle": "Aquí tienes un resumen de tu gestión de recibos"
+    },
     "uploadSection": {
       "title": "Subir Recibos",
       "dragDrop": "Arrastra y suelta imágenes de recibos aquí",
+      "dropHere": "Suelta archivos de recibos aquí",
+      "clickToBrowse": "o haz clic para explorar",
       "or": "o",
       "browse": "Explorar archivos",
       "supported": "Soporta: JPG, PNG, PDF (max 10MB)",
+      "supportedFormats": "Formatos soportados: PNG, JPG, JPEG, WEBP, PDF",
+      "maxFileSize": "Tamaño máximo de archivo: 10MB por archivo",
       "multipleFiles": "Sube varios archivos a la vez para un procesamiento más rápido",
       "secureStorage": "Tus recibos se almacenarán de forma segura y estarán listos para el procesamiento con IA",
       "creditCost": "El procesamiento cuesta 1 crédito por recibo"
+    },
+    "stats": {
+      "allTimeProcessed": "Total procesado",
+      "receiptsUploaded": "Recibos subidos",
+      "mostRecentExport": "Exportación más reciente"
+    },
+    "timePeriods": {
+      "thisMonth": "Este Mes",
+      "lastMonth": "Mes Pasado",
+      "thisYear": "Este Año",
+      "q1": "Q1",
+      "q2": "Q2",
+      "q3": "Q3",
+      "q4": "Q4",
+      "allTime": "Todo el Tiempo"
+    },
+    "timeAgo": {
+      "daysAgo": "días",
+      "dayAgo": "día",
+      "about17HoursAgo": "hace aproximadamente 17 horas"
+    },
+    "recentUploads": {
+      "title": "Subidas Recientes",
+      "subtitle": "Tus recibos subidos más recientemente"
+    },
+    "receiptsPage": {
+      "title": "Recibos",
+      "subtitle": "Ver y gestionar todos tus recibos subidos",
+      "quickExport": "Exportación Rápida",
+      "quickSearch": "Búsqueda rápida...",
+      "allStatus": "Todos los Estados",
+      "show": "Mostrar",
+      "filters": "Filtros"
     },
     "receiptsTable": {
       "title": "Tus Recibos",
       "noReceipts": "Aún no hay recibos",
       "uploadFirst": "Sube tu primer recibo para comenzar",
       "columns": {
+        "fileName": "Nombre del Archivo",
         "date": "Fecha",
         "merchant": "Comerciante",
         "amount": "Monto",
         "category": "Categoría",
         "status": "Estado",
+        "uploaded": "Subido",
         "actions": "Acciones"
       },
       "status": {
@@ -211,18 +254,67 @@
       "title": "Créditos",
       "balance": "Saldo Actual",
       "creditsRemaining": "créditos restantes",
+      "description": "Créditos disponibles para procesar recibos",
       "buyCredits": "Comprar Créditos",
       "history": "Historial de Créditos",
       "packages": {
         "title": "Elige un paquete",
         "credits": "créditos",
         "mostPopular": "Más Popular",
-        "bestValue": "Mejor Valor"
+        "bestValue": "Mejor Valor",
+        "basic": {
+          "name": "Básico",
+          "description": "Perfecto para uso ocasional",
+          "features": [
+            "10 créditos de procesamiento de recibos",
+            "Extracción de datos con IA",
+            "Exportación Excel y CSV",
+            "Soporte por correo electrónico",
+            "Los créditos nunca expiran"
+          ]
+        },
+        "popular": {
+          "name": "Popular",
+          "description": "Ideal para pequeñas empresas",
+          "features": [
+            "50 créditos de procesamiento de recibos",
+            "Extracción de datos con IA",
+            "Exportación Excel y CSV",
+            "Soporte prioritario por correo",
+            "Los créditos nunca expiran",
+            "20% de ahorro"
+          ]
+        },
+        "business": {
+          "name": "Empresa",
+          "description": "Para usuarios de alto volumen",
+          "features": [
+            "200 créditos de procesamiento de recibos",
+            "Extracción de datos con IA",
+            "Exportación Excel y CSV",
+            "Soporte prioritario por correo",
+            "Los créditos nunca expiran",
+            "40% de ahorro"
+          ]
+        }
+      },
+      "transactions": {
+        "title": "Historial de Transacciones",
+        "subtitle": "Tu historial de transacciones de créditos",
+        "purchase": "Compra",
+        "usage": "Uso",
+        "refund": "Reembolso",
+        "bonus": "Bonificación",
+        "purchasedBasicPackage": "Paquete básico comprado"
       }
     },
     "exports": {
       "title": "Historial de Exportaciones",
+      "subtitle": "Ver tus exportaciones de recibos pasadas",
       "noExports": "Aún no hay exportaciones",
+      "type": "Tipo",
+      "receipts": "recibos",
+      "showingRecent": "Mostrando {count, plural, one {la exportación más reciente} other {las {count} exportaciones más recientes}}",
       "columns": {
         "date": "Fecha de Exportación",
         "receipts": "Recibos",

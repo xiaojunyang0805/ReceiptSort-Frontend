@@ -12,6 +12,7 @@ import {
   startOfQuarter,
   endOfQuarter,
 } from 'date-fns'
+import { useTranslations } from 'next-intl'
 
 interface ExportPresetsProps {
   onExport: (dateFrom: Date, dateTo: Date, label: string) => void
@@ -19,41 +20,43 @@ interface ExportPresetsProps {
 }
 
 export default function ExportPresets({ onExport, isExporting }: ExportPresetsProps) {
+  const t = useTranslations('dashboard.receiptsPage')
+  const tPeriods = useTranslations('dashboard.timePeriods')
   const now = new Date()
 
   const presets = [
     {
-      label: 'This Month',
+      labelKey: 'thisMonth',
       dateFrom: startOfMonth(now),
       dateTo: endOfMonth(now),
     },
     {
-      label: 'Last Month',
+      labelKey: 'lastMonth',
       dateFrom: startOfMonth(subMonths(now, 1)),
       dateTo: endOfMonth(subMonths(now, 1)),
     },
     {
-      label: 'This Year',
+      labelKey: 'thisYear',
       dateFrom: startOfYear(now),
       dateTo: endOfYear(now),
     },
     {
-      label: 'Q1',
+      labelKey: 'q1',
       dateFrom: startOfQuarter(new Date(now.getFullYear(), 0, 1)),
       dateTo: endOfQuarter(new Date(now.getFullYear(), 0, 1)),
     },
     {
-      label: 'Q2',
+      labelKey: 'q2',
       dateFrom: startOfQuarter(new Date(now.getFullYear(), 3, 1)),
       dateTo: endOfQuarter(new Date(now.getFullYear(), 3, 1)),
     },
     {
-      label: 'Q3',
+      labelKey: 'q3',
       dateFrom: startOfQuarter(new Date(now.getFullYear(), 6, 1)),
       dateTo: endOfQuarter(new Date(now.getFullYear(), 6, 1)),
     },
     {
-      label: 'Q4',
+      labelKey: 'q4',
       dateFrom: startOfQuarter(new Date(now.getFullYear(), 9, 1)),
       dateTo: endOfQuarter(new Date(now.getFullYear(), 9, 1)),
     },
@@ -64,28 +67,37 @@ export default function ExportPresets({ onExport, isExporting }: ExportPresetsPr
       <div className="space-y-4">
         <div className="flex items-center gap-2">
           <Download className="h-4 w-4" />
-          <h3 className="font-medium">Quick Export</h3>
+          <h3 className="font-medium">{t('quickExport')}</h3>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-          {presets.map((preset) => (
-            <Button
-              key={preset.label}
-              variant="outline"
-              size="sm"
-              onClick={() => onExport(preset.dateFrom, preset.dateTo, preset.label)}
-              disabled={isExporting}
-            >
-              {preset.label}
-            </Button>
-          ))}
+          {presets.map((preset) => {
+            const label = preset.labelKey === 'thisMonth' ? tPeriods('thisMonth')
+              : preset.labelKey === 'lastMonth' ? tPeriods('lastMonth')
+              : preset.labelKey === 'thisYear' ? tPeriods('thisYear')
+              : preset.labelKey === 'q1' ? tPeriods('q1')
+              : preset.labelKey === 'q2' ? tPeriods('q2')
+              : preset.labelKey === 'q3' ? tPeriods('q3')
+              : tPeriods('q4')
+            return (
+              <Button
+                key={preset.labelKey}
+                variant="outline"
+                size="sm"
+                onClick={() => onExport(preset.dateFrom, preset.dateTo, label)}
+                disabled={isExporting}
+              >
+                {label}
+              </Button>
+            )
+          })}
           <Button
             variant="outline"
             size="sm"
-            onClick={() => onExport(new Date(0), new Date(), 'All Time')}
+            onClick={() => onExport(new Date(0), new Date(), tPeriods('allTime'))}
             disabled={isExporting}
           >
-            All Time
+            {tPeriods('allTime')}
           </Button>
         </div>
       </div>

@@ -16,6 +16,7 @@ import { Badge } from '@/components/ui/badge'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Card } from '@/components/ui/card'
 import { ReceiptCategory } from '@/types/receipt'
+import { useTranslations } from 'next-intl'
 
 const CATEGORIES: ReceiptCategory[] = [
   'Food & Dining',
@@ -59,6 +60,7 @@ export default function ReceiptFilters({
   onApply,
   onClear,
 }: ReceiptFiltersProps) {
+  const t = useTranslations('dashboard.receiptsPage')
   const [isExpanded, setIsExpanded] = useState(false)
 
   const activeFilterCount =
@@ -91,7 +93,7 @@ export default function ReceiptFilters({
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Filter className="h-4 w-4" />
-            <h3 className="font-medium">Filters</h3>
+            <h3 className="font-medium">{t('filters')}</h3>
             {activeFilterCount > 0 && (
               <Badge variant="secondary">{activeFilterCount}</Badge>
             )}
@@ -108,7 +110,7 @@ export default function ReceiptFilters({
               size="sm"
               onClick={() => setIsExpanded(!isExpanded)}
             >
-              {isExpanded ? 'Hide' : 'Show'}
+              {isExpanded ? 'Hide' : t('show')}
             </Button>
           </div>
         </div>

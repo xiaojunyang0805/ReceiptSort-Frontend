@@ -14,6 +14,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button'
 import { ChevronLeft, ChevronRight, TrendingUp, TrendingDown, Plus, Gift } from 'lucide-react'
 import { formatDistanceToNow } from 'date-fns'
+import { useTranslations } from 'next-intl'
 
 interface CreditTransaction {
   id: string
@@ -26,6 +27,7 @@ interface CreditTransaction {
 const ITEMS_PER_PAGE = 20
 
 export function CreditHistory() {
+  const t = useTranslations('dashboard.credits.transactions')
   const [transactions, setTransactions] = useState<CreditTransaction[]>([])
   const [loading, setLoading] = useState(true)
   const [currentPage, setCurrentPage] = useState(1)
@@ -111,7 +113,7 @@ export function CreditHistory() {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>Transaction History</CardTitle>
+          <CardTitle>{t('title')}</CardTitle>
           <CardDescription>Loading your credit transactions...</CardDescription>
         </CardHeader>
         <CardContent>
@@ -127,8 +129,8 @@ export function CreditHistory() {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>Transaction History</CardTitle>
-          <CardDescription>Your credit transaction history</CardDescription>
+          <CardTitle>{t('title')}</CardTitle>
+          <CardDescription>{t('subtitle')}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="text-center py-12">
@@ -146,8 +148,8 @@ export function CreditHistory() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Transaction History</CardTitle>
-        <CardDescription>Your credit transaction history</CardDescription>
+        <CardTitle>{t('title')}</CardTitle>
+        <CardDescription>{t('subtitle')}</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="border rounded-lg">
@@ -171,7 +173,12 @@ export function CreditHistory() {
                   <TableCell>
                     <div className="flex items-center gap-2">
                       {getTypeIcon(transaction.type)}
-                      <span className="capitalize text-sm">{transaction.type}</span>
+                      <span className="capitalize text-sm">
+                        {transaction.type === 'purchase' && t('purchase')}
+                        {transaction.type === 'usage' && t('usage')}
+                        {transaction.type === 'refund' && t('refund')}
+                        {transaction.type === 'bonus' && t('bonus')}
+                      </span>
                     </div>
                   </TableCell>
                   <TableCell className={`font-semibold ${getTypeColor(transaction.type)}`}>
