@@ -183,7 +183,10 @@
       "dragDrop": "Arrastra y suelta imágenes de recibos aquí",
       "or": "o",
       "browse": "Explorar archivos",
-      "supported": "Soporta: JPG, PNG, PDF (max 10MB)"
+      "supported": "Soporta: JPG, PNG, PDF (max 10MB)",
+      "multipleFiles": "Sube varios archivos a la vez para un procesamiento más rápido",
+      "secureStorage": "Tus recibos se almacenarán de forma segura y estarán listos para el procesamiento con IA",
+      "creditCost": "El procesamiento cuesta 1 crédito por recibo"
     },
     "receiptsTable": {
       "title": "Tus Recibos",

@@ -183,7 +183,10 @@
       "dragDrop": "Ziehen Sie Belegbilder hierher",
       "or": "oder",
       "browse": "Dateien durchsuchen",
-      "supported": "Unterstützt: JPG, PNG, PDF (max 10MB)"
+      "supported": "Unterstützt: JPG, PNG, PDF (max 10MB)",
+      "multipleFiles": "Laden Sie mehrere Dateien gleichzeitig hoch für eine schnellere Verarbeitung",
+      "secureStorage": "Ihre Belege werden sicher gespeichert und sind bereit für die KI-Verarbeitung",
+      "creditCost": "Die Verarbeitung kostet 1 Credit pro Beleg"
     },
     "receiptsTable": {
       "title": "Ihre Belege",

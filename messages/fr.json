@@ -183,7 +183,10 @@
       "dragDrop": "Glissez-déposez des images de reçus ici",
       "or": "ou",
       "browse": "Parcourir les fichiers",
-      "supported": "Supporte: JPG, PNG, PDF (max 10MB)"
+      "supported": "Supporte: JPG, PNG, PDF (max 10MB)",
+      "multipleFiles": "Téléchargez plusieurs fichiers à la fois pour un traitement plus rapide",
+      "secureStorage": "Vos reçus seront stockés en toute sécurité et prêts pour le traitement par IA",
+      "creditCost": "Le traitement coûte 1 crédit par reçu"
     },
     "receiptsTable": {
       "title": "Vos Reçus",

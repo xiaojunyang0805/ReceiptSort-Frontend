@@ -183,7 +183,10 @@
       "dragDrop": "Sleep en zet bonnetjeafbeeldingen hier neer",
       "or": "of",
       "browse": "Bladeren door bestanden",
-      "supported": "Ondersteunt: JPG, PNG, PDF (max 10MB)"
+      "supported": "Ondersteunt: JPG, PNG, PDF (max 10MB)",
+      "multipleFiles": "Upload meerdere bestanden tegelijk voor snellere verwerking",
+      "secureStorage": "Uw bonnetjes worden veilig opgeslagen en zijn klaar voor AI-verwerking",
+      "creditCost": "Verwerking kost 1 credit per bonnetje"
     },
     "receiptsTable": {
       "title": "Uw Bonnetjes",

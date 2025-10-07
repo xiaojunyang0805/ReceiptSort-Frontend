@@ -183,7 +183,10 @@
       "dragDrop": "レシート画像をここにドラッグ&ドロップ",
       "or": "または",
       "browse": "ファイルを参照",
-      "supported": "対応: JPG, PNG, PDF (最大10MB)"
+      "supported": "対応: JPG, PNG, PDF (最大10MB)",
+      "multipleFiles": "複数のファイルを一度にアップロードして処理を高速化",
+      "secureStorage": "レシートは安全に保存され、AI処理の準備が整います",
+      "creditCost": "処理はレシート1枚につき1クレジットです"
     },
     "receiptsTable": {
       "title": "あなたのレシート",

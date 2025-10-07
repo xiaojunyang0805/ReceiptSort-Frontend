@@ -183,7 +183,10 @@
       "dragDrop": "Drag and drop receipt images here",
       "or": "or",
       "browse": "Browse files",
-      "supported": "Supports: JPG, PNG, PDF (max 10MB)"
+      "supported": "Supports: JPG, PNG, PDF (max 10MB)",
+      "multipleFiles": "Upload multiple files at once for faster processing",
+      "secureStorage": "Your receipts will be securely stored and ready for AI processing",
+      "creditCost": "Processing costs 1 credit per receipt"
     },
     "receiptsTable": {
       "title": "Your Receipts",

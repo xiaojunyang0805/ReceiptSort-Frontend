@@ -41,9 +41,9 @@ export default async function UploadPage() {
           <ol className="list-decimal list-inside space-y-2 text-sm">
             <li>{tHowItWorks('steps.upload.description')}</li>
             <li>{t('uploadSection.supported')}</li>
-            <li>Upload multiple files at once for faster processing</li>
-            <li>Your receipts will be securely stored and ready for AI processing</li>
-            <li>Processing costs 1 credit per receipt</li>
+            <li>{t('uploadSection.multipleFiles')}</li>
+            <li>{t('uploadSection.secureStorage')}</li>
+            <li>{t('uploadSection.creditCost')}</li>
           </ol>
         </CardContent>
       </Card>
