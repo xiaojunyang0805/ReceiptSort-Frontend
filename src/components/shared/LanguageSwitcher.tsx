@@ -1,0 +1,49 @@
+'use client'
+
+import { useLocale } from 'next-intl'
+import { useRouter, usePathname } from 'next/navigation'
+import { locales, localeNames } from '@/i18n/config'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import { Button } from '@/components/ui/button'
+import { Globe } from 'lucide-react'
+
+export function LanguageSwitcher() {
+  const locale = useLocale()
+  const router = useRouter()
+  const pathname = usePathname()
+
+  const handleLocaleChange = (newLocale: string) => {
+    // Remove current locale from pathname
+    const pathnameWithoutLocale = pathname.replace(`/${locale}`, '')
+    // Add new locale
+    const newPath = `/${newLocale}${pathnameWithoutLocale || ''}`
+    router.push(newPath)
+  }
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" size="sm" className="gap-2">
+          <Globe className="h-4 w-4" />
+          <span className="hidden sm:inline">{localeNames[locale as keyof typeof localeNames]}</span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        {locales.map((loc) => (
+          <DropdownMenuItem
+            key={loc}
+            onClick={() => handleLocaleChange(loc)}
+            className={locale === loc ? 'bg-accent' : ''}
+          >
+            {localeNames[loc]}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}

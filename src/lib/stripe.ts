@@ -142,6 +142,11 @@ export async function createCheckoutSession(
   packageId: string,
   credits: number
 ): Promise<Stripe.Checkout.Session> {
+  // Hardcode the URL for now to bypass environment variable issues
+  const baseUrl = 'https://receiptsort.vercel.app'
+
+  console.log('[Stripe] Using hardcoded baseUrl:', baseUrl)
+
   const session = await stripe.checkout.sessions.create({
     mode: 'payment',
     line_items: [
@@ -150,8 +155,8 @@ export async function createCheckoutSession(
         quantity: 1,
       },
     ],
-    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/credits?success=true&session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/credits?canceled=true`,
+    success_url: `${baseUrl}/credits?success=true&session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${baseUrl}/credits?canceled=true`,
     customer_email: userEmail,
     metadata: {
       user_id: userId,
@@ -187,6 +192,8 @@ export async function createSubscriptionCheckoutSession(
   planId: string,
   creditsPerMonth: number
 ): Promise<Stripe.Checkout.Session> {
+  const baseUrl = 'https://receiptsort.vercel.app'
+
   const session = await stripe.checkout.sessions.create({
     mode: 'subscription',
     line_items: [
@@ -195,8 +202,8 @@ export async function createSubscriptionCheckoutSession(
         quantity: 1,
       },
     ],
-    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/credits?success=true&session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/credits?canceled=true`,
+    success_url: `${baseUrl}/credits?success=true&session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${baseUrl}/credits?canceled=true`,
     customer_email: userEmail,
     metadata: {
       user_id: userId,
@@ -224,9 +231,11 @@ export async function createSubscriptionCheckoutSession(
 export async function createPortalSession(
   customerId: string
 ): Promise<Stripe.BillingPortal.Session> {
+  const baseUrl = 'https://receiptsort.vercel.app'
+
   const session = await stripe.billingPortal.sessions.create({
     customer: customerId,
-    return_url: `${process.env.NEXT_PUBLIC_APP_URL}/credits`,
+    return_url: `${baseUrl}/credits`,
   })
 
   return session

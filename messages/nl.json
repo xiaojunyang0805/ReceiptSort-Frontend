@@ -1,0 +1,240 @@
+{
+  "common": {
+    "getStarted": "Gratis Beginnen",
+    "signUp": "Aanmelden",
+    "login": "Inloggen",
+    "logout": "Uitloggen",
+    "learnMore": "Meer Informatie",
+    "tryDemo": "Probeer Demo",
+    "uploadReceipts": "Bonnetjes Uploaden",
+    "pricing": "Prijzen",
+    "features": "Kenmerken",
+    "howItWorks": "Hoe Het Werkt",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "dashboard": "Dashboard",
+    "receipts": "Bonnetjes",
+    "exports": "Exports",
+    "credits": "Credits",
+    "profile": "Profiel",
+    "upload": "Uploaden",
+    "export": "Exporteren",
+    "download": "Downloaden",
+    "cancel": "Annuleren",
+    "save": "Opslaan",
+    "delete": "Verwijderen",
+    "edit": "Bewerken",
+    "close": "Sluiten",
+    "search": "Zoeken",
+    "filter": "Filteren",
+    "select": "Selecteren",
+    "loading": "Laden...",
+    "error": "Fout",
+    "success": "Succes",
+    "confirm": "Bevestigen"
+  },
+  "hero": {
+    "headline": "Stop Met Het Verspillen van Uren aan Bonnetvoerinvoer",
+    "headlineHighlight": "Bonnetje Invoer",
+    "subheadline": "Extraheer gegevens van bonnetjes in seconden met AI.",
+    "subheadlineDetails": "Upload bonnetjes → AI extraheert gegevens → Download Excel.",
+    "watchDemo": "Bekijk Demo",
+    "trustBadge": "Vertrouwd door 2000+ bedrijven wereldwijd",
+    "valueProps": {
+      "accuracy": "95%+ Nauwkeurigheid",
+      "processing": "Verwerk in Seconden",
+      "support": "Ondersteunt 100+ Talen"
+    }
+  },
+  "features": {
+    "title": "Alles wat u nodig heeft om bonnetjes te organiseren",
+    "subtitle": "Gebouwd voor kleine bedrijven, freelancers en accountants die hun tijd waarderen.",
+    "items": {
+      "upload": {
+        "title": "Upload vanaf Elk Apparaat",
+        "description": "Sleep en zet bonnetjes neer van uw telefoon, e-mail of scanner. Ondersteunt afbeeldingen en PDF's tot 10MB."
+      },
+      "aiExtraction": {
+        "title": "AI-Powered Gegevensextractie",
+        "description": "GPT-4 Vision extraheert handelaar, bedrag, datum, categorie, belasting en betaalmethode met 95%+ nauwkeurigheid."
+      },
+      "export": {
+        "title": "Exporteren naar Excel of CSV",
+        "description": "Download georganiseerde spreadsheets klaar voor QuickBooks, Xero of andere boekhoudsoftware."
+      },
+      "pricing": {
+        "title": "Geen Maandelijkse Verplichting",
+        "description": "Slechts €0,50 per bonnetje. Koop credits wanneer u ze nodig heeft. Maak u geen zorgen over abonnementskosten."
+      },
+      "security": {
+        "title": "Beveiliging op Bankniveau",
+        "description": "Uw gegevens zijn versleuteld en worden nooit gedeeld. GDPR-conform. Bonnetjes worden automatisch verwijderd na 90 dagen."
+      },
+      "timeSaving": {
+        "title": "Bespaar 5+ Uur Per Week",
+        "description": "Stop met handmatige gegevensinvoer. Verwerk 100 bonnetjes in de tijd die het kost om er 1 handmatig te doen."
+      }
+    }
+  },
+  "howItWorks": {
+    "title": "Hoe Het Werkt",
+    "subtitle": "Ga aan de slag in 3 eenvoudige stappen",
+    "steps": {
+      "upload": {
+        "title": "Upload Bonnetjes",
+        "description": "Sleep en zet bonnetjeafbeeldingen neer of klik om te uploaden"
+      },
+      "process": {
+        "title": "AI Verwerkt Gegevens",
+        "description": "Onze AI extraheert automatisch alle belangrijke informatie"
+      },
+      "export": {
+        "title": "Exporteren & Downloaden",
+        "description": "Download uw georganiseerde gegevens als Excel of CSV"
+      }
+    }
+  },
+  "socialProof": {
+    "title": "Vertrouwd door bedrijven wereldwijd",
+    "stats": {
+      "receipts": "Bonnetjes Verwerkt",
+      "users": "Actieve Gebruikers",
+      "accuracy": "Gemiddelde Nauwkeurigheid",
+      "timeSaved": "Uren Bespaard"
+    },
+    "testimonials": {
+      "title": "Wat onze klanten zeggen"
+    }
+  },
+  "faq": {
+    "title": "Veelgestelde Vragen",
+    "subtitle": "Alles wat u moet weten over ReceiptSorter"
+  },
+  "finalCTA": {
+    "title": "Klaar om uren te besparen op bonnetjesbeheer?",
+    "subtitle": "Sluit je aan bij duizenden bedrijven die ReceiptSorter al gebruiken",
+    "button": "Begin Met Bonnetjes Verwerken"
+  },
+  "auth": {
+    "loginTitle": "Welkom terug",
+    "loginSubtitle": "Log in op uw account",
+    "signupTitle": "Maak uw account aan",
+    "signupSubtitle": "Begin in seconden met het verwerken van bonnetjes",
+    "email": "E-mailadres",
+    "password": "Wachtwoord",
+    "confirmPassword": "Bevestig wachtwoord",
+    "forgotPassword": "Wachtwoord vergeten?",
+    "noAccount": "Heeft u geen account?",
+    "hasAccount": "Heeft u al een account?",
+    "signInWithGoogle": "Inloggen met Google",
+    "signUpWithGoogle": "Aanmelden met Google",
+    "orContinueWith": "Of ga verder met",
+    "termsAgree": "Door u aan te melden, gaat u akkoord met onze",
+    "termsOfService": "Servicevoorwaarden",
+    "privacyPolicy": "Privacybeleid",
+    "and": "en"
+  },
+  "dashboard": {
+    "welcome": "Welkom terug",
+    "uploadSection": {
+      "title": "Bonnetjes Uploaden",
+      "dragDrop": "Sleep en zet bonnetjeafbeeldingen hier neer",
+      "or": "of",
+      "browse": "Bladeren door bestanden",
+      "supported": "Ondersteunt: JPG, PNG, PDF (max 10MB)"
+    },
+    "receiptsTable": {
+      "title": "Uw Bonnetjes",
+      "noReceipts": "Nog geen bonnetjes",
+      "uploadFirst": "Upload uw eerste bonnetje om te beginnen",
+      "columns": {
+        "date": "Datum",
+        "merchant": "Handelaar",
+        "amount": "Bedrag",
+        "category": "Categorie",
+        "status": "Status",
+        "actions": "Acties"
+      },
+      "status": {
+        "pending": "In Afwachting",
+        "processing": "Verwerken",
+        "completed": "Voltooid",
+        "failed": "Mislukt"
+      }
+    },
+    "credits": {
+      "title": "Credits",
+      "balance": "Huidig Saldo",
+      "creditsRemaining": "credits resterend",
+      "buyCredits": "Credits Kopen",
+      "history": "Creditgeschiedenis",
+      "packages": {
+        "title": "Kies een pakket",
+        "credits": "credits",
+        "mostPopular": "Meest Populair",
+        "bestValue": "Beste Waarde"
+      }
+    },
+    "exports": {
+      "title": "Exportgeschiedenis",
+      "noExports": "Nog geen exports",
+      "columns": {
+        "date": "Exportdatum",
+        "receipts": "Bonnetjes",
+        "format": "Formaat",
+        "download": "Downloaden"
+      }
+    },
+    "profile": {
+      "title": "Profielinstellingen",
+      "personalInfo": "Persoonlijke Informatie",
+      "name": "Naam",
+      "email": "E-mail",
+      "language": "Taal",
+      "timezone": "Tijdzone",
+      "updateProfile": "Profiel Bijwerken",
+      "changePassword": "Wachtwoord Wijzigen",
+      "currentPassword": "Huidig Wachtwoord",
+      "newPassword": "Nieuw Wachtwoord"
+    }
+  },
+  "pricing": {
+    "title": "Eenvoudige, transparante prijzen",
+    "subtitle": "Kies het plan dat bij u past",
+    "perReceipt": "per bonnetje",
+    "creditPacks": "Creditpakketten",
+    "subscriptions": "Abonnementen",
+    "buyNow": "Nu Kopen",
+    "subscribe": "Abonneren",
+    "popular": "Meest Populair",
+    "features": {
+      "allFeatures": "Alle functies inbegrepen",
+      "aiExtraction": "AI-powered extractie",
+      "exportFormats": "Excel & CSV export",
+      "support": "E-mailondersteuning",
+      "security": "Beveiliging op bankniveau",
+      "gdpr": "GDPR-conform"
+    }
+  },
+  "footer": {
+    "description": "AI-powered bonnetjesgegevensextractie voor bedrijven",
+    "product": "Product",
+    "company": "Bedrijf",
+    "legal": "Juridisch",
+    "support": "Ondersteuning",
+    "termsOfService": "Servicevoorwaarden",
+    "privacyPolicy": "Privacybeleid",
+    "allRightsReserved": "Alle rechten voorbehouden"
+  },
+  "navigation": {
+    "home": "Home",
+    "features": "Kenmerken",
+    "pricing": "Prijzen",
+    "howItWorks": "Hoe Het Werkt",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "dashboard": "Dashboard",
+    "login": "Inloggen",
+    "signup": "Aanmelden"
+  }
+}

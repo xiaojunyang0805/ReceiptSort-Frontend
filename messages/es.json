@@ -1,0 +1,240 @@
+{
+  "common": {
+    "getStarted": "Comenzar Gratis",
+    "signUp": "Registrarse",
+    "login": "Iniciar Sesión",
+    "logout": "Cerrar Sesión",
+    "learnMore": "Más Información",
+    "tryDemo": "Probar Demo",
+    "uploadReceipts": "Subir Recibos",
+    "pricing": "Precios",
+    "features": "Características",
+    "howItWorks": "Cómo Funciona",
+    "faq": "FAQ",
+    "contact": "Contacto",
+    "dashboard": "Panel",
+    "receipts": "Recibos",
+    "exports": "Exportaciones",
+    "credits": "Créditos",
+    "profile": "Perfil",
+    "upload": "Subir",
+    "export": "Exportar",
+    "download": "Descargar",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "close": "Cerrar",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "select": "Seleccionar",
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "confirm": "Confirmar"
+  },
+  "hero": {
+    "headline": "Deja de Perder Horas en la Entrada de Recibos",
+    "headlineHighlight": "Entrada de Recibos",
+    "subheadline": "Extrae datos de recibos en segundos con IA.",
+    "subheadlineDetails": "Sube recibos → IA extrae datos → Descarga Excel.",
+    "watchDemo": "Ver Demo",
+    "trustBadge": "Confiado por más de 2000 empresas en todo el mundo",
+    "valueProps": {
+      "accuracy": "95%+ Precisión",
+      "processing": "Procesar en Segundos",
+      "support": "Soporta 100+ Idiomas"
+    }
+  },
+  "features": {
+    "title": "Todo lo que necesitas para organizar recibos",
+    "subtitle": "Diseñado para pequeñas empresas, freelancers y contadores que valoran su tiempo.",
+    "items": {
+      "upload": {
+        "title": "Subir desde Cualquier Dispositivo",
+        "description": "Arrastra y suelta recibos desde tu teléfono, correo o escáner. Soporta imágenes y PDFs de hasta 10MB."
+      },
+      "aiExtraction": {
+        "title": "Extracción de Datos con IA",
+        "description": "GPT-4 Vision extrae comerciante, monto, fecha, categoría, impuesto y método de pago con 95%+ de precisión."
+      },
+      "export": {
+        "title": "Exportar a Excel o CSV",
+        "description": "Descarga hojas de cálculo organizadas listas para QuickBooks, Xero o cualquier software de contabilidad."
+      },
+      "pricing": {
+        "title": "Sin Compromiso Mensual",
+        "description": "Solo $0.50 por recibo. Compra créditos cuando los necesites. Nunca te preocupes por tarifas de suscripción."
+      },
+      "security": {
+        "title": "Seguridad de Nivel Bancario",
+        "description": "Tus datos están encriptados y nunca se comparten. Cumple con GDPR. Los recibos se eliminan automáticamente después de 90 días."
+      },
+      "timeSaving": {
+        "title": "Ahorra 5+ Horas Semanales",
+        "description": "Deja la entrada manual de datos. Procesa 100 recibos en el tiempo que lleva hacer 1 manualmente."
+      }
+    }
+  },
+  "howItWorks": {
+    "title": "Cómo Funciona",
+    "subtitle": "Comienza en 3 simples pasos",
+    "steps": {
+      "upload": {
+        "title": "Subir Recibos",
+        "description": "Arrastra y suelta o haz clic para subir imágenes de recibos"
+      },
+      "process": {
+        "title": "IA Procesa Datos",
+        "description": "Nuestra IA extrae automáticamente toda la información clave"
+      },
+      "export": {
+        "title": "Exportar y Descargar",
+        "description": "Descarga tus datos organizados como Excel o CSV"
+      }
+    }
+  },
+  "socialProof": {
+    "title": "Confiado por empresas en todo el mundo",
+    "stats": {
+      "receipts": "Recibos Procesados",
+      "users": "Usuarios Activos",
+      "accuracy": "Precisión Promedio",
+      "timeSaved": "Horas Ahorradas"
+    },
+    "testimonials": {
+      "title": "Lo que dicen nuestros clientes"
+    }
+  },
+  "faq": {
+    "title": "Preguntas Frecuentes",
+    "subtitle": "Todo lo que necesitas saber sobre ReceiptSorter"
+  },
+  "finalCTA": {
+    "title": "¿Listo para ahorrar horas en la gestión de recibos?",
+    "subtitle": "Únete a miles de empresas que ya usan ReceiptSorter",
+    "button": "Comenzar a Procesar Recibos"
+  },
+  "auth": {
+    "loginTitle": "Bienvenido de nuevo",
+    "loginSubtitle": "Inicia sesión en tu cuenta",
+    "signupTitle": "Crea tu cuenta",
+    "signupSubtitle": "Comienza a procesar recibos en segundos",
+    "email": "Dirección de correo",
+    "password": "Contraseña",
+    "confirmPassword": "Confirmar contraseña",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "noAccount": "¿No tienes una cuenta?",
+    "hasAccount": "¿Ya tienes una cuenta?",
+    "signInWithGoogle": "Iniciar sesión con Google",
+    "signUpWithGoogle": "Registrarse con Google",
+    "orContinueWith": "O continuar con",
+    "termsAgree": "Al registrarte, aceptas nuestros",
+    "termsOfService": "Términos de Servicio",
+    "privacyPolicy": "Política de Privacidad",
+    "and": "y"
+  },
+  "dashboard": {
+    "welcome": "Bienvenido de nuevo",
+    "uploadSection": {
+      "title": "Subir Recibos",
+      "dragDrop": "Arrastra y suelta imágenes de recibos aquí",
+      "or": "o",
+      "browse": "Explorar archivos",
+      "supported": "Soporta: JPG, PNG, PDF (max 10MB)"
+    },
+    "receiptsTable": {
+      "title": "Tus Recibos",
+      "noReceipts": "Aún no hay recibos",
+      "uploadFirst": "Sube tu primer recibo para comenzar",
+      "columns": {
+        "date": "Fecha",
+        "merchant": "Comerciante",
+        "amount": "Monto",
+        "category": "Categoría",
+        "status": "Estado",
+        "actions": "Acciones"
+      },
+      "status": {
+        "pending": "Pendiente",
+        "processing": "Procesando",
+        "completed": "Completado",
+        "failed": "Fallido"
+      }
+    },
+    "credits": {
+      "title": "Créditos",
+      "balance": "Saldo Actual",
+      "creditsRemaining": "créditos restantes",
+      "buyCredits": "Comprar Créditos",
+      "history": "Historial de Créditos",
+      "packages": {
+        "title": "Elige un paquete",
+        "credits": "créditos",
+        "mostPopular": "Más Popular",
+        "bestValue": "Mejor Valor"
+      }
+    },
+    "exports": {
+      "title": "Historial de Exportaciones",
+      "noExports": "Aún no hay exportaciones",
+      "columns": {
+        "date": "Fecha de Exportación",
+        "receipts": "Recibos",
+        "format": "Formato",
+        "download": "Descargar"
+      }
+    },
+    "profile": {
+      "title": "Configuración del Perfil",
+      "personalInfo": "Información Personal",
+      "name": "Nombre",
+      "email": "Correo",
+      "language": "Idioma",
+      "timezone": "Zona Horaria",
+      "updateProfile": "Actualizar Perfil",
+      "changePassword": "Cambiar Contraseña",
+      "currentPassword": "Contraseña Actual",
+      "newPassword": "Nueva Contraseña"
+    }
+  },
+  "pricing": {
+    "title": "Precios simples y transparentes",
+    "subtitle": "Elige el plan que funcione para ti",
+    "perReceipt": "por recibo",
+    "creditPacks": "Paquetes de Créditos",
+    "subscriptions": "Suscripciones",
+    "buyNow": "Comprar Ahora",
+    "subscribe": "Suscribirse",
+    "popular": "Más Popular",
+    "features": {
+      "allFeatures": "Todas las características incluidas",
+      "aiExtraction": "Extracción con IA",
+      "exportFormats": "Exportación Excel y CSV",
+      "support": "Soporte por correo",
+      "security": "Seguridad de nivel bancario",
+      "gdpr": "Cumple con GDPR"
+    }
+  },
+  "footer": {
+    "description": "Extracción de datos de recibos con IA para empresas",
+    "product": "Producto",
+    "company": "Empresa",
+    "legal": "Legal",
+    "support": "Soporte",
+    "termsOfService": "Términos de Servicio",
+    "privacyPolicy": "Política de Privacidad",
+    "allRightsReserved": "Todos los derechos reservados"
+  },
+  "navigation": {
+    "home": "Inicio",
+    "features": "Características",
+    "pricing": "Precios",
+    "howItWorks": "Cómo Funciona",
+    "faq": "FAQ",
+    "contact": "Contacto",
+    "dashboard": "Panel",
+    "login": "Iniciar Sesión",
+    "signup": "Registrarse"
+  }
+}

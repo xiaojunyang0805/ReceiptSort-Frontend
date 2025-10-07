@@ -56,6 +56,10 @@ export async function POST(request: NextRequest) {
     const userEmail = user.email || ''
 
     // 5. Create Stripe Checkout Session
+    console.log(`[Checkout] Creating session with priceId: ${creditPackage.priceId}`)
+    console.log(`[Checkout] STRIPE_SECRET_KEY exists: ${!!process.env.STRIPE_SECRET_KEY}`)
+    console.log(`[Checkout] NEXT_PUBLIC_APP_URL: ${process.env.NEXT_PUBLIC_APP_URL}`)
+
     const session = await createCheckoutSession(
       creditPackage.priceId,
       user.id,
@@ -65,6 +69,13 @@ export async function POST(request: NextRequest) {
     )
 
     console.log(`[Checkout] Stripe session created: ${session.id}`)
+    console.log(`[Checkout] Session URL: ${session.url}`)
+    console.log(`[Checkout] Session object keys:`, Object.keys(session))
+
+    if (!session.url) {
+      console.error(`[Checkout] ERROR: session.url is null/undefined!`)
+      console.error(`[Checkout] Full session:`, JSON.stringify(session, null, 2))
+    }
 
     // 6. Return checkout URL
     return NextResponse.json({

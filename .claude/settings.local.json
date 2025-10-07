@@ -11,7 +11,15 @@
       "Bash(npm install:*)",
       "Bash(gh api:*)",
       "Bash(npx vercel:*)",
-      "Bash(move componentslandingFinalCTA.tsx srccomponentslandingFinalCTA.tsx)"
+      "Bash(move componentslandingFinalCTA.tsx srccomponentslandingFinalCTA.tsx)",
+      "mcp__chrome-devtools__click",
+      "mcp__chrome-devtools__take_snapshot",
+      "mcp__chrome-devtools__navigate_page",
+      "mcp__chrome-devtools__fill_form",
+      "Bash(timeout 5 sleep 5)",
+      "Bash(curl https://api.stripe.com/v1/products )",
+      "Bash(curl https://api.stripe.com/v1/prices )",
+      "WebFetch(domain:next-intl.dev)"
     ],
     "deny": [],
     "ask": []

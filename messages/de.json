@@ -1,0 +1,240 @@
+{
+  "common": {
+    "getStarted": "Kostenlos Starten",
+    "signUp": "Registrieren",
+    "login": "Anmelden",
+    "logout": "Abmelden",
+    "learnMore": "Mehr Erfahren",
+    "tryDemo": "Demo Testen",
+    "uploadReceipts": "Belege Hochladen",
+    "pricing": "Preise",
+    "features": "Funktionen",
+    "howItWorks": "Wie Es Funktioniert",
+    "faq": "FAQ",
+    "contact": "Kontakt",
+    "dashboard": "Dashboard",
+    "receipts": "Belege",
+    "exports": "Exporte",
+    "credits": "Credits",
+    "profile": "Profil",
+    "upload": "Hochladen",
+    "export": "Exportieren",
+    "download": "Herunterladen",
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "close": "Schließen",
+    "search": "Suchen",
+    "filter": "Filtern",
+    "select": "Auswählen",
+    "loading": "Lädt...",
+    "error": "Fehler",
+    "success": "Erfolg",
+    "confirm": "Bestätigen"
+  },
+  "hero": {
+    "headline": "Verschwenden Sie keine Stunden mehr mit Belegerfassung",
+    "headlineHighlight": "Belegerfassung",
+    "subheadline": "Extrahieren Sie Daten aus Belegen in Sekunden mit KI.",
+    "subheadlineDetails": "Belege hochladen → KI extrahiert Daten → Excel herunterladen.",
+    "watchDemo": "Demo Ansehen",
+    "trustBadge": "Vertraut von über 2000 Unternehmen weltweit",
+    "valueProps": {
+      "accuracy": "95%+ Genauigkeit",
+      "processing": "Verarbeitung in Sekunden",
+      "support": "Unterstützt 100+ Sprachen"
+    }
+  },
+  "features": {
+    "title": "Alles, was Sie zur Organisation von Belegen benötigen",
+    "subtitle": "Entwickelt für Kleinunternehmen, Freelancer und Buchhalter, die ihre Zeit schätzen.",
+    "items": {
+      "upload": {
+        "title": "Von Jedem Gerät Hochladen",
+        "description": "Ziehen Sie Belege per Drag & Drop von Ihrem Telefon, E-Mail oder Scanner. Unterstützt Bilder und PDFs bis 10MB."
+      },
+      "aiExtraction": {
+        "title": "KI-gestützte Datenextraktion",
+        "description": "GPT-4 Vision extrahiert Händler, Betrag, Datum, Kategorie, Steuer und Zahlungsmethode mit 95%+ Genauigkeit."
+      },
+      "export": {
+        "title": "Nach Excel oder CSV Exportieren",
+        "description": "Laden Sie organisierte Tabellen herunter, die für QuickBooks, Xero oder jede Buchhaltungssoftware bereit sind."
+      },
+      "pricing": {
+        "title": "Keine Monatliche Verpflichtung",
+        "description": "Nur 0,50€ pro Beleg. Kaufen Sie Credits, wenn Sie sie benötigen. Keine Sorgen über Abonnementgebühren."
+      },
+      "security": {
+        "title": "Sicherheit auf Bankniveau",
+        "description": "Ihre Daten sind verschlüsselt und werden nie geteilt. DSGVO-konform. Belege werden nach 90 Tagen automatisch gelöscht."
+      },
+      "timeSaving": {
+        "title": "Sparen Sie 5+ Stunden Pro Woche",
+        "description": "Stoppen Sie die manuelle Dateneingabe. Verarbeiten Sie 100 Belege in der Zeit, die Sie für 1 manuell benötigen."
+      }
+    }
+  },
+  "howItWorks": {
+    "title": "Wie Es Funktioniert",
+    "subtitle": "Starten Sie in 3 einfachen Schritten",
+    "steps": {
+      "upload": {
+        "title": "Belege Hochladen",
+        "description": "Ziehen Sie Belegbilder per Drag & Drop oder klicken Sie zum Hochladen"
+      },
+      "process": {
+        "title": "KI Verarbeitet Daten",
+        "description": "Unsere KI extrahiert automatisch alle wichtigen Informationen"
+      },
+      "export": {
+        "title": "Exportieren & Herunterladen",
+        "description": "Laden Sie Ihre organisierten Daten als Excel oder CSV herunter"
+      }
+    }
+  },
+  "socialProof": {
+    "title": "Vertraut von Unternehmen weltweit",
+    "stats": {
+      "receipts": "Verarbeitete Belege",
+      "users": "Aktive Nutzer",
+      "accuracy": "Durchschnittliche Genauigkeit",
+      "timeSaved": "Eingesparte Stunden"
+    },
+    "testimonials": {
+      "title": "Was unsere Kunden sagen"
+    }
+  },
+  "faq": {
+    "title": "Häufig Gestellte Fragen",
+    "subtitle": "Alles, was Sie über ReceiptSorter wissen müssen"
+  },
+  "finalCTA": {
+    "title": "Bereit, Stunden beim Belegmanagement zu sparen?",
+    "subtitle": "Schließen Sie sich Tausenden von Unternehmen an, die bereits ReceiptSorter verwenden",
+    "button": "Belege Verarbeiten Starten"
+  },
+  "auth": {
+    "loginTitle": "Willkommen zurück",
+    "loginSubtitle": "Melden Sie sich bei Ihrem Konto an",
+    "signupTitle": "Erstellen Sie Ihr Konto",
+    "signupSubtitle": "Beginnen Sie in Sekunden mit der Verarbeitung von Belegen",
+    "email": "E-Mail-Adresse",
+    "password": "Passwort",
+    "confirmPassword": "Passwort bestätigen",
+    "forgotPassword": "Passwort vergessen?",
+    "noAccount": "Haben Sie kein Konto?",
+    "hasAccount": "Haben Sie bereits ein Konto?",
+    "signInWithGoogle": "Mit Google anmelden",
+    "signUpWithGoogle": "Mit Google registrieren",
+    "orContinueWith": "Oder fortfahren mit",
+    "termsAgree": "Durch die Registrierung stimmen Sie unseren",
+    "termsOfService": "Nutzungsbedingungen",
+    "privacyPolicy": "Datenschutzrichtlinie",
+    "and": "und"
+  },
+  "dashboard": {
+    "welcome": "Willkommen zurück",
+    "uploadSection": {
+      "title": "Belege Hochladen",
+      "dragDrop": "Ziehen Sie Belegbilder hierher",
+      "or": "oder",
+      "browse": "Dateien durchsuchen",
+      "supported": "Unterstützt: JPG, PNG, PDF (max 10MB)"
+    },
+    "receiptsTable": {
+      "title": "Ihre Belege",
+      "noReceipts": "Noch keine Belege",
+      "uploadFirst": "Laden Sie Ihren ersten Beleg hoch, um zu beginnen",
+      "columns": {
+        "date": "Datum",
+        "merchant": "Händler",
+        "amount": "Betrag",
+        "category": "Kategorie",
+        "status": "Status",
+        "actions": "Aktionen"
+      },
+      "status": {
+        "pending": "Ausstehend",
+        "processing": "Verarbeitung",
+        "completed": "Abgeschlossen",
+        "failed": "Fehlgeschlagen"
+      }
+    },
+    "credits": {
+      "title": "Credits",
+      "balance": "Aktueller Saldo",
+      "creditsRemaining": "Credits verbleibend",
+      "buyCredits": "Credits Kaufen",
+      "history": "Credit-Verlauf",
+      "packages": {
+        "title": "Wählen Sie ein Paket",
+        "credits": "Credits",
+        "mostPopular": "Am Beliebtesten",
+        "bestValue": "Bester Wert"
+      }
+    },
+    "exports": {
+      "title": "Export-Verlauf",
+      "noExports": "Noch keine Exporte",
+      "columns": {
+        "date": "Exportdatum",
+        "receipts": "Belege",
+        "format": "Format",
+        "download": "Herunterladen"
+      }
+    },
+    "profile": {
+      "title": "Profileinstellungen",
+      "personalInfo": "Persönliche Informationen",
+      "name": "Name",
+      "email": "E-Mail",
+      "language": "Sprache",
+      "timezone": "Zeitzone",
+      "updateProfile": "Profil Aktualisieren",
+      "changePassword": "Passwort Ändern",
+      "currentPassword": "Aktuelles Passwort",
+      "newPassword": "Neues Passwort"
+    }
+  },
+  "pricing": {
+    "title": "Einfache, transparente Preise",
+    "subtitle": "Wählen Sie den Plan, der zu Ihnen passt",
+    "perReceipt": "pro Beleg",
+    "creditPacks": "Credit-Pakete",
+    "subscriptions": "Abonnements",
+    "buyNow": "Jetzt Kaufen",
+    "subscribe": "Abonnieren",
+    "popular": "Am Beliebtesten",
+    "features": {
+      "allFeatures": "Alle Funktionen enthalten",
+      "aiExtraction": "KI-gestützte Extraktion",
+      "exportFormats": "Excel & CSV Export",
+      "support": "E-Mail-Support",
+      "security": "Sicherheit auf Bankniveau",
+      "gdpr": "DSGVO-konform"
+    }
+  },
+  "footer": {
+    "description": "KI-gestützte Belegdatenextraktion für Unternehmen",
+    "product": "Produkt",
+    "company": "Unternehmen",
+    "legal": "Rechtliches",
+    "support": "Support",
+    "termsOfService": "Nutzungsbedingungen",
+    "privacyPolicy": "Datenschutzrichtlinie",
+    "allRightsReserved": "Alle Rechte vorbehalten"
+  },
+  "navigation": {
+    "home": "Startseite",
+    "features": "Funktionen",
+    "pricing": "Preise",
+    "howItWorks": "Wie Es Funktioniert",
+    "faq": "FAQ",
+    "contact": "Kontakt",
+    "dashboard": "Dashboard",
+    "login": "Anmelden",
+    "signup": "Registrieren"
+  }
+}

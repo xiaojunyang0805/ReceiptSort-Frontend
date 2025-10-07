@@ -1,0 +1,240 @@
+{
+  "common": {
+    "getStarted": "無料で始める",
+    "signUp": "サインアップ",
+    "login": "ログイン",
+    "logout": "ログアウト",
+    "learnMore": "詳細を見る",
+    "tryDemo": "デモを試す",
+    "uploadReceipts": "レシートをアップロード",
+    "pricing": "料金",
+    "features": "機能",
+    "howItWorks": "使い方",
+    "faq": "よくある質問",
+    "contact": "お問い合わせ",
+    "dashboard": "ダッシュボード",
+    "receipts": "レシート",
+    "exports": "エクスポート",
+    "credits": "クレジット",
+    "profile": "プロフィール",
+    "upload": "アップロード",
+    "export": "エクスポート",
+    "download": "ダウンロード",
+    "cancel": "キャンセル",
+    "save": "保存",
+    "delete": "削除",
+    "edit": "編集",
+    "close": "閉じる",
+    "search": "検索",
+    "filter": "フィルター",
+    "select": "選択",
+    "loading": "読み込み中...",
+    "error": "エラー",
+    "success": "成功",
+    "confirm": "確認"
+  },
+  "hero": {
+    "headline": "レシート入力に費やす時間をなくしましょう",
+    "headlineHighlight": "レシート入力",
+    "subheadline": "AIで数秒でレシートからデータを抽出します。",
+    "subheadlineDetails": "レシートアップロード → AIがデータ抽出 → Excelダウンロード",
+    "watchDemo": "デモを見る",
+    "trustBadge": "世界中の2000社以上の企業に信頼されています",
+    "valueProps": {
+      "accuracy": "95%以上の精度",
+      "processing": "数秒で処理",
+      "support": "100以上の言語をサポート"
+    }
+  },
+  "features": {
+    "title": "レシートを整理するために必要なすべて",
+    "subtitle": "時間を大切にする中小企業、フリーランサー、会計士のために作られました。",
+    "items": {
+      "upload": {
+        "title": "あらゆるデバイスからアップロード",
+        "description": "スマートフォン、メール、スキャナーからレシートをドラッグ&ドロップ。10MBまでの画像とPDFに対応。"
+      },
+      "aiExtraction": {
+        "title": "AI搭載データ抽出",
+        "description": "GPT-4 Visionが店舗名、金額、日付、カテゴリ、税金、支払方法を95%以上の精度で抽出します。"
+      },
+      "export": {
+        "title": "ExcelまたはCSVにエクスポート",
+        "description": "QuickBooks、Xero、その他の会計ソフトウェアですぐに使える整理されたスプレッドシートをダウンロードします。"
+      },
+      "pricing": {
+        "title": "月額契約なし",
+        "description": "レシート1枚あたりわずか50円。必要なときにクレジットを購入。サブスクリプション料金の心配はありません。"
+      },
+      "security": {
+        "title": "銀行レベルのセキュリティ",
+        "description": "データは暗号化され、決して共有されません。GDPR準拠。レシートは90日後に自動的に削除されます。"
+      },
+      "timeSaving": {
+        "title": "週5時間以上節約",
+        "description": "手動でのデータ入力をやめましょう。手動で1枚処理する時間で100枚のレシートを処理できます。"
+      }
+    }
+  },
+  "howItWorks": {
+    "title": "使い方",
+    "subtitle": "3つの簡単なステップで始められます",
+    "steps": {
+      "upload": {
+        "title": "レシートをアップロード",
+        "description": "レシート画像をドラッグ&ドロップまたはクリックしてアップロード"
+      },
+      "process": {
+        "title": "AIがデータを処理",
+        "description": "AIが自動的にすべての重要情報を抽出します"
+      },
+      "export": {
+        "title": "エクスポート＆ダウンロード",
+        "description": "整理されたデータをExcelまたはCSVでダウンロード"
+      }
+    }
+  },
+  "socialProof": {
+    "title": "世界中の企業に信頼されています",
+    "stats": {
+      "receipts": "処理されたレシート",
+      "users": "アクティブユーザー",
+      "accuracy": "平均精度",
+      "timeSaved": "節約された時間"
+    },
+    "testimonials": {
+      "title": "お客様の声"
+    }
+  },
+  "faq": {
+    "title": "よくある質問",
+    "subtitle": "ReceiptSorterについて知っておくべきすべて"
+  },
+  "finalCTA": {
+    "title": "レシート管理で時間を節約する準備はできましたか？",
+    "subtitle": "すでにReceiptSorterを使用している何千もの企業に参加しましょう",
+    "button": "レシート処理を開始"
+  },
+  "auth": {
+    "loginTitle": "おかえりなさい",
+    "loginSubtitle": "アカウントにサインインしてください",
+    "signupTitle": "アカウントを作成",
+    "signupSubtitle": "数秒でレシート処理を開始",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "confirmPassword": "パスワードを確認",
+    "forgotPassword": "パスワードをお忘れですか？",
+    "noAccount": "アカウントをお持ちでないですか？",
+    "hasAccount": "すでにアカウントをお持ちですか？",
+    "signInWithGoogle": "Googleでサインイン",
+    "signUpWithGoogle": "Googleでサインアップ",
+    "orContinueWith": "または続ける",
+    "termsAgree": "サインアップすることで、当社の",
+    "termsOfService": "利用規約",
+    "privacyPolicy": "プライバシーポリシー",
+    "and": "および"
+  },
+  "dashboard": {
+    "welcome": "おかえりなさい",
+    "uploadSection": {
+      "title": "レシートをアップロード",
+      "dragDrop": "レシート画像をここにドラッグ&ドロップ",
+      "or": "または",
+      "browse": "ファイルを参照",
+      "supported": "対応: JPG, PNG, PDF (最大10MB)"
+    },
+    "receiptsTable": {
+      "title": "あなたのレシート",
+      "noReceipts": "まだレシートがありません",
+      "uploadFirst": "最初のレシートをアップロードして始めましょう",
+      "columns": {
+        "date": "日付",
+        "merchant": "店舗名",
+        "amount": "金額",
+        "category": "カテゴリ",
+        "status": "ステータス",
+        "actions": "操作"
+      },
+      "status": {
+        "pending": "保留中",
+        "processing": "処理中",
+        "completed": "完了",
+        "failed": "失敗"
+      }
+    },
+    "credits": {
+      "title": "クレジット",
+      "balance": "現在の残高",
+      "creditsRemaining": "クレジット残",
+      "buyCredits": "クレジットを購入",
+      "history": "クレジット履歴",
+      "packages": {
+        "title": "パッケージを選択",
+        "credits": "クレジット",
+        "mostPopular": "最も人気",
+        "bestValue": "最もお得"
+      }
+    },
+    "exports": {
+      "title": "エクスポート履歴",
+      "noExports": "まだエクスポートがありません",
+      "columns": {
+        "date": "エクスポート日",
+        "receipts": "レシート",
+        "format": "フォーマット",
+        "download": "ダウンロード"
+      }
+    },
+    "profile": {
+      "title": "プロフィール設定",
+      "personalInfo": "個人情報",
+      "name": "名前",
+      "email": "メール",
+      "language": "言語",
+      "timezone": "タイムゾーン",
+      "updateProfile": "プロフィールを更新",
+      "changePassword": "パスワードを変更",
+      "currentPassword": "現在のパスワード",
+      "newPassword": "新しいパスワード"
+    }
+  },
+  "pricing": {
+    "title": "シンプルで透明な料金",
+    "subtitle": "あなたに合ったプランを選択してください",
+    "perReceipt": "レシートあたり",
+    "creditPacks": "クレジットパック",
+    "subscriptions": "サブスクリプション",
+    "buyNow": "今すぐ購入",
+    "subscribe": "サブスクライブ",
+    "popular": "最も人気",
+    "features": {
+      "allFeatures": "すべての機能が含まれています",
+      "aiExtraction": "AI搭載抽出",
+      "exportFormats": "Excel＆CSVエクスポート",
+      "support": "メールサポート",
+      "security": "銀行レベルのセキュリティ",
+      "gdpr": "GDPR準拠"
+    }
+  },
+  "footer": {
+    "description": "企業向けAI搭載レシートデータ抽出",
+    "product": "製品",
+    "company": "会社",
+    "legal": "法的情報",
+    "support": "サポート",
+    "termsOfService": "利用規約",
+    "privacyPolicy": "プライバシーポリシー",
+    "allRightsReserved": "全著作権所有"
+  },
+  "navigation": {
+    "home": "ホーム",
+    "features": "機能",
+    "pricing": "料金",
+    "howItWorks": "使い方",
+    "faq": "よくある質問",
+    "contact": "お問い合わせ",
+    "dashboard": "ダッシュボード",
+    "login": "ログイン",
+    "signup": "サインアップ"
+  }
+}

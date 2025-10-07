@@ -1,54 +1,53 @@
+'use client'
+
 import { Upload, Sparkles, Download, DollarSign, Shield, Clock } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-
-const features = [
-  {
-    icon: Upload,
-    title: 'Upload from Any Device',
-    description:
-      'Drag & drop receipts from your phone, email, or scanner. Supports images and PDFs up to 10MB.',
-  },
-  {
-    icon: Sparkles,
-    title: 'AI-Powered Data Extraction',
-    description:
-      'GPT-4 Vision extracts merchant, amount, date, category, tax, and payment method with 95%+ accuracy.',
-  },
-  {
-    icon: Download,
-    title: 'Export to Excel or CSV',
-    description:
-      'Download organized spreadsheets ready for QuickBooks, Xero, or any accounting software.',
-  },
-  {
-    icon: DollarSign,
-    title: 'No Monthly Commitment',
-    description:
-      'Only $0.50 per receipt. Buy credits when you need them. Never worry about subscription fees.',
-  },
-  {
-    icon: Shield,
-    title: 'Bank-Level Security',
-    description:
-      'Your data is encrypted and never shared. GDPR compliant. Receipts automatically deleted after 90 days.',
-  },
-  {
-    icon: Clock,
-    title: 'Save 5+ Hours Weekly',
-    description:
-      'Stop manual data entry. Process 100 receipts in the time it takes to do 1 manually.',
-  },
-]
+import { useTranslations } from 'next-intl'
 
 export function Features() {
+  const t = useTranslations('features')
+
+  const features = [
+    {
+      icon: Upload,
+      titleKey: 'items.upload.title',
+      descriptionKey: 'items.upload.description',
+    },
+    {
+      icon: Sparkles,
+      titleKey: 'items.aiExtraction.title',
+      descriptionKey: 'items.aiExtraction.description',
+    },
+    {
+      icon: Download,
+      titleKey: 'items.export.title',
+      descriptionKey: 'items.export.description',
+    },
+    {
+      icon: DollarSign,
+      titleKey: 'items.pricing.title',
+      descriptionKey: 'items.pricing.description',
+    },
+    {
+      icon: Shield,
+      titleKey: 'items.security.title',
+      descriptionKey: 'items.security.description',
+    },
+    {
+      icon: Clock,
+      titleKey: 'items.timeSaving.title',
+      descriptionKey: 'items.timeSaving.description',
+    },
+  ]
+
   return (
     <section className="container mx-auto px-4 py-20">
       <div className="text-center mb-16">
         <h2 className="text-4xl md:text-5xl font-bold mb-4">
-          Everything you need to organize receipts
+          {t('title')}
         </h2>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          Powerful features designed to save you time and simplify your receipt management
+          {t('subtitle')}
         </p>
       </div>
 
@@ -64,11 +63,11 @@ export function Features() {
                 <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                   <Icon className="h-7 w-7 text-primary" />
                 </div>
-                <CardTitle className="text-xl">{feature.title}</CardTitle>
+                <CardTitle className="text-xl">{t(feature.titleKey)}</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base leading-relaxed">
-                  {feature.description}
+                  {t(feature.descriptionKey)}
                 </CardDescription>
               </CardContent>
             </Card>

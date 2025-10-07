@@ -1,0 +1,240 @@
+{
+  "common": {
+    "getStarted": "Commencer Gratuitement",
+    "signUp": "S'inscrire",
+    "login": "Se Connecter",
+    "logout": "Se Déconnecter",
+    "learnMore": "En Savoir Plus",
+    "tryDemo": "Essayer la Démo",
+    "uploadReceipts": "Télécharger des Reçus",
+    "pricing": "Tarifs",
+    "features": "Fonctionnalités",
+    "howItWorks": "Comment Ça Marche",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "dashboard": "Tableau de Bord",
+    "receipts": "Reçus",
+    "exports": "Exportations",
+    "credits": "Crédits",
+    "profile": "Profil",
+    "upload": "Télécharger",
+    "export": "Exporter",
+    "download": "Télécharger",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "close": "Fermer",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "select": "Sélectionner",
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "confirm": "Confirmer"
+  },
+  "hero": {
+    "headline": "Arrêtez de Perdre des Heures sur la Saisie de Reçus",
+    "headlineHighlight": "Saisie de Reçus",
+    "subheadline": "Extrayez les données des reçus en quelques secondes avec l'IA.",
+    "subheadlineDetails": "Téléchargez des reçus → L'IA extrait les données → Téléchargez Excel.",
+    "watchDemo": "Voir la Démo",
+    "trustBadge": "Approuvé par plus de 2000 entreprises dans le monde",
+    "valueProps": {
+      "accuracy": "95%+ de Précision",
+      "processing": "Traitement en Secondes",
+      "support": "Supporte 100+ Langues"
+    }
+  },
+  "features": {
+    "title": "Tout ce dont vous avez besoin pour organiser vos reçus",
+    "subtitle": "Conçu pour les petites entreprises, les freelances et les comptables qui valorisent leur temps.",
+    "items": {
+      "upload": {
+        "title": "Télécharger depuis N'importe Quel Appareil",
+        "description": "Glissez et déposez des reçus depuis votre téléphone, e-mail ou scanner. Supporte les images et PDF jusqu'à 10MB."
+      },
+      "aiExtraction": {
+        "title": "Extraction de Données par IA",
+        "description": "GPT-4 Vision extrait le marchand, le montant, la date, la catégorie, la taxe et le mode de paiement avec une précision de 95%+."
+      },
+      "export": {
+        "title": "Exporter vers Excel ou CSV",
+        "description": "Téléchargez des feuilles de calcul organisées prêtes pour QuickBooks, Xero ou tout logiciel de comptabilité."
+      },
+      "pricing": {
+        "title": "Aucun Engagement Mensuel",
+        "description": "Seulement 0,50€ par reçu. Achetez des crédits quand vous en avez besoin. Ne vous inquiétez jamais des frais d'abonnement."
+      },
+      "security": {
+        "title": "Sécurité de Niveau Bancaire",
+        "description": "Vos données sont cryptées et jamais partagées. Conforme au RGPD. Les reçus sont automatiquement supprimés après 90 jours."
+      },
+      "timeSaving": {
+        "title": "Économisez 5+ Heures par Semaine",
+        "description": "Arrêtez la saisie manuelle de données. Traitez 100 reçus dans le temps qu'il faut pour en faire 1 manuellement."
+      }
+    }
+  },
+  "howItWorks": {
+    "title": "Comment Ça Marche",
+    "subtitle": "Commencez en 3 étapes simples",
+    "steps": {
+      "upload": {
+        "title": "Télécharger les Reçus",
+        "description": "Glissez-déposez ou cliquez pour télécharger des images de reçus"
+      },
+      "process": {
+        "title": "L'IA Traite les Données",
+        "description": "Notre IA extrait automatiquement toutes les informations clés"
+      },
+      "export": {
+        "title": "Exporter & Télécharger",
+        "description": "Téléchargez vos données organisées au format Excel ou CSV"
+      }
+    }
+  },
+  "socialProof": {
+    "title": "Approuvé par des entreprises du monde entier",
+    "stats": {
+      "receipts": "Reçus Traités",
+      "users": "Utilisateurs Actifs",
+      "accuracy": "Précision Moyenne",
+      "timeSaved": "Heures Économisées"
+    },
+    "testimonials": {
+      "title": "Ce que disent nos clients"
+    }
+  },
+  "faq": {
+    "title": "Questions Fréquemment Posées",
+    "subtitle": "Tout ce que vous devez savoir sur ReceiptSorter"
+  },
+  "finalCTA": {
+    "title": "Prêt à économiser des heures sur la gestion des reçus?",
+    "subtitle": "Rejoignez des milliers d'entreprises qui utilisent déjà ReceiptSorter",
+    "button": "Commencer à Traiter les Reçus"
+  },
+  "auth": {
+    "loginTitle": "Bon retour",
+    "loginSubtitle": "Connectez-vous à votre compte",
+    "signupTitle": "Créez votre compte",
+    "signupSubtitle": "Commencez à traiter des reçus en quelques secondes",
+    "email": "Adresse e-mail",
+    "password": "Mot de passe",
+    "confirmPassword": "Confirmez le mot de passe",
+    "forgotPassword": "Mot de passe oublié?",
+    "noAccount": "Vous n'avez pas de compte?",
+    "hasAccount": "Vous avez déjà un compte?",
+    "signInWithGoogle": "Se connecter avec Google",
+    "signUpWithGoogle": "S'inscrire avec Google",
+    "orContinueWith": "Ou continuer avec",
+    "termsAgree": "En vous inscrivant, vous acceptez nos",
+    "termsOfService": "Conditions d'Utilisation",
+    "privacyPolicy": "Politique de Confidentialité",
+    "and": "et"
+  },
+  "dashboard": {
+    "welcome": "Bon retour",
+    "uploadSection": {
+      "title": "Télécharger des Reçus",
+      "dragDrop": "Glissez-déposez des images de reçus ici",
+      "or": "ou",
+      "browse": "Parcourir les fichiers",
+      "supported": "Supporte: JPG, PNG, PDF (max 10MB)"
+    },
+    "receiptsTable": {
+      "title": "Vos Reçus",
+      "noReceipts": "Aucun reçu pour le moment",
+      "uploadFirst": "Téléchargez votre premier reçu pour commencer",
+      "columns": {
+        "date": "Date",
+        "merchant": "Marchand",
+        "amount": "Montant",
+        "category": "Catégorie",
+        "status": "Statut",
+        "actions": "Actions"
+      },
+      "status": {
+        "pending": "En Attente",
+        "processing": "En Cours",
+        "completed": "Terminé",
+        "failed": "Échoué"
+      }
+    },
+    "credits": {
+      "title": "Crédits",
+      "balance": "Solde Actuel",
+      "creditsRemaining": "crédits restants",
+      "buyCredits": "Acheter des Crédits",
+      "history": "Historique des Crédits",
+      "packages": {
+        "title": "Choisissez un forfait",
+        "credits": "crédits",
+        "mostPopular": "Le Plus Populaire",
+        "bestValue": "Meilleur Rapport Qualité-Prix"
+      }
+    },
+    "exports": {
+      "title": "Historique des Exportations",
+      "noExports": "Aucune exportation pour le moment",
+      "columns": {
+        "date": "Date d'Exportation",
+        "receipts": "Reçus",
+        "format": "Format",
+        "download": "Télécharger"
+      }
+    },
+    "profile": {
+      "title": "Paramètres du Profil",
+      "personalInfo": "Informations Personnelles",
+      "name": "Nom",
+      "email": "E-mail",
+      "language": "Langue",
+      "timezone": "Fuseau Horaire",
+      "updateProfile": "Mettre à Jour le Profil",
+      "changePassword": "Changer le Mot de Passe",
+      "currentPassword": "Mot de Passe Actuel",
+      "newPassword": "Nouveau Mot de Passe"
+    }
+  },
+  "pricing": {
+    "title": "Tarification simple et transparente",
+    "subtitle": "Choisissez le plan qui vous convient",
+    "perReceipt": "par reçu",
+    "creditPacks": "Packs de Crédits",
+    "subscriptions": "Abonnements",
+    "buyNow": "Acheter Maintenant",
+    "subscribe": "S'abonner",
+    "popular": "Le Plus Populaire",
+    "features": {
+      "allFeatures": "Toutes les fonctionnalités incluses",
+      "aiExtraction": "Extraction par IA",
+      "exportFormats": "Export Excel & CSV",
+      "support": "Support par e-mail",
+      "security": "Sécurité de niveau bancaire",
+      "gdpr": "Conforme au RGPD"
+    }
+  },
+  "footer": {
+    "description": "Extraction de données de reçus par IA pour les entreprises",
+    "product": "Produit",
+    "company": "Entreprise",
+    "legal": "Juridique",
+    "support": "Support",
+    "termsOfService": "Conditions d'Utilisation",
+    "privacyPolicy": "Politique de Confidentialité",
+    "allRightsReserved": "Tous droits réservés"
+  },
+  "navigation": {
+    "home": "Accueil",
+    "features": "Fonctionnalités",
+    "pricing": "Tarifs",
+    "howItWorks": "Comment Ça Marche",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "dashboard": "Tableau de Bord",
+    "login": "Se Connecter",
+    "signup": "S'inscrire"
+  }
+}

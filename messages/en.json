@@ -1,0 +1,240 @@
+{
+  "common": {
+    "getStarted": "Get Started Free",
+    "signUp": "Sign Up",
+    "login": "Login",
+    "logout": "Logout",
+    "learnMore": "Learn More",
+    "tryDemo": "Try Demo",
+    "uploadReceipts": "Upload Receipts",
+    "pricing": "Pricing",
+    "features": "Features",
+    "howItWorks": "How It Works",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "dashboard": "Dashboard",
+    "receipts": "Receipts",
+    "exports": "Exports",
+    "credits": "Credits",
+    "profile": "Profile",
+    "upload": "Upload",
+    "export": "Export",
+    "download": "Download",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "search": "Search",
+    "filter": "Filter",
+    "select": "Select",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "confirm": "Confirm"
+  },
+  "hero": {
+    "headline": "Stop Wasting Hours on Receipt Entry",
+    "headlineHighlight": "Receipt Entry",
+    "subheadline": "Extract data from receipts in seconds with AI.",
+    "subheadlineDetails": "Upload receipts → AI extracts data → Download Excel.",
+    "watchDemo": "Watch Demo",
+    "trustBadge": "Trusted by 2000+ businesses worldwide",
+    "valueProps": {
+      "accuracy": "95%+ Accuracy",
+      "processing": "Process in Seconds",
+      "support": "Supports 100+ Languages"
+    }
+  },
+  "features": {
+    "title": "Everything you need to organize receipts",
+    "subtitle": "Built for small businesses, freelancers, and accountants who value their time.",
+    "items": {
+      "upload": {
+        "title": "Upload from Any Device",
+        "description": "Drag & drop receipts from your phone, email, or scanner. Supports images and PDFs up to 10MB."
+      },
+      "aiExtraction": {
+        "title": "AI-Powered Data Extraction",
+        "description": "GPT-4 Vision extracts merchant, amount, date, category, tax, and payment method with 95%+ accuracy."
+      },
+      "export": {
+        "title": "Export to Excel or CSV",
+        "description": "Download organized spreadsheets ready for QuickBooks, Xero, or any accounting software."
+      },
+      "pricing": {
+        "title": "No Monthly Commitment",
+        "description": "Only $0.50 per receipt. Buy credits when you need them. Never worry about subscription fees."
+      },
+      "security": {
+        "title": "Bank-Level Security",
+        "description": "Your data is encrypted and never shared. GDPR compliant. Receipts automatically deleted after 90 days."
+      },
+      "timeSaving": {
+        "title": "Save 5+ Hours Weekly",
+        "description": "Stop manual data entry. Process 100 receipts in the time it takes to do 1 manually."
+      }
+    }
+  },
+  "howItWorks": {
+    "title": "How It Works",
+    "subtitle": "Get started in 3 simple steps",
+    "steps": {
+      "upload": {
+        "title": "Upload Receipts",
+        "description": "Drag and drop or click to upload receipt images"
+      },
+      "process": {
+        "title": "AI Processes Data",
+        "description": "Our AI extracts all key information automatically"
+      },
+      "export": {
+        "title": "Export & Download",
+        "description": "Download your organized data as Excel or CSV"
+      }
+    }
+  },
+  "socialProof": {
+    "title": "Trusted by businesses worldwide",
+    "stats": {
+      "receipts": "Receipts Processed",
+      "users": "Active Users",
+      "accuracy": "Average Accuracy",
+      "timeSaved": "Hours Saved"
+    },
+    "testimonials": {
+      "title": "What our customers say"
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Everything you need to know about ReceiptSorter"
+  },
+  "finalCTA": {
+    "title": "Ready to save hours on receipt management?",
+    "subtitle": "Join thousands of businesses already using ReceiptSorter",
+    "button": "Start Processing Receipts"
+  },
+  "auth": {
+    "loginTitle": "Welcome back",
+    "loginSubtitle": "Sign in to your account",
+    "signupTitle": "Create your account",
+    "signupSubtitle": "Start processing receipts in seconds",
+    "email": "Email address",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "forgotPassword": "Forgot password?",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "signInWithGoogle": "Sign in with Google",
+    "signUpWithGoogle": "Sign up with Google",
+    "orContinueWith": "Or continue with",
+    "termsAgree": "By signing up, you agree to our",
+    "termsOfService": "Terms of Service",
+    "privacyPolicy": "Privacy Policy",
+    "and": "and"
+  },
+  "dashboard": {
+    "welcome": "Welcome back",
+    "uploadSection": {
+      "title": "Upload Receipts",
+      "dragDrop": "Drag and drop receipt images here",
+      "or": "or",
+      "browse": "Browse files",
+      "supported": "Supports: JPG, PNG, PDF (max 10MB)"
+    },
+    "receiptsTable": {
+      "title": "Your Receipts",
+      "noReceipts": "No receipts yet",
+      "uploadFirst": "Upload your first receipt to get started",
+      "columns": {
+        "date": "Date",
+        "merchant": "Merchant",
+        "amount": "Amount",
+        "category": "Category",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "status": {
+        "pending": "Pending",
+        "processing": "Processing",
+        "completed": "Completed",
+        "failed": "Failed"
+      }
+    },
+    "credits": {
+      "title": "Credits",
+      "balance": "Current Balance",
+      "creditsRemaining": "credits remaining",
+      "buyCredits": "Buy Credits",
+      "history": "Credit History",
+      "packages": {
+        "title": "Choose a package",
+        "credits": "credits",
+        "mostPopular": "Most Popular",
+        "bestValue": "Best Value"
+      }
+    },
+    "exports": {
+      "title": "Export History",
+      "noExports": "No exports yet",
+      "columns": {
+        "date": "Export Date",
+        "receipts": "Receipts",
+        "format": "Format",
+        "download": "Download"
+      }
+    },
+    "profile": {
+      "title": "Profile Settings",
+      "personalInfo": "Personal Information",
+      "name": "Name",
+      "email": "Email",
+      "language": "Language",
+      "timezone": "Timezone",
+      "updateProfile": "Update Profile",
+      "changePassword": "Change Password",
+      "currentPassword": "Current Password",
+      "newPassword": "New Password"
+    }
+  },
+  "pricing": {
+    "title": "Simple, transparent pricing",
+    "subtitle": "Choose the plan that works for you",
+    "perReceipt": "per receipt",
+    "creditPacks": "Credit Packs",
+    "subscriptions": "Subscriptions",
+    "buyNow": "Buy Now",
+    "subscribe": "Subscribe",
+    "popular": "Most Popular",
+    "features": {
+      "allFeatures": "All features included",
+      "aiExtraction": "AI-powered extraction",
+      "exportFormats": "Excel & CSV export",
+      "support": "Email support",
+      "security": "Bank-level security",
+      "gdpr": "GDPR compliant"
+    }
+  },
+  "footer": {
+    "description": "AI-powered receipt data extraction for businesses",
+    "product": "Product",
+    "company": "Company",
+    "legal": "Legal",
+    "support": "Support",
+    "termsOfService": "Terms of Service",
+    "privacyPolicy": "Privacy Policy",
+    "allRightsReserved": "All rights reserved"
+  },
+  "navigation": {
+    "home": "Home",
+    "features": "Features",
+    "pricing": "Pricing",
+    "howItWorks": "How It Works",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "dashboard": "Dashboard",
+    "login": "Login",
+    "signup": "Sign Up"
+  }
+}

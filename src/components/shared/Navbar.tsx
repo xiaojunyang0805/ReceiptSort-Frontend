@@ -1,13 +1,16 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
 import { FileText, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Link } from '@/lib/navigation';
+import { useTranslations } from 'next-intl';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const t = useTranslations('navigation');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,42 +53,43 @@ export default function Navbar() {
               onClick={() => scrollToSection('features')}
               className="font-medium text-gray-600 transition-colors hover:text-primary"
             >
-              Features
+              {t('features')}
             </button>
             <button
               onClick={() => scrollToSection('how-it-works')}
               className="font-medium text-gray-600 transition-colors hover:text-primary"
             >
-              How It Works
+              {t('howItWorks')}
             </button>
             <Link
               href="/pricing"
               className="font-medium text-gray-600 transition-colors hover:text-primary"
             >
-              Pricing
+              {t('pricing')}
             </Link>
             <button
               onClick={() => scrollToSection('faq')}
               className="font-medium text-gray-600 transition-colors hover:text-primary"
             >
-              FAQ
+              {t('faq')}
             </button>
           </div>
 
           {/* Desktop CTAs */}
           <div className="hidden md:flex items-center gap-3">
+            <LanguageSwitcher />
             <Button
               asChild
               variant="ghost"
               className="text-gray-600 hover:text-primary"
             >
-              <Link href="/login">Sign In</Link>
+              <Link href="/login">{t('login')}</Link>
             </Button>
             <Button
               asChild
               className="bg-blue-600 text-white hover:bg-blue-700"
             >
-              <Link href="/signup">Start Free</Link>
+              <Link href="/signup">{t('signup')}</Link>
             </Button>
           </div>
 
@@ -111,42 +115,43 @@ export default function Navbar() {
                 onClick={() => scrollToSection('features')}
                 className="px-4 py-2 text-left font-medium text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors"
               >
-                Features
+                {t('features')}
               </button>
               <button
                 onClick={() => scrollToSection('how-it-works')}
                 className="px-4 py-2 text-left font-medium text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors"
               >
-                How It Works
+                {t('howItWorks')}
               </button>
               <Link
                 href="/pricing"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="px-4 py-2 text-left font-medium text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors"
               >
-                Pricing
+                {t('pricing')}
               </Link>
               <button
                 onClick={() => scrollToSection('faq')}
                 className="px-4 py-2 text-left font-medium text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors"
               >
-                FAQ
+                {t('faq')}
               </button>
               <div className="border-t pt-4 px-4 flex flex-col gap-3">
+                <LanguageSwitcher />
                 <Button
                   asChild
                   variant="outline"
                   className="w-full"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  <Link href="/login">Sign In</Link>
+                  <Link href="/login">{t('login')}</Link>
                 </Button>
                 <Button
                   asChild
                   className="w-full"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  <Link href="/signup">Start Free</Link>
+                  <Link href="/signup">{t('signup')}</Link>
                 </Button>
               </div>
             </div>

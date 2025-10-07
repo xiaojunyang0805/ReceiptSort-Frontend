@@ -2,11 +2,13 @@
 
 import { Button } from '@/components/ui/button'
 import { Check, Play } from 'lucide-react'
-import Link from 'next/link'
+import { Link } from '@/lib/navigation'
 import { useState, useEffect } from 'react'
+import { useTranslations } from 'next-intl'
 
 export function Hero() {
   const [mounted, setMounted] = useState(false)
+  const t = useTranslations('hero')
 
   useEffect(() => {
     setMounted(true)
@@ -35,15 +37,15 @@ export function Hero() {
           >
             {/* Headline */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-gray-900">
-              Stop Wasting Hours on{' '}
-              <span className="text-blue-600">Receipt Entry</span>
+              {t('headline').split(t('headlineHighlight'))[0]}{' '}
+              <span className="text-blue-600">{t('headlineHighlight')}</span>
             </h1>
 
             {/* Subheadline */}
             <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
-              Extract data from receipts in seconds with AI.
+              {t('subheadline')}
               <br />
-              Upload receipts → AI extracts data → Download Excel.
+              {t('subheadlineDetails')}
             </p>
 
             {/* CTAs */}
@@ -54,7 +56,7 @@ export function Hero() {
                 className="bg-blue-600 text-white hover:bg-blue-700 text-lg px-8 py-6 h-auto font-semibold shadow-xl hover:shadow-2xl transition-all"
               >
                 <Link href="/signup">
-                  Start Free
+                  {t('getStarted', { defaultValue: 'Start Free' })}
                   <span className="ml-2">→</span>
                 </Link>
               </Button>
@@ -66,7 +68,7 @@ export function Hero() {
                 className="border-2 border-gray-300 text-gray-700 hover:bg-gray-50 text-lg px-8 py-6 h-auto font-semibold"
               >
                 <Play className="h-5 w-5 mr-2" />
-                Watch Demo
+                {t('watchDemo')}
               </Button>
             </div>
 
@@ -74,15 +76,15 @@ export function Hero() {
             <div className="grid sm:grid-cols-3 gap-4 pt-8 text-sm md:text-base">
               <div className="flex items-center gap-2">
                 <Check className="h-5 w-5 text-blue-600 flex-shrink-0" />
-                <span className="text-gray-700">10 free credits • No credit card</span>
+                <span className="text-gray-700">{t('valueProps.accuracy')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Check className="h-5 w-5 text-blue-600 flex-shrink-0" />
-                <span className="text-gray-700">95%+ accuracy • GDPR compliant</span>
+                <span className="text-gray-700">{t('valueProps.processing')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Check className="h-5 w-5 text-blue-600 flex-shrink-0" />
-                <span className="text-gray-700">Exports to Excel/CSV</span>
+                <span className="text-gray-700">{t('valueProps.support')}</span>
               </div>
             </div>
           </div>
