@@ -37,8 +37,7 @@ export function Hero() {
           >
             {/* Headline */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-gray-900">
-              {t('headline').split(t('headlineHighlight'))[0]}{' '}
-              <span className="text-blue-600">{t('headlineHighlight')}</span>
+              {t('headline')}
             </h1>
 
             {/* Subheadline */}
