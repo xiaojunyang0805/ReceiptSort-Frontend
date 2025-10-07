@@ -15,9 +15,8 @@ export async function middleware(request: NextRequest) {
   const intlResponse = intlMiddleware(request);
 
   // Step 2: Handle authentication with Supabase
-  let supabaseResponse = NextResponse.next({
-    request,
-  })
+  // Use the intl response as base to preserve locale handling
+  const response = intlResponse;
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -29,11 +28,9 @@ export async function middleware(request: NextRequest) {
         },
         setAll(cookiesToSet) {
           cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value))
-          supabaseResponse = NextResponse.next({
-            request,
-          })
+          // Update response cookies
           cookiesToSet.forEach(({ name, value, options }) =>
-            supabaseResponse.cookies.set(name, value, options)
+            response.cookies.set(name, value, options)
           )
         },
       },
@@ -59,12 +56,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
-  // Merge cookies from both responses
-  intlResponse.cookies.getAll().forEach((cookie) => {
-    supabaseResponse.cookies.set(cookie.name, cookie.value);
-  });
-
-  return supabaseResponse;
+  return response;
 }
 
 export const config = {
