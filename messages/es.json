@@ -108,7 +108,49 @@
   },
   "faq": {
     "title": "Preguntas Frecuentes",
-    "subtitle": "Todo lo que necesitas saber sobre ReceiptSorter"
+    "subtitle": "Todo lo que necesitas saber sobre ReceiptSorter",
+    "items": {
+      "accuracy": {
+        "question": "¿Qué tan precisa es la extracción por IA?",
+        "answer": "Nuestra IA alcanza una precisión del 95%+ en recibos claros y estándar. Siempre puedes editar manualmente cualquier dato extraído antes de exportar."
+      },
+      "formats": {
+        "question": "¿Qué formatos de archivo soportan?",
+        "answer": "Soportamos todos los formatos de imagen comunes (JPG, PNG, WebP) y archivos PDF de hasta 10MB."
+      },
+      "cost": {
+        "question": "¿Cuánto cuesta?",
+        "answer": "Usamos un sistema de créditos. Cada recibo cuesta 1 crédito ($0.50). Puedes comprar créditos en paquetes (10 por $9.99, 50 por $24.99, etc.) o suscribirte para obtener mejor valor."
+      },
+      "expiration": {
+        "question": "¿Los créditos expiran?",
+        "answer": "No, los créditos nunca expiran. Úsalos cuando los necesites."
+      },
+      "security": {
+        "question": "¿Están seguros mis datos?",
+        "answer": "Sí. Usamos encriptación de nivel bancario (SSL de 256 bits) y tus recibos se eliminan automáticamente después de 90 días. Nunca compartimos tus datos."
+      },
+      "export": {
+        "question": "¿Puedo exportar a QuickBooks o Xero?",
+        "answer": "Actualmente, exportamos a formatos Excel y CSV que funcionan con todos los principales software de contabilidad. Las integraciones directas llegarán pronto."
+      },
+      "wrongExtraction": {
+        "question": "¿Qué pasa si la extracción es incorrecta?",
+        "answer": "Puedes editar manualmente cualquier dato extraído antes de exportar. Si la extracción falla completamente, reembolsaremos el crédito."
+      },
+      "refunds": {
+        "question": "¿Ofrecen reembolsos?",
+        "answer": "Sí, ofrecemos una garantía de devolución de dinero de 30 días en compras de créditos si no estás satisfecho."
+      },
+      "business": {
+        "question": "¿Puedo usar esto para mi negocio?",
+        "answer": "¡Absolutamente! Muchas pequeñas empresas, freelancers y contadores usan ReceiptSorter para el seguimiento de gastos y contabilidad."
+      },
+      "software": {
+        "question": "¿Necesito instalar algún software?",
+        "answer": "No, ReceiptSorter es 100% basado en web. Accede desde cualquier dispositivo con un navegador web."
+      }
+    }
   },
   "finalCTA": {
     "title": "¿Listo para ahorrar horas en la gestión de recibos?",

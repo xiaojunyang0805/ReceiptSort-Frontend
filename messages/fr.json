@@ -108,7 +108,49 @@
   },
   "faq": {
     "title": "Questions Fréquemment Posées",
-    "subtitle": "Tout ce que vous devez savoir sur ReceiptSorter"
+    "subtitle": "Tout ce que vous devez savoir sur ReceiptSorter",
+    "items": {
+      "accuracy": {
+        "question": "Quelle est la précision de l'extraction par IA?",
+        "answer": "Notre IA atteint une précision de 95%+ sur les reçus clairs et standards. Vous pouvez toujours modifier manuellement les données extraites avant l'exportation."
+      },
+      "formats": {
+        "question": "Quels formats de fichiers prenez-vous en charge?",
+        "answer": "Nous prenons en charge tous les formats d'image courants (JPG, PNG, WebP) et les fichiers PDF jusqu'à 10 Mo."
+      },
+      "cost": {
+        "question": "Combien cela coûte-t-il?",
+        "answer": "Nous utilisons un système de crédits. Chaque reçu coûte 1 crédit (0,50€). Vous pouvez acheter des crédits en packs (10 pour 9,99€, 50 pour 24,99€, etc.) ou vous abonner pour une meilleure valeur."
+      },
+      "expiration": {
+        "question": "Les crédits expirent-ils?",
+        "answer": "Non, les crédits n'expirent jamais. Utilisez-les quand vous en avez besoin."
+      },
+      "security": {
+        "question": "Mes données sont-elles sécurisées?",
+        "answer": "Oui. Nous utilisons un cryptage de niveau bancaire (SSL 256 bits) et vos reçus sont automatiquement supprimés après 90 jours. Nous ne partageons jamais vos données."
+      },
+      "export": {
+        "question": "Puis-je exporter vers QuickBooks ou Xero?",
+        "answer": "Actuellement, nous exportons vers les formats Excel et CSV qui fonctionnent avec tous les principaux logiciels de comptabilité. Les intégrations directes arrivent bientôt."
+      },
+      "wrongExtraction": {
+        "question": "Que se passe-t-il si l'extraction est incorrecte?",
+        "answer": "Vous pouvez modifier manuellement toutes les données extraites avant l'exportation. Si l'extraction échoue complètement, nous rembourserons le crédit."
+      },
+      "refunds": {
+        "question": "Offrez-vous des remboursements?",
+        "answer": "Oui, nous offrons une garantie de remboursement de 30 jours sur les achats de crédits si vous n'êtes pas satisfait."
+      },
+      "business": {
+        "question": "Puis-je l'utiliser pour mon entreprise?",
+        "answer": "Absolument! De nombreuses petites entreprises, freelances et comptables utilisent ReceiptSorter pour le suivi des dépenses et la comptabilité."
+      },
+      "software": {
+        "question": "Dois-je installer un logiciel?",
+        "answer": "Non, ReceiptSorter est 100% basé sur le web. Accédez-y depuis n'importe quel appareil avec un navigateur web."
+      }
+    }
   },
   "finalCTA": {
     "title": "Prêt à économiser des heures sur la gestion des reçus?",

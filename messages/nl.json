@@ -108,7 +108,49 @@
   },
   "faq": {
     "title": "Veelgestelde Vragen",
-    "subtitle": "Alles wat u moet weten over ReceiptSorter"
+    "subtitle": "Alles wat u moet weten over ReceiptSorter",
+    "items": {
+      "accuracy": {
+        "question": "Hoe nauwkeurig is de AI-extractie?",
+        "answer": "Onze AI bereikt 95%+ nauwkeurigheid bij duidelijke, standaard bonnetjes. U kunt altijd handmatig alle geëxtraheerde gegevens bewerken voordat u exporteert."
+      },
+      "formats": {
+        "question": "Welke bestandsformaten ondersteunen jullie?",
+        "answer": "We ondersteunen alle gangbare afbeeldingsformaten (JPG, PNG, WebP) en PDF-bestanden tot 10MB."
+      },
+      "cost": {
+        "question": "Hoeveel kost het?",
+        "answer": "We gebruiken een creditsysteem. Elk bonnetje kost 1 credit (€0,50). U kunt credits kopen in pakketten (10 voor €9,99, 50 voor €24,99, enz.) of een abonnement nemen voor betere waarde."
+      },
+      "expiration": {
+        "question": "Verlopen credits?",
+        "answer": "Nee, credits verlopen nooit. Gebruik ze wanneer u ze nodig heeft."
+      },
+      "security": {
+        "question": "Zijn mijn gegevens veilig?",
+        "answer": "Ja. We gebruiken versleuteling op bankniveau (256-bit SSL) en uw bonnetjes worden automatisch verwijderd na 90 dagen. We delen uw gegevens nooit."
+      },
+      "export": {
+        "question": "Kan ik exporteren naar QuickBooks of Xero?",
+        "answer": "Momenteel exporteren we naar Excel- en CSV-formaten die werken met alle belangrijke boekhoudsoftware. Directe integraties komen binnenkort."
+      },
+      "wrongExtraction": {
+        "question": "Wat als de extractie onjuist is?",
+        "answer": "U kunt alle geëxtraheerde gegevens handmatig bewerken voordat u exporteert. Als de extractie volledig mislukt, restitueren we het credit."
+      },
+      "refunds": {
+        "question": "Bieden jullie terugbetalingen aan?",
+        "answer": "Ja, we bieden een 30 dagen geld-terug-garantie op creditaankopen als u niet tevreden bent."
+      },
+      "business": {
+        "question": "Kan ik dit voor mijn bedrijf gebruiken?",
+        "answer": "Absoluut! Veel kleine bedrijven, freelancers en accountants gebruiken ReceiptSorter voor onkostenregistratie en boekhouding."
+      },
+      "software": {
+        "question": "Moet ik software installeren?",
+        "answer": "Nee, ReceiptSorter is 100% webgebaseerd. Toegang vanaf elk apparaat met een webbrowser."
+      }
+    }
   },
   "finalCTA": {
     "title": "Klaar om uren te besparen op bonnetjesbeheer?",

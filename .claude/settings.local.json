@@ -19,7 +19,8 @@
       "Bash(timeout 5 sleep 5)",
       "Bash(curl https://api.stripe.com/v1/products )",
       "Bash(curl https://api.stripe.com/v1/prices )",
-      "WebFetch(domain:next-intl.dev)"
+      "WebFetch(domain:next-intl.dev)",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []
