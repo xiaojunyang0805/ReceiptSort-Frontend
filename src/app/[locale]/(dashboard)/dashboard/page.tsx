@@ -5,8 +5,10 @@ import { CreditCard, FileText, Upload, Calendar } from 'lucide-react'
 import { Link } from '@/lib/navigation'
 import { ProcessAllButton } from '@/components/dashboard/ProcessAllButton'
 import { LowCreditBanner } from '@/components/dashboard/LowCreditBanner'
+import { getTranslations } from 'next-intl/server'
 
 export default async function DashboardPage() {
+  const t = await getTranslations('dashboard')
   const supabase = await createClient()
   const {
     data: { user },
@@ -72,7 +74,7 @@ export default async function DashboardPage() {
       {/* Welcome Section */}
       <div>
         <h1 className="text-3xl font-bold tracking-tight">
-          Welcome back, {profile?.full_name || user?.email?.split('@')[0]}!
+          {t('welcome')}, {profile?.full_name || user?.email?.split('@')[0]}!
         </h1>
         <p className="text-muted-foreground mt-2">
           Here&apos;s an overview of your receipt management
@@ -84,7 +86,7 @@ export default async function DashboardPage() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <CreditCard className="h-5 w-5" />
-            Credit Balance
+            {t('credits.balance')}
           </CardTitle>
           <CardDescription>Available credits for processing receipts</CardDescription>
         </CardHeader>
@@ -93,10 +95,10 @@ export default async function DashboardPage() {
             {profile?.credits ?? 0}
           </div>
           <p className="text-sm text-muted-foreground mt-2">
-            Credits remaining
+            {t('credits.creditsRemaining')}
           </p>
           <Button asChild className="mt-4">
-            <Link href="/credits">Purchase More Credits</Link>
+            <Link href="/credits">{t('credits.buyCredits')}</Link>
           </Button>
         </CardContent>
       </Card>
@@ -105,7 +107,7 @@ export default async function DashboardPage() {
       <div className="grid gap-4 md:grid-cols-3">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Receipts</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('receiptsTable.title')}</CardTitle>
             <FileText className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>

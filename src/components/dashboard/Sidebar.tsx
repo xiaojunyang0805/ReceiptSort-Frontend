@@ -4,21 +4,23 @@ import { Link } from '@/lib/navigation'
 import { usePathname } from '@/lib/navigation'
 import { cn } from '@/lib/utils'
 import { Home, Upload, Receipt, Download, CreditCard } from 'lucide-react'
-
-const navigation = [
-  { name: 'Dashboard', href: '/dashboard', icon: Home },
-  { name: 'Upload Receipts', href: '/upload', icon: Upload },
-  { name: 'My Receipts', href: '/receipts', icon: Receipt },
-  { name: 'Export History', href: '/exports', icon: Download },
-  { name: 'Credits', href: '/credits', icon: CreditCard },
-]
+import { useTranslations } from 'next-intl'
 
 interface SidebarProps {
   className?: string
 }
 
 export function Sidebar({ className }: SidebarProps) {
+  const t = useTranslations('common')
   const pathname = usePathname()
+
+  const navigation = [
+    { name: t('dashboard'), href: '/dashboard', icon: Home },
+    { name: t('uploadReceipts'), href: '/upload', icon: Upload },
+    { name: t('receipts'), href: '/receipts', icon: Receipt },
+    { name: t('exports'), href: '/exports', icon: Download },
+    { name: t('credits'), href: '/credits', icon: CreditCard },
+  ]
 
   return (
     <aside className={cn('pb-12 w-full', className)}>
