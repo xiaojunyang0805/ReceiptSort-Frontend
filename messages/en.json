@@ -103,8 +103,37 @@
       "timeSaved": "Hours Saved"
     },
     "testimonials": {
-      "title": "What our customers say"
+      "title": "What our customers say",
+      "items": [
+        {
+          "quote": "ReceiptSort saved me hours of manual data entry. The AI accuracy is impressive, and exporting to Excel is seamless.",
+          "name": "Sarah Chen",
+          "role": "Freelance Designer"
+        },
+        {
+          "quote": "As a small business owner, I don't have time for bookkeeping. This tool is a game-changer for expense tracking.",
+          "name": "Marcus Johnson",
+          "role": "Retail Store Owner"
+        },
+        {
+          "quote": "I was skeptical about AI accuracy, but ReceiptSort gets it right 95% of the time. The other 5% I can easily fix.",
+          "name": "Jennifer Martinez",
+          "role": "Accountant"
+        }
+      ]
+    },
+    "trustBadges": {
+      "securePayment": "Secure payment by Stripe",
+      "gdpr": "GDPR Compliant",
+      "encryption": "256-bit SSL Encryption"
     }
+  },
+  "support": {
+    "title": "Still have questions?",
+    "subtitle": "Our support team is here to help. Get in touch and we'll respond within 24 hours.",
+    "emailUs": "Email Us",
+    "or": "or",
+    "contactForm": "Contact Form"
   },
   "faq": {
     "title": "Frequently Asked Questions",

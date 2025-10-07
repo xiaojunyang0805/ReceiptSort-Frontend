@@ -24,43 +24,34 @@ const stats = [
 
 const testimonials = [
   {
-    quote:
-      'ReceiptSort saved me hours of manual data entry. The AI accuracy is impressive, and exporting to Excel is seamless.',
-    name: 'Sarah Chen',
-    role: 'Freelance Designer',
     avatar: 'SC',
     color: 'bg-blue-500',
+    index: 0,
   },
   {
-    quote:
-      "As a small business owner, I don't have time for bookkeeping. This tool is a game-changer for expense tracking.",
-    name: 'Marcus Johnson',
-    role: 'Retail Store Owner',
     avatar: 'MJ',
     color: 'bg-green-500',
+    index: 1,
   },
   {
-    quote:
-      "I was skeptical about AI accuracy, but ReceiptSort gets it right 95% of the time. The other 5% I can easily fix.",
-    name: 'Jennifer Martinez',
-    role: 'Accountant',
     avatar: 'JM',
     color: 'bg-purple-500',
+    index: 2,
   },
 ]
 
 const trustBadges = [
   {
     icon: Shield,
-    text: 'Secure payment by Stripe',
+    key: 'securePayment',
   },
   {
     icon: CheckCircle2,
-    text: 'GDPR Compliant',
+    key: 'gdpr',
   },
   {
     icon: Lock,
-    text: '256-bit SSL Encryption',
+    key: 'encryption',
   },
 ]
 
@@ -103,8 +94,8 @@ export function SocialProof() {
             {t('testimonials.title')}
           </h3>
           <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} className="bg-background hover:shadow-lg transition-shadow">
+            {testimonials.map((testimonial) => (
+              <Card key={testimonial.index} className="bg-background hover:shadow-lg transition-shadow">
                 <CardContent className="pt-6">
                   <div className="mb-4">
                     <svg
@@ -116,7 +107,7 @@ export function SocialProof() {
                     </svg>
                   </div>
                   <p className="text-muted-foreground mb-6 leading-relaxed">
-                    &ldquo;{testimonial.quote}&rdquo;
+                    &ldquo;{t(`testimonials.items.${testimonial.index}.quote`)}&rdquo;
                   </p>
                   <div className="flex items-center gap-3">
                     <div
@@ -125,9 +116,9 @@ export function SocialProof() {
                       {testimonial.avatar}
                     </div>
                     <div>
-                      <div className="font-semibold">{testimonial.name}</div>
+                      <div className="font-semibold">{t(`testimonials.items.${testimonial.index}.name`)}</div>
                       <div className="text-sm text-muted-foreground">
-                        {testimonial.role}
+                        {t(`testimonials.items.${testimonial.index}.role`)}
                       </div>
                     </div>
                   </div>
@@ -140,16 +131,16 @@ export function SocialProof() {
         {/* Trust Badges */}
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-3 gap-6">
-            {trustBadges.map((badge, index) => {
+            {trustBadges.map((badge) => {
               const Icon = badge.icon
               return (
                 <div
-                  key={index}
+                  key={badge.key}
                   className="flex items-center justify-center gap-3 p-4 rounded-lg bg-background/50"
                 >
                   <Icon className="h-6 w-6 text-primary flex-shrink-0" />
                   <span className="text-sm font-medium text-muted-foreground">
-                    {badge.text}
+                    {t(`trustBadges.${badge.key}`)}
                   </span>
                 </div>
               )

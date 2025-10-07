@@ -103,8 +103,37 @@
       "timeSaved": "Horas Ahorradas"
     },
     "testimonials": {
-      "title": "Lo que dicen nuestros clientes"
+      "title": "Lo que dicen nuestros clientes",
+      "items": [
+        {
+          "quote": "ReceiptSort me ahorró horas de entrada manual de datos. La precisión de la IA es impresionante y exportar a Excel es perfecto.",
+          "name": "Sarah Chen",
+          "role": "Diseñadora Freelance"
+        },
+        {
+          "quote": "Como propietario de una pequeña empresa, no tengo tiempo para la contabilidad. Esta herramienta es revolucionaria para el seguimiento de gastos.",
+          "name": "Marcus Johnson",
+          "role": "Propietario de Tienda"
+        },
+        {
+          "quote": "Era escéptico sobre la precisión de la IA, pero ReceiptSort lo hace bien el 95% del tiempo. El otro 5% puedo corregirlo fácilmente.",
+          "name": "Jennifer Martinez",
+          "role": "Contadora"
+        }
+      ]
+    },
+    "trustBadges": {
+      "securePayment": "Pago seguro por Stripe",
+      "gdpr": "Cumple con GDPR",
+      "encryption": "Encriptación SSL de 256 bits"
     }
+  },
+  "support": {
+    "title": "¿Todavía tienes preguntas?",
+    "subtitle": "Nuestro equipo de soporte está aquí para ayudarte. Ponte en contacto y te responderemos en 24 horas.",
+    "emailUs": "Envíanos un correo",
+    "or": "o",
+    "contactForm": "Formulario de contacto"
   },
   "faq": {
     "title": "Preguntas Frecuentes",

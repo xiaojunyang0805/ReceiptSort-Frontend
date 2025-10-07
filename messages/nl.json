@@ -103,8 +103,37 @@
       "timeSaved": "Uren Bespaard"
     },
     "testimonials": {
-      "title": "Wat onze klanten zeggen"
+      "title": "Wat onze klanten zeggen",
+      "items": [
+        {
+          "quote": "ReceiptSort heeft me uren handmatige gegevensinvoer bespaard. De AI-nauwkeurigheid is indrukwekkend en exporteren naar Excel is naadloos.",
+          "name": "Sarah Chen",
+          "role": "Freelance Designer"
+        },
+        {
+          "quote": "Als eigenaar van een klein bedrijf heb ik geen tijd voor boekhouding. Deze tool is een game-changer voor onkostenregistratie.",
+          "name": "Marcus Johnson",
+          "role": "Winkeleigenaar"
+        },
+        {
+          "quote": "Ik was sceptisch over de AI-nauwkeurigheid, maar ReceiptSort doet het 95% van de tijd goed. De andere 5% kan ik gemakkelijk aanpassen.",
+          "name": "Jennifer Martinez",
+          "role": "Accountant"
+        }
+      ]
+    },
+    "trustBadges": {
+      "securePayment": "Veilige betaling via Stripe",
+      "gdpr": "GDPR-conform",
+      "encryption": "256-bit SSL Encryptie"
     }
+  },
+  "support": {
+    "title": "Heeft u nog vragen?",
+    "subtitle": "Ons ondersteuningsteam staat voor u klaar. Neem contact op en we reageren binnen 24 uur.",
+    "emailUs": "E-mail Ons",
+    "or": "of",
+    "contactForm": "Contactformulier"
   },
   "faq": {
     "title": "Veelgestelde Vragen",

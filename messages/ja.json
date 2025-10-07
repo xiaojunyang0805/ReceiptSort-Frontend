@@ -103,8 +103,37 @@
       "timeSaved": "節約された時間"
     },
     "testimonials": {
-      "title": "お客様の声"
+      "title": "お客様の声",
+      "items": [
+        {
+          "quote": "ReceiptSortのおかげで手動でのデータ入力の時間を何時間も節約できました。AIの精度は印象的で、Excelへのエクスポートもシームレスです。",
+          "name": "Sarah Chen",
+          "role": "フリーランスデザイナー"
+        },
+        {
+          "quote": "小規模ビジネスオーナーとして、記帳に時間をかける余裕はありません。このツールは経費管理のゲームチェンジャーです。",
+          "name": "Marcus Johnson",
+          "role": "小売店オーナー"
+        },
+        {
+          "quote": "AIの精度には懐疑的でしたが、ReceiptSortは95%の確率で正確です。残りの5%も簡単に修正できます。",
+          "name": "Jennifer Martinez",
+          "role": "会計士"
+        }
+      ]
+    },
+    "trustBadges": {
+      "securePayment": "Stripeによる安全な決済",
+      "gdpr": "GDPR準拠",
+      "encryption": "256ビットSSL暗号化"
     }
+  },
+  "support": {
+    "title": "まだ質問がありますか？",
+    "subtitle": "サポートチームがお手伝いします。お問い合わせいただければ、24時間以内にご返信いたします。",
+    "emailUs": "メールでお問い合わせ",
+    "or": "または",
+    "contactForm": "お問い合わせフォーム"
   },
   "faq": {
     "title": "よくある質問",

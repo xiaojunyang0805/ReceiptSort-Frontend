@@ -103,8 +103,37 @@
       "timeSaved": "Eingesparte Stunden"
     },
     "testimonials": {
-      "title": "Was unsere Kunden sagen"
+      "title": "Was unsere Kunden sagen",
+      "items": [
+        {
+          "quote": "ReceiptSort hat mir Stunden manueller Dateneingabe erspart. Die KI-Genauigkeit ist beeindruckend und der Export nach Excel ist nahtlos.",
+          "name": "Sarah Chen",
+          "role": "Freiberufliche Designerin"
+        },
+        {
+          "quote": "Als Kleinunternehmer habe ich keine Zeit für die Buchhaltung. Dieses Tool ist ein Game-Changer für die Spesenverfolgung.",
+          "name": "Marcus Johnson",
+          "role": "Einzelhandelsinhaber"
+        },
+        {
+          "quote": "Ich war skeptisch bezüglich der KI-Genauigkeit, aber ReceiptSort macht es zu 95% richtig. Die anderen 5% kann ich leicht korrigieren.",
+          "name": "Jennifer Martinez",
+          "role": "Buchhalterin"
+        }
+      ]
+    },
+    "trustBadges": {
+      "securePayment": "Sichere Zahlung über Stripe",
+      "gdpr": "DSGVO-konform",
+      "encryption": "256-Bit SSL-Verschlüsselung"
     }
+  },
+  "support": {
+    "title": "Haben Sie noch Fragen?",
+    "subtitle": "Unser Support-Team hilft Ihnen gerne weiter. Kontaktieren Sie uns und wir antworten innerhalb von 24 Stunden.",
+    "emailUs": "E-Mail an uns",
+    "or": "oder",
+    "contactForm": "Kontaktformular"
   },
   "faq": {
     "title": "Häufig Gestellte Fragen",

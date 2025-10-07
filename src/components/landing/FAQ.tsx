@@ -37,6 +37,7 @@ function FAQAccordionItem({ faq, isOpen, onClick, t }: { faq: FAQItem; isOpen: b
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const t = useTranslations('faq');
+  const tSupport = useTranslations('support');
 
   const faqs: FAQItem[] = [
     { id: 'accuracy' },
@@ -84,24 +85,24 @@ export default function FAQ() {
         {/* Still Have Questions Section */}
         <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-8 sm:p-12 text-center">
           <h3 className="text-2xl font-bold text-gray-900 mb-4">
-            Still have questions?
+            {tSupport('title')}
           </h3>
           <p className="text-gray-600 mb-6 max-w-xl mx-auto">
-            Our support team is here to help. Get in touch and we&apos;ll respond within 24 hours.
+            {tSupport('subtitle')}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="mailto:support@receiptsort.com"
               className="inline-flex items-center px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors"
             >
-              Email Us
+              {tSupport('emailUs')}
             </a>
-            <span className="text-gray-500">or</span>
+            <span className="text-gray-500">{tSupport('or')}</span>
             <a
               href="#contact"
               className="inline-flex items-center px-6 py-3 border-2 border-indigo-600 text-indigo-600 font-semibold rounded-lg hover:bg-indigo-50 transition-colors"
             >
-              Contact Form
+              {tSupport('contactForm')}
             </a>
           </div>
           <p className="text-sm text-gray-500 mt-6">
