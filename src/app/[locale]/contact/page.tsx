@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Link } from '@/lib/navigation';
-import { ArrowLeft, Mail, MessageSquare } from 'lucide-react';
+import { ArrowLeft, MessageSquare } from 'lucide-react';
 import { ContactForm } from '@/components/contact/ContactForm';
 
 export default function ContactPage() {
@@ -28,7 +28,7 @@ export default function ContactPage() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="max-w-2xl mx-auto">
           {/* Contact Form */}
           <Card>
             <CardHeader>
@@ -45,47 +45,8 @@ export default function ContactPage() {
             </CardContent>
           </Card>
 
-          {/* Contact Information */}
-          <div className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Mail className="h-5 w-5 text-primary" />
-                  Email Us Directly
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <h3 className="font-semibold mb-1">General Support</h3>
-                  <a
-                    href="mailto:support@receiptsort.com"
-                    className="text-primary hover:underline"
-                  >
-                    support@receiptsort.com
-                  </a>
-                </div>
-
-                <div>
-                  <h3 className="font-semibold mb-1">Sales Inquiries</h3>
-                  <a
-                    href="mailto:sales@receiptsort.com"
-                    className="text-primary hover:underline"
-                  >
-                    sales@receiptsort.com
-                  </a>
-                </div>
-
-                <div>
-                  <h3 className="font-semibold mb-1">Privacy & Legal</h3>
-                  <a
-                    href="mailto:legal@receiptsort.com"
-                    className="text-primary hover:underline"
-                  >
-                    legal@receiptsort.com
-                  </a>
-                </div>
-              </CardContent>
-            </Card>
+          {/* Additional Resources */}
+          <div className="grid md:grid-cols-2 gap-6 mt-8">
 
             <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200">
               <CardHeader>
