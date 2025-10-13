@@ -306,11 +306,21 @@ Provider: Squarespace (seenano.nl)
 
 **Impact:** This was preventing the landing page from loading properly, which affected Google OAuth login flow.
 
+**Google OAuth Fix (2025-10-13):**
+1. ✅ Fixed OAuth redirect URL issue
+   - Problem: Google was redirecting to root page with `?code=...` instead of `/auth/callback`
+   - Root cause: `process.env.NEXT_PUBLIC_URL` not available in client component
+   - Solution: Changed to use `window.location.origin` which is always correct
+   - Location: `src/components/auth/AuthForm.tsx:125`
+   - Commit: `00615bd`
+   - Deployment: https://vercel.com/xiaojunyang0805s-projects/receiptsort/FjfP3AR5VzayMogDjrJaFzk479xB
+
+**Impact:** Google OAuth should now properly redirect through `/auth/callback` to `/dashboard`
+
 **Remaining Tasks:**
-1. Test landing page loads without errors
-2. Test Google OAuth login/signup
-3. Production testing (authentication, upload, payment flow, contact form)
-4. Optional: Update DNS to new Vercel infrastructure (e029d0913d0d6a84.vercel-dns-017.com)
+1. Test Google OAuth login/signup works correctly
+2. Production testing (authentication, upload, payment flow, contact form)
+3. Optional: Update DNS to new Vercel infrastructure (e029d0913d0d6a84.vercel-dns-017.com)
 
 **Benefits:**
 - Cost-effective (no new domain purchase)
