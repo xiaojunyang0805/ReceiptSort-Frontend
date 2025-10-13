@@ -1,6 +1,6 @@
 'use client'
 
-import { LogOut, User } from 'lucide-react'
+import { LogOut, User, Home } from 'lucide-react'
 import { signOut } from '@/app/actions/auth'
 import {
   DropdownMenu,
@@ -35,6 +35,14 @@ export function NavbarClient({ userInitials, fullName, email, credits }: NavbarC
         <div className="flex-1" />
 
         <div className="flex items-center gap-4">
+          {/* Home Button */}
+          <Link href="/">
+            <Button variant="outline" size="sm" className="gap-2">
+              <Home className="h-4 w-4" />
+              <span className="hidden sm:inline">Home</span>
+            </Button>
+          </Link>
+
           {/* Language Switcher */}
           <LanguageSwitcher />
 
