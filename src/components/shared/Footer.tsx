@@ -150,9 +150,14 @@ export default function Footer() {
               </span>
             </div>
 
-            {/* Made with love */}
-            <div className="text-sm text-gray-500">
-              Made with ❤️ in the Netherlands
+            {/* Company Info */}
+            <div className="flex flex-col items-center md:items-end gap-1">
+              <div className="text-sm text-gray-500">
+                Made with ❤️ in the Netherlands
+              </div>
+              <div className="text-sm text-gray-500">
+                Powered by Seenano Technology B.V.
+              </div>
             </div>
           </div>
         </div>
