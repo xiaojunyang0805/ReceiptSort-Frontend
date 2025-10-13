@@ -296,9 +296,21 @@ Provider: Squarespace (seenano.nl)
    - Commit: `4d61c3a`
    - Deployment: https://vercel.com/xiaojunyang0805s-projects/receiptsort/7a5BNUGrUP31NujH157CBQAA99M6
 
+**Critical Bug Fix (2025-10-13):**
+1. ✅ Fixed MISSING_MESSAGE error for `hero.getStarted`
+   - Added `getStarted` translation key to hero section in all language files
+   - Was causing console errors and preventing page load
+   - Affected languages: en, ja, es, fr, de, nl
+   - Commit: `46fb1e5`
+   - Deployment: https://vercel.com/xiaojunyang0805s-projects/receiptsort/6FSrVQyBv1Ct7wqAsnbr3eiXuxR5
+
+**Impact:** This was preventing the landing page from loading properly, which affected Google OAuth login flow.
+
 **Remaining Tasks:**
-1. Production testing (authentication, upload, payment flow, contact form)
-2. Optional: Update DNS to new Vercel infrastructure (e029d0913d0d6a84.vercel-dns-017.com)
+1. Test landing page loads without errors
+2. Test Google OAuth login/signup
+3. Production testing (authentication, upload, payment flow, contact form)
+4. Optional: Update DNS to new Vercel infrastructure (e029d0913d0d6a84.vercel-dns-017.com)
 
 **Benefits:**
 - Cost-effective (no new domain purchase)
