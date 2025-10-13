@@ -43,7 +43,7 @@ export function ContactForm({ accessKey }: ContactFormProps) {
         setSubmitStatus('error')
         setErrorMessage(data.message || 'Something went wrong. Please try again.')
       }
-    } catch (error) {
+    } catch {
       setSubmitStatus('error')
       setErrorMessage('Network error. Please check your connection and try again.')
     } finally {
