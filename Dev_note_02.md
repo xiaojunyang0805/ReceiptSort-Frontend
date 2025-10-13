@@ -281,6 +281,21 @@ Provider: Squarespace (seenano.nl)
    - Deployment URL: https://receiptsort.seenano.nl
    - Vercel Inspect: https://vercel.com/xiaojunyang0805s-projects/receiptsort/BjYW3rdTXCUTB9HeQpGuJEbxqBXj
 
+**Navigation Fixes (2025-10-13):**
+1. ✅ Fixed "Contact Form" button in FAQ section
+   - Changed from `href="#contact"` to `href="/contact"`
+   - Now properly navigates to contact page
+   - Location: `src/components/landing/FAQ.tsx:102`
+
+2. ✅ Updated footer "Company" section
+   - Changed "About" to scroll to features section (instead of linking to /contact)
+   - Removed "Blog" link
+   - Location: `src/components/shared/Footer.tsx:26-38`
+
+3. ✅ Deployed navigation fixes to production
+   - Commit: `4d61c3a`
+   - Deployment: https://vercel.com/xiaojunyang0805s-projects/receiptsort/7a5BNUGrUP31NujH157CBQAA99M6
+
 **Remaining Tasks:**
 1. Production testing (authentication, upload, payment flow, contact form)
 2. Optional: Update DNS to new Vercel infrastructure (e029d0913d0d6a84.vercel-dns-017.com)
