@@ -120,11 +120,13 @@ export function AuthForm({ mode }: AuthFormProps) {
   const handleGoogleSignIn = async () => {
     setIsGoogleLoading(true)
     try {
-      const redirectUrl = process.env.NEXT_PUBLIC_URL || window.location.origin
+      // Use window.location.origin to ensure we get the current domain
+      // This is more reliable than environment variables for OAuth redirects
+      const origin = window.location.origin
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${redirectUrl}/auth/callback`,
+          redirectTo: `${origin}/auth/callback`,
         },
       })
 
