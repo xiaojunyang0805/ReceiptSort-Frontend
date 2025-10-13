@@ -24,14 +24,12 @@ export default function Footer() {
             <h3 className="font-semibold text-gray-900 mb-4">{t('company')}</h3>
             <ul className="space-y-3">
               <li>
-                <Link href="/contact" className="text-gray-600 hover:text-primary transition-colors">
+                <button
+                  onClick={() => scrollToSection('features')}
+                  className="text-gray-600 hover:text-primary transition-colors"
+                >
                   About
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="text-gray-600 hover:text-primary transition-colors">
-                  Blog
-                </Link>
+                </button>
               </li>
               <li>
                 <Link href="/contact" className="text-gray-600 hover:text-primary transition-colors">

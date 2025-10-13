@@ -99,7 +99,7 @@ export default function FAQ() {
             </a>
             <span className="text-gray-500">{tSupport('or')}</span>
             <a
-              href="#contact"
+              href="/contact"
               className="inline-flex items-center px-6 py-3 border-2 border-indigo-600 text-indigo-600 font-semibold rounded-lg hover:bg-indigo-50 transition-colors"
             >
               {tSupport('contactForm')}
