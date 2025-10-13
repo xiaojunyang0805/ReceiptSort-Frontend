@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Link } from '@/lib/navigation';
-import { ArrowLeft, MessageSquare } from 'lucide-react';
+import { ArrowLeft, MessageSquare, Mail } from 'lucide-react';
 import { ContactForm } from '@/components/contact/ContactForm';
 
 export default function ContactPage() {
@@ -42,6 +42,28 @@ export default function ContactPage() {
             </CardHeader>
             <CardContent>
               <ContactForm />
+            </CardContent>
+          </Card>
+
+          {/* Email Contact Card */}
+          <Card className="mt-6 bg-gradient-to-br from-purple-50 to-pink-50 border-purple-200">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Mail className="h-5 w-5 text-primary" />
+                Prefer Email?
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-700 mb-3">
+                You can also reach us directly via email:
+              </p>
+              <a
+                href="mailto:support@seenano.nl"
+                className="inline-flex items-center gap-2 text-lg font-semibold text-primary hover:underline"
+              >
+                <Mail className="h-5 w-5" />
+                support@seenano.nl
+              </a>
             </CardContent>
           </Card>
 

@@ -152,6 +152,13 @@ export default function Footer() {
 
             {/* Company Info */}
             <div className="flex flex-col items-center md:items-end gap-1">
+              <a
+                href="mailto:support@seenano.nl"
+                className="text-sm text-gray-600 hover:text-primary transition-colors flex items-center gap-1.5"
+              >
+                <Mail className="h-3.5 w-3.5" />
+                support@seenano.nl
+              </a>
               <div className="text-sm text-gray-500">
                 Made with ❤️ in the Netherlands
               </div>
