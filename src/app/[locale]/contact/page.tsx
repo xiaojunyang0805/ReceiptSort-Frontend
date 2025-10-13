@@ -1,12 +1,12 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Label } from '@/components/ui/label';
 import { Link } from '@/lib/navigation';
-import { ArrowLeft, Mail, MessageSquare, Send } from 'lucide-react';
+import { ArrowLeft, Mail, MessageSquare } from 'lucide-react';
+import { ContactForm } from '@/components/contact/ContactForm';
 
 export default function ContactPage() {
+  // Web3Forms access key - get yours at https://web3forms.com
+  const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || '';
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -43,54 +43,7 @@ export default function ContactPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form className="space-y-4">
-                <div>
-                  <Label htmlFor="name">Name</Label>
-                  <Input
-                    id="name"
-                    placeholder="Your name"
-                    className="mt-1.5"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="your@email.com"
-                    className="mt-1.5"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="subject">Subject</Label>
-                  <Input
-                    id="subject"
-                    placeholder="How can we help?"
-                    className="mt-1.5"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="message">Message</Label>
-                  <Textarea
-                    id="message"
-                    placeholder="Tell us more about your inquiry..."
-                    rows={6}
-                    className="mt-1.5"
-                  />
-                </div>
-
-                <Button type="submit" className="w-full gap-2">
-                  <Send className="h-4 w-4" />
-                  Send Message
-                </Button>
-
-                <p className="text-sm text-muted-foreground text-center">
-                  We typically respond within 24 hours
-                </p>
-              </form>
+              <ContactForm accessKey={accessKey} />
             </CardContent>
           </Card>
 
