@@ -6,7 +6,8 @@ import { ContactForm } from '@/components/contact/ContactForm';
 
 export default function ContactPage() {
   // Web3Forms access key - get yours at https://web3forms.com
-  const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || '';
+  // Trim to remove any whitespace or newline characters
+  const accessKey = (process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || '').trim();
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
