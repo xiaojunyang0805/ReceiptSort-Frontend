@@ -104,9 +104,17 @@ export function AuthForm({ mode }: AuthFormProps) {
         }
 
         if (data.user) {
-          toast.success('Account created successfully!')
-          router.push('/dashboard')
-          router.refresh()
+          // Check if email confirmation is required
+          if (data.session) {
+            // User is automatically logged in (email confirmation disabled)
+            toast.success('Account created successfully!')
+            router.push('/dashboard')
+            router.refresh()
+          } else {
+            // Email confirmation required
+            toast.success('Please check your email to confirm your account before logging in')
+            router.push('/')
+          }
         }
       }
     } catch (error) {
