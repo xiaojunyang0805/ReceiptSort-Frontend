@@ -5,9 +5,6 @@ import { ArrowLeft, Mail, MessageSquare } from 'lucide-react';
 import { ContactForm } from '@/components/contact/ContactForm';
 
 export default function ContactPage() {
-  // Web3Forms access key - get yours at https://web3forms.com
-  // Trim to remove any whitespace or newline characters
-  const accessKey = (process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || '').trim();
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -44,7 +41,7 @@ export default function ContactPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <ContactForm accessKey={accessKey} />
+              <ContactForm />
             </CardContent>
           </Card>
 

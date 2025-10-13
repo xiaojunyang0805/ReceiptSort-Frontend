@@ -8,11 +8,7 @@ import { Label } from '@/components/ui/label'
 import { Send, CheckCircle, AlertCircle } from 'lucide-react'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 
-interface ContactFormProps {
-  accessKey: string
-}
-
-export function ContactForm({ accessKey }: ContactFormProps) {
+export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
@@ -26,7 +22,9 @@ export function ContactForm({ accessKey }: ContactFormProps) {
     const formData = new FormData(e.currentTarget)
 
     try {
-      const response = await fetch('https://api.web3forms.com/submit', {
+      // Use our API route instead of calling Web3Forms directly
+      // This avoids CORS issues and keeps the access key secure
+      const response = await fetch('/api/contact', {
         method: 'POST',
         body: formData,
       })
@@ -70,12 +68,6 @@ export function ContactForm({ accessKey }: ContactFormProps) {
       )}
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Web3Forms Access Key - Hidden */}
-        <input type="hidden" name="access_key" value={accessKey} />
-
-        {/* Optional: Redirect after submission (can remove if you want to stay on page) */}
-        <input type="hidden" name="redirect" value="false" />
-
         {/* Bot spam protection */}
         <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
 
