@@ -481,5 +481,60 @@
     "dashboard": "Dashboard",
     "login": "Inloggen",
     "signup": "Aanmelden"
+  },
+  "contact": {
+    "title": "Neem Contact Op",
+    "subtitle": "Heeft u vragen? We horen graag van u. Stuur ons een bericht en we reageren binnen 24 uur.",
+    "backToHome": "Terug naar Home",
+    "sendMessage": "Stuur ons een Bericht",
+    "formDescription": "Vul het onderstaande formulier in en we nemen zo snel mogelijk contact met u op.",
+    "name": "Naam",
+    "namePlaceholder": "Uw naam",
+    "email": "E-mail",
+    "emailPlaceholder": "uw@email.com",
+    "subject": "Onderwerp",
+    "subjectPlaceholder": "Hoe kunnen we helpen?",
+    "message": "Bericht",
+    "messagePlaceholder": "Vertel ons meer over uw vraag...",
+    "sendButton": "Bericht Versturen",
+    "responseTime": "We reageren meestal binnen 24 uur",
+    "preferEmail": "E-mail voorkeur?",
+    "reachDirectly": "U kunt ons ook direct bereiken via e-mail:",
+    "frequentlyAskedQuestions": "Veelgestelde Vragen",
+    "faqDescription": "Voordat u contact opneemt, vindt u uw antwoord mogelijk in ons FAQ-gedeelte.",
+    "viewFaq": "Bekijk FAQ",
+    "quickStartGuide": "Snelstartgids",
+    "quickStartDescription": "Nieuw bij ReceiptSorter? Leer in 3 eenvoudige stappen hoe u aan de slag gaat.",
+    "howItWorks": "Hoe Het Werkt"
+  },
+  "creditPackages": {
+    "title": "Credits Kopen",
+    "starter": {
+      "name": "Starter",
+      "description": "Perfect om de service te proberen"
+    },
+    "basic": {
+      "name": "Basis",
+      "description": "Geweldig voor regelmatige gebruikers"
+    },
+    "pro": {
+      "name": "Pro",
+      "description": "Beste waarde voor veelgebruikers"
+    },
+    "business": {
+      "name": "Zakelijk",
+      "description": "Voor hoogvolume bedrijven"
+    },
+    "credits": "Credits",
+    "perCredit": "per credit",
+    "processReceipts": "{count} bonnetjes verwerken",
+    "aiPoweredExtraction": "AI-gestuurde extractie",
+    "prioritySupport": "Prioriteitsondersteuning",
+    "bulkProcessing": "Bulkverwerking",
+    "neverExpires": "Verloopt nooit",
+    "purchase": "Kopen",
+    "processing": "Verwerken...",
+    "bestValue": "Beste Waarde",
+    "save": "Bespaar {percent}%"
   }
 }

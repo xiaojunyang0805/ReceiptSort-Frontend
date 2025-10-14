@@ -344,7 +344,18 @@
         "usage": "Usage",
         "refund": "Refund",
         "bonus": "Bonus",
-        "purchasedBasicPackage": "Purchased basic package"
+        "purchasedBasicPackage": "Purchased basic package",
+        "date": "Date",
+        "type": "Type",
+        "amount": "Amount",
+        "description": "Description",
+        "noTransactions": "No transactions yet",
+        "purchaseCreditsToStart": "Purchase credits to get started",
+        "loading": "Loading your credit transactions...",
+        "showing": "Showing {from} to {to} of {total} transactions",
+        "previous": "Previous",
+        "next": "Next",
+        "page": "Page {current} of {total}"
       }
     },
     "exports": {
@@ -482,5 +493,60 @@
     "dashboard": "Dashboard",
     "login": "Login",
     "signup": "Sign Up"
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "subtitle": "Have questions? We'd love to hear from you. Send us a message and we'll respond within 24 hours.",
+    "backToHome": "Back to Home",
+    "sendMessage": "Send us a Message",
+    "formDescription": "Fill out the form below and we'll get back to you as soon as possible.",
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "email": "Email",
+    "emailPlaceholder": "your@email.com",
+    "subject": "Subject",
+    "subjectPlaceholder": "How can we help?",
+    "message": "Message",
+    "messagePlaceholder": "Tell us more about your inquiry...",
+    "sendButton": "Send Message",
+    "responseTime": "We typically respond within 24 hours",
+    "preferEmail": "Prefer Email?",
+    "reachDirectly": "You can also reach us directly via email:",
+    "frequentlyAskedQuestions": "Frequently Asked Questions",
+    "faqDescription": "Before reaching out, you might find your answer in our FAQ section.",
+    "viewFaq": "View FAQ",
+    "quickStartGuide": "Quick Start Guide",
+    "quickStartDescription": "New to ReceiptSorter? Learn how to get started in 3 simple steps.",
+    "howItWorks": "How It Works"
+  },
+  "creditPackages": {
+    "title": "Purchase Credits",
+    "starter": {
+      "name": "Starter",
+      "description": "Perfect for trying out the service"
+    },
+    "basic": {
+      "name": "Basic",
+      "description": "Great for regular users"
+    },
+    "pro": {
+      "name": "Pro",
+      "description": "Best value for power users"
+    },
+    "business": {
+      "name": "Business",
+      "description": "For high-volume businesses"
+    },
+    "credits": "Credits",
+    "perCredit": "per credit",
+    "processReceipts": "Process {count} receipts",
+    "aiPoweredExtraction": "AI-powered extraction",
+    "prioritySupport": "Priority support",
+    "bulkProcessing": "Bulk processing",
+    "neverExpires": "Never expires",
+    "purchase": "Purchase",
+    "processing": "Processing...",
+    "bestValue": "Best Value",
+    "save": "Save {percent}%"
   }
 }

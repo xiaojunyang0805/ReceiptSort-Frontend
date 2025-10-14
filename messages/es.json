@@ -482,5 +482,60 @@
     "dashboard": "Panel",
     "login": "Iniciar Sesión",
     "signup": "Registrarse"
+  },
+  "contact": {
+    "title": "Ponte en Contacto",
+    "subtitle": "¿Tienes preguntas? Nos encantaría saber de ti. Envíanos un mensaje y te responderemos en 24 horas.",
+    "backToHome": "Volver al Inicio",
+    "sendMessage": "Envíanos un Mensaje",
+    "formDescription": "Completa el formulario a continuación y te responderemos lo antes posible.",
+    "name": "Nombre",
+    "namePlaceholder": "Tu nombre",
+    "email": "Correo Electrónico",
+    "emailPlaceholder": "tu@correo.com",
+    "subject": "Asunto",
+    "subjectPlaceholder": "¿Cómo podemos ayudarte?",
+    "message": "Mensaje",
+    "messagePlaceholder": "Cuéntanos más sobre tu consulta...",
+    "sendButton": "Enviar Mensaje",
+    "responseTime": "Normalmente respondemos en 24 horas",
+    "preferEmail": "¿Prefieres el correo electrónico?",
+    "reachDirectly": "También puedes contactarnos directamente por correo:",
+    "frequentlyAskedQuestions": "Preguntas Frecuentes",
+    "faqDescription": "Antes de contactarnos, podrías encontrar tu respuesta en nuestra sección de FAQ.",
+    "viewFaq": "Ver FAQ",
+    "quickStartGuide": "Guía de Inicio Rápido",
+    "quickStartDescription": "¿Nuevo en ReceiptSorter? Aprende cómo empezar en 3 sencillos pasos.",
+    "howItWorks": "Cómo Funciona"
+  },
+  "creditPackages": {
+    "title": "Comprar Créditos",
+    "starter": {
+      "name": "Inicial",
+      "description": "Perfecto para probar el servicio"
+    },
+    "basic": {
+      "name": "Básico",
+      "description": "Ideal para usuarios regulares"
+    },
+    "pro": {
+      "name": "Pro",
+      "description": "Mejor valor para usuarios intensivos"
+    },
+    "business": {
+      "name": "Empresa",
+      "description": "Para negocios de alto volumen"
+    },
+    "credits": "Créditos",
+    "perCredit": "por crédito",
+    "processReceipts": "Procesar {count} recibos",
+    "aiPoweredExtraction": "Extracción con IA",
+    "prioritySupport": "Soporte prioritario",
+    "bulkProcessing": "Procesamiento masivo",
+    "neverExpires": "Nunca expira",
+    "purchase": "Comprar",
+    "processing": "Procesando...",
+    "bestValue": "Mejor Valor",
+    "save": "Ahorra {percent}%"
   }
 }

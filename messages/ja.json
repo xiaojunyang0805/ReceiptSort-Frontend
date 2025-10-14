@@ -482,5 +482,60 @@
     "dashboard": "ダッシュボード",
     "login": "ログイン",
     "signup": "サインアップ"
+  },
+  "contact": {
+    "title": "お問い合わせ",
+    "subtitle": "ご質問はありますか？お気軽にお問い合わせください。メッセージをお送りいただければ、24時間以内にご返信いたします。",
+    "backToHome": "ホームに戻る",
+    "sendMessage": "メッセージを送信",
+    "formDescription": "以下のフォームにご記入ください。できるだけ早くご返信いたします。",
+    "name": "お名前",
+    "namePlaceholder": "お名前を入力",
+    "email": "メールアドレス",
+    "emailPlaceholder": "your@email.com",
+    "subject": "件名",
+    "subjectPlaceholder": "どのようにお手伝いできますか？",
+    "message": "メッセージ",
+    "messagePlaceholder": "お問い合わせ内容を詳しくお聞かせください...",
+    "sendButton": "メッセージを送信",
+    "responseTime": "通常24時間以内にご返信いたします",
+    "preferEmail": "メールでのお問い合わせをご希望ですか？",
+    "reachDirectly": "以下のメールアドレスから直接お問い合わせいただけます：",
+    "frequentlyAskedQuestions": "よくある質問",
+    "faqDescription": "お問い合わせの前に、よくある質問で回答が見つかるかもしれません。",
+    "viewFaq": "FAQを見る",
+    "quickStartGuide": "クイックスタートガイド",
+    "quickStartDescription": "ReceiptSorterが初めてですか？3つの簡単なステップで始める方法を学びましょう。",
+    "howItWorks": "使い方"
+  },
+  "creditPackages": {
+    "title": "クレジットを購入",
+    "starter": {
+      "name": "スターター",
+      "description": "サービスを試すのに最適"
+    },
+    "basic": {
+      "name": "ベーシック",
+      "description": "通常のユーザーに最適"
+    },
+    "pro": {
+      "name": "プロ",
+      "description": "ヘビーユーザーに最もお得"
+    },
+    "business": {
+      "name": "ビジネス",
+      "description": "大量処理が必要な企業向け"
+    },
+    "credits": "クレジット",
+    "perCredit": "クレジットあたり",
+    "processReceipts": "{count}件のレシートを処理",
+    "aiPoweredExtraction": "AI搭載抽出",
+    "prioritySupport": "優先サポート",
+    "bulkProcessing": "一括処理",
+    "neverExpires": "無期限",
+    "purchase": "購入",
+    "processing": "処理中...",
+    "bestValue": "最もお得",
+    "save": "{percent}%お得"
   }
 }

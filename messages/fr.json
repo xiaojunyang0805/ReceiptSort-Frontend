@@ -482,5 +482,60 @@
     "dashboard": "Tableau de Bord",
     "login": "Se Connecter",
     "signup": "S'inscrire"
+  },
+  "contact": {
+    "title": "Contactez-nous",
+    "subtitle": "Vous avez des questions ? Nous serions ravis d'avoir de vos nouvelles. Envoyez-nous un message et nous vous répondrons dans les 24 heures.",
+    "backToHome": "Retour à l'Accueil",
+    "sendMessage": "Envoyez-nous un Message",
+    "formDescription": "Remplissez le formulaire ci-dessous et nous vous répondrons dès que possible.",
+    "name": "Nom",
+    "namePlaceholder": "Votre nom",
+    "email": "E-mail",
+    "emailPlaceholder": "votre@email.com",
+    "subject": "Sujet",
+    "subjectPlaceholder": "Comment pouvons-nous vous aider ?",
+    "message": "Message",
+    "messagePlaceholder": "Parlez-nous de votre demande...",
+    "sendButton": "Envoyer le Message",
+    "responseTime": "Nous répondons généralement dans les 24 heures",
+    "preferEmail": "Vous préférez l'e-mail ?",
+    "reachDirectly": "Vous pouvez également nous joindre directement par e-mail :",
+    "frequentlyAskedQuestions": "Questions Fréquemment Posées",
+    "faqDescription": "Avant de nous contacter, vous pourriez trouver votre réponse dans notre section FAQ.",
+    "viewFaq": "Voir la FAQ",
+    "quickStartGuide": "Guide de Démarrage Rapide",
+    "quickStartDescription": "Nouveau sur ReceiptSorter ? Apprenez à démarrer en 3 étapes simples.",
+    "howItWorks": "Comment Ça Marche"
+  },
+  "creditPackages": {
+    "title": "Acheter des Crédits",
+    "starter": {
+      "name": "Débutant",
+      "description": "Parfait pour essayer le service"
+    },
+    "basic": {
+      "name": "Basique",
+      "description": "Idéal pour les utilisateurs réguliers"
+    },
+    "pro": {
+      "name": "Pro",
+      "description": "Meilleur rapport qualité-prix pour les utilisateurs intensifs"
+    },
+    "business": {
+      "name": "Entreprise",
+      "description": "Pour les entreprises à fort volume"
+    },
+    "credits": "Crédits",
+    "perCredit": "par crédit",
+    "processReceipts": "Traiter {count} reçus",
+    "aiPoweredExtraction": "Extraction par IA",
+    "prioritySupport": "Support prioritaire",
+    "bulkProcessing": "Traitement en masse",
+    "neverExpires": "N'expire jamais",
+    "purchase": "Acheter",
+    "processing": "Traitement en cours...",
+    "bestValue": "Meilleur Rapport Qualité-Prix",
+    "save": "Économisez {percent}%"
   }
 }

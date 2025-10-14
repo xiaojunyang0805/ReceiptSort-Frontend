@@ -482,5 +482,60 @@
     "dashboard": "Dashboard",
     "login": "Anmelden",
     "signup": "Registrieren"
+  },
+  "contact": {
+    "title": "Kontaktieren Sie uns",
+    "subtitle": "Haben Sie Fragen? Wir würden gerne von Ihnen hören. Senden Sie uns eine Nachricht und wir antworten innerhalb von 24 Stunden.",
+    "backToHome": "Zurück zur Startseite",
+    "sendMessage": "Senden Sie uns eine Nachricht",
+    "formDescription": "Füllen Sie das untenstehende Formular aus und wir melden uns so schnell wie möglich bei Ihnen.",
+    "name": "Name",
+    "namePlaceholder": "Ihr Name",
+    "email": "E-Mail",
+    "emailPlaceholder": "ihre@email.com",
+    "subject": "Betreff",
+    "subjectPlaceholder": "Wie können wir helfen?",
+    "message": "Nachricht",
+    "messagePlaceholder": "Erzählen Sie uns mehr über Ihre Anfrage...",
+    "sendButton": "Nachricht Senden",
+    "responseTime": "Wir antworten in der Regel innerhalb von 24 Stunden",
+    "preferEmail": "Bevorzugen Sie E-Mail?",
+    "reachDirectly": "Sie können uns auch direkt per E-Mail erreichen:",
+    "frequentlyAskedQuestions": "Häufig Gestellte Fragen",
+    "faqDescription": "Bevor Sie uns kontaktieren, finden Sie Ihre Antwort möglicherweise in unserem FAQ-Bereich.",
+    "viewFaq": "FAQ Ansehen",
+    "quickStartGuide": "Schnellstartanleitung",
+    "quickStartDescription": "Neu bei ReceiptSorter? Lernen Sie in 3 einfachen Schritten, wie Sie loslegen.",
+    "howItWorks": "Wie Es Funktioniert"
+  },
+  "creditPackages": {
+    "title": "Credits Kaufen",
+    "starter": {
+      "name": "Starter",
+      "description": "Perfekt zum Ausprobieren des Dienstes"
+    },
+    "basic": {
+      "name": "Basis",
+      "description": "Ideal für regelmäßige Nutzer"
+    },
+    "pro": {
+      "name": "Pro",
+      "description": "Bester Wert für Vielnutzer"
+    },
+    "business": {
+      "name": "Business",
+      "description": "Für Unternehmen mit hohem Volumen"
+    },
+    "credits": "Credits",
+    "perCredit": "pro Credit",
+    "processReceipts": "{count} Belege verarbeiten",
+    "aiPoweredExtraction": "KI-gestützte Extraktion",
+    "prioritySupport": "Prioritäts-Support",
+    "bulkProcessing": "Massenverarbeitung",
+    "neverExpires": "Verfällt nie",
+    "purchase": "Kaufen",
+    "processing": "Verarbeitung...",
+    "bestValue": "Bester Wert",
+    "save": "{percent}% Sparen"
   }
 }

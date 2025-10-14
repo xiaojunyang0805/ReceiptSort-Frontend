@@ -3,8 +3,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Link } from '@/lib/navigation';
 import { ArrowLeft, MessageSquare, Mail } from 'lucide-react';
 import { ContactForm } from '@/components/contact/ContactForm';
+import { getTranslations } from 'next-intl/server';
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const t = await getTranslations('contact');
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -13,7 +16,7 @@ export default function ContactPage() {
           <Button variant="ghost" asChild>
             <Link href="/" className="gap-2">
               <ArrowLeft className="h-4 w-4" />
-              Back to Home
+              {t('backToHome')}
             </Link>
           </Button>
         </div>
@@ -22,9 +25,9 @@ export default function ContactPage() {
       {/* Content */}
       <div className="container mx-auto px-4 py-12 max-w-5xl">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">Get in Touch</h1>
+          <h1 className="text-4xl font-bold mb-4">{t('title')}</h1>
           <p className="text-xl text-muted-foreground">
-            Have questions? We&apos;d love to hear from you. Send us a message and we&apos;ll respond within 24 hours.
+            {t('subtitle')}
           </p>
         </div>
 
@@ -34,10 +37,10 @@ export default function ContactPage() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <MessageSquare className="h-5 w-5 text-primary" />
-                Send us a Message
+                {t('sendMessage')}
               </CardTitle>
               <CardDescription>
-                Fill out the form below and we&apos;ll get back to you as soon as possible.
+                {t('formDescription')}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -50,12 +53,12 @@ export default function ContactPage() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Mail className="h-5 w-5 text-primary" />
-                Prefer Email?
+                {t('preferEmail')}
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-gray-700 mb-3">
-                You can also reach us directly via email:
+                {t('reachDirectly')}
               </p>
               <a
                 href="mailto:support@seenano.nl"
@@ -72,15 +75,15 @@ export default function ContactPage() {
 
             <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200">
               <CardHeader>
-                <CardTitle>Frequently Asked Questions</CardTitle>
+                <CardTitle>{t('frequentlyAskedQuestions')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-700 mb-4">
-                  Before reaching out, you might find your answer in our FAQ section.
+                  {t('faqDescription')}
                 </p>
                 <Button asChild variant="outline" className="w-full">
                   <Link href="/#faq">
-                    View FAQ
+                    {t('viewFaq')}
                   </Link>
                 </Button>
               </CardContent>
@@ -88,15 +91,15 @@ export default function ContactPage() {
 
             <Card className="bg-gradient-to-br from-green-50 to-emerald-50 border-green-200">
               <CardHeader>
-                <CardTitle>Quick Start Guide</CardTitle>
+                <CardTitle>{t('quickStartGuide')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-700 mb-4">
-                  New to ReceiptSorter? Learn how to get started in 3 simple steps.
+                  {t('quickStartDescription')}
                 </p>
                 <Button asChild variant="outline" className="w-full">
                   <Link href="/#how-it-works">
-                    How It Works
+                    {t('howItWorks')}
                   </Link>
                 </Button>
               </CardContent>

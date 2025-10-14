@@ -6,8 +6,10 @@ import { Button } from '@/components/ui/button'
 import { Check, Sparkles, Loader2 } from 'lucide-react'
 import { CREDIT_PACKAGES } from '@/lib/stripe'
 import { toast } from 'sonner'
+import { useTranslations } from 'next-intl'
 
 export function CreditPackages() {
+  const t = useTranslations('creditPackages')
   const [loadingPackage, setLoadingPackage] = useState<string | null>(null)
 
   const handlePurchase = async (packageId: string) => {
@@ -53,7 +55,7 @@ export function CreditPackages() {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4">Purchase Credits</h2>
+      <h2 className="text-2xl font-bold mb-4">{t('title')}</h2>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         {CREDIT_PACKAGES.map((pkg) => {
           const pricePerCredit = calculatePricePerCredit(pkg.price, pkg.credits)
@@ -68,33 +70,33 @@ export function CreditPackages() {
               {pkg.popular && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full flex items-center gap-1">
                   <Sparkles className="h-3 w-3" />
-                  Best Value
+                  {t('bestValue')}
                 </div>
               )}
 
               {discount > 0 && !pkg.popular && (
                 <div className="absolute top-4 right-4 bg-green-600 text-white text-xs font-semibold px-2 py-1 rounded">
-                  Save {discount}%
+                  {t('save', { percent: discount })}
                 </div>
               )}
 
               <CardHeader>
-                <CardTitle>{pkg.name}</CardTitle>
-                <CardDescription>{pkg.description}</CardDescription>
+                <CardTitle>{t(`${pkg.id}.name`)}</CardTitle>
+                <CardDescription>{t(`${pkg.id}.description`)}</CardDescription>
               </CardHeader>
 
               <CardContent className="space-y-4">
                 {/* Credits */}
                 <div>
                   <div className="text-4xl font-bold">{pkg.credits}</div>
-                  <p className="text-sm text-muted-foreground">Credits</p>
+                  <p className="text-sm text-muted-foreground">{t('credits')}</p>
                 </div>
 
                 {/* Price */}
                 <div>
                   <div className="text-3xl font-bold">${pkg.price}</div>
                   <p className="text-sm text-muted-foreground">
-                    ${pricePerCredit}/credit
+                    ${pricePerCredit}{t('perCredit')}
                   </p>
                 </div>
 
@@ -102,27 +104,27 @@ export function CreditPackages() {
                 <ul className="space-y-2 text-sm">
                   <li className="flex items-center gap-2">
                     <Check className="h-4 w-4 text-green-600 flex-shrink-0" />
-                    Process {pkg.credits} receipts
+                    {t('processReceipts', { count: pkg.credits })}
                   </li>
                   <li className="flex items-center gap-2">
                     <Check className="h-4 w-4 text-green-600 flex-shrink-0" />
-                    AI-powered extraction
+                    {t('aiPoweredExtraction')}
                   </li>
                   {pkg.credits >= 100 && (
                     <li className="flex items-center gap-2">
                       <Check className="h-4 w-4 text-green-600 flex-shrink-0" />
-                      Priority support
+                      {t('prioritySupport')}
                     </li>
                   )}
                   {pkg.credits >= 500 && (
                     <li className="flex items-center gap-2">
                       <Check className="h-4 w-4 text-green-600 flex-shrink-0" />
-                      Bulk processing
+                      {t('bulkProcessing')}
                     </li>
                   )}
                   <li className="flex items-center gap-2">
                     <Check className="h-4 w-4 text-green-600 flex-shrink-0" />
-                    Never expires
+                    {t('neverExpires')}
                   </li>
                 </ul>
 
@@ -136,10 +138,10 @@ export function CreditPackages() {
                   {isLoading ? (
                     <>
                       <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                      Processing...
+                      {t('processing')}
                     </>
                   ) : (
-                    'Purchase'
+                    t('purchase')
                   )}
                 </Button>
               </CardContent>
