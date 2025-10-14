@@ -38,8 +38,8 @@ import { Link } from '@/lib/navigation'
 import { Checkbox } from '@/components/ui/checkbox'
 import ExportDialog from './ExportDialog'
 import ReceiptFilters, { ReceiptFiltersState, INITIAL_FILTERS } from './ReceiptFilters'
-import ExportPresets from './ExportPresets'
 import { useTranslations } from 'next-intl'
+import { ProcessAllButton } from './ProcessAllButton'
 
 interface Receipt {
   id: string
@@ -79,7 +79,6 @@ export default function ReceiptList() {
   const [exportDialogOpen, setExportDialogOpen] = useState(false)
   const [filters, setFilters] = useState<ReceiptFiltersState>(INITIAL_FILTERS)
   const [appliedFilters, setAppliedFilters] = useState<ReceiptFiltersState>(INITIAL_FILTERS)
-  const [isExporting, setIsExporting] = useState(false)
   const supabase = createClient()
 
   useEffect(() => {
@@ -287,50 +286,6 @@ export default function ReceiptList() {
     setLoading(true)
   }
 
-  // Export preset handler
-  const handlePresetExport = async (dateFrom: Date, dateTo: Date, label: string) => {
-    setIsExporting(true)
-    try {
-      const { data: { user } } = await supabase.auth.getUser()
-      if (!user) return
-
-      // Fetch receipts with date filter
-      let query = supabase
-        .from('receipts')
-        .select('id')
-        .eq('user_id', user.id)
-        .eq('processing_status', 'completed')
-
-      if (dateFrom.getTime() !== 0) { // Not "All Time"
-        query = query.gte('receipt_date', dateFrom.toISOString())
-      }
-      query = query.lte('receipt_date', dateTo.toISOString())
-
-      const { data: receiptData, error } = await query
-
-      if (error) throw error
-
-      if (!receiptData || receiptData.length === 0) {
-        toast.error('No receipts found', {
-          description: `No completed receipts found for ${label}`,
-        })
-        return
-      }
-
-      const receiptIds = receiptData.map(r => r.id)
-
-      // Use existing export dialog but with pre-selected IDs
-      setSelectedIds(new Set(receiptIds))
-      setExportDialogOpen(true)
-    } catch (error) {
-      console.error('[Preset Export] Error:', error)
-      toast.error('Export failed', {
-        description: 'Failed to prepare export',
-      })
-    } finally {
-      setIsExporting(false)
-    }
-  }
 
   if (loading) {
     return (
@@ -389,8 +344,30 @@ export default function ReceiptList() {
         </Card>
       )}
 
-      {/* Export Presets */}
-      <ExportPresets onExport={handlePresetExport} isExporting={isExporting} />
+      {/* Quick Actions Bar */}
+      <Card className="p-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <h3 className="font-semibold text-lg">Quick Actions</h3>
+            <p className="text-sm text-muted-foreground">View receipts or process pending ones</p>
+          </div>
+          <div className="flex gap-2">
+            {receipts.filter(r => r.processing_status === 'pending').length > 0 && (
+              <ProcessAllButton
+                pendingCount={receipts.filter(r => r.processing_status === 'pending').length}
+                pendingIds={receipts.filter(r => r.processing_status === 'pending').map(r => r.id)}
+                userCredits={userCredits}
+              />
+            )}
+            <Button variant="outline" asChild>
+              <Link href="/receipts">
+                <Eye className="mr-2 h-4 w-4" />
+                View All Receipts
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </Card>
 
       {/* Advanced Filters */}
       <ReceiptFilters

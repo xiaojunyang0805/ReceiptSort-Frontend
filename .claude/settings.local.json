@@ -20,7 +20,11 @@
       "Bash(curl https://api.stripe.com/v1/products )",
       "Bash(curl https://api.stripe.com/v1/prices )",
       "WebFetch(domain:next-intl.dev)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(git branch:*)",
+      "Bash(git init:*)",
+      "Bash(git remote add:*)",
+      "Bash(vercel:*)"
     ],
     "deny": [],
     "ask": []

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { useDropzone, type FileRejection } from 'react-dropzone'
 import { createClient } from '@/lib/supabase/client'
 import { Upload, X, File, CheckCircle, AlertCircle, Loader2 } from 'lucide-react'
@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+import { useRouter } from 'next/navigation'
 
 interface UploadFile {
   file: File
@@ -30,6 +31,7 @@ const ACCEPTED_FILE_TYPES = {
 
 export default function ReceiptUpload() {
   const t = useTranslations('dashboard.uploadSection')
+  const router = useRouter()
   const [uploadFiles, setUploadFiles] = useState<UploadFile[]>([])
   const [isUploading, setIsUploading] = useState(false)
   const supabase = createClient()
@@ -60,6 +62,29 @@ export default function ReceiptUpload() {
 
     setUploadFiles((prev) => [...prev, ...newFiles])
   }, [])
+
+  // Auto-upload files when they're added
+  useEffect(() => {
+    const pendingFiles = uploadFiles.filter(f => f.status === 'pending')
+    if (pendingFiles.length > 0 && !isUploading) {
+      handleUpload()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [uploadFiles])
+
+  // Redirect to receipts page when all uploads are complete
+  useEffect(() => {
+    const allComplete = uploadFiles.length > 0 && uploadFiles.every(f => f.status === 'success' || f.status === 'error')
+    const hasSuccess = uploadFiles.some(f => f.status === 'success')
+
+    if (allComplete && hasSuccess && !isUploading) {
+      // Wait a brief moment to show success state, then redirect
+      const timer = setTimeout(() => {
+        router.push('/receipts')
+      }, 1500)
+      return () => clearTimeout(timer)
+    }
+  }, [uploadFiles, isUploading, router])
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -172,18 +197,6 @@ export default function ReceiptUpload() {
     setIsUploading(false)
   }
 
-  const clearCompleted = () => {
-    setUploadFiles((prev) => {
-      prev.forEach((f) => {
-        if (f.preview && f.status === 'success') {
-          URL.revokeObjectURL(f.preview)
-        }
-      })
-      return prev.filter((f) => f.status !== 'success')
-    })
-  }
-
-  const pendingCount = uploadFiles.filter((f) => f.status === 'pending').length
   const hasFiles = uploadFiles.length > 0
   const hasCompleted = uploadFiles.some((f) => f.status === 'success')
 
@@ -230,31 +243,14 @@ export default function ReceiptUpload() {
       {hasFiles && (
         <Card className="p-6">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-semibold">Upload Queue ({uploadFiles.length})</h3>
-            <div className="flex gap-2">
-              {hasCompleted && (
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={clearCompleted}
-                  disabled={isUploading}
-                >
-                  Clear Completed
-                </Button>
-              )}
-              {pendingCount > 0 && (
-                <Button onClick={handleUpload} disabled={isUploading}>
-                  {isUploading ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Uploading...
-                    </>
-                  ) : (
-                    `Upload ${pendingCount} file${pendingCount > 1 ? 's' : ''}`
-                  )}
-                </Button>
-              )}
-            </div>
+            <h3 className="font-semibold">
+              {isUploading ? 'Uploading...' : hasCompleted ? 'Upload Complete!' : 'Upload Queue'} ({uploadFiles.length})
+            </h3>
+            {!isUploading && hasCompleted && (
+              <p className="text-sm text-muted-foreground">
+                Redirecting to Receipts page...
+              </p>
+            )}
           </div>
 
           <div className="space-y-3">
