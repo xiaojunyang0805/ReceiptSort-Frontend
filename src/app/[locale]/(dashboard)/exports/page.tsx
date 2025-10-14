@@ -18,7 +18,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Calendar } from '@/components/ui/calendar'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { FileSpreadsheet, FileText, Download, ChevronDown, ChevronUp, Loader2, CalendarIcon, X, Filter } from 'lucide-react'
+import { FileSpreadsheet, FileText, Download, ChevronDown, ChevronUp, Loader2, CalendarIcon, X } from 'lucide-react'
 import { formatDistanceToNow, format } from 'date-fns'
 import { toast } from 'sonner'
 import ExportDialog from '@/components/dashboard/ExportDialog'
@@ -184,27 +184,45 @@ export default function ExportsPage() {
       {/* Export Filters Section */}
       <Card className="p-6">
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-center gap-2">
-              <Filter className="h-5 w-5" />
               <h2 className="text-xl font-semibold">Export Receipts</h2>
             </div>
-            <Button
-              variant="ghost"
-              onClick={() => setShowFilters(!showFilters)}
-            >
-              {showFilters ? (
-                <>
-                  <ChevronUp className="mr-2 h-4 w-4" />
-                  Hide Filters
-                </>
-              ) : (
-                <>
-                  <ChevronDown className="mr-2 h-4 w-4" />
-                  Show Filters
-                </>
-              )}
-            </Button>
+            <div className="flex gap-2">
+              <Button
+                onClick={handleExportWithFilters}
+                disabled={isExporting}
+                size="lg"
+              >
+                {isExporting ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Loading...
+                  </>
+                ) : (
+                  <>
+                    <Download className="mr-2 h-4 w-4" />
+                    Export All
+                  </>
+                )}
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => setShowFilters(!showFilters)}
+              >
+                {showFilters ? (
+                  <>
+                    <ChevronUp className="mr-2 h-4 w-4" />
+                    Hide
+                  </>
+                ) : (
+                  <>
+                    <ChevronDown className="mr-2 h-4 w-4" />
+                    Filters
+                  </>
+                )}
+              </Button>
+            </div>
           </div>
 
           {showFilters && (
@@ -295,38 +313,18 @@ export default function ExportsPage() {
                 </div>
               </div>
 
-              {/* Action Buttons */}
-              <div className="flex flex-wrap gap-2 pt-2">
-                <Button
-                  onClick={handleExportWithFilters}
-                  disabled={isExporting}
-                  className="flex-1 min-w-[200px]"
-                >
-                  {isExporting ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Loading...
-                    </>
-                  ) : (
-                    <>
-                      <Download className="mr-2 h-4 w-4" />
-                      Export {hasActiveFilters ? 'Filtered' : 'All'} Receipts
-                    </>
-                  )}
-                </Button>
-                {hasActiveFilters && (
+              {/* Clear Filters and Active Filters Display */}
+              {hasActiveFilters && (
+                <div className="flex flex-col gap-3 pt-2 border-t">
                   <Button
                     variant="outline"
                     onClick={clearFilters}
                     disabled={isExporting}
+                    className="w-full sm:w-auto"
                   >
                     <X className="mr-2 h-4 w-4" />
-                    Clear Filters
+                    Clear All Filters
                   </Button>
-                )}
-              </div>
-
-              {hasActiveFilters && (
                 <div className="text-sm text-muted-foreground bg-muted/50 rounded-lg p-3">
                   <div className="font-medium mb-1">Active Filters:</div>
                   <div className="space-y-1">
@@ -337,13 +335,14 @@ export default function ExportsPage() {
                     {maxAmount && <div>• Max Amount: ${maxAmount}</div>}
                   </div>
                 </div>
+                </div>
               )}
             </div>
           )}
         </div>
       </Card>
 
-      {/* Export History Title */}
+      {/* Export History Section */}
       <div>
         <h2 className="text-2xl font-bold">Export History</h2>
         <p className="text-muted-foreground mt-1">View your past receipt exports</p>
