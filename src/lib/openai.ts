@@ -1,6 +1,7 @@
 import OpenAI from 'openai'
 import { ExtractedReceiptData, ReceiptCategory, PaymentMethod } from '@/types/receipt'
 import { extractTextFromPdf, isPdfUrl } from './pdf-converter'
+import { needsImageConversion, convertImageToJpeg } from './image-converter'
 
 // Initialize OpenAI client (lazy initialization for scripts)
 let openai: OpenAI | null = null
@@ -140,6 +141,21 @@ export async function extractReceiptData(
       }
     }
 
+    // Check if image needs conversion (BMP, TIFF) and convert if necessary
+    let processedImageUrl = imageUrl
+    if (!isPdf && needsImageConversion(imageUrl)) {
+      console.log('[OpenAI] Detected unsupported image format (BMP/TIFF), converting to JPEG...')
+      try {
+        processedImageUrl = await convertImageToJpeg(imageUrl)
+        console.log('[OpenAI] Image successfully converted to JPEG')
+      } catch (conversionError) {
+        console.error('[OpenAI] Image conversion failed:', conversionError)
+        throw new Error(
+          `Failed to convert image format: ${conversionError instanceof Error ? conversionError.message : 'Conversion error'}`
+        )
+      }
+    }
+
     // Call OpenAI API (Vision for images, Chat for PDF text)
     const response = await client.chat.completions.create({
       model: 'gpt-4o',
@@ -163,7 +179,7 @@ export async function extractReceiptData(
                 {
                   type: 'image_url',
                   image_url: {
-                    url: imageUrl,
+                    url: processedImageUrl,
                     detail: 'high', // Use high detail for better accuracy
                   },
                 },
