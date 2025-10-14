@@ -26,6 +26,9 @@ const ACCEPTED_FILE_TYPES = {
   'image/png': ['.png'],
   'image/jpeg': ['.jpg', '.jpeg'],
   'image/webp': ['.webp'],
+  'image/tiff': ['.tiff', '.tif'],
+  'image/bmp': ['.bmp'],
+  'image/gif': ['.gif'],
   'application/pdf': ['.pdf'],
 }
 

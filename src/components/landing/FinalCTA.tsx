@@ -7,6 +7,7 @@ import { useTranslations } from 'next-intl';
 
 export default function FinalCTA() {
   const t = useTranslations('finalCTA')
+  const tPricing = useTranslations('pricing')
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-primary via-primary/95 to-primary/90 py-20 sm:py-24">
@@ -35,7 +36,7 @@ export default function FinalCTA() {
               className="group h-12 px-8 text-base font-semibold shadow-xl transition-all hover:scale-105 hover:shadow-2xl"
             >
               <Link href="/signup">
-                {t('button')}
+                {tPricing('tryItFree')}
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
@@ -55,7 +56,7 @@ export default function FinalCTA() {
           {/* Trust indicators */}
           <div className="space-y-4">
             <p className="text-sm text-primary-foreground/80">
-              {t('trustIndicator')}
+              {tPricing('freeCreditsNoCreditCard')}
             </p>
 
             {/* Payment method logos */}

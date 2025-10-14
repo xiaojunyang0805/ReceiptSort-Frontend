@@ -221,8 +221,8 @@
       "clickToBrowse": "ou cliquez pour parcourir",
       "or": "ou",
       "browse": "Parcourir les fichiers",
-      "supported": "Supporte: JPG, PNG, PDF (max 10MB)",
-      "supportedFormats": "Formats supportés: PNG, JPG, JPEG, WEBP, PDF",
+      "supported": "Supporte: PNG, JPG, JPEG, WEBP, TIFF, BMP, GIF, PDF (max 10MB)",
+      "supportedFormats": "Formats supportés: PNG, JPG, JPEG, WEBP, TIFF, BMP, GIF, PDF",
       "maxFileSize": "Taille maximale du fichier: 10MB par fichier",
       "multipleFiles": "Téléchargez plusieurs fichiers à la fois pour un traitement plus rapide",
       "secureStorage": "Vos reçus seront stockés en toute sécurité et prêts pour le traitement par IA",
@@ -294,6 +294,8 @@
       "availableCredits": "Vos crédits disponibles",
       "buyCredits": "Acheter des Crédits",
       "history": "Historique des Crédits",
+      "oneTimePurchase": "Achat unique",
+      "monthlySubscription": "Abonnement mensuel",
       "packages": {
         "title": "Choisissez un forfait",
         "credits": "crédits",
@@ -426,6 +428,8 @@
     "goToDashboard": "Aller au Tableau de Bord",
     "startFree": "Commencer Gratuitement",
     "signIn": "Se Connecter",
+    "tryItFree": "Essayez gratuitement",
+    "freeCreditsNoCreditCard": "10 crédits gratuits • Aucune carte bancaire requise",
     "features": {
       "allFeatures": "Toutes les fonctionnalités incluses",
       "aiExtraction": "Extraction par IA",

@@ -221,8 +221,8 @@
       "clickToBrowse": "またはクリックして参照",
       "or": "または",
       "browse": "ファイルを参照",
-      "supported": "対応: JPG, PNG, PDF (最大10MB)",
-      "supportedFormats": "対応形式: PNG, JPG, JPEG, WEBP, PDF",
+      "supported": "対応: PNG, JPG, JPEG, WEBP, TIFF, BMP, GIF, PDF (最大10MB)",
+      "supportedFormats": "対応形式: PNG, JPG, JPEG, WEBP, TIFF, BMP, GIF, PDF",
       "maxFileSize": "最大ファイルサイズ: 1ファイルあたり10MB",
       "multipleFiles": "複数のファイルを一度にアップロードして処理を高速化",
       "secureStorage": "レシートは安全に保存され、AI処理の準備が整います",
@@ -294,6 +294,8 @@
       "availableCredits": "利用可能なクレジット",
       "buyCredits": "クレジットを購入",
       "history": "クレジット履歴",
+      "oneTimePurchase": "単発購入",
+      "monthlySubscription": "月額サブスクリプション",
       "packages": {
         "title": "パッケージを選択",
         "credits": "クレジット",
@@ -426,6 +428,8 @@
     "goToDashboard": "ダッシュボードへ",
     "startFree": "無料で始める",
     "signIn": "サインイン",
+    "tryItFree": "無料で試す",
+    "freeCreditsNoCreditCard": "10クレジット無料 • クレジットカード不要",
     "features": {
       "allFeatures": "すべての機能が含まれています",
       "aiExtraction": "AI搭載抽出",

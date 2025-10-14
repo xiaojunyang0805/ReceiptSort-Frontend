@@ -221,8 +221,8 @@
       "clickToBrowse": "oder klicken Sie zum Durchsuchen",
       "or": "oder",
       "browse": "Dateien durchsuchen",
-      "supported": "Unterstützt: JPG, PNG, PDF (max 10MB)",
-      "supportedFormats": "Unterstützte Formate: PNG, JPG, JPEG, WEBP, PDF",
+      "supported": "Unterstützt: PNG, JPG, JPEG, WEBP, TIFF, BMP, GIF, PDF (max 10MB)",
+      "supportedFormats": "Unterstützte Formate: PNG, JPG, JPEG, WEBP, TIFF, BMP, GIF, PDF",
       "maxFileSize": "Maximale Dateigröße: 10MB pro Datei",
       "multipleFiles": "Laden Sie mehrere Dateien gleichzeitig hoch für eine schnellere Verarbeitung",
       "secureStorage": "Ihre Belege werden sicher gespeichert und sind bereit für die KI-Verarbeitung",
@@ -294,6 +294,8 @@
       "availableCredits": "Ihre verfügbaren Credits",
       "buyCredits": "Credits Kaufen",
       "history": "Credit-Verlauf",
+      "oneTimePurchase": "Einmaliger Kauf",
+      "monthlySubscription": "Monatliches Abonnement",
       "packages": {
         "title": "Wählen Sie ein Paket",
         "credits": "Credits",
@@ -426,6 +428,8 @@
     "goToDashboard": "Zum Dashboard",
     "startFree": "Kostenlos Starten",
     "signIn": "Anmelden",
+    "tryItFree": "Kostenlos testen",
+    "freeCreditsNoCreditCard": "10 kostenlose Credits • Keine Kreditkarte erforderlich",
     "features": {
       "allFeatures": "Alle Funktionen enthalten",
       "aiExtraction": "KI-gestützte Extraktion",

@@ -221,8 +221,8 @@
       "clickToBrowse": "or click to browse",
       "or": "or",
       "browse": "Browse files",
-      "supported": "Supports: JPG, PNG, PDF (max 10MB)",
-      "supportedFormats": "Supported formats: PNG, JPG, JPEG, WEBP, PDF",
+      "supported": "Supports: PNG, JPG, JPEG, WEBP, TIFF, BMP, GIF, PDF (max 10MB)",
+      "supportedFormats": "Supported formats: PNG, JPG, JPEG, WEBP, TIFF, BMP, GIF, PDF",
       "maxFileSize": "Maximum file size: 10MB per file",
       "multipleFiles": "Upload multiple files at once for faster processing",
       "secureStorage": "Your receipts will be securely stored and ready for AI processing",
@@ -294,6 +294,8 @@
       "availableCredits": "Your available credits",
       "buyCredits": "Buy Credits",
       "history": "Credit History",
+      "oneTimePurchase": "One-Time Purchase",
+      "monthlySubscription": "Monthly Subscription",
       "packages": {
         "title": "Choose a package",
         "credits": "credits",
@@ -426,6 +428,8 @@
     "goToDashboard": "Go to Dashboard",
     "startFree": "Start Free",
     "signIn": "Sign In",
+    "tryItFree": "Try It Free",
+    "freeCreditsNoCreditCard": "10 free credits • No credit card required",
     "features": {
       "allFeatures": "All features included",
       "aiExtraction": "AI-powered extraction",

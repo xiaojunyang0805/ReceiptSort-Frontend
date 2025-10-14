@@ -221,8 +221,8 @@
       "clickToBrowse": "of klik om te bladeren",
       "or": "of",
       "browse": "Bladeren door bestanden",
-      "supported": "Ondersteunt: JPG, PNG, PDF (max 10MB)",
-      "supportedFormats": "Ondersteunde formaten: PNG, JPG, JPEG, WEBP, PDF",
+      "supported": "Ondersteunt: PNG, JPG, JPEG, WEBP, TIFF, BMP, GIF, PDF (max 10MB)",
+      "supportedFormats": "Ondersteunde formaten: PNG, JPG, JPEG, WEBP, TIFF, BMP, GIF, PDF",
       "maxFileSize": "Maximale bestandsgrootte: 10MB per bestand",
       "multipleFiles": "Upload meerdere bestanden tegelijk voor snellere verwerking",
       "secureStorage": "Uw bonnetjes worden veilig opgeslagen en zijn klaar voor AI-verwerking",
@@ -294,6 +294,8 @@
       "availableCredits": "Uw beschikbare credits",
       "buyCredits": "Credits Kopen",
       "history": "Creditgeschiedenis",
+      "oneTimePurchase": "Eenmalige aankoop",
+      "monthlySubscription": "Maandelijks abonnement",
       "packages": {
         "title": "Kies een pakket",
         "credits": "credits",
@@ -425,6 +427,8 @@
     "goToDashboard": "Ga naar Dashboard",
     "startFree": "Gratis Beginnen",
     "signIn": "Inloggen",
+    "tryItFree": "Gratis proberen",
+    "freeCreditsNoCreditCard": "10 gratis credits • Geen creditcard vereist",
     "features": {
       "allFeatures": "Alle functies inbegrepen",
       "aiExtraction": "AI-powered extractie",
