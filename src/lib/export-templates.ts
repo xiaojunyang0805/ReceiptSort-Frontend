@@ -29,13 +29,27 @@ export const STANDARD_TEMPLATE: ExportTemplate = {
   name: 'Standard',
   description: 'All receipt fields',
   columns: [
+    // Phase 1: Document Type and Invoice Number
+    { key: 'document_type', label: 'Document Type' },
+    { key: 'invoice_number', label: 'Invoice Number' },
+
+    // Core Fields
     { key: 'merchant_name', label: 'Merchant', required: true },
     { key: 'total_amount', label: 'Amount', required: true },
     { key: 'currency', label: 'Currency', required: true },
     { key: 'receipt_date', label: 'Date', required: true },
     { key: 'category', label: 'Category' },
+
+    // Phase 1: Financial Details
+    { key: 'subtotal', label: 'Subtotal (Before Tax)' },
     { key: 'tax_amount', label: 'Tax Amount' },
+
+    // Other Fields
     { key: 'payment_method', label: 'Payment Method' },
+
+    // Phase 1: Additional Details
+    { key: 'due_date', label: 'Due Date' },
+    { key: 'vendor_address', label: 'Vendor Address' },
     { key: 'notes', label: 'Notes' },
   ],
 }
@@ -94,13 +108,27 @@ export const EXPORT_TEMPLATES: ExportTemplate[] = [
 
 // Available columns for custom template
 export const AVAILABLE_COLUMNS: ExportColumn[] = [
+  // Phase 1: Document Information
+  { key: 'document_type', label: 'Document Type' },
+  { key: 'invoice_number', label: 'Invoice Number' },
+
+  // Core Fields
   { key: 'merchant_name', label: 'Merchant', required: true },
   { key: 'total_amount', label: 'Amount', required: true },
   { key: 'currency', label: 'Currency' },
   { key: 'receipt_date', label: 'Date', required: true },
   { key: 'category', label: 'Category' },
+
+  // Phase 1: Financial Details
+  { key: 'subtotal', label: 'Subtotal (Before Tax)' },
   { key: 'tax_amount', label: 'Tax Amount' },
+
+  // Other Fields
   { key: 'payment_method', label: 'Payment Method' },
+
+  // Phase 1: Additional Details
+  { key: 'due_date', label: 'Due Date' },
+  { key: 'vendor_address', label: 'Vendor Address' },
   { key: 'notes', label: 'Notes' },
 ]
 

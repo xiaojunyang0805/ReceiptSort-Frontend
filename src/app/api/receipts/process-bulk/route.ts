@@ -195,6 +195,13 @@ export async function POST(request: Request) {
               processing_status: 'completed',
               processing_error: null,
               updated_at: new Date().toISOString(),
+
+              // Phase 1: Essential Fields
+              invoice_number: extractedData.invoice_number,
+              document_type: extractedData.document_type,
+              subtotal: extractedData.subtotal,
+              vendor_address: extractedData.vendor_address,
+              due_date: extractedData.due_date,
             })
             .eq('id', receiptId)
 

@@ -1,5 +1,10 @@
 import OpenAI from 'openai'
-import { ExtractedReceiptData, ReceiptCategory, PaymentMethod } from '@/types/receipt'
+import {
+  ExtractedReceiptData,
+  ReceiptCategory,
+  PaymentMethod,
+  DocumentType,
+} from '@/types/receipt'
 import { extractTextFromPdf, isPdfUrl } from './pdf-converter'
 import { needsImageConversion, convertImageToJpeg } from './image-converter'
 
@@ -19,7 +24,7 @@ function getOpenAIClient(): OpenAI {
  * System prompt for receipt data extraction
  * Optimized for consistent, accurate extraction with enhanced rules
  */
-const RECEIPT_EXTRACTION_PROMPT = `You are a receipt data extraction expert. Extract structured data from receipt images with high accuracy.
+const RECEIPT_EXTRACTION_PROMPT = `You are a receipt data extraction expert. Extract structured data from receipts, invoices, and bills with high accuracy.
 
 You MUST return valid JSON in this exact format (no markdown, no explanations):
 {
@@ -31,7 +36,12 @@ You MUST return valid JSON in this exact format (no markdown, no explanations):
   "tax_amount": 10.50,
   "payment_method": "Credit Card",
   "confidence_score": 0.95,
-  "raw_text": "Full OCR text here"
+  "raw_text": "Full OCR text here",
+  "invoice_number": "INV-2025-001",
+  "document_type": "invoice",
+  "subtotal": 112.95,
+  "vendor_address": "123 Main St, City, State 12345",
+  "due_date": "2025-11-09"
 }
 
 CRITICAL RULES:
@@ -101,6 +111,45 @@ CRITICAL RULES:
    - receipt_date: Use null if not found (NOT today's date)
    - If you cannot read the image clearly, set merchant_name to "Unknown", amount to 0.01, confidence_score to 0.3
    - Always extract raw_text even if you cannot read the receipt
+
+9. PHASE 1: ESSENTIAL FIELDS (NEW) 🆕
+
+   A. INVOICE NUMBER:
+      - Look for: "Invoice #", "Invoice No", "Receipt #", "Bill #", "Transaction ID", "Reference #"
+      - Extract the alphanumeric string following these keywords
+      - Examples: "INV-2025-001", "5227 4217 0820 71", "A123456"
+      - Set to null if not found
+
+   B. DOCUMENT TYPE (Auto-detect):
+      - "receipt": Simple store receipt with merchant, amount, date only (e.g., grocery receipt, coffee shop receipt)
+      - "invoice": Business invoice with invoice number, due date, line items (e.g., contractor invoice, service invoice)
+      - "medical_invoice": Medical/healthcare invoice with patient info, treatment codes, provider details
+      - "bill": Utility bill, phone bill, insurance bill with account number and due date
+      - DEFAULT: "receipt" if unclear
+
+      Detection guidelines:
+      - If has patient name, DOB, treatment codes, AGB/NPI → "medical_invoice"
+      - If has invoice number AND line item descriptions → "invoice"
+      - If has account number AND service period → "bill"
+      - Otherwise → "receipt"
+
+   C. SUBTOTAL:
+      - Look for: "Subtotal", "Sub-total", "Amount Before Tax", "Net Amount"
+      - MUST be amount BEFORE tax is added
+      - Example: If "Subtotal: $50, Tax: $5, Total: $55" → subtotal is 50.00
+      - Set to null if not found or if equals total_amount
+
+   D. VENDOR ADDRESS:
+      - Extract FULL address from top of document (near merchant name)
+      - Include: street, city, state/province, postal code, country
+      - Example: "123 Main Street, Amsterdam, 1012 AB, Netherlands"
+      - Set to null if not found
+
+   E. DUE DATE:
+      - Look for: "Due Date", "Payment Due", "Pay By", "Due By"
+      - Format: YYYY-MM-DD (same as receipt_date)
+      - Only for invoices and bills (NOT for simple receipts)
+      - Set to null if not found or if document is a simple receipt
 
 IMPORTANT: You MUST return valid JSON. Do not add any explanations or markdown formatting.`
 
@@ -231,6 +280,17 @@ export async function extractReceiptData(
       payment_method: validatePaymentMethod(extractedData.payment_method),
       confidence_score: validateConfidenceScore(extractedData.confidence_score),
       raw_text: String(extractedData.raw_text || '').trim(),
+
+      // Phase 1: Essential Fields
+      invoice_number: extractedData.invoice_number
+        ? String(extractedData.invoice_number).trim()
+        : null,
+      document_type: validateDocumentType(extractedData.document_type),
+      subtotal: extractedData.subtotal ? Number(extractedData.subtotal) : null,
+      vendor_address: extractedData.vendor_address
+        ? String(extractedData.vendor_address).trim()
+        : null,
+      due_date: extractedData.due_date || null,
     }
 
     return validatedData
@@ -250,6 +310,19 @@ export async function extractReceiptData(
 
     throw new Error('Failed to extract receipt data')
   }
+}
+
+/**
+ * Validate and normalize document type (Phase 1)
+ */
+function validateDocumentType(docType: string | undefined): DocumentType {
+  const validTypes: DocumentType[] = ['receipt', 'invoice', 'medical_invoice', 'bill']
+
+  if (docType && validTypes.includes(docType as DocumentType)) {
+    return docType as DocumentType
+  }
+
+  return 'receipt' // Default to receipt
 }
 
 /**

@@ -14,6 +14,13 @@ interface Receipt {
   notes?: string
   processing_status: 'pending' | 'processing' | 'completed' | 'failed'
   created_at: string
+
+  // Phase 1: Essential Fields
+  invoice_number?: string
+  document_type?: string
+  subtotal?: number
+  vendor_address?: string
+  due_date?: string
 }
 
 /**

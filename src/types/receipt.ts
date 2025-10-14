@@ -28,7 +28,29 @@ export interface ExtractedReceiptData {
 
   /** Full OCR text extracted from receipt */
   raw_text: string
+
+  // === Phase 1: Essential Fields ===
+
+  /** Invoice/receipt number from the document */
+  invoice_number: string | null
+
+  /** Type of document (auto-detected by AI) */
+  document_type: DocumentType
+
+  /** Amount before tax (for accounting) */
+  subtotal: number | null
+
+  /** Full vendor address from the document */
+  vendor_address: string | null
+
+  /** Payment due date in ISO format (YYYY-MM-DD), for invoices/bills */
+  due_date: string | null
 }
+
+/**
+ * Valid document types (Phase 1: Essential Fields)
+ */
+export type DocumentType = 'receipt' | 'invoice' | 'medical_invoice' | 'bill'
 
 /**
  * Valid receipt categories
@@ -79,4 +101,11 @@ export interface Receipt {
   processing_error?: string
   created_at: string
   updated_at: string
+
+  // === Phase 1: Essential Fields ===
+  invoice_number?: string
+  document_type?: string
+  subtotal?: number
+  vendor_address?: string
+  due_date?: string
 }

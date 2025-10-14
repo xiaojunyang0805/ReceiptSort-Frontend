@@ -13,6 +13,13 @@ interface Receipt {
   notes?: string
   processing_status: 'pending' | 'processing' | 'completed' | 'failed'
   created_at: string
+
+  // Phase 1: Essential Fields
+  invoice_number?: string
+  document_type?: string
+  subtotal?: number
+  vendor_address?: string
+  due_date?: string
 }
 
 /**
@@ -43,15 +50,20 @@ export async function generateExcel(receipts: Receipt[]): Promise<Buffer> {
     views: [{ state: 'frozen', ySplit: 1 }], // Freeze header row
   })
 
-  // Define columns
+  // Define columns (Phase 1: Enhanced with essential fields)
   worksheet.columns = [
+    { header: 'Doc Type', key: 'docType', width: 14 },
+    { header: 'Invoice #', key: 'invoiceNumber', width: 18 },
     { header: 'Merchant', key: 'merchant', width: 25 },
     { header: 'Amount', key: 'amount', width: 12 },
     { header: 'Currency', key: 'currency', width: 10 },
     { header: 'Date', key: 'date', width: 12 },
     { header: 'Category', key: 'category', width: 18 },
+    { header: 'Subtotal', key: 'subtotal', width: 12 },
     { header: 'Tax', key: 'tax', width: 12 },
     { header: 'Payment Method', key: 'payment', width: 16 },
+    { header: 'Due Date', key: 'dueDate', width: 12 },
+    { header: 'Vendor Address', key: 'vendorAddress', width: 35 },
     { header: 'Notes', key: 'notes', width: 30 },
   ]
 
@@ -66,16 +78,21 @@ export async function generateExcel(receipts: Receipt[]): Promise<Buffer> {
   headerRow.alignment = { vertical: 'middle', horizontal: 'center' }
   headerRow.height = 20
 
-  // Add data rows
+  // Add data rows (Phase 1: Include essential fields)
   completedReceipts.forEach((receipt, index) => {
     const row = worksheet.addRow({
+      docType: receipt.document_type || 'receipt',
+      invoiceNumber: receipt.invoice_number || '',
       merchant: receipt.merchant_name || '',
       amount: receipt.total_amount || 0,
       currency: receipt.currency || '',
       date: receipt.receipt_date ? new Date(receipt.receipt_date) : null,
       category: receipt.category || '',
+      subtotal: receipt.subtotal || null,
       tax: receipt.tax_amount || null,
       payment: receipt.payment_method || '',
+      dueDate: receipt.due_date ? new Date(receipt.due_date) : null,
+      vendorAddress: receipt.vendor_address || '',
       notes: receipt.notes || '',
     })
 
@@ -88,13 +105,17 @@ export async function generateExcel(receipts: Receipt[]): Promise<Buffer> {
       }
     }
 
-    // Format amount and tax columns
+    // Format amount, subtotal, and tax columns
     row.getCell('amount').numFmt = '$#,##0.00'
+    row.getCell('subtotal').numFmt = '$#,##0.00'
     row.getCell('tax').numFmt = '$#,##0.00'
 
-    // Format date column
+    // Format date columns
     if (receipt.receipt_date) {
       row.getCell('date').numFmt = 'mm/dd/yyyy'
+    }
+    if (receipt.due_date) {
+      row.getCell('dueDate').numFmt = 'mm/dd/yyyy'
     }
 
     // Conditional formatting: amounts > $100 in bold
@@ -131,10 +152,10 @@ export async function generateExcel(receipts: Receipt[]): Promise<Buffer> {
     top: { style: 'double', color: { argb: 'FF000000' } },
   }
 
-  // Enable auto-filter
+  // Enable auto-filter (Phase 1: Updated to include all 13 columns)
   worksheet.autoFilter = {
     from: { row: 1, column: 1 },
-    to: { row: 1, column: 8 },
+    to: { row: 1, column: 13 },
   }
 
   // Add summary worksheet

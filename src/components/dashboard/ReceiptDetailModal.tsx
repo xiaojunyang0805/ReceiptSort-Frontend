@@ -48,6 +48,13 @@ interface Receipt {
   processing_error?: string
   created_at: string
   updated_at: string
+
+  // Phase 1: Essential Fields
+  invoice_number?: string
+  document_type?: string
+  subtotal?: number
+  vendor_address?: string
+  due_date?: string
 }
 
 interface ReceiptDetailModalProps {
@@ -78,6 +85,13 @@ const PAYMENT_METHODS = [
 ]
 
 const CURRENCIES = ['USD', 'EUR', 'GBP']
+
+const DOCUMENT_TYPES = [
+  { value: 'receipt', label: 'Receipt' },
+  { value: 'invoice', label: 'Invoice' },
+  { value: 'medical_invoice', label: 'Medical Invoice' },
+  { value: 'bill', label: 'Bill' },
+]
 
 const statusConfig = {
   pending: { label: 'Pending', color: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300' },
@@ -113,6 +127,13 @@ export default function ReceiptDetailModal({
         tax_amount: receipt.tax_amount || 0,
         payment_method: receipt.payment_method || '',
         notes: receipt.notes || '',
+
+        // Phase 1: Essential Fields
+        invoice_number: receipt.invoice_number || '',
+        document_type: receipt.document_type || 'receipt',
+        subtotal: receipt.subtotal || 0,
+        vendor_address: receipt.vendor_address || '',
+        due_date: receipt.due_date || '',
       })
     }
   }, [receipt])
@@ -171,6 +192,13 @@ export default function ReceiptDetailModal({
           payment_method: formData.payment_method,
           notes: formData.notes,
           updated_at: new Date().toISOString(),
+
+          // Phase 1: Essential Fields
+          invoice_number: formData.invoice_number || null,
+          document_type: formData.document_type,
+          subtotal: formData.subtotal || null,
+          vendor_address: formData.vendor_address || null,
+          due_date: formData.due_date || null,
         })
         .eq('id', receipt.id)
 
@@ -377,6 +405,29 @@ export default function ReceiptDetailModal({
                 </Alert>
               )}
 
+            {/* Phase 1: Document Type Selector */}
+            <div>
+              <Label htmlFor="documentType">Document Type</Label>
+              <Select
+                value={formData.document_type}
+                onValueChange={(value) =>
+                  setFormData({ ...formData, document_type: value })
+                }
+                disabled={!isEditable}
+              >
+                <SelectTrigger id="documentType">
+                  <SelectValue placeholder="Select document type" />
+                </SelectTrigger>
+                <SelectContent>
+                  {DOCUMENT_TYPES.map((type) => (
+                    <SelectItem key={type.value} value={type.value}>
+                      {type.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
             <div>
               <Label htmlFor="merchant">Merchant Name</Label>
               <Input
@@ -389,6 +440,24 @@ export default function ReceiptDetailModal({
                 placeholder="Enter merchant name"
               />
             </div>
+
+            {/* Phase 1: Invoice Number (for invoices and bills) */}
+            {(formData.document_type === 'invoice' ||
+              formData.document_type === 'medical_invoice' ||
+              formData.document_type === 'bill') && (
+              <div>
+                <Label htmlFor="invoiceNumber">Invoice Number</Label>
+                <Input
+                  id="invoiceNumber"
+                  value={formData.invoice_number || ''}
+                  onChange={(e) =>
+                    setFormData({ ...formData, invoice_number: e.target.value })
+                  }
+                  disabled={!isEditable}
+                  placeholder="INV-2025-001"
+                />
+              </div>
+            )}
 
             <div className="grid grid-cols-2 gap-4">
               <div>
@@ -463,20 +532,55 @@ export default function ReceiptDetailModal({
               </Select>
             </div>
 
-            <div>
-              <Label htmlFor="tax">Tax Amount</Label>
-              <Input
-                id="tax"
-                type="number"
-                step="0.01"
-                value={formData.tax_amount || ''}
-                onChange={(e) =>
-                  setFormData({ ...formData, tax_amount: parseFloat(e.target.value) || 0 })
-                }
-                disabled={!isEditable}
-                placeholder="0.00"
-              />
+            {/* Phase 1: Subtotal and Tax (side by side) */}
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="subtotal">Subtotal (Before Tax)</Label>
+                <Input
+                  id="subtotal"
+                  type="number"
+                  step="0.01"
+                  value={formData.subtotal || ''}
+                  onChange={(e) =>
+                    setFormData({ ...formData, subtotal: parseFloat(e.target.value) || 0 })
+                  }
+                  disabled={!isEditable}
+                  placeholder="0.00"
+                />
+              </div>
+              <div>
+                <Label htmlFor="tax">Tax Amount</Label>
+                <Input
+                  id="tax"
+                  type="number"
+                  step="0.01"
+                  value={formData.tax_amount || ''}
+                  onChange={(e) =>
+                    setFormData({ ...formData, tax_amount: parseFloat(e.target.value) || 0 })
+                  }
+                  disabled={!isEditable}
+                  placeholder="0.00"
+                />
+              </div>
             </div>
+
+            {/* Phase 1: Due Date (for invoices and bills) */}
+            {(formData.document_type === 'invoice' ||
+              formData.document_type === 'medical_invoice' ||
+              formData.document_type === 'bill') && (
+              <div>
+                <Label htmlFor="dueDate">Due Date</Label>
+                <Input
+                  id="dueDate"
+                  type="date"
+                  value={formData.due_date || ''}
+                  onChange={(e) =>
+                    setFormData({ ...formData, due_date: e.target.value })
+                  }
+                  disabled={!isEditable}
+                />
+              </div>
+            )}
 
             <div>
               <Label htmlFor="payment">Payment Method</Label>
@@ -499,6 +603,25 @@ export default function ReceiptDetailModal({
                 </SelectContent>
               </Select>
             </div>
+
+            {/* Phase 1: Vendor Address (for invoices) */}
+            {(formData.document_type === 'invoice' ||
+              formData.document_type === 'medical_invoice' ||
+              formData.document_type === 'bill') && (
+              <div>
+                <Label htmlFor="vendorAddress">Vendor Address</Label>
+                <Textarea
+                  id="vendorAddress"
+                  value={formData.vendor_address || ''}
+                  onChange={(e) =>
+                    setFormData({ ...formData, vendor_address: e.target.value })
+                  }
+                  disabled={!isEditable}
+                  placeholder="123 Main Street, City, State 12345"
+                  rows={2}
+                />
+              </div>
+            )}
 
             <div>
               <Label htmlFor="notes">Notes</Label>
