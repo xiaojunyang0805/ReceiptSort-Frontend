@@ -185,7 +185,9 @@
   "finalCTA": {
     "title": "¿Listo para ahorrar horas en la gestión de recibos?",
     "subtitle": "Únete a miles de empresas que ya usan ReceiptSorter",
-    "button": "Comenzar a Procesar Recibos"
+    "button": "Comenzar a Procesar Recibos",
+    "viewPricing": "Ver Precios",
+    "trustIndicator": "Únete a más de 10,000 usuarios que confían en ReceiptSorter"
   },
   "auth": {
     "loginTitle": "Bienvenido de nuevo",
@@ -257,7 +259,10 @@
       "quickSearch": "Búsqueda rápida...",
       "allStatus": "Todos los Estados",
       "show": "Mostrar",
-      "filters": "Filtros"
+      "filters": "Filtros",
+      "quickActions": "Acciones Rápidas",
+      "quickActionsSubtitle": "Ver recibos o procesar los pendientes",
+      "viewAllReceipts": "Ver Todos los Recibos"
     },
     "receiptsTable": {
       "title": "Tus Recibos",
@@ -285,6 +290,8 @@
       "balance": "Saldo Actual",
       "creditsRemaining": "créditos restantes",
       "description": "Créditos disponibles para procesar recibos",
+      "manageSubtitle": "Gestiona tus créditos para procesar recibos",
+      "availableCredits": "Tus créditos disponibles",
       "buyCredits": "Comprar Créditos",
       "history": "Historial de Créditos",
       "packages": {
@@ -349,8 +356,33 @@
         "title": "Historial de Exportaciones",
         "subtitle": "Ver tus exportaciones de recibos pasadas"
       },
+      "buttons": {
+        "exportAll": "Exportar Todo",
+        "filters": "Filtros",
+        "hide": "Ocultar",
+        "clearFilters": "Limpiar Todos los Filtros",
+        "loading": "Cargando..."
+      },
+      "filters": {
+        "fromDate": "Fecha Desde",
+        "toDate": "Fecha Hasta",
+        "merchantName": "Nombre del Comerciante",
+        "amountRange": "Rango de Monto",
+        "min": "Mín",
+        "max": "Máx",
+        "pickDate": "Elegir una fecha",
+        "searchPlaceholder": "Buscar por nombre de comerciante...",
+        "activeFilters": "Filtros Activos",
+        "from": "Desde",
+        "to": "Hasta",
+        "merchant": "Comerciante",
+        "minAmount": "Monto Mínimo",
+        "maxAmount": "Monto Máximo"
+      },
       "noExports": "Aún no hay exportaciones",
+      "noExportsDescription": "Exporta recibos desde el panel para verlos aquí",
       "type": "Tipo",
+      "fileName": "Nombre del Archivo",
       "receipts": "recibos",
       "showingRecent": "Mostrando {count, plural, one {la exportación más reciente} other {las {count} exportaciones más recientes}}",
       "columns": {
@@ -376,12 +408,24 @@
   "pricing": {
     "title": "Precios simples y transparentes",
     "subtitle": "Elige el plan que funcione para ti",
+    "subheadline": "Paga según uses o suscríbete y ahorra",
+    "currentBalance": "Tu saldo actual",
+    "credits": "créditos",
+    "perCredit": "por crédito",
     "perReceipt": "por recibo",
     "creditPacks": "Paquetes de Créditos",
+    "creditPackagesTitle": "Paquetes de Créditos",
     "subscriptions": "Suscripciones",
     "buyNow": "Comprar Ahora",
     "subscribe": "Suscribirse",
     "popular": "Más Popular",
+    "purchaseCredits": "Comprar Créditos",
+    "getStarted": "Comenzar",
+    "readyTitle": "¿Listo para comenzar?",
+    "readySubtitle": "Comienza con 10 créditos gratis, sin tarjeta de crédito requerida",
+    "goToDashboard": "Ir al Panel",
+    "startFree": "Empezar Gratis",
+    "signIn": "Iniciar Sesión",
     "features": {
       "allFeatures": "Todas las características incluidas",
       "aiExtraction": "Extracción con IA",
@@ -389,6 +433,29 @@
       "support": "Soporte por correo",
       "security": "Seguridad de nivel bancario",
       "gdpr": "Cumple con GDPR"
+    },
+    "faq": {
+      "title": "Preguntas Frecuentes",
+      "howCreditsWork": {
+        "question": "¿Cómo funcionan los créditos?",
+        "answer": "Cada recibo que subes y procesas cuesta 1 crédito. Los créditos se deducen solo cuando la IA extrae exitosamente datos de tu recibo. Puedes comprar créditos en paquetes o suscribirte para créditos mensuales con descuento."
+      },
+      "doCreditsExpire": {
+        "question": "¿Los créditos expiran?",
+        "answer": "No, los créditos nunca expiran. Una vez que compras créditos, permanecen en tu cuenta hasta que los uses. Esto te da flexibilidad completa para usarlos a tu propio ritmo."
+      },
+      "canIGetRefund": {
+        "question": "¿Puedo obtener un reembolso?",
+        "answer": "¡Sí! Ofrecemos una garantía de devolución de dinero de 30 días. Si no estás satisfecho con nuestro servicio, contáctanos dentro de los 30 días de tu compra para un reembolso completo de créditos no utilizados."
+      },
+      "wrongExtraction": {
+        "question": "¿Qué pasa si la extracción es incorrecta?",
+        "answer": "Si la extracción por IA contiene errores o no cumple tus expectativas, contacta a nuestro equipo de soporte. Revisaremos el caso y proporcionaremos un reintento gratuito o reembolso de crédito si la calidad de extracción estuvo por debajo de nuestros estándares."
+      },
+      "needSubscription": {
+        "question": "¿Necesito una suscripción?",
+        "answer": "No, las suscripciones son completamente opcionales. Puedes comprar créditos según los necesites con nuestros paquetes de pago por uso. Las suscripciones están disponibles si quieres ahorrar dinero con créditos mensuales con descuento, pero eres libre de usar el servicio como mejor te funcione."
+      }
     }
   },
   "footer": {

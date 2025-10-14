@@ -185,7 +185,9 @@
   "finalCTA": {
     "title": "レシート管理で時間を節約する準備はできましたか？",
     "subtitle": "すでにReceiptSorterを使用している何千もの企業に参加しましょう",
-    "button": "レシート処理を開始"
+    "button": "レシート処理を開始",
+    "viewPricing": "料金を見る",
+    "trustIndicator": "ReceiptSorterを信頼する10,000人以上のユーザーに参加しましょう"
   },
   "auth": {
     "loginTitle": "おかえりなさい",
@@ -257,7 +259,10 @@
       "quickSearch": "クイック検索...",
       "allStatus": "すべてのステータス",
       "show": "表示",
-      "filters": "フィルター"
+      "filters": "フィルター",
+      "quickActions": "クイックアクション",
+      "quickActionsSubtitle": "レシートを表示するか、保留中のレシートを処理する",
+      "viewAllReceipts": "すべてのレシートを表示"
     },
     "receiptsTable": {
       "title": "あなたのレシート",
@@ -285,6 +290,8 @@
       "balance": "現在の残高",
       "creditsRemaining": "クレジット残",
       "description": "レシート処理に利用可能なクレジット",
+      "manageSubtitle": "レシート処理のためのクレジットを管理",
+      "availableCredits": "利用可能なクレジット",
       "buyCredits": "クレジットを購入",
       "history": "クレジット履歴",
       "packages": {
@@ -349,8 +356,33 @@
         "title": "エクスポート履歴",
         "subtitle": "過去のレシートエクスポートを表示"
       },
+      "buttons": {
+        "exportAll": "すべてエクスポート",
+        "filters": "フィルター",
+        "hide": "非表示",
+        "clearFilters": "すべてのフィルターをクリア",
+        "loading": "読み込み中..."
+      },
+      "filters": {
+        "fromDate": "開始日",
+        "toDate": "終了日",
+        "merchantName": "店舗名",
+        "amountRange": "金額範囲",
+        "min": "最小",
+        "max": "最大",
+        "pickDate": "日付を選択",
+        "searchPlaceholder": "店舗名で検索...",
+        "activeFilters": "有効なフィルター",
+        "from": "開始",
+        "to": "終了",
+        "merchant": "店舗",
+        "minAmount": "最小金額",
+        "maxAmount": "最大金額"
+      },
       "noExports": "まだエクスポートがありません",
+      "noExportsDescription": "ダッシュボードからレシートをエクスポートすると、ここに表示されます",
       "type": "タイプ",
+      "fileName": "ファイル名",
       "receipts": "レシート",
       "showingRecent": "最新のエクスポート{count}件を表示",
       "columns": {
@@ -376,12 +408,24 @@
   "pricing": {
     "title": "シンプルで透明な料金",
     "subtitle": "あなたに合ったプランを選択してください",
+    "subheadline": "従量課金またはサブスクリプションでお得に",
+    "currentBalance": "現在の残高",
+    "credits": "クレジット",
+    "perCredit": "クレジットあたり",
     "perReceipt": "レシートあたり",
     "creditPacks": "クレジットパック",
+    "creditPackagesTitle": "クレジットパッケージ",
     "subscriptions": "サブスクリプション",
     "buyNow": "今すぐ購入",
     "subscribe": "サブスクライブ",
     "popular": "最も人気",
+    "purchaseCredits": "クレジットを購入",
+    "getStarted": "始める",
+    "readyTitle": "始める準備はできましたか？",
+    "readySubtitle": "10クレジット無料、クレジットカード不要",
+    "goToDashboard": "ダッシュボードへ",
+    "startFree": "無料で始める",
+    "signIn": "サインイン",
     "features": {
       "allFeatures": "すべての機能が含まれています",
       "aiExtraction": "AI搭載抽出",
@@ -389,6 +433,29 @@
       "support": "メールサポート",
       "security": "銀行レベルのセキュリティ",
       "gdpr": "GDPR準拠"
+    },
+    "faq": {
+      "title": "よくある質問",
+      "howCreditsWork": {
+        "question": "クレジットの仕組みは？",
+        "answer": "アップロードして処理する各レシートには1クレジットかかります。クレジットは、AIがレシートからデータの抽出に成功した場合にのみ差し引かれます。パッケージでクレジットを購入するか、割引された月額クレジットのサブスクリプションを利用できます。"
+      },
+      "doCreditsExpire": {
+        "question": "クレジットに有効期限はありますか？",
+        "answer": "いいえ、クレジットに有効期限はありません。購入したクレジットは、使用するまでアカウントに残ります。これにより、自分のペースで完全に柔軟に使用できます。"
+      },
+      "canIGetRefund": {
+        "question": "返金は受けられますか？",
+        "answer": "はい！30日間の返金保証を提供しています。サービスにご満足いただけない場合は、購入から30日以内にお問い合わせください。未使用のクレジットの全額返金を受けられます。"
+      },
+      "wrongExtraction": {
+        "question": "抽出が間違っている場合はどうなりますか？",
+        "answer": "AI抽出にエラーが含まれているか、期待に応えられない場合は、サポートチームにお問い合わせください。ケースを確認し、抽出品質が基準を下回っている場合は、無料の再試行またはクレジットの返金を提供します。"
+      },
+      "needSubscription": {
+        "question": "サブスクリプションは必要ですか？",
+        "answer": "いいえ、サブスクリプションは完全にオプションです。従量課金パッケージで必要に応じてクレジットを購入できます。割引された月額クレジットでお金を節約したい場合はサブスクリプションを利用できますが、最適な方法でサービスを自由に使用できます。"
+      }
     }
   },
   "footer": {

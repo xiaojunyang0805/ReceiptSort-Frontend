@@ -185,7 +185,9 @@
   "finalCTA": {
     "title": "Ready to save hours on receipt management?",
     "subtitle": "Join thousands of businesses already using ReceiptSorter",
-    "button": "Start Processing Receipts"
+    "button": "Start Processing Receipts",
+    "viewPricing": "View Pricing",
+    "trustIndicator": "Join 10,000+ users who trust ReceiptSorter"
   },
   "auth": {
     "loginTitle": "Welcome back",
@@ -257,7 +259,10 @@
       "quickSearch": "Quick search...",
       "allStatus": "All Status",
       "show": "Show",
-      "filters": "Filters"
+      "filters": "Filters",
+      "quickActions": "Quick Actions",
+      "quickActionsSubtitle": "View receipts or process pending ones",
+      "viewAllReceipts": "View All Receipts"
     },
     "receiptsTable": {
       "title": "Your Receipts",
@@ -285,6 +290,8 @@
       "balance": "Current Balance",
       "creditsRemaining": "credits remaining",
       "description": "Available credits for processing receipts",
+      "manageSubtitle": "Manage your credits for processing receipts",
+      "availableCredits": "Your available credits",
       "buyCredits": "Buy Credits",
       "history": "Credit History",
       "packages": {
@@ -353,7 +360,8 @@
         "exportAll": "Export All",
         "filters": "Filters",
         "hide": "Hide",
-        "clearFilters": "Clear All Filters"
+        "clearFilters": "Clear All Filters",
+        "loading": "Loading..."
       },
       "filters": {
         "fromDate": "From Date",
@@ -400,12 +408,24 @@
   "pricing": {
     "title": "Simple, transparent pricing",
     "subtitle": "Choose the plan that works for you",
+    "subheadline": "Pay as you go or subscribe and save",
+    "currentBalance": "Your current balance",
+    "credits": "credits",
+    "perCredit": "per credit",
     "perReceipt": "per receipt",
     "creditPacks": "Credit Packs",
+    "creditPackagesTitle": "Credit Packages",
     "subscriptions": "Subscriptions",
     "buyNow": "Buy Now",
     "subscribe": "Subscribe",
     "popular": "Most Popular",
+    "purchaseCredits": "Purchase Credits",
+    "getStarted": "Get Started",
+    "readyTitle": "Ready to get started?",
+    "readySubtitle": "Start with 10 free credits, no credit card required",
+    "goToDashboard": "Go to Dashboard",
+    "startFree": "Start Free",
+    "signIn": "Sign In",
     "features": {
       "allFeatures": "All features included",
       "aiExtraction": "AI-powered extraction",
@@ -413,6 +433,29 @@
       "support": "Email support",
       "security": "Bank-level security",
       "gdpr": "GDPR compliant"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "howCreditsWork": {
+        "question": "How do credits work?",
+        "answer": "Each receipt you upload and process costs 1 credit. Credits are deducted only when the AI successfully extracts data from your receipt. You can purchase credits in packages or subscribe for monthly credits at a discounted rate."
+      },
+      "doCreditsExpire": {
+        "question": "Do credits expire?",
+        "answer": "No, credits never expire. Once you purchase credits, they remain in your account until you use them. This gives you complete flexibility to use them at your own pace."
+      },
+      "canIGetRefund": {
+        "question": "Can I get a refund?",
+        "answer": "Yes! We offer a 30-day money-back guarantee. If you're not satisfied with our service, contact us within 30 days of your purchase for a full refund on unused credits."
+      },
+      "wrongExtraction": {
+        "question": "What if the extraction is wrong?",
+        "answer": "If the AI extraction contains errors or doesn't meet your expectations, contact our support team. We'll review the case and provide a free retry or credit refund if the extraction quality was below our standards."
+      },
+      "needSubscription": {
+        "question": "Do I need a subscription?",
+        "answer": "No, subscriptions are completely optional. You can purchase credits as needed with our pay-as-you-go packages. Subscriptions are available if you want to save money with discounted monthly credits, but you're free to use the service however works best for you."
+      }
     }
   },
   "footer": {

@@ -185,7 +185,9 @@
   "finalCTA": {
     "title": "Klaar om uren te besparen op bonnetjesbeheer?",
     "subtitle": "Sluit je aan bij duizenden bedrijven die ReceiptSorter al gebruiken",
-    "button": "Begin Met Bonnetjes Verwerken"
+    "button": "Begin Met Bonnetjes Verwerken",
+    "viewPricing": "Prijzen Bekijken",
+    "trustIndicator": "Sluit je aan bij 10.000+ gebruikers die ReceiptSorter vertrouwen"
   },
   "auth": {
     "loginTitle": "Welkom terug",
@@ -257,7 +259,10 @@
       "quickSearch": "Snel zoeken...",
       "allStatus": "Alle Status",
       "show": "Tonen",
-      "filters": "Filters"
+      "filters": "Filters",
+      "quickActions": "Snelle Acties",
+      "quickActionsSubtitle": "Bonnetjes bekijken of openstaande verwerken",
+      "viewAllReceipts": "Alle Bonnetjes Bekijken"
     },
     "receiptsTable": {
       "title": "Uw Bonnetjes",
@@ -285,6 +290,8 @@
       "balance": "Huidig Saldo",
       "creditsRemaining": "credits resterend",
       "description": "Beschikbare credits voor het verwerken van bonnetjes",
+      "manageSubtitle": "Beheer uw credits voor het verwerken van bonnetjes",
+      "availableCredits": "Uw beschikbare credits",
       "buyCredits": "Credits Kopen",
       "history": "Creditgeschiedenis",
       "packages": {
@@ -350,9 +357,34 @@
         "subtitle": "Bekijk uw eerdere bonnetjesexports"
       },
       "noExports": "Nog geen exports",
+      "noExportsDescription": "U heeft nog geen bonnetjes geëxporteerd. Upload en verwerk enkele bonnetjes om te beginnen.",
       "type": "Type",
       "receipts": "bonnetjes",
       "showingRecent": "{count} meest recente export{count, plural, one {} other {s}} weergeven",
+      "fileName": "Bonnetjes-export",
+      "buttons": {
+        "exportAll": "Alles Exporteren",
+        "filters": "Filters",
+        "hide": "Verbergen",
+        "clearFilters": "Alle Filters Wissen",
+        "loading": "Laden..."
+      },
+      "filters": {
+        "fromDate": "Vanaf Datum",
+        "toDate": "Tot Datum",
+        "merchantName": "Handelaarsnaam",
+        "amountRange": "Bedragbereik",
+        "min": "Min",
+        "max": "Max",
+        "pickDate": "Kies een datum",
+        "searchPlaceholder": "Zoek handelaar...",
+        "activeFilters": "Actieve filters",
+        "from": "Van",
+        "to": "Tot",
+        "merchant": "Handelaar",
+        "minAmount": "Min. bedrag",
+        "maxAmount": "Max. bedrag"
+      },
       "columns": {
         "date": "Exportdatum",
         "receipts": "Bonnetjes",
@@ -376,12 +408,23 @@
   "pricing": {
     "title": "Eenvoudige, transparante prijzen",
     "subtitle": "Kies het plan dat bij u past",
-    "perReceipt": "per bonnetje",
+    "subheadline": "Betaal per gebruik of neem een abonnement en bespaar",
+    "currentBalance": "Uw huidig saldo",
+    "credits": "credits",
+    "perCredit": "per credit",
+    "creditPackagesTitle": "Creditpakketten",
     "creditPacks": "Creditpakketten",
     "subscriptions": "Abonnementen",
+    "purchaseCredits": "Credits Kopen",
     "buyNow": "Nu Kopen",
     "subscribe": "Abonneren",
+    "getStarted": "Aan de Slag",
     "popular": "Meest Populair",
+    "readyTitle": "Klaar om te beginnen?",
+    "readySubtitle": "Kies een pakket dat bij uw behoeften past",
+    "goToDashboard": "Ga naar Dashboard",
+    "startFree": "Gratis Beginnen",
+    "signIn": "Inloggen",
     "features": {
       "allFeatures": "Alle functies inbegrepen",
       "aiExtraction": "AI-powered extractie",
@@ -389,6 +432,29 @@
       "support": "E-mailondersteuning",
       "security": "Beveiliging op bankniveau",
       "gdpr": "GDPR-conform"
+    },
+    "faq": {
+      "title": "Veelgestelde Vragen",
+      "howCreditsWork": {
+        "question": "Hoe werken credits?",
+        "answer": "Elk bonnetje dat u uploadt en verwerkt kost 1 credit. Credits worden alleen gebruikt wanneer u een bonnetje verwerkt, niet bij het uploaden. U kunt credits kopen in pakketten of een abonnement nemen voor betere waarde."
+      },
+      "doCreditsExpire": {
+        "question": "Verlopen credits?",
+        "answer": "Nee, credits verlopen nooit. Koop ze wanneer u ze nodig heeft en gebruik ze naar eigen inzicht. Er zijn geen maandelijkse verplichtingen of verloopdata."
+      },
+      "canIGetRefund": {
+        "question": "Kan ik terugbetaling krijgen?",
+        "answer": "Ja, we bieden een 30 dagen geld-terug-garantie op creditaankopen. Als u om welke reden dan ook niet tevreden bent, neem dan contact met ons op voor een volledige terugbetaling."
+      },
+      "wrongExtraction": {
+        "question": "Wat als de extractie onjuist is?",
+        "answer": "U kunt alle geëxtraheerde gegevens handmatig bewerken voordat u exporteert. Als de extractie volledig mislukt, neem dan contact met ons op en restitueren we het credit."
+      },
+      "needSubscription": {
+        "question": "Heb ik een abonnement nodig?",
+        "answer": "Nee, u kunt credits kopen wanneer u ze nodig heeft zonder enige maandelijkse verplichting. Abonnementen zijn beschikbaar als u regelmatig bonnetjes verwerkt en wilt besparen."
+      }
     }
   },
   "footer": {

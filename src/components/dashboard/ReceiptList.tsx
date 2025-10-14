@@ -348,8 +348,8 @@ export default function ReceiptList() {
       <Card className="p-4">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
-            <h3 className="font-semibold text-lg">Quick Actions</h3>
-            <p className="text-sm text-muted-foreground">View receipts or process pending ones</p>
+            <h3 className="font-semibold text-lg">{t('quickActions')}</h3>
+            <p className="text-sm text-muted-foreground">{t('quickActionsSubtitle')}</p>
           </div>
           <div className="flex gap-2">
             {receipts.filter(r => r.processing_status === 'pending').length > 0 && (
@@ -362,7 +362,7 @@ export default function ReceiptList() {
             <Button variant="outline" asChild>
               <Link href="/receipts">
                 <Eye className="mr-2 h-4 w-4" />
-                View All Receipts
+                {t('viewAllReceipts')}
               </Link>
             </Button>
           </div>

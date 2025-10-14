@@ -186,7 +186,7 @@ export default function ExportsPage() {
         <div className="space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-center gap-2">
-              <h2 className="text-xl font-semibold">Export Receipts</h2>
+              <h2 className="text-xl font-semibold">{t('exportSection.title')}</h2>
             </div>
             <div className="flex gap-2">
               <Button
@@ -197,12 +197,12 @@ export default function ExportsPage() {
                 {isExporting ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Loading...
+                    {t('buttons.loading')}
                   </>
                 ) : (
                   <>
                     <Download className="mr-2 h-4 w-4" />
-                    Export All
+                    {t('buttons.exportAll')}
                   </>
                 )}
               </Button>
@@ -213,12 +213,12 @@ export default function ExportsPage() {
                 {showFilters ? (
                   <>
                     <ChevronUp className="mr-2 h-4 w-4" />
-                    Hide
+                    {t('buttons.hide')}
                   </>
                 ) : (
                   <>
                     <ChevronDown className="mr-2 h-4 w-4" />
-                    Filters
+                    {t('buttons.filters')}
                   </>
                 )}
               </Button>
@@ -230,7 +230,7 @@ export default function ExportsPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Date Range Filters */}
                 <div className="space-y-2">
-                  <Label>From Date</Label>
+                  <Label>{t('filters.fromDate')}</Label>
                   <Popover>
                     <PopoverTrigger asChild>
                       <Button
@@ -241,7 +241,7 @@ export default function ExportsPage() {
                         )}
                       >
                         <CalendarIcon className="mr-2 h-4 w-4" />
-                        {dateFrom ? format(dateFrom, "PPP") : "Pick a date"}
+                        {dateFrom ? format(dateFrom, "PPP") : t('filters.pickDate')}
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-auto p-0" align="start">
@@ -256,7 +256,7 @@ export default function ExportsPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label>To Date</Label>
+                  <Label>{t('filters.toDate')}</Label>
                   <Popover>
                     <PopoverTrigger asChild>
                       <Button
@@ -267,7 +267,7 @@ export default function ExportsPage() {
                         )}
                       >
                         <CalendarIcon className="mr-2 h-4 w-4" />
-                        {dateTo ? format(dateTo, "PPP") : "Pick a date"}
+                        {dateTo ? format(dateTo, "PPP") : t('filters.pickDate')}
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-auto p-0" align="start">
@@ -283,9 +283,9 @@ export default function ExportsPage() {
 
                 {/* Merchant Search */}
                 <div className="space-y-2">
-                  <Label>Merchant Name</Label>
+                  <Label>{t('filters.merchantName')}</Label>
                   <Input
-                    placeholder="Search by merchant name..."
+                    placeholder={t('filters.searchPlaceholder')}
                     value={merchantSearch}
                     onChange={(e) => setMerchantSearch(e.target.value)}
                   />
@@ -293,18 +293,18 @@ export default function ExportsPage() {
 
                 {/* Amount Range */}
                 <div className="space-y-2">
-                  <Label>Amount Range</Label>
+                  <Label>{t('filters.amountRange')}</Label>
                   <div className="flex gap-2">
                     <Input
                       type="number"
-                      placeholder="Min"
+                      placeholder={t('filters.min')}
                       value={minAmount}
                       onChange={(e) => setMinAmount(e.target.value)}
                       step="0.01"
                     />
                     <Input
                       type="number"
-                      placeholder="Max"
+                      placeholder={t('filters.max')}
                       value={maxAmount}
                       onChange={(e) => setMaxAmount(e.target.value)}
                       step="0.01"
@@ -323,16 +323,16 @@ export default function ExportsPage() {
                     className="w-full sm:w-auto"
                   >
                     <X className="mr-2 h-4 w-4" />
-                    Clear All Filters
+                    {t('buttons.clearFilters')}
                   </Button>
                 <div className="text-sm text-muted-foreground bg-muted/50 rounded-lg p-3">
-                  <div className="font-medium mb-1">Active Filters:</div>
+                  <div className="font-medium mb-1">{t('filters.activeFilters')}:</div>
                   <div className="space-y-1">
-                    {dateFrom && <div>• From: {format(dateFrom, "PPP")}</div>}
-                    {dateTo && <div>• To: {format(dateTo, "PPP")}</div>}
-                    {merchantSearch && <div>• Merchant: &quot;{merchantSearch}&quot;</div>}
-                    {minAmount && <div>• Min Amount: ${minAmount}</div>}
-                    {maxAmount && <div>• Max Amount: ${maxAmount}</div>}
+                    {dateFrom && <div>• {t('filters.from')}: {format(dateFrom, "PPP")}</div>}
+                    {dateTo && <div>• {t('filters.to')}: {format(dateTo, "PPP")}</div>}
+                    {merchantSearch && <div>• {t('filters.merchant')}: &quot;{merchantSearch}&quot;</div>}
+                    {minAmount && <div>• {t('filters.minAmount')}: ${minAmount}</div>}
+                    {maxAmount && <div>• {t('filters.maxAmount')}: ${maxAmount}</div>}
                   </div>
                 </div>
                 </div>
@@ -355,7 +355,7 @@ export default function ExportsPage() {
             <div>
               <h3 className="font-medium text-lg">{t('noExports')}</h3>
               <p className="text-muted-foreground mt-1">
-                Export receipts from the dashboard to see them here
+                {t('noExportsDescription')}
               </p>
             </div>
           </div>
@@ -366,7 +366,7 @@ export default function ExportsPage() {
             <TableHeader>
               <TableRow>
                 <TableHead>{t('type')}</TableHead>
-                <TableHead>File Name</TableHead>
+                <TableHead>{t('fileName')}</TableHead>
                 <TableHead>{t('columns.receipts')}</TableHead>
                 <TableHead>{t('columns.date')}</TableHead>
               </TableRow>

@@ -35,7 +35,7 @@ export default async function CreditsPage({ searchParams }: CreditsPageProps) {
       <div>
         <h1 className="text-3xl font-bold tracking-tight">{t('title')}</h1>
         <p className="text-muted-foreground mt-2">
-          Manage your credits for processing receipts
+          {t('manageSubtitle')}
         </p>
       </div>
 
@@ -56,7 +56,7 @@ export default async function CreditsPage({ searchParams }: CreditsPageProps) {
             <CreditCard className="h-5 w-5" />
             {t('balance')}
           </CardTitle>
-          <CardDescription>Your available credits</CardDescription>
+          <CardDescription>{t('availableCredits')}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="text-5xl font-bold text-primary">

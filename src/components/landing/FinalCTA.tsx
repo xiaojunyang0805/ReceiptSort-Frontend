@@ -47,7 +47,7 @@ export default function FinalCTA() {
               className="h-12 border-2 border-primary-foreground/20 bg-transparent px-8 text-base font-semibold text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
             >
               <Link href="/pricing">
-                View Pricing
+                {t('viewPricing')}
               </Link>
             </Button>
           </div>
@@ -55,7 +55,7 @@ export default function FinalCTA() {
           {/* Trust indicators */}
           <div className="space-y-4">
             <p className="text-sm text-primary-foreground/80">
-              Join 10,000+ users who trust ReceiptSorter
+              {t('trustIndicator')}
             </p>
 
             {/* Payment method logos */}

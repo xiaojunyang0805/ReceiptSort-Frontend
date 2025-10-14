@@ -185,7 +185,9 @@
   "finalCTA": {
     "title": "Bereit, Stunden beim Belegmanagement zu sparen?",
     "subtitle": "Schließen Sie sich Tausenden von Unternehmen an, die bereits ReceiptSorter verwenden",
-    "button": "Belege Verarbeiten Starten"
+    "button": "Belege Verarbeiten Starten",
+    "viewPricing": "Preise Ansehen",
+    "trustIndicator": "Schließen Sie sich 10.000+ Nutzern an, die ReceiptSorter vertrauen"
   },
   "auth": {
     "loginTitle": "Willkommen zurück",
@@ -257,7 +259,10 @@
       "quickSearch": "Schnellsuche...",
       "allStatus": "Alle Status",
       "show": "Anzeigen",
-      "filters": "Filter"
+      "filters": "Filter",
+      "quickActions": "Schnellaktionen",
+      "quickActionsSubtitle": "Belege anzeigen oder ausstehende verarbeiten",
+      "viewAllReceipts": "Alle Belege Anzeigen"
     },
     "receiptsTable": {
       "title": "Ihre Belege",
@@ -285,6 +290,8 @@
       "balance": "Aktueller Saldo",
       "creditsRemaining": "Credits verbleibend",
       "description": "Verfügbare Credits für die Verarbeitung von Belegen",
+      "manageSubtitle": "Verwalten Sie Ihre Credits für die Belegverarbeitung",
+      "availableCredits": "Ihre verfügbaren Credits",
       "buyCredits": "Credits Kaufen",
       "history": "Credit-Verlauf",
       "packages": {
@@ -349,8 +356,33 @@
         "title": "Export-Verlauf",
         "subtitle": "Ihre bisherigen Belegexporte anzeigen"
       },
+      "buttons": {
+        "exportAll": "Alle Exportieren",
+        "filters": "Filter",
+        "hide": "Ausblenden",
+        "clearFilters": "Alle Filter Löschen",
+        "loading": "Lädt..."
+      },
+      "filters": {
+        "fromDate": "Von Datum",
+        "toDate": "Bis Datum",
+        "merchantName": "Händlername",
+        "amountRange": "Betragsbereich",
+        "min": "Min",
+        "max": "Max",
+        "pickDate": "Datum wählen",
+        "searchPlaceholder": "Nach Händlername suchen...",
+        "activeFilters": "Aktive Filter",
+        "from": "Von",
+        "to": "Bis",
+        "merchant": "Händler",
+        "minAmount": "Mindestbetrag",
+        "maxAmount": "Höchstbetrag"
+      },
       "noExports": "Noch keine Exporte",
+      "noExportsDescription": "Exportieren Sie Belege vom Dashboard, um sie hier zu sehen",
       "type": "Typ",
+      "fileName": "Dateiname",
       "receipts": "Belege",
       "showingRecent": "Zeigt {count} neuesten Export{count, plural, one {} other {e}} an",
       "columns": {
@@ -376,12 +408,24 @@
   "pricing": {
     "title": "Einfache, transparente Preise",
     "subtitle": "Wählen Sie den Plan, der zu Ihnen passt",
+    "subheadline": "Zahlen Sie pro Nutzung oder abonnieren Sie und sparen Sie",
+    "currentBalance": "Ihr aktueller Saldo",
+    "credits": "Credits",
+    "perCredit": "pro Credit",
     "perReceipt": "pro Beleg",
     "creditPacks": "Credit-Pakete",
+    "creditPackagesTitle": "Credit-Pakete",
     "subscriptions": "Abonnements",
     "buyNow": "Jetzt Kaufen",
     "subscribe": "Abonnieren",
     "popular": "Am Beliebtesten",
+    "purchaseCredits": "Credits Kaufen",
+    "getStarted": "Loslegen",
+    "readyTitle": "Bereit loszulegen?",
+    "readySubtitle": "Starten Sie mit 10 kostenlosen Credits, keine Kreditkarte erforderlich",
+    "goToDashboard": "Zum Dashboard",
+    "startFree": "Kostenlos Starten",
+    "signIn": "Anmelden",
     "features": {
       "allFeatures": "Alle Funktionen enthalten",
       "aiExtraction": "KI-gestützte Extraktion",
@@ -389,6 +433,29 @@
       "support": "E-Mail-Support",
       "security": "Sicherheit auf Bankniveau",
       "gdpr": "DSGVO-konform"
+    },
+    "faq": {
+      "title": "Häufig Gestellte Fragen",
+      "howCreditsWork": {
+        "question": "Wie funktionieren Credits?",
+        "answer": "Jeder Beleg, den Sie hochladen und verarbeiten, kostet 1 Credit. Credits werden nur abgezogen, wenn die KI erfolgreich Daten aus Ihrem Beleg extrahiert. Sie können Credits in Paketen kaufen oder ein Abonnement für monatliche Credits zu einem ermäßigten Preis abschließen."
+      },
+      "doCreditsExpire": {
+        "question": "Verfallen Credits?",
+        "answer": "Nein, Credits verfallen nie. Sobald Sie Credits kaufen, bleiben sie in Ihrem Konto, bis Sie sie verwenden. Dies gibt Ihnen völlige Flexibilität, sie in Ihrem eigenen Tempo zu nutzen."
+      },
+      "canIGetRefund": {
+        "question": "Kann ich eine Rückerstattung erhalten?",
+        "answer": "Ja! Wir bieten eine 30-tägige Geld-zurück-Garantie. Wenn Sie mit unserem Service nicht zufrieden sind, kontaktieren Sie uns innerhalb von 30 Tagen nach Ihrem Kauf für eine vollständige Rückerstattung ungenutzter Credits."
+      },
+      "wrongExtraction": {
+        "question": "Was ist, wenn die Extraktion falsch ist?",
+        "answer": "Wenn die KI-Extraktion Fehler enthält oder Ihre Erwartungen nicht erfüllt, kontaktieren Sie unser Support-Team. Wir prüfen den Fall und bieten einen kostenlosen erneuten Versuch oder eine Credit-Rückerstattung an, wenn die Extraktionsqualität unter unseren Standards lag."
+      },
+      "needSubscription": {
+        "question": "Brauche ich ein Abonnement?",
+        "answer": "Nein, Abonnements sind völlig optional. Sie können Credits nach Bedarf mit unseren Pay-as-you-go-Paketen kaufen. Abonnements sind verfügbar, wenn Sie mit ermäßigten monatlichen Credits Geld sparen möchten, aber Sie können den Service so nutzen, wie es für Sie am besten funktioniert."
+      }
     }
   },
   "footer": {
