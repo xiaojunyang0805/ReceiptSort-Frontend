@@ -1,5 +1,6 @@
 import OpenAI from 'openai'
 import { ExtractedReceiptData, ReceiptCategory, PaymentMethod } from '@/types/receipt'
+import { extractTextFromPdf, isPdfUrl } from './pdf-converter'
 
 // Initialize OpenAI client (lazy initialization for scripts)
 let openai: OpenAI | null = null
@@ -103,13 +104,13 @@ CRITICAL RULES:
 Return valid JSON only. No markdown, no explanations.`
 
 /**
- * Extract receipt data from an image or PDF using OpenAI Vision API
+ * Extract receipt data from an image or PDF using OpenAI API
  *
  * @param imageUrl - Publicly accessible URL or base64 data URL of the receipt (supports images and PDFs)
  * @returns Structured receipt data
  * @throws Error if extraction fails
  *
- * Note: gpt-4o supports both images (JPG, PNG, WebP) and PDF files natively
+ * Note: For images, uses OpenAI Vision API. For PDFs, extracts text first and processes it with GPT-4o.
  */
 export async function extractReceiptData(
   imageUrl: string
@@ -122,27 +123,53 @@ export async function extractReceiptData(
 
     const client = getOpenAIClient()
 
-    // Call OpenAI Vision API
+    // Check if URL is a PDF and extract text if necessary
+    const isPdf = isPdfUrl(imageUrl)
+    let extractedText: string | null = null
+
+    if (isPdf) {
+      console.log('[OpenAI] Detected PDF file, extracting text...')
+      try {
+        extractedText = await extractTextFromPdf(imageUrl)
+        console.log('[OpenAI] PDF text successfully extracted')
+      } catch (extractionError) {
+        console.error('[OpenAI] PDF text extraction failed:', extractionError)
+        throw new Error(
+          `Failed to extract text from PDF: ${extractionError instanceof Error ? extractionError.message : 'Extraction error'}`
+        )
+      }
+    }
+
+    // Call OpenAI API (Vision for images, Chat for PDF text)
     const response = await client.chat.completions.create({
       model: 'gpt-4o',
-      messages: [
-        {
-          role: 'user',
-          content: [
+      messages: isPdf
+        ? [
+            // For PDFs: send text with prompt
             {
-              type: 'text',
-              text: RECEIPT_EXTRACTION_PROMPT,
+              role: 'user',
+              content: `${RECEIPT_EXTRACTION_PROMPT}\n\nExtracted text from receipt PDF:\n\n${extractedText}`,
             },
+          ]
+        : [
+            // For images: use Vision API
             {
-              type: 'image_url',
-              image_url: {
-                url: imageUrl,
-                detail: 'high', // Use high detail for better accuracy
-              },
+              role: 'user',
+              content: [
+                {
+                  type: 'text',
+                  text: RECEIPT_EXTRACTION_PROMPT,
+                },
+                {
+                  type: 'image_url',
+                  image_url: {
+                    url: imageUrl,
+                    detail: 'high', // Use high detail for better accuracy
+                  },
+                },
+              ],
             },
           ],
-        },
-      ],
       max_tokens: 500,
       temperature: 0.1, // Low temperature for consistent output
     })
