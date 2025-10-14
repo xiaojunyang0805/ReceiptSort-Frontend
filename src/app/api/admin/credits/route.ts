@@ -1,11 +1,24 @@
 import { createClient } from '@supabase/supabase-js'
 import { NextResponse } from 'next/server'
+import { verifyAdminAccess } from '@/lib/admin'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
 
 export async function POST(request: Request) {
   try {
+    // Verify admin access
+    try {
+      await verifyAdminAccess(request)
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Unauthorized'
+      console.error('[Admin API] Access denied:', errorMessage)
+      return NextResponse.json(
+        { error: 'Unauthorized: Admin access required' },
+        { status: 403 }
+      )
+    }
+
     const { userId, action, amount } = await request.json()
 
     if (!userId || !action || !amount) {

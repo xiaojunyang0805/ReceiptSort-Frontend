@@ -1,6 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import { createClient } from '@/lib/supabase/client'
+import { checkIsAdmin } from '@/lib/admin'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -33,6 +36,10 @@ interface UserProfile {
 }
 
 export default function AdminPage() {
+  const router = useRouter()
+  const supabase = createClient()
+  const [isCheckingAccess, setIsCheckingAccess] = useState(true)
+  const [isAdmin, setIsAdmin] = useState(false)
   const [searchEmail, setSearchEmail] = useState('')
   const [users, setUsers] = useState<UserProfile[]>([])
   const [isSearching, setIsSearching] = useState(false)
@@ -40,6 +47,39 @@ export default function AdminPage() {
   const [creditAction, setCreditAction] = useState<'add' | 'subtract' | 'set'>('add')
   const [creditAmount, setCreditAmount] = useState('')
   const [isProcessing, setIsProcessing] = useState(false)
+
+  // Check admin access on mount
+  useEffect(() => {
+    const checkAccess = async () => {
+      try {
+        const { data: { user } } = await supabase.auth.getUser()
+
+        if (!user) {
+          console.log('[Admin] No user found, redirecting to login')
+          router.push('/login')
+          return
+        }
+
+        const adminStatus = await checkIsAdmin()
+
+        if (!adminStatus) {
+          console.log('[Admin] User is not admin, redirecting to dashboard')
+          toast.error('Access denied: Admin privileges required')
+          router.push('/dashboard')
+          return
+        }
+
+        setIsAdmin(true)
+      } catch (error) {
+        console.error('[Admin] Error checking access:', error)
+        router.push('/dashboard')
+      } finally {
+        setIsCheckingAccess(false)
+      }
+    }
+
+    checkAccess()
+  }, [router, supabase])
 
   const handleSearch = async () => {
     if (!searchEmail.trim()) {
@@ -49,9 +89,20 @@ export default function AdminPage() {
 
     setIsSearching(true)
     try {
+      // Get auth token
+      const { data: { session } } = await supabase.auth.getSession()
+      if (!session) {
+        toast.error('Session expired. Please login again.')
+        router.push('/login')
+        return
+      }
+
       const response = await fetch('/api/admin/users', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session.access_token}`,
+        },
         body: JSON.stringify({ email: searchEmail }),
       })
 
@@ -91,9 +142,20 @@ export default function AdminPage() {
 
     setIsProcessing(true)
     try {
+      // Get auth token
+      const { data: { session } } = await supabase.auth.getSession()
+      if (!session) {
+        toast.error('Session expired. Please login again.')
+        router.push('/login')
+        return
+      }
+
       const response = await fetch('/api/admin/credits', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session.access_token}`,
+        },
         body: JSON.stringify({
           userId: selectedUser.id,
           action: creditAction,
@@ -125,6 +187,22 @@ export default function AdminPage() {
     } finally {
       setIsProcessing(false)
     }
+  }
+
+  // Show loading state while checking access
+  if (isCheckingAccess) {
+    return (
+      <div className="container mx-auto py-8">
+        <div className="flex items-center justify-center h-64">
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        </div>
+      </div>
+    )
+  }
+
+  // Only render admin panel if user is admin
+  if (!isAdmin) {
+    return null
   }
 
   return (
