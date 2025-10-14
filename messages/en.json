@@ -339,8 +339,16 @@
       }
     },
     "exports": {
-      "title": "Export History",
-      "subtitle": "View your past receipt exports",
+      "title": "Exports",
+      "subtitle": "Export and manage your receipt data",
+      "exportSection": {
+        "title": "Export Receipts",
+        "description": "Filter and export your completed receipts"
+      },
+      "history": {
+        "title": "Export History",
+        "subtitle": "View your past receipt exports"
+      },
       "noExports": "No exports yet",
       "type": "Type",
       "receipts": "receipts",

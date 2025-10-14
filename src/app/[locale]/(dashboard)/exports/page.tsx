@@ -344,8 +344,8 @@ export default function ExportsPage() {
 
       {/* Export History Section */}
       <div>
-        <h2 className="text-2xl font-bold">Export History</h2>
-        <p className="text-muted-foreground mt-1">View your past receipt exports</p>
+        <h2 className="text-2xl font-bold">{t('history.title')}</h2>
+        <p className="text-muted-foreground mt-1">{t('history.subtitle')}</p>
       </div>
 
       {exports.length === 0 ? (
