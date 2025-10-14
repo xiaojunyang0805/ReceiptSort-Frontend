@@ -143,16 +143,16 @@ export default async function DashboardPage() {
       {!hasReceipts ? (
         <Card>
           <CardHeader>
-            <CardTitle>Get Started</CardTitle>
+            <CardTitle>{t('getStarted.title')}</CardTitle>
             <CardDescription>
-              Upload your first receipt to start organizing
+              {t('getStarted.description')}
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Button asChild size="lg">
               <Link href="/upload">
                 <Upload className="mr-2 h-4 w-4" />
-                Upload Your First Receipt
+                {t('getStarted.uploadButton')}
               </Link>
             </Button>
           </CardContent>
@@ -160,9 +160,12 @@ export default async function DashboardPage() {
       ) : hasPendingReceipts ? (
         <Card>
           <CardHeader>
-            <CardTitle>Pending Receipts</CardTitle>
+            <CardTitle>{t('pendingReceipts.title')}</CardTitle>
             <CardDescription>
-              You have {pendingReceipts} receipt{pendingReceipts === 1 ? '' : 's'} waiting to be processed
+              {(pendingReceipts ?? 0) === 1
+                ? t('pendingReceipts.description', { count: pendingReceipts ?? 0 })
+                : t('pendingReceipts.descriptionPlural', { count: pendingReceipts ?? 0 })
+              }
             </CardDescription>
           </CardHeader>
           <CardContent>

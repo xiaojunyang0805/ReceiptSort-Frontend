@@ -214,6 +214,16 @@
       "title": "Overview",
       "subtitle": "Here's an overview of your receipt management"
     },
+    "getStarted": {
+      "title": "Get Started",
+      "description": "Upload your first receipt to start organizing",
+      "uploadButton": "Upload Your First Receipt"
+    },
+    "pendingReceipts": {
+      "title": "Pending Receipts",
+      "description": "You have {count} receipt waiting to be processed",
+      "descriptionPlural": "You have {count} receipts waiting to be processed"
+    },
     "uploadSection": {
       "title": "Upload Receipts",
       "dragDrop": "Drag and drop receipt images here",

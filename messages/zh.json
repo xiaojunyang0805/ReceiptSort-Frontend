@@ -214,6 +214,16 @@
       "title": "概览",
       "subtitle": "这是您收据管理的概览"
     },
+    "getStarted": {
+      "title": "开始使用",
+      "description": "上传您的第一张收据以开始整理",
+      "uploadButton": "上传您的第一张收据"
+    },
+    "pendingReceipts": {
+      "title": "待处理的收据",
+      "description": "您有 {count} 张收据等待处理",
+      "descriptionPlural": "您有 {count} 张收据等待处理"
+    },
     "uploadSection": {
       "title": "上传收据",
       "dragDrop": "拖放收据图片到此处",
