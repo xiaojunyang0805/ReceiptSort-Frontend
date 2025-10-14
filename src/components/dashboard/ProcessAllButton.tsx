@@ -26,7 +26,7 @@ export function ProcessAllButton({
   pendingIds,
   userCredits,
 }: ProcessAllButtonProps) {
-  const t = useTranslations('receiptsPage.processing')
+  const t = useTranslations('dashboard.receiptsPage.processing')
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [isProcessing, setIsProcessing] = useState(false)
   const [progress, setProgress] = useState({
