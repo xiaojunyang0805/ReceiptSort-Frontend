@@ -1,7 +1,7 @@
 'use client';
 
 import { Link } from '@/lib/navigation';
-import { FileText, Mail, Twitter, Linkedin } from 'lucide-react';
+import { FileText, Mail } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 export default function Footer() {
@@ -18,7 +18,7 @@ export default function Footer() {
   return (
     <footer className="bg-gray-50 border-t">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Column 1: Company */}
           <div>
             <h3 className="font-semibold text-gray-900 mb-4">{t('company')}</h3>
@@ -93,44 +93,6 @@ export default function Footer() {
                 <Link href="/privacy" className="text-gray-600 hover:text-primary transition-colors">
                   Cookie Policy
                 </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 4: Social */}
-          <div>
-            <h3 className="font-semibold text-gray-900 mb-4">Social</h3>
-            <ul className="space-y-3">
-              <li>
-                <a
-                  href="https://twitter.com/receiptsort"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-gray-600 hover:text-primary transition-colors"
-                >
-                  <Twitter className="h-4 w-4" />
-                  Twitter/X
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://linkedin.com/company/receiptsort"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-gray-600 hover:text-primary transition-colors"
-                >
-                  <Linkedin className="h-4 w-4" />
-                  LinkedIn
-                </a>
-              </li>
-              <li>
-                <a
-                  href="mailto:support@receiptsort.com"
-                  className="flex items-center gap-2 text-gray-600 hover:text-primary transition-colors"
-                >
-                  <Mail className="h-4 w-4" />
-                  Email
-                </a>
               </li>
             </ul>
           </div>
