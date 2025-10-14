@@ -492,7 +492,8 @@
     "contact": "Kontakt",
     "dashboard": "Dashboard",
     "login": "Anmelden",
-    "signup": "Registrieren"
+    "signup": "Registrieren",
+    "about": "Über Uns"
   },
   "contact": {
     "title": "Kontaktieren Sie uns",
@@ -509,6 +510,8 @@
     "message": "Nachricht",
     "messagePlaceholder": "Erzählen Sie uns mehr über Ihre Anfrage...",
     "sendButton": "Nachricht Senden",
+    "sending": "Wird gesendet...",
+    "successMessage": "Nachricht erfolgreich gesendet! Wir melden uns innerhalb von 24 Stunden bei Ihnen.",
     "responseTime": "Wir antworten in der Regel innerhalb von 24 Stunden",
     "preferEmail": "Bevorzugen Sie E-Mail?",
     "reachDirectly": "Sie können uns auch direkt per E-Mail erreichen:",

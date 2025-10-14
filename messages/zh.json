@@ -492,7 +492,8 @@
     "contact": "联系我们",
     "dashboard": "控制面板",
     "login": "登录",
-    "signup": "注册"
+    "signup": "注册",
+    "about": "关于我们"
   },
   "contact": {
     "title": "联系我们",
@@ -509,6 +510,8 @@
     "message": "消息",
     "messagePlaceholder": "告诉我们更多关于您的咨询...",
     "sendButton": "发送消息",
+    "sending": "发送中...",
+    "successMessage": "消息发送成功！我们将在24小时内回复您。",
     "responseTime": "我们通常在24小时内回复",
     "preferEmail": "更喜欢电子邮件？",
     "reachDirectly": "您也可以通过电子邮件直接联系我们：",

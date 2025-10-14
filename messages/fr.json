@@ -492,7 +492,8 @@
     "contact": "Contact",
     "dashboard": "Tableau de Bord",
     "login": "Se Connecter",
-    "signup": "S'inscrire"
+    "signup": "S'inscrire",
+    "about": "À Propos"
   },
   "contact": {
     "title": "Contactez-nous",
@@ -509,6 +510,8 @@
     "message": "Message",
     "messagePlaceholder": "Parlez-nous de votre demande...",
     "sendButton": "Envoyer le Message",
+    "sending": "Envoi en cours...",
+    "successMessage": "Message envoyé avec succès ! Nous vous répondrons dans les 24 heures.",
     "responseTime": "Nous répondons généralement dans les 24 heures",
     "preferEmail": "Vous préférez l'e-mail ?",
     "reachDirectly": "Vous pouvez également nous joindre directement par e-mail :",

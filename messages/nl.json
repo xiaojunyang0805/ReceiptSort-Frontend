@@ -491,7 +491,8 @@
     "contact": "Contact",
     "dashboard": "Dashboard",
     "login": "Inloggen",
-    "signup": "Aanmelden"
+    "signup": "Aanmelden",
+    "about": "Over Ons"
   },
   "contact": {
     "title": "Neem Contact Op",
@@ -508,6 +509,8 @@
     "message": "Bericht",
     "messagePlaceholder": "Vertel ons meer over uw vraag...",
     "sendButton": "Bericht Versturen",
+    "sending": "Verzenden...",
+    "successMessage": "Bericht succesvol verzonden! We nemen binnen 24 uur contact met u op.",
     "responseTime": "We reageren meestal binnen 24 uur",
     "preferEmail": "E-mail voorkeur?",
     "reachDirectly": "U kunt ons ook direct bereiken via e-mail:",

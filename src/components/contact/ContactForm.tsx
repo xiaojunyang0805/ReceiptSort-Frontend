@@ -7,8 +7,10 @@ import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 import { Send, CheckCircle, AlertCircle } from 'lucide-react'
 import { Alert, AlertDescription } from '@/components/ui/alert'
+import { useTranslations } from 'next-intl'
 
 export function ContactForm() {
+  const t = useTranslations('contact')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
@@ -55,7 +57,7 @@ export function ContactForm() {
         <Alert className="mb-4 border-green-200 bg-green-50">
           <CheckCircle className="h-4 w-4 text-green-600" />
           <AlertDescription className="text-green-800">
-            Message sent successfully! We&apos;ll get back to you within 24 hours.
+            {t('successMessage')}
           </AlertDescription>
         </Alert>
       )}
@@ -72,11 +74,11 @@ export function ContactForm() {
         <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
 
         <div>
-          <Label htmlFor="name">Name</Label>
+          <Label htmlFor="name">{t('name')}</Label>
           <Input
             id="name"
             name="name"
-            placeholder="Your name"
+            placeholder={t('namePlaceholder')}
             className="mt-1.5"
             required
             disabled={isSubmitting}
@@ -84,12 +86,12 @@ export function ContactForm() {
         </div>
 
         <div>
-          <Label htmlFor="email">Email</Label>
+          <Label htmlFor="email">{t('email')}</Label>
           <Input
             id="email"
             name="email"
             type="email"
-            placeholder="your@email.com"
+            placeholder={t('emailPlaceholder')}
             className="mt-1.5"
             required
             disabled={isSubmitting}
@@ -97,11 +99,11 @@ export function ContactForm() {
         </div>
 
         <div>
-          <Label htmlFor="subject">Subject</Label>
+          <Label htmlFor="subject">{t('subject')}</Label>
           <Input
             id="subject"
             name="subject"
-            placeholder="How can we help?"
+            placeholder={t('subjectPlaceholder')}
             className="mt-1.5"
             required
             disabled={isSubmitting}
@@ -109,11 +111,11 @@ export function ContactForm() {
         </div>
 
         <div>
-          <Label htmlFor="message">Message</Label>
+          <Label htmlFor="message">{t('message')}</Label>
           <Textarea
             id="message"
             name="message"
-            placeholder="Tell us more about your inquiry..."
+            placeholder={t('messagePlaceholder')}
             rows={6}
             className="mt-1.5"
             required
@@ -123,11 +125,11 @@ export function ContactForm() {
 
         <Button type="submit" className="w-full gap-2" disabled={isSubmitting}>
           <Send className="h-4 w-4" />
-          {isSubmitting ? 'Sending...' : 'Send Message'}
+          {isSubmitting ? t('sending') : t('sendButton')}
         </Button>
 
         <p className="text-sm text-muted-foreground text-center">
-          We typically respond within 24 hours
+          {t('responseTime')}
         </p>
       </form>
     </>

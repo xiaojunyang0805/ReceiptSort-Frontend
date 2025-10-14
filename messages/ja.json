@@ -492,7 +492,8 @@
     "contact": "お問い合わせ",
     "dashboard": "ダッシュボード",
     "login": "ログイン",
-    "signup": "サインアップ"
+    "signup": "サインアップ",
+    "about": "私たちについて"
   },
   "contact": {
     "title": "お問い合わせ",
@@ -509,6 +510,8 @@
     "message": "メッセージ",
     "messagePlaceholder": "お問い合わせ内容を詳しくお聞かせください...",
     "sendButton": "メッセージを送信",
+    "sending": "送信中...",
+    "successMessage": "メッセージが正常に送信されました！24時間以内にご連絡いたします。",
     "responseTime": "通常24時間以内にご返信いたします",
     "preferEmail": "メールでのお問い合わせをご希望ですか？",
     "reachDirectly": "以下のメールアドレスから直接お問い合わせいただけます：",

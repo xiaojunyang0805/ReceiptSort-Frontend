@@ -492,7 +492,8 @@
     "contact": "Contact",
     "dashboard": "Dashboard",
     "login": "Login",
-    "signup": "Sign Up"
+    "signup": "Sign Up",
+    "about": "About"
   },
   "contact": {
     "title": "Get in Touch",
@@ -509,6 +510,8 @@
     "message": "Message",
     "messagePlaceholder": "Tell us more about your inquiry...",
     "sendButton": "Send Message",
+    "sending": "Sending...",
+    "successMessage": "Message sent successfully! We'll get back to you within 24 hours.",
     "responseTime": "We typically respond within 24 hours",
     "preferEmail": "Prefer Email?",
     "reachDirectly": "You can also reach us directly via email:",

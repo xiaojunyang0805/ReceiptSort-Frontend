@@ -492,7 +492,8 @@
     "contact": "Contacto",
     "dashboard": "Panel",
     "login": "Iniciar Sesión",
-    "signup": "Registrarse"
+    "signup": "Registrarse",
+    "about": "Acerca de"
   },
   "contact": {
     "title": "Ponte en Contacto",
@@ -509,6 +510,8 @@
     "message": "Mensaje",
     "messagePlaceholder": "Cuéntanos más sobre tu consulta...",
     "sendButton": "Enviar Mensaje",
+    "sending": "Enviando...",
+    "successMessage": "¡Mensaje enviado con éxito! Te responderemos en 24 horas.",
     "responseTime": "Normalmente respondemos en 24 horas",
     "preferEmail": "¿Prefieres el correo electrónico?",
     "reachDirectly": "También puedes contactarnos directamente por correo:",
