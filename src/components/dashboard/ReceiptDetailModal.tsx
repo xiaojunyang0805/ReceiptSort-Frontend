@@ -99,6 +99,7 @@ export default function ReceiptDetailModal({
   const [signedUrl, setSignedUrl] = useState<string | null>(null)
   const [urlLoading, setUrlLoading] = useState(false)
   const [urlError, setUrlError] = useState<string | null>(null)
+  const [imageError, setImageError] = useState(false)
   const supabase = createClient()
 
   useEffect(() => {
@@ -280,14 +281,29 @@ export default function ReceiptDetailModal({
                 </Button>
               </div>
             ) : signedUrl && receipt.file_type.startsWith('image/') ? (
-              <div className="relative aspect-[3/4] w-full border rounded-lg overflow-hidden bg-muted">
-                <Image
-                  src={signedUrl}
-                  alt={receipt.file_name}
-                  fill
-                  className="object-contain"
-                />
-              </div>
+              imageError ? (
+                <div className="aspect-[3/4] w-full border rounded-lg flex flex-col items-center justify-center bg-muted p-4">
+                  <FileText className="h-16 w-16 text-muted-foreground mb-4" />
+                  <p className="text-sm text-muted-foreground mb-2">Failed to load image</p>
+                  <p className="text-xs text-muted-foreground mb-4">Using direct link instead</p>
+                  <Button asChild variant="outline" size="sm">
+                    <a href={signedUrl} target="_blank" rel="noopener noreferrer">
+                      Open Image
+                    </a>
+                  </Button>
+                </div>
+              ) : (
+                <div className="relative aspect-[3/4] w-full border rounded-lg overflow-hidden bg-muted">
+                  <Image
+                    src={signedUrl}
+                    alt={receipt.file_name}
+                    fill
+                    className="object-contain"
+                    onError={() => setImageError(true)}
+                    unoptimized
+                  />
+                </div>
+              )
             ) : signedUrl ? (
               <div className="aspect-[3/4] w-full border rounded-lg flex flex-col items-center justify-center bg-muted">
                 <FileText className="h-16 w-16 text-muted-foreground mb-4" />
