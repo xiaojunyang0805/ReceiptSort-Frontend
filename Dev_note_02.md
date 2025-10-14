@@ -965,6 +965,49 @@ Jimp.read(buffer).getBuffer('image/jpeg')
 
 **Coverage:** Addresses 80% of use cases with just 5 essential fields
 
+### Phase 1 Deployment Bug Fixes ✅ (2025-10-14)
+
+**Issues Found After Deployment:**
+1. ❌ Receipt processing failure: "Failed to update receipt with extracted data"
+2. ❌ Translation button showing literal key: "receiptsPage.processing.processAllButton" in Chinese interface
+
+**Root Causes & Fixes:**
+
+**Issue #1: Database Migration Not Executed**
+- **Problem:** Code tried to update Phase 1 columns that didn't exist in production database
+- **Solution:** Created migration verification script and executed migration in Supabase
+- **Files Created:**
+  - `scripts/check-phase1-columns.sql` - Verification query
+  - `URGENT_FIX_REQUIRED.md` - Troubleshooting guide
+- **Result:** ✅ All 5 Phase 1 columns created successfully
+- **Git Commit:** `aa25b3f`
+
+**Issue #2: Translation Namespace Incorrect**
+- **Problem:** ProcessAllButton used `'receiptsPage.processing'` instead of `'dashboard.receiptsPage.processing'`
+- **Root Cause:** Missing `dashboard.` prefix in useTranslations() hook
+- **Solution:** Fixed namespace path in ProcessAllButton.tsx:29
+- **Result:** ✅ Button now shows "处理所有待处理 ({count})" in Chinese
+- **Git Commit:** `6a91a4f`
+
+**Issue #3: Dashboard English Text Not Translated**
+- **Problem:** "Pending Receipts" and "Get Started" cards showed English text in Chinese interface
+- **Solution:** Added missing translation keys to zh.json and en.json
+- **Keys Added:**
+  - `dashboard.getStarted.title/description/uploadButton`
+  - `dashboard.pendingReceipts.title/description/descriptionPlural`
+- **Files Modified:**
+  - `messages/zh.json`, `messages/en.json` - Added translation keys
+  - `src/app/[locale]/(dashboard)/dashboard/page.tsx` - Replaced hardcoded text
+- **Result:** ✅ Dashboard fully translated in Chinese
+- **Git Commit:** `8fc428e`
+
+**Testing Result:** ✅ ALL ISSUES RESOLVED
+- Receipt processing working for all document types
+- Chinese interface fully translated throughout
+- Phase 1 features fully operational
+
+**Deployment:** https://receiptsort.seenano.nl
+
 ---
 
 ## Issues & Resolutions
