@@ -14,10 +14,15 @@ import {
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { FileSpreadsheet, FileText, Download, ChevronDown, ChevronUp, Loader2 } from 'lucide-react'
-import { formatDistanceToNow, subMonths, startOfMonth, endOfMonth, startOfYear, endOfYear, startOfQuarter, endOfQuarter } from 'date-fns'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Calendar } from '@/components/ui/calendar'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { FileSpreadsheet, FileText, Download, ChevronDown, ChevronUp, Loader2, CalendarIcon, X, Filter } from 'lucide-react'
+import { formatDistanceToNow, format } from 'date-fns'
 import { toast } from 'sonner'
 import ExportDialog from '@/components/dashboard/ExportDialog'
+import { cn } from '@/lib/utils'
 
 interface Export {
   id: string
@@ -36,7 +41,13 @@ export default function ExportsPage() {
   const [isExporting, setIsExporting] = useState(false)
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set())
   const [exportDialogOpen, setExportDialogOpen] = useState(false)
-  const [selectedTimePeriod, setSelectedTimePeriod] = useState<string | null>(null)
+
+  // Advanced filter states
+  const [dateFrom, setDateFrom] = useState<Date | undefined>(undefined)
+  const [dateTo, setDateTo] = useState<Date | undefined>(undefined)
+  const [merchantSearch, setMerchantSearch] = useState('')
+  const [minAmount, setMinAmount] = useState('')
+  const [maxAmount, setMaxAmount] = useState('')
 
   useEffect(() => {
     fetchExports()
@@ -82,97 +93,39 @@ export default function ExportsPage() {
     }
   }
 
-  const handleExportAll = async () => {
+  const handleExportWithFilters = async () => {
     setIsExporting(true)
     try {
       const supabase = createClient()
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) return
 
-      // Fetch all completed receipts
-      const { data: receiptData, error } = await supabase
-        .from('receipts')
-        .select('id')
-        .eq('user_id', user.id)
-        .eq('processing_status', 'completed')
-
-      if (error) throw error
-
-      if (!receiptData || receiptData.length === 0) {
-        toast.error('No receipts found', {
-          description: 'No completed receipts available to export',
-        })
-        return
-      }
-
-      const receiptIds = receiptData.map(r => r.id)
-      setSelectedIds(new Set(receiptIds))
-      setExportDialogOpen(true)
-    } catch (error) {
-      console.error('[Export All] Error:', error)
-      toast.error('Export failed', {
-        description: 'Failed to prepare export',
-      })
-    } finally {
-      setIsExporting(false)
-    }
-  }
-
-  const handleTimePeriodExport = async (period: string) => {
-    setIsExporting(true)
-    setSelectedTimePeriod(period)
-    try {
-      const supabase = createClient()
-      const { data: { user } } = await supabase.auth.getUser()
-      if (!user) return
-
-      const now = new Date()
-      let dateFrom: Date
-      let dateTo = new Date()
-
-      // Calculate date ranges
-      switch (period) {
-        case 'thisMonth':
-          dateFrom = startOfMonth(now)
-          dateTo = endOfMonth(now)
-          break
-        case 'lastMonth':
-          dateFrom = startOfMonth(subMonths(now, 1))
-          dateTo = endOfMonth(subMonths(now, 1))
-          break
-        case 'thisYear':
-          dateFrom = startOfYear(now)
-          dateTo = endOfYear(now)
-          break
-        case 'q1':
-          dateFrom = startOfQuarter(new Date(now.getFullYear(), 0, 1))
-          dateTo = endOfQuarter(new Date(now.getFullYear(), 0, 1))
-          break
-        case 'q2':
-          dateFrom = startOfQuarter(new Date(now.getFullYear(), 3, 1))
-          dateTo = endOfQuarter(new Date(now.getFullYear(), 3, 1))
-          break
-        case 'q3':
-          dateFrom = startOfQuarter(new Date(now.getFullYear(), 6, 1))
-          dateTo = endOfQuarter(new Date(now.getFullYear(), 6, 1))
-          break
-        case 'q4':
-          dateFrom = startOfQuarter(new Date(now.getFullYear(), 9, 1))
-          dateTo = endOfQuarter(new Date(now.getFullYear(), 9, 1))
-          break
-        default:
-          dateFrom = new Date(0) // All time
-      }
-
-      // Fetch receipts with date filter
+      // Build query with filters
       let query = supabase
         .from('receipts')
         .select('id')
         .eq('user_id', user.id)
         .eq('processing_status', 'completed')
 
-      if (period !== 'allTime') {
-        query = query.gte('receipt_date', dateFrom.toISOString()).lte('receipt_date', dateTo.toISOString())
+      // Apply date filters
+      if (dateFrom) {
+        query = query.gte('receipt_date', dateFrom.toISOString())
+      }
+      if (dateTo) {
+        query = query.lte('receipt_date', dateTo.toISOString())
+      }
+
+      // Apply merchant search filter
+      if (merchantSearch.trim()) {
+        query = query.ilike('merchant_name', `%${merchantSearch.trim()}%`)
+      }
+
+      // Apply amount filters
+      if (minAmount) {
+        query = query.gte('total_amount', parseFloat(minAmount))
+      }
+      if (maxAmount) {
+        query = query.lte('total_amount', parseFloat(maxAmount))
       }
 
       const { data: receiptData, error } = await query
@@ -181,7 +134,7 @@ export default function ExportsPage() {
 
       if (!receiptData || receiptData.length === 0) {
         toast.error('No receipts found', {
-          description: `No completed receipts found for ${period}`,
+          description: 'No receipts match your filter criteria',
         })
         return
       }
@@ -190,15 +143,24 @@ export default function ExportsPage() {
       setSelectedIds(new Set(receiptIds))
       setExportDialogOpen(true)
     } catch (error) {
-      console.error('[Time Period Export] Error:', error)
+      console.error('[Export With Filters] Error:', error)
       toast.error('Export failed', {
         description: 'Failed to prepare export',
       })
     } finally {
       setIsExporting(false)
-      setSelectedTimePeriod(null)
     }
   }
+
+  const clearFilters = () => {
+    setDateFrom(undefined)
+    setDateTo(undefined)
+    setMerchantSearch('')
+    setMinAmount('')
+    setMaxAmount('')
+  }
+
+  const hasActiveFilters = dateFrom || dateTo || merchantSearch || minAmount || maxAmount
 
   if (isLoading) {
     return (
@@ -219,137 +181,165 @@ export default function ExportsPage() {
         </p>
       </div>
 
-      {/* Quick Export Section */}
+      {/* Export Filters Section */}
       <Card className="p-6">
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <div>
-              <h2 className="text-xl font-semibold">Quick Export</h2>
-              <p className="text-sm text-muted-foreground">Export all your completed receipts or filter by time period</p>
+            <div className="flex items-center gap-2">
+              <Filter className="h-5 w-5" />
+              <h2 className="text-xl font-semibold">Export Receipts</h2>
             </div>
             <Button
-              onClick={handleExportAll}
-              disabled={isExporting}
-              size="lg"
+              variant="ghost"
+              onClick={() => setShowFilters(!showFilters)}
             >
-              {isExporting && !selectedTimePeriod ? (
+              {showFilters ? (
                 <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Loading...
+                  <ChevronUp className="mr-2 h-4 w-4" />
+                  Hide Filters
                 </>
               ) : (
                 <>
-                  <Download className="mr-2 h-4 w-4" />
-                  Export All
+                  <ChevronDown className="mr-2 h-4 w-4" />
+                  Show Filters
                 </>
               )}
             </Button>
           </div>
 
-          {/* Collapsible Filters */}
-          <div className="border-t pt-4">
-            <Button
-              variant="ghost"
-              onClick={() => setShowFilters(!showFilters)}
-              className="w-full justify-between"
-            >
-              <span>Filter by Time Period</span>
-              {showFilters ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-            </Button>
+          {showFilters && (
+            <div className="space-y-4 pt-4 border-t">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Date Range Filters */}
+                <div className="space-y-2">
+                  <Label>From Date</Label>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant="outline"
+                        className={cn(
+                          "w-full justify-start text-left font-normal",
+                          !dateFrom && "text-muted-foreground"
+                        )}
+                      >
+                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        {dateFrom ? format(dateFrom, "PPP") : "Pick a date"}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        mode="single"
+                        selected={dateFrom}
+                        onSelect={setDateFrom}
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
+                </div>
 
-            {showFilters && (
-              <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-3">
-                <Button
-                  variant="outline"
-                  onClick={() => handleTimePeriodExport('thisMonth')}
-                  disabled={isExporting}
-                  className="w-full"
-                >
-                  {isExporting && selectedTimePeriod === 'thisMonth' ? (
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  ) : null}
-                  This Month
-                </Button>
-                <Button
-                  variant="outline"
-                  onClick={() => handleTimePeriodExport('lastMonth')}
-                  disabled={isExporting}
-                  className="w-full"
-                >
-                  {isExporting && selectedTimePeriod === 'lastMonth' ? (
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  ) : null}
-                  Last Month
-                </Button>
-                <Button
-                  variant="outline"
-                  onClick={() => handleTimePeriodExport('thisYear')}
-                  disabled={isExporting}
-                  className="w-full"
-                >
-                  {isExporting && selectedTimePeriod === 'thisYear' ? (
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  ) : null}
-                  This Year
-                </Button>
-                <Button
-                  variant="outline"
-                  onClick={() => handleTimePeriodExport('q1')}
-                  disabled={isExporting}
-                  className="w-full"
-                >
-                  {isExporting && selectedTimePeriod === 'q1' ? (
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  ) : null}
-                  Q1
-                </Button>
-                <Button
-                  variant="outline"
-                  onClick={() => handleTimePeriodExport('q2')}
-                  disabled={isExporting}
-                  className="w-full"
-                >
-                  {isExporting && selectedTimePeriod === 'q2' ? (
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  ) : null}
-                  Q2
-                </Button>
-                <Button
-                  variant="outline"
-                  onClick={() => handleTimePeriodExport('q3')}
-                  disabled={isExporting}
-                  className="w-full"
-                >
-                  {isExporting && selectedTimePeriod === 'q3' ? (
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  ) : null}
-                  Q3
-                </Button>
-                <Button
-                  variant="outline"
-                  onClick={() => handleTimePeriodExport('q4')}
-                  disabled={isExporting}
-                  className="w-full"
-                >
-                  {isExporting && selectedTimePeriod === 'q4' ? (
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  ) : null}
-                  Q4
-                </Button>
-                <Button
-                  variant="outline"
-                  onClick={() => handleTimePeriodExport('allTime')}
-                  disabled={isExporting}
-                  className="w-full"
-                >
-                  {isExporting && selectedTimePeriod === 'allTime' ? (
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  ) : null}
-                  All Time
-                </Button>
+                <div className="space-y-2">
+                  <Label>To Date</Label>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant="outline"
+                        className={cn(
+                          "w-full justify-start text-left font-normal",
+                          !dateTo && "text-muted-foreground"
+                        )}
+                      >
+                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        {dateTo ? format(dateTo, "PPP") : "Pick a date"}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        mode="single"
+                        selected={dateTo}
+                        onSelect={setDateTo}
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
+                </div>
+
+                {/* Merchant Search */}
+                <div className="space-y-2">
+                  <Label>Merchant Name</Label>
+                  <Input
+                    placeholder="Search by merchant name..."
+                    value={merchantSearch}
+                    onChange={(e) => setMerchantSearch(e.target.value)}
+                  />
+                </div>
+
+                {/* Amount Range */}
+                <div className="space-y-2">
+                  <Label>Amount Range</Label>
+                  <div className="flex gap-2">
+                    <Input
+                      type="number"
+                      placeholder="Min"
+                      value={minAmount}
+                      onChange={(e) => setMinAmount(e.target.value)}
+                      step="0.01"
+                    />
+                    <Input
+                      type="number"
+                      placeholder="Max"
+                      value={maxAmount}
+                      onChange={(e) => setMaxAmount(e.target.value)}
+                      step="0.01"
+                    />
+                  </div>
+                </div>
               </div>
-            )}
-          </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap gap-2 pt-2">
+                <Button
+                  onClick={handleExportWithFilters}
+                  disabled={isExporting}
+                  className="flex-1 min-w-[200px]"
+                >
+                  {isExporting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Loading...
+                    </>
+                  ) : (
+                    <>
+                      <Download className="mr-2 h-4 w-4" />
+                      Export {hasActiveFilters ? 'Filtered' : 'All'} Receipts
+                    </>
+                  )}
+                </Button>
+                {hasActiveFilters && (
+                  <Button
+                    variant="outline"
+                    onClick={clearFilters}
+                    disabled={isExporting}
+                  >
+                    <X className="mr-2 h-4 w-4" />
+                    Clear Filters
+                  </Button>
+                )}
+              </div>
+
+              {hasActiveFilters && (
+                <div className="text-sm text-muted-foreground bg-muted/50 rounded-lg p-3">
+                  <div className="font-medium mb-1">Active Filters:</div>
+                  <div className="space-y-1">
+                    {dateFrom && <div>• From: {format(dateFrom, "PPP")}</div>}
+                    {dateTo && <div>• To: {format(dateTo, "PPP")}</div>}
+                    {merchantSearch && <div>• Merchant: &quot;{merchantSearch}&quot;</div>}
+                    {minAmount && <div>• Min Amount: ${minAmount}</div>}
+                    {maxAmount && <div>• Max Amount: ${maxAmount}</div>}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </Card>
 
