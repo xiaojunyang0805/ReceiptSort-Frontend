@@ -3,7 +3,7 @@
 import { Link } from '@/lib/navigation'
 import { usePathname } from '@/lib/navigation'
 import { cn } from '@/lib/utils'
-import { Home, Upload, Receipt, Download, CreditCard } from 'lucide-react'
+import { Home, Upload, Receipt, Download, CreditCard, Shield } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
 interface SidebarProps {
@@ -20,6 +20,7 @@ export function Sidebar({ className }: SidebarProps) {
     { name: t('receipts'), href: '/receipts', icon: Receipt },
     { name: t('exports'), href: '/exports', icon: Download },
     { name: t('credits'), href: '/credits', icon: CreditCard },
+    { name: 'Admin', href: '/admin', icon: Shield },
   ]
 
   return (

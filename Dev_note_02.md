@@ -435,12 +435,154 @@ Provider: Squarespace (seenano.nl)
 - **Email/Password Signup**: Email confirmation required before login
 - **Email/Password Login**: Works only after email confirmed
 
+### PDF Receipt Processing Fix (2025-10-14)
+
+**Issue:** PDF receipts failed to process with "400 You uploaded an unsupported image" error
+
+**Root Cause:**
+- OpenAI Vision API doesn't support PDF files through the `image_url` parameter
+- Only accepts image formats: PNG, JPEG, GIF, WebP
+- Code was sending PDF URLs directly to Vision API
+
+**Solution Implemented:**
+1. ✅ Installed `pdf-parse-fork` library for text extraction
+2. ✅ Created `pdf-converter.ts` utility module:
+   - Detects PDF files automatically
+   - Extracts text content from PDFs
+3. ✅ Updated `openai.ts` to handle PDFs differently:
+   - **Images**: Process with Vision API (unchanged)
+   - **PDFs**: Extract text first, then send to GPT-4o with same extraction prompt
+4. ✅ Added TypeScript definitions for pdf-parse-fork
+
+**Files Modified:**
+- `src/lib/pdf-converter.ts` (new) - PDF text extraction utility
+- `src/types/pdf-parse-fork.d.ts` (new) - TypeScript definitions
+- `src/lib/openai.ts` - Updated to handle both images and PDFs
+- `package.json` - Added pdf-parse-fork dependency
+
+**Testing Result:** ✅ CONFIRMED - PDF receipts now process successfully
+- Chinese e-fapiao PDFs tested and working
+- Text extraction accurate
+- Structured data extraction working (merchant, amount, date, category, etc.)
+
+**Commit:** `bcba403`
+**Deployment:** https://receiptsort.seenano.nl
+
+### Major UX Improvements (2025-10-14)
+
+**User Feedback:** 90% of users didn't realize they needed to manually process receipts after upload
+
+**Problems Identified:**
+1. ❌ Users had to click "Upload 1 file" button after dropping files
+2. ❌ No automatic redirect after upload
+3. ❌ "Quick Export" time period buttons confusing and not intuitive
+4. ❌ "View" and "Process" actions hidden in dropdown menus
+5. ❌ Export functionality scattered across pages
+
+**Solutions Implemented:**
+
+#### 1. Auto-Upload on File Drop ✅
+- Files now upload automatically when dropped/selected
+- Removed manual "Upload 1 file" button requirement
+- Shows "Uploading..." and "Upload Complete!" status
+- Better user feedback during upload process
+
+**Files Modified:**
+- `src/components/dashboard/ReceiptUpload.tsx`
+  - Added `useEffect` to auto-trigger upload when files added
+  - Added auto-redirect after successful upload (1.5s delay)
+  - Removed "Upload" button from UI
+  - Updated status messages
+
+#### 2. Auto-Redirect After Upload ✅
+- Automatically navigates to Receipts page after upload completes
+- 1.5 second delay to show success state
+- Smooth transition from upload → viewing receipts
+
+#### 3. Receipts Page Reorganization ✅
+**Removed:**
+- ❌ Confusing "Quick Export" section with time period buttons
+- ❌ `ExportPresets` component
+
+**Added:**
+- ✅ Prominent "Quick Actions" card at top of page
+- ✅ "Process All Pending" button (when pending receipts exist)
+- ✅ "View All Receipts" button (always visible)
+- ✅ Clear explanatory text
+
+**Impact:** Processing receipts now much more discoverable
+
+**Files Modified:**
+- `src/components/dashboard/ReceiptList.tsx`
+  - Removed `ExportPresets` import and usage
+  - Removed `handlePresetExport` function
+  - Added prominent Quick Actions card with Process/View buttons
+
+#### 4. Exports Page Enhancement ✅
+**Added:**
+- ✅ Large "Export All" button for immediate export
+- ✅ Collapsible "Filter by Time Period" section (initially hidden)
+- ✅ Integrated Quick Export with Export History on same page
+- ✅ Clear section headings and descriptions
+
+**Better UX:**
+- Users don't need to understand time periods upfront
+- "Export All" is the primary action
+- Time filters available when needed (expandable)
+
+**Files Modified:**
+- `src/app/[locale]/(dashboard)/exports/page.tsx`
+  - Added Quick Export section at top
+  - Added `handleExportAll()` function
+  - Added `handleTimePeriodExport()` with date range calculations
+  - Added collapsible time period filters (Show/Hide)
+  - Integrated with `ExportDialog` component
+  - Loading states for each filter option
+
+**Filter Options Available:**
+- This Month, Last Month, This Year
+- Q1, Q2, Q3, Q4
+- All Time
+
+#### 5. Simplified Export Flow ✅
+**Before:** Receipts page → Click confusing time button → Hope it works
+**After:** Exports page → Click "Export All" OR expand filters for specific periods
+
+**User Flow Improvements:**
+
+**BEFORE:**
+1. Drop file → Click "Upload 1 file" → Wait → Manually go to Receipts
+2. Click hidden menu → Find "Process" option → Process receipt
+3. Go to Receipts → Click confusing time period button → Hope it works
+
+**AFTER:**
+1. Drop file → Auto-uploads → Auto-redirects to Receipts ✨
+2. See "Process All" button prominently → Click → Done ✨
+3. Go to Exports → Click "Export All" OR expand filters ✨
+
+**Build Status:** ✅ SUCCESS (no errors)
+
+**Commits:**
+- PDF Fix: `bcba403` - Fix PDF receipt processing by extracting text before OpenAI processing
+- UX Improvements: `071aac3` - Implement major UX improvements for receipt upload and export workflows
+
+**Deployment:** https://receiptsort.seenano.nl
+
+**User Impact:**
+- Upload process: 3 clicks → 1 click (drop file)
+- Processing: Hidden in menu → Prominent button
+- Export: Confusing time periods → Clear "Export All" + optional filters
+- Overall: More intuitive, faster workflow, better discoverability
+
 **Remaining Tasks:**
 1. ~~Test Google OAuth login/signup works correctly~~ ✅ Complete
 2. ~~Test contact form~~ ✅ Complete
 3. ~~Test email/password signup flow~~ ✅ Complete
-4. Production testing (receipt upload, payment flow)
-5. Optional: Update DNS to new Vercel infrastructure (e029d0913d0d6a84.vercel-dns-017.com)
+4. ~~Fix PDF receipt processing~~ ✅ Complete
+5. ~~Improve upload/export UX based on user feedback~~ ✅ Complete
+6. Production testing (full workflow: upload → process → export)
+7. Payment flow testing
+8. Optional: Update DNS to new Vercel infrastructure (e029d0913d0d6a84.vercel-dns-017.com)
 
 **Benefits:**
 - Cost-effective (no new domain purchase)
