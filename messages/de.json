@@ -339,8 +339,16 @@
       }
     },
     "exports": {
-      "title": "Export-Verlauf",
-      "subtitle": "Ihre bisherigen Belegexporte anzeigen",
+      "title": "Exporte",
+      "subtitle": "Exportieren und verwalten Sie Ihre Belegdaten",
+      "exportSection": {
+        "title": "Belege exportieren",
+        "description": "Filtern und exportieren Sie Ihre abgeschlossenen Belege"
+      },
+      "history": {
+        "title": "Export-Verlauf",
+        "subtitle": "Ihre bisherigen Belegexporte anzeigen"
+      },
       "noExports": "Noch keine Exporte",
       "type": "Typ",
       "receipts": "Belege",

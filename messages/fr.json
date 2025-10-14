@@ -339,8 +339,16 @@
       }
     },
     "exports": {
-      "title": "Historique des Exportations",
-      "subtitle": "Voir vos exportations de reçus passées",
+      "title": "Exportations",
+      "subtitle": "Exporter et gérer vos données de reçus",
+      "exportSection": {
+        "title": "Exporter les Reçus",
+        "description": "Filtrer et exporter vos reçus complétés"
+      },
+      "history": {
+        "title": "Historique des Exportations",
+        "subtitle": "Voir vos exportations de reçus passées"
+      },
       "noExports": "Aucune exportation pour le moment",
       "type": "Type",
       "receipts": "reçus",

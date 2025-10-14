@@ -339,8 +339,16 @@
       }
     },
     "exports": {
-      "title": "エクスポート履歴",
-      "subtitle": "過去のレシートエクスポートを表示",
+      "title": "エクスポート",
+      "subtitle": "レシートデータのエクスポートと管理",
+      "exportSection": {
+        "title": "レシートをエクスポート",
+        "description": "完了したレシートをフィルタリングしてエクスポート"
+      },
+      "history": {
+        "title": "エクスポート履歴",
+        "subtitle": "過去のレシートエクスポートを表示"
+      },
       "noExports": "まだエクスポートがありません",
       "type": "タイプ",
       "receipts": "レシート",

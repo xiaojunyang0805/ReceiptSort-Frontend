@@ -339,8 +339,16 @@
       }
     },
     "exports": {
-      "title": "Exportgeschiedenis",
-      "subtitle": "Bekijk uw eerdere bonnetjesexports",
+      "title": "Exports",
+      "subtitle": "Exporteer en beheer uw bonnetjesgegevens",
+      "exportSection": {
+        "title": "Bonnetjes Exporteren",
+        "description": "Filter en exporteer uw voltooide bonnetjes"
+      },
+      "history": {
+        "title": "Exportgeschiedenis",
+        "subtitle": "Bekijk uw eerdere bonnetjesexports"
+      },
       "noExports": "Nog geen exports",
       "type": "Type",
       "receipts": "bonnetjes",

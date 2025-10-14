@@ -349,8 +349,32 @@
         "title": "Export History",
         "subtitle": "View your past receipt exports"
       },
+      "buttons": {
+        "exportAll": "Export All",
+        "filters": "Filters",
+        "hide": "Hide",
+        "clearFilters": "Clear All Filters"
+      },
+      "filters": {
+        "fromDate": "From Date",
+        "toDate": "To Date",
+        "merchantName": "Merchant Name",
+        "amountRange": "Amount Range",
+        "min": "Min",
+        "max": "Max",
+        "pickDate": "Pick a date",
+        "searchPlaceholder": "Search by merchant name...",
+        "activeFilters": "Active Filters",
+        "from": "From",
+        "to": "To",
+        "merchant": "Merchant",
+        "minAmount": "Min Amount",
+        "maxAmount": "Max Amount"
+      },
       "noExports": "No exports yet",
+      "noExportsDescription": "Export receipts from the dashboard to see them here",
       "type": "Type",
+      "fileName": "File Name",
       "receipts": "receipts",
       "showingRecent": "Showing {count} most recent export{count, plural, one {} other {s}}",
       "columns": {
