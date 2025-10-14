@@ -21,7 +21,7 @@ function getOpenAIClient(): OpenAI {
  */
 const RECEIPT_EXTRACTION_PROMPT = `You are a receipt data extraction expert. Extract structured data from receipt images with high accuracy.
 
-Return ONLY valid JSON, no other text:
+You MUST return valid JSON in this exact format (no markdown, no explanations):
 {
   "merchant_name": "Business name from receipt",
   "amount": 123.45,
@@ -95,14 +95,14 @@ CRITICAL RULES:
    - 0.5: Poor quality, many fields unclear
 
 8. FALLBACK RULES:
-   - merchant_name: REQUIRED - use best available name, even if generic
-   - amount: REQUIRED - must be clear TOTAL value
+   - merchant_name: REQUIRED - use best available name, even if generic (e.g., "Medical Center", "Hospital", "Clinic")
+   - amount: REQUIRED - must be clear TOTAL value (for medical receipts, look for "Total", "Amount Due", "Balance")
    - currency: REQUIRED - default to USD if symbol unclear
    - receipt_date: Use null if not found (NOT today's date)
-   - If core fields (merchant, amount, currency) unclear: extraction fails
-   - Always extract raw_text even if extraction fails
+   - If you cannot read the image clearly, set merchant_name to "Unknown", amount to 0.01, confidence_score to 0.3
+   - Always extract raw_text even if you cannot read the receipt
 
-Return valid JSON only. No markdown, no explanations.`
+IMPORTANT: You MUST return valid JSON. Do not add any explanations or markdown formatting.`
 
 /**
  * Extract receipt data from an image or PDF using OpenAI API
@@ -186,8 +186,9 @@ export async function extractReceiptData(
               ],
             },
           ],
-      max_tokens: 500,
+      max_tokens: 800, // Increased for better responses
       temperature: 0.1, // Low temperature for consistent output
+      response_format: { type: 'json_object' }, // Force JSON response
     })
 
     // Extract the response text
@@ -206,9 +207,12 @@ export async function extractReceiptData(
         .trim()
 
       extractedData = JSON.parse(cleanedContent)
-    } catch {
+    } catch (parseError) {
       console.error('Failed to parse OpenAI response:', content)
-      throw new Error('Invalid JSON response from OpenAI Vision API')
+      console.error('Parse error:', parseError)
+      throw new Error(
+        `Invalid JSON response from OpenAI Vision API. Response preview: ${content.substring(0, 200)}...`
+      )
     }
 
     // Validate required fields
