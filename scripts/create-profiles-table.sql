@@ -21,20 +21,25 @@ CREATE INDEX IF NOT EXISTS idx_profiles_is_admin ON public.profiles(is_admin);
 -- Enable Row Level Security
 ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
 
+-- Drop existing policies if they exist
+DROP POLICY IF EXISTS "Users can view own profile" ON public.profiles;
+DROP POLICY IF EXISTS "Users can update own profile" ON public.profiles;
+DROP POLICY IF EXISTS "Service role can do anything" ON public.profiles;
+
 -- Policy: Users can read their own profile
-CREATE POLICY IF NOT EXISTS "Users can view own profile"
+CREATE POLICY "Users can view own profile"
   ON public.profiles
   FOR SELECT
   USING (auth.uid() = id);
 
 -- Policy: Users can update their own profile
-CREATE POLICY IF NOT EXISTS "Users can update own profile"
+CREATE POLICY "Users can update own profile"
   ON public.profiles
   FOR UPDATE
   USING (auth.uid() = id);
 
 -- Policy: Service role can do anything (for admin operations)
-CREATE POLICY IF NOT EXISTS "Service role can do anything"
+CREATE POLICY "Service role can do anything"
   ON public.profiles
   FOR ALL
   USING (auth.jwt()->>'role' = 'service_role');
