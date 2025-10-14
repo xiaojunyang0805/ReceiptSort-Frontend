@@ -262,7 +262,31 @@
       "filters": "Filter",
       "quickActions": "Schnellaktionen",
       "quickActionsSubtitle": "Belege anzeigen oder ausstehende verarbeiten",
-      "viewAllReceipts": "Alle Belege Anzeigen"
+      "viewAllReceipts": "Alle Belege Anzeigen",
+      "processing": {
+        "processing": "Verarbeitung...",
+        "processAllButton": "Alle Ausstehenden Verarbeiten ({count})",
+        "dialogTitle": "Alle Ausstehenden Belege Verarbeiten?",
+        "dialogDescription": "Dies verarbeitet {count} Beleg{count, plural, one {} other {e}} mit {count} Credit{count, plural, one {} other {s}}.",
+        "receiptsToProcess": "Zu verarbeitende Belege:",
+        "creditsRequired": "Erforderliche Credits:",
+        "yourCredits": "Ihre Credits:",
+        "insufficientCreditsWarning": "Sie benötigen {creditsNeeded} weitere{creditsNeeded, plural, one {n} other {}} Credit{creditsNeeded, plural, one {} other {s}}, um alle Belege zu verarbeiten. Nur die ersten {userCredits} Beleg{userCredits, plural, one {} other {e}} werden verarbeitet.",
+        "processingTimeEstimate": "Die Verarbeitung dauert etwa {seconds} Sekunden (1-2 Sekunden pro Beleg).",
+        "cancel": "Abbrechen",
+        "processAll": "Alle Verarbeiten",
+        "processPartial": "{count} Verarbeiten",
+        "toast": {
+          "successTitle": "Alle Belege erfolgreich verarbeitet!",
+          "successDescription": "{successful} Beleg{successful, plural, one {} other {e}} verarbeitet. {creditsUsed} Credit{creditsUsed, plural, one {} other {s}} verwendet.",
+          "partialTitle": "Verarbeitung mit einigen Fehlern abgeschlossen",
+          "partialDescription": "{successful} erfolgreich, {failed} fehlgeschlagen. {creditsUsed} Credit{creditsUsed, plural, one {} other {s}} verwendet.",
+          "errorTitle": "Alle Belege konnten nicht verarbeitet werden",
+          "errorDescription": "Bitte überprüfen Sie einzelne Belege für Fehlerdetails.",
+          "failedTitle": "Verarbeitung der Belege fehlgeschlagen",
+          "unknownError": "Unbekannter Fehler"
+        }
+      }
     },
     "receiptsTable": {
       "title": "Ihre Belege",

@@ -262,7 +262,31 @@
       "filters": "筛选",
       "quickActions": "快速操作",
       "quickActionsSubtitle": "查看收据或处理待处理的收据",
-      "viewAllReceipts": "查看所有收据"
+      "viewAllReceipts": "查看所有收据",
+      "processing": {
+        "processing": "处理中...",
+        "processAllButton": "处理所有待处理 ({count})",
+        "dialogTitle": "处理所有待处理的收据？",
+        "dialogDescription": "这将处理{count}张收据，使用{count}个积分。",
+        "receiptsToProcess": "要处理的收据：",
+        "creditsRequired": "所需积分：",
+        "yourCredits": "您的积分：",
+        "insufficientCreditsWarning": "您需要额外{creditsNeeded}个积分才能处理所有收据。只有前{userCredits}张收据将被处理。",
+        "processingTimeEstimate": "处理大约需要{seconds}秒（每张收据1-2秒）。",
+        "cancel": "取消",
+        "processAll": "处理所有",
+        "processPartial": "处理{count}张",
+        "toast": {
+          "successTitle": "所有收据处理成功！",
+          "successDescription": "已处理{successful}张收据。使用了{creditsUsed}个积分。",
+          "partialTitle": "处理完成，但有一些失败",
+          "partialDescription": "{successful}张成功，{failed}张失败。使用了{creditsUsed}个积分。",
+          "errorTitle": "所有收据处理失败",
+          "errorDescription": "请检查各个收据的错误详情。",
+          "failedTitle": "处理收据失败",
+          "unknownError": "未知错误"
+        }
+      }
     },
     "receiptsTable": {
       "title": "您的收据",

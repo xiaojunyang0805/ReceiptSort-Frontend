@@ -13,6 +13,7 @@ import {
 import { Loader2, Play } from 'lucide-react'
 import { toast } from 'sonner'
 import { ProcessingProgress } from './ProcessingProgress'
+import { useTranslations } from 'next-intl'
 
 interface ProcessAllButtonProps {
   pendingCount: number
@@ -25,6 +26,7 @@ export function ProcessAllButton({
   pendingIds,
   userCredits,
 }: ProcessAllButtonProps) {
+  const t = useTranslations('receiptsPage.processing')
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [isProcessing, setIsProcessing] = useState(false)
   const [progress, setProgress] = useState({
@@ -71,16 +73,23 @@ export function ProcessAllButton({
 
       // Show summary toast
       if (result.summary.successful > 0 && result.summary.failed === 0) {
-        toast.success('All receipts processed successfully!', {
-          description: `Processed ${result.summary.successful} receipt${result.summary.successful === 1 ? '' : 's'}. ${result.summary.credits_used} credit${result.summary.credits_used === 1 ? '' : 's'} used.`,
+        toast.success(t('toast.successTitle'), {
+          description: t('toast.successDescription', {
+            successful: result.summary.successful,
+            creditsUsed: result.summary.credits_used
+          }),
         })
       } else if (result.summary.successful > 0 && result.summary.failed > 0) {
-        toast.warning('Processing completed with some failures', {
-          description: `${result.summary.successful} successful, ${result.summary.failed} failed. ${result.summary.credits_used} credit${result.summary.credits_used === 1 ? '' : 's'} used.`,
+        toast.warning(t('toast.partialTitle'), {
+          description: t('toast.partialDescription', {
+            successful: result.summary.successful,
+            failed: result.summary.failed,
+            creditsUsed: result.summary.credits_used
+          }),
         })
       } else {
-        toast.error('All receipts failed to process', {
-          description: 'Please check individual receipts for error details.',
+        toast.error(t('toast.errorTitle'), {
+          description: t('toast.errorDescription'),
         })
       }
 
@@ -90,8 +99,8 @@ export function ProcessAllButton({
       }, 2000)
     } catch (error) {
       console.error('Error processing receipts:', error)
-      toast.error('Failed to process receipts', {
-        description: error instanceof Error ? error.message : 'Unknown error',
+      toast.error(t('toast.failedTitle'), {
+        description: error instanceof Error ? error.message : t('toast.unknownError'),
       })
       setIsProcessing(false)
     }
@@ -120,12 +129,12 @@ export function ProcessAllButton({
         {isProcessing ? (
           <>
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            Processing...
+            {t('processing')}
           </>
         ) : (
           <>
             <Play className="mr-2 h-4 w-4" />
-            Process All Pending ({pendingCount})
+            {t('processAllButton', { count: pendingCount })}
           </>
         )}
       </Button>
@@ -133,24 +142,23 @@ export function ProcessAllButton({
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Process All Pending Receipts?</DialogTitle>
+            <DialogTitle>{t('dialogTitle')}</DialogTitle>
             <DialogDescription>
-              This will process {pendingCount} receipt{pendingCount === 1 ? '' : 's'} using{' '}
-              {pendingCount} credit{pendingCount === 1 ? '' : 's'}.
+              {t('dialogDescription', { count: pendingCount })}
             </DialogDescription>
           </DialogHeader>
 
           <div className="space-y-4 py-4">
             <div className="flex items-center justify-between text-sm">
-              <span className="text-muted-foreground">Receipts to process:</span>
+              <span className="text-muted-foreground">{t('receiptsToProcess')}</span>
               <span className="font-medium">{pendingCount}</span>
             </div>
             <div className="flex items-center justify-between text-sm">
-              <span className="text-muted-foreground">Credits required:</span>
+              <span className="text-muted-foreground">{t('creditsRequired')}</span>
               <span className="font-medium">{pendingCount}</span>
             </div>
             <div className="flex items-center justify-between text-sm">
-              <span className="text-muted-foreground">Your credits:</span>
+              <span className="text-muted-foreground">{t('yourCredits')}</span>
               <span className={`font-medium ${insufficientCredits ? 'text-red-600' : ''}`}>
                 {userCredits}
               </span>
@@ -159,26 +167,24 @@ export function ProcessAllButton({
             {insufficientCredits && (
               <div className="bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-900/50 rounded-lg p-3">
                 <p className="text-sm text-red-800 dark:text-red-200">
-                  You need {creditsNeeded} more credit{creditsNeeded === 1 ? '' : 's'} to process all receipts.
-                  Only the first {userCredits} receipt{userCredits === 1 ? '' : 's'} will be processed.
+                  {t('insufficientCreditsWarning', { creditsNeeded, userCredits })}
                 </p>
               </div>
             )}
 
             <div className="bg-muted p-3 rounded-lg">
               <p className="text-sm text-muted-foreground">
-                Processing will take approximately {Math.ceil(pendingCount * 1.5)} seconds
-                (1-2 seconds per receipt).
+                {t('processingTimeEstimate', { seconds: Math.ceil(pendingCount * 1.5) })}
               </p>
             </div>
           </div>
 
           <DialogFooter>
             <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
-              Cancel
+              {t('cancel')}
             </Button>
             <Button onClick={handleProcessAll} disabled={userCredits < 1}>
-              {insufficientCredits ? `Process ${userCredits}` : 'Process All'}
+              {insufficientCredits ? t('processPartial', { count: userCredits }) : t('processAll')}
             </Button>
           </DialogFooter>
         </DialogContent>

@@ -262,7 +262,31 @@
       "filters": "フィルター",
       "quickActions": "クイックアクション",
       "quickActionsSubtitle": "レシートを表示するか、保留中のレシートを処理する",
-      "viewAllReceipts": "すべてのレシートを表示"
+      "viewAllReceipts": "すべてのレシートを表示",
+      "processing": {
+        "processing": "処理中...",
+        "processAllButton": "保留中をすべて処理 ({count})",
+        "dialogTitle": "保留中のレシートをすべて処理しますか？",
+        "dialogDescription": "{count}件のレシートを処理します。{count}クレジットを使用します。",
+        "receiptsToProcess": "処理するレシート：",
+        "creditsRequired": "必要なクレジット：",
+        "yourCredits": "あなたのクレジット：",
+        "insufficientCreditsWarning": "すべてのレシートを処理するには、あと{creditsNeeded}クレジット必要です。最初の{userCredits}件のレシートのみが処理されます。",
+        "processingTimeEstimate": "処理には約{seconds}秒かかります（レシートあたり1〜2秒）。",
+        "cancel": "キャンセル",
+        "processAll": "すべて処理",
+        "processPartial": "{count}件処理",
+        "toast": {
+          "successTitle": "すべてのレシートが正常に処理されました！",
+          "successDescription": "{successful}件のレシートを処理しました。{creditsUsed}クレジットを使用しました。",
+          "partialTitle": "一部失敗して処理が完了しました",
+          "partialDescription": "{successful}件成功、{failed}件失敗。{creditsUsed}クレジットを使用しました。",
+          "errorTitle": "すべてのレシートの処理に失敗しました",
+          "errorDescription": "エラーの詳細については、個別のレシートを確認してください。",
+          "failedTitle": "レシートの処理に失敗しました",
+          "unknownError": "不明なエラー"
+        }
+      }
     },
     "receiptsTable": {
       "title": "あなたのレシート",

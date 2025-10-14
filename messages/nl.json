@@ -262,7 +262,31 @@
       "filters": "Filters",
       "quickActions": "Snelle Acties",
       "quickActionsSubtitle": "Bonnetjes bekijken of openstaande verwerken",
-      "viewAllReceipts": "Alle Bonnetjes Bekijken"
+      "viewAllReceipts": "Alle Bonnetjes Bekijken",
+      "processing": {
+        "processing": "Verwerken...",
+        "processAllButton": "Alle Openstaande Verwerken ({count})",
+        "dialogTitle": "Alle Openstaande Bonnetjes Verwerken?",
+        "dialogDescription": "Dit verwerkt {count} bonnetje{count, plural, one {} other {s}} met {count} credit{count, plural, one {} other {s}}.",
+        "receiptsToProcess": "Te verwerken bonnetjes:",
+        "creditsRequired": "Vereiste credits:",
+        "yourCredits": "Uw credits:",
+        "insufficientCreditsWarning": "U heeft {creditsNeeded} meer credit{creditsNeeded, plural, one {} other {s}} nodig om alle bonnetjes te verwerken. Alleen de eerste {userCredits} bonnetje{userCredits, plural, one {} other {s}} worden verwerkt.",
+        "processingTimeEstimate": "Verwerking duurt ongeveer {seconds} seconden (1-2 seconden per bonnetje).",
+        "cancel": "Annuleren",
+        "processAll": "Alle Verwerken",
+        "processPartial": "{count} Verwerken",
+        "toast": {
+          "successTitle": "Alle bonnetjes succesvol verwerkt!",
+          "successDescription": "{successful} bonnetje{successful, plural, one {} other {s}} verwerkt. {creditsUsed} credit{creditsUsed, plural, one {} other {s}} gebruikt.",
+          "partialTitle": "Verwerking voltooid met enkele mislukkingen",
+          "partialDescription": "{successful} succesvol, {failed} mislukt. {creditsUsed} credit{creditsUsed, plural, one {} other {s}} gebruikt.",
+          "errorTitle": "Alle bonnetjes konden niet worden verwerkt",
+          "errorDescription": "Controleer individuele bonnetjes voor foutdetails.",
+          "failedTitle": "Bonnetjes verwerken mislukt",
+          "unknownError": "Onbekende fout"
+        }
+      }
     },
     "receiptsTable": {
       "title": "Uw Bonnetjes",

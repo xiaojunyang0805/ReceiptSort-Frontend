@@ -262,7 +262,31 @@
       "filters": "Filters",
       "quickActions": "Quick Actions",
       "quickActionsSubtitle": "View receipts or process pending ones",
-      "viewAllReceipts": "View All Receipts"
+      "viewAllReceipts": "View All Receipts",
+      "processing": {
+        "processing": "Processing...",
+        "processAllButton": "Process All Pending ({count})",
+        "dialogTitle": "Process All Pending Receipts?",
+        "dialogDescription": "This will process {count} receipt{count, plural, one {} other {s}} using {count} credit{count, plural, one {} other {s}}.",
+        "receiptsToProcess": "Receipts to process:",
+        "creditsRequired": "Credits required:",
+        "yourCredits": "Your credits:",
+        "insufficientCreditsWarning": "You need {creditsNeeded} more credit{creditsNeeded, plural, one {} other {s}} to process all receipts. Only the first {userCredits} receipt{userCredits, plural, one {} other {s}} will be processed.",
+        "processingTimeEstimate": "Processing will take approximately {seconds} seconds (1-2 seconds per receipt).",
+        "cancel": "Cancel",
+        "processAll": "Process All",
+        "processPartial": "Process {count}",
+        "toast": {
+          "successTitle": "All receipts processed successfully!",
+          "successDescription": "Processed {successful} receipt{successful, plural, one {} other {s}}. {creditsUsed} credit{creditsUsed, plural, one {} other {s}} used.",
+          "partialTitle": "Processing completed with some failures",
+          "partialDescription": "{successful} successful, {failed} failed. {creditsUsed} credit{creditsUsed, plural, one {} other {s}} used.",
+          "errorTitle": "All receipts failed to process",
+          "errorDescription": "Please check individual receipts for error details.",
+          "failedTitle": "Failed to process receipts",
+          "unknownError": "Unknown error"
+        }
+      }
     },
     "receiptsTable": {
       "title": "Your Receipts",

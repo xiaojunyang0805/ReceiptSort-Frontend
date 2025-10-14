@@ -262,7 +262,31 @@
       "filters": "Filtres",
       "quickActions": "Actions Rapides",
       "quickActionsSubtitle": "Voir les reçus ou traiter ceux en attente",
-      "viewAllReceipts": "Voir Tous les Reçus"
+      "viewAllReceipts": "Voir Tous les Reçus",
+      "processing": {
+        "processing": "Traitement en cours...",
+        "processAllButton": "Traiter Tous les En Attente ({count})",
+        "dialogTitle": "Traiter Tous les Reçus En Attente?",
+        "dialogDescription": "Cela traitera {count} reçu{count, plural, one {} other {s}} en utilisant {count} crédit{count, plural, one {} other {s}}.",
+        "receiptsToProcess": "Reçus à traiter:",
+        "creditsRequired": "Crédits requis:",
+        "yourCredits": "Vos crédits:",
+        "insufficientCreditsWarning": "Vous avez besoin de {creditsNeeded} crédit{creditsNeeded, plural, one {} other {s}} supplémentaire{creditsNeeded, plural, one {} other {s}} pour traiter tous les reçus. Seuls les {userCredits} premier{userCredits, plural, one {} other {s}} reçu{userCredits, plural, one {} other {s}} seront traités.",
+        "processingTimeEstimate": "Le traitement prendra environ {seconds} secondes (1-2 secondes par reçu).",
+        "cancel": "Annuler",
+        "processAll": "Tout Traiter",
+        "processPartial": "Traiter {count}",
+        "toast": {
+          "successTitle": "Tous les reçus traités avec succès!",
+          "successDescription": "{successful} reçu{successful, plural, one {} other {s}} traité{successful, plural, one {} other {s}}. {creditsUsed} crédit{creditsUsed, plural, one {} other {s}} utilisé{creditsUsed, plural, one {} other {s}}.",
+          "partialTitle": "Traitement terminé avec quelques échecs",
+          "partialDescription": "{successful} réussi{successful, plural, one {} other {s}}, {failed} échoué{failed, plural, one {} other {s}}. {creditsUsed} crédit{creditsUsed, plural, one {} other {s}} utilisé{creditsUsed, plural, one {} other {s}}.",
+          "errorTitle": "Tous les reçus ont échoué le traitement",
+          "errorDescription": "Veuillez vérifier les reçus individuels pour les détails d'erreur.",
+          "failedTitle": "Échec du traitement des reçus",
+          "unknownError": "Erreur inconnue"
+        }
+      }
     },
     "receiptsTable": {
       "title": "Vos Reçus",

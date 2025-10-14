@@ -262,7 +262,31 @@
       "filters": "Filtros",
       "quickActions": "Acciones Rápidas",
       "quickActionsSubtitle": "Ver recibos o procesar los pendientes",
-      "viewAllReceipts": "Ver Todos los Recibos"
+      "viewAllReceipts": "Ver Todos los Recibos",
+      "processing": {
+        "processing": "Procesando...",
+        "processAllButton": "Procesar Todos los Pendientes ({count})",
+        "dialogTitle": "¿Procesar Todos los Recibos Pendientes?",
+        "dialogDescription": "Esto procesará {count} recibo{count, plural, one {} other {s}} usando {count} crédito{count, plural, one {} other {s}}.",
+        "receiptsToProcess": "Recibos a procesar:",
+        "creditsRequired": "Créditos requeridos:",
+        "yourCredits": "Tus créditos:",
+        "insufficientCreditsWarning": "Necesitas {creditsNeeded} crédito{creditsNeeded, plural, one {} other {s}} más para procesar todos los recibos. Solo se procesarán los primeros {userCredits} recibo{userCredits, plural, one {} other {s}}.",
+        "processingTimeEstimate": "El procesamiento tomará aproximadamente {seconds} segundos (1-2 segundos por recibo).",
+        "cancel": "Cancelar",
+        "processAll": "Procesar Todos",
+        "processPartial": "Procesar {count}",
+        "toast": {
+          "successTitle": "¡Todos los recibos procesados con éxito!",
+          "successDescription": "{successful} recibo{successful, plural, one {} other {s}} procesado{successful, plural, one {} other {s}}. {creditsUsed} crédito{creditsUsed, plural, one {} other {s}} usado{creditsUsed, plural, one {} other {s}}.",
+          "partialTitle": "Procesamiento completado con algunas fallas",
+          "partialDescription": "{successful} exitoso{successful, plural, one {} other {s}}, {failed} fallido{failed, plural, one {} other {s}}. {creditsUsed} crédito{creditsUsed, plural, one {} other {s}} usado{creditsUsed, plural, one {} other {s}}.",
+          "errorTitle": "Todos los recibos fallaron al procesar",
+          "errorDescription": "Por favor, revisa los recibos individuales para detalles de error.",
+          "failedTitle": "Error al procesar recibos",
+          "unknownError": "Error desconocido"
+        }
+      }
     },
     "receiptsTable": {
       "title": "Tus Recibos",
