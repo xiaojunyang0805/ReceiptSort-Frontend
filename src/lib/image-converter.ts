@@ -41,10 +41,21 @@ export async function convertImageToJpeg(imageUrl: string): Promise<string> {
     const imageBuffer = Buffer.from(await response.arrayBuffer())
     console.log(`[Image Converter] Fetched image: ${imageBuffer.length} bytes`)
 
-    // Convert to JPEG using sharp
+    // Get image metadata for debugging
+    const metadata = await sharp(imageBuffer).metadata()
+    console.log(
+      `[Image Converter] Image metadata: ${metadata.format}, ${metadata.width}x${metadata.height}, ` +
+        `channels: ${metadata.channels}, space: ${metadata.space}`
+    )
+
+    // Convert to JPEG using sharp with enhanced handling for BMP/TIFF
     const jpegBuffer = await sharp(imageBuffer)
+      // First ensure image is in RGB color space (handles 1-bit BMP, CMYK, etc.)
+      .toColorspace('srgb')
+      // Normalize to remove any color profile issues
+      .normalise()
       .jpeg({
-        quality: 92, // High quality for better OCR
+        quality: 95, // Higher quality for better OCR (especially for 1-bit images)
         mozjpeg: true, // Use mozjpeg for better compression
       })
       .toBuffer()
