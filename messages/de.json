@@ -344,7 +344,18 @@
         "usage": "Verbrauch",
         "refund": "Rückerstattung",
         "bonus": "Bonus",
-        "purchasedBasicPackage": "Basispaket gekauft"
+        "purchasedBasicPackage": "Basispaket gekauft",
+        "date": "Datum",
+        "type": "Typ",
+        "amount": "Betrag",
+        "description": "Beschreibung",
+        "noTransactions": "Noch keine Transaktionen",
+        "purchaseCreditsToStart": "Kaufen Sie Credits, um zu beginnen",
+        "loading": "Lade Ihre Credit-Transaktionen...",
+        "showing": "Zeige {from} bis {to} von {total} Transaktionen",
+        "previous": "Zurück",
+        "next": "Weiter",
+        "page": "Seite {current} von {total}"
       }
     },
     "exports": {

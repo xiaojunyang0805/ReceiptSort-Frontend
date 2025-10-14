@@ -344,7 +344,18 @@
         "usage": "Uso",
         "refund": "Reembolso",
         "bonus": "Bonificación",
-        "purchasedBasicPackage": "Paquete básico comprado"
+        "purchasedBasicPackage": "Paquete básico comprado",
+        "date": "Fecha",
+        "type": "Tipo",
+        "amount": "Monto",
+        "description": "Descripción",
+        "noTransactions": "Aún no hay transacciones",
+        "purchaseCreditsToStart": "Compra créditos para comenzar",
+        "loading": "Cargando tu historial de transacciones...",
+        "showing": "Mostrando {from} a {to} de {total} transacciones",
+        "previous": "Anterior",
+        "next": "Siguiente",
+        "page": "Página {current} de {total}"
       }
     },
     "exports": {

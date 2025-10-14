@@ -344,7 +344,18 @@
         "usage": "使用",
         "refund": "返金",
         "bonus": "ボーナス",
-        "purchasedBasicPackage": "ベーシックパッケージを購入"
+        "purchasedBasicPackage": "ベーシックパッケージを購入",
+        "date": "日付",
+        "type": "種類",
+        "amount": "金額",
+        "description": "説明",
+        "noTransactions": "まだ取引がありません",
+        "purchaseCreditsToStart": "クレジットを購入して始めましょう",
+        "loading": "クレジット取引履歴を読み込み中...",
+        "showing": "{from}から{to}まで（全{total}件の取引）を表示",
+        "previous": "前へ",
+        "next": "次へ",
+        "page": "ページ{current}/{total}"
       }
     },
     "exports": {

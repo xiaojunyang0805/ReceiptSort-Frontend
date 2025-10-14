@@ -344,7 +344,18 @@
         "usage": "Utilisation",
         "refund": "Remboursement",
         "bonus": "Bonus",
-        "purchasedBasicPackage": "Forfait basique acheté"
+        "purchasedBasicPackage": "Forfait basique acheté",
+        "date": "Date",
+        "type": "Type",
+        "amount": "Montant",
+        "description": "Description",
+        "noTransactions": "Aucune transaction pour le moment",
+        "purchaseCreditsToStart": "Achetez des crédits pour commencer",
+        "loading": "Chargement de votre historique des transactions...",
+        "showing": "Affichage de {from} à {to} sur {total} transactions",
+        "previous": "Précédent",
+        "next": "Suivant",
+        "page": "Page {current} sur {total}"
       }
     },
     "exports": {

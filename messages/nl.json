@@ -344,7 +344,18 @@
         "usage": "Gebruik",
         "refund": "Terugbetaling",
         "bonus": "Bonus",
-        "purchasedBasicPackage": "Basispakket gekocht"
+        "purchasedBasicPackage": "Basispakket gekocht",
+        "date": "Datum",
+        "type": "Type",
+        "amount": "Bedrag",
+        "description": "Beschrijving",
+        "noTransactions": "Nog geen transacties",
+        "purchaseCreditsToStart": "Koop credits om te beginnen",
+        "loading": "Uw credittransacties laden...",
+        "showing": "{from} tot {to} van {total} transacties weergeven",
+        "previous": "Vorige",
+        "next": "Volgende",
+        "page": "Pagina {current} van {total}"
       }
     },
     "exports": {

@@ -114,7 +114,7 @@ export function CreditHistory() {
       <Card>
         <CardHeader>
           <CardTitle>{t('title')}</CardTitle>
-          <CardDescription>Loading your credit transactions...</CardDescription>
+          <CardDescription>{t('loading')}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="h-48 flex items-center justify-center">
@@ -135,9 +135,9 @@ export function CreditHistory() {
         <CardContent>
           <div className="text-center py-12">
             <TrendingUp className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-            <p className="text-muted-foreground">No transactions yet</p>
+            <p className="text-muted-foreground">{t('noTransactions')}</p>
             <p className="text-sm text-muted-foreground mt-2">
-              Purchase credits to get started
+              {t('purchaseCreditsToStart')}
             </p>
           </div>
         </CardContent>
@@ -156,10 +156,10 @@ export function CreditHistory() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Date</TableHead>
-                <TableHead>Type</TableHead>
-                <TableHead>Amount</TableHead>
-                <TableHead className="hidden md:table-cell">Description</TableHead>
+                <TableHead>{t('date')}</TableHead>
+                <TableHead>{t('type')}</TableHead>
+                <TableHead>{t('amount')}</TableHead>
+                <TableHead className="hidden md:table-cell">{t('description')}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -197,8 +197,11 @@ export function CreditHistory() {
         {totalPages > 1 && (
           <div className="flex items-center justify-between mt-4">
             <p className="text-sm text-muted-foreground">
-              Showing {(currentPage - 1) * ITEMS_PER_PAGE + 1} to{' '}
-              {Math.min(currentPage * ITEMS_PER_PAGE, totalCount)} of {totalCount} transactions
+              {t('showing', {
+                from: (currentPage - 1) * ITEMS_PER_PAGE + 1,
+                to: Math.min(currentPage * ITEMS_PER_PAGE, totalCount),
+                total: totalCount
+              })}
             </p>
             <div className="flex items-center gap-2">
               <Button
@@ -208,10 +211,10 @@ export function CreditHistory() {
                 disabled={currentPage === 1}
               >
                 <ChevronLeft className="h-4 w-4" />
-                Previous
+                {t('previous')}
               </Button>
               <div className="text-sm">
-                Page {currentPage} of {totalPages}
+                {t('page', { current: currentPage, total: totalPages })}
               </div>
               <Button
                 variant="outline"
@@ -219,7 +222,7 @@ export function CreditHistory() {
                 onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
                 disabled={currentPage === totalPages}
               >
-                Next
+                {t('next')}
                 <ChevronRight className="h-4 w-4" />
               </Button>
             </div>

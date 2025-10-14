@@ -82,6 +82,7 @@ const steps = [
 
 export function HowItWorks() {
   const t = useTranslations('howItWorks')
+  const tPricing = useTranslations('pricing')
 
   return (
     <section id="demo" className="container mx-auto px-4 py-20 bg-muted/30">
@@ -152,12 +153,12 @@ export function HowItWorks() {
       <div className="text-center mt-16">
         <Button size="lg" asChild className="text-lg px-8 py-6 h-auto">
           <Link href="/signup">
-            Try It Free
+            {tPricing('tryItFree')}
             <span className="ml-2">→</span>
           </Link>
         </Button>
         <p className="text-sm text-muted-foreground mt-4">
-          10 free credits • No credit card required
+          {tPricing('freeCreditsNoCreditCard')}
         </p>
       </div>
     </section>
