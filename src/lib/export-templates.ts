@@ -18,9 +18,6 @@ export interface ExportColumn {
   format?: (value: unknown) => string
 }
 
-// Translation helper type
-type TranslationFunction = (key: string) => string
-
 export interface ExportTemplate {
   id: string
   name: string
