@@ -34,6 +34,14 @@ interface Receipt {
     line_total: number
     item_code?: string | null
   }>
+
+  // Phase 3: Medical Receipts
+  patient_dob?: string
+  treatment_date?: string
+  insurance_claim_number?: string
+  diagnosis_codes?: string
+  procedure_codes?: string
+  provider_id?: string
 }
 
 /**

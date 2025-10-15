@@ -60,6 +60,14 @@ interface Receipt {
   purchase_order_number?: string
   payment_reference?: string
   vendor_tax_id?: string
+
+  // Phase 3: Medical Receipts
+  patient_dob?: string
+  treatment_date?: string
+  insurance_claim_number?: string
+  diagnosis_codes?: string
+  procedure_codes?: string
+  provider_id?: string
 }
 
 interface LineItem {
@@ -158,6 +166,14 @@ export default function ReceiptDetailModal({
         purchase_order_number: receipt.purchase_order_number || '',
         payment_reference: receipt.payment_reference || '',
         vendor_tax_id: receipt.vendor_tax_id || '',
+
+        // Phase 3: Medical Receipts
+        patient_dob: receipt.patient_dob || '',
+        treatment_date: receipt.treatment_date || '',
+        insurance_claim_number: receipt.insurance_claim_number || '',
+        diagnosis_codes: receipt.diagnosis_codes || '',
+        procedure_codes: receipt.procedure_codes || '',
+        provider_id: receipt.provider_id || '',
       })
 
       // Fetch line items when receipt changes
@@ -256,6 +272,14 @@ export default function ReceiptDetailModal({
           purchase_order_number: formData.purchase_order_number || null,
           payment_reference: formData.payment_reference || null,
           vendor_tax_id: formData.vendor_tax_id || null,
+
+          // Phase 3: Medical Receipts
+          patient_dob: formData.patient_dob || null,
+          treatment_date: formData.treatment_date || null,
+          insurance_claim_number: formData.insurance_claim_number || null,
+          diagnosis_codes: formData.diagnosis_codes || null,
+          procedure_codes: formData.procedure_codes || null,
+          provider_id: formData.provider_id || null,
         })
         .eq('id', receipt.id)
 
@@ -775,6 +799,96 @@ export default function ReceiptDetailModal({
                   </div>
                 )}
               </div>
+            )}
+
+            {/* Phase 3: Medical Invoice Fields (for medical_invoice only) */}
+            {formData.document_type === 'medical_invoice' && (
+              <>
+                <div className="space-y-2 pt-2">
+                  <Label className="text-base font-semibold">Medical Information</Label>
+                  <div className="border-t pt-3 space-y-4">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="patientDob">Patient Date of Birth</Label>
+                        <Input
+                          id="patientDob"
+                          type="date"
+                          value={formData.patient_dob || ''}
+                          onChange={(e) =>
+                            setFormData({ ...formData, patient_dob: e.target.value })
+                          }
+                          disabled={!isEditable}
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="treatmentDate">Treatment Date</Label>
+                        <Input
+                          id="treatmentDate"
+                          type="date"
+                          value={formData.treatment_date || ''}
+                          onChange={(e) =>
+                            setFormData({ ...formData, treatment_date: e.target.value })
+                          }
+                          disabled={!isEditable}
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="insuranceClaim">Insurance Claim Number</Label>
+                      <Input
+                        id="insuranceClaim"
+                        value={formData.insurance_claim_number || ''}
+                        onChange={(e) =>
+                          setFormData({ ...formData, insurance_claim_number: e.target.value })
+                        }
+                        disabled={!isEditable}
+                        placeholder="CLAIM-2025-789"
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="diagnosisCodes">Diagnosis Codes (ICD)</Label>
+                        <Input
+                          id="diagnosisCodes"
+                          value={formData.diagnosis_codes || ''}
+                          onChange={(e) =>
+                            setFormData({ ...formData, diagnosis_codes: e.target.value })
+                          }
+                          disabled={!isEditable}
+                          placeholder="M54.5, Z79.899"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="procedureCodes">Procedure Codes (CPT)</Label>
+                        <Input
+                          id="procedureCodes"
+                          value={formData.procedure_codes || ''}
+                          onChange={(e) =>
+                            setFormData({ ...formData, procedure_codes: e.target.value })
+                          }
+                          disabled={!isEditable}
+                          placeholder="F517A, 99213"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="providerId">Provider ID (AGB/NPI)</Label>
+                      <Input
+                        id="providerId"
+                        value={formData.provider_id || ''}
+                        onChange={(e) =>
+                          setFormData({ ...formData, provider_id: e.target.value })
+                        }
+                        disabled={!isEditable}
+                        placeholder="12065201 (AGB) or 1234567890 (NPI)"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </>
             )}
 
             <div>

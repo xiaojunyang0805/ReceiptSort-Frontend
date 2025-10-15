@@ -25,6 +25,14 @@ interface Receipt {
   purchase_order_number?: string
   payment_reference?: string
   vendor_tax_id?: string
+
+  // Phase 3: Medical Receipts
+  patient_dob?: string
+  treatment_date?: string
+  insurance_claim_number?: string
+  diagnosis_codes?: string
+  procedure_codes?: string
+  provider_id?: string
 }
 
 /**
@@ -55,7 +63,7 @@ export async function generateExcel(receipts: Receipt[]): Promise<Buffer> {
     views: [{ state: 'frozen', ySplit: 1 }], // Freeze header row
   })
 
-  // Define columns (Phase 1 + Phase 2)
+  // Define columns (Phase 1 + Phase 2 + Phase 3)
   worksheet.columns = [
     { header: 'Doc Type', key: 'docType', width: 14 },
     { header: 'Invoice #', key: 'invoiceNumber', width: 18 },
@@ -72,6 +80,12 @@ export async function generateExcel(receipts: Receipt[]): Promise<Buffer> {
     { header: 'Tax ID', key: 'taxId', width: 18 },
     { header: 'Due Date', key: 'dueDate', width: 12 },
     { header: 'Vendor Address', key: 'vendorAddress', width: 35 },
+    { header: 'Patient DOB', key: 'patientDob', width: 14 },
+    { header: 'Treatment Date', key: 'treatmentDate', width: 14 },
+    { header: 'Insurance Claim', key: 'insuranceClaim', width: 18 },
+    { header: 'Diagnosis (ICD)', key: 'diagnosisCodes', width: 20 },
+    { header: 'Procedure (CPT)', key: 'procedureCodes', width: 20 },
+    { header: 'Provider ID', key: 'providerId', width: 16 },
     { header: 'Notes', key: 'notes', width: 30 },
   ]
 
@@ -86,7 +100,7 @@ export async function generateExcel(receipts: Receipt[]): Promise<Buffer> {
   headerRow.alignment = { vertical: 'middle', horizontal: 'center' }
   headerRow.height = 20
 
-  // Add data rows (Phase 1 + Phase 2: Include all fields)
+  // Add data rows (Phase 1 + Phase 2 + Phase 3: Include all fields)
   completedReceipts.forEach((receipt, index) => {
     const row = worksheet.addRow({
       docType: receipt.document_type || 'receipt',
@@ -104,6 +118,12 @@ export async function generateExcel(receipts: Receipt[]): Promise<Buffer> {
       taxId: receipt.vendor_tax_id || '',
       dueDate: receipt.due_date ? new Date(receipt.due_date) : null,
       vendorAddress: receipt.vendor_address || '',
+      patientDob: receipt.patient_dob ? new Date(receipt.patient_dob) : null,
+      treatmentDate: receipt.treatment_date ? new Date(receipt.treatment_date) : null,
+      insuranceClaim: receipt.insurance_claim_number || '',
+      diagnosisCodes: receipt.diagnosis_codes || '',
+      procedureCodes: receipt.procedure_codes || '',
+      providerId: receipt.provider_id || '',
       notes: receipt.notes || '',
     })
 
@@ -127,6 +147,13 @@ export async function generateExcel(receipts: Receipt[]): Promise<Buffer> {
     }
     if (receipt.due_date) {
       row.getCell('dueDate').numFmt = 'mm/dd/yyyy'
+    }
+    // Phase 3: Format medical date columns
+    if (receipt.patient_dob) {
+      row.getCell('patientDob').numFmt = 'mm/dd/yyyy'
+    }
+    if (receipt.treatment_date) {
+      row.getCell('treatmentDate').numFmt = 'mm/dd/yyyy'
     }
 
     // Conditional formatting: amounts > $100 in bold
@@ -163,10 +190,10 @@ export async function generateExcel(receipts: Receipt[]): Promise<Buffer> {
     top: { style: 'double', color: { argb: 'FF000000' } },
   }
 
-  // Enable auto-filter (Phase 1 + Phase 2: Updated to include all 16 columns)
+  // Enable auto-filter (Phase 1 + Phase 2 + Phase 3: Updated to include all 22 columns)
   worksheet.autoFilter = {
     from: { row: 1, column: 1 },
-    to: { row: 1, column: 16 },
+    to: { row: 1, column: 22 },
   }
 
   // Add summary worksheet

@@ -59,6 +59,14 @@ export const STANDARD_TEMPLATE: ExportTemplate = {
 
     // Phase 2: Line Items Summary (formatted as text)
     { key: 'line_items_summary', label: 'Line Items' },
+
+    // Phase 3: Medical Receipt Fields
+    { key: 'patient_dob', label: 'Patient DOB' },
+    { key: 'treatment_date', label: 'Treatment Date' },
+    { key: 'insurance_claim_number', label: 'Insurance Claim #' },
+    { key: 'diagnosis_codes', label: 'Diagnosis Codes (ICD)' },
+    { key: 'procedure_codes', label: 'Procedure Codes (CPT)' },
+    { key: 'provider_id', label: 'Provider ID (AGB/NPI)' },
   ],
 }
 
@@ -146,6 +154,14 @@ export const AVAILABLE_COLUMNS: ExportColumn[] = [
 
   // Phase 2: Line Items
   { key: 'line_items_summary', label: 'Line Items' },
+
+  // Phase 3: Medical Receipt Fields
+  { key: 'patient_dob', label: 'Patient DOB' },
+  { key: 'treatment_date', label: 'Treatment Date' },
+  { key: 'insurance_claim_number', label: 'Insurance Claim #' },
+  { key: 'diagnosis_codes', label: 'Diagnosis Codes (ICD)' },
+  { key: 'procedure_codes', label: 'Procedure Codes (CPT)' },
+  { key: 'provider_id', label: 'Provider ID (AGB/NPI)' },
 ]
 
 /**
