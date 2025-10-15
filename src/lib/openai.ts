@@ -161,9 +161,23 @@ CRITICAL RULES:
       - Set to null if not found or if equals total_amount
 
    D. VENDOR ADDRESS:
-      - Extract FULL address from top of document (near merchant name)
+      - Extract FULL address of the service provider/vendor
       - Include: street, city, state/province, postal code, country
       - Example: "123 Main Street, Amsterdam, 1012 AB, Netherlands"
+
+      IMPORTANT FOR MEDICAL INVOICES:
+      - Medical invoices often have 3 addresses:
+        1. Invoice issuer address (accounting company) - usually at top
+        2. Healthcare provider address (dentist, clinic, hospital) - actual service location
+        3. Patient address (invoice receiver) - billing address
+      - For medical_invoice: ALWAYS extract the HEALTHCARE PROVIDER address (actual service provider)
+      - Look for: practice name, clinic name, dentist office, hospital, medical center address
+      - DO NOT extract: invoice issuer address (accounting company) or patient address
+      - Example: If invoice issued by "Infomedics B.V." for "Tandartspraktijk Huizinga (Dentist)",
+        extract the dentist office address, NOT Infomedics or patient address
+
+      FOR NON-MEDICAL DOCUMENTS:
+      - Extract vendor/merchant address from top of document (near merchant name)
       - Set to null if not found
 
    E. DUE DATE:
@@ -299,6 +313,15 @@ CRITICAL RULES:
         * Medical terms (consultation, treatment, diagnosis, patient, healthcare)
         * Healthcare provider names (clinic, hospital, doctor, physiotherapy)
       - Medical invoices often have line items with treatment codes
+
+      CRITICAL FOR MEDICAL INVOICES - VENDOR ADDRESS:
+      - For medical_invoice: vendor_address MUST be the HEALTHCARE PROVIDER address
+      - Look for the practice/clinic/hospital name and its address
+      - Common patterns in Netherlands medical invoices:
+        * Top: Invoice issuer (accounting company like "Infomedics B.V.")
+        * Middle: Healthcare provider name + address (like "Tandartspraktijk Huizinga, Campuslaan 99")
+        * Bottom: Patient name + home address (invoice receiver)
+      - Extract the MIDDLE address (healthcare provider), NOT top (issuer) or bottom (patient)
 
    H. MEDICAL FIELDS VALIDATION:
       - patient_dob must be reasonable (between 1900 and today)
