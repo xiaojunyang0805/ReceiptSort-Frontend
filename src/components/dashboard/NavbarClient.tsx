@@ -14,6 +14,7 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Link } from '@/lib/navigation'
 import { LanguageSwitcher } from '@/components/shared/LanguageSwitcher'
+import { useTranslations } from 'next-intl'
 
 interface NavbarClientProps {
   userInitials: string
@@ -23,6 +24,8 @@ interface NavbarClientProps {
 }
 
 export function NavbarClient({ userInitials, fullName, email, credits }: NavbarClientProps) {
+  const t = useTranslations('dashboard.profile')
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="flex h-16 items-center px-4 gap-4">
@@ -39,7 +42,7 @@ export function NavbarClient({ userInitials, fullName, email, credits }: NavbarC
           <Link href="/">
             <Button variant="outline" size="sm" className="gap-2">
               <Home className="h-4 w-4" />
-              <span className="hidden sm:inline">Home</span>
+              <span className="hidden sm:inline">{t('home')}</span>
             </Button>
           </Link>
 
@@ -48,7 +51,7 @@ export function NavbarClient({ userInitials, fullName, email, credits }: NavbarC
 
           <Link href="/credits" className="hidden sm:block">
             <div className="flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full hover:bg-primary/20 transition-colors cursor-pointer">
-              <span className="text-sm font-medium">Credits:</span>
+              <span className="text-sm font-medium">{t('creditsLabel')}:</span>
               <span
                 className={`text-sm font-bold ${
                   credits === 0
@@ -77,7 +80,7 @@ export function NavbarClient({ userInitials, fullName, email, credits }: NavbarC
               <DropdownMenuLabel>
                 <div className="flex flex-col space-y-1">
                   <p className="text-sm font-medium leading-none">
-                    {fullName || 'User'}
+                    {fullName || t('user')}
                   </p>
                   <p className="text-xs leading-none text-muted-foreground">
                     {email}
@@ -87,21 +90,21 @@ export function NavbarClient({ userInitials, fullName, email, credits }: NavbarC
               <DropdownMenuSeparator />
               <DropdownMenuItem className="sm:hidden">
                 <span className="text-sm">
-                  Credits: {credits}
+                  {t('creditsLabel')}: {credits}
                 </span>
               </DropdownMenuItem>
               <DropdownMenuSeparator className="sm:hidden" />
               <DropdownMenuItem asChild>
                 <Link href="/dashboard/profile" className="cursor-pointer">
                   <User className="mr-2 h-4 w-4" />
-                  <span>Profile</span>
+                  <span>{t('title')}</span>
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <form action={signOut} className="w-full">
                   <button type="submit" className="flex w-full items-center cursor-pointer">
                     <LogOut className="mr-2 h-4 w-4" />
-                    <span>Sign out</span>
+                    <span>{t('signOut')}</span>
                   </button>
                 </form>
               </DropdownMenuItem>

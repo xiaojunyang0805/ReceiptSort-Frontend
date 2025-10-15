@@ -462,15 +462,38 @@
     },
     "profile": {
       "title": "プロフィール設定",
+      "subtitle": "アカウント設定と設定を管理",
+      "profileInfo": "プロフィール情報",
+      "profileInfoDescription": "個人情報を更新する",
+      "loadingProfile": "プロフィールを読み込み中...",
       "personalInfo": "個人情報",
       "name": "名前",
-      "email": "メール",
+      "fullName": "フルネーム",
+      "fullNamePlaceholder": "フルネームを入力してください",
+      "email": "メールアドレス",
+      "emailCannotBeChanged": "メールアドレスは変更できません",
       "language": "言語",
       "timezone": "タイムゾーン",
       "updateProfile": "プロフィールを更新",
+      "saveChanges": "変更を保存",
+      "saving": "保存中...",
       "changePassword": "パスワードを変更",
       "currentPassword": "現在のパスワード",
-      "newPassword": "新しいパスワード"
+      "newPassword": "新しいパスワード",
+      "accountInfo": "アカウント情報",
+      "accountInfoDescription": "アカウントの詳細を表示",
+      "userId": "ユーザーID",
+      "accountCreated": "アカウント作成日",
+      "lastSignIn": "最終サインイン",
+      "user": "ユーザー",
+      "signOut": "サインアウト",
+      "home": "ホーム",
+      "creditsLabel": "クレジット",
+      "toasts": {
+        "profileUpdated": "プロフィールが正常に更新されました",
+        "profileUpdateError": "プロフィールの更新に失敗しました",
+        "profileLoadError": "プロフィールの読み込みに失敗しました"
+      }
     }
   },
   "pricing": {

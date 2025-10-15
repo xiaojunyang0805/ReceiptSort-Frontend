@@ -462,15 +462,38 @@
     },
     "profile": {
       "title": "Profileinstellungen",
+      "subtitle": "Verwalten Sie Ihre Kontoeinstellungen und Präferenzen",
+      "profileInfo": "Profilinformationen",
+      "profileInfoDescription": "Aktualisieren Sie Ihre persönlichen Informationen",
+      "loadingProfile": "Ihr Profil wird geladen...",
       "personalInfo": "Persönliche Informationen",
       "name": "Name",
+      "fullName": "Vollständiger Name",
+      "fullNamePlaceholder": "Geben Sie Ihren vollständigen Namen ein",
       "email": "E-Mail",
+      "emailCannotBeChanged": "E-Mail kann nicht geändert werden",
       "language": "Sprache",
       "timezone": "Zeitzone",
       "updateProfile": "Profil Aktualisieren",
+      "saveChanges": "Änderungen Speichern",
+      "saving": "Speichern...",
       "changePassword": "Passwort Ändern",
       "currentPassword": "Aktuelles Passwort",
-      "newPassword": "Neues Passwort"
+      "newPassword": "Neues Passwort",
+      "accountInfo": "Kontoinformationen",
+      "accountInfoDescription": "Ihre Kontodetails ansehen",
+      "userId": "Benutzer-ID",
+      "accountCreated": "Konto Erstellt",
+      "lastSignIn": "Letzte Anmeldung",
+      "user": "Benutzer",
+      "signOut": "Abmelden",
+      "home": "Startseite",
+      "creditsLabel": "Credits",
+      "toasts": {
+        "profileUpdated": "Profil erfolgreich aktualisiert",
+        "profileUpdateError": "Profil konnte nicht aktualisiert werden",
+        "profileLoadError": "Profil konnte nicht geladen werden"
+      }
     }
   },
   "pricing": {

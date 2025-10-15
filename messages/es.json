@@ -462,15 +462,38 @@
     },
     "profile": {
       "title": "Configuración del Perfil",
+      "subtitle": "Gestione la configuración de su cuenta y preferencias",
+      "profileInfo": "Información del Perfil",
+      "profileInfoDescription": "Actualice su información personal",
+      "loadingProfile": "Cargando su perfil...",
       "personalInfo": "Información Personal",
       "name": "Nombre",
-      "email": "Correo",
+      "fullName": "Nombre Completo",
+      "fullNamePlaceholder": "Ingrese su nombre completo",
+      "email": "Correo Electrónico",
+      "emailCannotBeChanged": "El correo electrónico no se puede cambiar",
       "language": "Idioma",
       "timezone": "Zona Horaria",
       "updateProfile": "Actualizar Perfil",
+      "saveChanges": "Guardar Cambios",
+      "saving": "Guardando...",
       "changePassword": "Cambiar Contraseña",
       "currentPassword": "Contraseña Actual",
-      "newPassword": "Nueva Contraseña"
+      "newPassword": "Nueva Contraseña",
+      "accountInfo": "Información de la Cuenta",
+      "accountInfoDescription": "Ver los detalles de su cuenta",
+      "userId": "ID de Usuario",
+      "accountCreated": "Cuenta Creada",
+      "lastSignIn": "Último Inicio de Sesión",
+      "user": "Usuario",
+      "signOut": "Cerrar sesión",
+      "home": "Inicio",
+      "creditsLabel": "Créditos",
+      "toasts": {
+        "profileUpdated": "Perfil actualizado exitosamente",
+        "profileUpdateError": "Error al actualizar el perfil",
+        "profileLoadError": "Error al cargar el perfil"
+      }
     }
   },
   "pricing": {

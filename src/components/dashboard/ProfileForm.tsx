@@ -8,8 +8,10 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useToast } from '@/hooks/use-toast'
 import { User } from '@supabase/supabase-js'
+import { useTranslations } from 'next-intl'
 
 export function ProfileForm() {
+  const t = useTranslations('dashboard.profile')
   const [user, setUser] = useState<User | null>(null)
   const [fullName, setFullName] = useState('')
   const [loading, setLoading] = useState(true)
@@ -48,7 +50,7 @@ export function ProfileForm() {
       console.error('Error loading profile:', error)
       toast({
         title: 'Error',
-        description: 'Failed to load profile',
+        description: t('toasts.profileLoadError'),
         variant: 'destructive',
       })
     } finally {
@@ -75,13 +77,13 @@ export function ProfileForm() {
 
       toast({
         title: 'Success',
-        description: 'Profile updated successfully',
+        description: t('toasts.profileUpdated'),
       })
     } catch (error) {
       console.error('Error updating profile:', error)
       toast({
         title: 'Error',
-        description: 'Failed to update profile',
+        description: t('toasts.profileUpdateError'),
         variant: 'destructive',
       })
     } finally {
@@ -93,8 +95,8 @@ export function ProfileForm() {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>Profile Information</CardTitle>
-          <CardDescription>Loading your profile...</CardDescription>
+          <CardTitle>{t('profileInfo')}</CardTitle>
+          <CardDescription>{t('loadingProfile')}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="h-48 flex items-center justify-center">
@@ -109,12 +111,12 @@ export function ProfileForm() {
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle>Profile Information</CardTitle>
-          <CardDescription>Update your personal information</CardDescription>
+          <CardTitle>{t('profileInfo')}</CardTitle>
+          <CardDescription>{t('profileInfoDescription')}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email">{t('email')}</Label>
             <Input
               id="email"
               type="email"
@@ -123,41 +125,41 @@ export function ProfileForm() {
               className="bg-muted"
             />
             <p className="text-sm text-muted-foreground">
-              Email cannot be changed
+              {t('emailCannotBeChanged')}
             </p>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="fullName">Full Name</Label>
+            <Label htmlFor="fullName">{t('fullName')}</Label>
             <Input
               id="fullName"
               type="text"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
-              placeholder="Enter your full name"
+              placeholder={t('fullNamePlaceholder')}
             />
           </div>
 
           <Button onClick={handleSave} disabled={saving}>
-            {saving ? 'Saving...' : 'Save Changes'}
+            {saving ? t('saving') : t('saveChanges')}
           </Button>
         </CardContent>
       </Card>
 
       <Card>
         <CardHeader>
-          <CardTitle>Account Information</CardTitle>
-          <CardDescription>View your account details</CardDescription>
+          <CardTitle>{t('accountInfo')}</CardTitle>
+          <CardDescription>{t('accountInfoDescription')}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-2">
           <div className="flex justify-between py-2 border-b">
-            <span className="text-sm font-medium">User ID</span>
+            <span className="text-sm font-medium">{t('userId')}</span>
             <span className="text-sm text-muted-foreground font-mono">
               {user?.id}
             </span>
           </div>
           <div className="flex justify-between py-2 border-b">
-            <span className="text-sm font-medium">Account Created</span>
+            <span className="text-sm font-medium">{t('accountCreated')}</span>
             <span className="text-sm text-muted-foreground">
               {user?.created_at
                 ? new Date(user.created_at).toLocaleDateString()
@@ -165,7 +167,7 @@ export function ProfileForm() {
             </span>
           </div>
           <div className="flex justify-between py-2">
-            <span className="text-sm font-medium">Last Sign In</span>
+            <span className="text-sm font-medium">{t('lastSignIn')}</span>
             <span className="text-sm text-muted-foreground">
               {user?.last_sign_in_at
                 ? new Date(user.last_sign_in_at).toLocaleDateString()

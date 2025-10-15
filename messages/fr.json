@@ -462,15 +462,38 @@
     },
     "profile": {
       "title": "Paramètres du Profil",
+      "subtitle": "Gérez les paramètres de votre compte et vos préférences",
+      "profileInfo": "Informations du Profil",
+      "profileInfoDescription": "Mettez à jour vos informations personnelles",
+      "loadingProfile": "Chargement de votre profil...",
       "personalInfo": "Informations Personnelles",
       "name": "Nom",
+      "fullName": "Nom Complet",
+      "fullNamePlaceholder": "Entrez votre nom complet",
       "email": "E-mail",
+      "emailCannotBeChanged": "L'e-mail ne peut pas être modifié",
       "language": "Langue",
       "timezone": "Fuseau Horaire",
       "updateProfile": "Mettre à Jour le Profil",
+      "saveChanges": "Enregistrer les Modifications",
+      "saving": "Enregistrement...",
       "changePassword": "Changer le Mot de Passe",
       "currentPassword": "Mot de Passe Actuel",
-      "newPassword": "Nouveau Mot de Passe"
+      "newPassword": "Nouveau Mot de Passe",
+      "accountInfo": "Informations du Compte",
+      "accountInfoDescription": "Voir les détails de votre compte",
+      "userId": "ID Utilisateur",
+      "accountCreated": "Compte Créé",
+      "lastSignIn": "Dernière Connexion",
+      "user": "Utilisateur",
+      "signOut": "Se déconnecter",
+      "home": "Accueil",
+      "creditsLabel": "Crédits",
+      "toasts": {
+        "profileUpdated": "Profil mis à jour avec succès",
+        "profileUpdateError": "Échec de la mise à jour du profil",
+        "profileLoadError": "Échec du chargement du profil"
+      }
     }
   },
   "pricing": {

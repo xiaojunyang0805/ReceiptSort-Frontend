@@ -472,15 +472,38 @@
     },
     "profile": {
       "title": "Profile Settings",
+      "subtitle": "Manage your account settings and preferences",
+      "profileInfo": "Profile Information",
+      "profileInfoDescription": "Update your personal information",
+      "loadingProfile": "Loading your profile...",
       "personalInfo": "Personal Information",
       "name": "Name",
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "Enter your full name",
       "email": "Email",
+      "emailCannotBeChanged": "Email cannot be changed",
       "language": "Language",
       "timezone": "Timezone",
       "updateProfile": "Update Profile",
+      "saveChanges": "Save Changes",
+      "saving": "Saving...",
       "changePassword": "Change Password",
       "currentPassword": "Current Password",
-      "newPassword": "New Password"
+      "newPassword": "New Password",
+      "accountInfo": "Account Information",
+      "accountInfoDescription": "View your account details",
+      "userId": "User ID",
+      "accountCreated": "Account Created",
+      "lastSignIn": "Last Sign In",
+      "user": "User",
+      "signOut": "Sign out",
+      "home": "Home",
+      "creditsLabel": "Credits",
+      "toasts": {
+        "profileUpdated": "Profile updated successfully",
+        "profileUpdateError": "Failed to update profile",
+        "profileLoadError": "Failed to load profile"
+      }
     }
   },
   "pricing": {

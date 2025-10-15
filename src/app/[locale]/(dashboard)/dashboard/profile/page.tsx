@@ -15,7 +15,7 @@ export default async function ProfilePage() {
       <div>
         <h1 className="text-3xl font-bold tracking-tight">{t('title')}</h1>
         <p className="text-muted-foreground mt-2">
-          Manage your account settings and preferences
+          {t('subtitle')}
         </p>
       </div>
 

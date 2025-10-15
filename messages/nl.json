@@ -462,15 +462,38 @@
     },
     "profile": {
       "title": "Profielinstellingen",
+      "subtitle": "Beheer uw accountinstellingen en voorkeuren",
+      "profileInfo": "Profielinformatie",
+      "profileInfoDescription": "Werk uw persoonlijke informatie bij",
+      "loadingProfile": "Uw profiel laden...",
       "personalInfo": "Persoonlijke Informatie",
       "name": "Naam",
+      "fullName": "Volledige Naam",
+      "fullNamePlaceholder": "Voer uw volledige naam in",
       "email": "E-mail",
+      "emailCannotBeChanged": "E-mail kan niet worden gewijzigd",
       "language": "Taal",
       "timezone": "Tijdzone",
       "updateProfile": "Profiel Bijwerken",
+      "saveChanges": "Wijzigingen Opslaan",
+      "saving": "Opslaan...",
       "changePassword": "Wachtwoord Wijzigen",
       "currentPassword": "Huidig Wachtwoord",
-      "newPassword": "Nieuw Wachtwoord"
+      "newPassword": "Nieuw Wachtwoord",
+      "accountInfo": "Accountinformatie",
+      "accountInfoDescription": "Bekijk uw accountgegevens",
+      "userId": "Gebruikers-ID",
+      "accountCreated": "Account Aangemaakt",
+      "lastSignIn": "Laatste Aanmelding",
+      "user": "Gebruiker",
+      "signOut": "Uitloggen",
+      "home": "Home",
+      "creditsLabel": "Credits",
+      "toasts": {
+        "profileUpdated": "Profiel succesvol bijgewerkt",
+        "profileUpdateError": "Profiel bijwerken mislukt",
+        "profileLoadError": "Profiel laden mislukt"
+      }
     }
   },
   "pricing": {
