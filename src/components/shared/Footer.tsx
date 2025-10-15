@@ -28,7 +28,7 @@ export default function Footer() {
                   onClick={() => scrollToSection('features')}
                   className="text-gray-600 hover:text-primary transition-colors"
                 >
-                  About
+                  {tNav('about')}
                 </button>
               </li>
               <li>
@@ -91,7 +91,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/privacy" className="text-gray-600 hover:text-primary transition-colors">
-                  Cookie Policy
+                  {t('cookiePolicy')}
                 </Link>
               </li>
             </ul>
