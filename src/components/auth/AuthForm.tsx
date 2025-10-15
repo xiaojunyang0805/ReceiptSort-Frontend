@@ -21,13 +21,16 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Link } from '@/lib/navigation'
 import { useTranslations } from 'next-intl'
 
+// Type for the translation function
+type TranslationFunction = ReturnType<typeof useTranslations<'auth'>>
+
 // Create schemas with a function to support translations
-const createLoginSchema = (t: any) => z.object({
+const createLoginSchema = (t: TranslationFunction) => z.object({
   email: z.string().email(t('errors.invalidEmail')),
   password: z.string().min(6, t('errors.passwordMin')),
 })
 
-const createSignupSchema = (t: any) => z.object({
+const createSignupSchema = (t: TranslationFunction) => z.object({
   fullName: z.string().min(2, t('errors.fullNameMin')),
   email: z.string().email(t('errors.invalidEmail')),
   password: z.string().min(6, t('errors.passwordMin')),
