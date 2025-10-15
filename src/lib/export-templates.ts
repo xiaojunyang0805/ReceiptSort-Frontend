@@ -47,10 +47,18 @@ export const STANDARD_TEMPLATE: ExportTemplate = {
     // Other Fields
     { key: 'payment_method', label: 'Payment Method' },
 
+    // Phase 2: Business Invoice Fields
+    { key: 'purchase_order_number', label: 'Purchase Order #' },
+    { key: 'payment_reference', label: 'Payment Reference' },
+    { key: 'vendor_tax_id', label: 'Vendor Tax ID' },
+
     // Phase 1: Additional Details
     { key: 'due_date', label: 'Due Date' },
     { key: 'vendor_address', label: 'Vendor Address' },
     { key: 'notes', label: 'Notes' },
+
+    // Phase 2: Line Items Summary (formatted as text)
+    { key: 'line_items_summary', label: 'Line Items' },
   ],
 }
 
@@ -126,10 +134,18 @@ export const AVAILABLE_COLUMNS: ExportColumn[] = [
   // Other Fields
   { key: 'payment_method', label: 'Payment Method' },
 
+  // Phase 2: Business Invoice Fields
+  { key: 'purchase_order_number', label: 'Purchase Order #' },
+  { key: 'payment_reference', label: 'Payment Reference' },
+  { key: 'vendor_tax_id', label: 'Vendor Tax ID' },
+
   // Phase 1: Additional Details
   { key: 'due_date', label: 'Due Date' },
   { key: 'vendor_address', label: 'Vendor Address' },
   { key: 'notes', label: 'Notes' },
+
+  // Phase 2: Line Items
+  { key: 'line_items_summary', label: 'Line Items' },
 ]
 
 /**

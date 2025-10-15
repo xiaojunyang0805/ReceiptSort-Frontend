@@ -21,6 +21,19 @@ interface Receipt {
   subtotal?: number
   vendor_address?: string
   due_date?: string
+
+  // Phase 2: Business Invoices
+  purchase_order_number?: string
+  payment_reference?: string
+  vendor_tax_id?: string
+  line_items?: Array<{
+    line_number: number
+    description: string
+    quantity: number
+    unit_price: number
+    line_total: number
+    item_code?: string | null
+  }>
 }
 
 /**

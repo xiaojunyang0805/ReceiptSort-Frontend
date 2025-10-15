@@ -55,6 +55,23 @@ interface Receipt {
   subtotal?: number
   vendor_address?: string
   due_date?: string
+
+  // Phase 2: Business Invoices
+  purchase_order_number?: string
+  payment_reference?: string
+  vendor_tax_id?: string
+}
+
+interface LineItem {
+  id?: string
+  receipt_id?: string
+  line_number: number
+  description: string
+  quantity: number
+  unit_price: number
+  line_total: number
+  item_code?: string | null
+  tax_rate?: number | null
 }
 
 interface ReceiptDetailModalProps {
@@ -114,6 +131,8 @@ export default function ReceiptDetailModal({
   const [urlLoading, setUrlLoading] = useState(false)
   const [urlError, setUrlError] = useState<string | null>(null)
   const [imageError, setImageError] = useState(false)
+  const [lineItems, setLineItems] = useState<LineItem[]>([])
+  const [lineItemsLoading, setLineItemsLoading] = useState(false)
   const supabase = createClient()
 
   useEffect(() => {
@@ -134,9 +153,42 @@ export default function ReceiptDetailModal({
         subtotal: receipt.subtotal || 0,
         vendor_address: receipt.vendor_address || '',
         due_date: receipt.due_date || '',
+
+        // Phase 2: Business Invoices
+        purchase_order_number: receipt.purchase_order_number || '',
+        payment_reference: receipt.payment_reference || '',
+        vendor_tax_id: receipt.vendor_tax_id || '',
       })
+
+      // Fetch line items when receipt changes
+      if (open) {
+        fetchLineItems()
+      }
     }
-  }, [receipt])
+  }, [receipt, open])
+
+  // Fetch line items for this receipt
+  const fetchLineItems = async () => {
+    if (!receipt) return
+
+    setLineItemsLoading(true)
+    try {
+      const { data, error } = await supabase
+        .from('receipt_line_items')
+        .select('*')
+        .eq('receipt_id', receipt.id)
+        .order('line_number', { ascending: true })
+
+      if (error) throw error
+
+      setLineItems(data || [])
+    } catch (error) {
+      console.error('Error fetching line items:', error)
+      setLineItems([])
+    } finally {
+      setLineItemsLoading(false)
+    }
+  }
 
   // Fetch signed URL when modal opens
   useEffect(() => {
@@ -199,6 +251,11 @@ export default function ReceiptDetailModal({
           subtotal: formData.subtotal || null,
           vendor_address: formData.vendor_address || null,
           due_date: formData.due_date || null,
+
+          // Phase 2: Business Invoices
+          purchase_order_number: formData.purchase_order_number || null,
+          payment_reference: formData.payment_reference || null,
+          vendor_tax_id: formData.vendor_tax_id || null,
         })
         .eq('id', receipt.id)
 
@@ -604,6 +661,53 @@ export default function ReceiptDetailModal({
               </Select>
             </div>
 
+            {/* Phase 2: Business Invoice Fields (for invoices) */}
+            {(formData.document_type === 'invoice' ||
+              formData.document_type === 'medical_invoice' ||
+              formData.document_type === 'bill') && (
+              <>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="purchaseOrderNumber">Purchase Order #</Label>
+                    <Input
+                      id="purchaseOrderNumber"
+                      value={formData.purchase_order_number || ''}
+                      onChange={(e) =>
+                        setFormData({ ...formData, purchase_order_number: e.target.value })
+                      }
+                      disabled={!isEditable}
+                      placeholder="PO-2025-456"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="paymentReference">Payment Reference</Label>
+                    <Input
+                      id="paymentReference"
+                      value={formData.payment_reference || ''}
+                      onChange={(e) =>
+                        setFormData({ ...formData, payment_reference: e.target.value })
+                      }
+                      disabled={!isEditable}
+                      placeholder="TXN-789012"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <Label htmlFor="vendorTaxId">Vendor Tax ID (VAT/EIN/BTW)</Label>
+                  <Input
+                    id="vendorTaxId"
+                    value={formData.vendor_tax_id || ''}
+                    onChange={(e) =>
+                      setFormData({ ...formData, vendor_tax_id: e.target.value })
+                    }
+                    disabled={!isEditable}
+                    placeholder="VAT123456789"
+                  />
+                </div>
+              </>
+            )}
+
             {/* Phase 1: Vendor Address (for invoices) */}
             {(formData.document_type === 'invoice' ||
               formData.document_type === 'medical_invoice' ||
@@ -620,6 +724,56 @@ export default function ReceiptDetailModal({
                   placeholder="123 Main Street, City, State 12345"
                   rows={2}
                 />
+              </div>
+            )}
+
+            {/* Phase 2: Line Items Table */}
+            {lineItems.length > 0 && (
+              <div className="space-y-2">
+                <Label>Line Items ({lineItems.length})</Label>
+                <div className="border rounded-lg overflow-hidden">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <thead className="bg-muted">
+                        <tr>
+                          <th className="px-3 py-2 text-left font-medium">#</th>
+                          <th className="px-3 py-2 text-left font-medium">Description</th>
+                          <th className="px-3 py-2 text-right font-medium">Qty</th>
+                          <th className="px-3 py-2 text-right font-medium">Price</th>
+                          <th className="px-3 py-2 text-right font-medium">Total</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y">
+                        {lineItems.map((item) => (
+                          <tr key={item.id || item.line_number} className="hover:bg-muted/50">
+                            <td className="px-3 py-2 text-muted-foreground">{item.line_number}</td>
+                            <td className="px-3 py-2">
+                              <div>{item.description}</div>
+                              {item.item_code && (
+                                <div className="text-xs text-muted-foreground mt-0.5">
+                                  Code: {item.item_code}
+                                </div>
+                              )}
+                            </td>
+                            <td className="px-3 py-2 text-right">{item.quantity}</td>
+                            <td className="px-3 py-2 text-right">
+                              {formData.currency} {item.unit_price.toFixed(2)}
+                            </td>
+                            <td className="px-3 py-2 text-right font-medium">
+                              {formData.currency} {item.line_total.toFixed(2)}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                {lineItemsLoading && (
+                  <div className="text-sm text-muted-foreground flex items-center gap-2">
+                    <Loader2 className="h-3 w-3 animate-spin" />
+                    Loading line items...
+                  </div>
+                )}
               </div>
             )}
 
