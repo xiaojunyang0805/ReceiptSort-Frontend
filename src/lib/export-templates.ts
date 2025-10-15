@@ -9,12 +9,17 @@
  * - Custom (user-defined)
  */
 
+import { getTranslations } from 'next-intl/server'
+
 export interface ExportColumn {
   key: string
   label: string
   required?: boolean
   format?: (value: unknown) => string
 }
+
+// Translation helper type
+type TranslationFunction = (key: string) => string
 
 export interface ExportTemplate {
   id: string
@@ -246,5 +251,82 @@ export function loadTemplatePreference(): {
     return JSON.parse(stored)
   } catch {
     return null
+  }
+}
+
+/**
+ * Get translated label for a column key
+ * Maps database field keys to translation keys
+ */
+async function getTranslatedLabel(key: string, locale: string): Promise<string> {
+  const t = await getTranslations({ locale, namespace: 'receiptDetails' })
+
+  const labelMap: Record<string, string> = {
+    'document_type': t('documentType'),
+    'invoice_number': t('invoiceNumber'),
+    'merchant_name': t('merchantName'),
+    'total_amount': t('amount'),
+    'currency': t('currency'),
+    'receipt_date': t('receiptDate'),
+    'category': t('category'),
+    'subtotal': t('subtotal'),
+    'tax_amount': t('taxAmount'),
+    'payment_method': t('paymentMethod'),
+    'purchase_order_number': t('purchaseOrderNumber'),
+    'payment_reference': t('paymentReference'),
+    'vendor_tax_id': t('vendorTaxId'),
+    'due_date': t('dueDate'),
+    'vendor_address': t('vendorAddress'),
+    'notes': t('notes'),
+    'patient_dob': t('patientDob'),
+    'treatment_date': t('treatmentDate'),
+    'insurance_claim_number': t('insuranceClaimNumber'),
+    'diagnosis_codes': t('diagnosisCodes'),
+    'procedure_codes': t('procedureCodes'),
+    'provider_id': t('providerId'),
+    'line_items_summary': t('lineItems'),
+  }
+
+  return labelMap[key] || key
+}
+
+/**
+ * Get translated template for CSV export
+ */
+export async function getTranslatedTemplate(templateId: string, locale: string = 'en'): Promise<ExportTemplate> {
+  const baseTemplate = getTemplate(templateId) || STANDARD_TEMPLATE
+
+  // Translate all column labels
+  const translatedColumns = await Promise.all(
+    baseTemplate.columns.map(async (col) => ({
+      ...col,
+      label: await getTranslatedLabel(col.key, locale),
+    }))
+  )
+
+  return {
+    ...baseTemplate,
+    columns: translatedColumns,
+  }
+}
+
+/**
+ * Create custom translated template from selected columns
+ */
+export async function createTranslatedCustomTemplate(selectedColumns: string[], locale: string = 'en'): Promise<ExportTemplate> {
+  const columns = await Promise.all(
+    AVAILABLE_COLUMNS
+      .filter(col => selectedColumns.includes(col.key))
+      .map(async (col) => ({
+        ...col,
+        label: await getTranslatedLabel(col.key, locale),
+      }))
+  )
+
+  return {
+    id: 'custom',
+    name: 'Custom',
+    description: 'User-defined columns',
+    columns,
   }
 }

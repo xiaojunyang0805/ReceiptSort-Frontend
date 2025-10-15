@@ -575,5 +575,72 @@
     "processing": "Verarbeitung...",
     "bestValue": "Bester Wert",
     "save": "{percent}% Sparen"
+  },
+  "receiptDetails": {
+    "title": "Belegdetails",
+    "receiptPreview": "Belegvorschau",
+    "documentType": "Dokumenttyp",
+    "merchantName": "Händlername",
+    "invoiceNumber": "Rechnungsnummer",
+    "amount": "Betrag",
+    "currency": "Währung",
+    "receiptDate": "Belegdatum",
+    "category": "Kategorie",
+    "subtotal": "Zwischensumme (Vor Steuern)",
+    "taxAmount": "Steuerbetrag",
+    "dueDate": "Fälligkeitsdatum",
+    "paymentMethod": "Zahlungsmethode",
+    "purchaseOrderNumber": "Bestellnummer",
+    "paymentReference": "Zahlungsreferenz",
+    "vendorTaxId": "Steuer-ID des Anbieters (USt-ID/EIN/BTW)",
+    "vendorAddress": "Anbieteradresse",
+    "lineItems": "Positionsangaben",
+    "lineItemsCount": "Positionsangaben ({count})",
+    "medicalInformation": "Medizinische Informationen",
+    "patientDob": "Geburtsdatum des Patienten",
+    "treatmentDate": "Behandlungsdatum",
+    "insuranceClaimNumber": "Versicherungsanspruchsnummer",
+    "diagnosisCodes": "Diagnosecodes (ICD)",
+    "procedureCodes": "Verfahrenscodes (CPT)",
+    "providerId": "Anbieter-ID (AGB/NPI)",
+    "notes": "Notizen",
+    "saveChanges": "Änderungen Speichern",
+    "saving": "Speichern...",
+    "delete": "Löschen",
+    "deleting": "Löschen...",
+    "retryProcessing": "Verarbeitung Wiederholen",
+    "retrying": "Wiederholen...",
+    "documentTypes": {
+      "receipt": "Beleg",
+      "invoice": "Rechnung",
+      "medicalInvoice": "Arztrechnung",
+      "bill": "Rechnung"
+    },
+    "categories": {
+      "foodDining": "Essen & Gastronomie",
+      "transportation": "Transport",
+      "shopping": "Einkaufen",
+      "officeSupplies": "Bürobedarf",
+      "travel": "Reisen",
+      "entertainment": "Unterhaltung",
+      "utilities": "Versorgungsleistungen",
+      "healthcare": "Gesundheitswesen",
+      "other": "Sonstiges"
+    },
+    "paymentMethods": {
+      "cash": "Bargeld",
+      "creditCard": "Kreditkarte",
+      "debitCard": "Debitkarte",
+      "bankTransfer": "Banküberweisung",
+      "other": "Sonstiges"
+    },
+    "lineItemColumns": {
+      "lineNumber": "#",
+      "description": "Beschreibung",
+      "quantity": "Menge",
+      "unitPrice": "Preis",
+      "lineTotal": "Gesamt",
+      "itemCode": "Code"
+    }
   }
 }

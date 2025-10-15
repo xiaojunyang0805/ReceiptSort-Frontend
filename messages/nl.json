@@ -34,7 +34,7 @@
     "confirm": "Bevestigen"
   },
   "hero": {
-    "headline": "Stop Met Het Verspillen van Uren aan Bonnetvoerinvoer",
+    "headline": "Verspil geen uren meer aan het invoeren van bonnen",
     "headlineHighlight": "Bonnetje Invoer",
     "subheadline": "Extraheer gegevens van bonnetjes in seconden met AI.",
     "subheadlineDetails": "Upload bonnetjes → AI extraheert gegevens → Download Excel.",
@@ -574,5 +574,72 @@
     "processing": "Verwerken...",
     "bestValue": "Beste Waarde",
     "save": "Bespaar {percent}%"
+  },
+  "receiptDetails": {
+    "title": "Bonnetje Details",
+    "receiptPreview": "Bonnetje Voorbeeld",
+    "documentType": "Documenttype",
+    "merchantName": "Handelaarsnaam",
+    "invoiceNumber": "Factuurnummer",
+    "amount": "Bedrag",
+    "currency": "Valuta",
+    "receiptDate": "Bonnetje Datum",
+    "category": "Categorie",
+    "subtotal": "Subtotaal (Voor Belasting)",
+    "taxAmount": "Belastingbedrag",
+    "dueDate": "Vervaldatum",
+    "paymentMethod": "Betaalmethode",
+    "purchaseOrderNumber": "Inkoopordernummer",
+    "paymentReference": "Betalingsreferentie",
+    "vendorTaxId": "Leverancier BTW-nummer",
+    "vendorAddress": "Leveranciersadres",
+    "lineItems": "Regelitems",
+    "lineItemsCount": "Regelitems ({count})",
+    "medicalInformation": "Medische Informatie",
+    "patientDob": "Geboortedatum Patiënt",
+    "treatmentDate": "Behandeldatum",
+    "insuranceClaimNumber": "Verzekeringsclaim Nummer",
+    "diagnosisCodes": "Diagnosecodes (ICD)",
+    "procedureCodes": "Procedurecodes (CPT)",
+    "providerId": "Zorgverlener ID (AGB/NPI)",
+    "notes": "Notities",
+    "saveChanges": "Wijzigingen Opslaan",
+    "saving": "Opslaan...",
+    "delete": "Verwijderen",
+    "deleting": "Verwijderen...",
+    "retryProcessing": "Opnieuw Verwerken",
+    "retrying": "Opnieuw Proberen...",
+    "documentTypes": {
+      "receipt": "Bonnetje",
+      "invoice": "Factuur",
+      "medicalInvoice": "Medische Factuur",
+      "bill": "Rekening"
+    },
+    "categories": {
+      "foodDining": "Eten & Drinken",
+      "transportation": "Vervoer",
+      "shopping": "Winkelen",
+      "officeSupplies": "Kantoorbenodigdheden",
+      "travel": "Reizen",
+      "entertainment": "Amusement",
+      "utilities": "Nutsvoorzieningen",
+      "healthcare": "Gezondheidszorg",
+      "other": "Overige"
+    },
+    "paymentMethods": {
+      "cash": "Contant",
+      "creditCard": "Creditcard",
+      "debitCard": "Betaalpas",
+      "bankTransfer": "Bankoverschrijving",
+      "other": "Overige"
+    },
+    "lineItemColumns": {
+      "lineNumber": "#",
+      "description": "Beschrijving",
+      "quantity": "Aantal",
+      "unitPrice": "Prijs",
+      "lineTotal": "Totaal",
+      "itemCode": "Code"
+    }
   }
 }

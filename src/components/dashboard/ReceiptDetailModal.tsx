@@ -25,6 +25,7 @@ import { Loader2, Save, Trash2, FileText, AlertTriangle, RefreshCw } from 'lucid
 import Image from 'next/image'
 import { format } from 'date-fns'
 import { Alert, AlertDescription } from '@/components/ui/alert'
+import { useTranslations } from 'next-intl'
 
 interface Receipt {
   id: string
@@ -89,41 +90,7 @@ interface ReceiptDetailModalProps {
   onUpdate?: () => void
 }
 
-const CATEGORIES = [
-  'Food & Dining',
-  'Transportation',
-  'Shopping',
-  'Office Supplies',
-  'Travel',
-  'Entertainment',
-  'Utilities',
-  'Healthcare',
-  'Other',
-]
-
-const PAYMENT_METHODS = [
-  'Cash',
-  'Credit Card',
-  'Debit Card',
-  'Bank Transfer',
-  'Other',
-]
-
 const CURRENCIES = ['USD', 'EUR', 'GBP']
-
-const DOCUMENT_TYPES = [
-  { value: 'receipt', label: 'Receipt' },
-  { value: 'invoice', label: 'Invoice' },
-  { value: 'medical_invoice', label: 'Medical Invoice' },
-  { value: 'bill', label: 'Bill' },
-]
-
-const statusConfig = {
-  pending: { label: 'Pending', color: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300' },
-  processing: { label: 'Processing', color: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400' },
-  completed: { label: 'Completed', color: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' },
-  failed: { label: 'Failed', color: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400' },
-}
 
 export default function ReceiptDetailModal({
   receipt,
@@ -131,6 +98,9 @@ export default function ReceiptDetailModal({
   onOpenChange,
   onUpdate,
 }: ReceiptDetailModalProps) {
+  const t = useTranslations('receiptDetails')
+  const tTable = useTranslations('dashboard.receiptsTable')
+
   const [formData, setFormData] = useState<Partial<Receipt>>({})
   const [saving, setSaving] = useState(false)
   const [deleting, setDeleting] = useState(false)
@@ -142,6 +112,41 @@ export default function ReceiptDetailModal({
   const [lineItems, setLineItems] = useState<LineItem[]>([])
   const [lineItemsLoading, setLineItemsLoading] = useState(false)
   const supabase = createClient()
+
+  // Translated options
+  const CATEGORIES = [
+    { value: 'Food & Dining', label: t('categories.foodDining') },
+    { value: 'Transportation', label: t('categories.transportation') },
+    { value: 'Shopping', label: t('categories.shopping') },
+    { value: 'Office Supplies', label: t('categories.officeSupplies') },
+    { value: 'Travel', label: t('categories.travel') },
+    { value: 'Entertainment', label: t('categories.entertainment') },
+    { value: 'Utilities', label: t('categories.utilities') },
+    { value: 'Healthcare', label: t('categories.healthcare') },
+    { value: 'Other', label: t('categories.other') },
+  ]
+
+  const PAYMENT_METHODS = [
+    { value: 'Cash', label: t('paymentMethods.cash') },
+    { value: 'Credit Card', label: t('paymentMethods.creditCard') },
+    { value: 'Debit Card', label: t('paymentMethods.debitCard') },
+    { value: 'Bank Transfer', label: t('paymentMethods.bankTransfer') },
+    { value: 'Other', label: t('paymentMethods.other') },
+  ]
+
+  const DOCUMENT_TYPES = [
+    { value: 'receipt', label: t('documentTypes.receipt') },
+    { value: 'invoice', label: t('documentTypes.invoice') },
+    { value: 'medical_invoice', label: t('documentTypes.medicalInvoice') },
+    { value: 'bill', label: t('documentTypes.bill') },
+  ]
+
+  const statusConfig = {
+    pending: { label: tTable('status.pending'), color: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300' },
+    processing: { label: tTable('status.processing'), color: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400' },
+    completed: { label: tTable('status.completed'), color: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' },
+    failed: { label: tTable('status.failed'), color: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400' },
+  }
 
   useEffect(() => {
     if (receipt) {
@@ -362,7 +367,7 @@ export default function ReceiptDetailModal({
         <DialogHeader>
           <div className="flex items-start justify-between">
             <div>
-              <DialogTitle>Receipt Details</DialogTitle>
+              <DialogTitle>{t('title')}</DialogTitle>
               <p className="text-sm text-muted-foreground mt-1">
                 {receipt.file_name}
               </p>
@@ -376,7 +381,7 @@ export default function ReceiptDetailModal({
         <div className="grid md:grid-cols-2 gap-6 mt-4">
           {/* Left: Image Preview */}
           <div className="space-y-4">
-            <Label>Receipt Preview</Label>
+            <Label>{t('receiptPreview')}</Label>
             {urlLoading ? (
               <div className="aspect-[3/4] w-full border rounded-lg flex items-center justify-center bg-muted">
                 <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
@@ -452,12 +457,12 @@ export default function ReceiptDetailModal({
                     {retrying ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Retrying...
+                        {t('retrying')}
                       </>
                     ) : (
                       <>
                         <RefreshCw className="mr-2 h-4 w-4" />
-                        Retry Processing
+                        {t('retryProcessing')}
                       </>
                     )}
                   </Button>
@@ -488,7 +493,7 @@ export default function ReceiptDetailModal({
 
             {/* Phase 1: Document Type Selector */}
             <div>
-              <Label htmlFor="documentType">Document Type</Label>
+              <Label htmlFor="documentType">{t('documentType')}</Label>
               <Select
                 value={formData.document_type}
                 onValueChange={(value) =>
@@ -510,7 +515,7 @@ export default function ReceiptDetailModal({
             </div>
 
             <div>
-              <Label htmlFor="merchant">Merchant Name</Label>
+              <Label htmlFor="merchant">{t('merchantName')}</Label>
               <Input
                 id="merchant"
                 value={formData.merchant_name || ''}
@@ -527,7 +532,7 @@ export default function ReceiptDetailModal({
               formData.document_type === 'medical_invoice' ||
               formData.document_type === 'bill') && (
               <div>
-                <Label htmlFor="invoiceNumber">Invoice Number</Label>
+                <Label htmlFor="invoiceNumber">{t('invoiceNumber')}</Label>
                 <Input
                   id="invoiceNumber"
                   value={formData.invoice_number || ''}
@@ -542,7 +547,7 @@ export default function ReceiptDetailModal({
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="amount">Amount</Label>
+                <Label htmlFor="amount">{t('amount')}</Label>
                 <Input
                   id="amount"
                   type="number"
@@ -556,7 +561,7 @@ export default function ReceiptDetailModal({
                 />
               </div>
               <div>
-                <Label htmlFor="currency">Currency</Label>
+                <Label htmlFor="currency">{t('currency')}</Label>
                 <Select
                   value={formData.currency}
                   onValueChange={(value) =>
@@ -579,7 +584,7 @@ export default function ReceiptDetailModal({
             </div>
 
             <div>
-              <Label htmlFor="date">Receipt Date</Label>
+              <Label htmlFor="date">{t('receiptDate')}</Label>
               <Input
                 id="date"
                 type="date"
@@ -592,7 +597,7 @@ export default function ReceiptDetailModal({
             </div>
 
             <div>
-              <Label htmlFor="category">Category</Label>
+              <Label htmlFor="category">{t('category')}</Label>
               <Select
                 value={formData.category}
                 onValueChange={(value) =>
@@ -616,7 +621,7 @@ export default function ReceiptDetailModal({
             {/* Phase 1: Subtotal and Tax (side by side) */}
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="subtotal">Subtotal (Before Tax)</Label>
+                <Label htmlFor="subtotal">{t('subtotal')}</Label>
                 <Input
                   id="subtotal"
                   type="number"
@@ -630,7 +635,7 @@ export default function ReceiptDetailModal({
                 />
               </div>
               <div>
-                <Label htmlFor="tax">Tax Amount</Label>
+                <Label htmlFor="tax">{t('taxAmount')}</Label>
                 <Input
                   id="tax"
                   type="number"
@@ -650,7 +655,7 @@ export default function ReceiptDetailModal({
               formData.document_type === 'medical_invoice' ||
               formData.document_type === 'bill') && (
               <div>
-                <Label htmlFor="dueDate">Due Date</Label>
+                <Label htmlFor="dueDate">{t('dueDate')}</Label>
                 <Input
                   id="dueDate"
                   type="date"
@@ -664,7 +669,7 @@ export default function ReceiptDetailModal({
             )}
 
             <div>
-              <Label htmlFor="payment">Payment Method</Label>
+              <Label htmlFor="payment">{t('paymentMethod')}</Label>
               <Select
                 value={formData.payment_method}
                 onValueChange={(value) =>
@@ -692,7 +697,7 @@ export default function ReceiptDetailModal({
               <>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="purchaseOrderNumber">Purchase Order #</Label>
+                    <Label htmlFor="purchaseOrderNumber">{t('purchaseOrderNumber')}</Label>
                     <Input
                       id="purchaseOrderNumber"
                       value={formData.purchase_order_number || ''}
@@ -704,7 +709,7 @@ export default function ReceiptDetailModal({
                     />
                   </div>
                   <div>
-                    <Label htmlFor="paymentReference">Payment Reference</Label>
+                    <Label htmlFor="paymentReference">{t('paymentReference')}</Label>
                     <Input
                       id="paymentReference"
                       value={formData.payment_reference || ''}
@@ -718,7 +723,7 @@ export default function ReceiptDetailModal({
                 </div>
 
                 <div>
-                  <Label htmlFor="vendorTaxId">Vendor Tax ID (VAT/EIN/BTW)</Label>
+                  <Label htmlFor="vendorTaxId">{t('vendorTaxId')}</Label>
                   <Input
                     id="vendorTaxId"
                     value={formData.vendor_tax_id || ''}
@@ -737,7 +742,7 @@ export default function ReceiptDetailModal({
               formData.document_type === 'medical_invoice' ||
               formData.document_type === 'bill') && (
               <div>
-                <Label htmlFor="vendorAddress">Vendor Address</Label>
+                <Label htmlFor="vendorAddress">{t('vendorAddress')}</Label>
                 <Textarea
                   id="vendorAddress"
                   value={formData.vendor_address || ''}
@@ -754,17 +759,17 @@ export default function ReceiptDetailModal({
             {/* Phase 2: Line Items Table */}
             {lineItems.length > 0 && (
               <div className="space-y-2">
-                <Label>Line Items ({lineItems.length})</Label>
+                <Label>{t('lineItemsCount', {count: lineItems.length})}</Label>
                 <div className="border rounded-lg overflow-hidden">
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm">
                       <thead className="bg-muted">
                         <tr>
-                          <th className="px-3 py-2 text-left font-medium">#</th>
-                          <th className="px-3 py-2 text-left font-medium">Description</th>
-                          <th className="px-3 py-2 text-right font-medium">Qty</th>
-                          <th className="px-3 py-2 text-right font-medium">Price</th>
-                          <th className="px-3 py-2 text-right font-medium">Total</th>
+                          <th className="px-3 py-2 text-left font-medium">{t('lineItemColumns.lineNumber')}</th>
+                          <th className="px-3 py-2 text-left font-medium">{t('lineItemColumns.description')}</th>
+                          <th className="px-3 py-2 text-right font-medium">{t('lineItemColumns.quantity')}</th>
+                          <th className="px-3 py-2 text-right font-medium">{t('lineItemColumns.unitPrice')}</th>
+                          <th className="px-3 py-2 text-right font-medium">{t('lineItemColumns.lineTotal')}</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y">
@@ -775,7 +780,7 @@ export default function ReceiptDetailModal({
                               <div>{item.description}</div>
                               {item.item_code && (
                                 <div className="text-xs text-muted-foreground mt-0.5">
-                                  Code: {item.item_code}
+                                  {t('lineItemColumns.itemCode')}: {item.item_code}
                                 </div>
                               )}
                             </td>
@@ -805,11 +810,11 @@ export default function ReceiptDetailModal({
             {formData.document_type === 'medical_invoice' && (
               <>
                 <div className="space-y-2 pt-2">
-                  <Label className="text-base font-semibold">Medical Information</Label>
+                  <Label className="text-base font-semibold">{t('medicalInformation')}</Label>
                   <div className="border-t pt-3 space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor="patientDob">Patient Date of Birth</Label>
+                        <Label htmlFor="patientDob">{t('patientDob')}</Label>
                         <Input
                           id="patientDob"
                           type="date"
@@ -821,7 +826,7 @@ export default function ReceiptDetailModal({
                         />
                       </div>
                       <div>
-                        <Label htmlFor="treatmentDate">Treatment Date</Label>
+                        <Label htmlFor="treatmentDate">{t('treatmentDate')}</Label>
                         <Input
                           id="treatmentDate"
                           type="date"
@@ -835,7 +840,7 @@ export default function ReceiptDetailModal({
                     </div>
 
                     <div>
-                      <Label htmlFor="insuranceClaim">Insurance Claim Number</Label>
+                      <Label htmlFor="insuranceClaim">{t('insuranceClaimNumber')}</Label>
                       <Input
                         id="insuranceClaim"
                         value={formData.insurance_claim_number || ''}
@@ -849,7 +854,7 @@ export default function ReceiptDetailModal({
 
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor="diagnosisCodes">Diagnosis Codes (ICD)</Label>
+                        <Label htmlFor="diagnosisCodes">{t('diagnosisCodes')}</Label>
                         <Input
                           id="diagnosisCodes"
                           value={formData.diagnosis_codes || ''}
@@ -861,7 +866,7 @@ export default function ReceiptDetailModal({
                         />
                       </div>
                       <div>
-                        <Label htmlFor="procedureCodes">Procedure Codes (CPT)</Label>
+                        <Label htmlFor="procedureCodes">{t('procedureCodes')}</Label>
                         <Input
                           id="procedureCodes"
                           value={formData.procedure_codes || ''}
@@ -875,7 +880,7 @@ export default function ReceiptDetailModal({
                     </div>
 
                     <div>
-                      <Label htmlFor="providerId">Provider ID (AGB/NPI)</Label>
+                      <Label htmlFor="providerId">{t('providerId')}</Label>
                       <Input
                         id="providerId"
                         value={formData.provider_id || ''}
@@ -892,7 +897,7 @@ export default function ReceiptDetailModal({
             )}
 
             <div>
-              <Label htmlFor="notes">Notes</Label>
+              <Label htmlFor="notes">{t('notes')}</Label>
               <Textarea
                 id="notes"
                 value={formData.notes || ''}
@@ -920,12 +925,12 @@ export default function ReceiptDetailModal({
                 {saving ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Saving...
+                    {t('saving')}
                   </>
                 ) : (
                   <>
                     <Save className="mr-2 h-4 w-4" />
-                    Save Changes
+                    {t('saveChanges')}
                   </>
                 )}
               </Button>

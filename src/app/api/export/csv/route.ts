@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { generateCSV, generateCSVFilename } from '@/lib/csv-generator'
-import { getTemplate, createCustomTemplate } from '@/lib/export-templates'
+import { getTranslatedTemplate, createTranslatedCustomTemplate } from '@/lib/export-templates'
 
 interface ExportRequest {
   receipt_ids: string[]
+  locale?: string
   template_id?: string
   custom_columns?: string[]
 }
@@ -33,7 +34,7 @@ export async function POST(request: NextRequest) {
 
     // 2. Parse request body
     const body: ExportRequest = await request.json()
-    const { receipt_ids, template_id, custom_columns } = body
+    const { receipt_ids, locale = 'en', template_id, custom_columns } = body
 
     if (!receipt_ids || !Array.isArray(receipt_ids) || receipt_ids.length === 0) {
       return NextResponse.json(
@@ -54,13 +55,18 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    console.log(`[CSV Export] User ${user.id} exporting ${receipt_ids.length} receipts`)
+    console.log(`[CSV Export] User ${user.id} exporting ${receipt_ids.length} receipts with locale: ${locale}`)
 
     // 3. Fetch receipts from database (with ownership verification)
-    // Only fetch fields needed for export to optimize performance
+    // Fetch all fields needed for export (Phase 1 + Phase 2 + Phase 3)
     const { data: receipts, error: fetchError } = await supabase
       .from('receipts')
-      .select('id, processing_status, merchant_name, total_amount, currency, receipt_date, category, tax_amount, payment_method, notes, created_at')
+      .select(`
+        id, processing_status, merchant_name, total_amount, currency, receipt_date, category, tax_amount, payment_method, notes, created_at,
+        invoice_number, document_type, subtotal, vendor_address, due_date,
+        purchase_order_number, payment_reference, vendor_tax_id,
+        patient_dob, treatment_date, insurance_claim_number, diagnosis_codes, procedure_codes, provider_id
+      `)
       .in('id', receipt_ids)
       .eq('user_id', user.id)
 
@@ -91,18 +97,20 @@ export async function POST(request: NextRequest) {
 
     console.log(`[CSV Export] Found ${completedReceipts.length} completed receipts`)
 
-    // 5. Determine export template
+    // 5. Determine export template with translations
     let template
     if (template_id === 'custom' && custom_columns) {
-      template = createCustomTemplate(custom_columns)
+      template = await createTranslatedCustomTemplate(custom_columns, locale)
     } else if (template_id) {
-      template = getTemplate(template_id)
+      template = await getTranslatedTemplate(template_id, locale)
+    } else {
+      // Default to standard template with translations
+      template = await getTranslatedTemplate('standard', locale)
     }
-    // If no template or template not found, use default (STANDARD_TEMPLATE)
 
-    console.log(`[CSV Export] Using template: ${template?.name || 'Standard'}`)
+    console.log(`[CSV Export] Using template: ${template.name} (locale: ${locale})`)
 
-    // 6. Generate CSV
+    // 6. Generate CSV with translated headers
     const csv = generateCSV(completedReceipts, template)
     const filename = generateCSVFilename()
 

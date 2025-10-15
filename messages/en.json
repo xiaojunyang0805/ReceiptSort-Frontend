@@ -585,5 +585,72 @@
     "processing": "Processing...",
     "bestValue": "Best Value",
     "save": "Save {percent}%"
+  },
+  "receiptDetails": {
+    "title": "Receipt Details",
+    "receiptPreview": "Receipt Preview",
+    "documentType": "Document Type",
+    "merchantName": "Merchant Name",
+    "invoiceNumber": "Invoice Number",
+    "amount": "Amount",
+    "currency": "Currency",
+    "receiptDate": "Receipt Date",
+    "category": "Category",
+    "subtotal": "Subtotal (Before Tax)",
+    "taxAmount": "Tax Amount",
+    "dueDate": "Due Date",
+    "paymentMethod": "Payment Method",
+    "purchaseOrderNumber": "Purchase Order #",
+    "paymentReference": "Payment Reference",
+    "vendorTaxId": "Vendor Tax ID (VAT/EIN/BTW)",
+    "vendorAddress": "Vendor Address",
+    "lineItems": "Line Items",
+    "lineItemsCount": "Line Items ({count})",
+    "medicalInformation": "Medical Information",
+    "patientDob": "Patient Date of Birth",
+    "treatmentDate": "Treatment Date",
+    "insuranceClaimNumber": "Insurance Claim Number",
+    "diagnosisCodes": "Diagnosis Codes (ICD)",
+    "procedureCodes": "Procedure Codes (CPT)",
+    "providerId": "Provider ID (AGB/NPI)",
+    "notes": "Notes",
+    "saveChanges": "Save Changes",
+    "saving": "Saving...",
+    "delete": "Delete",
+    "deleting": "Deleting...",
+    "retryProcessing": "Retry Processing",
+    "retrying": "Retrying...",
+    "documentTypes": {
+      "receipt": "Receipt",
+      "invoice": "Invoice",
+      "medicalInvoice": "Medical Invoice",
+      "bill": "Bill"
+    },
+    "categories": {
+      "foodDining": "Food & Dining",
+      "transportation": "Transportation",
+      "shopping": "Shopping",
+      "officeSupplies": "Office Supplies",
+      "travel": "Travel",
+      "entertainment": "Entertainment",
+      "utilities": "Utilities",
+      "healthcare": "Healthcare",
+      "other": "Other"
+    },
+    "paymentMethods": {
+      "cash": "Cash",
+      "creditCard": "Credit Card",
+      "debitCard": "Debit Card",
+      "bankTransfer": "Bank Transfer",
+      "other": "Other"
+    },
+    "lineItemColumns": {
+      "lineNumber": "#",
+      "description": "Description",
+      "quantity": "Qty",
+      "unitPrice": "Price",
+      "lineTotal": "Total",
+      "itemCode": "Code"
+    }
   }
 }

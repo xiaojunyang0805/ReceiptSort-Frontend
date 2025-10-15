@@ -1,5 +1,6 @@
 import ExcelJS from 'exceljs'
 import { format } from 'date-fns'
+import { getTranslations } from 'next-intl/server'
 
 interface Receipt {
   id: string
@@ -39,10 +40,14 @@ interface Receipt {
  * Generate Excel workbook from receipts with advanced formatting
  *
  * @param receipts - Array of receipt records to export
+ * @param locale - User's selected language locale (e.g., 'en', 'nl', 'de')
  * @returns Excel file as Buffer
  */
-export async function generateExcel(receipts: Receipt[]): Promise<Buffer> {
+export async function generateExcel(receipts: Receipt[], locale: string = 'en'): Promise<Buffer> {
   const workbook = new ExcelJS.Workbook()
+
+  // Get translations for the user's locale
+  const t = await getTranslations({ locale, namespace: 'receiptDetails' })
 
   // Set workbook properties
   workbook.creator = 'ReceiptSort'
@@ -63,30 +68,30 @@ export async function generateExcel(receipts: Receipt[]): Promise<Buffer> {
     views: [{ state: 'frozen', ySplit: 1 }], // Freeze header row
   })
 
-  // Define columns (Phase 1 + Phase 2 + Phase 3)
+  // Define columns with translated headers (Phase 1 + Phase 2 + Phase 3)
   worksheet.columns = [
-    { header: 'Doc Type', key: 'docType', width: 14 },
-    { header: 'Invoice #', key: 'invoiceNumber', width: 18 },
-    { header: 'Merchant', key: 'merchant', width: 25 },
-    { header: 'Amount', key: 'amount', width: 12 },
-    { header: 'Currency', key: 'currency', width: 10 },
-    { header: 'Date', key: 'date', width: 12 },
-    { header: 'Category', key: 'category', width: 18 },
-    { header: 'Subtotal', key: 'subtotal', width: 12 },
-    { header: 'Tax', key: 'tax', width: 12 },
-    { header: 'Payment Method', key: 'payment', width: 16 },
-    { header: 'PO Number', key: 'poNumber', width: 16 },
-    { header: 'Payment Ref', key: 'paymentRef', width: 16 },
-    { header: 'Tax ID', key: 'taxId', width: 18 },
-    { header: 'Due Date', key: 'dueDate', width: 12 },
-    { header: 'Vendor Address', key: 'vendorAddress', width: 35 },
-    { header: 'Patient DOB', key: 'patientDob', width: 14 },
-    { header: 'Treatment Date', key: 'treatmentDate', width: 14 },
-    { header: 'Insurance Claim', key: 'insuranceClaim', width: 18 },
-    { header: 'Diagnosis (ICD)', key: 'diagnosisCodes', width: 20 },
-    { header: 'Procedure (CPT)', key: 'procedureCodes', width: 20 },
-    { header: 'Provider ID', key: 'providerId', width: 16 },
-    { header: 'Notes', key: 'notes', width: 30 },
+    { header: t('documentType'), key: 'docType', width: 14 },
+    { header: t('invoiceNumber'), key: 'invoiceNumber', width: 18 },
+    { header: t('merchantName'), key: 'merchant', width: 25 },
+    { header: t('amount'), key: 'amount', width: 12 },
+    { header: t('currency'), key: 'currency', width: 10 },
+    { header: t('receiptDate'), key: 'date', width: 12 },
+    { header: t('category'), key: 'category', width: 18 },
+    { header: t('subtotal'), key: 'subtotal', width: 12 },
+    { header: t('taxAmount'), key: 'tax', width: 12 },
+    { header: t('paymentMethod'), key: 'payment', width: 16 },
+    { header: t('purchaseOrderNumber'), key: 'poNumber', width: 16 },
+    { header: t('paymentReference'), key: 'paymentRef', width: 16 },
+    { header: t('vendorTaxId'), key: 'taxId', width: 18 },
+    { header: t('dueDate'), key: 'dueDate', width: 12 },
+    { header: t('vendorAddress'), key: 'vendorAddress', width: 35 },
+    { header: t('patientDob'), key: 'patientDob', width: 14 },
+    { header: t('treatmentDate'), key: 'treatmentDate', width: 14 },
+    { header: t('insuranceClaimNumber'), key: 'insuranceClaim', width: 18 },
+    { header: t('diagnosisCodes'), key: 'diagnosisCodes', width: 20 },
+    { header: t('procedureCodes'), key: 'procedureCodes', width: 20 },
+    { header: t('providerId'), key: 'providerId', width: 16 },
+    { header: t('notes'), key: 'notes', width: 30 },
   ]
 
   // Style header row

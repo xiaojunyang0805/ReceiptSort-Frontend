@@ -575,5 +575,72 @@
     "processing": "Procesando...",
     "bestValue": "Mejor Valor",
     "save": "Ahorra {percent}%"
+  },
+  "receiptDetails": {
+    "title": "Detalles del Recibo",
+    "receiptPreview": "Vista Previa del Recibo",
+    "documentType": "Tipo de Documento",
+    "merchantName": "Nombre del Comerciante",
+    "invoiceNumber": "Número de Factura",
+    "amount": "Monto",
+    "currency": "Moneda",
+    "receiptDate": "Fecha del Recibo",
+    "category": "Categoría",
+    "subtotal": "Subtotal (Antes de Impuestos)",
+    "taxAmount": "Monto de Impuestos",
+    "dueDate": "Fecha de Vencimiento",
+    "paymentMethod": "Método de Pago",
+    "purchaseOrderNumber": "Número de Orden de Compra",
+    "paymentReference": "Referencia de Pago",
+    "vendorTaxId": "ID Fiscal del Proveedor (IVA/EIN/BTW)",
+    "vendorAddress": "Dirección del Proveedor",
+    "lineItems": "Artículos de Línea",
+    "lineItemsCount": "Artículos de Línea ({count})",
+    "medicalInformation": "Información Médica",
+    "patientDob": "Fecha de Nacimiento del Paciente",
+    "treatmentDate": "Fecha de Tratamiento",
+    "insuranceClaimNumber": "Número de Reclamo de Seguro",
+    "diagnosisCodes": "Códigos de Diagnóstico (ICD)",
+    "procedureCodes": "Códigos de Procedimiento (CPT)",
+    "providerId": "ID del Proveedor (AGB/NPI)",
+    "notes": "Notas",
+    "saveChanges": "Guardar Cambios",
+    "saving": "Guardando...",
+    "delete": "Eliminar",
+    "deleting": "Eliminando...",
+    "retryProcessing": "Reintentar Procesamiento",
+    "retrying": "Reintentando...",
+    "documentTypes": {
+      "receipt": "Recibo",
+      "invoice": "Factura",
+      "medicalInvoice": "Factura Médica",
+      "bill": "Cuenta"
+    },
+    "categories": {
+      "foodDining": "Comida y Restaurantes",
+      "transportation": "Transporte",
+      "shopping": "Compras",
+      "officeSupplies": "Suministros de Oficina",
+      "travel": "Viajes",
+      "entertainment": "Entretenimiento",
+      "utilities": "Servicios Públicos",
+      "healthcare": "Atención Médica",
+      "other": "Otro"
+    },
+    "paymentMethods": {
+      "cash": "Efectivo",
+      "creditCard": "Tarjeta de Crédito",
+      "debitCard": "Tarjeta de Débito",
+      "bankTransfer": "Transferencia Bancaria",
+      "other": "Otro"
+    },
+    "lineItemColumns": {
+      "lineNumber": "#",
+      "description": "Descripción",
+      "quantity": "Cant.",
+      "unitPrice": "Precio",
+      "lineTotal": "Total",
+      "itemCode": "Código"
+    }
   }
 }

@@ -20,6 +20,7 @@ import {
   saveTemplatePreference,
   loadTemplatePreference,
 } from '@/lib/export-templates'
+import { useLocale } from 'next-intl'
 
 interface ExportDialogProps {
   open: boolean
@@ -39,6 +40,7 @@ export default function ExportDialog({
   selectedIds,
   onExportComplete,
 }: ExportDialogProps) {
+  const locale = useLocale()
   const [selectedFormat, setSelectedFormat] = useState<ExportFormat>('excel')
   const [selectedTemplate, setSelectedTemplate] = useState('standard')
   const [customColumns, setCustomColumns] = useState<string[]>([
@@ -73,10 +75,12 @@ export default function ExportDialog({
 
       const requestBody: {
         receipt_ids: string[]
+        locale: string
         template_id?: string
         custom_columns?: string[]
       } = {
         receipt_ids: selectedIds,
+        locale,
       }
 
       // Add template info for CSV exports

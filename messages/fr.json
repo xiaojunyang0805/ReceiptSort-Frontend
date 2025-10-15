@@ -575,5 +575,72 @@
     "processing": "Traitement en cours...",
     "bestValue": "Meilleur Rapport Qualité-Prix",
     "save": "Économisez {percent}%"
+  },
+  "receiptDetails": {
+    "title": "Détails du Reçu",
+    "receiptPreview": "Aperçu du Reçu",
+    "documentType": "Type de Document",
+    "merchantName": "Nom du Marchand",
+    "invoiceNumber": "Numéro de Facture",
+    "amount": "Montant",
+    "currency": "Devise",
+    "receiptDate": "Date du Reçu",
+    "category": "Catégorie",
+    "subtotal": "Sous-total (Avant Taxes)",
+    "taxAmount": "Montant de la Taxe",
+    "dueDate": "Date d'Échéance",
+    "paymentMethod": "Méthode de Paiement",
+    "purchaseOrderNumber": "Numéro de Bon de Commande",
+    "paymentReference": "Référence de Paiement",
+    "vendorTaxId": "Numéro Fiscal du Fournisseur (TVA/EIN/BTW)",
+    "vendorAddress": "Adresse du Fournisseur",
+    "lineItems": "Articles de Ligne",
+    "lineItemsCount": "Articles de Ligne ({count})",
+    "medicalInformation": "Informations Médicales",
+    "patientDob": "Date de Naissance du Patient",
+    "treatmentDate": "Date du Traitement",
+    "insuranceClaimNumber": "Numéro de Réclamation d'Assurance",
+    "diagnosisCodes": "Codes de Diagnostic (ICD)",
+    "procedureCodes": "Codes de Procédure (CPT)",
+    "providerId": "ID du Fournisseur (AGB/NPI)",
+    "notes": "Notes",
+    "saveChanges": "Enregistrer les Modifications",
+    "saving": "Enregistrement...",
+    "delete": "Supprimer",
+    "deleting": "Suppression...",
+    "retryProcessing": "Réessayer le Traitement",
+    "retrying": "Nouvelle tentative...",
+    "documentTypes": {
+      "receipt": "Reçu",
+      "invoice": "Facture",
+      "medicalInvoice": "Facture Médicale",
+      "bill": "Note"
+    },
+    "categories": {
+      "foodDining": "Alimentation et Restaurants",
+      "transportation": "Transport",
+      "shopping": "Achats",
+      "officeSupplies": "Fournitures de Bureau",
+      "travel": "Voyage",
+      "entertainment": "Divertissement",
+      "utilities": "Services Publics",
+      "healthcare": "Soins de Santé",
+      "other": "Autre"
+    },
+    "paymentMethods": {
+      "cash": "Espèces",
+      "creditCard": "Carte de Crédit",
+      "debitCard": "Carte de Débit",
+      "bankTransfer": "Virement Bancaire",
+      "other": "Autre"
+    },
+    "lineItemColumns": {
+      "lineNumber": "#",
+      "description": "Description",
+      "quantity": "Qté",
+      "unitPrice": "Prix",
+      "lineTotal": "Total",
+      "itemCode": "Code"
+    }
   }
 }

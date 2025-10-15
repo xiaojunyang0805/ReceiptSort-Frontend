@@ -1550,6 +1550,68 @@ ReceiptSort now offers:
 
 ---
 
+## Repository Cleanup (2025-10-15)
+
+**Date:** October 15, 2025
+
+**Objective:** Remove all obsolete developer files, debug scripts, and completed documentation to maintain a clean, production-ready repository.
+
+**Files Deleted: 64 files + 4 folders**
+
+**Categories Removed:**
+
+1. **Documentation Files (33 files)**
+   - README.md (default Next.js boilerplate)
+   - docs/enhanced-schema-proposal.md (work completed)
+   - Setup guides: SUPABASE_SETUP.md, STRIPE_SETUP.md, VERCEL_CLI_SETUP.md, CONTACT_FORM_SETUP.md, email-forwarding-setup-guide.md, SQUARESPACE_DNS_SETUP.md
+   - Obsolete docs: Admin Access Control - Next Steps.md, ADMIN_SETUP.md, CRITICAL_FIX.md, DAY4_COMPLETION.md, debug-oauth.md, DEPLOYMENT_COMPLETE.md, DEPLOYMENT_GUIDE.md, DEPLOYMENT_QUICKSTART.md, DNS_CONFIGURATION.md, EDGE_CASES.md, EXPORT_GUIDE.md, EXPORT_HISTORY_DEBUG.md, EXPORT_TEST_GUIDE.md, FIX_TRANSACTIONS_TABLE.md, GOOGLE_OAUTH_FIX.md, I18N_IMPLEMENTATION_GUIDE.md, I18N_SETUP_COMPLETE.md, LANDING_PAGE_TEST_GUIDE.md, MIGRATION_GUIDE.md, OAUTH_REDIRECT_FIX.md, POST_DEPLOYMENT_CHECKLIST.md, README-TESTING.md, setup-google-oauth.md, TESTING_GUIDE.md, URGENT_FIX_REQUIRED.md, UX_IMPROVEMENTS_SUMMARY.md
+
+2. **Database Files (21 files + 3 folders)**
+   - database/migrations/ folder (3 executed migration files)
+     * 20251014_phase1_essential_fields.sql ✅
+     * 20251015_phase2_business_invoices.sql ✅
+     * 20251015_phase3_medical_receipts.sql ✅
+   - migrations/ folder (6 old migration files superseded by database/migrations/)
+   - scripts/ folder (9 one-time setup SQL scripts)
+   - Root-level SQL files (12 developer debug scripts): add_credits.sql, check_exports_columns.sql, check_exports_policies.sql, check-failed-receipts.sql, database-policies.sql, fix-existing-user.sql, fix-trigger.sql, fix-trigger-improved.sql, fix-trigger-oauth.sql, storage-policies.sql, test_manual_insert.sql, verify_policies.sql
+
+3. **Empty Folders (1 folder)**
+   - docs/ folder (now empty after enhanced-schema-proposal.md deletion)
+
+**Rationale:**
+- All database migrations already executed in production ✅
+- All information captured in Dev_note_01.md and Dev_note_02.md
+- Setup guides for completed configurations (no longer needed)
+- Debug/fix documentation for resolved issues (obsolete)
+- SQL scripts were one-time developer tools (already executed)
+- Main project README now at https://github.com/xiaojunyang0805/receiptsort-project
+
+**Final Repository Structure:**
+
+```
+/receiptsort
+├── Dev_note_01.md (117KB) ✅ - Days 1-4 development history
+├── Dev_note_02.md (63KB)  ✅ - Days 5-6 market value enhancement
+├── src/                    - Source code
+├── public/                 - Static assets
+├── package.json           - Dependencies
+└── [other config files]   - Next.js, TypeScript, etc.
+```
+
+**Benefits:**
+- Ultra-clean repository with only essential documentation
+- No confusion from obsolete files
+- Complete development history preserved in 2 comprehensive files
+- Ready for long-term maintenance
+- Professional repository structure
+
+**For comprehensive project documentation, refer to:**
+- 🌐 Live application: https://receiptsort.seenano.nl
+- 📚 Project README: https://github.com/xiaojunyang0805/receiptsort-project
+- 📝 Development history: Dev_note_01.md and Dev_note_02.md (this file)
+
+---
+
 ## Issues & Resolutions
 
 ---

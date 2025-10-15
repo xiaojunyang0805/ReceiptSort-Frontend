@@ -585,5 +585,72 @@
     "processing": "处理中...",
     "bestValue": "最超值",
     "save": "节省{percent}%"
+  },
+  "receiptDetails": {
+    "title": "收据详情",
+    "receiptPreview": "收据预览",
+    "documentType": "文档类型",
+    "merchantName": "商家名称",
+    "invoiceNumber": "发票号码",
+    "amount": "金额",
+    "currency": "货币",
+    "receiptDate": "收据日期",
+    "category": "类别",
+    "subtotal": "小计（税前）",
+    "taxAmount": "税额",
+    "dueDate": "到期日期",
+    "paymentMethod": "付款方式",
+    "purchaseOrderNumber": "采购订单号",
+    "paymentReference": "付款参考号",
+    "vendorTaxId": "供应商税号（VAT/EIN/BTW）",
+    "vendorAddress": "供应商地址",
+    "lineItems": "行项目",
+    "lineItemsCount": "行项目（{count}）",
+    "medicalInformation": "医疗信息",
+    "patientDob": "患者出生日期",
+    "treatmentDate": "治疗日期",
+    "insuranceClaimNumber": "保险索赔号",
+    "diagnosisCodes": "诊断代码（ICD）",
+    "procedureCodes": "程序代码（CPT）",
+    "providerId": "提供者ID（AGB/NPI）",
+    "notes": "备注",
+    "saveChanges": "保存更改",
+    "saving": "保存中...",
+    "delete": "删除",
+    "deleting": "删除中...",
+    "retryProcessing": "重试处理",
+    "retrying": "重试中...",
+    "documentTypes": {
+      "receipt": "收据",
+      "invoice": "发票",
+      "medicalInvoice": "医疗发票",
+      "bill": "账单"
+    },
+    "categories": {
+      "foodDining": "餐饮",
+      "transportation": "交通",
+      "shopping": "购物",
+      "officeSupplies": "办公用品",
+      "travel": "旅行",
+      "entertainment": "娱乐",
+      "utilities": "公用事业",
+      "healthcare": "医疗保健",
+      "other": "其他"
+    },
+    "paymentMethods": {
+      "cash": "现金",
+      "creditCard": "信用卡",
+      "debitCard": "借记卡",
+      "bankTransfer": "银行转账",
+      "other": "其他"
+    },
+    "lineItemColumns": {
+      "lineNumber": "#",
+      "description": "描述",
+      "quantity": "数量",
+      "unitPrice": "单价",
+      "lineTotal": "总计",
+      "itemCode": "代码"
+    }
   }
 }

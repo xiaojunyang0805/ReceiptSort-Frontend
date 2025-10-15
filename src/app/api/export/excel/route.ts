@@ -4,6 +4,7 @@ import { generateExcel, generateExcelFilename } from '@/lib/excel-generator'
 
 interface ExportRequest {
   receipt_ids: string[]
+  locale?: string
 }
 
 // Export limits
@@ -29,7 +30,7 @@ export async function POST(request: NextRequest) {
 
     // 2. Parse request body
     const body: ExportRequest = await request.json()
-    const { receipt_ids } = body
+    const { receipt_ids, locale = 'en' } = body
 
     if (!receipt_ids || !Array.isArray(receipt_ids) || receipt_ids.length === 0) {
       return NextResponse.json(
@@ -53,10 +54,15 @@ export async function POST(request: NextRequest) {
     console.log(`[Excel Export] User ${user.id} exporting ${receipt_ids.length} receipts`)
 
     // 3. Fetch receipts from database (with ownership verification)
-    // Only fetch fields needed for export to optimize performance
+    // Fetch all fields needed for export (Phase 1 + Phase 2 + Phase 3)
     const { data: receipts, error: fetchError } = await supabase
       .from('receipts')
-      .select('id, processing_status, merchant_name, total_amount, currency, receipt_date, category, tax_amount, payment_method, notes, created_at')
+      .select(`
+        id, processing_status, merchant_name, total_amount, currency, receipt_date, category, tax_amount, payment_method, notes, created_at,
+        invoice_number, document_type, subtotal, vendor_address, due_date,
+        purchase_order_number, payment_reference, vendor_tax_id,
+        patient_dob, treatment_date, insurance_claim_number, diagnosis_codes, procedure_codes, provider_id
+      `)
       .in('id', receipt_ids)
       .eq('user_id', user.id)
 
@@ -87,8 +93,8 @@ export async function POST(request: NextRequest) {
 
     console.log(`[Excel Export] Found ${completedReceipts.length} completed receipts`)
 
-    // 5. Generate Excel file
-    const excelBuffer = await generateExcel(completedReceipts)
+    // 5. Generate Excel file with translated headers
+    const excelBuffer = await generateExcel(completedReceipts, locale)
     const filename = generateExcelFilename()
 
     // 6. Record export in exports table
