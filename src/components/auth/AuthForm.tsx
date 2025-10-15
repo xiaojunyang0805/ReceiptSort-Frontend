@@ -19,37 +19,48 @@ import {
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Link } from '@/lib/navigation'
+import { useTranslations } from 'next-intl'
 
-const loginSchema = z.object({
-  email: z.string().email('Invalid email address'),
-  password: z.string().min(6, 'Password must be at least 6 characters'),
+// Create schemas with a function to support translations
+const createLoginSchema = (t: any) => z.object({
+  email: z.string().email(t('errors.invalidEmail')),
+  password: z.string().min(6, t('errors.passwordMin')),
 })
 
-const signupSchema = z.object({
-  fullName: z.string().min(2, 'Full name must be at least 2 characters'),
-  email: z.string().email('Invalid email address'),
-  password: z.string().min(6, 'Password must be at least 6 characters'),
-  confirmPassword: z.string().min(6, 'Password must be at least 6 characters'),
+const createSignupSchema = (t: any) => z.object({
+  fullName: z.string().min(2, t('errors.fullNameMin')),
+  email: z.string().email(t('errors.invalidEmail')),
+  password: z.string().min(6, t('errors.passwordMin')),
+  confirmPassword: z.string().min(6, t('errors.passwordMin')),
 }).refine((data) => data.password === data.confirmPassword, {
-  message: "Passwords don't match",
+  message: t('errors.passwordMismatch'),
   path: ['confirmPassword'],
 })
 
-type LoginFormValues = z.infer<typeof loginSchema>
-type SignupFormValues = z.infer<typeof signupSchema>
+type LoginFormValues = {
+  email: string
+  password: string
+}
+type SignupFormValues = {
+  fullName: string
+  email: string
+  password: string
+  confirmPassword: string
+}
 
 interface AuthFormProps {
   mode: 'login' | 'signup'
 }
 
 export function AuthForm({ mode }: AuthFormProps) {
+  const t = useTranslations('auth')
   const [isLoading, setIsLoading] = useState(false)
   const [isGoogleLoading, setIsGoogleLoading] = useState(false)
   const router = useRouter()
   const supabase = createClient()
 
   const form = useForm<LoginFormValues | SignupFormValues>({
-    resolver: zodResolver(mode === 'login' ? loginSchema : signupSchema),
+    resolver: zodResolver(mode === 'login' ? createLoginSchema(t) : createSignupSchema(t)),
     defaultValues: mode === 'login'
       ? { email: '', password: '' }
       : { fullName: '', email: '', password: '', confirmPassword: '' },
@@ -68,9 +79,9 @@ export function AuthForm({ mode }: AuthFormProps) {
 
         if (error) {
           if (error.message.includes('Invalid login credentials')) {
-            toast.error('Invalid email or password')
+            toast.error(t('errors.invalidCredentials'))
           } else if (error.message.includes('Email not confirmed')) {
-            toast.error('Please verify your email before logging in')
+            toast.error(t('errors.emailNotConfirmed'))
           } else {
             toast.error(error.message)
           }
@@ -78,7 +89,7 @@ export function AuthForm({ mode }: AuthFormProps) {
         }
 
         if (data.user) {
-          toast.success('Welcome back!')
+          toast.success(t('success.welcomeBack'))
           router.push('/dashboard')
           router.refresh()
         }
@@ -96,7 +107,7 @@ export function AuthForm({ mode }: AuthFormProps) {
 
         if (error) {
           if (error.message.includes('already registered')) {
-            toast.error('This email is already registered')
+            toast.error(t('errors.emailAlreadyRegistered'))
           } else {
             toast.error(error.message)
           }
@@ -107,18 +118,18 @@ export function AuthForm({ mode }: AuthFormProps) {
           // Check if email confirmation is required
           if (data.session) {
             // User is automatically logged in (email confirmation disabled)
-            toast.success('Account created successfully!')
+            toast.success(t('success.accountCreated'))
             router.push('/dashboard')
             router.refresh()
           } else {
             // Email confirmation required
-            toast.success('Please check your email to confirm your account before logging in')
+            toast.success(t('success.checkEmail'))
             router.push('/')
           }
         }
       }
     } catch (error) {
-      toast.error('An unexpected error occurred')
+      toast.error(t('errors.unexpectedError'))
       console.error(error)
     } finally {
       setIsLoading(false)
@@ -139,11 +150,11 @@ export function AuthForm({ mode }: AuthFormProps) {
       })
 
       if (error) {
-        toast.error('Failed to sign in with Google')
+        toast.error(t('errors.googleSignInFailed'))
         console.error(error)
       }
     } catch (error) {
-      toast.error('An unexpected error occurred')
+      toast.error(t('errors.unexpectedError'))
       console.error(error)
     } finally {
       setIsGoogleLoading(false)
@@ -153,11 +164,9 @@ export function AuthForm({ mode }: AuthFormProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{mode === 'login' ? 'Login' : 'Create Account'}</CardTitle>
+        <CardTitle>{mode === 'login' ? t('loginTitle') : t('signupTitle')}</CardTitle>
         <CardDescription>
-          {mode === 'login'
-            ? 'Enter your credentials to access your account'
-            : 'Sign up to start organizing your receipts'}
+          {mode === 'login' ? t('loginSubtitle') : t('signupSubtitle')}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -188,7 +197,7 @@ export function AuthForm({ mode }: AuthFormProps) {
                 d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
               />
             </svg>
-            {isGoogleLoading ? 'Loading...' : `Continue with Google`}
+            {isGoogleLoading ? t('loading') : t('continueWithGoogle')}
           </Button>
 
           {/* Divider */}
@@ -197,7 +206,7 @@ export function AuthForm({ mode }: AuthFormProps) {
               <span className="w-full border-t" />
             </div>
             <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-background px-2 text-muted-foreground">Or continue with email</span>
+              <span className="bg-background px-2 text-muted-foreground">{t('orContinueWithEmail')}</span>
             </div>
           </div>
 
@@ -210,9 +219,9 @@ export function AuthForm({ mode }: AuthFormProps) {
                 name="fullName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Full Name</FormLabel>
+                    <FormLabel>{t('fullName')}</FormLabel>
                     <FormControl>
-                      <Input placeholder="John Doe" {...field} disabled={isLoading} />
+                      <Input placeholder={t('fullNamePlaceholder')} {...field} disabled={isLoading} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -225,11 +234,11 @@ export function AuthForm({ mode }: AuthFormProps) {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>{t('email')}</FormLabel>
                   <FormControl>
                     <Input
                       type="email"
-                      placeholder="name@example.com"
+                      placeholder={t('emailPlaceholder')}
                       {...field}
                       disabled={isLoading}
                     />
@@ -244,11 +253,11 @@ export function AuthForm({ mode }: AuthFormProps) {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>{t('password')}</FormLabel>
                   <FormControl>
                     <Input
                       type="password"
-                      placeholder="••••••••"
+                      placeholder={t('passwordPlaceholder')}
                       {...field}
                       disabled={isLoading}
                     />
@@ -264,11 +273,11 @@ export function AuthForm({ mode }: AuthFormProps) {
                 name="confirmPassword"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Confirm Password</FormLabel>
+                    <FormLabel>{t('confirmPassword')}</FormLabel>
                     <FormControl>
                       <Input
                         type="password"
-                        placeholder="••••••••"
+                        placeholder={t('passwordPlaceholder')}
                         {...field}
                         disabled={isLoading}
                       />
@@ -280,7 +289,7 @@ export function AuthForm({ mode }: AuthFormProps) {
             )}
 
             <Button type="submit" className="w-full" disabled={isLoading || isGoogleLoading}>
-              {isLoading ? 'Loading...' : mode === 'login' ? 'Sign In' : 'Sign Up'}
+              {isLoading ? t('loading') : mode === 'login' ? t('signIn') : t('signUp')}
             </Button>
           </form>
         </Form>
@@ -290,16 +299,16 @@ export function AuthForm({ mode }: AuthFormProps) {
         <p className="text-sm text-gray-600 dark:text-gray-400">
           {mode === 'login' ? (
             <>
-              Don&apos;t have an account?{' '}
+              {t('noAccount')}{' '}
               <Link href="/signup" className="text-primary hover:underline font-medium">
-                Sign up
+                {t('signUp')}
               </Link>
             </>
           ) : (
             <>
-              Already have an account?{' '}
+              {t('hasAccount')}{' '}
               <Link href="/login" className="text-primary hover:underline font-medium">
-                Log in
+                {t('logIn')}
               </Link>
             </>
           )}

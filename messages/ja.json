@@ -190,23 +190,46 @@
     "trustIndicator": "ReceiptSorterを信頼する10,000人以上のユーザーに参加しましょう"
   },
   "auth": {
-    "loginTitle": "おかえりなさい",
-    "loginSubtitle": "アカウントにサインインしてください",
+    "loginTitle": "ログイン",
+    "loginSubtitle": "アカウントにアクセスするには認証情報を入力してください",
     "signupTitle": "アカウントを作成",
-    "signupSubtitle": "数秒でレシート処理を開始",
+    "signupSubtitle": "レシートの整理を始めるためにサインアップしてください",
     "email": "メールアドレス",
+    "emailPlaceholder": "name@example.com",
     "password": "パスワード",
+    "passwordPlaceholder": "••••••••",
     "confirmPassword": "パスワードを確認",
+    "fullName": "氏名",
+    "fullNamePlaceholder": "山田太郎",
     "forgotPassword": "パスワードをお忘れですか？",
     "noAccount": "アカウントをお持ちでないですか？",
     "hasAccount": "すでにアカウントをお持ちですか？",
-    "signInWithGoogle": "Googleでサインイン",
-    "signUpWithGoogle": "Googleでサインアップ",
-    "orContinueWith": "または続ける",
+    "signIn": "サインイン",
+    "signUp": "サインアップ",
+    "logIn": "ログイン",
+    "continueWithGoogle": "Googleで続ける",
+    "orContinueWithEmail": "またはメールアドレスで続ける",
+    "loading": "読み込み中...",
     "termsAgree": "サインアップすることで、当社の",
     "termsOfService": "利用規約",
     "privacyPolicy": "プライバシーポリシー",
-    "and": "および"
+    "and": "および",
+    "errors": {
+      "invalidEmail": "無効なメールアドレス",
+      "passwordMin": "パスワードは6文字以上である必要があります",
+      "fullNameMin": "氏名は2文字以上である必要があります",
+      "passwordMismatch": "パスワードが一致しません",
+      "invalidCredentials": "無効なメールアドレスまたはパスワード",
+      "emailNotConfirmed": "ログインする前にメールアドレスを確認してください",
+      "emailAlreadyRegistered": "このメールアドレスは既に登録されています",
+      "unexpectedError": "予期しないエラーが発生しました",
+      "googleSignInFailed": "Googleでのサインインに失敗しました"
+    },
+    "success": {
+      "welcomeBack": "おかえりなさい！",
+      "accountCreated": "アカウントが正常に作成されました！",
+      "checkEmail": "ログインする前にメールを確認してアカウントを確認してください"
+    }
   },
   "dashboard": {
     "welcome": "おかえりなさい",
