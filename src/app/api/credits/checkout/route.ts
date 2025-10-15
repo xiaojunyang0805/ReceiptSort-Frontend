@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
-import { createCheckoutSession, getPackageById } from '@/lib/stripe'
+import { createCheckoutSession, createHostedInvoice, getPackageById } from '@/lib/stripe'
 
 interface CheckoutRequest {
   package_id: string
+  use_invoice?: boolean // Optional flag to use invoice-based payment
 }
 
 /**
@@ -29,7 +30,7 @@ export async function POST(request: NextRequest) {
 
     // 2. Parse request body
     const body: CheckoutRequest = await request.json()
-    const { package_id } = body
+    const { package_id, use_invoice = true } = body // Default to invoice mode
 
     if (!package_id) {
       return NextResponse.json(
@@ -39,6 +40,7 @@ export async function POST(request: NextRequest) {
     }
 
     console.log(`[Checkout] User ${user.id} requesting package: ${package_id}`)
+    console.log(`[Checkout] Payment mode: ${use_invoice ? 'invoice' : 'checkout'}`)
 
     // 3. Find package by ID
     const creditPackage = getPackageById(package_id)
@@ -52,36 +54,67 @@ export async function POST(request: NextRequest) {
 
     console.log(`[Checkout] Package found: ${creditPackage.name} - ${creditPackage.credits} credits for $${creditPackage.price}`)
 
-    // 4. Get user email
+    // 4. Get user email and profile
     const userEmail = user.email || ''
 
-    // 5. Create Stripe Checkout Session
-    console.log(`[Checkout] Creating session with priceId: ${creditPackage.priceId}`)
-    console.log(`[Checkout] STRIPE_SECRET_KEY exists: ${!!process.env.STRIPE_SECRET_KEY}`)
-    console.log(`[Checkout] NEXT_PUBLIC_APP_URL: ${process.env.NEXT_PUBLIC_APP_URL}`)
+    // Get user's full name from profile
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('full_name')
+      .eq('id', user.id)
+      .single()
 
-    const session = await createCheckoutSession(
-      creditPackage.priceId,
-      user.id,
-      userEmail,
-      creditPackage.id,
-      creditPackage.credits
-    )
+    const userName = profile?.full_name
 
-    console.log(`[Checkout] Stripe session created: ${session.id}`)
-    console.log(`[Checkout] Session URL: ${session.url}`)
-    console.log(`[Checkout] Session object keys:`, Object.keys(session))
+    // 5. Create payment (Invoice or Checkout Session)
+    if (use_invoice) {
+      // Invoice-based payment flow (generates proper invoices)
+      console.log(`[Checkout] Creating hosted invoice with priceId: ${creditPackage.priceId}`)
 
-    if (!session.url) {
-      console.error(`[Checkout] ERROR: session.url is null/undefined!`)
-      console.error(`[Checkout] Full session:`, JSON.stringify(session, null, 2))
+      const invoice = await createHostedInvoice(
+        creditPackage.priceId,
+        user.id,
+        userEmail,
+        userName,
+        creditPackage.id,
+        creditPackage.credits
+      )
+
+      console.log(`[Checkout] Invoice created: ${invoice.id}`)
+      console.log(`[Checkout] Hosted invoice URL: ${invoice.hosted_invoice_url}`)
+
+      // Return invoice URL
+      return NextResponse.json({
+        url: invoice.hosted_invoice_url,
+        invoiceId: invoice.id,
+        paymentMode: 'invoice',
+      })
+    } else {
+      // Original checkout session flow
+      console.log(`[Checkout] Creating checkout session with priceId: ${creditPackage.priceId}`)
+
+      const session = await createCheckoutSession(
+        creditPackage.priceId,
+        user.id,
+        userEmail,
+        creditPackage.id,
+        creditPackage.credits
+      )
+
+      console.log(`[Checkout] Checkout session created: ${session.id}`)
+      console.log(`[Checkout] Session URL: ${session.url}`)
+
+      if (!session.url) {
+        console.error(`[Checkout] ERROR: session.url is null/undefined!`)
+      }
+
+      // Return checkout URL
+      return NextResponse.json({
+        url: session.url,
+        sessionId: session.id,
+        paymentMode: 'checkout',
+      })
     }
-
-    // 6. Return checkout URL
-    return NextResponse.json({
-      url: session.url,
-      sessionId: session.id,
-    })
   } catch (error) {
     console.error('[Checkout] Error creating checkout session:', error)
 

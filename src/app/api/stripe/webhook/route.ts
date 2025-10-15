@@ -85,7 +85,28 @@ export async function POST(request: NextRequest) {
         const subscriptionId = (invoice as unknown as { subscription?: string }).subscription
         if (subscriptionId) {
           await handleSubscriptionRenewal(invoice)
+        } else {
+          // Handle one-time invoice payment (credit purchase)
+          await handleInvoicePayment(invoice)
         }
+        break
+      }
+
+      case 'invoice.finalized': {
+        const invoice = event.data.object as Stripe.Invoice
+        console.log(`[Webhook] Invoice finalized: ${invoice.id}`)
+
+        // Store invoice record in database
+        await storeInvoiceRecord(invoice)
+        break
+      }
+
+      case 'invoice.paid': {
+        const invoice = event.data.object as Stripe.Invoice
+        console.log(`[Webhook] Invoice paid: ${invoice.id}`)
+
+        // Update invoice record status
+        await updateInvoiceStatus(invoice.id, 'paid')
         break
       }
 
@@ -331,6 +352,145 @@ async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
   } catch (error) {
     console.error('[Webhook] Error handling subscription update:', error)
     throw error
+  }
+}
+
+/**
+ * Handle invoice payment for one-time credit purchases
+ */
+async function handleInvoicePayment(invoice: Stripe.Invoice) {
+  try {
+    const { user_id, package_id, credits } = invoice.metadata || {}
+
+    if (!user_id || !credits) {
+      console.warn('[Webhook] Missing required invoice metadata: user_id or credits')
+      return
+    }
+
+    const creditsToAdd = parseInt(credits, 10)
+
+    console.log(`[Webhook] Processing invoice payment: ${creditsToAdd} credits for user ${user_id}`)
+
+    // 1. Get current user credits
+    const { data: profile, error: fetchError } = await supabase
+      .from('profiles')
+      .select('credits')
+      .eq('id', user_id)
+      .single()
+
+    if (fetchError) {
+      throw new Error(`Failed to fetch user profile: ${fetchError.message}`)
+    }
+
+    const currentCredits = profile?.credits || 0
+    const newCredits = currentCredits + creditsToAdd
+
+    // 2. Update user credits
+    const { error: updateError } = await supabase
+      .from('profiles')
+      .update({ credits: newCredits })
+      .eq('id', user_id)
+
+    if (updateError) {
+      throw new Error(`Failed to update credits: ${updateError.message}`)
+    }
+
+    console.log(`[Webhook] Credits updated: ${currentCredits} -> ${newCredits}`)
+
+    // 3. Create credit transaction record
+    const paymentIntent = (invoice as unknown as { payment_intent?: string }).payment_intent
+    const { error: transactionError } = await supabase
+      .from('credit_transactions')
+      .insert({
+        user_id,
+        amount: creditsToAdd,
+        type: 'purchase',
+        description: `Purchased ${package_id} package (Invoice: ${invoice.number})`,
+        stripe_payment_intent: paymentIntent || null,
+      })
+
+    if (transactionError) {
+      console.error('[Webhook] Failed to create transaction record:', transactionError)
+    } else {
+      console.log(`[Webhook] Transaction record created for invoice ${invoice.id}`)
+    }
+
+    console.log(`[Webhook] Invoice payment processed successfully for user ${user_id}`)
+  } catch (error) {
+    console.error('[Webhook] Error handling invoice payment:', error)
+    throw error
+  }
+}
+
+/**
+ * Store invoice record in database
+ */
+async function storeInvoiceRecord(invoice: Stripe.Invoice) {
+  try {
+    const { user_id } = invoice.metadata || {}
+
+    if (!user_id) {
+      console.warn('[Webhook] Missing user_id in invoice metadata')
+      return
+    }
+
+    // Store invoice record
+    const { error } = await supabase
+      .from('invoices')
+      .upsert({
+        id: invoice.id,
+        user_id,
+        stripe_invoice_id: invoice.id,
+        stripe_customer_id: invoice.customer as string,
+        invoice_number: invoice.number,
+        amount_due: invoice.amount_due,
+        amount_paid: invoice.amount_paid,
+        currency: invoice.currency,
+        status: invoice.status,
+        invoice_pdf: invoice.invoice_pdf,
+        hosted_invoice_url: invoice.hosted_invoice_url,
+        created_at: new Date(invoice.created * 1000).toISOString(),
+        due_date: invoice.due_date ? new Date(invoice.due_date * 1000).toISOString() : null,
+        paid_at: invoice.status_transitions?.paid_at
+          ? new Date(invoice.status_transitions.paid_at * 1000).toISOString()
+          : null,
+        metadata: invoice.metadata,
+      }, {
+        onConflict: 'stripe_invoice_id'
+      })
+
+    if (error) {
+      console.error('[Webhook] Failed to store invoice record:', error)
+    } else {
+      console.log(`[Webhook] Invoice record stored: ${invoice.id}`)
+    }
+  } catch (error) {
+    console.error('[Webhook] Error storing invoice record:', error)
+    // Don't throw - this is just for record-keeping
+  }
+}
+
+/**
+ * Update invoice status in database
+ */
+async function updateInvoiceStatus(invoiceId: string, status: string) {
+  try {
+    const { error } = await supabase
+      .from('invoices')
+      .update({
+        status,
+        paid_at: status === 'paid' ? new Date().toISOString() : null,
+      })
+      .eq('stripe_invoice_id', invoiceId)
+
+    if (error) {
+      console.error('[Webhook] Failed to update invoice status:', error)
+    } else {
+      console.log(`[Webhook] Invoice status updated: ${invoiceId} -> ${status}`)
+    }
+  } catch (error) {
+    console.error('[Webhook] Error updating invoice status:', error)
+    // Don't throw - this is just for record-keeping
   }
 }
 

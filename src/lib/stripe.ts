@@ -287,6 +287,227 @@ export async function retrieveCheckoutSession(
 }
 
 /**
+ * Create or retrieve a Stripe Customer
+ *
+ * @param userId - User ID for metadata
+ * @param userEmail - User email
+ * @param userName - User full name (optional)
+ * @returns Stripe Customer
+ */
+export async function createOrGetCustomer(
+  userId: string,
+  userEmail: string,
+  userName?: string
+): Promise<Stripe.Customer> {
+  // First, try to find existing customer by email
+  const existingCustomers = await stripe.customers.list({
+    email: userEmail,
+    limit: 1,
+  })
+
+  if (existingCustomers.data.length > 0) {
+    console.log(`[Stripe] Found existing customer: ${existingCustomers.data[0].id}`)
+    return existingCustomers.data[0]
+  }
+
+  // Create new customer
+  const customer = await stripe.customers.create({
+    email: userEmail,
+    name: userName,
+    metadata: {
+      user_id: userId,
+    },
+  })
+
+  console.log(`[Stripe] Created new customer: ${customer.id}`)
+  return customer
+}
+
+/**
+ * Create Invoice-Based Payment for Credit Purchase
+ * This creates a proper invoice that will be automatically emailed to the customer
+ *
+ * @param priceId - Stripe Price ID
+ * @param userId - User ID for metadata
+ * @param userEmail - User email
+ * @param userName - User full name (optional)
+ * @param packageId - Package ID for metadata
+ * @param credits - Number of credits
+ * @returns Object containing invoice and payment intent
+ */
+export async function createInvoicePayment(
+  priceId: string,
+  userId: string,
+  userEmail: string,
+  userName: string | undefined,
+  packageId: string,
+  credits: number
+): Promise<{ invoice: Stripe.Invoice; paymentIntent: string }> {
+  // 1. Create or get customer
+  const customer = await createOrGetCustomer(userId, userEmail, userName)
+
+  // 2. Get price details
+  const priceObj = await stripe.prices.retrieve(priceId)
+  const amount = priceObj.unit_amount || 0
+  const currency = priceObj.currency
+
+  // 3. Create invoice item
+  await stripe.invoiceItems.create({
+    customer: customer.id,
+    amount,
+    currency,
+    description: `ReceiptSort Credits - ${packageId} Package (${credits} credits)`,
+    metadata: {
+      user_id: userId,
+      package_id: packageId,
+      credits: credits.toString(),
+      stripe_price_id: priceId,
+    },
+  })
+
+  // 3. Create invoice
+  const invoice = await stripe.invoices.create({
+    customer: customer.id,
+    auto_advance: true, // Auto-finalize the invoice
+    collection_method: 'charge_automatically', // Charge immediately
+    metadata: {
+      user_id: userId,
+      package_id: packageId,
+      credits: credits.toString(),
+      product_type: 'credit_package',
+    },
+    description: `ReceiptSort Credits Purchase - ${credits} credits`,
+  })
+
+  console.log(`[Stripe] Created invoice: ${invoice.id}`)
+
+  // 4. Finalize and pay the invoice
+  const finalizedInvoice = await stripe.invoices.finalizeInvoice(invoice.id, {
+    auto_advance: true,
+  })
+
+  // 5. Pay the invoice
+  const paidInvoice = await stripe.invoices.pay(finalizedInvoice.id)
+
+  console.log(`[Stripe] Invoice payment initiated: ${paidInvoice.id}`)
+
+  return {
+    invoice: paidInvoice,
+    paymentIntent: (paidInvoice as unknown as { payment_intent?: string }).payment_intent || '',
+  }
+}
+
+/**
+ * Create Hosted Invoice Page for Credit Purchase
+ * This creates an invoice and returns a hosted URL for payment
+ *
+ * @param priceId - Stripe Price ID
+ * @param userId - User ID for metadata
+ * @param userEmail - User email
+ * @param userName - User full name (optional)
+ * @param packageId - Package ID for metadata
+ * @param credits - Number of credits
+ * @returns Invoice with hosted URL
+ */
+export async function createHostedInvoice(
+  priceId: string,
+  userId: string,
+  userEmail: string,
+  userName: string | undefined,
+  packageId: string,
+  credits: number
+): Promise<Stripe.Invoice> {
+  // 1. Create or get customer
+  const customer = await createOrGetCustomer(userId, userEmail, userName)
+
+  // 2. Get price details
+  const priceObj = await stripe.prices.retrieve(priceId)
+  const amount = priceObj.unit_amount || 0
+  const currency = priceObj.currency
+
+  // 3. Create invoice item
+  await stripe.invoiceItems.create({
+    customer: customer.id,
+    amount,
+    currency,
+    description: `ReceiptSort Credits - ${packageId} Package (${credits} credits)`,
+    metadata: {
+      user_id: userId,
+      package_id: packageId,
+      credits: credits.toString(),
+      stripe_price_id: priceId,
+    },
+  })
+
+  // 3. Create invoice with hosted page
+  const invoice = await stripe.invoices.create({
+    customer: customer.id,
+    auto_advance: false, // Manual finalization to get hosted URL
+    collection_method: 'charge_automatically',
+    metadata: {
+      user_id: userId,
+      package_id: packageId,
+      credits: credits.toString(),
+      product_type: 'credit_package',
+    },
+    description: `ReceiptSort Credits Purchase - ${credits} credits`,
+  })
+
+  // 4. Finalize invoice to generate hosted URL
+  const finalizedInvoice = await stripe.invoices.finalizeInvoice(invoice.id)
+
+  console.log(`[Stripe] Created hosted invoice: ${finalizedInvoice.id}`)
+  console.log(`[Stripe] Hosted URL: ${finalizedInvoice.hosted_invoice_url}`)
+
+  return finalizedInvoice
+}
+
+/**
+ * Retrieve Invoice by ID
+ *
+ * @param invoiceId - Stripe Invoice ID
+ * @returns Stripe Invoice
+ */
+export async function retrieveInvoice(
+  invoiceId: string
+): Promise<Stripe.Invoice> {
+  const invoice = await stripe.invoices.retrieve(invoiceId)
+  return invoice
+}
+
+/**
+ * List invoices for a customer
+ *
+ * @param customerId - Stripe Customer ID
+ * @param limit - Number of invoices to retrieve
+ * @returns List of invoices
+ */
+export async function listCustomerInvoices(
+  customerId: string,
+  limit = 10
+): Promise<Stripe.Invoice[]> {
+  const invoices = await stripe.invoices.list({
+    customer: customerId,
+    limit,
+  })
+  return invoices.data
+}
+
+/**
+ * Send invoice email manually
+ *
+ * @param invoiceId - Stripe Invoice ID
+ * @returns Stripe Invoice
+ */
+export async function sendInvoiceEmail(
+  invoiceId: string
+): Promise<Stripe.Invoice> {
+  const invoice = await stripe.invoices.sendInvoice(invoiceId)
+  console.log(`[Stripe] Invoice email sent: ${invoiceId}`)
+  return invoice
+}
+
+/**
  * Get Stripe client (for advanced use cases)
  */
 export function getStripeClient(): Stripe {
