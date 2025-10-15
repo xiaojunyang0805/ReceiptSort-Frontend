@@ -43,7 +43,7 @@
     "valueProps": {
       "accuracy": "95%+ Precisión",
       "processing": "Procesar en Segundos",
-      "support": "Impulsado por OpenAI"
+      "support": "GPT-4 Vision AI"
     },
     "getStarted": "Empezar Gratis"
   },
@@ -64,8 +64,8 @@
         "description": "Descarga hojas de cálculo organizadas listas para QuickBooks, Xero o cualquier software de contabilidad."
       },
       "pricing": {
-        "title": "Sin Compromiso Mensual",
-        "description": "Solo $0.50 por recibo. Compra créditos cuando los necesites. Nunca te preocupes por tarifas de suscripción."
+        "title": "Paga Según Uses",
+        "description": "Desde $0.20 por recibo con paquetes al por mayor. Compra créditos cuando los necesites, o suscríbete para obtener aún mejor valor."
       },
       "security": {
         "title": "Seguridad de Nivel Bancario",
@@ -73,13 +73,14 @@
       },
       "timeSaving": {
         "title": "Ahorra 5+ Horas Semanales",
-        "description": "Deja la entrada manual de datos. Procesa 100 recibos en el tiempo que lleva hacer 1 manualmente."
+        "description": "Deja la entrada manual de datos. Procesa 100 recibos en el tiempo que lleva hacer 1 manualmente. Cada recibo se procesa en menos de 5 segundos."
       }
     }
   },
   "howItWorks": {
     "title": "Cómo Funciona",
     "subtitle": "Comienza en 3 simples pasos",
+    "description": "De la foto del recibo a la hoja de cálculo organizada en menos de un minuto",
     "steps": {
       "upload": {
         "title": "Subir Recibos",
@@ -138,7 +139,7 @@
   },
   "faq": {
     "title": "Preguntas Frecuentes",
-    "subtitle": "Todo lo que necesitas saber sobre ReceiptSorter",
+    "subtitle": "Todo lo que necesitas saber sobre ReceiptSort",
     "items": {
       "accuracy": {
         "question": "¿Qué tan precisa es la extracción por IA?",
@@ -150,7 +151,7 @@
       },
       "cost": {
         "question": "¿Cuánto cuesta?",
-        "answer": "Usamos un sistema de créditos. Cada recibo cuesta 1 crédito ($0.50). Puedes comprar créditos en paquetes (10 por $9.99, 50 por $24.99, etc.) o suscribirte para obtener mejor valor."
+        "answer": "Usamos un sistema de créditos. Cada recibo cuesta 1 crédito. Los créditos comienzan en $0.50 cada uno para paquetes pequeños, o tan bajos como $0.20 cada uno al comprar al por mayor (ej., 25 por $9.99, 500 por $99.99). Suscríbete mensualmente para obtener aún mejor valor."
       },
       "expiration": {
         "question": "¿Los créditos expiran?",
@@ -162,7 +163,7 @@
       },
       "export": {
         "question": "¿Puedo exportar a QuickBooks o Xero?",
-        "answer": "Actualmente, exportamos a formatos Excel y CSV que funcionan con todos los principales software de contabilidad. Las integraciones directas llegarán pronto."
+        "answer": "Exportamos a formatos Excel y CSV, que son compatibles con QuickBooks, Xero y todos los principales software de contabilidad. Simplemente importa el archivo descargado en tu sistema de contabilidad."
       },
       "wrongExtraction": {
         "question": "¿Qué pasa si la extracción es incorrecta?",
@@ -174,17 +175,17 @@
       },
       "business": {
         "question": "¿Puedo usar esto para mi negocio?",
-        "answer": "¡Absolutamente! Muchas pequeñas empresas, freelancers y contadores usan ReceiptSorter para el seguimiento de gastos y contabilidad."
+        "answer": "¡Absolutamente! Muchas pequeñas empresas, freelancers y contadores usan ReceiptSort para el seguimiento de gastos y contabilidad."
       },
       "software": {
         "question": "¿Necesito instalar algún software?",
-        "answer": "No, ReceiptSorter es 100% basado en web. Accede desde cualquier dispositivo con un navegador web."
+        "answer": "No, ReceiptSort es 100% basado en web. Accede desde cualquier dispositivo con un navegador web."
       }
     }
   },
   "finalCTA": {
     "title": "¿Listo para ahorrar horas en la gestión de recibos?",
-    "subtitle": "Únete a miles de empresas que ya usan ReceiptSorter",
+    "subtitle": "Comienza a procesar recibos con IA hoy",
     "button": "Comenzar a Procesar Recibos",
     "viewPricing": "Ver Precios",
     "trustIndicator": "Únete a más de 10,000 usuarios que confían en ReceiptSorter"
@@ -646,7 +647,7 @@
     "faqDescription": "Antes de contactarnos, podrías encontrar tu respuesta en nuestra sección de FAQ.",
     "viewFaq": "Ver FAQ",
     "quickStartGuide": "Guía de Inicio Rápido",
-    "quickStartDescription": "¿Nuevo en ReceiptSorter? Aprende cómo empezar en 3 sencillos pasos.",
+    "quickStartDescription": "¿Nuevo en ReceiptSort? Aprende cómo empezar en 3 sencillos pasos.",
     "howItWorks": "Cómo Funciona"
   },
   "creditPackages": {

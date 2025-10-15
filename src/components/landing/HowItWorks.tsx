@@ -91,7 +91,7 @@ export function HowItWorks() {
           {t('subtitle')}
         </h2>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          From receipt photo to organized spreadsheet in under a minute
+          {t('description')}
         </p>
       </div>
 

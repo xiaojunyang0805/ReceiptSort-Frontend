@@ -44,7 +44,7 @@
     "valueProps": {
       "accuracy": "95%+ Accuracy",
       "processing": "Process in Seconds",
-      "support": "Powered by OpenAI"
+      "support": "GPT-4 Vision AI"
     }
   },
   "features": {
@@ -64,8 +64,8 @@
         "description": "Download organized spreadsheets ready for QuickBooks, Xero, or any accounting software."
       },
       "pricing": {
-        "title": "No Monthly Commitment",
-        "description": "Only $0.50 per receipt. Buy credits when you need them. Never worry about subscription fees."
+        "title": "Pay As You Go",
+        "description": "From $0.20 per receipt with bulk packages. Buy credits when you need them, or subscribe for even better value."
       },
       "security": {
         "title": "Bank-Level Security",
@@ -73,13 +73,14 @@
       },
       "timeSaving": {
         "title": "Save 5+ Hours Weekly",
-        "description": "Stop manual data entry. Process 100 receipts in the time it takes to do 1 manually."
+        "description": "Stop manual data entry. Process 100 receipts in the time it takes to do 1 manually. Each receipt processes in under 5 seconds."
       }
     }
   },
   "howItWorks": {
     "title": "How It Works",
     "subtitle": "Get started in 3 simple steps",
+    "description": "From receipt photo to organized spreadsheet in under a minute",
     "steps": {
       "upload": {
         "title": "Upload Receipts",
@@ -138,7 +139,7 @@
   },
   "faq": {
     "title": "Frequently Asked Questions",
-    "subtitle": "Everything you need to know about ReceiptSorter",
+    "subtitle": "Everything you need to know about ReceiptSort",
     "items": {
       "accuracy": {
         "question": "How accurate is the AI extraction?",
@@ -150,7 +151,7 @@
       },
       "cost": {
         "question": "How much does it cost?",
-        "answer": "We use a credit system. Each receipt costs 1 credit ($0.50). You can buy credits in packs (10 for $9.99, 50 for $24.99, etc.) or subscribe for better value."
+        "answer": "We use a credit system. Each receipt costs 1 credit. Credits start at $0.50 each for small packages, or as low as $0.20 each when buying in bulk (e.g., 25 for $9.99, 500 for $99.99). Subscribe monthly for even better value."
       },
       "expiration": {
         "question": "Do credits expire?",
@@ -162,7 +163,7 @@
       },
       "export": {
         "question": "Can I export to QuickBooks or Xero?",
-        "answer": "Currently, we export to Excel and CSV formats which work with all major accounting software. Direct integrations coming soon."
+        "answer": "We export to Excel and CSV formats, which are compatible with QuickBooks, Xero, and all major accounting software. Simply import the downloaded file into your accounting system."
       },
       "wrongExtraction": {
         "question": "What if the extraction is wrong?",
@@ -174,20 +175,20 @@
       },
       "business": {
         "question": "Can I use this for my business?",
-        "answer": "Absolutely! Many small businesses, freelancers, and accountants use ReceiptSorter for expense tracking and bookkeeping."
+        "answer": "Absolutely! Many small businesses, freelancers, and accountants use ReceiptSort for expense tracking and bookkeeping."
       },
       "software": {
         "question": "Do I need to install any software?",
-        "answer": "No, ReceiptSorter is 100% web-based. Access it from any device with a web browser."
+        "answer": "No, ReceiptSort is 100% web-based. Access it from any device with a web browser."
       }
     }
   },
   "finalCTA": {
     "title": "Ready to save hours on receipt management?",
-    "subtitle": "Join thousands of businesses already using ReceiptSorter",
+    "subtitle": "Start processing receipts with AI today",
     "button": "Start Processing Receipts",
     "viewPricing": "View Pricing",
-    "trustIndicator": "Join 10,000+ users who trust ReceiptSorter"
+    "trustIndicator": "Join users who trust ReceiptSort"
   },
   "auth": {
     "loginTitle": "Login",
@@ -656,7 +657,7 @@
     "faqDescription": "Before reaching out, you might find your answer in our FAQ section.",
     "viewFaq": "View FAQ",
     "quickStartGuide": "Quick Start Guide",
-    "quickStartDescription": "New to ReceiptSorter? Learn how to get started in 3 simple steps.",
+    "quickStartDescription": "New to ReceiptSort? Learn how to get started in 3 simple steps.",
     "howItWorks": "How It Works"
   },
   "creditPackages": {

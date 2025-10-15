@@ -43,7 +43,7 @@
     "valueProps": {
       "accuracy": "95%+ Genauigkeit",
       "processing": "Verarbeitung in Sekunden",
-      "support": "Unterstützt von OpenAI"
+      "support": "GPT-4 Vision AI"
     },
     "getStarted": "Kostenlos Starten"
   },
@@ -64,8 +64,8 @@
         "description": "Laden Sie organisierte Tabellen herunter, die für QuickBooks, Xero oder jede Buchhaltungssoftware bereit sind."
       },
       "pricing": {
-        "title": "Keine Monatliche Verpflichtung",
-        "description": "Nur 0,50€ pro Beleg. Kaufen Sie Credits, wenn Sie sie benötigen. Keine Sorgen über Abonnementgebühren."
+        "title": "Bezahlen Sie Nach Bedarf",
+        "description": "Ab 0,20€ pro Beleg mit Massenpaketen. Kaufen Sie Credits, wenn Sie sie benötigen, oder abonnieren Sie für noch besseren Wert."
       },
       "security": {
         "title": "Sicherheit auf Bankniveau",
@@ -73,13 +73,14 @@
       },
       "timeSaving": {
         "title": "Sparen Sie 5+ Stunden Pro Woche",
-        "description": "Stoppen Sie die manuelle Dateneingabe. Verarbeiten Sie 100 Belege in der Zeit, die Sie für 1 manuell benötigen."
+        "description": "Stoppen Sie die manuelle Dateneingabe. Verarbeiten Sie 100 Belege in der Zeit, die Sie für 1 manuell benötigen. Jeder Beleg wird in unter 5 Sekunden verarbeitet."
       }
     }
   },
   "howItWorks": {
     "title": "Wie Es Funktioniert",
     "subtitle": "Starten Sie in 3 einfachen Schritten",
+    "description": "Vom Belegfoto zur organisierten Tabelle in unter einer Minute",
     "steps": {
       "upload": {
         "title": "Belege Hochladen",
@@ -138,7 +139,7 @@
   },
   "faq": {
     "title": "Häufig Gestellte Fragen",
-    "subtitle": "Alles, was Sie über ReceiptSorter wissen müssen",
+    "subtitle": "Alles, was Sie über ReceiptSort wissen müssen",
     "items": {
       "accuracy": {
         "question": "Wie genau ist die KI-Extraktion?",
@@ -150,7 +151,7 @@
       },
       "cost": {
         "question": "Wie viel kostet es?",
-        "answer": "Wir verwenden ein Credit-System. Jeder Beleg kostet 1 Credit (0,50€). Sie können Credits in Paketen kaufen (10 für 9,99€, 50 für 24,99€, usw.) oder ein Abonnement für einen besseren Wert abschließen."
+        "answer": "Wir verwenden ein Credit-System. Jeder Beleg kostet 1 Credit. Credits beginnen bei 0,50€ pro Stück für kleine Pakete oder nur 0,20€ pro Stück beim Massenkauf (z.B. 25 für 9,99€, 500 für 99,99€). Abonnieren Sie monatlich für noch besseren Wert."
       },
       "expiration": {
         "question": "Verfallen Credits?",
@@ -162,7 +163,7 @@
       },
       "export": {
         "question": "Kann ich nach QuickBooks oder Xero exportieren?",
-        "answer": "Derzeit exportieren wir in Excel- und CSV-Formate, die mit allen wichtigen Buchhaltungsprogrammen funktionieren. Direkte Integrationen kommen bald."
+        "answer": "Wir exportieren in Excel- und CSV-Formate, die mit QuickBooks, Xero und allen wichtigen Buchhaltungsprogrammen kompatibel sind. Importieren Sie einfach die heruntergeladene Datei in Ihr Buchhaltungssystem."
       },
       "wrongExtraction": {
         "question": "Was passiert, wenn die Extraktion falsch ist?",
@@ -174,17 +175,17 @@
       },
       "business": {
         "question": "Kann ich dies für mein Unternehmen verwenden?",
-        "answer": "Absolut! Viele kleine Unternehmen, Freelancer und Buchhalter nutzen ReceiptSorter für die Spesenabrechnung und Buchhaltung."
+        "answer": "Absolut! Viele kleine Unternehmen, Freelancer und Buchhalter nutzen ReceiptSort für die Spesenabrechnung und Buchhaltung."
       },
       "software": {
         "question": "Muss ich Software installieren?",
-        "answer": "Nein, ReceiptSorter ist zu 100% webbasiert. Greifen Sie von jedem Gerät mit einem Webbrowser darauf zu."
+        "answer": "Nein, ReceiptSort ist zu 100% webbasiert. Greifen Sie von jedem Gerät mit einem Webbrowser darauf zu."
       }
     }
   },
   "finalCTA": {
     "title": "Bereit, Stunden beim Belegmanagement zu sparen?",
-    "subtitle": "Schließen Sie sich Tausenden von Unternehmen an, die bereits ReceiptSorter verwenden",
+    "subtitle": "Beginnen Sie noch heute mit der Verarbeitung von Belegen mit KI",
     "button": "Belege Verarbeiten Starten",
     "viewPricing": "Preise Ansehen",
     "trustIndicator": "Schließen Sie sich 10.000+ Nutzern an, die ReceiptSorter vertrauen"
@@ -646,7 +647,7 @@
     "faqDescription": "Bevor Sie uns kontaktieren, finden Sie Ihre Antwort möglicherweise in unserem FAQ-Bereich.",
     "viewFaq": "FAQ Ansehen",
     "quickStartGuide": "Schnellstartanleitung",
-    "quickStartDescription": "Neu bei ReceiptSorter? Lernen Sie in 3 einfachen Schritten, wie Sie loslegen.",
+    "quickStartDescription": "Neu bei ReceiptSort? Lernen Sie in 3 einfachen Schritten, wie Sie loslegen.",
     "howItWorks": "Wie Es Funktioniert"
   },
   "creditPackages": {

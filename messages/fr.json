@@ -43,7 +43,7 @@
     "valueProps": {
       "accuracy": "95%+ de Précision",
       "processing": "Traitement en Secondes",
-      "support": "Propulsé par OpenAI"
+      "support": "GPT-4 Vision AI"
     },
     "getStarted": "Commencer Gratuitement"
   },
@@ -64,8 +64,8 @@
         "description": "Téléchargez des feuilles de calcul organisées prêtes pour QuickBooks, Xero ou tout logiciel de comptabilité."
       },
       "pricing": {
-        "title": "Aucun Engagement Mensuel",
-        "description": "Seulement 0,50€ par reçu. Achetez des crédits quand vous en avez besoin. Ne vous inquiétez jamais des frais d'abonnement."
+        "title": "Payez à l'Usage",
+        "description": "À partir de 0,20€ par reçu avec les forfaits en gros. Achetez des crédits quand vous en avez besoin, ou abonnez-vous pour encore plus de valeur."
       },
       "security": {
         "title": "Sécurité de Niveau Bancaire",
@@ -73,13 +73,14 @@
       },
       "timeSaving": {
         "title": "Économisez 5+ Heures par Semaine",
-        "description": "Arrêtez la saisie manuelle de données. Traitez 100 reçus dans le temps qu'il faut pour en faire 1 manuellement."
+        "description": "Arrêtez la saisie manuelle de données. Traitez 100 reçus dans le temps qu'il faut pour en faire 1 manuellement. Chaque reçu est traité en moins de 5 secondes."
       }
     }
   },
   "howItWorks": {
     "title": "Comment Ça Marche",
     "subtitle": "Commencez en 3 étapes simples",
+    "description": "De la photo du reçu à la feuille de calcul organisée en moins d'une minute",
     "steps": {
       "upload": {
         "title": "Télécharger les Reçus",
@@ -138,7 +139,7 @@
   },
   "faq": {
     "title": "Questions Fréquemment Posées",
-    "subtitle": "Tout ce que vous devez savoir sur ReceiptSorter",
+    "subtitle": "Tout ce que vous devez savoir sur ReceiptSort",
     "items": {
       "accuracy": {
         "question": "Quelle est la précision de l'extraction par IA?",
@@ -150,7 +151,7 @@
       },
       "cost": {
         "question": "Combien cela coûte-t-il?",
-        "answer": "Nous utilisons un système de crédits. Chaque reçu coûte 1 crédit (0,50€). Vous pouvez acheter des crédits en packs (10 pour 9,99€, 50 pour 24,99€, etc.) ou vous abonner pour une meilleure valeur."
+        "answer": "Nous utilisons un système de crédits. Chaque reçu coûte 1 crédit. Les crédits commencent à 0,50€ chacun pour les petits forfaits, ou aussi bas que 0,20€ chacun lors de l'achat en gros (par ex., 25 pour 9,99€, 500 pour 99,99€). Abonnez-vous mensuellement pour encore plus de valeur."
       },
       "expiration": {
         "question": "Les crédits expirent-ils?",
@@ -162,7 +163,7 @@
       },
       "export": {
         "question": "Puis-je exporter vers QuickBooks ou Xero?",
-        "answer": "Actuellement, nous exportons vers les formats Excel et CSV qui fonctionnent avec tous les principaux logiciels de comptabilité. Les intégrations directes arrivent bientôt."
+        "answer": "Nous exportons vers les formats Excel et CSV, qui sont compatibles avec QuickBooks, Xero et tous les principaux logiciels de comptabilité. Il suffit d'importer le fichier téléchargé dans votre système comptable."
       },
       "wrongExtraction": {
         "question": "Que se passe-t-il si l'extraction est incorrecte?",
@@ -174,17 +175,17 @@
       },
       "business": {
         "question": "Puis-je l'utiliser pour mon entreprise?",
-        "answer": "Absolument! De nombreuses petites entreprises, freelances et comptables utilisent ReceiptSorter pour le suivi des dépenses et la comptabilité."
+        "answer": "Absolument! De nombreuses petites entreprises, freelances et comptables utilisent ReceiptSort pour le suivi des dépenses et la comptabilité."
       },
       "software": {
         "question": "Dois-je installer un logiciel?",
-        "answer": "Non, ReceiptSorter est 100% basé sur le web. Accédez-y depuis n'importe quel appareil avec un navigateur web."
+        "answer": "Non, ReceiptSort est 100% basé sur le web. Accédez-y depuis n'importe quel appareil avec un navigateur web."
       }
     }
   },
   "finalCTA": {
     "title": "Prêt à économiser des heures sur la gestion des reçus?",
-    "subtitle": "Rejoignez des milliers d'entreprises qui utilisent déjà ReceiptSorter",
+    "subtitle": "Commencez à traiter des reçus avec l'IA aujourd'hui",
     "button": "Commencer à Traiter les Reçus",
     "viewPricing": "Voir les Tarifs",
     "trustIndicator": "Rejoignez 10 000+ utilisateurs qui font confiance à ReceiptSorter"
@@ -646,7 +647,7 @@
     "faqDescription": "Avant de nous contacter, vous pourriez trouver votre réponse dans notre section FAQ.",
     "viewFaq": "Voir la FAQ",
     "quickStartGuide": "Guide de Démarrage Rapide",
-    "quickStartDescription": "Nouveau sur ReceiptSorter ? Apprenez à démarrer en 3 étapes simples.",
+    "quickStartDescription": "Nouveau sur ReceiptSort ? Apprenez à démarrer en 3 étapes simples.",
     "howItWorks": "Comment Ça Marche"
   },
   "creditPackages": {

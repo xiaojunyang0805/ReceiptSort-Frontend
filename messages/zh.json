@@ -44,7 +44,7 @@
     "valueProps": {
       "accuracy": "95%以上准确率",
       "processing": "秒级处理",
-      "support": "由OpenAI驱动"
+      "support": "GPT-4 Vision AI"
     }
   },
   "features": {
@@ -64,8 +64,8 @@
         "description": "下载已整理的电子表格，可直接用于QuickBooks、Xero或任何会计软件。"
       },
       "pricing": {
-        "title": "无需月度承诺",
-        "description": "每张收据仅需$0.50。需要时购买积分。无需担心订阅费用。"
+        "title": "按需付费",
+        "description": "批量购买低至每张收据$0.20。需要时购买积分,或订阅获得更优惠的价格。"
       },
       "security": {
         "title": "银行级安全",
@@ -73,13 +73,14 @@
       },
       "timeSaving": {
         "title": "每周节省5小时以上",
-        "description": "告别手工数据录入。在处理1张收据的时间内处理100张。"
+        "description": "告别手工数据录入。在处理1张收据的时间内处理100张。每张收据处理时间不到5秒。"
       }
     }
   },
   "howItWorks": {
     "title": "使用方法",
     "subtitle": "三个简单步骤即可开始",
+    "description": "不到一分钟,从收据照片到整理好的电子表格",
     "steps": {
       "upload": {
         "title": "上传收据",
@@ -138,7 +139,7 @@
   },
   "faq": {
     "title": "常见问题",
-    "subtitle": "关于ReceiptSorter您需要了解的一切",
+    "subtitle": "关于ReceiptSort您需要了解的一切",
     "items": {
       "accuracy": {
         "question": "AI提取的准确度如何？",
@@ -150,7 +151,7 @@
       },
       "cost": {
         "question": "费用是多少？",
-        "answer": "我们使用积分系统。每张收据需要1积分（$0.50）。您可以批量购买积分（10积分$9.99、50积分$24.99等）或订阅以获得更优惠的价格。"
+        "answer": "我们使用积分系统。每张收据需要1积分。小包装每积分$0.50起,批量购买低至每积分$0.20（例如25积分$9.99、500积分$99.99）。订阅月度套餐可获得更优惠的价格。"
       },
       "expiration": {
         "question": "积分会过期吗？",
@@ -162,7 +163,7 @@
       },
       "export": {
         "question": "可以导出到QuickBooks或Xero吗？",
-        "answer": "目前我们导出为Excel和CSV格式，可用于所有主流会计软件。直接集成即将推出。"
+        "answer": "我们导出为Excel和CSV格式,这些格式与QuickBooks、Xero和所有主流会计软件兼容。只需将下载的文件导入您的会计系统即可。"
       },
       "wrongExtraction": {
         "question": "如果提取错误怎么办？",
@@ -174,17 +175,17 @@
       },
       "business": {
         "question": "可以用于我的企业吗？",
-        "answer": "当然可以！许多小企业、自由职业者和会计师使用ReceiptSorter进行费用跟踪和记账。"
+        "answer": "当然可以！许多小企业、自由职业者和会计师使用ReceiptSort进行费用跟踪和记账。"
       },
       "software": {
         "question": "需要安装任何软件吗？",
-        "answer": "不需要，ReceiptSorter是100%基于网页的。可从任何带有网络浏览器的设备访问。"
+        "answer": "不需要，ReceiptSort是100%基于网页的。可从任何带有网络浏览器的设备访问。"
       }
     }
   },
   "finalCTA": {
     "title": "准备好在收据管理上节省时间了吗？",
-    "subtitle": "加入已经在使用ReceiptSorter的数千家企业",
+    "subtitle": "立即开始使用AI处理收据",
     "button": "开始处理收据",
     "viewPricing": "查看价格",
     "trustIndicator": "加入信赖ReceiptSorter的10,000多名用户"
@@ -656,7 +657,7 @@
     "faqDescription": "在联系我们之前，您可能会在我们的常见问题部分找到答案。",
     "viewFaq": "查看常见问题",
     "quickStartGuide": "快速入门指南",
-    "quickStartDescription": "ReceiptSorter新手？通过3个简单步骤学习如何开始使用。",
+    "quickStartDescription": "ReceiptSort新手？通过3个简单步骤学习如何开始使用。",
     "howItWorks": "使用方法"
   },
   "creditPackages": {

@@ -43,7 +43,7 @@
     "valueProps": {
       "accuracy": "95%+ Nauwkeurigheid",
       "processing": "Verwerk in Seconden",
-      "support": "Aangedreven door OpenAI"
+      "support": "GPT-4 Vision AI"
     },
     "getStarted": "Gratis Beginnen"
   },
@@ -64,8 +64,8 @@
         "description": "Download georganiseerde spreadsheets klaar voor QuickBooks, Xero of andere boekhoudsoftware."
       },
       "pricing": {
-        "title": "Geen Maandelijkse Verplichting",
-        "description": "Slechts €0,50 per bonnetje. Koop credits wanneer u ze nodig heeft. Maak u geen zorgen over abonnementskosten."
+        "title": "Betaal Per Gebruik",
+        "description": "Vanaf €0,20 per bonnetje met bulkpakketten. Koop credits wanneer u ze nodig heeft, of neem een abonnement voor nog betere waarde."
       },
       "security": {
         "title": "Beveiliging op Bankniveau",
@@ -73,13 +73,14 @@
       },
       "timeSaving": {
         "title": "Bespaar 5+ Uur Per Week",
-        "description": "Stop met handmatige gegevensinvoer. Verwerk 100 bonnetjes in de tijd die het kost om er 1 handmatig te doen."
+        "description": "Stop met handmatige gegevensinvoer. Verwerk 100 bonnetjes in de tijd die het kost om er 1 handmatig te doen. Elk bonnetje wordt verwerkt in minder dan 5 seconden."
       }
     }
   },
   "howItWorks": {
     "title": "Hoe Het Werkt",
     "subtitle": "Ga aan de slag in 3 eenvoudige stappen",
+    "description": "Van bonnetjefoto naar georganiseerde spreadsheet in minder dan een minuut",
     "steps": {
       "upload": {
         "title": "Upload Bonnetjes",
@@ -138,7 +139,7 @@
   },
   "faq": {
     "title": "Veelgestelde Vragen",
-    "subtitle": "Alles wat u moet weten over ReceiptSorter",
+    "subtitle": "Alles wat u moet weten over ReceiptSort",
     "items": {
       "accuracy": {
         "question": "Hoe nauwkeurig is de AI-extractie?",
@@ -150,7 +151,7 @@
       },
       "cost": {
         "question": "Hoeveel kost het?",
-        "answer": "We gebruiken een creditsysteem. Elk bonnetje kost 1 credit (€0,50). U kunt credits kopen in pakketten (10 voor €9,99, 50 voor €24,99, enz.) of een abonnement nemen voor betere waarde."
+        "answer": "We gebruiken een creditsysteem. Elk bonnetje kost 1 credit. Credits beginnen bij €0,50 per stuk voor kleine pakketten, of slechts €0,20 per stuk bij bulkaankoop (bijv. 25 voor €9,99, 500 voor €99,99). Neem maandelijks een abonnement voor nog betere waarde."
       },
       "expiration": {
         "question": "Verlopen credits?",
@@ -162,7 +163,7 @@
       },
       "export": {
         "question": "Kan ik exporteren naar QuickBooks of Xero?",
-        "answer": "Momenteel exporteren we naar Excel- en CSV-formaten die werken met alle belangrijke boekhoudsoftware. Directe integraties komen binnenkort."
+        "answer": "We exporteren naar Excel- en CSV-formaten, die compatibel zijn met QuickBooks, Xero en alle belangrijke boekhoudsoftware. Importeer het gedownloade bestand eenvoudig in uw boekhoudsysteem."
       },
       "wrongExtraction": {
         "question": "Wat als de extractie onjuist is?",
@@ -174,17 +175,17 @@
       },
       "business": {
         "question": "Kan ik dit voor mijn bedrijf gebruiken?",
-        "answer": "Absoluut! Veel kleine bedrijven, freelancers en accountants gebruiken ReceiptSorter voor onkostenregistratie en boekhouding."
+        "answer": "Absoluut! Veel kleine bedrijven, freelancers en accountants gebruiken ReceiptSort voor onkostenregistratie en boekhouding."
       },
       "software": {
         "question": "Moet ik software installeren?",
-        "answer": "Nee, ReceiptSorter is 100% webgebaseerd. Toegang vanaf elk apparaat met een webbrowser."
+        "answer": "Nee, ReceiptSort is 100% webgebaseerd. Toegang vanaf elk apparaat met een webbrowser."
       }
     }
   },
   "finalCTA": {
     "title": "Klaar om uren te besparen op bonnetjesbeheer?",
-    "subtitle": "Sluit je aan bij duizenden bedrijven die ReceiptSorter al gebruiken",
+    "subtitle": "Begin vandaag nog met het verwerken van bonnetjes met AI",
     "button": "Begin Met Bonnetjes Verwerken",
     "viewPricing": "Prijzen Bekijken",
     "trustIndicator": "Sluit je aan bij 10.000+ gebruikers die ReceiptSorter vertrouwen"
@@ -645,7 +646,7 @@
     "faqDescription": "Voordat u contact opneemt, vindt u uw antwoord mogelijk in ons FAQ-gedeelte.",
     "viewFaq": "Bekijk FAQ",
     "quickStartGuide": "Snelstartgids",
-    "quickStartDescription": "Nieuw bij ReceiptSorter? Leer in 3 eenvoudige stappen hoe u aan de slag gaat.",
+    "quickStartDescription": "Nieuw bij ReceiptSort? Leer in 3 eenvoudige stappen hoe u aan de slag gaat.",
     "howItWorks": "Hoe Het Werkt"
   },
   "creditPackages": {
