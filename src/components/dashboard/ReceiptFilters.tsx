@@ -61,6 +61,8 @@ export default function ReceiptFilters({
   onClear,
 }: ReceiptFiltersProps) {
   const t = useTranslations('dashboard.receiptsPage')
+  const tCategories = useTranslations('receiptDetails.categories')
+  const tTable = useTranslations('dashboard.receiptsTable')
   const [isExpanded, setIsExpanded] = useState(false)
 
   const activeFilterCount =
@@ -232,7 +234,15 @@ export default function ReceiptFilters({
                       htmlFor={`cat-${category}`}
                       className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                     >
-                      {category}
+                      {category === 'Food & Dining' ? tCategories('foodDining') :
+                       category === 'Office Supplies' ? tCategories('officeSupplies') :
+                       category === 'Transportation' ? tCategories('transportation') :
+                       category === 'Shopping' ? tCategories('shopping') :
+                       category === 'Travel' ? tCategories('travel') :
+                       category === 'Entertainment' ? tCategories('entertainment') :
+                       category === 'Utilities' ? tCategories('utilities') :
+                       category === 'Healthcare' ? tCategories('healthcare') :
+                       tCategories('other')}
                     </label>
                   </div>
                 ))}
@@ -254,7 +264,7 @@ export default function ReceiptFilters({
                       htmlFor={`status-${status.value}`}
                       className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                     >
-                      {status.label}
+                      {tTable(`status.${status.value}`)}
                     </label>
                   </div>
                 ))}
