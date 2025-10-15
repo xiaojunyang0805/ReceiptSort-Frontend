@@ -56,7 +56,13 @@ You MUST return valid JSON in this exact format (no markdown, no explanations):
       "item_code": "SKU-001",
       "tax_rate": 21.00
     }
-  ]
+  ],
+  "patient_dob": "1962-05-06",
+  "treatment_date": "2025-09-18",
+  "insurance_claim_number": "CLAIM-2025-789",
+  "diagnosis_codes": "M54.5, Z79.899",
+  "procedure_codes": "F517A, 99213",
+  "provider_id": "12065201"
 }
 
 CRITICAL RULES:
@@ -234,6 +240,72 @@ CRITICAL RULES:
       - If no itemized table found, return empty array: "line_items": []
       - Maximum 50 line items per receipt (if more, extract first 50)
 
+11. PHASE 3: MEDICAL RECEIPTS (NEW) 🆕
+
+   A. PATIENT DATE OF BIRTH:
+      - Look for: "DOB", "Date of Birth", "Born", "Geboortedatum", "Patient DOB"
+      - Format: YYYY-MM-DD (same as receipt_date)
+      - Usually near patient name or identification section
+      - Examples: "DOB: 05/06/1962" → "1962-05-06"
+      - ONLY extract for medical_invoice document type
+      - Set to null if not found or not medical document
+
+   B. TREATMENT DATE:
+      - Look for: "Treatment Date", "Service Date", "Date of Service", "Behandeldatum"
+      - Format: YYYY-MM-DD (same as receipt_date)
+      - This is DIFFERENT from receipt_date (invoice date)
+      - receipt_date = invoice issue date, treatment_date = actual service date
+      - Example: "Treatment: 18/09/2025" → "2025-09-18"
+      - ONLY extract for medical_invoice document type
+      - Set to null if not found or not medical document
+
+   C. INSURANCE CLAIM NUMBER:
+      - Look for: "Claim #", "Claim Number", "Insurance Claim", "Verzekering", "Claimnummer"
+      - Extract alphanumeric string (e.g., "CLAIM-2025-789", "IC123456")
+      - May be blank on many medical receipts (patient pays first, claims later)
+      - Set to null if not found
+
+   D. DIAGNOSIS CODES (ICD Codes):
+      - Look for: "ICD", "Diagnosis Code", "DX Code", "Diagnosecode"
+      - Format: Comma-separated codes (e.g., "M54.5, Z79.899")
+      - Common formats: ICD-10 codes (letter + 2-3 digits + optional decimal)
+      - Examples: "M54.5" (low back pain), "Z79.899" (long term drug therapy)
+      - Extract ALL diagnosis codes if multiple
+      - Set to null if not found
+
+   E. PROCEDURE CODES (CPT/Treatment Codes):
+      - Look for: "CPT", "Procedure Code", "Treatment Code", "Behandelcode", "Code"
+      - Format: Comma-separated codes (e.g., "F517A, 99213")
+      - Netherlands medical codes: Letter + digits (e.g., "F517A", "C123")
+      - USA CPT codes: 5 digits (e.g., "99213", "80053")
+      - May appear in line items table (item_code column)
+      - Examples: "F517A" (consultation), "99213" (office visit), "80053" (lab test)
+      - Extract ALL procedure codes if multiple
+      - Set to null if not found
+
+   F. PROVIDER ID:
+      - Look for: "Provider ID", "AGB", "NPI", "Practice Number", "AGB-code", "Praktijknummer"
+      - Netherlands: AGB code (8 digits) - e.g., "12065201"
+      - USA: NPI number (10 digits) - e.g., "1234567890"
+      - Usually near provider name or at bottom of document
+      - Examples: "AGB: 12065201", "NPI: 1234567890"
+      - Set to null if not found
+
+   G. MEDICAL DOCUMENT TYPE DETECTION:
+      - Set document_type = "medical_invoice" if you see ANY of:
+        * Patient date of birth (DOB)
+        * Treatment codes (CPT, ICD, treatment codes)
+        * Provider ID (AGB, NPI)
+        * Medical terms (consultation, treatment, diagnosis, patient, healthcare)
+        * Healthcare provider names (clinic, hospital, doctor, physiotherapy)
+      - Medical invoices often have line items with treatment codes
+
+   H. MEDICAL FIELDS VALIDATION:
+      - patient_dob must be reasonable (between 1900 and today)
+      - treatment_date should be ≤ receipt_date (treatment before invoice)
+      - diagnosis_codes and procedure_codes can be in various formats (validate carefully)
+      - All Phase 3 fields should be null for non-medical documents
+
 IMPORTANT: You MUST return valid JSON. Do not add any explanations or markdown formatting.`
 
 /**
@@ -386,6 +458,20 @@ export async function extractReceiptData(
         ? String(extractedData.vendor_tax_id).trim()
         : null,
       line_items: validateLineItems(extractedData.line_items),
+
+      // Phase 3: Medical Receipts
+      patient_dob: extractedData.patient_dob || null,
+      treatment_date: extractedData.treatment_date || null,
+      insurance_claim_number: extractedData.insurance_claim_number
+        ? String(extractedData.insurance_claim_number).trim()
+        : null,
+      diagnosis_codes: extractedData.diagnosis_codes
+        ? String(extractedData.diagnosis_codes).trim()
+        : null,
+      procedure_codes: extractedData.procedure_codes
+        ? String(extractedData.procedure_codes).trim()
+        : null,
+      provider_id: extractedData.provider_id ? String(extractedData.provider_id).trim() : null,
     }
 
     return validatedData

@@ -59,6 +59,26 @@ export interface ExtractedReceiptData {
 
   /** Line items breakdown (for detailed invoices) */
   line_items: ReceiptLineItem[]
+
+  // === Phase 3: Medical Receipts ===
+
+  /** Patient date of birth (for medical invoices/receipts) */
+  patient_dob: string | null
+
+  /** Actual treatment or service date (for medical invoices) */
+  treatment_date: string | null
+
+  /** Insurance claim reference number */
+  insurance_claim_number: string | null
+
+  /** ICD diagnosis codes (comma-separated) */
+  diagnosis_codes: string | null
+
+  /** CPT/treatment procedure codes (comma-separated) */
+  procedure_codes: string | null
+
+  /** Healthcare provider ID (AGB code in Netherlands, NPI in USA) */
+  provider_id: string | null
 }
 
 /**
@@ -164,4 +184,12 @@ export interface Receipt {
   payment_reference?: string
   vendor_tax_id?: string
   line_items?: ReceiptLineItem[]
+
+  // === Phase 3: Medical Receipts ===
+  patient_dob?: string
+  treatment_date?: string
+  insurance_claim_number?: string
+  diagnosis_codes?: string
+  procedure_codes?: string
+  provider_id?: string
 }

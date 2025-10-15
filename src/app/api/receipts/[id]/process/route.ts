@@ -164,6 +164,14 @@ export async function POST(
           purchase_order_number: extractedData.purchase_order_number,
           payment_reference: extractedData.payment_reference,
           vendor_tax_id: extractedData.vendor_tax_id,
+
+          // Phase 3: Medical Receipts
+          patient_dob: extractedData.patient_dob,
+          treatment_date: extractedData.treatment_date,
+          insurance_claim_number: extractedData.insurance_claim_number,
+          diagnosis_codes: extractedData.diagnosis_codes,
+          procedure_codes: extractedData.procedure_codes,
+          provider_id: extractedData.provider_id,
         })
         .eq('id', params.id)
 
