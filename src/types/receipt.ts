@@ -45,6 +45,56 @@ export interface ExtractedReceiptData {
 
   /** Payment due date in ISO format (YYYY-MM-DD), for invoices/bills */
   due_date: string | null
+
+  // === Phase 2: Business Invoices ===
+
+  /** Purchase order number for business invoices */
+  purchase_order_number: string | null
+
+  /** Transaction ID, check number, or payment reference */
+  payment_reference: string | null
+
+  /** Vendor VAT/Tax ID/EIN/BTW number */
+  vendor_tax_id: string | null
+
+  /** Line items breakdown (for detailed invoices) */
+  line_items: ReceiptLineItem[]
+}
+
+/**
+ * Line item from a receipt or invoice (Phase 2: Business Invoices)
+ */
+export interface ReceiptLineItem {
+  /** Unique identifier for the line item */
+  id?: string
+
+  /** Foreign key to the receipt */
+  receipt_id?: string
+
+  /** Sequential line number (1, 2, 3...) */
+  line_number: number
+
+  /** Item description or service description */
+  description: string
+
+  /** Quantity purchased */
+  quantity: number
+
+  /** Price per unit (excluding tax) */
+  unit_price: number
+
+  /** Total for this line (quantity × unit_price) */
+  line_total: number
+
+  /** Product SKU, treatment code, CPT code, or item identifier */
+  item_code?: string | null
+
+  /** Tax rate percentage applied to this line (e.g., 21.00 for 21%) */
+  tax_rate?: number | null
+
+  /** Timestamps */
+  created_at?: string
+  updated_at?: string
 }
 
 /**
@@ -108,4 +158,10 @@ export interface Receipt {
   subtotal?: number
   vendor_address?: string
   due_date?: string
+
+  // === Phase 2: Business Invoices ===
+  purchase_order_number?: string
+  payment_reference?: string
+  vendor_tax_id?: string
+  line_items?: ReceiptLineItem[]
 }

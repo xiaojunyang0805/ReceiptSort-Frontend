@@ -1008,6 +1008,72 @@ Jimp.read(buffer).getBuffer('image/jpeg')
 
 **Deployment:** https://receiptsort.seenano.nl
 
+### Phase 2: Business Invoices Implementation (Backend Complete) ⏳ (2025-10-15)
+
+**Status:** Backend implementation complete, awaiting database migration before UI/export work
+
+**Implementation Time:** ~4 hours for backend
+
+**3 Additional Fields + Line Items Table:**
+1. `purchase_order_number` - PO number for business invoices (VARCHAR 100)
+2. `payment_reference` - Transaction ID, check number (VARCHAR 100)
+3. `vendor_tax_id` - VAT/Tax ID/EIN/BTW number (VARCHAR 50)
+4. `receipt_line_items` table - Detailed line-by-line breakdown (separate table)
+
+**Line Items Structure:**
+- `line_number` - Sequential number (1, 2, 3...)
+- `description` - Item/service description (TEXT, required)
+- `quantity` - Number of units (DECIMAL 10,2, default 1.0)
+- `unit_price` - Price per unit before tax (DECIMAL 10,2)
+- `line_total` - Total for line (quantity × unit_price) (DECIMAL 10,2)
+- `item_code` - SKU, product code, treatment code (VARCHAR 100, optional)
+- `tax_rate` - Tax percentage (DECIMAL 5,2, optional)
+
+**Files Created:**
+- `database/migrations/20251015_phase2_business_invoices.sql` - Complete migration with RLS policies
+
+**Files Modified:**
+
+1. **Types (`src/types/receipt.ts`):**
+   - Added `ReceiptLineItem` interface with 8 fields
+   - Extended `ExtractedReceiptData` with Phase 2 fields + line_items array
+   - Extended `Receipt` interface for database records
+
+2. **AI Extraction (`src/lib/openai.ts`):**
+   - Added Phase 2 extraction rules (comprehensive 60+ line guidelines)
+   - Line item extraction logic with validation
+   - Increased `max_tokens` from 800 → 1500 for line items
+   - Added `validateLineItems()` function
+   - Smart line item detection (only extract if 2+ items in table format)
+
+3. **API Routes:**
+   - `src/app/api/receipts/[id]/process/route.ts` - Updated to save Phase 2 fields + line items
+   - `src/app/api/receipts/process-bulk/route.ts` - Updated for bulk processing with line items
+   - Both routes delete old line items before inserting new ones (re-processing support)
+
+**Database Migration Features:**
+- Row Level Security (RLS) enabled on line items table
+- 4 RLS policies (SELECT, INSERT, UPDATE, DELETE - users can only access their own line items)
+- Indexes on receipt_id, line_number for query performance
+- Auto-updated timestamps with trigger
+- Comprehensive comments for documentation
+
+**Value Proposition:**
+- ✅ Full QuickBooks/Xero accounting integration compatibility
+- ✅ Detailed expense reports with line-by-line breakdown
+- ✅ Audit trail support for business invoicing
+- ✅ Purchase order tracking for B2B transactions
+- ✅ Payment reference tracking for reconciliation
+
+**Remaining Tasks (Steps 7-10):**
+1. ⏳ **Run Database Migration** - Execute in Supabase SQL Editor (REQUIRED before continuing)
+2. ⏳ **UI Component** - Update ReceiptDetailModal to display Phase 2 fields + line items table
+3. ⏳ **Export Templates** - Update CSV/Excel to include Phase 2 columns + line items
+4. ⏳ **Testing & Build** - Run build, fix TypeScript errors
+5. ⏳ **Production Deployment** - Deploy Phase 2 code
+
+**Phase 2 Implementation Progress:** 60% complete (backend done, frontend + exports pending)
+
 ---
 
 ## Issues & Resolutions

@@ -202,8 +202,45 @@ export async function POST(request: Request) {
               subtotal: extractedData.subtotal,
               vendor_address: extractedData.vendor_address,
               due_date: extractedData.due_date,
+
+              // Phase 2: Business Invoices
+              purchase_order_number: extractedData.purchase_order_number,
+              payment_reference: extractedData.payment_reference,
+              vendor_tax_id: extractedData.vendor_tax_id,
             })
             .eq('id', receiptId)
+
+          // Save line items if present (Phase 2)
+          if (extractedData.line_items && extractedData.line_items.length > 0) {
+            console.log(`[Bulk Process] Saving ${extractedData.line_items.length} line items for receipt ${receiptId}`)
+
+            // Delete existing line items (if re-processing)
+            await supabase
+              .from('receipt_line_items')
+              .delete()
+              .eq('receipt_id', receiptId)
+
+            // Insert new line items
+            const lineItemsToInsert = extractedData.line_items.map((item) => ({
+              receipt_id: receiptId,
+              line_number: item.line_number,
+              description: item.description,
+              quantity: item.quantity,
+              unit_price: item.unit_price,
+              line_total: item.line_total,
+              item_code: item.item_code,
+              tax_rate: item.tax_rate,
+            }))
+
+            const { error: insertError } = await supabase
+              .from('receipt_line_items')
+              .insert(lineItemsToInsert)
+
+            if (insertError) {
+              console.error(`[Bulk Process] Failed to insert line items for receipt ${receiptId}:`, insertError)
+              // Don't fail the entire request - line items are optional
+            }
+          }
 
           // Deduct credit
           await supabase

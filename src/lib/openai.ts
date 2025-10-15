@@ -4,6 +4,7 @@ import {
   ReceiptCategory,
   PaymentMethod,
   DocumentType,
+  ReceiptLineItem,
 } from '@/types/receipt'
 import { extractTextFromPdf, isPdfUrl } from './pdf-converter'
 import { needsImageConversion, convertImageToJpeg } from './image-converter'
@@ -41,7 +42,21 @@ You MUST return valid JSON in this exact format (no markdown, no explanations):
   "document_type": "invoice",
   "subtotal": 112.95,
   "vendor_address": "123 Main St, City, State 12345",
-  "due_date": "2025-11-09"
+  "due_date": "2025-11-09",
+  "purchase_order_number": "PO-2025-456",
+  "payment_reference": "TXN-789012",
+  "vendor_tax_id": "VAT123456789",
+  "line_items": [
+    {
+      "line_number": 1,
+      "description": "Product/Service description",
+      "quantity": 2.0,
+      "unit_price": 50.00,
+      "line_total": 100.00,
+      "item_code": "SKU-001",
+      "tax_rate": 21.00
+    }
+  ]
 }
 
 CRITICAL RULES:
@@ -151,6 +166,74 @@ CRITICAL RULES:
       - Only for invoices and bills (NOT for simple receipts)
       - Set to null if not found or if document is a simple receipt
 
+10. PHASE 2: BUSINESS INVOICES (NEW) 🆕
+
+   A. PURCHASE ORDER NUMBER:
+      - Look for: "PO #", "PO Number", "Purchase Order", "P.O.", "Order #"
+      - Extract the alphanumeric string following these keywords
+      - Examples: "PO-2025-456", "P.O. 789012", "Order #ABC123"
+      - Common for business invoices (B2B transactions)
+      - Set to null if not found
+
+   B. PAYMENT REFERENCE:
+      - Look for: "Transaction ID", "Payment Ref", "Reference", "Confirmation #", "Check #"
+      - Extract transaction identifier or payment confirmation code
+      - Examples: "TXN-789012", "Ref: 1234567890", "CHK-5678"
+      - May appear near payment method or at bottom of receipt
+      - Set to null if not found
+
+   C. VENDOR TAX ID:
+      - Look for: "VAT", "Tax ID", "EIN", "BTW", "ABN", "GST", "Tax Registration"
+      - Extract tax registration number (format varies by country)
+      - Examples: "VAT123456789", "EIN 12-3456789", "BTW NL123456789B01"
+      - Usually appears near vendor address at top of document
+      - Set to null if not found
+
+   D. LINE ITEMS (Critical for Business Invoices):
+      - Extract ONLY if document has a clear itemized list (table format)
+      - Look for columns: Description/Item, Quantity/Qty, Price/Rate, Total/Amount
+      - Each line item must include:
+        * line_number: Sequential number (1, 2, 3...)
+        * description: Item/service description (REQUIRED)
+        * quantity: Number of units (default 1.0 if not shown)
+        * unit_price: Price per unit BEFORE tax
+        * line_total: Total for this line (quantity × unit_price)
+        * item_code: SKU, product code, treatment code, CPT code (optional)
+        * tax_rate: Tax percentage if shown per line (e.g., 21.00 for 21%)
+
+      - Line item extraction rules:
+        * ONLY extract if document has 2+ itemized lines in table format
+        * Skip simple receipts with just a total (use empty array [])
+        * Description should be concise but complete
+        * If quantity not shown, use 1.0
+        * Calculate line_total = quantity × unit_price (verify against document)
+        * For medical invoices: item_code = treatment code (e.g., "F517A", "CPT-99213")
+        * For product invoices: item_code = SKU or product code
+
+      - Examples:
+
+        INVOICE WITH LINE ITEMS:
+        Description              Qty    Price     Total
+        Consulting Services      10h    $150.00   $1,500.00
+        Software License         1      $299.00   $299.00
+        → Extract 2 line items
+
+        SIMPLE RECEIPT:
+        Coffee                             $4.50
+        TOTAL                              $4.50
+        → Use empty array [] (no line items)
+
+        MEDICAL INVOICE:
+        Code    Description              Qty    Amount
+        F517A   Beugconsult              1      €52.14
+        → Extract 1 line item with item_code="F517A"
+
+   E. LINE ITEMS VALIDATION:
+      - Verify sum of line_total values ≈ subtotal or total amount
+      - If mismatch > 10%, set confidence_score lower (0.85 or less)
+      - If no itemized table found, return empty array: "line_items": []
+      - Maximum 50 line items per receipt (if more, extract first 50)
+
 IMPORTANT: You MUST return valid JSON. Do not add any explanations or markdown formatting.`
 
 /**
@@ -235,7 +318,7 @@ export async function extractReceiptData(
               ],
             },
           ],
-      max_tokens: 800, // Increased for better responses
+      max_tokens: 1500, // Increased for line items support (Phase 2)
       temperature: 0.1, // Low temperature for consistent output
       response_format: { type: 'json_object' }, // Force JSON response
     })
@@ -291,6 +374,18 @@ export async function extractReceiptData(
         ? String(extractedData.vendor_address).trim()
         : null,
       due_date: extractedData.due_date || null,
+
+      // Phase 2: Business Invoices
+      purchase_order_number: extractedData.purchase_order_number
+        ? String(extractedData.purchase_order_number).trim()
+        : null,
+      payment_reference: extractedData.payment_reference
+        ? String(extractedData.payment_reference).trim()
+        : null,
+      vendor_tax_id: extractedData.vendor_tax_id
+        ? String(extractedData.vendor_tax_id).trim()
+        : null,
+      line_items: validateLineItems(extractedData.line_items),
     }
 
     return validatedData
@@ -310,6 +405,45 @@ export async function extractReceiptData(
 
     throw new Error('Failed to extract receipt data')
   }
+}
+
+/**
+ * Validate and normalize line items (Phase 2)
+ */
+function validateLineItems(lineItems: unknown): ReceiptLineItem[] {
+  // If no line items or not an array, return empty array
+  if (!lineItems || !Array.isArray(lineItems)) {
+    return []
+  }
+
+  // Validate and normalize each line item
+  const validatedItems: ReceiptLineItem[] = []
+
+  for (const item of lineItems) {
+    // Skip if missing required fields
+    if (!item || typeof item !== 'object') continue
+    if (!('description' in item) || !item.description) continue
+    if (!('line_number' in item) || typeof item.line_number !== 'number') continue
+    if (!('unit_price' in item) || typeof item.unit_price !== 'number') continue
+    if (!('line_total' in item) || typeof item.line_total !== 'number') continue
+
+    validatedItems.push({
+      line_number: Number(item.line_number),
+      description: String(item.description).trim(),
+      quantity: 'quantity' in item && typeof item.quantity === 'number' ? Number(item.quantity) : 1.0,
+      unit_price: Number(item.unit_price),
+      line_total: Number(item.line_total),
+      item_code:
+        'item_code' in item && item.item_code ? String(item.item_code).trim() : null,
+      tax_rate:
+        'tax_rate' in item && typeof item.tax_rate === 'number'
+          ? Number(item.tax_rate)
+          : null,
+    })
+  }
+
+  // Limit to 50 items
+  return validatedItems.slice(0, 50)
 }
 
 /**
