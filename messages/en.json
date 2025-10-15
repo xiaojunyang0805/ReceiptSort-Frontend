@@ -406,7 +406,21 @@
         "cancelAnytime": "Cancel anytime",
         "subscribe": "Subscribe",
         "processing": "Processing...",
-        "disclaimer": "Subscriptions renew automatically. Manage or cancel anytime from your account settings."
+        "disclaimer": "Subscriptions renew automatically. Manage or cancel anytime from your account settings.",
+        "plans": {
+          "basic": {
+            "name": "Basic",
+            "description": "Perfect for regular users"
+          },
+          "pro": {
+            "name": "Pro",
+            "description": "Best for power users"
+          },
+          "business": {
+            "name": "Business",
+            "description": "For high-volume businesses"
+          }
+        }
       }
     },
     "exports": {

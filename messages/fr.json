@@ -396,7 +396,21 @@
         "cancelAnytime": "Annulez à tout moment",
         "subscribe": "S'abonner",
         "processing": "Traitement en cours...",
-        "disclaimer": "Les abonnements se renouvellent automatiquement. Gérez ou annulez à tout moment depuis les paramètres de votre compte."
+        "disclaimer": "Les abonnements se renouvellent automatiquement. Gérez ou annulez à tout moment depuis les paramètres de votre compte.",
+        "plans": {
+          "basic": {
+            "name": "Basic",
+            "description": "Parfait pour les utilisateurs réguliers"
+          },
+          "pro": {
+            "name": "Pro",
+            "description": "Idéal pour les utilisateurs intensifs"
+          },
+          "business": {
+            "name": "Business",
+            "description": "Pour les entreprises à fort volume"
+          }
+        }
       }
     },
     "exports": {

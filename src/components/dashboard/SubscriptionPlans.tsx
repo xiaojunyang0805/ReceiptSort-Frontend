@@ -88,8 +88,8 @@ export function SubscriptionPlans() {
               )}
 
               <CardHeader>
-                <CardTitle>{plan.name}</CardTitle>
-                <CardDescription>{plan.description}</CardDescription>
+                <CardTitle>{t(`plans.${plan.id}.name`)}</CardTitle>
+                <CardDescription>{t(`plans.${plan.id}.description`)}</CardDescription>
               </CardHeader>
 
               <CardContent className="space-y-4">

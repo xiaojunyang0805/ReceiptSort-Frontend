@@ -396,7 +396,21 @@
         "cancelAnytime": "Annuleer op elk moment",
         "subscribe": "Abonneren",
         "processing": "Verwerken...",
-        "disclaimer": "Abonnementen worden automatisch verlengd. Beheer of annuleer op elk moment vanuit uw accountinstellingen."
+        "disclaimer": "Abonnementen worden automatisch verlengd. Beheer of annuleer op elk moment vanuit uw accountinstellingen.",
+        "plans": {
+          "basic": {
+            "name": "Basic",
+            "description": "Perfect voor regelmatige gebruikers"
+          },
+          "pro": {
+            "name": "Pro",
+            "description": "Beste voor veelgebruikers"
+          },
+          "business": {
+            "name": "Business",
+            "description": "Voor hoogvolume bedrijven"
+          }
+        }
       }
     },
     "exports": {

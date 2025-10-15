@@ -396,7 +396,21 @@
         "cancelAnytime": "Cancela en cualquier momento",
         "subscribe": "Suscribirse",
         "processing": "Procesando...",
-        "disclaimer": "Las suscripciones se renuevan automáticamente. Gestiona o cancela en cualquier momento desde la configuración de tu cuenta."
+        "disclaimer": "Las suscripciones se renuevan automáticamente. Gestiona o cancela en cualquier momento desde la configuración de tu cuenta.",
+        "plans": {
+          "basic": {
+            "name": "Basic",
+            "description": "Perfecto para usuarios regulares"
+          },
+          "pro": {
+            "name": "Pro",
+            "description": "Mejor para usuarios intensivos"
+          },
+          "business": {
+            "name": "Business",
+            "description": "Para empresas de alto volumen"
+          }
+        }
       }
     },
     "exports": {

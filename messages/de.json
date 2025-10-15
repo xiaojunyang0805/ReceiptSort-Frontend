@@ -396,7 +396,21 @@
         "cancelAnytime": "Jederzeit kündbar",
         "subscribe": "Abonnieren",
         "processing": "Verarbeitung...",
-        "disclaimer": "Abonnements werden automatisch verlängert. Verwalten oder kündigen Sie jederzeit in Ihren Kontoeinstellungen."
+        "disclaimer": "Abonnements werden automatisch verlängert. Verwalten oder kündigen Sie jederzeit in Ihren Kontoeinstellungen.",
+        "plans": {
+          "basic": {
+            "name": "Basic",
+            "description": "Perfekt für regelmäßige Nutzer"
+          },
+          "pro": {
+            "name": "Pro",
+            "description": "Am besten für Vielnutzer"
+          },
+          "business": {
+            "name": "Business",
+            "description": "Für Unternehmen mit hohem Volumen"
+          }
+        }
       }
     },
     "exports": {

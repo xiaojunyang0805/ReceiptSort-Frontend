@@ -406,7 +406,21 @@
         "cancelAnytime": "随时取消",
         "subscribe": "订阅",
         "processing": "处理中...",
-        "disclaimer": "订阅会自动续订。随时从账户设置中管理或取消。"
+        "disclaimer": "订阅会自动续订。随时从账户设置中管理或取消。",
+        "plans": {
+          "basic": {
+            "name": "Basic",
+            "description": "适合普通用户"
+          },
+          "pro": {
+            "name": "Pro",
+            "description": "高级用户的最佳选择"
+          },
+          "business": {
+            "name": "Business",
+            "description": "适合大量使用的企业"
+          }
+        }
       }
     },
     "exports": {

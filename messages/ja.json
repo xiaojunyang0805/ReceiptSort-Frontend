@@ -396,7 +396,21 @@
         "cancelAnytime": "いつでもキャンセル可能",
         "subscribe": "サブスクライブ",
         "processing": "処理中...",
-        "disclaimer": "サブスクリプションは自動的に更新されます。アカウント設定からいつでも管理またはキャンセルできます。"
+        "disclaimer": "サブスクリプションは自動的に更新されます。アカウント設定からいつでも管理またはキャンセルできます。",
+        "plans": {
+          "basic": {
+            "name": "Basic",
+            "description": "通常のユーザーに最適"
+          },
+          "pro": {
+            "name": "Pro",
+            "description": "ヘビーユーザーに最適"
+          },
+          "business": {
+            "name": "Business",
+            "description": "大量処理が必要な企業向け"
+          }
+        }
       }
     },
     "exports": {
