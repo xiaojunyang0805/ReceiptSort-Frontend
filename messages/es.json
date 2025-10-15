@@ -380,6 +380,23 @@
         "previous": "Anterior",
         "next": "Siguiente",
         "page": "Página {current} de {total}"
+      },
+      "subscriptions": {
+        "title": "Suscripciones Mensuales",
+        "subtitle": "Obtén créditos automáticamente cada mes. Cancela en cualquier momento.",
+        "bestValue": "Mejor Valor",
+        "save": "Ahorra {percent}%",
+        "creditsPerMonth": "Créditos por mes",
+        "perMonth": "por mes",
+        "receiptsPerMonth": "{count} recibos por mes",
+        "aiPoweredExtraction": "Extracción con IA",
+        "automaticRenewal": "Renovación automática mensual",
+        "prioritySupport": "Soporte prioritario",
+        "bulkProcessing": "Procesamiento masivo",
+        "cancelAnytime": "Cancela en cualquier momento",
+        "subscribe": "Suscribirse",
+        "processing": "Procesando...",
+        "disclaimer": "Las suscripciones se renuevan automáticamente. Gestiona o cancela en cualquier momento desde la configuración de tu cuenta."
       }
     },
     "exports": {

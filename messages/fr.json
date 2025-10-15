@@ -380,6 +380,23 @@
         "previous": "Précédent",
         "next": "Suivant",
         "page": "Page {current} sur {total}"
+      },
+      "subscriptions": {
+        "title": "Abonnements Mensuels",
+        "subtitle": "Obtenez des crédits automatiquement chaque mois. Annulez à tout moment.",
+        "bestValue": "Meilleur Rapport Qualité-Prix",
+        "save": "Économisez {percent}%",
+        "creditsPerMonth": "Crédits par mois",
+        "perMonth": "par mois",
+        "receiptsPerMonth": "{count} reçus par mois",
+        "aiPoweredExtraction": "Extraction par IA",
+        "automaticRenewal": "Renouvellement mensuel automatique",
+        "prioritySupport": "Support prioritaire",
+        "bulkProcessing": "Traitement en masse",
+        "cancelAnytime": "Annulez à tout moment",
+        "subscribe": "S'abonner",
+        "processing": "Traitement en cours...",
+        "disclaimer": "Les abonnements se renouvellent automatiquement. Gérez ou annulez à tout moment depuis les paramètres de votre compte."
       }
     },
     "exports": {

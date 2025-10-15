@@ -6,8 +6,10 @@ import { Button } from '@/components/ui/button'
 import { Check, Sparkles, Loader2, Repeat } from 'lucide-react'
 import { SUBSCRIPTION_PLANS } from '@/lib/stripe'
 import { toast } from 'sonner'
+import { useTranslations } from 'next-intl'
 
 export function SubscriptionPlans() {
+  const t = useTranslations('dashboard.credits.subscriptions')
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null)
 
   const handleSubscribe = async (planId: string) => {
@@ -55,10 +57,10 @@ export function SubscriptionPlans() {
     <div>
       <div className="flex items-center gap-2 mb-4">
         <Repeat className="h-5 w-5 text-primary" />
-        <h2 className="text-2xl font-bold">Monthly Subscriptions</h2>
+        <h2 className="text-2xl font-bold">{t('title')}</h2>
       </div>
       <p className="text-muted-foreground mb-6">
-        Get credits automatically every month. Cancel anytime.
+        {t('subtitle')}
       </p>
 
       <div className="grid gap-6 md:grid-cols-3">
@@ -75,13 +77,13 @@ export function SubscriptionPlans() {
               {plan.popular && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full flex items-center gap-1">
                   <Sparkles className="h-3 w-3" />
-                  Best Value
+                  {t('bestValue')}
                 </div>
               )}
 
               {savings > 0 && (
                 <div className="absolute top-4 right-4 bg-green-600 text-white text-xs font-semibold px-2 py-1 rounded">
-                  Save {savings}%
+                  {t('save', { percent: savings })}
                 </div>
               )}
 
@@ -94,14 +96,14 @@ export function SubscriptionPlans() {
                 {/* Credits per month */}
                 <div>
                   <div className="text-4xl font-bold">{plan.creditsPerMonth}</div>
-                  <p className="text-sm text-muted-foreground">Credits per month</p>
+                  <p className="text-sm text-muted-foreground">{t('creditsPerMonth')}</p>
                 </div>
 
                 {/* Price */}
                 <div>
                   <div className="text-3xl font-bold">${plan.pricePerMonth}</div>
                   <p className="text-sm text-muted-foreground">
-                    per month · ${pricePerReceipt}/receipt
+                    {t('perMonth')} · ${pricePerReceipt}/receipt
                   </p>
                 </div>
 
@@ -109,31 +111,31 @@ export function SubscriptionPlans() {
                 <ul className="space-y-2 text-sm">
                   <li className="flex items-center gap-2">
                     <Check className="h-4 w-4 text-green-600 flex-shrink-0" />
-                    {plan.creditsPerMonth} receipts per month
+                    {t('receiptsPerMonth', { count: plan.creditsPerMonth })}
                   </li>
                   <li className="flex items-center gap-2">
                     <Check className="h-4 w-4 text-green-600 flex-shrink-0" />
-                    AI-powered extraction
+                    {t('aiPoweredExtraction')}
                   </li>
                   <li className="flex items-center gap-2">
                     <Check className="h-4 w-4 text-green-600 flex-shrink-0" />
-                    Automatic monthly renewal
+                    {t('automaticRenewal')}
                   </li>
                   {plan.creditsPerMonth >= 200 && (
                     <li className="flex items-center gap-2">
                       <Check className="h-4 w-4 text-green-600 flex-shrink-0" />
-                      Priority support
+                      {t('prioritySupport')}
                     </li>
                   )}
                   {plan.creditsPerMonth >= 1000 && (
                     <li className="flex items-center gap-2">
                       <Check className="h-4 w-4 text-green-600 flex-shrink-0" />
-                      Bulk processing
+                      {t('bulkProcessing')}
                     </li>
                   )}
                   <li className="flex items-center gap-2">
                     <Check className="h-4 w-4 text-green-600 flex-shrink-0" />
-                    Cancel anytime
+                    {t('cancelAnytime')}
                   </li>
                 </ul>
 
@@ -147,10 +149,10 @@ export function SubscriptionPlans() {
                   {isLoading ? (
                     <>
                       <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                      Processing...
+                      {t('processing')}
                     </>
                   ) : (
-                    'Subscribe'
+                    t('subscribe')
                   )}
                 </Button>
               </CardContent>
@@ -160,7 +162,7 @@ export function SubscriptionPlans() {
       </div>
 
       <p className="text-xs text-muted-foreground mt-4 text-center">
-        Subscriptions renew automatically. Manage or cancel anytime from your account settings.
+        {t('disclaimer')}
       </p>
     </div>
   )

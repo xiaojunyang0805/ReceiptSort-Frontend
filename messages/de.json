@@ -380,6 +380,23 @@
         "previous": "Zurück",
         "next": "Weiter",
         "page": "Seite {current} von {total}"
+      },
+      "subscriptions": {
+        "title": "Monatliche Abonnements",
+        "subtitle": "Erhalten Sie jeden Monat automatisch Credits. Jederzeit kündbar.",
+        "bestValue": "Bester Wert",
+        "save": "{percent}% Sparen",
+        "creditsPerMonth": "Credits pro Monat",
+        "perMonth": "pro Monat",
+        "receiptsPerMonth": "{count} Belege pro Monat",
+        "aiPoweredExtraction": "KI-gestützte Extraktion",
+        "automaticRenewal": "Automatische monatliche Verlängerung",
+        "prioritySupport": "Prioritäts-Support",
+        "bulkProcessing": "Massenverarbeitung",
+        "cancelAnytime": "Jederzeit kündbar",
+        "subscribe": "Abonnieren",
+        "processing": "Verarbeitung...",
+        "disclaimer": "Abonnements werden automatisch verlängert. Verwalten oder kündigen Sie jederzeit in Ihren Kontoeinstellungen."
       }
     },
     "exports": {

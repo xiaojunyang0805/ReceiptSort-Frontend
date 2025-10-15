@@ -390,6 +390,23 @@
         "previous": "Previous",
         "next": "Next",
         "page": "Page {current} of {total}"
+      },
+      "subscriptions": {
+        "title": "Monthly Subscriptions",
+        "subtitle": "Get credits automatically every month. Cancel anytime.",
+        "bestValue": "Best Value",
+        "save": "Save {percent}%",
+        "creditsPerMonth": "Credits per month",
+        "perMonth": "per month",
+        "receiptsPerMonth": "{count} receipts per month",
+        "aiPoweredExtraction": "AI-powered extraction",
+        "automaticRenewal": "Automatic monthly renewal",
+        "prioritySupport": "Priority support",
+        "bulkProcessing": "Bulk processing",
+        "cancelAnytime": "Cancel anytime",
+        "subscribe": "Subscribe",
+        "processing": "Processing...",
+        "disclaimer": "Subscriptions renew automatically. Manage or cancel anytime from your account settings."
       }
     },
     "exports": {

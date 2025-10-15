@@ -380,6 +380,23 @@
         "previous": "Vorige",
         "next": "Volgende",
         "page": "Pagina {current} van {total}"
+      },
+      "subscriptions": {
+        "title": "Maandelijkse Abonnementen",
+        "subtitle": "Krijg elke maand automatisch credits. Annuleer op elk moment.",
+        "bestValue": "Beste Waarde",
+        "save": "Bespaar {percent}%",
+        "creditsPerMonth": "Credits per maand",
+        "perMonth": "per maand",
+        "receiptsPerMonth": "{count} bonnetjes per maand",
+        "aiPoweredExtraction": "AI-gestuurde extractie",
+        "automaticRenewal": "Automatische maandelijkse verlenging",
+        "prioritySupport": "Prioriteitsondersteuning",
+        "bulkProcessing": "Bulkverwerking",
+        "cancelAnytime": "Annuleer op elk moment",
+        "subscribe": "Abonneren",
+        "processing": "Verwerken...",
+        "disclaimer": "Abonnementen worden automatisch verlengd. Beheer of annuleer op elk moment vanuit uw accountinstellingen."
       }
     },
     "exports": {

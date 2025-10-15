@@ -380,6 +380,23 @@
         "previous": "前へ",
         "next": "次へ",
         "page": "ページ{current}/{total}"
+      },
+      "subscriptions": {
+        "title": "月額サブスクリプション",
+        "subtitle": "毎月自動的にクレジットを取得。いつでもキャンセル可能。",
+        "bestValue": "最もお得",
+        "save": "{percent}%お得",
+        "creditsPerMonth": "月間クレジット",
+        "perMonth": "月額",
+        "receiptsPerMonth": "月間{count}件のレシート",
+        "aiPoweredExtraction": "AI搭載抽出",
+        "automaticRenewal": "毎月自動更新",
+        "prioritySupport": "優先サポート",
+        "bulkProcessing": "一括処理",
+        "cancelAnytime": "いつでもキャンセル可能",
+        "subscribe": "サブスクライブ",
+        "processing": "処理中...",
+        "disclaimer": "サブスクリプションは自動的に更新されます。アカウント設定からいつでも管理またはキャンセルできます。"
       }
     },
     "exports": {

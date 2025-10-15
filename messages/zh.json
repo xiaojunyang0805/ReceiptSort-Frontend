@@ -390,6 +390,23 @@
         "previous": "上一页",
         "next": "下一页",
         "page": "第{current}页，共{total}页"
+      },
+      "subscriptions": {
+        "title": "月度订阅",
+        "subtitle": "每月自动获取积分。随时取消。",
+        "bestValue": "最超值",
+        "save": "节省{percent}%",
+        "creditsPerMonth": "每月积分",
+        "perMonth": "每月",
+        "receiptsPerMonth": "每月{count}张收据",
+        "aiPoweredExtraction": "AI驱动的提取",
+        "automaticRenewal": "每月自动续订",
+        "prioritySupport": "优先支持",
+        "bulkProcessing": "批量处理",
+        "cancelAnytime": "随时取消",
+        "subscribe": "订阅",
+        "processing": "处理中...",
+        "disclaimer": "订阅会自动续订。随时从账户设置中管理或取消。"
       }
     },
     "exports": {
