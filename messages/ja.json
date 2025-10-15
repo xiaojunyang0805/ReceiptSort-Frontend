@@ -53,7 +53,7 @@
     "items": {
       "upload": {
         "title": "あらゆるデバイスからアップロード",
-        "description": "スマートフォン、メール、スキャナーからレシートをドラッグ&ドロップ。10MBまでの画像とPDFに対応。"
+        "description": "スマートフォン、メール、スキャナーからレシートをドラッグ&ドロップ。すべての一般的な画像形式（JPG、PNG、WebP、TIFF、BMP、GIF）および1ファイルあたり最大10MBのPDFに対応。"
       },
       "aiExtraction": {
         "title": "AI搭載データ抽出",
@@ -147,7 +147,7 @@
       },
       "formats": {
         "question": "どのファイル形式に対応していますか？",
-        "answer": "一般的な画像形式（JPG、PNG、WebP）と10MBまでのPDFファイルに対応しています。"
+        "answer": "すべての一般的な画像形式（JPG、PNG、JPEG、WebP、TIFF、BMP、GIF）および1ファイルあたり最大10MBのPDFファイルに対応しています。"
       },
       "cost": {
         "question": "料金はいくらですか？",

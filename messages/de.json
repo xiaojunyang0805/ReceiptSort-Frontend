@@ -53,7 +53,7 @@
     "items": {
       "upload": {
         "title": "Von Jedem Gerät Hochladen",
-        "description": "Ziehen Sie Belege per Drag & Drop von Ihrem Telefon, E-Mail oder Scanner. Unterstützt Bilder und PDFs bis 10MB."
+        "description": "Ziehen Sie Belege per Drag & Drop von Ihrem Telefon, E-Mail oder Scanner. Unterstützt alle gängigen Bildformate (JPG, PNG, WebP, TIFF, BMP, GIF) und PDFs bis 10MB pro Datei."
       },
       "aiExtraction": {
         "title": "KI-gestützte Datenextraktion",
@@ -147,7 +147,7 @@
       },
       "formats": {
         "question": "Welche Dateiformate unterstützen Sie?",
-        "answer": "Wir unterstützen alle gängigen Bildformate (JPG, PNG, WebP) und PDF-Dateien bis 10MB."
+        "answer": "Wir unterstützen alle gängigen Bildformate (JPG, PNG, JPEG, WebP, TIFF, BMP, GIF) und PDF-Dateien bis 10MB pro Datei."
       },
       "cost": {
         "question": "Wie viel kostet es?",

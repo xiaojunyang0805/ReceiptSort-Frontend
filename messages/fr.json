@@ -53,7 +53,7 @@
     "items": {
       "upload": {
         "title": "Télécharger depuis N'importe Quel Appareil",
-        "description": "Glissez et déposez des reçus depuis votre téléphone, e-mail ou scanner. Supporte les images et PDF jusqu'à 10MB."
+        "description": "Glissez et déposez des reçus depuis votre téléphone, e-mail ou scanner. Supporte tous les formats d'image courants (JPG, PNG, WebP, TIFF, BMP, GIF) et PDF jusqu'à 10MB par fichier."
       },
       "aiExtraction": {
         "title": "Extraction de Données par IA",
@@ -147,7 +147,7 @@
       },
       "formats": {
         "question": "Quels formats de fichiers prenez-vous en charge?",
-        "answer": "Nous prenons en charge tous les formats d'image courants (JPG, PNG, WebP) et les fichiers PDF jusqu'à 10 Mo."
+        "answer": "Nous prenons en charge tous les formats d'image courants (JPG, PNG, JPEG, WebP, TIFF, BMP, GIF) et les fichiers PDF jusqu'à 10MB par fichier."
       },
       "cost": {
         "question": "Combien cela coûte-t-il?",

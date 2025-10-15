@@ -53,7 +53,7 @@
     "items": {
       "upload": {
         "title": "Upload vanaf Elk Apparaat",
-        "description": "Sleep en zet bonnetjes neer van uw telefoon, e-mail of scanner. Ondersteunt afbeeldingen en PDF's tot 10MB."
+        "description": "Sleep en zet bonnetjes neer van uw telefoon, e-mail of scanner. Ondersteunt alle gangbare afbeeldingsformaten (JPG, PNG, WebP, TIFF, BMP, GIF) en PDF's tot 10MB per bestand."
       },
       "aiExtraction": {
         "title": "AI-Powered Gegevensextractie",
@@ -147,7 +147,7 @@
       },
       "formats": {
         "question": "Welke bestandsformaten ondersteunen jullie?",
-        "answer": "We ondersteunen alle gangbare afbeeldingsformaten (JPG, PNG, WebP) en PDF-bestanden tot 10MB."
+        "answer": "We ondersteunen alle gangbare afbeeldingsformaten (JPG, PNG, JPEG, WebP, TIFF, BMP, GIF) en PDF-bestanden tot 10MB per bestand."
       },
       "cost": {
         "question": "Hoeveel kost het?",

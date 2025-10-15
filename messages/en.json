@@ -53,7 +53,7 @@
     "items": {
       "upload": {
         "title": "Upload from Any Device",
-        "description": "Drag & drop receipts from your phone, email, or scanner. Supports images and PDFs up to 10MB."
+        "description": "Drag & drop receipts from your phone, email, or scanner. Supports all common image formats (JPG, PNG, WebP, TIFF, BMP, GIF) and PDFs up to 10MB per file."
       },
       "aiExtraction": {
         "title": "AI-Powered Data Extraction",
@@ -147,7 +147,7 @@
       },
       "formats": {
         "question": "What file formats do you support?",
-        "answer": "We support all common image formats (JPG, PNG, WebP) and PDF files up to 10MB."
+        "answer": "We support all common image formats (JPG, PNG, JPEG, WebP, TIFF, BMP, GIF) and PDF files up to 10MB per file."
       },
       "cost": {
         "question": "How much does it cost?",

@@ -53,7 +53,7 @@
     "items": {
       "upload": {
         "title": "Subir desde Cualquier Dispositivo",
-        "description": "Arrastra y suelta recibos desde tu teléfono, correo o escáner. Soporta imágenes y PDFs de hasta 10MB."
+        "description": "Arrastra y suelta recibos desde tu teléfono, correo o escáner. Soporta todos los formatos de imagen comunes (JPG, PNG, WebP, TIFF, BMP, GIF) y PDFs de hasta 10MB por archivo."
       },
       "aiExtraction": {
         "title": "Extracción de Datos con IA",
@@ -147,7 +147,7 @@
       },
       "formats": {
         "question": "¿Qué formatos de archivo soportan?",
-        "answer": "Soportamos todos los formatos de imagen comunes (JPG, PNG, WebP) y archivos PDF de hasta 10MB."
+        "answer": "Soportamos todos los formatos de imagen comunes (JPG, PNG, JPEG, WebP, TIFF, BMP, GIF) y archivos PDF de hasta 10MB por archivo."
       },
       "cost": {
         "question": "¿Cuánto cuesta?",

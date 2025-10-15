@@ -53,7 +53,7 @@
     "items": {
       "upload": {
         "title": "从任何设备上传",
-        "description": "从手机、电子邮件或扫描仪拖放收据。支持最大10MB的图片和PDF。"
+        "description": "从手机、电子邮件或扫描仪拖放收据。支持所有常见图片格式（JPG、PNG、WebP、TIFF、BMP、GIF）和最大每个文件10MB的PDF。"
       },
       "aiExtraction": {
         "title": "AI驱动的数据提取",
@@ -147,7 +147,7 @@
       },
       "formats": {
         "question": "支持哪些文件格式？",
-        "answer": "我们支持所有常见图片格式（JPG、PNG、WebP）和最大10MB的PDF文件。"
+        "answer": "我们支持所有常见图片格式（JPG、PNG、JPEG、WebP、TIFF、BMP、GIF）和最大每个文件10MB的PDF文件。"
       },
       "cost": {
         "question": "费用是多少？",
