@@ -263,6 +263,31 @@
       "quickActions": "Acciones Rápidas",
       "quickActionsSubtitle": "Ver recibos o procesar los pendientes",
       "viewAllReceipts": "Ver Todos los Recibos",
+      "exportSelected": "Exportar Seleccionados ({count})",
+      "noMatchingReceipts": "No hay recibos que coincidan con tus criterios de búsqueda",
+      "dropdownMenu": {
+        "viewDetails": "Ver Detalles",
+        "editData": "Editar Datos",
+        "delete": "Eliminar",
+        "process": "Procesar (1 crédito)",
+        "processing": "Procesando...",
+        "retry": "Reintentar (1 crédito)",
+        "retrying": "Reintentando..."
+      },
+      "filterPanel": {
+        "search": "Buscar",
+        "searchPlaceholder": "Nombre del comerciante, monto...",
+        "fromDate": "Fecha Desde",
+        "toDate": "Fecha Hasta",
+        "pickDate": "Elegir una fecha",
+        "minAmount": "Monto Mínimo",
+        "maxAmount": "Monto Máximo",
+        "categories": "Categorías",
+        "status": "Estado",
+        "applyFilters": "Aplicar Filtros",
+        "clear": "Limpiar",
+        "hide": "Ocultar"
+      },
       "processing": {
         "processing": "Procesando...",
         "processAllButton": "Procesar Todos los Pendientes ({count})",

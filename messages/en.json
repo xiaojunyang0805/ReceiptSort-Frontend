@@ -273,6 +273,31 @@
       "quickActions": "Quick Actions",
       "quickActionsSubtitle": "View receipts or process pending ones",
       "viewAllReceipts": "View All Receipts",
+      "exportSelected": "Export Selected ({count})",
+      "noMatchingReceipts": "No receipts match your search criteria",
+      "dropdownMenu": {
+        "viewDetails": "View Details",
+        "editData": "Edit Data",
+        "delete": "Delete",
+        "process": "Process (1 credit)",
+        "processing": "Processing...",
+        "retry": "Retry (1 credit)",
+        "retrying": "Retrying..."
+      },
+      "filterPanel": {
+        "search": "Search",
+        "searchPlaceholder": "Merchant name, amount...",
+        "fromDate": "From Date",
+        "toDate": "To Date",
+        "pickDate": "Pick a date",
+        "minAmount": "Min Amount",
+        "maxAmount": "Max Amount",
+        "categories": "Categories",
+        "status": "Status",
+        "applyFilters": "Apply Filters",
+        "clear": "Clear",
+        "hide": "Hide"
+      },
       "processing": {
         "processing": "Processing...",
         "processAllButton": "Process All Pending ({count})",

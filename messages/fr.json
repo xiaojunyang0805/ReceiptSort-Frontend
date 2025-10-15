@@ -263,6 +263,31 @@
       "quickActions": "Actions Rapides",
       "quickActionsSubtitle": "Voir les reçus ou traiter ceux en attente",
       "viewAllReceipts": "Voir Tous les Reçus",
+      "exportSelected": "Exporter la Sélection ({count})",
+      "noMatchingReceipts": "Aucun reçu ne correspond à vos critères de recherche",
+      "dropdownMenu": {
+        "viewDetails": "Voir les Détails",
+        "editData": "Modifier les Données",
+        "delete": "Supprimer",
+        "process": "Traiter (1 crédit)",
+        "processing": "Traitement en cours...",
+        "retry": "Réessayer (1 crédit)",
+        "retrying": "Nouvelle tentative..."
+      },
+      "filterPanel": {
+        "search": "Rechercher",
+        "searchPlaceholder": "Nom du marchand, montant...",
+        "fromDate": "Date de Début",
+        "toDate": "Date de Fin",
+        "pickDate": "Choisir une date",
+        "minAmount": "Montant Minimum",
+        "maxAmount": "Montant Maximum",
+        "categories": "Catégories",
+        "status": "Statut",
+        "applyFilters": "Appliquer les Filtres",
+        "clear": "Effacer",
+        "hide": "Masquer"
+      },
       "processing": {
         "processing": "Traitement en cours...",
         "processAllButton": "Traiter Tous les En Attente ({count})",

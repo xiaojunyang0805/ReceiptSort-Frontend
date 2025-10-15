@@ -273,6 +273,31 @@
       "quickActions": "快速操作",
       "quickActionsSubtitle": "查看收据或处理待处理的收据",
       "viewAllReceipts": "查看所有收据",
+      "exportSelected": "导出选中项 ({count})",
+      "noMatchingReceipts": "没有符合搜索条件的收据",
+      "dropdownMenu": {
+        "viewDetails": "查看详情",
+        "editData": "编辑数据",
+        "delete": "删除",
+        "process": "处理（1积分）",
+        "processing": "处理中...",
+        "retry": "重试（1积分）",
+        "retrying": "重试中..."
+      },
+      "filterPanel": {
+        "search": "搜索",
+        "searchPlaceholder": "商家名称、金额...",
+        "fromDate": "开始日期",
+        "toDate": "结束日期",
+        "pickDate": "选择日期",
+        "minAmount": "最小金额",
+        "maxAmount": "最大金额",
+        "categories": "类别",
+        "status": "状态",
+        "applyFilters": "应用筛选",
+        "clear": "清除",
+        "hide": "隐藏"
+      },
       "processing": {
         "processing": "处理中...",
         "processAllButton": "处理所有待处理 ({count})",

@@ -263,6 +263,31 @@
       "quickActions": "クイックアクション",
       "quickActionsSubtitle": "レシートを表示するか、保留中のレシートを処理する",
       "viewAllReceipts": "すべてのレシートを表示",
+      "exportSelected": "選択項目をエクスポート ({count})",
+      "noMatchingReceipts": "検索条件に一致するレシートがありません",
+      "dropdownMenu": {
+        "viewDetails": "詳細を表示",
+        "editData": "データを編集",
+        "delete": "削除",
+        "process": "処理 (1クレジット)",
+        "processing": "処理中...",
+        "retry": "再試行 (1クレジット)",
+        "retrying": "再試行中..."
+      },
+      "filterPanel": {
+        "search": "検索",
+        "searchPlaceholder": "店舗名、金額...",
+        "fromDate": "開始日",
+        "toDate": "終了日",
+        "pickDate": "日付を選択",
+        "minAmount": "最小金額",
+        "maxAmount": "最大金額",
+        "categories": "カテゴリ",
+        "status": "ステータス",
+        "applyFilters": "フィルターを適用",
+        "clear": "クリア",
+        "hide": "非表示"
+      },
       "processing": {
         "processing": "処理中...",
         "processAllButton": "保留中をすべて処理 ({count})",

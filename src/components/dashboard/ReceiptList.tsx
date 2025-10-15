@@ -67,6 +67,7 @@ const statusConfig = {
 
 export default function ReceiptList() {
   const t = useTranslations('dashboard.receiptsPage')
+  const tTable = useTranslations('dashboard.receiptsTable')
   const [receipts, setReceipts] = useState<Receipt[]>([])
   const [loading, setLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState('')
@@ -391,10 +392,10 @@ export default function ReceiptList() {
           className="px-3 py-2 border rounded-md bg-background"
         >
           <option value="all">{t('allStatus')}</option>
-          <option value="pending">Pending</option>
-          <option value="processing">Processing</option>
-          <option value="completed">Completed</option>
-          <option value="failed">Failed</option>
+          <option value="pending">{tTable('status.pending')}</option>
+          <option value="processing">{tTable('status.processing')}</option>
+          <option value="completed">{tTable('status.completed')}</option>
+          <option value="failed">{tTable('status.failed')}</option>
         </select>
         {selectedCount > 0 && (
           <Button
@@ -403,7 +404,7 @@ export default function ReceiptList() {
             className="ml-auto"
           >
             <Download className="mr-2 h-4 w-4" />
-            Export Selected ({selectedCount})
+            {t('exportSelected', { count: selectedCount })}
           </Button>
         )}
       </div>
@@ -420,13 +421,13 @@ export default function ReceiptList() {
                   disabled={completedReceipts.length === 0}
                 />
               </TableHead>
-              <TableHead>File Name</TableHead>
-              <TableHead>Merchant</TableHead>
-              <TableHead>Amount</TableHead>
-              <TableHead>Date</TableHead>
-              <TableHead>Category</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Uploaded</TableHead>
+              <TableHead>{tTable('columns.fileName')}</TableHead>
+              <TableHead>{tTable('columns.merchant')}</TableHead>
+              <TableHead>{tTable('columns.amount')}</TableHead>
+              <TableHead>{tTable('columns.date')}</TableHead>
+              <TableHead>{tTable('columns.category')}</TableHead>
+              <TableHead>{tTable('columns.status')}</TableHead>
+              <TableHead>{tTable('columns.uploaded')}</TableHead>
               <TableHead className="w-12"></TableHead>
             </TableRow>
           </TableHeader>
@@ -481,7 +482,7 @@ export default function ReceiptList() {
                         setModalOpen(true)
                       }}>
                         <Eye className="mr-2 h-4 w-4" />
-                        View Details
+                        {t('dropdownMenu.viewDetails')}
                       </DropdownMenuItem>
                       {receipt.processing_status === 'pending' && (
                         <DropdownMenuItem
@@ -491,12 +492,12 @@ export default function ReceiptList() {
                           {processingIds.has(receipt.id) ? (
                             <>
                               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                              Processing...
+                              {t('dropdownMenu.processing')}
                             </>
                           ) : (
                             <>
                               <Play className="mr-2 h-4 w-4" />
-                              Process (1 credit)
+                              {t('dropdownMenu.process')}
                             </>
                           )}
                         </DropdownMenuItem>
@@ -507,7 +508,7 @@ export default function ReceiptList() {
                           setModalOpen(true)
                         }}>
                           <Edit className="mr-2 h-4 w-4" />
-                          Edit Data
+                          {t('dropdownMenu.editData')}
                         </DropdownMenuItem>
                       )}
                       {receipt.processing_status === 'failed' && (
@@ -518,12 +519,12 @@ export default function ReceiptList() {
                           {processingIds.has(receipt.id) ? (
                             <>
                               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                              Retrying...
+                              {t('dropdownMenu.retrying')}
                             </>
                           ) : (
                             <>
                               <Play className="mr-2 h-4 w-4" />
-                              Retry (1 credit)
+                              {t('dropdownMenu.retry')}
                             </>
                           )}
                         </DropdownMenuItem>
@@ -533,7 +534,7 @@ export default function ReceiptList() {
                         onClick={() => handleDelete(receipt.id)}
                       >
                         <Trash2 className="mr-2 h-4 w-4" />
-                        Delete
+                        {t('dropdownMenu.delete')}
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -567,7 +568,7 @@ export default function ReceiptList() {
                         setModalOpen(true)
                       }}>
                         <Eye className="mr-2 h-4 w-4" />
-                        View Details
+                        {t('dropdownMenu.viewDetails')}
                       </DropdownMenuItem>
                       {receipt.processing_status === 'pending' && (
                         <DropdownMenuItem
@@ -577,12 +578,12 @@ export default function ReceiptList() {
                           {processingIds.has(receipt.id) ? (
                             <>
                               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                              Processing...
+                              {t('dropdownMenu.processing')}
                             </>
                           ) : (
                             <>
                               <Play className="mr-2 h-4 w-4" />
-                              Process (1 credit)
+                              {t('dropdownMenu.process')}
                             </>
                           )}
                         </DropdownMenuItem>
@@ -593,7 +594,7 @@ export default function ReceiptList() {
                           setModalOpen(true)
                         }}>
                           <Edit className="mr-2 h-4 w-4" />
-                          Edit Data
+                          {t('dropdownMenu.editData')}
                         </DropdownMenuItem>
                       )}
                       {receipt.processing_status === 'failed' && (
@@ -604,12 +605,12 @@ export default function ReceiptList() {
                           {processingIds.has(receipt.id) ? (
                             <>
                               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                              Retrying...
+                              {t('dropdownMenu.retrying')}
                             </>
                           ) : (
                             <>
                               <Play className="mr-2 h-4 w-4" />
-                              Retry (1 credit)
+                              {t('dropdownMenu.retry')}
                             </>
                           )}
                         </DropdownMenuItem>
@@ -619,7 +620,7 @@ export default function ReceiptList() {
                         onClick={() => handleDelete(receipt.id)}
                       >
                         <Trash2 className="mr-2 h-4 w-4" />
-                        Delete
+                        {t('dropdownMenu.delete')}
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -658,7 +659,7 @@ export default function ReceiptList() {
       {filteredReceipts.length === 0 && receipts.length > 0 && (
         <Card className="p-8 text-center">
           <p className="text-muted-foreground">
-            No receipts match your search criteria
+            {t('noMatchingReceipts')}
           </p>
         </Card>
       )}

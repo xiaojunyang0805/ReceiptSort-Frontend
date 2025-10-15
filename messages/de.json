@@ -263,6 +263,31 @@
       "quickActions": "Schnellaktionen",
       "quickActionsSubtitle": "Belege anzeigen oder ausstehende verarbeiten",
       "viewAllReceipts": "Alle Belege Anzeigen",
+      "exportSelected": "Auswahl Exportieren ({count})",
+      "noMatchingReceipts": "Keine Belege entsprechen Ihren Suchkriterien",
+      "dropdownMenu": {
+        "viewDetails": "Details Anzeigen",
+        "editData": "Daten Bearbeiten",
+        "delete": "Löschen",
+        "process": "Verarbeiten (1 Credit)",
+        "processing": "Verarbeitung...",
+        "retry": "Erneut Versuchen (1 Credit)",
+        "retrying": "Erneut Versuchen..."
+      },
+      "filterPanel": {
+        "search": "Suchen",
+        "searchPlaceholder": "Händlername, Betrag...",
+        "fromDate": "Von Datum",
+        "toDate": "Bis Datum",
+        "pickDate": "Datum wählen",
+        "minAmount": "Mindestbetrag",
+        "maxAmount": "Höchstbetrag",
+        "categories": "Kategorien",
+        "status": "Status",
+        "applyFilters": "Filter Anwenden",
+        "clear": "Löschen",
+        "hide": "Ausblenden"
+      },
       "processing": {
         "processing": "Verarbeitung...",
         "processAllButton": "Alle Ausstehenden Verarbeiten ({count})",

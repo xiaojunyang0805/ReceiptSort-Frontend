@@ -263,6 +263,31 @@
       "quickActions": "Snelle Acties",
       "quickActionsSubtitle": "Bonnetjes bekijken of openstaande verwerken",
       "viewAllReceipts": "Alle Bonnetjes Bekijken",
+      "exportSelected": "Selectie Exporteren ({count})",
+      "noMatchingReceipts": "Geen bonnetjes komen overeen met uw zoekcriteria",
+      "dropdownMenu": {
+        "viewDetails": "Details Bekijken",
+        "editData": "Gegevens Bewerken",
+        "delete": "Verwijderen",
+        "process": "Verwerken (1 credit)",
+        "processing": "Verwerken...",
+        "retry": "Opnieuw Proberen (1 credit)",
+        "retrying": "Opnieuw Proberen..."
+      },
+      "filterPanel": {
+        "search": "Zoeken",
+        "searchPlaceholder": "Handelaarsnaam, bedrag...",
+        "fromDate": "Vanaf Datum",
+        "toDate": "Tot Datum",
+        "pickDate": "Kies een datum",
+        "minAmount": "Min. Bedrag",
+        "maxAmount": "Max. Bedrag",
+        "categories": "Categorieën",
+        "status": "Status",
+        "applyFilters": "Filters Toepassen",
+        "clear": "Wissen",
+        "hide": "Verbergen"
+      },
       "processing": {
         "processing": "Verwerken...",
         "processAllButton": "Alle Openstaande Verwerken ({count})",

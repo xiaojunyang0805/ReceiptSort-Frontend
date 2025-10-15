@@ -102,7 +102,7 @@ export default function ReceiptFilters({
             {activeFilterCount > 0 && (
               <Button variant="ghost" size="sm" onClick={onClear}>
                 <X className="h-4 w-4 mr-1" />
-                Clear
+                {t('filterPanel.clear')}
               </Button>
             )}
             <Button
@@ -110,7 +110,7 @@ export default function ReceiptFilters({
               size="sm"
               onClick={() => setIsExpanded(!isExpanded)}
             >
-              {isExpanded ? 'Hide' : t('show')}
+              {isExpanded ? t('filterPanel.hide') : t('show')}
             </Button>
           </div>
         </div>
@@ -120,9 +120,9 @@ export default function ReceiptFilters({
           <div className="space-y-4 pt-4 border-t">
             {/* Search */}
             <div className="space-y-2">
-              <Label>Search</Label>
+              <Label>{t('filterPanel.search')}</Label>
               <Input
-                placeholder="Merchant name, amount..."
+                placeholder={t('filterPanel.searchPlaceholder')}
                 value={filters.searchQuery}
                 onChange={(e) =>
                   onFiltersChange({ ...filters, searchQuery: e.target.value })
@@ -133,7 +133,7 @@ export default function ReceiptFilters({
             {/* Date Range */}
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label>From Date</Label>
+                <Label>{t('filterPanel.fromDate')}</Label>
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button
@@ -144,7 +144,7 @@ export default function ReceiptFilters({
                       {filters.dateFrom ? (
                         format(filters.dateFrom, 'PPP')
                       ) : (
-                        <span className="text-muted-foreground">Pick a date</span>
+                        <span className="text-muted-foreground">{t('filterPanel.pickDate')}</span>
                       )}
                     </Button>
                   </PopoverTrigger>
@@ -162,7 +162,7 @@ export default function ReceiptFilters({
               </div>
 
               <div className="space-y-2">
-                <Label>To Date</Label>
+                <Label>{t('filterPanel.toDate')}</Label>
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button
@@ -173,7 +173,7 @@ export default function ReceiptFilters({
                       {filters.dateTo ? (
                         format(filters.dateTo, 'PPP')
                       ) : (
-                        <span className="text-muted-foreground">Pick a date</span>
+                        <span className="text-muted-foreground">{t('filterPanel.pickDate')}</span>
                       )}
                     </Button>
                   </PopoverTrigger>
@@ -194,7 +194,7 @@ export default function ReceiptFilters({
             {/* Amount Range */}
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label>Min Amount</Label>
+                <Label>{t('filterPanel.minAmount')}</Label>
                 <Input
                   type="number"
                   placeholder="0.00"
@@ -205,7 +205,7 @@ export default function ReceiptFilters({
                 />
               </div>
               <div className="space-y-2">
-                <Label>Max Amount</Label>
+                <Label>{t('filterPanel.maxAmount')}</Label>
                 <Input
                   type="number"
                   placeholder="1000.00"
@@ -219,7 +219,7 @@ export default function ReceiptFilters({
 
             {/* Categories */}
             <div className="space-y-2">
-              <Label>Categories</Label>
+              <Label>{t('filterPanel.categories')}</Label>
               <div className="grid grid-cols-2 gap-2">
                 {CATEGORIES.map((category) => (
                   <div key={category} className="flex items-center space-x-2">
@@ -241,7 +241,7 @@ export default function ReceiptFilters({
 
             {/* Status */}
             <div className="space-y-2">
-              <Label>Status</Label>
+              <Label>{t('filterPanel.status')}</Label>
               <div className="grid grid-cols-2 gap-2">
                 {STATUSES.map((status) => (
                   <div key={status.value} className="flex items-center space-x-2">
@@ -264,7 +264,7 @@ export default function ReceiptFilters({
             {/* Apply Button */}
             <Button onClick={onApply} className="w-full">
               <Filter className="mr-2 h-4 w-4" />
-              Apply Filters
+              {t('filterPanel.applyFilters')}
             </Button>
           </div>
         )}
