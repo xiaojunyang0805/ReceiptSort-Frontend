@@ -1066,13 +1066,109 @@ Jimp.read(buffer).getBuffer('image/jpeg')
 - ✅ Payment reference tracking for reconciliation
 
 **Remaining Tasks (Steps 7-10):**
-1. ⏳ **Run Database Migration** - Execute in Supabase SQL Editor (REQUIRED before continuing)
-2. ⏳ **UI Component** - Update ReceiptDetailModal to display Phase 2 fields + line items table
-3. ⏳ **Export Templates** - Update CSV/Excel to include Phase 2 columns + line items
-4. ⏳ **Testing & Build** - Run build, fix TypeScript errors
+1. ✅ **Run Database Migration** - Execute in Supabase SQL Editor
+2. ✅ **UI Component** - Update ReceiptDetailModal to display Phase 2 fields + line items table
+3. ✅ **Export Templates** - Update CSV/Excel to include Phase 2 columns + line items
+4. ✅ **Testing & Build** - Run build, fix TypeScript errors
 5. ⏳ **Production Deployment** - Deploy Phase 2 code
 
-**Phase 2 Implementation Progress:** 60% complete (backend done, frontend + exports pending)
+**Phase 2 Implementation Progress:** 95% complete (all code ready, deployment pending)
+
+**Phase 2 UI Implementation Complete ✅ (2025-10-15):**
+
+**Files Modified for UI:**
+
+1. **Receipt Detail Modal (`src/components/dashboard/ReceiptDetailModal.tsx`):**
+   - Added `LineItem` interface matching database structure
+   - Added state for line items: `const [lineItems, setLineItems] = useState<LineItem[]>([])`
+   - Created `fetchLineItems()` function to load line items from database
+   - Extended `formData` initialization with Phase 2 fields
+   - Updated `handleSave()` to persist Phase 2 fields
+   - **Conditional Phase 2 Fields Display:**
+     - Purchase Order Number (text input)
+     - Payment Reference (text input)
+     - Vendor Tax ID (text input)
+     - Only shown for invoices and bills (based on `document_type`)
+   - **Line Items Table:**
+     - Columns: Line #, Description, Quantity, Unit Price, Line Total
+     - Proper number formatting with `.toFixed()` for currency
+     - Responsive table with proper styling
+     - Only shown if line items exist
+
+2. **Export Templates (`src/lib/export-templates.ts`):**
+   - **STANDARD_TEMPLATE:** Added 4 new columns:
+     - `purchase_order_number` → "Purchase Order #"
+     - `payment_reference` → "Payment Reference"
+     - `vendor_tax_id` → "Vendor Tax ID"
+     - `line_items_summary` → "Line Items"
+   - **AVAILABLE_COLUMNS:** Added same 4 Phase 2 columns
+   - All Phase 2 columns available in custom templates
+
+3. **CSV Generator (`src/lib/csv-generator.ts`):**
+   - Extended `Receipt` interface with Phase 2 fields:
+     ```typescript
+     purchase_order_number?: string
+     payment_reference?: string
+     vendor_tax_id?: string
+     line_items?: Array<{
+       line_number: number
+       description: string
+       quantity: number
+       unit_price: number
+       line_total: number
+       item_code?: string | null
+     }>
+     ```
+   - No other changes needed (uses template system)
+
+4. **Excel Generator (`src/lib/excel-generator.ts`):**
+   - Extended `Receipt` interface with Phase 2 fields (same as CSV)
+   - Updated worksheet columns from 13 → 16 columns:
+     - Column 11: "PO Number" (width 16)
+     - Column 12: "Payment Ref" (width 16)
+     - Column 13: "Tax ID" (width 18)
+     - (Existing columns 14-16: Due Date, Vendor Address, Notes)
+   - Updated data row mapping to include Phase 2 values:
+     ```typescript
+     poNumber: receipt.purchase_order_number || '',
+     paymentRef: receipt.payment_reference || '',
+     taxId: receipt.vendor_tax_id || '',
+     ```
+   - Updated auto-filter range from 13 → 16 columns
+   - Updated comment: "Phase 1 + Phase 2: Include all fields"
+
+**Build & Testing:**
+- ✅ Build: SUCCESS (no TypeScript errors)
+- ✅ Type Check: SUCCESS (no errors)
+- ✅ ESLint: 4 minor warnings (useEffect dependencies, non-blocking)
+
+**Git Commits:**
+- `cb382c4` - Phase 2 backend implementation (database, types, API, AI extraction)
+- `ac5c300` - Phase 2 UI and export implementation (this commit)
+
+**Phase 2 Features Summary:**
+
+**Backend (cb382c4):**
+- Database migration with RLS policies
+- 3 new receipt fields (PO number, payment ref, tax ID)
+- Line items table with 7 fields
+- Enhanced AI extraction with 60+ line prompt
+- API routes to save Phase 2 data
+
+**Frontend (ac5c300):**
+- Conditional Phase 2 fields in detail modal
+- Line items table display with formatting
+- Phase 2 columns in CSV/Excel exports
+- Proper field validation and saving
+
+**Value Delivered:**
+- ✅ QuickBooks/Xero compatibility (line items + purchase orders)
+- ✅ Detailed expense reports (line-by-line breakdown)
+- ✅ Payment reconciliation (payment references)
+- ✅ Tax compliance (vendor tax IDs)
+- ✅ Audit trail support (full invoice details)
+
+**Production Deployment:** Ready for Vercel deployment
 
 ---
 
