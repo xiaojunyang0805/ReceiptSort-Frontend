@@ -1866,3 +1866,100 @@ ReceiptSort now offers:
 Focus was on improving immediate user experience and translation quality based on manual inspection, rather than comprehensive systematic testing. Full testing suite recommended before major marketing push.
 
 ---
+## Payment-Invoice Workflow Testing & Fixes (2025-10-18)
+
+**Date:** October 18, 2025  
+**Focus:** Testing and fixing Stripe payment-to-invoice workflow in test mode  
+**Duration:** ~6 hours  
+**Status:** ✅ COMPLETE - All issues resolved, workflow functional
+
+### Testing Objective
+
+Test the payment-invoice workflow:
+1. User makes payment using Stripe Checkout
+2. Credits automatically added via webhook
+3. Invoice created automatically
+4. Invoice sent to customer email
+
+### Issues Discovered & Resolved
+
+#### Issue #1: Invoice Amount Showing $0.00 ✅
+
+**Problem:** Invoices created but showed €0.00/$0.00, no line items
+
+**Root Cause:** Invoice items must be **explicitly linked to invoice** when created. Previous code created items BEFORE invoice, leaving them as "pending".
+
+**Solution:**
+```typescript
+// Create invoice FIRST
+const invoice = await stripe.invoices.create({ customer: customer.id })
+// Then link items explicitly
+await stripe.invoiceItems.create({
+  invoice: invoice.id,  // ← CRITICAL explicit linking
+  amount: 499
+})
+```
+
+**Git Commit:** `2a11192`
+
+#### Issue #2: Currency Mismatch Error ✅
+
+**Problem:** "You cannot combine currencies on a single invoice" - invoice defaulted to EUR, item was USD
+
+**Solution:** Add `currency` parameter to invoice creation to match session currency
+
+**Git Commit:** `d1be83a`
+
+#### Issue #3: Invoice Email Sending Error ✅
+
+**Problem:** "You can only manually send an invoice if its collection method is 'send_invoice'"
+
+**Solution:** Changed from `charge_automatically` to `send_invoice` with `days_until_due: 0`
+
+**Git Commit:** `9c5493d`
+
+### Testing Results
+
+✅ Payment processing ($4.99 USD for 10 credits)  
+✅ Credits auto-added (85 → 95 credits)  
+✅ Invoice created with correct amount  
+✅ Invoice finalized and marked as paid  
+✅ Invoice email API sent (invoice.sent event logged)  
+
+### Important Discovery: Stripe Test Mode Email Behavior
+
+**Stripe does NOT deliver emails in test mode** (by design to prevent spam). The `invoice.sent` event means API succeeded, but no actual email sent.
+
+**Solutions:**
+- Test mode: Verify via PDF URLs and API events
+- Live mode: Required for actual email delivery
+
+### Scripts Created
+
+Organized 15+ diagnostic scripts in `scripts/` folders:
+- `scripts/test-utilities/` - Invoice checking and testing
+- `scripts/debugging/` - Emergency fix scripts
+- `scripts/README.md` - Comprehensive documentation
+
+### Key Learnings
+
+1. **Invoice Item Linking:** Always create invoice first, then link items with `invoice: invoice.id`
+2. **Collection Method:** Use `send_invoice` for manual email sending
+3. **Currency Matching:** Specify currency in invoice to match items
+4. **Test vs Live:** Test mode doesn't deliver emails (expected behavior)
+5. **Webhook Async:** Use `constructEventAsync()` for Node.js runtime
+
+### Production Status
+
+**Deployment:** ✅ https://receiptsort.seenano.nl
+
+**Functionality:**
+- ✅ Payment processing
+- ✅ Credit auto-addition
+- ✅ Invoice creation with correct amounts
+- ✅ Invoice email API (works in test mode)
+- ✅ Database transaction recording
+
+**Ready for Live Mode Testing:** ✅ YES
+
+---
