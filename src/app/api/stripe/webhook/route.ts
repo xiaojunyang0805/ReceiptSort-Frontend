@@ -529,9 +529,12 @@ async function createInvoiceAfterCheckout(session: Stripe.Checkout.Session) {
     // 2. Get payment details
     const amountPaid = session.amount_total || 0
     const currency = session.currency || 'usd'
+    const paymentIntentId = session.payment_intent as string
+
+    console.log(`[Webhook] Creating invoice for ${amountPaid} ${currency}, payment_intent: ${paymentIntentId}`)
 
     // 3. Create invoice item for the purchase
-    await stripe.invoiceItems.create({
+    const invoiceItem = await stripe.invoiceItems.create({
       customer: customer.id,
       amount: amountPaid,
       currency,
@@ -544,12 +547,13 @@ async function createInvoiceAfterCheckout(session: Stripe.Checkout.Session) {
       },
     })
 
-    // 4. Create invoice
+    console.log(`[Webhook] Invoice item created: ${invoiceItem.id}`)
+
+    // 4. Create invoice with automatic collection (already paid via checkout)
     const invoice = await stripe.invoices.create({
       customer: customer.id,
-      auto_advance: true,
-      collection_method: 'send_invoice',
-      days_until_due: 0,
+      auto_advance: false, // Manual control since payment already completed
+      collection_method: 'charge_automatically',
       metadata: {
         user_id,
         package_id,
@@ -562,22 +566,37 @@ async function createInvoiceAfterCheckout(session: Stripe.Checkout.Session) {
       footer: 'Thank you for your purchase! Your credits have been added to your account.',
     })
 
-    // 5. Finalize the invoice
+    console.log(`[Webhook] Draft invoice created: ${invoice.id}`)
+
+    // 5. Finalize the invoice to make it viewable and get the final amount
     const finalizedInvoice = await stripe.invoices.finalizeInvoice(invoice.id)
 
-    // 6. Mark invoice as paid (since payment already completed via checkout)
-    await stripe.invoices.pay(finalizedInvoice.id, {
+    console.log(`[Webhook] Invoice finalized: ${finalizedInvoice.id}`)
+    console.log(`[Webhook] Invoice amount_due: ${finalizedInvoice.amount_due}`)
+    console.log(`[Webhook] Invoice subtotal: ${finalizedInvoice.subtotal}`)
+    console.log(`[Webhook] Invoice total: ${finalizedInvoice.total}`)
+
+    // 6. Mark invoice as paid (payment already completed via checkout)
+    // Use paid_out_of_band since the payment was processed through Checkout Session
+    const paidInvoice = await stripe.invoices.pay(finalizedInvoice.id, {
       paid_out_of_band: true,
     })
 
-    console.log(`[Webhook] Invoice created: ${finalizedInvoice.id}`)
-    console.log(`[Webhook] Invoice PDF: ${finalizedInvoice.invoice_pdf}`)
+    console.log(`[Webhook] Invoice marked as paid: ${paidInvoice.id}`)
+    console.log(`[Webhook] Invoice PDF: ${paidInvoice.invoice_pdf}`)
+    console.log(`[Webhook] Invoice amount_paid: ${paidInvoice.amount_paid} ${paidInvoice.currency}`)
 
-    // 7. Send invoice email
-    await sendInvoiceEmail(finalizedInvoice.id)
+    // 7. Send invoice email manually
+    try {
+      await sendInvoiceEmail(paidInvoice.id)
+      console.log(`[Webhook] Invoice email sent to ${customerEmail}`)
+    } catch (emailError) {
+      console.error(`[Webhook] Failed to send invoice email:`, emailError)
+      // Don't throw - invoice is created, email is secondary
+    }
 
     // 8. Store invoice in database
-    await storeInvoiceRecord(finalizedInvoice)
+    await storeInvoiceRecord(paidInvoice)
 
   } catch (error) {
     console.error('[Webhook] Error creating invoice after checkout:', error)
