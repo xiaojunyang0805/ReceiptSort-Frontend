@@ -342,7 +342,8 @@
         }
       },
       "noReceipts": "レシートはまだありません",
-      "noReceiptsDescription": "最初のレシートをアップロードして開始します"
+      "noReceiptsDescription": "最初のレシートをアップロードして開始します",
+      "uploadButton": "レシートをアップロード"
     },
     "receiptsTable": {
       "title": "あなたのレシート",

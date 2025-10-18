@@ -342,7 +342,8 @@
         }
       },
       "noReceipts": "Aucun reçu pour le moment",
-      "noReceiptsDescription": "Téléchargez votre premier reçu pour commencer"
+      "noReceiptsDescription": "Téléchargez votre premier reçu pour commencer",
+      "uploadButton": "Télécharger le reçu"
     },
     "receiptsTable": {
       "title": "Vos Reçus",

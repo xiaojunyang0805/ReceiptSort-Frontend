@@ -312,7 +312,7 @@ export default function ReceiptList() {
             </p>
           </div>
           <Button asChild>
-            <a href="/upload">Upload Receipt</a>
+            <a href="/upload">{t('uploadButton')}</a>
           </Button>
         </div>
       </Card>

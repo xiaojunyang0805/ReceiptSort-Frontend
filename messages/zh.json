@@ -352,7 +352,8 @@
         }
       },
       "noReceipts": "暂无收据",
-      "noReceiptsDescription": "上传您的第一张收据以开始使用"
+      "noReceiptsDescription": "上传您的第一张收据以开始使用",
+      "uploadButton": "上传收据"
     },
     "receiptsTable": {
       "title": "您的收据",

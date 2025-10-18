@@ -342,7 +342,8 @@
         }
       },
       "noReceipts": "Aún no hay recibos",
-      "noReceiptsDescription": "Sube tu primer recibo para comenzar"
+      "noReceiptsDescription": "Sube tu primer recibo para comenzar",
+      "uploadButton": "Subir recibo"
     },
     "receiptsTable": {
       "title": "Tus Recibos",

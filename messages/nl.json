@@ -342,7 +342,8 @@
         }
       },
       "noReceipts": "Nog geen bonnen",
-      "noReceiptsDescription": "Upload uw eerste bon om te beginnen"
+      "noReceiptsDescription": "Upload uw eerste bon om te beginnen",
+      "uploadButton": "Bon uploaden"
     },
     "receiptsTable": {
       "title": "Uw Bonnetjes",

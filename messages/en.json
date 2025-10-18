@@ -352,7 +352,8 @@
         }
       },
       "noReceipts": "No receipts yet",
-      "noReceiptsDescription": "Upload your first receipt to get started"
+      "noReceiptsDescription": "Upload your first receipt to get started",
+      "uploadButton": "Upload Receipt"
     },
     "receiptsTable": {
       "title": "Your Receipts",

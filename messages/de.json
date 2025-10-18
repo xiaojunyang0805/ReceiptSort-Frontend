@@ -342,7 +342,8 @@
         }
       },
       "noReceipts": "Noch keine Belege",
-      "noReceiptsDescription": "Laden Sie Ihren ersten Beleg hoch, um loszulegen"
+      "noReceiptsDescription": "Laden Sie Ihren ersten Beleg hoch, um loszulegen",
+      "uploadButton": "Beleg hochladen"
     },
     "receiptsTable": {
       "title": "Ihre Belege",
