@@ -66,13 +66,17 @@ export default async function InvoicesPage() {
 
       {/* Export Actions */}
       <div className="mb-6 flex gap-4">
-        <Button variant="outline" onClick={() => window.location.href = '/api/invoices/export?format=csv'}>
-          <Download className="w-4 h-4 mr-2" />
-          Export CSV
+        <Button variant="outline" asChild>
+          <a href="/api/invoices/export?format=csv">
+            <Download className="w-4 h-4 mr-2" />
+            Export CSV
+          </a>
         </Button>
-        <Button variant="outline" onClick={() => window.location.href = '/api/invoices/export?format=json'}>
-          <Download className="w-4 h-4 mr-2" />
-          Export JSON
+        <Button variant="outline" asChild>
+          <a href="/api/invoices/export?format=json">
+            <Download className="w-4 h-4 mr-2" />
+            Export JSON
+          </a>
         </Button>
       </div>
 
@@ -87,8 +91,10 @@ export default async function InvoicesPage() {
             <p className="text-muted-foreground mb-6">
               {t('noInvoicesDescription')}
             </p>
-            <Button onClick={() => window.location.href = '/credits'}>
-              {t('purchaseCredits')}
+            <Button asChild>
+              <a href="/credits">
+                {t('purchaseCredits')}
+              </a>
             </Button>
           </CardContent>
         </Card>
