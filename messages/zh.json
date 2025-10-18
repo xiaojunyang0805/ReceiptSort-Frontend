@@ -756,5 +756,12 @@
       "lineTotal": "总计",
       "itemCode": "代码"
     }
+  },
+  "invoices": {
+    "title": "发票",
+    "description": "查看和下载所有购买发票，用于会计和增值税申报",
+    "noInvoices": "暂无发票",
+    "noInvoicesDescription": "购买积分即可开始并获取交易发票",
+    "purchaseCredits": "购买积分"
   }
 }

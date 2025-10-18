@@ -745,5 +745,12 @@
       "lineTotal": "Totaal",
       "itemCode": "Code"
     }
+  },
+  "invoices": {
+    "title": "Facturen",
+    "description": "Bekijk en download al uw aankoopfacturen voor boekhouding en BTW-aangifte",
+    "noInvoices": "Nog geen facturen",
+    "noInvoicesDescription": "Koop credits om te beginnen en facturen voor uw transacties te ontvangen",
+    "purchaseCredits": "Credits kopen"
   }
 }

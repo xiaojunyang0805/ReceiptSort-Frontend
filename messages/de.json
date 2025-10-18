@@ -746,5 +746,12 @@
       "lineTotal": "Gesamt",
       "itemCode": "Code"
     }
+  },
+  "invoices": {
+    "title": "Rechnungen",
+    "description": "Zeigen Sie alle Kaufrechnungen für Buchhaltung und Umsatzsteuer an und laden Sie sie herunter",
+    "noInvoices": "Noch keine Rechnungen",
+    "noInvoicesDescription": "Kaufen Sie Credits, um loszulegen und Rechnungen für Ihre Transaktionen zu erhalten",
+    "purchaseCredits": "Credits kaufen"
   }
 }

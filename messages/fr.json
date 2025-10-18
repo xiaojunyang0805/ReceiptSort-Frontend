@@ -746,5 +746,12 @@
       "lineTotal": "Total",
       "itemCode": "Code"
     }
+  },
+  "invoices": {
+    "title": "Factures",
+    "description": "Consultez et téléchargez toutes vos factures d'achat pour la comptabilité et la déclaration de TVA",
+    "noInvoices": "Aucune facture pour le moment",
+    "noInvoicesDescription": "Achetez des crédits pour commencer et recevoir des factures pour vos transactions",
+    "purchaseCredits": "Acheter des crédits"
   }
 }

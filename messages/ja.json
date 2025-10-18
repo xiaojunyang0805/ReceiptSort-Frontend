@@ -746,5 +746,12 @@
       "lineTotal": "合計",
       "itemCode": "コード"
     }
+  },
+  "invoices": {
+    "title": "請求書",
+    "description": "会計とVAT申告のためにすべての購入請求書を表示およびダウンロード",
+    "noInvoices": "請求書はまだありません",
+    "noInvoicesDescription": "クレジットを購入して開始し、取引の請求書を受け取ります",
+    "purchaseCredits": "クレジットを購入"
   }
 }

@@ -692,24 +692,10 @@
   },
   "invoices": {
     "title": "Invoices",
-    "description": "View and manage your Stripe invoices for VAT filing and accounting",
-    "noInvoices": "No invoices yet",
-    "noInvoicesDescription": "Your invoices will appear here after you purchase credits",
-    "purchaseCredits": "Purchase Credits",
-    "package": "Package",
-    "credits": "Credits",
-    "paidOn": "Paid On",
-    "downloadPdf": "Download PDF",
-    "viewInvoice": "View Invoice",
-    "exportCsv": "Export CSV",
-    "exportJson": "Export JSON",
-    "status": {
-      "paid": "Paid",
-      "open": "Open",
-      "draft": "Draft",
-      "void": "Void",
-      "uncollectible": "Uncollectible"
-    }
+    "description": "View and download all your purchase invoices for accounting and VAT filing",
+    "noInvoices": "No Invoices Yet",
+    "noInvoicesDescription": "Purchase credits to get started and receive invoices for your transactions",
+    "purchaseCredits": "Purchase Credits"
   },
   "receiptDetails": {
     "title": "Receipt Details",
