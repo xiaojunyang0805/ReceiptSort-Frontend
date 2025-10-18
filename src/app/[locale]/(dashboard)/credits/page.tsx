@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { CreditCard } from 'lucide-react'
 import { CreditHistory } from '@/components/dashboard/CreditHistory'
 import { SuccessMessage } from '@/components/dashboard/SuccessMessage'
-import { PurchaseToggle } from '@/components/dashboard/PurchaseToggle'
+import { CreditPackages } from '@/components/dashboard/CreditPackages'
 import { getTranslations } from 'next-intl/server'
 
 interface CreditsPageProps {
@@ -68,8 +68,8 @@ export default async function CreditsPage({ searchParams }: CreditsPageProps) {
         </CardContent>
       </Card>
 
-      {/* Purchase Options with Toggle */}
-      <PurchaseToggle />
+      {/* Purchase Options */}
+      <CreditPackages />
 
       {/* Transaction History */}
       <CreditHistory />

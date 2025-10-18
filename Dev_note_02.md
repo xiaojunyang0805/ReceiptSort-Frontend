@@ -1938,14 +1938,16 @@ ReceiptSort now offers:
 Focus was on improving immediate user experience and translation quality based on manual inspection, rather than comprehensive systematic testing. Full testing suite recommended before major marketing push.
 
 ---
-## Payment-Invoice Workflow Testing & Fixes (2025-10-18)
+## Payment-Invoice Workflow Testing & Fixes (2025-10-18 - 2025-10-19)
 
-**Date:** October 18, 2025  
-**Focus:** Testing and fixing Stripe payment-to-invoice workflow in test mode  
-**Duration:** ~6 hours  
-**Status:** ✅ COMPLETE - All issues resolved, workflow functional
+**Date:** October 18-19, 2025
+**Focus:** Testing and fixing Stripe payment-to-invoice workflow (test mode → live mode)
+**Duration:** ~12 hours across 2 days
+**Status:** ✅ COMPLETE - All payment and invoice auto-sending fully tested and working
 
-### Testing Objective
+### Phase 1: Test Mode Testing (2025-10-18)
+
+**Testing Objective:**
 
 Test the payment-invoice workflow:
 1. User makes payment using Stripe Checkout
@@ -1953,9 +1955,9 @@ Test the payment-invoice workflow:
 3. Invoice created automatically
 4. Invoice sent to customer email
 
-### Issues Discovered & Resolved
+#### Issues Discovered & Resolved (Test Mode)
 
-#### Issue #1: Invoice Amount Showing $0.00 ✅
+**Issue #1: Invoice Amount Showing $0.00 ✅**
 
 **Problem:** Invoices created but showed €0.00/$0.00, no line items
 
@@ -1974,7 +1976,7 @@ await stripe.invoiceItems.create({
 
 **Git Commit:** `2a11192`
 
-#### Issue #2: Currency Mismatch Error ✅
+**Issue #2: Currency Mismatch Error ✅**
 
 **Problem:** "You cannot combine currencies on a single invoice" - invoice defaulted to EUR, item was USD
 
@@ -1982,7 +1984,7 @@ await stripe.invoiceItems.create({
 
 **Git Commit:** `d1be83a`
 
-#### Issue #3: Invoice Email Sending Error ✅
+**Issue #3: Invoice Email Sending Error ✅**
 
 **Problem:** "You can only manually send an invoice if its collection method is 'send_invoice'"
 
@@ -1990,15 +1992,15 @@ await stripe.invoiceItems.create({
 
 **Git Commit:** `9c5493d`
 
-### Testing Results
+**Test Mode Results:**
 
-✅ Payment processing ($4.99 USD for 10 credits)  
-✅ Credits auto-added (85 → 95 credits)  
-✅ Invoice created with correct amount  
-✅ Invoice finalized and marked as paid  
-✅ Invoice email API sent (invoice.sent event logged)  
+✅ Payment processing ($4.99 USD for 10 credits)
+✅ Credits auto-added (85 → 95 credits)
+✅ Invoice created with correct amount
+✅ Invoice finalized and marked as paid
+✅ Invoice email API sent (invoice.sent event logged)
 
-### Important Discovery: Stripe Test Mode Email Behavior
+**Important Discovery: Stripe Test Mode Email Behavior**
 
 **Stripe does NOT deliver emails in test mode** (by design to prevent spam). The `invoice.sent` event means API succeeded, but no actual email sent.
 
@@ -2006,32 +2008,295 @@ await stripe.invoiceItems.create({
 - Test mode: Verify via PDF URLs and API events
 - Live mode: Required for actual email delivery
 
+### Phase 2: Live Mode Testing (2025-10-19)
+
+**Preparation:**
+1. ✅ Updated Stripe API keys (test → live mode)
+2. ✅ Updated price IDs to live mode prices
+3. ✅ Verified Stripe Dashboard settings:
+   - ✅ Customer emails → Successful payments (enabled)
+   - ✅ Settings → Billing → Subscriptions → Send finalized invoices (enabled)
+   - ✅ Invoice footer configured with VAT/company info
+4. ✅ Fixed critical webhook signature verification bug
+
+#### Issues Discovered & Resolved (Live Mode)
+
+**Issue #4: Webhook Signature Verification Failure ✅**
+
+**Problem:**
+- All live mode webhooks failing with "No signatures found matching the expected signature"
+- Test mode webhooks were working fine
+- User could make payment, but webhook failed → no credits added, no invoice sent
+
+**Root Cause:**
+- Using test mode webhook signing secret (`whsec_test_xxx`) with live mode webhooks
+- Live and test mode use different webhook secrets
+
+**Solution:**
+- Updated `STRIPE_WEBHOOK_SECRET` environment variable to live mode secret
+- Verified webhook secret matches Stripe Dashboard live mode endpoint
+- Redeployed application
+
+**Git Commits:**
+- Webhook secret updated in Vercel environment variables
+- No code changes needed (already using environment variable)
+
+**Issue #5: Invoice PDFs Not Attached to Receipt Emails ✅**
+
+**Problem:**
+- Receipt emails sent successfully
+- Credits added correctly
+- Invoice created with correct amount and status
+- BUT: Invoice PDF not attached to receipt email
+- Only receipt displayed in email, no invoice attachment
+
+**Root Cause:**
+- Invoices created manually with `paid_out_of_band` don't trigger automatic email attachment
+- Manual invoice creation bypasses Stripe's built-in receipt+invoice workflow
+- Stripe only auto-attaches invoices created via `invoice_creation` parameter in checkout session
+
+**Solution:**
+- Added `invoice_creation` parameter to checkout session (src/lib/stripe.ts:185-198)
+- Removed manual invoice creation from webhook handler
+- Added duplicate prevention logic (created_by_checkout marker in invoice metadata)
+- Updated webhook to skip duplicate credit addition for auto-created invoices
+
+**Technical Details:**
+```typescript
+// In createCheckoutSession():
+invoice_creation: {
+  enabled: true,
+  invoice_data: {
+    description: `ReceiptSort Credits Purchase - ${credits} credits`,
+    metadata: {
+      user_id: userId,
+      package_id: packageId,
+      credits: credits.toString(),
+      product_type: 'credit_package',
+      created_by_checkout: 'true', // Marker to prevent duplicate processing
+    },
+  },
+}
+
+// In webhook invoice.payment_succeeded handler:
+const createdByCheckout = invoice.metadata?.created_by_checkout
+if (createdByCheckout === 'true') {
+  console.log('[Webhook] Invoice created by checkout - credits already added, skipping')
+  break // Prevent duplicate credit addition
+}
+```
+
+**Git Commits:**
+- `3f95592` - Implement invoice_creation for automatic invoice PDF attachment
+- `b13f79e` - Fix build: Add eslint-disable for deprecated createInvoiceRecord function
+
+**Issue #6: Build Failure - Unused Function ✅**
+
+**Problem:** Vercel build failed with ESLint error:
+```
+'createInvoiceRecord' is defined but never used. @typescript-eslint/no-unused-vars
+```
+
+**Solution:** Added `// eslint-disable-next-line @typescript-eslint/no-unused-vars` comment above deprecated function
+
+**Git Commit:** `b13f79e`
+
+### Final Live Mode Testing Results ✅
+
+**Test Purchase Details:**
+- Amount: $4.99 (Starter package - 10 credits)
+- Payment method: Real credit card
+- Receipt number: 2468-0236
+- Invoice number: RPB5YKBM-0010
+- Payment date: October 18, 2025
+
+**Verification:**
+
+✅ **Payment Processing:**
+- Payment succeeded via Stripe Checkout
+- Webhook received and signature verified
+- Credits added to account (10 credits)
+
+✅ **Invoice Creation:**
+- Invoice created automatically via `invoice_creation` parameter
+- Invoice amount: $4.99 (correct)
+- Invoice status: Paid
+- Invoice PDF generated successfully
+
+✅ **Email Delivery:**
+- Receipt email received in inbox
+- Invoice PDF attached to receipt email (RPB5YKBM-0010.pdf) 🎉
+- Receipt PDF attached as well (receipt_RPB5YKBM-0010.pdf)
+- Email subject: "Your receipt from SeeNano Technology B.V. #2468-0236"
+
+✅ **Database Records:**
+- Transaction recorded in database
+- Credits balance updated correctly
+- Invoice reference stored
+
+**Files Received:**
+1. Invoice_RPB5YKBM-0010.pdf (22KB) - Tax invoice with VAT footer
+2. receipt_RPB5YKBM-0010.pdf (22KB) - Payment receipt
+
+### Architecture Decision
+
+**Chosen Solution:** Stripe's `invoice_creation` parameter (automatic invoice creation)
+
+**Why this approach:**
+1. ✅ Stripe's recommended best practice for one-time payments with invoices
+2. ✅ Automatically attaches invoice PDF to receipt email
+3. ✅ Customer receives ONE email with BOTH receipt and invoice PDFs
+4. ✅ Simpler code (fewer webhooks to handle)
+5. ✅ More reliable than manual invoice creation + email sending
+6. ✅ Complies with VAT requirements (invoice footer included)
+
+**Alternative approaches considered:**
+- ❌ Manual invoice creation + manual email sending (unreliable, more webhooks)
+- ❌ Separate invoice emails (confusing for customers, two emails per purchase)
+
 ### Scripts Created
 
 Organized 15+ diagnostic scripts in `scripts/` folders:
-- `scripts/test-utilities/` - Invoice checking and testing
+- `scripts/test-utilities/` - Invoice checking and testing scripts
+  - `check-invoice-details.mjs`
+  - `check-invoice-email-status.mjs`
+  - `check-invoices.mjs`
+  - `check-pending-invoice-items.mjs`
+  - `check-profiles.mjs`
+  - `check-schema.mjs`
+  - `test-fresh-invoice.mjs`
+  - `test-invoice-creation.mjs`
+  - `test-invoice-direct-items.mjs`
+  - `test-invoice-retrieve-items.mjs`
+  - `test-invoice-with-param.mjs`
+  - `test-stripe.js`
 - `scripts/debugging/` - Emergency fix scripts
+  - `add-10-credits.mjs`
+  - `add-credits-manual.js`
+  - `add-transaction-record.js`
+  - `fix-current-payment.mjs`
 - `scripts/README.md` - Comprehensive documentation
+- `scripts/check-invoice-events.mjs` - Webhook event analyzer (root level)
 
 ### Key Learnings
 
 1. **Invoice Item Linking:** Always create invoice first, then link items with `invoice: invoice.id`
-2. **Collection Method:** Use `send_invoice` for manual email sending
+2. **Collection Method:** Use `send_invoice` for manual email sending (test mode only)
 3. **Currency Matching:** Specify currency in invoice to match items
-4. **Test vs Live:** Test mode doesn't deliver emails (expected behavior)
+4. **Test vs Live:**
+   - Test mode doesn't deliver emails (expected behavior)
+   - Live mode requires different webhook secrets
+   - Always test with real payment in live mode for full workflow verification
 5. **Webhook Async:** Use `constructEventAsync()` for Node.js runtime
+6. **Invoice Creation Best Practice:** Use `invoice_creation` parameter in checkout session for automatic invoice PDF attachment
+7. **Duplicate Prevention:** Add metadata markers (`created_by_checkout`) to prevent duplicate credit addition from multiple webhooks
+8. **Webhook Signature Verification:** Critical to use correct webhook secret for test vs live mode
+
+### Documentation Updated
+
+**Files Modified:**
+1. ✅ `STRIPE_DASHBOARD_SETTINGS.md` - Corrected invoice email setting path to "Settings → Billing → Subscriptions"
+2. ✅ `Stripe_implementation.md` - Updated implementation details for `invoice_creation` approach
+3. ✅ `src/lib/stripe.ts` - Added comprehensive comments explaining invoice creation logic
+4. ✅ `src/app/api/stripe/webhook/route.ts` - Added duplicate prevention logic with detailed comments
 
 ### Production Status
 
 **Deployment:** ✅ https://receiptsort.seenano.nl
 
-**Functionality:**
-- ✅ Payment processing
-- ✅ Credit auto-addition
+**Live Mode Functionality:**
+- ✅ Payment processing (real payments)
+- ✅ Credit auto-addition (webhook verified)
 - ✅ Invoice creation with correct amounts
-- ✅ Invoice email API (works in test mode)
+- ✅ Invoice PDF generation
+- ✅ Invoice email delivery with PDF attachments 🎉
 - ✅ Database transaction recording
+- ✅ Receipt email with invoice PDF attachment
+- ✅ VAT-compliant invoices with company footer
 
-**Ready for Live Mode Testing:** ✅ YES
+**All Payment & Invoice Tests:** ✅ COMPLETE
+
+**Ready for Production:** ✅ YES - All payment and invoice workflows fully tested and working in live mode
+
+---
+
+## Subscription Feature Removal Decision (2025-10-19)
+
+**Date:** October 19, 2025
+**Decision:** Remove subscription feature from UI
+**Status:** ✅ COMPLETE
+
+### Background
+
+During final production review, discovered that monthly subscription products were:
+- ✅ Visible in UI (toggle on credits page)
+- ✅ Partially implemented in backend (API endpoint, webhook handlers)
+- ❌ **NOT created in Stripe** (no products, no prices)
+- ❌ Non-functional (clicking "Subscribe" would fail)
+
+### Analysis
+
+Comprehensive analysis documented in `SUBSCRIPTION_ANALYSIS.md`:
+
+**Subscription Complexity vs One-Time Payments:**
+- 🔴 Recurring invoices every month (vs one-time)
+- 🔴 Failed payment handling (dunning management)
+- 🔴 Complex credit management across renewals
+- 🔴 Different invoice workflow (may conflict with `invoice_creation`)
+- 🔴 Extensive testing requirements (monthly cycles)
+- 🔴 5x more customer support tickets
+- 🔴 Estimated 40+ hours to implement properly
+- 🔴 HIGH RISK of breaking working payment system
+
+**Just completed 2 days of invoice PDF fixes** - didn't want to risk breaking it with subscriptions.
+
+### Decision Rationale
+
+**Focus on launch with simple, working payments:**
+1. ✅ One-time payments working perfectly
+2. ✅ Invoice PDFs attaching correctly
+3. ✅ All webhook flows tested
+4. ❌ Don't introduce 10x complexity before launch
+5. ❌ Don't risk breaking working system
+6. 📅 Can add subscriptions later when there's proven demand
+
+**When to Revisit Subscriptions:**
+- After 100+ paying customers (proven demand)
+- After 3+ months of stability
+- When you have 2+ weeks dedicated time
+- When ready for increased complexity
+
+### Implementation
+
+**Files Modified:**
+1. `src/app/[locale]/(dashboard)/credits/page.tsx`
+   - Removed `<PurchaseToggle />` component
+   - Now shows only `<CreditPackages />` directly
+   - Cleaner, simpler UI
+
+2. `src/app/api/credits/subscribe/route.ts`
+   - Marked as DEPRECATED with clear explanation
+   - Returns 501 Not Implemented
+   - Original code commented out (kept for future reference)
+
+**Files Kept (for future):**
+- `src/lib/stripe.ts` - `SUBSCRIPTION_PLANS` array (reference)
+- `src/components/dashboard/SubscriptionPlans.tsx` - Component (unused)
+- `src/components/dashboard/PurchaseToggle.tsx` - Toggle (unused)
+- Webhook handlers for subscriptions (harmless if no subscriptions exist)
+
+### Result
+
+**Production Status:**
+- ✅ Credits page shows only one-time purchase options
+- ✅ No confusing subscription toggle
+- ✅ No broken "Subscribe" buttons
+- ✅ Simple, clean user experience
+- ✅ Focus on working payment system
+- 📝 Subscription option available for future when ready
+
+**Time Saved:** ~40 hours of complex development
+**Risk Avoided:** Breaking working invoice/payment system
+**User Experience:** Improved (no confusion, no broken features)
 
 ---
