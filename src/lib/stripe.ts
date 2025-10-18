@@ -181,6 +181,20 @@ export async function createCheckoutSession(
         credits: credits.toString(),
       },
     },
+    // Automatically create invoice and attach to receipt email
+    invoice_creation: {
+      enabled: true,
+      invoice_data: {
+        description: `ReceiptSort Credits Purchase - ${credits} credits`,
+        metadata: {
+          user_id: userId,
+          package_id: packageId,
+          credits: credits.toString(),
+          product_type: 'credit_package',
+        },
+        // footer: undefined, // Use default footer from Stripe Dashboard settings
+      },
+    },
   })
 
   return session

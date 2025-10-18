@@ -206,14 +206,10 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
       console.log(`[Webhook] Transaction record created`)
     }
 
-    // 4. Create invoice for VAT record-keeping (payment already completed via checkout)
-    try {
-      await createInvoiceRecord(session)
-      console.log(`[Webhook] Invoice record created for VAT purposes`)
-    } catch (invoiceError) {
-      console.error('[Webhook] Failed to create invoice record:', invoiceError)
-      // Don't throw - credits already added, invoice is just for record-keeping
-    }
+    // 4. Invoice is automatically created by Stripe via invoice_creation parameter in checkout session
+    // The invoice will be attached to the receipt email automatically
+    // We'll store it when we receive the invoice.paid or invoice.finalized webhook event
+    console.log(`[Webhook] Invoice will be created automatically by Stripe and attached to receipt email`)
 
     console.log(`[Webhook] Checkout completed successfully for user ${user_id}`)
   } catch (error) {
