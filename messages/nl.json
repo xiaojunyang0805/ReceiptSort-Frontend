@@ -31,7 +31,9 @@
     "loading": "Laden...",
     "error": "Fout",
     "success": "Succes",
-    "confirm": "Bevestigen"
+    "confirm": "Bevestigen",
+    "billing": "Facturering",
+    "account": "Account"
   },
   "hero": {
     "headline": "Verspil geen uren meer aan het invoeren van bonnen",
@@ -746,11 +748,29 @@
       "itemCode": "Code"
     }
   },
-  "invoices": {
-    "title": "Facturen",
-    "description": "Bekijk en download al uw aankoopfacturen voor boekhouding en BTW-aangifte",
-    "noInvoices": "Nog geen facturen",
+  "billing": {
+    "title": "Facturering & Aankoopgeschiedenis",
+    "description": "Bekijk en download uw aankoopfacturen voor boekhouding en belastingaangifte",
+    "noInvoices": "Geen aankoopgeschiedenis",
     "noInvoicesDescription": "Koop credits om te beginnen en facturen voor uw transacties te ontvangen",
     "purchaseCredits": "Credits kopen"
+  },
+  "account": {
+    "title": "Accountinstellingen",
+    "description": "Beheer uw accountinformatie en voorkeuren",
+    "profileTitle": "Profielinformatie",
+    "profileDescription": "Uw persoonlijke informatie en contactgegevens",
+    "fullName": "Volledige naam",
+    "email": "E-mailadres",
+    "userId": "Gebruikers-ID",
+    "notSet": "Niet ingesteld",
+    "creditsTitle": "Creditsaldo",
+    "creditsDescription": "Uw huidige creditsaldo voor bonverwerking",
+    "currentCredits": "Huidige credits",
+    "purchaseCredits": "Meer credits kopen",
+    "billingTitle": "Facturering & Facturen",
+    "billingDescription": "Bekijk uw aankoopgeschiedenis en download facturen",
+    "viewBilling": "Bekijk factureringsgeschiedenis",
+    "accountCreated": "Account aangemaakt op"
   }
 }

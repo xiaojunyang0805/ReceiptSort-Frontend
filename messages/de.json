@@ -31,7 +31,9 @@
     "loading": "Lädt...",
     "error": "Fehler",
     "success": "Erfolg",
-    "confirm": "Bestätigen"
+    "confirm": "Bestätigen",
+    "billing": "Abrechnung",
+    "account": "Konto"
   },
   "hero": {
     "headline": "Verschwenden Sie keine Stunden mehr mit Belegerfassung",
@@ -747,11 +749,29 @@
       "itemCode": "Code"
     }
   },
-  "invoices": {
-    "title": "Rechnungen",
-    "description": "Zeigen Sie alle Kaufrechnungen für Buchhaltung und Umsatzsteuer an und laden Sie sie herunter",
-    "noInvoices": "Noch keine Rechnungen",
+  "billing": {
+    "title": "Abrechnung & Kaufhistorie",
+    "description": "Zeigen Sie Ihre Kaufrechnungen für Buchhaltung und Steuererklärung an und laden Sie sie herunter",
+    "noInvoices": "Keine Kaufhistorie",
     "noInvoicesDescription": "Kaufen Sie Credits, um loszulegen und Rechnungen für Ihre Transaktionen zu erhalten",
     "purchaseCredits": "Credits kaufen"
+  },
+  "account": {
+    "title": "Kontoeinstellungen",
+    "description": "Verwalten Sie Ihre Kontoinformationen und Einstellungen",
+    "profileTitle": "Profilinformationen",
+    "profileDescription": "Ihre persönlichen Informationen und Kontaktdaten",
+    "fullName": "Vollständiger Name",
+    "email": "E-Mail-Adresse",
+    "userId": "Benutzer-ID",
+    "notSet": "Nicht festgelegt",
+    "creditsTitle": "Credits-Guthaben",
+    "creditsDescription": "Ihr aktuelles Credits-Guthaben für die Belegverarbeitung",
+    "currentCredits": "Aktuelle Credits",
+    "purchaseCredits": "Weitere Credits kaufen",
+    "billingTitle": "Abrechnung & Rechnungen",
+    "billingDescription": "Zeigen Sie Ihre Kaufhistorie an und laden Sie Rechnungen herunter",
+    "viewBilling": "Abrechnungsverlauf anzeigen",
+    "accountCreated": "Konto erstellt am"
   }
 }

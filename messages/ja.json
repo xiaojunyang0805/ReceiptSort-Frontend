@@ -31,7 +31,9 @@
     "loading": "読み込み中...",
     "error": "エラー",
     "success": "成功",
-    "confirm": "確認"
+    "confirm": "確認",
+    "billing": "請求",
+    "account": "アカウント"
   },
   "hero": {
     "headline": "レシート入力に費やす時間をなくしましょう",
@@ -747,11 +749,29 @@
       "itemCode": "コード"
     }
   },
-  "invoices": {
-    "title": "請求書",
-    "description": "会計とVAT申告のためにすべての購入請求書を表示およびダウンロード",
-    "noInvoices": "請求書はまだありません",
+  "billing": {
+    "title": "請求と購入履歴",
+    "description": "会計と税務申告のために購入請求書を表示およびダウンロード",
+    "noInvoices": "購入履歴なし",
     "noInvoicesDescription": "クレジットを購入して開始し、取引の請求書を受け取ります",
     "purchaseCredits": "クレジットを購入"
+  },
+  "account": {
+    "title": "アカウント設定",
+    "description": "アカウント情報と設定を管理",
+    "profileTitle": "プロフィール情報",
+    "profileDescription": "個人情報と連絡先の詳細",
+    "fullName": "氏名",
+    "email": "メールアドレス",
+    "userId": "ユーザーID",
+    "notSet": "未設定",
+    "creditsTitle": "クレジット残高",
+    "creditsDescription": "レシート処理の現在のクレジット残高",
+    "currentCredits": "現在のクレジット",
+    "purchaseCredits": "さらにクレジットを購入",
+    "billingTitle": "請求と請求書",
+    "billingDescription": "購入履歴を表示し、請求書をダウンロード",
+    "viewBilling": "請求履歴を表示",
+    "accountCreated": "アカウント作成日"
   }
 }

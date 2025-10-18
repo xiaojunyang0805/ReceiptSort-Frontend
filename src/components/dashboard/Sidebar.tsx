@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { Link } from '@/lib/navigation'
 import { usePathname } from '@/lib/navigation'
 import { cn } from '@/lib/utils'
-import { Home, Upload, Receipt, Download, CreditCard, Shield, FileText } from 'lucide-react'
+import { Home, Upload, Receipt, Download, CreditCard, Shield, FileText, UserCircle } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { checkIsAdmin } from '@/lib/admin'
 
@@ -27,7 +27,8 @@ export function Sidebar({ className }: SidebarProps) {
     { name: t('receipts'), href: '/receipts', icon: Receipt },
     { name: t('exports'), href: '/exports', icon: Download },
     { name: t('credits'), href: '/credits', icon: CreditCard },
-    { name: 'Invoices', href: '/invoices', icon: FileText },
+    { name: t('billing'), href: '/billing', icon: FileText },
+    { name: t('account'), href: '/account', icon: UserCircle },
   ]
 
   // Only add Admin link if user is admin

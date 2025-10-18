@@ -31,7 +31,9 @@
     "loading": "Chargement...",
     "error": "Erreur",
     "success": "Succès",
-    "confirm": "Confirmer"
+    "confirm": "Confirmer",
+    "billing": "Facturation",
+    "account": "Compte"
   },
   "hero": {
     "headline": "Arrêtez de Perdre des Heures sur la Saisie de Reçus",
@@ -747,11 +749,29 @@
       "itemCode": "Code"
     }
   },
-  "invoices": {
-    "title": "Factures",
-    "description": "Consultez et téléchargez toutes vos factures d'achat pour la comptabilité et la déclaration de TVA",
-    "noInvoices": "Aucune facture pour le moment",
+  "billing": {
+    "title": "Facturation & Historique d'achat",
+    "description": "Consultez et téléchargez vos factures d'achat pour la comptabilité et la déclaration fiscale",
+    "noInvoices": "Aucun historique d'achat",
     "noInvoicesDescription": "Achetez des crédits pour commencer et recevoir des factures pour vos transactions",
     "purchaseCredits": "Acheter des crédits"
+  },
+  "account": {
+    "title": "Paramètres du compte",
+    "description": "Gérez vos informations de compte et vos préférences",
+    "profileTitle": "Informations de profil",
+    "profileDescription": "Vos informations personnelles et coordonnées",
+    "fullName": "Nom complet",
+    "email": "Adresse e-mail",
+    "userId": "ID utilisateur",
+    "notSet": "Non défini",
+    "creditsTitle": "Solde de crédits",
+    "creditsDescription": "Votre solde de crédits actuel pour le traitement des reçus",
+    "currentCredits": "Crédits actuels",
+    "purchaseCredits": "Acheter plus de crédits",
+    "billingTitle": "Facturation & Factures",
+    "billingDescription": "Consultez votre historique d'achat et téléchargez les factures",
+    "viewBilling": "Voir l'historique de facturation",
+    "accountCreated": "Compte créé le"
   }
 }

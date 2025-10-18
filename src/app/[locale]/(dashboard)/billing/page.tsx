@@ -1,7 +1,8 @@
 /**
- * Invoices Page
+ * Billing & Purchase History Page
  *
- * Displays all invoices from Stripe for VAT filing and record-keeping
+ * Displays purchase invoices from Stripe for accounting and record-keeping
+ * Note: This is for purchase history, not receipt/invoice processing
  */
 
 import { createClient } from '@/lib/supabase/server'
@@ -27,7 +28,7 @@ interface Invoice {
   metadata: Record<string, unknown>
 }
 
-export default async function InvoicesPage() {
+export default async function BillingPage() {
   const supabase = await createClient()
 
   // Check authentication
@@ -48,10 +49,10 @@ export default async function InvoicesPage() {
     .order('created_at', { ascending: false })
 
   if (invoicesError) {
-    console.error('[Invoices] Error fetching invoices:', invoicesError)
+    console.error('[Billing] Error fetching invoices:', invoicesError)
   }
 
-  const t = await getTranslations('invoices')
+  const t = await getTranslations('billing')
 
   return (
     <div className="container mx-auto py-8 px-4 max-w-6xl">

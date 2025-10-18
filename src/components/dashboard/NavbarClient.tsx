@@ -49,6 +49,14 @@ export function NavbarClient({ userInitials, fullName, email, credits }: NavbarC
           {/* Language Switcher */}
           <LanguageSwitcher />
 
+          {/* Logout Button - Now Visible */}
+          <form action={signOut}>
+            <Button variant="outline" size="sm" type="submit" className="gap-2">
+              <LogOut className="h-4 w-4" />
+              <span className="hidden sm:inline">{t('signOut')}</span>
+            </Button>
+          </form>
+
           <Link href="/credits" className="hidden sm:block">
             <div className="flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full hover:bg-primary/20 transition-colors cursor-pointer">
               <span className="text-sm font-medium">{t('creditsLabel')}:</span>

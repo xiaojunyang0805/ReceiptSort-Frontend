@@ -31,7 +31,9 @@
     "loading": "Loading...",
     "error": "Error",
     "success": "Success",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "billing": "Billing",
+    "account": "Account"
   },
   "hero": {
     "headline": "Stop Wasting Hours on Receipt Entry",
@@ -690,13 +692,6 @@
     "bestValue": "Best Value",
     "save": "Save {percent}%"
   },
-  "invoices": {
-    "title": "Invoices",
-    "description": "View and download all your purchase invoices for accounting and VAT filing",
-    "noInvoices": "No Invoices Yet",
-    "noInvoicesDescription": "Purchase credits to get started and receive invoices for your transactions",
-    "purchaseCredits": "Purchase Credits"
-  },
   "receiptDetails": {
     "title": "Receipt Details",
     "receiptPreview": "Receipt Preview",
@@ -763,5 +758,30 @@
       "lineTotal": "Total",
       "itemCode": "Code"
     }
+  },
+  "billing": {
+    "title": "Billing & Purchase History",
+    "description": "View and download your purchase invoices for accounting and tax filing",
+    "noInvoices": "No Purchase History",
+    "noInvoicesDescription": "Purchase credits to get started and receive invoices for your transactions",
+    "purchaseCredits": "Purchase Credits"
+  },
+  "account": {
+    "title": "Account Settings",
+    "description": "Manage your account information and preferences",
+    "profileTitle": "Profile Information",
+    "profileDescription": "Your personal information and contact details",
+    "fullName": "Full Name",
+    "email": "Email Address",
+    "userId": "User ID",
+    "notSet": "Not set",
+    "creditsTitle": "Credits Balance",
+    "creditsDescription": "Your current credit balance for receipt processing",
+    "currentCredits": "Current Credits",
+    "purchaseCredits": "Purchase More Credits",
+    "billingTitle": "Billing & Invoices",
+    "billingDescription": "View your purchase history and download invoices",
+    "viewBilling": "View Billing History",
+    "accountCreated": "Account created on"
   }
 }

@@ -31,7 +31,9 @@
     "loading": "Cargando...",
     "error": "Error",
     "success": "Éxito",
-    "confirm": "Confirmar"
+    "confirm": "Confirmar",
+    "billing": "Facturación",
+    "account": "Cuenta"
   },
   "hero": {
     "headline": "Deja de Perder Horas en la Entrada de Recibos",
@@ -747,11 +749,29 @@
       "itemCode": "Código"
     }
   },
-  "invoices": {
-    "title": "Facturas",
-    "description": "Vea y descargue todas sus facturas de compra para contabilidad y declaración de IVA",
-    "noInvoices": "Aún no hay facturas",
+  "billing": {
+    "title": "Facturación e Historial de compras",
+    "description": "Vea y descargue sus facturas de compra para contabilidad y declaración de impuestos",
+    "noInvoices": "Sin historial de compras",
     "noInvoicesDescription": "Compre créditos para comenzar y recibir facturas de sus transacciones",
     "purchaseCredits": "Comprar créditos"
+  },
+  "account": {
+    "title": "Configuración de cuenta",
+    "description": "Administre su información de cuenta y preferencias",
+    "profileTitle": "Información de perfil",
+    "profileDescription": "Su información personal y datos de contacto",
+    "fullName": "Nombre completo",
+    "email": "Dirección de correo electrónico",
+    "userId": "ID de usuario",
+    "notSet": "No establecido",
+    "creditsTitle": "Saldo de créditos",
+    "creditsDescription": "Su saldo de créditos actual para el procesamiento de recibos",
+    "currentCredits": "Créditos actuales",
+    "purchaseCredits": "Comprar más créditos",
+    "billingTitle": "Facturación y Facturas",
+    "billingDescription": "Vea su historial de compras y descargue facturas",
+    "viewBilling": "Ver historial de facturación",
+    "accountCreated": "Cuenta creada el"
   }
 }

@@ -31,7 +31,9 @@
     "loading": "加载中...",
     "error": "错误",
     "success": "成功",
-    "confirm": "确认"
+    "confirm": "确认",
+    "billing": "账单",
+    "account": "账户"
   },
   "hero": {
     "headline": "不再浪费时间手工录入收据",
@@ -757,11 +759,29 @@
       "itemCode": "代码"
     }
   },
-  "invoices": {
-    "title": "发票",
-    "description": "查看和下载所有购买发票，用于会计和增值税申报",
-    "noInvoices": "暂无发票",
+  "billing": {
+    "title": "账单与购买记录",
+    "description": "查看和下载您的购买发票，用于会计和报税",
+    "noInvoices": "暂无购买记录",
     "noInvoicesDescription": "购买积分即可开始并获取交易发票",
     "purchaseCredits": "购买积分"
+  },
+  "account": {
+    "title": "账户设置",
+    "description": "管理您的账户信息和偏好设置",
+    "profileTitle": "个人资料",
+    "profileDescription": "您的个人信息和联系方式",
+    "fullName": "姓名",
+    "email": "电子邮箱",
+    "userId": "用户ID",
+    "notSet": "未设置",
+    "creditsTitle": "积分余额",
+    "creditsDescription": "您当前的收据处理积分余额",
+    "currentCredits": "当前积分",
+    "purchaseCredits": "购买更多积分",
+    "billingTitle": "账单与发票",
+    "billingDescription": "查看您的购买历史并下载发票",
+    "viewBilling": "查看账单历史",
+    "accountCreated": "账户创建于"
   }
 }
