@@ -1,6 +1,6 @@
 'use client'
 
-import { LogOut, User, Home } from 'lucide-react'
+import { LogOut, Home } from 'lucide-react'
 import { signOut } from '@/app/actions/auth'
 import {
   DropdownMenu,
@@ -100,21 +100,6 @@ export function NavbarClient({ userInitials, fullName, email, credits }: NavbarC
                 <span className="text-sm">
                   {t('creditsLabel')}: {credits}
                 </span>
-              </DropdownMenuItem>
-              <DropdownMenuSeparator className="sm:hidden" />
-              <DropdownMenuItem asChild>
-                <Link href="/dashboard/profile" className="cursor-pointer">
-                  <User className="mr-2 h-4 w-4" />
-                  <span>{t('title')}</span>
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <form action={signOut} className="w-full">
-                  <button type="submit" className="flex w-full items-center cursor-pointer">
-                    <LogOut className="mr-2 h-4 w-4" />
-                    <span>{t('signOut')}</span>
-                  </button>
-                </form>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
