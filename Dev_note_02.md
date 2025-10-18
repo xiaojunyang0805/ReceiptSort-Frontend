@@ -24,6 +24,45 @@ Product development is nearly complete. This document tracks remaining tasks and
 
 ## Notes
 
+### 2025-10-18
+
+#### UX Improvements: Navigation Redesign
+**Problem:** User confusion between "Invoices" (Stripe purchase history) and core app purpose (receipt/invoice processing)
+
+**Changes Made:**
+1. **Renamed "Invoices" → "Billing"**
+   - Clearer purpose: purchase history and account billing
+   - Avoids confusion with receipt processing feature
+   - Route changed: `/invoices` → `/billing`
+
+2. **Created "Account" Page**
+   - Centralized account management
+   - Consolidates profile info, credits balance, billing access
+   - Replaced hidden dropdown menu with clear navigation item
+   - Route: `/account`
+
+3. **Moved Logout to Header**
+   - Now visible next to language switcher
+   - No longer hidden in dropdown menu
+   - Simpler, more direct UX
+
+4. **Updated All Translations**
+   - Added `billing` and `account` keys to 7 languages
+   - Renamed `invoices` namespace to `billing`
+   - Added complete `account` namespace
+   - Languages: en, zh, nl, de, fr, es, ja
+
+**Result:** Much clearer separation between app features (receipt processing) and account management (purchase history).
+
+#### Payment-Invoice Workflow Fixed & Tested
+
+**Fixed Issues:** (See previous notes below)
+**Backend Test:** ✅ All 10 workflow steps passing
+**Frontend Test:** ✅ Invoices page hydration error fixed
+**Status:** Ready for live mode testing
+
+---
+
 ### 2025-10-13
 
 #### Repository Visibility Strategy
