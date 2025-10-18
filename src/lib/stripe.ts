@@ -8,7 +8,9 @@ import Stripe from 'stripe'
 
 // Initialize Stripe with secret key
 // Use placeholder key during build if not set
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_placeholder', {
+// Trim any whitespace/newlines that might be in the environment variable
+const stripeSecretKey = (process.env.STRIPE_SECRET_KEY || 'sk_test_placeholder').trim().replace(/[\r\n]/g, '')
+const stripe = new Stripe(stripeSecretKey, {
   apiVersion: '2025-09-30.clover',
   typescript: true,
 })
@@ -43,13 +45,18 @@ export interface SubscriptionPlan {
  * Credit Packages
  * Update priceId values with your actual Stripe Price IDs from dashboard
  */
+// Helper to clean environment variable values
+const cleanEnvVar = (value: string | undefined, fallback: string): string => {
+  return (value || fallback).trim().replace(/[\r\n]/g, '')
+}
+
 export const CREDIT_PACKAGES: CreditPackage[] = [
   {
     id: 'starter',
     name: 'Starter',
     credits: 10,
     price: 4.99,
-    priceId: process.env.STRIPE_PRICE_STARTER || 'price_starter',
+    priceId: cleanEnvVar(process.env.STRIPE_PRICE_STARTER, 'price_starter'),
     description: 'Perfect for trying out the service',
   },
   {
@@ -57,7 +64,7 @@ export const CREDIT_PACKAGES: CreditPackage[] = [
     name: 'Basic',
     credits: 25,
     price: 9.99,
-    priceId: process.env.STRIPE_PRICE_BASIC || 'price_basic',
+    priceId: cleanEnvVar(process.env.STRIPE_PRICE_BASIC, 'price_basic'),
     description: 'Great for regular users',
     popular: true,
   },
@@ -66,7 +73,7 @@ export const CREDIT_PACKAGES: CreditPackage[] = [
     name: 'Pro',
     credits: 100,
     price: 29.99,
-    priceId: process.env.STRIPE_PRICE_PRO || 'price_pro',
+    priceId: cleanEnvVar(process.env.STRIPE_PRICE_PRO, 'price_pro'),
     description: 'Best value for power users',
   },
   {
@@ -74,7 +81,7 @@ export const CREDIT_PACKAGES: CreditPackage[] = [
     name: 'Business',
     credits: 500,
     price: 99.99,
-    priceId: process.env.STRIPE_PRICE_BUSINESS || 'price_business',
+    priceId: cleanEnvVar(process.env.STRIPE_PRICE_BUSINESS, 'price_business'),
     description: 'For high-volume businesses',
   },
 ]
