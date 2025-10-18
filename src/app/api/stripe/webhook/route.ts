@@ -533,23 +533,7 @@ async function createInvoiceAfterCheckout(session: Stripe.Checkout.Session) {
 
     console.log(`[Webhook] Creating invoice for ${amountPaid} ${currency}, payment_intent: ${paymentIntentId}`)
 
-    // 3. Create invoice item for the purchase
-    const invoiceItem = await stripe.invoiceItems.create({
-      customer: customer.id,
-      amount: amountPaid,
-      currency,
-      description: `ReceiptSort Credits - ${package_id} Package (${credits} credits)`,
-      metadata: {
-        user_id,
-        package_id,
-        credits,
-        checkout_session_id: session.id,
-      },
-    })
-
-    console.log(`[Webhook] Invoice item created: ${invoiceItem.id}`)
-
-    // 4. Create invoice with automatic collection (already paid via checkout)
+    // 3. Create draft invoice FIRST
     const invoice = await stripe.invoices.create({
       customer: customer.id,
       auto_advance: false, // Manual control since payment already completed
@@ -567,6 +551,23 @@ async function createInvoiceAfterCheckout(session: Stripe.Checkout.Session) {
     })
 
     console.log(`[Webhook] Draft invoice created: ${invoice.id}`)
+
+    // 4. Create invoice item LINKED to the invoice (this is critical!)
+    const invoiceItem = await stripe.invoiceItems.create({
+      customer: customer.id,
+      invoice: invoice.id, // Explicitly link to invoice
+      amount: amountPaid,
+      currency,
+      description: `ReceiptSort Credits - ${package_id} Package (${credits} credits)`,
+      metadata: {
+        user_id,
+        package_id,
+        credits,
+        checkout_session_id: session.id,
+      },
+    })
+
+    console.log(`[Webhook] Invoice item created and linked: ${invoiceItem.id}`)
 
     // 5. Finalize the invoice to make it viewable and get the final amount
     const finalizedInvoice = await stripe.invoices.finalizeInvoice(invoice.id)
