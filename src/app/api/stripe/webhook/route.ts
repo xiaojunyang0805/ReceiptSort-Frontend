@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
-import { constructWebhookEvent, createOrGetCustomer, sendInvoiceEmail, getStripeClient } from '@/lib/stripe'
+import { constructWebhookEvent, createOrGetCustomer, getStripeClient } from '@/lib/stripe'
 import Stripe from 'stripe'
 
 // Use service role key for admin operations
@@ -206,12 +206,12 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
       console.log(`[Webhook] Transaction record created`)
     }
 
-    // 4. Create and send invoice for the purchase
+    // 4. Create invoice for VAT record-keeping (payment already completed via checkout)
     try {
-      await createInvoiceAfterCheckout(session)
-      console.log(`[Webhook] Invoice created and sent for checkout ${session.id}`)
+      await createInvoiceRecord(session)
+      console.log(`[Webhook] Invoice record created for VAT purposes`)
     } catch (invoiceError) {
-      console.error('[Webhook] Failed to create invoice:', invoiceError)
+      console.error('[Webhook] Failed to create invoice record:', invoiceError)
       // Don't throw - credits already added, invoice is just for record-keeping
     }
 
@@ -460,7 +460,7 @@ async function storeInvoiceRecord(invoice: Stripe.Invoice) {
         paid_at: invoice.status_transitions?.paid_at
           ? new Date(invoice.status_transitions.paid_at * 1000).toISOString()
           : null,
-        metadata: invoice.metadata,
+        metadata: invoice.metadata as Record<string, unknown>,
       }, {
         onConflict: 'stripe_invoice_id'
       })
@@ -501,10 +501,11 @@ async function updateInvoiceStatus(invoiceId: string, status: string) {
 }
 
 /**
- * Create invoice after successful checkout completion
- * This ensures customers receive an invoice even when using checkout flow
+ * Create invoice record after successful checkout
+ * This creates a paid invoice for VAT record-keeping purposes
+ * The payment was already collected via the checkout session
  */
-async function createInvoiceAfterCheckout(session: Stripe.Checkout.Session) {
+async function createInvoiceRecord(session: Stripe.Checkout.Session) {
   try {
     const stripe = getStripeClient()
     const { user_id, package_id, credits } = session.metadata || {}
@@ -533,14 +534,13 @@ async function createInvoiceAfterCheckout(session: Stripe.Checkout.Session) {
 
     console.log(`[Webhook] Creating invoice for ${amountPaid} ${currency}, payment_intent: ${paymentIntentId}`)
 
-    // 3. Create draft invoice FIRST with matching currency
-    // Use 'send_invoice' collection method to allow manual email sending
+    // 3. Create draft invoice with charge_automatically to prevent payment button
+    // Stripe will automatically send email on finalize if email settings are enabled
     const invoice = await stripe.invoices.create({
       customer: customer.id,
       currency, // Must match the currency of invoice items
-      auto_advance: false, // Manual control since payment already completed
-      collection_method: 'send_invoice',
-      days_until_due: 0, // Required for send_invoice collection method
+      auto_advance: false, // Manual control
+      collection_method: 'charge_automatically', // Prevents showing payment page
       metadata: {
         user_id,
         package_id,
@@ -550,7 +550,7 @@ async function createInvoiceAfterCheckout(session: Stripe.Checkout.Session) {
         payment_status: 'paid',
       },
       description: `ReceiptSort Credits Purchase - ${credits} credits`,
-      footer: 'Thank you for your purchase! Your credits have been added to your account.',
+      // Don't set footer here - use default footer from Stripe settings which includes VAT
     })
 
     console.log(`[Webhook] Draft invoice created: ${invoice.id}`)
@@ -577,30 +577,30 @@ async function createInvoiceAfterCheckout(session: Stripe.Checkout.Session) {
 
     console.log(`[Webhook] Invoice finalized: ${finalizedInvoice.id}`)
     console.log(`[Webhook] Invoice amount_due: ${finalizedInvoice.amount_due}`)
-    console.log(`[Webhook] Invoice subtotal: ${finalizedInvoice.subtotal}`)
-    console.log(`[Webhook] Invoice total: ${finalizedInvoice.total}`)
 
-    // 6. Mark invoice as paid (payment already completed via checkout)
-    // Use paid_out_of_band since the payment was processed through Checkout Session
+    // 6. Mark invoice as paid and link the checkout payment
+    // We use paid_out_of_band because payment was already collected via checkout
+    // IMPORTANT: We also pass forgive=true to mark as paid without charging again
     const paidInvoice = await stripe.invoices.pay(finalizedInvoice.id, {
       paid_out_of_band: true,
+      forgive: true, // Forgive the amount owed so no charge is attempted
     })
 
     console.log(`[Webhook] Invoice marked as paid: ${paidInvoice.id}`)
     console.log(`[Webhook] Invoice PDF: ${paidInvoice.invoice_pdf}`)
-    console.log(`[Webhook] Invoice amount_paid: ${paidInvoice.amount_paid} ${paidInvoice.currency}`)
+    console.log(`[Webhook] Invoice status: ${paidInvoice.status}`)
 
-    // 7. Send invoice email manually
-    try {
-      await sendInvoiceEmail(paidInvoice.id)
-      console.log(`[Webhook] Invoice email sent to ${customerEmail}`)
-    } catch (emailError) {
-      console.error(`[Webhook] Failed to send invoice email:`, emailError)
-      // Don't throw - invoice is created, email is secondary
-    }
-
-    // 8. Store invoice in database
+    // 7. Store invoice in database
     await storeInvoiceRecord(paidInvoice)
+
+    console.log(`[Webhook] Invoice record created successfully`)
+    console.log(`[Webhook] - Invoice ID: ${paidInvoice.id}`)
+    console.log(`[Webhook] - Invoice Number: ${paidInvoice.number}`)
+    console.log(`[Webhook] - Status: ${paidInvoice.status}`)
+    console.log(`[Webhook] - PDF URL: ${paidInvoice.invoice_pdf}`)
+    console.log(`[Webhook] - Amount: ${paidInvoice.amount_paid / 100} ${paidInvoice.currency.toUpperCase()}`)
+    console.log(`[Webhook] - Customer: ${customerEmail}`)
+    console.log(`[Webhook] Note: Invoice email will be sent if "Successful payments" is enabled in Stripe Dashboard`)
 
   } catch (error) {
     console.error('[Webhook] Error creating invoice after checkout:', error)

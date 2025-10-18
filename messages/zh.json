@@ -387,6 +387,16 @@
       "history": "积分历史",
       "oneTimePurchase": "一次性购买",
       "monthlySubscription": "月度订阅",
+      "paymentSuccess": {
+        "title": "支付成功！",
+        "description": "积分已添加到您的账户。您的新余额为 {credits} 积分。",
+        "processing": "正在处理支付...",
+        "processingDescription": "请稍候，我们正在确认您的购买。"
+      },
+      "paymentCanceled": {
+        "title": "支付已取消",
+        "description": "您的支付已取消。您的账户未被收取任何费用。"
+      },
       "packages": {
         "title": "选择套餐",
         "credits": "积分",

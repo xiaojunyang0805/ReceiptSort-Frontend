@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { CheckCircle2, XCircle, Loader2 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 interface SuccessMessageProps {
   success: boolean
@@ -12,6 +13,7 @@ interface SuccessMessageProps {
 }
 
 export function SuccessMessage({ success, canceled, sessionId, currentCredits }: SuccessMessageProps) {
+  const t = useTranslations('dashboard.credits')
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -43,9 +45,9 @@ export function SuccessMessage({ success, canceled, sessionId, currentCredits }:
     return (
       <Alert>
         <Loader2 className="h-4 w-4 animate-spin" />
-        <AlertTitle>Processing payment...</AlertTitle>
+        <AlertTitle>{t('paymentSuccess.processing')}</AlertTitle>
         <AlertDescription>
-          Please wait while we confirm your purchase.
+          {t('paymentSuccess.processingDescription')}
         </AlertDescription>
       </Alert>
     )
@@ -55,9 +57,9 @@ export function SuccessMessage({ success, canceled, sessionId, currentCredits }:
     return (
       <Alert className="border-green-600 bg-green-50 text-green-900">
         <CheckCircle2 className="h-4 w-4 text-green-600" />
-        <AlertTitle>Payment Successful! 🎉</AlertTitle>
+        <AlertTitle>{t('paymentSuccess.title')} 🎉</AlertTitle>
         <AlertDescription>
-          Credits have been added to your account. Your new balance is {currentCredits} credits.
+          {t('paymentSuccess.description', { credits: currentCredits })}
         </AlertDescription>
       </Alert>
     )
@@ -67,9 +69,9 @@ export function SuccessMessage({ success, canceled, sessionId, currentCredits }:
     return (
       <Alert className="border-yellow-600 bg-yellow-50 text-yellow-900">
         <XCircle className="h-4 w-4 text-yellow-600" />
-        <AlertTitle>Payment Canceled</AlertTitle>
+        <AlertTitle>{t('paymentCanceled.title')}</AlertTitle>
         <AlertDescription>
-          Your payment was canceled. No charges were made to your account.
+          {t('paymentCanceled.description')}
         </AlertDescription>
       </Alert>
     )

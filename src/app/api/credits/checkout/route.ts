@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
 
     // 2. Parse request body
     const body: CheckoutRequest = await request.json()
-    const { package_id, use_invoice = false } = body // Default to checkout mode instead of invoice
+    const { package_id, use_invoice = false } = body // Default to checkout mode (invoice mode has issues)
 
     if (!package_id) {
       return NextResponse.json(

@@ -387,6 +387,16 @@
       "history": "Credit History",
       "oneTimePurchase": "One-Time Purchase",
       "monthlySubscription": "Monthly Subscription",
+      "paymentSuccess": {
+        "title": "Payment Successful!",
+        "description": "Credits have been added to your account. Your new balance is {credits} credits.",
+        "processing": "Processing payment...",
+        "processingDescription": "Please wait while we confirm your purchase."
+      },
+      "paymentCanceled": {
+        "title": "Payment Canceled",
+        "description": "Your payment was canceled. No charges were made to your account."
+      },
       "packages": {
         "title": "Choose a package",
         "credits": "credits",
