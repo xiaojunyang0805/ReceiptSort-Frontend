@@ -142,10 +142,10 @@ export async function createCheckoutSession(
   packageId: string,
   credits: number
 ): Promise<Stripe.Checkout.Session> {
-  // Hardcode the URL for now to bypass environment variable issues
-  const baseUrl = 'https://receiptsort.vercel.app'
+  // Use environment variable or fallback to production URL
+  const baseUrl = process.env.NEXT_PUBLIC_URL || process.env.NEXT_PUBLIC_APP_URL || 'https://receiptsort.vercel.app'
 
-  console.log('[Stripe] Using hardcoded baseUrl:', baseUrl)
+  console.log('[Stripe] Using baseUrl:', baseUrl)
 
   const session = await stripe.checkout.sessions.create({
     mode: 'payment',
@@ -192,7 +192,7 @@ export async function createSubscriptionCheckoutSession(
   planId: string,
   creditsPerMonth: number
 ): Promise<Stripe.Checkout.Session> {
-  const baseUrl = 'https://receiptsort.vercel.app'
+  const baseUrl = process.env.NEXT_PUBLIC_URL || process.env.NEXT_PUBLIC_APP_URL || 'https://receiptsort.vercel.app'
 
   const session = await stripe.checkout.sessions.create({
     mode: 'subscription',
@@ -231,7 +231,7 @@ export async function createSubscriptionCheckoutSession(
 export async function createPortalSession(
   customerId: string
 ): Promise<Stripe.BillingPortal.Session> {
-  const baseUrl = 'https://receiptsort.vercel.app'
+  const baseUrl = process.env.NEXT_PUBLIC_URL || process.env.NEXT_PUBLIC_APP_URL || 'https://receiptsort.vercel.app'
 
   const session = await stripe.billingPortal.sessions.create({
     customer: customerId,

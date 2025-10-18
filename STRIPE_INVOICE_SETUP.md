@@ -360,4 +360,4 @@ You now have a complete invoice-based payment system that:
 ✅ Exports invoices for VAT filing
 ✅ Maintains full audit trail
 
-The system is ready for production use once you complete the Stripe Dashboard configuration steps above.
+The system is ready for production use once you complete the Stripe Dashboard configuration steps above. 
