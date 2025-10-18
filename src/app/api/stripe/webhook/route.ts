@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
-import { constructWebhookEvent } from '@/lib/stripe'
+import { constructWebhookEvent, createOrGetCustomer, sendInvoiceEmail, getStripeClient } from '@/lib/stripe'
 import Stripe from 'stripe'
 
 // Use service role key for admin operations
@@ -206,8 +206,14 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
       console.log(`[Webhook] Transaction record created`)
     }
 
-    // 4. TODO: Send confirmation email (optional)
-    // await sendCreditPurchaseEmail(user_id, creditsToAdd, package_id)
+    // 4. Create and send invoice for the purchase
+    try {
+      await createInvoiceAfterCheckout(session)
+      console.log(`[Webhook] Invoice created and sent for checkout ${session.id}`)
+    } catch (invoiceError) {
+      console.error('[Webhook] Failed to create invoice:', invoiceError)
+      // Don't throw - credits already added, invoice is just for record-keeping
+    }
 
     console.log(`[Webhook] Checkout completed successfully for user ${user_id}`)
   } catch (error) {
@@ -491,6 +497,91 @@ async function updateInvoiceStatus(invoiceId: string, status: string) {
   } catch (error) {
     console.error('[Webhook] Error updating invoice status:', error)
     // Don't throw - this is just for record-keeping
+  }
+}
+
+/**
+ * Create invoice after successful checkout completion
+ * This ensures customers receive an invoice even when using checkout flow
+ */
+async function createInvoiceAfterCheckout(session: Stripe.Checkout.Session) {
+  try {
+    const stripe = getStripeClient()
+    const { user_id, package_id, credits } = session.metadata || {}
+
+    if (!user_id || !package_id || !credits) {
+      console.warn('[Webhook] Missing metadata for invoice creation')
+      return
+    }
+
+    const customerEmail = session.customer_email || session.customer_details?.email
+    if (!customerEmail) {
+      console.warn('[Webhook] No customer email available for invoice')
+      return
+    }
+
+    // Get customer name if available
+    const customerName = session.customer_details?.name
+
+    // 1. Create or get Stripe customer
+    const customer = await createOrGetCustomer(user_id, customerEmail, customerName || undefined)
+
+    // 2. Get payment details
+    const amountPaid = session.amount_total || 0
+    const currency = session.currency || 'usd'
+
+    // 3. Create invoice item for the purchase
+    await stripe.invoiceItems.create({
+      customer: customer.id,
+      amount: amountPaid,
+      currency,
+      description: `ReceiptSort Credits - ${package_id} Package (${credits} credits)`,
+      metadata: {
+        user_id,
+        package_id,
+        credits,
+        checkout_session_id: session.id,
+      },
+    })
+
+    // 4. Create invoice
+    const invoice = await stripe.invoices.create({
+      customer: customer.id,
+      auto_advance: true,
+      collection_method: 'send_invoice',
+      days_until_due: 0,
+      metadata: {
+        user_id,
+        package_id,
+        credits,
+        checkout_session_id: session.id,
+        product_type: 'credit_package',
+        payment_status: 'paid',
+      },
+      description: `ReceiptSort Credits Purchase - ${credits} credits`,
+      footer: 'Thank you for your purchase! Your credits have been added to your account.',
+    })
+
+    // 5. Finalize the invoice
+    const finalizedInvoice = await stripe.invoices.finalizeInvoice(invoice.id)
+
+    // 6. Mark invoice as paid (since payment already completed via checkout)
+    await stripe.invoices.pay(finalizedInvoice.id, {
+      paid_out_of_band: true,
+    })
+
+    console.log(`[Webhook] Invoice created: ${finalizedInvoice.id}`)
+    console.log(`[Webhook] Invoice PDF: ${finalizedInvoice.invoice_pdf}`)
+
+    // 7. Send invoice email
+    await sendInvoiceEmail(finalizedInvoice.id)
+
+    // 8. Store invoice in database
+    await storeInvoiceRecord(finalizedInvoice)
+
+  } catch (error) {
+    console.error('[Webhook] Error creating invoice after checkout:', error)
+    throw error
   }
 }
 
