@@ -238,7 +238,10 @@
     "welcome": "Bienvenido de nuevo",
     "overview": {
       "title": "Resumen",
-      "subtitle": "Aquí tienes un resumen de tu gestión de recibos"
+      "subtitle": "Aquí tienes un resumen de tu gestión de recibos",
+      "lastExport": {
+        "never": "Nunca"
+      }
     },
     "uploadSection": {
       "title": "Subir Recibos",
@@ -778,5 +781,9 @@
     "updateSuccess": "¡Perfil actualizado exitosamente!",
     "updateError": "Error al actualizar el perfil. Por favor, inténtelo de nuevo.",
     "emailCannotChange": "La dirección de correo electrónico no se puede cambiar"
+  },
+  "receiptsPage": {
+    "noReceipts": "Aún no hay recibos",
+    "noReceiptsDescription": "Sube tu primer recibo para comenzar"
   }
 }

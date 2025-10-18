@@ -238,7 +238,10 @@
     "welcome": "Welcome back",
     "overview": {
       "title": "Overview",
-      "subtitle": "Here's an overview of your receipt management"
+      "subtitle": "Here's an overview of your receipt management",
+      "lastExport": {
+        "never": "Never"
+      }
     },
     "getStarted": {
       "title": "Get Started",
@@ -788,5 +791,9 @@
     "updateSuccess": "Profile updated successfully!",
     "updateError": "Failed to update profile. Please try again.",
     "emailCannotChange": "Email address cannot be changed"
+  },
+  "receiptsPage": {
+    "noReceipts": "No receipts yet",
+    "noReceiptsDescription": "Upload your first receipt to get started"
   }
 }

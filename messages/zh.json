@@ -238,7 +238,10 @@
     "welcome": "欢迎回来",
     "overview": {
       "title": "概览",
-      "subtitle": "这是您收据管理的概览"
+      "subtitle": "这是您收据管理的概览",
+      "lastExport": {
+        "never": "从未"
+      }
     },
     "getStarted": {
       "title": "开始使用",
@@ -788,5 +791,9 @@
     "updateSuccess": "个人资料更新成功！",
     "updateError": "更新个人资料失败。请重试。",
     "emailCannotChange": "电子邮箱无法更改"
+  },
+  "receiptsPage": {
+    "noReceipts": "暂无收据",
+    "noReceiptsDescription": "上传您的第一张收据以开始使用"
   }
 }

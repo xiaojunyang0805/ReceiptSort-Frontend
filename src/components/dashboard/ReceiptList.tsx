@@ -306,9 +306,9 @@ export default function ReceiptList() {
             <FileText className="h-8 w-8 text-muted-foreground" />
           </div>
           <div>
-            <h3 className="text-lg font-semibold">No receipts yet</h3>
+            <h3 className="text-lg font-semibold">{t('noReceipts')}</h3>
             <p className="text-sm text-muted-foreground mt-1">
-              Upload your first receipt to get started
+              {t('noReceiptsDescription')}
             </p>
           </div>
           <Button asChild>

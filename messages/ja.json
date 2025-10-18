@@ -238,7 +238,10 @@
     "welcome": "おかえりなさい",
     "overview": {
       "title": "概要",
-      "subtitle": "レシート管理の概要です"
+      "subtitle": "レシート管理の概要です",
+      "lastExport": {
+        "never": "なし"
+      }
     },
     "uploadSection": {
       "title": "レシートをアップロード",
@@ -778,5 +781,9 @@
     "updateSuccess": "プロフィールが正常に更新されました！",
     "updateError": "プロフィールの更新に失敗しました。もう一度お試しください。",
     "emailCannotChange": "メールアドレスは変更できません"
+  },
+  "receiptsPage": {
+    "noReceipts": "レシートはまだありません",
+    "noReceiptsDescription": "最初のレシートをアップロードして開始します"
   }
 }

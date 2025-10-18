@@ -64,7 +64,7 @@ export default async function DashboardPage() {
         month: 'short',
         day: 'numeric',
       })
-    : 'Never'
+    : t('overview.lastExport.never')
 
   return (
     <div className="space-y-8 pb-20 md:pb-8">
