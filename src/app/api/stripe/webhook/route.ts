@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
     let event: Stripe.Event
 
     try {
-      event = constructWebhookEvent(body, signature)
+      event = await constructWebhookEvent(body, signature)
     } catch (err) {
       const error = err as Error
       console.error('[Webhook] Signature verification failed:', error.message)
@@ -585,5 +585,8 @@ async function createInvoiceAfterCheckout(session: Stripe.Checkout.Session) {
   }
 }
 
+// Use Node.js runtime for Supabase compatibility
+export const runtime = 'nodejs'
+
 // Disable body parsing for webhook verification
-export const runtime = 'edge'
+export const dynamic = 'force-dynamic'

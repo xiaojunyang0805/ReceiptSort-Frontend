@@ -259,10 +259,10 @@ export async function createPortalSession(
  * @param signature - Stripe signature from headers
  * @returns Verified Stripe Event
  */
-export function constructWebhookEvent(
+export async function constructWebhookEvent(
   body: string | Buffer,
   signature: string
-): Stripe.Event {
+): Promise<Stripe.Event> {
   const webhookSecret = (process.env.STRIPE_WEBHOOK_SECRET || '').trim().replace(/[\r\n]/g, '')
 
   if (!webhookSecret) {
@@ -270,7 +270,7 @@ export function constructWebhookEvent(
   }
 
   try {
-    const event = stripe.webhooks.constructEvent(
+    const event = await stripe.webhooks.constructEventAsync(
       body,
       signature,
       webhookSecret
