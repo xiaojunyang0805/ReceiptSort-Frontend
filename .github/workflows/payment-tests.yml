@@ -1,0 +1,46 @@
+name: Payment Flow Tests
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'src/lib/stripe.ts'
+      - 'src/app/api/credits/**'
+      - 'tests/**'
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run Quick Test
+      env:
+        STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+        STRIPE_PRICE_STARTER: ${{ secrets.STRIPE_PRICE_STARTER }}
+        STRIPE_PRICE_BASIC: ${{ secrets.STRIPE_PRICE_BASIC }}
+        STRIPE_PRICE_PRO: ${{ secrets.STRIPE_PRICE_PRO }}
+        STRIPE_PRICE_BUSINESS: ${{ secrets.STRIPE_PRICE_BUSINESS }}
+      run: node tests/quick-test.js
+
+    - name: Run Full Payment Flow Tests
+      env:
+        STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+        STRIPE_PRICE_STARTER: ${{ secrets.STRIPE_PRICE_STARTER }}
+        STRIPE_PRICE_BASIC: ${{ secrets.STRIPE_PRICE_BASIC }}
+        STRIPE_PRICE_PRO: ${{ secrets.STRIPE_PRICE_PRO }}
+        STRIPE_PRICE_BUSINESS: ${{ secrets.STRIPE_PRICE_BUSINESS }}
+      run: node tests/payment-flow.test.js
