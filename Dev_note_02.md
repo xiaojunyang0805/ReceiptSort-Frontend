@@ -61,9 +61,31 @@ Product development is nearly complete. This document tracks remaining tasks and
 **Result:** Much clearer separation between app features (receipt processing) and account management (purchase history). No duplicate navigation options.
 
 **Final Navigation Structure:**
-- **Sidebar:** Dashboard, Upload, Receipts, Exports, Credits, Billing, Account
+- **Sidebar:** Dashboard, Upload, Receipts, Exports, Credits, Account (removed Billing for cleaner UX)
 - **Header:** Home, Language Switcher, Logout (visible), Credits Badge, User Avatar
 - **Avatar Dropdown:** User name + email (identity only)
+
+#### Additional UX Refinements
+
+**Profile Editing**
+- Added editable name field to Account page
+- Users can now update their display name
+- Form includes validation, loading states, and success/error messages
+
+**Translation Fixes**
+- Fixed missing translations in dashboard and receipts pages:
+  - Dashboard "Never" → "从未" (last export date)
+  - Receipts empty state: "No receipts yet" → "暂无收据"
+  - Upload button: "Upload Receipt" → "上传收据"
+- Fixed translation key structure issue (receiptsPage nested correctly under dashboard)
+- All empty states now fully translated in 7 languages
+
+**Navigation Cleanup**
+- Removed "Billing" from sidebar (accessible via Account page)
+- Keeps sidebar focused on core receipt processing features
+- Account management (billing, profile) grouped under Account section
+
+**Commits:** 2bb57fc, 14d11c4, 7db0a7a, 9ad775a, e289836
 
 #### Payment-Invoice Workflow Fixed & Tested
 
