@@ -149,16 +149,20 @@ export async function createCheckoutSession(
   packageId: string,
   credits: number
 ): Promise<Stripe.Checkout.Session> {
+  // Clean the priceId to remove any whitespace/newlines
+  const cleanPriceId = priceId.trim().replace(/[\r\n]/g, '')
+
   // Use environment variable or fallback to production URL
-  const baseUrl = process.env.NEXT_PUBLIC_URL || process.env.NEXT_PUBLIC_APP_URL || 'https://receiptsort.vercel.app'
+  const baseUrl = (process.env.NEXT_PUBLIC_URL || process.env.NEXT_PUBLIC_APP_URL || 'https://receiptsort.vercel.app').trim().replace(/[\r\n]/g, '')
 
   console.log('[Stripe] Using baseUrl:', baseUrl)
+  console.log('[Stripe] Using priceId:', cleanPriceId)
 
   const session = await stripe.checkout.sessions.create({
     mode: 'payment',
     line_items: [
       {
-        price: priceId,
+        price: cleanPriceId,
         quantity: 1,
       },
     ],
@@ -350,11 +354,14 @@ export async function createInvoicePayment(
   packageId: string,
   credits: number
 ): Promise<{ invoice: Stripe.Invoice; paymentIntent: string }> {
+  // Clean the priceId to remove any whitespace/newlines
+  const cleanPriceId = priceId.trim().replace(/[\r\n]/g, '')
+
   // 1. Create or get customer
   const customer = await createOrGetCustomer(userId, userEmail, userName)
 
   // 2. Get price details
-  const priceObj = await stripe.prices.retrieve(priceId)
+  const priceObj = await stripe.prices.retrieve(cleanPriceId)
   const amount = priceObj.unit_amount || 0
   const currency = priceObj.currency
 
@@ -368,7 +375,7 @@ export async function createInvoicePayment(
       user_id: userId,
       package_id: packageId,
       credits: credits.toString(),
-      stripe_price_id: priceId,
+      stripe_price_id: cleanPriceId,
     },
   })
 
@@ -424,11 +431,14 @@ export async function createHostedInvoice(
   packageId: string,
   credits: number
 ): Promise<Stripe.Invoice> {
+  // Clean the priceId to remove any whitespace/newlines
+  const cleanPriceId = priceId.trim().replace(/[\r\n]/g, '')
+
   // 1. Create or get customer
   const customer = await createOrGetCustomer(userId, userEmail, userName)
 
   // 2. Get price details
-  const priceObj = await stripe.prices.retrieve(priceId)
+  const priceObj = await stripe.prices.retrieve(cleanPriceId)
   const amount = priceObj.unit_amount || 0
   const currency = priceObj.currency
 
@@ -442,7 +452,7 @@ export async function createHostedInvoice(
       user_id: userId,
       package_id: packageId,
       credits: credits.toString(),
-      stripe_price_id: priceId,
+      stripe_price_id: cleanPriceId,
     },
   })
 
