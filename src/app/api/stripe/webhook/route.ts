@@ -534,11 +534,13 @@ async function createInvoiceAfterCheckout(session: Stripe.Checkout.Session) {
     console.log(`[Webhook] Creating invoice for ${amountPaid} ${currency}, payment_intent: ${paymentIntentId}`)
 
     // 3. Create draft invoice FIRST with matching currency
+    // Use 'send_invoice' collection method to allow manual email sending
     const invoice = await stripe.invoices.create({
       customer: customer.id,
       currency, // Must match the currency of invoice items
       auto_advance: false, // Manual control since payment already completed
-      collection_method: 'charge_automatically',
+      collection_method: 'send_invoice',
+      days_until_due: 0, // Required for send_invoice collection method
       metadata: {
         user_id,
         package_id,
