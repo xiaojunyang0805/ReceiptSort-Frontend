@@ -340,7 +340,9 @@
           "failedTitle": "Error al procesar recibos",
           "unknownError": "Error desconocido"
         }
-      }
+      },
+      "noReceipts": "Aún no hay recibos",
+      "noReceiptsDescription": "Sube tu primer recibo para comenzar"
     },
     "receiptsTable": {
       "title": "Tus Recibos",
@@ -781,9 +783,5 @@
     "updateSuccess": "¡Perfil actualizado exitosamente!",
     "updateError": "Error al actualizar el perfil. Por favor, inténtelo de nuevo.",
     "emailCannotChange": "La dirección de correo electrónico no se puede cambiar"
-  },
-  "receiptsPage": {
-    "noReceipts": "Aún no hay recibos",
-    "noReceiptsDescription": "Sube tu primer recibo para comenzar"
   }
 }

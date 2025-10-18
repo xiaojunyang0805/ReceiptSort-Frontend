@@ -340,7 +340,9 @@
           "failedTitle": "Bonnetjes verwerken mislukt",
           "unknownError": "Onbekende fout"
         }
-      }
+      },
+      "noReceipts": "Nog geen bonnen",
+      "noReceiptsDescription": "Upload uw eerste bon om te beginnen"
     },
     "receiptsTable": {
       "title": "Uw Bonnetjes",
@@ -780,9 +782,5 @@
     "updateSuccess": "Profiel succesvol bijgewerkt!",
     "updateError": "Profiel bijwerken mislukt. Probeer het opnieuw.",
     "emailCannotChange": "E-mailadres kan niet worden gewijzigd"
-  },
-  "receiptsPage": {
-    "noReceipts": "Nog geen bonnen",
-    "noReceiptsDescription": "Upload uw eerste bon om te beginnen"
   }
 }

@@ -340,7 +340,9 @@
           "failedTitle": "Échec du traitement des reçus",
           "unknownError": "Erreur inconnue"
         }
-      }
+      },
+      "noReceipts": "Aucun reçu pour le moment",
+      "noReceiptsDescription": "Téléchargez votre premier reçu pour commencer"
     },
     "receiptsTable": {
       "title": "Vos Reçus",
@@ -781,9 +783,5 @@
     "updateSuccess": "Profil mis à jour avec succès !",
     "updateError": "Échec de la mise à jour du profil. Veuillez réessayer.",
     "emailCannotChange": "L'adresse e-mail ne peut pas être modifiée"
-  },
-  "receiptsPage": {
-    "noReceipts": "Aucun reçu pour le moment",
-    "noReceiptsDescription": "Téléchargez votre premier reçu pour commencer"
   }
 }

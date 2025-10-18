@@ -350,7 +350,9 @@
           "failedTitle": "Failed to process receipts",
           "unknownError": "Unknown error"
         }
-      }
+      },
+      "noReceipts": "No receipts yet",
+      "noReceiptsDescription": "Upload your first receipt to get started"
     },
     "receiptsTable": {
       "title": "Your Receipts",
@@ -791,9 +793,5 @@
     "updateSuccess": "Profile updated successfully!",
     "updateError": "Failed to update profile. Please try again.",
     "emailCannotChange": "Email address cannot be changed"
-  },
-  "receiptsPage": {
-    "noReceipts": "No receipts yet",
-    "noReceiptsDescription": "Upload your first receipt to get started"
   }
 }

@@ -340,7 +340,9 @@
           "failedTitle": "レシートの処理に失敗しました",
           "unknownError": "不明なエラー"
         }
-      }
+      },
+      "noReceipts": "レシートはまだありません",
+      "noReceiptsDescription": "最初のレシートをアップロードして開始します"
     },
     "receiptsTable": {
       "title": "あなたのレシート",
@@ -781,9 +783,5 @@
     "updateSuccess": "プロフィールが正常に更新されました！",
     "updateError": "プロフィールの更新に失敗しました。もう一度お試しください。",
     "emailCannotChange": "メールアドレスは変更できません"
-  },
-  "receiptsPage": {
-    "noReceipts": "レシートはまだありません",
-    "noReceiptsDescription": "最初のレシートをアップロードして開始します"
   }
 }

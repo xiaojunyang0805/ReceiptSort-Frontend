@@ -340,7 +340,9 @@
           "failedTitle": "Verarbeitung der Belege fehlgeschlagen",
           "unknownError": "Unbekannter Fehler"
         }
-      }
+      },
+      "noReceipts": "Noch keine Belege",
+      "noReceiptsDescription": "Laden Sie Ihren ersten Beleg hoch, um loszulegen"
     },
     "receiptsTable": {
       "title": "Ihre Belege",
@@ -781,9 +783,5 @@
     "updateSuccess": "Profil erfolgreich aktualisiert!",
     "updateError": "Profil konnte nicht aktualisiert werden. Bitte versuchen Sie es erneut.",
     "emailCannotChange": "E-Mail-Adresse kann nicht geändert werden"
-  },
-  "receiptsPage": {
-    "noReceipts": "Noch keine Belege",
-    "noReceiptsDescription": "Laden Sie Ihren ersten Beleg hoch, um loszulegen"
   }
 }
