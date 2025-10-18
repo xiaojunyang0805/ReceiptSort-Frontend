@@ -533,9 +533,10 @@ async function createInvoiceAfterCheckout(session: Stripe.Checkout.Session) {
 
     console.log(`[Webhook] Creating invoice for ${amountPaid} ${currency}, payment_intent: ${paymentIntentId}`)
 
-    // 3. Create draft invoice FIRST
+    // 3. Create draft invoice FIRST with matching currency
     const invoice = await stripe.invoices.create({
       customer: customer.id,
+      currency, // Must match the currency of invoice items
       auto_advance: false, // Manual control since payment already completed
       collection_method: 'charge_automatically',
       metadata: {
