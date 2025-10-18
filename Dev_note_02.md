@@ -52,7 +52,18 @@ Product development is nearly complete. This document tracks remaining tasks and
    - Added complete `account` namespace
    - Languages: en, zh, nl, de, fr, es, ja
 
-**Result:** Much clearer separation between app features (receipt processing) and account management (purchase history).
+5. **Simplified Avatar Dropdown**
+   - Removed "Personal Settings" link (duplicate of sidebar "Account")
+   - Removed logout button from dropdown (already visible in header)
+   - Dropdown now shows only user identity (name + email)
+   - Credits display kept for mobile view only
+
+**Result:** Much clearer separation between app features (receipt processing) and account management (purchase history). No duplicate navigation options.
+
+**Final Navigation Structure:**
+- **Sidebar:** Dashboard, Upload, Receipts, Exports, Credits, Billing, Account
+- **Header:** Home, Language Switcher, Logout (visible), Credits Badge, User Avatar
+- **Avatar Dropdown:** User name + email (identity only)
 
 #### Payment-Invoice Workflow Fixed & Tested
 
