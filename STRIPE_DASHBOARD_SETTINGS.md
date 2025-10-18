@@ -127,7 +127,7 @@ The actual setting is under **Billing → Subscriptions**, NOT under Customer em
    - Creates draft invoice with `collection_method: 'charge_automatically'`
    - Adds invoice item with credit package description
    - Finalizes invoice (generates PDF with VAT footer)
-   - Marks invoice as PAID using `paid_out_of_band: true` and `forgive: true`
+   - Marks invoice as PAID using `paid_out_of_band: true`
    - Stores invoice record in database
 4. **Stripe Email Automation:**
    - IF "Successful payments" is enabled → Stripe sends receipt email
@@ -263,8 +263,7 @@ The actual setting is under **Billing → Subscriptions**, NOT under Customer em
 4. ✅ Verify invoice was marked as paid:
    ```typescript
    await stripe.invoices.pay(finalizedInvoice.id, {
-     paid_out_of_band: true,
-     forgive: true
+     paid_out_of_band: true, // Cannot use both paid_out_of_band and forgive
    })
    ```
 

@@ -308,7 +308,6 @@ const finalizedInvoice = await stripe.invoices.finalizeInvoice(invoice.id)
 ```typescript
 const paidInvoice = await stripe.invoices.pay(finalizedInvoice.id, {
   paid_out_of_band: true,  // Payment was via checkout, not invoice
-  forgive: true             // Don't attempt to charge again
 })
 ```
 
@@ -316,7 +315,7 @@ const paidInvoice = await stripe.invoices.pay(finalizedInvoice.id, {
 - Payment was already collected via Checkout Session
 - Invoice is created AFTER payment for record-keeping
 - `paid_out_of_band` marks invoice as paid without attempting to charge
-- `forgive: true` ensures no charge is attempted
+- **Important:** Cannot use both `paid_out_of_band` and `forgive` - Stripe only allows one parameter
 
 ---
 

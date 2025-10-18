@@ -580,10 +580,9 @@ async function createInvoiceRecord(session: Stripe.Checkout.Session) {
 
     // 6. Mark invoice as paid and link the checkout payment
     // We use paid_out_of_band because payment was already collected via checkout
-    // IMPORTANT: We also pass forgive=true to mark as paid without charging again
+    // NOTE: Cannot use both paid_out_of_band and forgive - Stripe only allows one parameter
     const paidInvoice = await stripe.invoices.pay(finalizedInvoice.id, {
-      paid_out_of_band: true,
-      forgive: true, // Forgive the amount owed so no charge is attempted
+      paid_out_of_band: true, // Mark as paid without attempting to charge
     })
 
     console.log(`[Webhook] Invoice marked as paid: ${paidInvoice.id}`)
