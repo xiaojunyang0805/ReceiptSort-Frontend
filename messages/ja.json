@@ -772,6 +772,11 @@
     "billingTitle": "請求と請求書",
     "billingDescription": "購入履歴を表示し、請求書をダウンロード",
     "viewBilling": "請求履歴を表示",
-    "accountCreated": "アカウント作成日"
+    "accountCreated": "アカウント作成日",
+    "enterName": "フルネームを入力してください",
+    "saveChanges": "変更を保存",
+    "updateSuccess": "プロフィールが正常に更新されました！",
+    "updateError": "プロフィールの更新に失敗しました。もう一度お試しください。",
+    "emailCannotChange": "メールアドレスは変更できません"
   }
 }

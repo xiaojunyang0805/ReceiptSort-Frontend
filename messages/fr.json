@@ -772,6 +772,11 @@
     "billingTitle": "Facturation & Factures",
     "billingDescription": "Consultez votre historique d'achat et téléchargez les factures",
     "viewBilling": "Voir l'historique de facturation",
-    "accountCreated": "Compte créé le"
+    "accountCreated": "Compte créé le",
+    "enterName": "Entrez votre nom complet",
+    "saveChanges": "Enregistrer les modifications",
+    "updateSuccess": "Profil mis à jour avec succès !",
+    "updateError": "Échec de la mise à jour du profil. Veuillez réessayer.",
+    "emailCannotChange": "L'adresse e-mail ne peut pas être modifiée"
   }
 }

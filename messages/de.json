@@ -772,6 +772,11 @@
     "billingTitle": "Abrechnung & Rechnungen",
     "billingDescription": "Zeigen Sie Ihre Kaufhistorie an und laden Sie Rechnungen herunter",
     "viewBilling": "Abrechnungsverlauf anzeigen",
-    "accountCreated": "Konto erstellt am"
+    "accountCreated": "Konto erstellt am",
+    "enterName": "Geben Sie Ihren vollständigen Namen ein",
+    "saveChanges": "Änderungen speichern",
+    "updateSuccess": "Profil erfolgreich aktualisiert!",
+    "updateError": "Profil konnte nicht aktualisiert werden. Bitte versuchen Sie es erneut.",
+    "emailCannotChange": "E-Mail-Adresse kann nicht geändert werden"
   }
 }

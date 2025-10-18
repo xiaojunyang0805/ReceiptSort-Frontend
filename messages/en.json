@@ -782,6 +782,11 @@
     "billingTitle": "Billing & Invoices",
     "billingDescription": "View your purchase history and download invoices",
     "viewBilling": "View Billing History",
-    "accountCreated": "Account created on"
+    "accountCreated": "Account created on",
+    "enterName": "Enter your full name",
+    "saveChanges": "Save Changes",
+    "updateSuccess": "Profile updated successfully!",
+    "updateError": "Failed to update profile. Please try again.",
+    "emailCannotChange": "Email address cannot be changed"
   }
 }

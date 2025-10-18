@@ -782,6 +782,11 @@
     "billingTitle": "账单与发票",
     "billingDescription": "查看您的购买历史并下载发票",
     "viewBilling": "查看账单历史",
-    "accountCreated": "账户创建于"
+    "accountCreated": "账户创建于",
+    "enterName": "输入您的全名",
+    "saveChanges": "保存更改",
+    "updateSuccess": "个人资料更新成功！",
+    "updateError": "更新个人资料失败。请重试。",
+    "emailCannotChange": "电子邮箱无法更改"
   }
 }

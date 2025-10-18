@@ -14,6 +14,7 @@ import { Button } from '@/components/ui/button'
 import { User, Mail, CreditCard, FileText } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 import { Link } from '@/lib/navigation'
+import { ProfileForm } from '@/components/account/ProfileForm'
 
 export default async function AccountPage() {
   const supabase = await createClient()
@@ -58,29 +59,30 @@ export default async function AccountPage() {
             </CardTitle>
             <CardDescription>{t('profileDescription')}</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <div>
-              <label className="text-sm font-medium text-muted-foreground">
-                {t('fullName')}
-              </label>
-              <p className="text-base font-medium">
-                {profile?.full_name || t('notSet')}
-              </p>
-            </div>
+          <CardContent className="space-y-6">
+            {/* Editable Name Field */}
+            <ProfileForm initialName={profile?.full_name || null} />
+
+            {/* Read-only Email */}
             <div>
               <label className="text-sm font-medium text-muted-foreground">
                 {t('email')}
               </label>
-              <p className="text-base font-medium flex items-center gap-2">
+              <p className="text-base font-medium flex items-center gap-2 mt-1">
                 <Mail className="w-4 h-4" />
                 {user.email}
               </p>
+              <p className="text-xs text-muted-foreground mt-1">
+                {t('emailCannotChange')}
+              </p>
             </div>
+
+            {/* Read-only User ID */}
             <div>
               <label className="text-sm font-medium text-muted-foreground">
                 {t('userId')}
               </label>
-              <p className="text-xs font-mono text-muted-foreground">
+              <p className="text-xs font-mono text-muted-foreground mt-1">
                 {user.id}
               </p>
             </div>

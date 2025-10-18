@@ -771,6 +771,11 @@
     "billingTitle": "Facturering & Facturen",
     "billingDescription": "Bekijk uw aankoopgeschiedenis en download facturen",
     "viewBilling": "Bekijk factureringsgeschiedenis",
-    "accountCreated": "Account aangemaakt op"
+    "accountCreated": "Account aangemaakt op",
+    "enterName": "Voer uw volledige naam in",
+    "saveChanges": "Wijzigingen opslaan",
+    "updateSuccess": "Profiel succesvol bijgewerkt!",
+    "updateError": "Profiel bijwerken mislukt. Probeer het opnieuw.",
+    "emailCannotChange": "E-mailadres kan niet worden gewijzigd"
   }
 }
