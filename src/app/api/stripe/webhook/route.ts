@@ -506,10 +506,14 @@ async function updateInvoiceStatus(invoiceId: string, status: string) {
 }
 
 /**
+ * DEPRECATED: No longer used. Invoices now created automatically via invoice_creation parameter.
+ * Kept for reference only.
+ *
  * Create invoice record after successful checkout
  * This creates a paid invoice for VAT record-keeping purposes
  * The payment was already collected via the checkout session
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function createInvoiceRecord(session: Stripe.Checkout.Session) {
   try {
     const stripe = getStripeClient()
