@@ -223,7 +223,47 @@ Bank: ING BANK N.V.
 
 This file handles all Stripe webhook events.
 
-#### Function: `handleCheckoutCompleted()` (Lines 152-222)
+#### Checkout Session with Automatic Invoice Creation
+
+**File: `src/lib/stripe.ts` - `createCheckoutSession()` function**
+
+The checkout session uses Stripe's `invoice_creation` parameter to automatically create an invoice and attach it to the receipt email.
+
+**Key Code:**
+```typescript
+const session = await stripe.checkout.sessions.create({
+  mode: 'payment',
+  line_items: [{ price: priceId, quantity: 1 }],
+  success_url: `${baseUrl}/credits?success=true`,
+  cancel_url: `${baseUrl}/credits?canceled=true`,
+  customer_email: userEmail,
+  metadata: { user_id, package_id, credits },
+
+  // Automatically create invoice and attach to receipt email
+  invoice_creation: {
+    enabled: true,
+    invoice_data: {
+      description: `ReceiptSort Credits Purchase - ${credits} credits`,
+      metadata: {
+        user_id,
+        package_id,
+        credits,
+        product_type: 'credit_package',
+        created_by_checkout: 'true', // Marker to prevent duplicate credit addition
+      },
+    },
+  },
+})
+```
+
+**What this does:**
+- ✅ Stripe automatically creates invoice when payment succeeds
+- ✅ Invoice PDF is automatically attached to receipt email
+- ✅ Customer receives ONE email with payment receipt + invoice PDF
+- ✅ No manual invoice creation needed in webhook
+- ✅ VAT footer from Dashboard settings is included
+
+#### Function: `handleCheckoutCompleted()`
 
 Processes successful checkout payments.
 
@@ -232,7 +272,7 @@ Processes successful checkout payments.
 2. Validates payment succeeded
 3. Adds credits to user account
 4. Creates transaction record
-5. Calls `createInvoiceRecord()` for VAT purposes
+5. Invoice is created automatically by Stripe (via `invoice_creation` parameter)
 
 **Code Flow:**
 ```typescript
@@ -247,75 +287,39 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   // 3. Create transaction record
   await supabase.from('credit_transactions').insert({...})
 
-  // 4. Create invoice for VAT
-  await createInvoiceRecord(session)
+  // 4. Invoice is created automatically by Stripe - no code needed here
+  console.log('Invoice will be created automatically by Stripe')
 }
 ```
 
-#### Function: `createInvoiceRecord()` (Lines 508-609)
+#### Preventing Duplicate Credit Addition
 
-Creates a paid invoice for record-keeping after successful payment.
+**File: `src/app/api/stripe/webhook/route.ts` - `invoice.payment_succeeded` handler**
 
-**Responsibilities:**
-1. Creates Stripe customer (if doesn't exist)
-2. Creates draft invoice
-3. Adds invoice line item with payment amount
-4. Finalizes invoice (triggers PDF generation)
-5. Marks invoice as PAID using `paid_out_of_band`
-6. Stores invoice in database
-7. Stripe sends email automatically (if dashboard setting enabled)
+Since invoices are now created automatically, we need to prevent duplicate credit additions.
 
-**Key Code Sections:**
-
-**Creating Invoice:**
+**Code:**
 ```typescript
-const invoice = await stripe.invoices.create({
-  customer: customer.id,
-  currency,
-  auto_advance: false,  // Manual control
-  collection_method: 'charge_automatically',  // Prevents "Pay this invoice" button
-  metadata: {
-    user_id,
-    package_id,
-    credits,
-    checkout_session_id: session.id,
-    product_type: 'credit_package',
-    payment_status: 'paid',
-  },
-  description: `ReceiptSort Credits Purchase - ${credits} credits`,
-  // Don't set footer - uses default from Stripe Dashboard settings
-})
+case 'invoice.payment_succeeded': {
+  const invoice = event.data.object as Stripe.Invoice
+
+  // Check if invoice was created by checkout session
+  const createdByCheckout = invoice.metadata?.created_by_checkout
+  if (createdByCheckout === 'true') {
+    // Credits already added in checkout.session.completed
+    // This invoice is for VAT/record-keeping only
+    break
+  }
+
+  // Handle other invoice types (subscriptions, manual invoices)
+  // ...
+}
 ```
 
-**Adding Invoice Item:**
-```typescript
-const invoiceItem = await stripe.invoiceItems.create({
-  customer: customer.id,
-  invoice: invoice.id,  // Link to invoice
-  amount: amountPaid,
-  currency,
-  description: `ReceiptSort Credits - ${package_id} Package (${credits} credits)`,
-})
-```
-
-**Finalizing Invoice:**
-```typescript
-const finalizedInvoice = await stripe.invoices.finalizeInvoice(invoice.id)
-// This generates the invoice PDF
-```
-
-**Marking as Paid:**
-```typescript
-const paidInvoice = await stripe.invoices.pay(finalizedInvoice.id, {
-  paid_out_of_band: true,  // Payment was via checkout, not invoice
-})
-```
-
-**Why `paid_out_of_band`?**
-- Payment was already collected via Checkout Session
-- Invoice is created AFTER payment for record-keeping
-- `paid_out_of_band` marks invoice as paid without attempting to charge
-- **Important:** Cannot use both `paid_out_of_band` and `forgive` - Stripe only allows one parameter
+**Why this is needed:**
+- Without this check, credits would be added TWICE (once in checkout webhook, once in invoice webhook)
+- The `created_by_checkout: 'true'` marker identifies invoices created via `invoice_creation`
+- Subscription renewals and manual invoices don't have this marker, so they still work normally
 
 ---
 

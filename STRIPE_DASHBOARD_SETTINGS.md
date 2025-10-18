@@ -122,18 +122,18 @@ The actual setting is under **Billing → Subscriptions**, NOT under Customer em
    - Adds credits to user's account in database
    - Creates transaction record
    - Calls `createInvoiceRecord()` function
-3. **Invoice Creation** (`createInvoiceRecord` function):
-   - Creates or retrieves Stripe Customer
-   - Creates draft invoice with `collection_method: 'charge_automatically'`
-   - Adds invoice item with credit package description
-   - Finalizes invoice (generates PDF with VAT footer)
-   - Marks invoice as PAID using `paid_out_of_band: true`
-   - Stores invoice record in database
+3. **Invoice Creation** (Automatic via `invoice_creation` parameter):
+   - Stripe automatically creates invoice when payment succeeds
+   - Invoice includes metadata with user_id, package_id, credits, and `created_by_checkout: 'true'` marker
+   - Invoice is automatically finalized and marked as paid by Stripe
+   - Invoice PDF is automatically generated with VAT footer from Dashboard settings
+   - Invoice is stored in database when `invoice.finalized` webhook is received
 4. **Stripe Email Automation:**
-   - IF "Successful payments" is enabled → Stripe sends receipt email
-   - IF "Send finalized invoices" is enabled → Stripe sends invoice email
-   - Email includes invoice PDF attachment
-   - PDF contains VAT footer from dashboard settings
+   - Stripe sends receipt email (if "Successful payments" is enabled in Dashboard)
+   - **Invoice PDF is automatically attached to the receipt email**
+   - Customer receives ONE email with both payment receipt and invoice PDF
+   - PDF contains VAT footer from Dashboard settings
+   - No separate invoice email is sent (invoice is part of the receipt)
 
 ### Email Content (sent by Stripe):
 - **Subject:** "Receipt from SeeNano Technology B.V." or "Invoice from SeeNano Technology B.V."

@@ -80,6 +80,15 @@ export async function POST(request: NextRequest) {
         const invoice = event.data.object as Stripe.Invoice
         console.log(`[Webhook] Invoice payment succeeded: ${invoice.id}`)
 
+        // Check if this invoice was created by checkout session (has created_by_checkout marker)
+        const createdByCheckout = invoice.metadata?.created_by_checkout
+        if (createdByCheckout === 'true') {
+          console.log(`[Webhook] Invoice was created by checkout session - credits already added, skipping`)
+          // Credits were already added in checkout.session.completed handler
+          // This invoice is for VAT/record-keeping only
+          break
+        }
+
         // Handle subscription renewal - add monthly credits
         // Check if this is a subscription invoice
         const subscriptionId = (invoice as unknown as { subscription?: string }).subscription

@@ -191,6 +191,7 @@ export async function createCheckoutSession(
           package_id: packageId,
           credits: credits.toString(),
           product_type: 'credit_package',
+          created_by_checkout: 'true', // Mark this invoice as created by checkout session
         },
         // footer: undefined, // Use default footer from Stripe Dashboard settings
       },
