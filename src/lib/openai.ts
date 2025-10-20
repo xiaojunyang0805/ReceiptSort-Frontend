@@ -108,6 +108,9 @@ CRITICAL RULES:
    - € or EUR → EUR
    - £ or GBP → GBP
    - CHF or Fr. → CHF
+   - ¥ or CNY or RMB or 元 → CNY (Chinese Yuan)
+   - ¥ or JPY or 円 → JPY (Japanese Yen)
+   - Note: ¥ symbol is used for both CNY and JPY - use context to determine (Chinese text → CNY, Japanese text → JPY)
    - If symbol unclear: use USD as default
 
 6. PAYMENT METHOD:

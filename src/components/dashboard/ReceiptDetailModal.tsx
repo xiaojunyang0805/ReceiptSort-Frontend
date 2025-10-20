@@ -21,7 +21,7 @@ import {
 import { Textarea } from '@/components/ui/textarea'
 import { Badge } from '@/components/ui/badge'
 import { toast } from 'sonner'
-import { Loader2, Save, Trash2, FileText, AlertTriangle, RefreshCw } from 'lucide-react'
+import { Loader2, Save, Trash2, FileText, AlertTriangle, RefreshCw, ChevronLeft, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
 import { format } from 'date-fns'
 import { Alert, AlertDescription } from '@/components/ui/alert'
@@ -88,15 +88,21 @@ interface ReceiptDetailModalProps {
   open: boolean
   onOpenChange: (open: boolean) => void
   onUpdate?: () => void
+  onNavigate?: (receipt: Receipt) => void
+  allReceipts?: Receipt[]
+  selectedReceipts?: Receipt[]
 }
 
-const CURRENCIES = ['USD', 'EUR', 'GBP']
+const CURRENCIES = ['USD', 'EUR', 'GBP', 'CNY', 'JPY']
 
 export default function ReceiptDetailModal({
   receipt,
   open,
   onOpenChange,
   onUpdate,
+  onNavigate,
+  allReceipts = [],
+  selectedReceipts = [],
 }: ReceiptDetailModalProps) {
   const t = useTranslations('receiptDetails')
   const tTable = useTranslations('dashboard.receiptsTable')
@@ -250,6 +256,28 @@ export default function ReceiptDetailModal({
 
   if (!receipt) return null
 
+  // Navigation logic
+  const receiptsToNavigate = selectedReceipts.length > 0 ? selectedReceipts : allReceipts
+  const currentIndex = receiptsToNavigate.findIndex(r => r.id === receipt.id)
+  const hasPrevious = currentIndex > 0
+  const hasNext = currentIndex < receiptsToNavigate.length - 1
+
+  const handlePrevious = () => {
+    if (hasPrevious && onNavigate) {
+      const prevReceipt = receiptsToNavigate[currentIndex - 1]
+      onNavigate(prevReceipt)
+      setImageError(false)
+    }
+  }
+
+  const handleNext = () => {
+    if (hasNext && onNavigate) {
+      const nextReceipt = receiptsToNavigate[currentIndex + 1]
+      onNavigate(nextReceipt)
+      setImageError(false)
+    }
+  }
+
   const handleSave = async () => {
     setSaving(true)
     try {
@@ -365,16 +393,47 @@ export default function ReceiptDetailModal({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <div className="flex items-start justify-between">
-            <div>
-              <DialogTitle>{t('title')}</DialogTitle>
-              <p className="text-sm text-muted-foreground mt-1">
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2">
+                <DialogTitle>{t('title')}</DialogTitle>
+                {receiptsToNavigate.length > 1 && (
+                  <span className="text-sm text-muted-foreground">
+                    ({currentIndex + 1} of {receiptsToNavigate.length})
+                  </span>
+                )}
+              </div>
+              <p className="text-sm text-muted-foreground mt-1 truncate">
                 {receipt.file_name}
               </p>
             </div>
-            <Badge className={statusConfig[receipt.processing_status].color}>
-              {statusConfig[receipt.processing_status].label}
-            </Badge>
+            <div className="flex items-center gap-2 flex-shrink-0">
+              {receiptsToNavigate.length > 1 && (
+                <div className="flex gap-1">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={handlePrevious}
+                    disabled={!hasPrevious}
+                    title="Previous receipt"
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={handleNext}
+                    disabled={!hasNext}
+                    title="Next receipt"
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              )}
+              <Badge className={statusConfig[receipt.processing_status].color}>
+                {statusConfig[receipt.processing_status].label}
+              </Badge>
+            </div>
           </div>
         </DialogHeader>
 

@@ -318,7 +318,7 @@ function validateExtractedData(data: {
   }
 
   // Validate currency
-  const supportedCurrencies = ['USD', 'EUR', 'GBP', 'CHF', 'CAD', 'AUD', 'JPY']
+  const supportedCurrencies = ['USD', 'EUR', 'GBP', 'CHF', 'CAD', 'AUD', 'JPY', 'CNY']
   if (!supportedCurrencies.includes(data.currency)) {
     errors.push(`Currency ${data.currency} may not be supported`)
   }

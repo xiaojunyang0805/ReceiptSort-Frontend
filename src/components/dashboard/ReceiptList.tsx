@@ -350,22 +350,70 @@ export default function ReceiptList() {
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
             <h3 className="font-semibold text-lg">{t('quickActions')}</h3>
-            <p className="text-sm text-muted-foreground">{t('quickActionsSubtitle')}</p>
+            <p className="text-sm text-muted-foreground">
+              {selectedCount > 0
+                ? `${selectedCount} receipt${selectedCount === 1 ? '' : 's'} selected`
+                : t('quickActionsSubtitle')}
+            </p>
           </div>
-          <div className="flex gap-2">
-            {receipts.filter(r => r.processing_status === 'pending').length > 0 && (
-              <ProcessAllButton
-                pendingCount={receipts.filter(r => r.processing_status === 'pending').length}
-                pendingIds={receipts.filter(r => r.processing_status === 'pending').map(r => r.id)}
-                userCredits={userCredits}
-              />
+          <div className="flex gap-2 flex-wrap">
+            {selectedCount > 0 ? (
+              <>
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    const firstSelectedReceipt = filteredReceipts.find(r => selectedIds.has(r.id))
+                    if (firstSelectedReceipt) {
+                      setSelectedReceipt(firstSelectedReceipt)
+                      setModalOpen(true)
+                    }
+                  }}
+                >
+                  <Eye className="mr-2 h-4 w-4" />
+                  View Selected
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={() => setExportDialogOpen(true)}
+                >
+                  <Download className="mr-2 h-4 w-4" />
+                  Export {selectedCount}
+                </Button>
+                <Button
+                  variant="destructive"
+                  onClick={async () => {
+                    if (!confirm(`Delete ${selectedCount} receipt${selectedCount === 1 ? '' : 's'}?`)) return
+
+                    try {
+                      const { error } = await supabase
+                        .from('receipts')
+                        .delete()
+                        .in('id', Array.from(selectedIds))
+
+                      if (error) throw error
+
+                      toast.success(`Deleted ${selectedCount} receipt${selectedCount === 1 ? '' : 's'}`)
+                      setSelectedIds(new Set())
+                      fetchReceipts()
+                    } catch (error) {
+                      console.error('Error deleting receipts:', error)
+                      toast.error('Failed to delete receipts')
+                    }
+                  }}
+                >
+                  <Trash2 className="mr-2 h-4 w-4" />
+                  Delete {selectedCount}
+                </Button>
+              </>
+            ) : (
+              receipts.filter(r => r.processing_status === 'pending').length > 0 && (
+                <ProcessAllButton
+                  pendingCount={receipts.filter(r => r.processing_status === 'pending').length}
+                  pendingIds={receipts.filter(r => r.processing_status === 'pending').map(r => r.id)}
+                  userCredits={userCredits}
+                />
+              )
             )}
-            <Button variant="outline" asChild>
-              <Link href="/receipts">
-                <Eye className="mr-2 h-4 w-4" />
-                {t('viewAllReceipts')}
-              </Link>
-            </Button>
           </div>
         </div>
       </Card>
@@ -669,6 +717,9 @@ export default function ReceiptList() {
         open={modalOpen}
         onOpenChange={setModalOpen}
         onUpdate={fetchReceipts}
+        onNavigate={setSelectedReceipt}
+        allReceipts={filteredReceipts}
+        selectedReceipts={filteredReceipts.filter(r => selectedIds.has(r.id))}
       />
 
       <ExportDialog
