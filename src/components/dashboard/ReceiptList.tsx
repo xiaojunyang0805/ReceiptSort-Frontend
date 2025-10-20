@@ -276,8 +276,8 @@ export default function ReceiptList() {
             <h3 className="font-semibold text-lg">{t('quickActions')}</h3>
             <p className="text-sm text-muted-foreground">
               {selectedCount > 0
-                ? `${selectedCount} receipt${selectedCount === 1 ? '' : 's'} selected`
-                : 'Select receipts to perform actions'}
+                ? t('receiptsSelected', { count: selectedCount })
+                : t('selectReceipts')}
             </p>
           </div>
           <div className="flex gap-2 flex-wrap">
@@ -293,7 +293,7 @@ export default function ReceiptList() {
               }}
             >
               <Eye className="mr-2 h-4 w-4" />
-              View Details{selectedCount > 0 ? ` (${selectedCount})` : ''}
+              {selectedCount > 0 ? t('viewDetailsCount', { count: selectedCount }) : t('viewDetails')}
             </Button>
             <Button
               variant="outline"
@@ -301,13 +301,13 @@ export default function ReceiptList() {
               onClick={() => setExportDialogOpen(true)}
             >
               <Download className="mr-2 h-4 w-4" />
-              Export{selectedCount > 0 ? ` ${selectedCount}` : ''}
+              {selectedCount > 0 ? t('exportCount', { count: selectedCount }) : t('exportButton')}
             </Button>
             <Button
               variant="destructive"
               disabled={selectedCount === 0}
               onClick={async () => {
-                if (!confirm(`Delete ${selectedCount} receipt${selectedCount === 1 ? '' : 's'}?`)) return
+                if (!confirm(t('deleteConfirm', { count: selectedCount }))) return
 
                 try {
                   const { error } = await supabase
@@ -317,17 +317,17 @@ export default function ReceiptList() {
 
                   if (error) throw error
 
-                  toast.success(`Deleted ${selectedCount} receipt${selectedCount === 1 ? '' : 's'}`)
+                  toast.success(t('deleteSuccess', { count: selectedCount }))
                   setSelectedIds(new Set())
                   fetchReceipts()
                 } catch (error) {
                   console.error('Error deleting receipts:', error)
-                  toast.error('Failed to delete receipts')
+                  toast.error(t('deleteFailed'))
                 }
               }}
             >
               <Trash2 className="mr-2 h-4 w-4" />
-              Delete{selectedCount > 0 ? ` ${selectedCount}` : ''}
+              {selectedCount > 0 ? t('deleteCount', { count: selectedCount }) : t('deleteButton')}
             </Button>
           </div>
         </div>
@@ -341,7 +341,7 @@ export default function ReceiptList() {
         onClear={handleClearFilters}
       />
 
-      {/* Search and Export Actions */}
+      {/* Search and Filter */}
       <div className="flex flex-col sm:flex-row gap-4">
         <Input
           placeholder={t('quickSearch')}
@@ -360,16 +360,6 @@ export default function ReceiptList() {
           <option value="completed">{tTable('status.completed')}</option>
           <option value="failed">{tTable('status.failed')}</option>
         </select>
-        {selectedCount > 0 && (
-          <Button
-            onClick={() => setExportDialogOpen(true)}
-            variant="default"
-            className="ml-auto"
-          >
-            <Download className="mr-2 h-4 w-4" />
-            {t('exportSelected', { count: selectedCount })}
-          </Button>
-        )}
       </div>
 
       {/* Desktop Table View */}
