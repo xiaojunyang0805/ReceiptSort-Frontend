@@ -11,27 +11,17 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import { Card } from '@/components/ui/card'
 import {
-  MoreHorizontal,
   Eye,
-  Edit,
   Trash2,
-  Play,
   FileText,
   Loader2,
   CreditCard,
   Download,
-  CheckSquare,
 } from 'lucide-react'
 import { formatDistanceToNow } from 'date-fns'
 import { toast } from 'sonner'
@@ -40,7 +30,6 @@ import { Checkbox } from '@/components/ui/checkbox'
 import ExportDialog from './ExportDialog'
 import ReceiptFilters, { ReceiptFiltersState, INITIAL_FILTERS } from './ReceiptFilters'
 import { useTranslations } from 'next-intl'
-import { ProcessAllButton } from './ProcessAllButton'
 
 interface Receipt {
   id: string
@@ -75,7 +64,6 @@ export default function ReceiptList() {
   const [statusFilter, setStatusFilter] = useState<string>('all')
   const [selectedReceipt, setSelectedReceipt] = useState<Receipt | null>(null)
   const [modalOpen, setModalOpen] = useState(false)
-  const [processingIds, setProcessingIds] = useState<Set<string>>(new Set())
   const [userCredits, setUserCredits] = useState<number>(0)
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set())
   const [exportDialogOpen, setExportDialogOpen] = useState(false)
@@ -172,71 +160,6 @@ export default function ReceiptList() {
       setUserCredits(data?.credits ?? 0)
     } catch (error) {
       console.error('Error fetching user credits:', error)
-    }
-  }
-
-  const handleProcessReceipt = async (receiptId: string) => {
-    if (userCredits < 1) {
-      toast.error('Insufficient credits', {
-        description: 'You need at least 1 credit to process a receipt.',
-        action: {
-          label: 'Buy Credits',
-          onClick: () => window.location.href = '/credits',
-        },
-      })
-      return
-    }
-
-    setProcessingIds(prev => new Set(prev).add(receiptId))
-
-    try {
-      const response = await fetch(`/api/receipts/${receiptId}/process`, {
-        method: 'POST',
-      })
-
-      const result = await response.json()
-
-      if (!response.ok) {
-        throw new Error(result.error || 'Failed to process receipt')
-      }
-
-      toast.success('Receipt processed successfully!', {
-        description: `Extracted: ${result.data.merchant_name} - $${result.data.amount}`,
-      })
-
-      // Update credits
-      setUserCredits(result.credits_remaining)
-
-      // Refetch receipts to update UI
-      await fetchReceipts()
-    } catch (error) {
-      console.error('Error processing receipt:', error)
-      toast.error('Failed to process receipt', {
-        description: error instanceof Error ? error.message : 'Unknown error',
-      })
-    } finally {
-      setProcessingIds(prev => {
-        const newSet = new Set(prev)
-        newSet.delete(receiptId)
-        return newSet
-      })
-    }
-  }
-
-  const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this receipt?')) return
-
-    try {
-      const { error } = await supabase
-        .from('receipts')
-        .delete()
-        .eq('id', id)
-
-      if (error) throw error
-
-      setReceipts(receipts.filter(r => r.id !== id))
-    } catch (error) {
-      console.error('Error deleting receipt:', error)
     }
   }
 
@@ -354,92 +277,58 @@ export default function ReceiptList() {
             <p className="text-sm text-muted-foreground">
               {selectedCount > 0
                 ? `${selectedCount} receipt${selectedCount === 1 ? '' : 's'} selected`
-                : t('quickActionsSubtitle')}
+                : 'Select receipts to perform actions'}
             </p>
           </div>
           <div className="flex gap-2 flex-wrap">
-            {selectedCount > 0 ? (
-              <>
-                <Button
-                  variant="outline"
-                  onClick={() => {
-                    const firstSelectedReceipt = filteredReceipts.find(r => selectedIds.has(r.id))
-                    if (firstSelectedReceipt) {
-                      setSelectedReceipt(firstSelectedReceipt)
-                      setModalOpen(true)
-                    }
-                  }}
-                >
-                  <Eye className="mr-2 h-4 w-4" />
-                  View Selected
-                </Button>
-                <Button
-                  variant="outline"
-                  onClick={() => setExportDialogOpen(true)}
-                >
-                  <Download className="mr-2 h-4 w-4" />
-                  Export {selectedCount}
-                </Button>
-                <Button
-                  variant="destructive"
-                  onClick={async () => {
-                    if (!confirm(`Delete ${selectedCount} receipt${selectedCount === 1 ? '' : 's'}?`)) return
+            <Button
+              variant="outline"
+              disabled={selectedCount === 0}
+              onClick={() => {
+                const firstSelectedReceipt = filteredReceipts.find(r => selectedIds.has(r.id))
+                if (firstSelectedReceipt) {
+                  setSelectedReceipt(firstSelectedReceipt)
+                  setModalOpen(true)
+                }
+              }}
+            >
+              <Eye className="mr-2 h-4 w-4" />
+              View Details{selectedCount > 0 ? ` (${selectedCount})` : ''}
+            </Button>
+            <Button
+              variant="outline"
+              disabled={selectedCount === 0}
+              onClick={() => setExportDialogOpen(true)}
+            >
+              <Download className="mr-2 h-4 w-4" />
+              Export{selectedCount > 0 ? ` ${selectedCount}` : ''}
+            </Button>
+            <Button
+              variant="destructive"
+              disabled={selectedCount === 0}
+              onClick={async () => {
+                if (!confirm(`Delete ${selectedCount} receipt${selectedCount === 1 ? '' : 's'}?`)) return
 
-                    try {
-                      const { error } = await supabase
-                        .from('receipts')
-                        .delete()
-                        .in('id', Array.from(selectedIds))
+                try {
+                  const { error } = await supabase
+                    .from('receipts')
+                    .delete()
+                    .in('id', Array.from(selectedIds))
 
-                      if (error) throw error
+                  if (error) throw error
 
-                      toast.success(`Deleted ${selectedCount} receipt${selectedCount === 1 ? '' : 's'}`)
-                      setSelectedIds(new Set())
-                      fetchReceipts()
-                    } catch (error) {
-                      console.error('Error deleting receipts:', error)
-                      toast.error('Failed to delete receipts')
-                    }
-                  }}
-                >
-                  <Trash2 className="mr-2 h-4 w-4" />
-                  Delete {selectedCount}
-                </Button>
-              </>
-            ) : receipts.filter(r => r.processing_status === 'pending').length > 0 ? (
-              <ProcessAllButton
-                pendingCount={receipts.filter(r => r.processing_status === 'pending').length}
-                pendingIds={receipts.filter(r => r.processing_status === 'pending').map(r => r.id)}
-                userCredits={userCredits}
-              />
-            ) : (
-              completedReceipts.length > 0 && (
-                <>
-                  <Button
-                    variant="outline"
-                    onClick={() => {
-                      // Select all completed receipts
-                      setSelectedIds(new Set(completedReceipts.map(r => r.id)))
-                    }}
-                  >
-                    <CheckSquare className="mr-2 h-4 w-4" />
-                    Select All ({completedReceipts.length})
-                  </Button>
-                  <Button
-                    variant="outline"
-                    onClick={() => {
-                      if (completedReceipts.length > 0) {
-                        setExportDialogOpen(true)
-                        setSelectedIds(new Set(completedReceipts.map(r => r.id)))
-                      }
-                    }}
-                  >
-                    <Download className="mr-2 h-4 w-4" />
-                    Export All
-                  </Button>
-                </>
-              )
-            )}
+                  toast.success(`Deleted ${selectedCount} receipt${selectedCount === 1 ? '' : 's'}`)
+                  setSelectedIds(new Set())
+                  fetchReceipts()
+                } catch (error) {
+                  console.error('Error deleting receipts:', error)
+                  toast.error('Failed to delete receipts')
+                }
+              }}
+            >
+              <Trash2 className="mr-2 h-4 w-4" />
+              Delete{selectedCount > 0 ? ` ${selectedCount}` : ''}
+            </Button>
           </div>
         </div>
       </Card>
@@ -502,7 +391,6 @@ export default function ReceiptList() {
               <TableHead>{tTable('columns.category')}</TableHead>
               <TableHead>{tTable('columns.status')}</TableHead>
               <TableHead>{tTable('columns.uploaded')}</TableHead>
-              <TableHead className="w-12"></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -543,76 +431,6 @@ export default function ReceiptList() {
                     addSuffix: true,
                   })}
                 </TableCell>
-                <TableCell>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="icon">
-                        <MoreHorizontal className="h-4 w-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuItem onClick={() => {
-                        setSelectedReceipt(receipt)
-                        setModalOpen(true)
-                      }}>
-                        <Eye className="mr-2 h-4 w-4" />
-                        {t('dropdownMenu.viewDetails')}
-                      </DropdownMenuItem>
-                      {receipt.processing_status === 'pending' && (
-                        <DropdownMenuItem
-                          onClick={() => handleProcessReceipt(receipt.id)}
-                          disabled={userCredits < 1 || processingIds.has(receipt.id)}
-                        >
-                          {processingIds.has(receipt.id) ? (
-                            <>
-                              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                              {t('dropdownMenu.processing')}
-                            </>
-                          ) : (
-                            <>
-                              <Play className="mr-2 h-4 w-4" />
-                              {t('dropdownMenu.process')}
-                            </>
-                          )}
-                        </DropdownMenuItem>
-                      )}
-                      {receipt.processing_status === 'completed' && (
-                        <DropdownMenuItem onClick={() => {
-                          setSelectedReceipt(receipt)
-                          setModalOpen(true)
-                        }}>
-                          <Edit className="mr-2 h-4 w-4" />
-                          {t('dropdownMenu.editData')}
-                        </DropdownMenuItem>
-                      )}
-                      {receipt.processing_status === 'failed' && (
-                        <DropdownMenuItem
-                          onClick={() => handleProcessReceipt(receipt.id)}
-                          disabled={userCredits < 1 || processingIds.has(receipt.id)}
-                        >
-                          {processingIds.has(receipt.id) ? (
-                            <>
-                              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                              {t('dropdownMenu.retrying')}
-                            </>
-                          ) : (
-                            <>
-                              <Play className="mr-2 h-4 w-4" />
-                              {t('dropdownMenu.retry')}
-                            </>
-                          )}
-                        </DropdownMenuItem>
-                      )}
-                      <DropdownMenuItem
-                        className="text-destructive"
-                        onClick={() => handleDelete(receipt.id)}
-                      >
-                        <Trash2 className="mr-2 h-4 w-4" />
-                        {t('dropdownMenu.delete')}
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -630,74 +448,12 @@ export default function ReceiptList() {
               <div className="flex-1 min-w-0">
                 <div className="flex items-start justify-between gap-2">
                   <h3 className="font-medium truncate">{receipt.file_name}</h3>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="icon" className="flex-shrink-0">
-                        <MoreHorizontal className="h-4 w-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuItem onClick={() => {
-                        setSelectedReceipt(receipt)
-                        setModalOpen(true)
-                      }}>
-                        <Eye className="mr-2 h-4 w-4" />
-                        {t('dropdownMenu.viewDetails')}
-                      </DropdownMenuItem>
-                      {receipt.processing_status === 'pending' && (
-                        <DropdownMenuItem
-                          onClick={() => handleProcessReceipt(receipt.id)}
-                          disabled={userCredits < 1 || processingIds.has(receipt.id)}
-                        >
-                          {processingIds.has(receipt.id) ? (
-                            <>
-                              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                              {t('dropdownMenu.processing')}
-                            </>
-                          ) : (
-                            <>
-                              <Play className="mr-2 h-4 w-4" />
-                              {t('dropdownMenu.process')}
-                            </>
-                          )}
-                        </DropdownMenuItem>
-                      )}
-                      {receipt.processing_status === 'completed' && (
-                        <DropdownMenuItem onClick={() => {
-                          setSelectedReceipt(receipt)
-                          setModalOpen(true)
-                        }}>
-                          <Edit className="mr-2 h-4 w-4" />
-                          {t('dropdownMenu.editData')}
-                        </DropdownMenuItem>
-                      )}
-                      {receipt.processing_status === 'failed' && (
-                        <DropdownMenuItem
-                          onClick={() => handleProcessReceipt(receipt.id)}
-                          disabled={userCredits < 1 || processingIds.has(receipt.id)}
-                        >
-                          {processingIds.has(receipt.id) ? (
-                            <>
-                              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                              {t('dropdownMenu.retrying')}
-                            </>
-                          ) : (
-                            <>
-                              <Play className="mr-2 h-4 w-4" />
-                              {t('dropdownMenu.retry')}
-                            </>
-                          )}
-                        </DropdownMenuItem>
-                      )}
-                      <DropdownMenuItem
-                        className="text-destructive"
-                        onClick={() => handleDelete(receipt.id)}
-                      >
-                        <Trash2 className="mr-2 h-4 w-4" />
-                        {t('dropdownMenu.delete')}
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
+                  <Checkbox
+                    checked={selectedIds.has(receipt.id)}
+                    onCheckedChange={() => handleSelectReceipt(receipt.id)}
+                    disabled={receipt.processing_status !== 'completed'}
+                    className="flex-shrink-0"
+                  />
                 </div>
                 <div className="mt-2 space-y-1 text-sm">
                   {receipt.merchant_name && (
