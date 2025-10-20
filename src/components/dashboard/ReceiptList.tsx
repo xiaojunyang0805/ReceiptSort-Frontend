@@ -31,6 +31,7 @@ import {
   Loader2,
   CreditCard,
   Download,
+  CheckSquare,
 } from 'lucide-react'
 import { formatDistanceToNow } from 'date-fns'
 import { toast } from 'sonner'
@@ -405,13 +406,38 @@ export default function ReceiptList() {
                   Delete {selectedCount}
                 </Button>
               </>
+            ) : receipts.filter(r => r.processing_status === 'pending').length > 0 ? (
+              <ProcessAllButton
+                pendingCount={receipts.filter(r => r.processing_status === 'pending').length}
+                pendingIds={receipts.filter(r => r.processing_status === 'pending').map(r => r.id)}
+                userCredits={userCredits}
+              />
             ) : (
-              receipts.filter(r => r.processing_status === 'pending').length > 0 && (
-                <ProcessAllButton
-                  pendingCount={receipts.filter(r => r.processing_status === 'pending').length}
-                  pendingIds={receipts.filter(r => r.processing_status === 'pending').map(r => r.id)}
-                  userCredits={userCredits}
-                />
+              completedReceipts.length > 0 && (
+                <>
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      // Select all completed receipts
+                      setSelectedIds(new Set(completedReceipts.map(r => r.id)))
+                    }}
+                  >
+                    <CheckSquare className="mr-2 h-4 w-4" />
+                    Select All ({completedReceipts.length})
+                  </Button>
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      if (completedReceipts.length > 0) {
+                        setExportDialogOpen(true)
+                        setSelectedIds(new Set(completedReceipts.map(r => r.id)))
+                      }
+                    }}
+                  >
+                    <Download className="mr-2 h-4 w-4" />
+                    Export All
+                  </Button>
+                </>
               )
             )}
           </div>
