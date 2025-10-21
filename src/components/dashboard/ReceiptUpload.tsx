@@ -17,8 +17,9 @@ interface UploadFile {
   id: string
   preview?: string
   progress: number
-  status: 'pending' | 'uploading' | 'success' | 'error'
+  status: 'pending' | 'uploading' | 'processing' | 'success' | 'error'
   error?: string
+  receiptId?: string // Store receipt ID for processing
 }
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024 // 10MB
@@ -107,6 +108,54 @@ export default function ReceiptUpload() {
     })
   }
 
+  const processReceipt = async (uploadFileId: string, receiptId: string) => {
+    try {
+      // Call the process API endpoint
+      const response = await fetch(`/api/receipts/${receiptId}/process`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to process receipt')
+      }
+
+      const result = await response.json()
+      console.log('Receipt processed successfully:', result)
+
+      // Update status to success
+      setUploadFiles((prev) =>
+        prev.map((f) => (f.id === uploadFileId ? { ...f, status: 'success', progress: 100 } : f))
+      )
+
+      const fileName = uploadFiles.find(f => f.id === uploadFileId)?.file.name || 'Receipt'
+      toast.success(`${fileName} processed successfully!`)
+    } catch (error) {
+      console.error('Processing error:', error)
+      const errorMessage = error instanceof Error ? error.message : 'Processing failed'
+
+      // Update status to error
+      setUploadFiles((prev) =>
+        prev.map((f) =>
+          f.id === uploadFileId
+            ? {
+                ...f,
+                status: 'error',
+                error: errorMessage,
+                progress: 0,
+              }
+            : f
+        )
+      )
+
+      const fileName = uploadFiles.find(f => f.id === uploadFileId)?.file.name || 'Receipt'
+      toast.error(`Failed to process ${fileName}: ${errorMessage}`)
+    }
+  }
+
   const uploadFile = async (uploadFile: UploadFile) => {
     const { file, id } = uploadFile
 
@@ -148,7 +197,7 @@ export default function ReceiptUpload() {
       } = supabase.storage.from('receipts').getPublicUrl(filePath)
 
       // Create database record
-      const { error: dbError } = await supabase.from('receipts').insert({
+      const { data: receiptData, error: dbError } = await supabase.from('receipts').insert({
         user_id: user.id,
         file_name: file.name,
         file_path: filePath,
@@ -156,16 +205,20 @@ export default function ReceiptUpload() {
         file_type: file.type,
         file_size: file.size,
         processing_status: 'pending',
-      })
+      }).select().single()
 
       if (dbError) throw dbError
+      if (!receiptData) throw new Error('Failed to create receipt record')
 
-      // Success
+      // Update progress - upload complete, now processing
       setUploadFiles((prev) =>
-        prev.map((f) => (f.id === id ? { ...f, status: 'success', progress: 100 } : f))
+        prev.map((f) => (f.id === id ? { ...f, status: 'processing', progress: 70, receiptId: receiptData.id } : f))
       )
 
-      toast.success(`${file.name} uploaded successfully`)
+      toast.success(`${file.name} uploaded successfully, processing...`)
+
+      // Auto-process the receipt
+      await processReceipt(id, receiptData.id)
     } catch (error) {
       console.error('Upload error:', error)
       const errorMessage = error instanceof Error ? error.message : 'Upload failed'
@@ -285,10 +338,12 @@ export default function ReceiptUpload() {
                   <p className="font-medium truncate">{uploadFile.file.name}</p>
                   <p className="text-sm text-muted-foreground">
                     {(uploadFile.file.size / 1024 / 1024).toFixed(2)} MB
+                    {uploadFile.status === 'processing' && ' • Processing with AI...'}
+                    {uploadFile.status === 'uploading' && ' • Uploading...'}
                   </p>
 
                   {/* Progress Bar */}
-                  {uploadFile.status === 'uploading' && (
+                  {(uploadFile.status === 'uploading' || uploadFile.status === 'processing') && (
                     <div className="mt-2 bg-muted rounded-full h-1.5 overflow-hidden">
                       <div
                         className="bg-primary h-full transition-all duration-300"
@@ -311,7 +366,7 @@ export default function ReceiptUpload() {
                   {uploadFile.status === 'error' && (
                     <AlertCircle className="h-5 w-5 text-destructive" />
                   )}
-                  {uploadFile.status === 'uploading' && (
+                  {(uploadFile.status === 'uploading' || uploadFile.status === 'processing') && (
                     <Loader2 className="h-5 w-5 animate-spin text-primary" />
                   )}
                   {uploadFile.status === 'pending' && (
