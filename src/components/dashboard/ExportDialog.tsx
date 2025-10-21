@@ -276,12 +276,27 @@ export default function ExportDialog({
         console.error('[Export Dialog] Export failed. Status:', response.status, 'Response:', errorText)
 
         let errorMessage = 'Export failed'
+        let errorDescription = ''
+
         try {
           const error = JSON.parse(errorText)
           errorMessage = error.error || error.details || 'Export failed'
+
+          // Add specific error descriptions
+          if (errorMessage.includes('No completed receipts')) {
+            errorDescription = 'Selected receipts are still being processed. Please wait for processing to complete.'
+          } else if (errorMessage.includes('Insufficient credits')) {
+            errorDescription = 'You need more credits to perform this export. Please purchase credits.'
+          }
         } catch {
           errorMessage = errorText || 'Export failed'
         }
+
+        toast({
+          title: errorMessage,
+          description: errorDescription || 'Please try again or contact support',
+          variant: 'destructive',
+        })
 
         throw new Error(errorMessage)
       }

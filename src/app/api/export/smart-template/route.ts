@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
       .from('receipts')
       .select('*')
       .in('id', receipt_ids)
-      .eq('status', 'completed')
+      .eq('processing_status', 'completed')
 
     if (fetchError) {
       throw new Error(`Failed to fetch receipts: ${fetchError.message}`)
