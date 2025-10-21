@@ -188,28 +188,38 @@ export async function POST(request: NextRequest) {
     // Generate the Excel file
     const buffer = await workbook.xlsx.writeBuffer()
 
-    console.log('[Smart Template Export] Generated buffer:', buffer.byteLength, 'bytes')
+    console.log(`[Smart Template Export ${requestId}] Generated buffer: ${buffer.byteLength} bytes`)
 
     // CHARGE CREDITS NOW (only after successful generation)
+    console.log(`[Smart Template Export ${requestId}] Charging ${TEMPLATE_PRICING.COST_PER_TEMPLATE} credits...`)
+    console.log(`[Smart Template Export ${requestId}] Current credits: ${profile.credits}, After: ${profile.credits - TEMPLATE_PRICING.COST_PER_TEMPLATE}`)
+
     const { error: deductError } = await supabase
       .from('profiles')
       .update({ credits: profile.credits - TEMPLATE_PRICING.COST_PER_TEMPLATE })
       .eq('id', user.id)
 
     if (deductError) {
-      console.error('[Smart Template Export] Failed to deduct credits:', deductError)
+      console.error(`[Smart Template Export ${requestId}] ❌ Failed to deduct credits:`, deductError)
       // Continue anyway since file was generated
+    } else {
+      console.log(`[Smart Template Export ${requestId}] ✓ Credits deducted successfully`)
     }
 
     // Record the transaction
-    await supabase.from('credit_transactions').insert({
+    console.log(`[Smart Template Export ${requestId}] Recording transaction...`)
+    const { error: txError } = await supabase.from('credit_transactions').insert({
       user_id: user.id,
       amount: -TEMPLATE_PRICING.COST_PER_TEMPLATE,
       transaction_type: 'usage',
       description: `Smart template export: ${receipts.length} receipts`,
     })
 
-    console.log('[Smart Template Export] Credits charged:', TEMPLATE_PRICING.COST_PER_TEMPLATE)
+    if (txError) {
+      console.error(`[Smart Template Export ${requestId}] ❌ Failed to record transaction:`, txError)
+    } else {
+      console.log(`[Smart Template Export ${requestId}] ✓ Transaction recorded`)
+    }
 
     // If user wants to save for reuse, create template record
     if (save_for_reuse && template_name) {
@@ -251,17 +261,17 @@ export async function POST(request: NextRequest) {
     // Return the file
     const filename = `receipts_export_${new Date().toISOString().split('T')[0]}.xlsx`
 
-    // Convert Buffer to Uint8Array for proper binary transfer
-    const uint8Array = new Uint8Array(buffer)
+    console.log(`[Smart Template Export ${requestId}] ========== RETURNING FILE ==========`)
+    console.log(`[Smart Template Export ${requestId}] Filename: ${filename}`)
+    console.log(`[Smart Template Export ${requestId}] Buffer type: ${buffer.constructor.name}`)
+    console.log(`[Smart Template Export ${requestId}] Buffer length: ${buffer.length || buffer.byteLength}`)
 
-    console.log('[Smart Template Export] Returning file:', filename, uint8Array.length, 'bytes')
-
-    return new NextResponse(uint8Array, {
+    // Return buffer directly - Next.js handles Buffer properly
+    return new NextResponse(buffer, {
       status: 200,
       headers: {
         'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         'Content-Disposition': `attachment; filename="${filename}"`,
-        'Content-Length': uint8Array.length.toString(),
       },
     })
   } catch (error) {
