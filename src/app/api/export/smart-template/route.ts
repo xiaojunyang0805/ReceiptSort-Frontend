@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
-import ExcelJS from 'exceljs'
+import * as XLSX from 'xlsx'
 import { TEMPLATE_PRICING } from '@/lib/template-pricing'
 
 interface SmartTemplateExportRequest {
@@ -106,16 +106,14 @@ export async function POST(request: NextRequest) {
 
     // Decode template file from base64
     const templateBuffer = Buffer.from(template_file, 'base64')
-    const arrayBuffer = templateBuffer.buffer.slice(
-      templateBuffer.byteOffset,
-      templateBuffer.byteOffset + templateBuffer.byteLength
-    )
 
-    // Load the template workbook
-    const workbook = new ExcelJS.Workbook()
-    await workbook.xlsx.load(arrayBuffer)
+    // Load the template workbook using xlsx library (better WPS Office compatibility)
+    const workbook = XLSX.read(templateBuffer, { cellStyles: true })
 
-    const worksheet = workbook.getWorksheet(sheet_name)
+    console.log(`[Smart Template Export ${requestId}] Loaded template with xlsx library`)
+    console.log(`[Smart Template Export ${requestId}] Sheet names:`, workbook.SheetNames)
+
+    const worksheet = workbook.Sheets[sheet_name]
     if (!worksheet) {
       throw new Error(`Sheet "${sheet_name}" not found in template`)
     }
@@ -128,7 +126,6 @@ export async function POST(request: NextRequest) {
 
       Object.entries(field_mapping).forEach(([field, column]) => {
         const cellAddress = `${column}${rowNum}`
-        const cell = worksheet.getCell(cellAddress)
 
         // Get the value from receipt
         let value: string | number | Date | null = null
@@ -171,24 +168,34 @@ export async function POST(request: NextRequest) {
             value = ''
         }
 
-        // Set the cell value
-        cell.value = value
+        // Set cell value using xlsx format
+        if (!worksheet[cellAddress]) {
+          worksheet[cellAddress] = {}
+        }
 
-        // Apply formatting for specific fields
-        if (field === 'receipt_date' && value instanceof Date) {
-          cell.numFmt = 'yyyy-mm-dd'
-        } else if (field.includes('amount') || field === 'subtotal') {
-          cell.numFmt = '#,##0.00'
+        if (value instanceof Date) {
+          worksheet[cellAddress].v = value
+          worksheet[cellAddress].t = 'd'
+          worksheet[cellAddress].z = 'yyyy-mm-dd'
+        } else if (typeof value === 'number') {
+          worksheet[cellAddress].v = value
+          worksheet[cellAddress].t = 'n'
+          if (field.includes('amount') || field === 'subtotal') {
+            worksheet[cellAddress].z = '#,##0.00'
+          }
+        } else {
+          worksheet[cellAddress].v = value
+          worksheet[cellAddress].t = 's'
         }
       })
     })
 
     console.log('[Smart Template Export] Generating file...')
 
-    // Generate the Excel file
-    const buffer = await workbook.xlsx.writeBuffer()
+    // Generate the Excel file using xlsx library (WPS Office compatible)
+    const buffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'buffer' })
 
-    console.log(`[Smart Template Export ${requestId}] Generated buffer: ${buffer.byteLength} bytes`)
+    console.log(`[Smart Template Export ${requestId}] Generated buffer: ${buffer.length} bytes`)
 
     // CHARGE CREDITS NOW (only after successful generation)
     console.log(`[Smart Template Export ${requestId}] Charging ${TEMPLATE_PRICING.COST_PER_TEMPLATE} credits...`)
@@ -264,7 +271,7 @@ export async function POST(request: NextRequest) {
     console.log(`[Smart Template Export ${requestId}] ========== RETURNING FILE ==========`)
     console.log(`[Smart Template Export ${requestId}] Filename: ${filename}`)
     console.log(`[Smart Template Export ${requestId}] Buffer type: ${buffer.constructor.name}`)
-    console.log(`[Smart Template Export ${requestId}] Buffer length: ${buffer.byteLength}`)
+    console.log(`[Smart Template Export ${requestId}] Buffer length: ${buffer.length}`)
 
     // Return buffer with proper type casting (same as Excel export route)
     return new NextResponse(buffer as unknown as BodyInit, {
@@ -272,7 +279,7 @@ export async function POST(request: NextRequest) {
       headers: {
         'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         'Content-Disposition': `attachment; filename="${filename}"`,
-        'Content-Length': buffer.byteLength.toString(),
+        'Content-Length': buffer.length.toString(),
         'Cache-Control': 'no-cache',
       },
     })
