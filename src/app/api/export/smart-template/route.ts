@@ -264,7 +264,7 @@ export async function POST(request: NextRequest) {
     console.log(`[Smart Template Export ${requestId}] ========== RETURNING FILE ==========`)
     console.log(`[Smart Template Export ${requestId}] Filename: ${filename}`)
     console.log(`[Smart Template Export ${requestId}] Buffer type: ${buffer.constructor.name}`)
-    console.log(`[Smart Template Export ${requestId}] Buffer length: ${buffer.length || buffer.byteLength}`)
+    console.log(`[Smart Template Export ${requestId}] Buffer length: ${buffer.byteLength}`)
 
     // Return buffer directly - Next.js handles Buffer properly
     return new NextResponse(buffer, {
