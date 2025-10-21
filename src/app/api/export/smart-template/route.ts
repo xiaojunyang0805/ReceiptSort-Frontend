@@ -168,6 +168,8 @@ export async function POST(request: NextRequest) {
     // Generate the Excel file
     const buffer = await workbook.xlsx.writeBuffer()
 
+    console.log('[Smart Template Export] Generated buffer:', buffer.byteLength, 'bytes')
+
     // CHARGE CREDITS NOW (only after successful generation)
     const { error: deductError } = await supabase
       .from('profiles')
@@ -205,7 +207,7 @@ export async function POST(request: NextRequest) {
 
       if (!uploadError) {
         // Create template record
-        await supabase.from('export_templates').insert({
+        const { error: insertError } = await supabase.from('export_templates').insert({
           user_id: user.id,
           template_name: template_name,
           description: template_description || null,
@@ -216,17 +218,30 @@ export async function POST(request: NextRequest) {
           credits_spent: 0, // No additional charge since already charged for export
         })
 
-        console.log('[Smart Template Export] Template saved for reuse')
+        if (insertError) {
+          console.error('[Smart Template Export] Failed to save template:', insertError)
+        } else {
+          console.log('[Smart Template Export] Template saved for reuse')
+        }
+      } else {
+        console.error('[Smart Template Export] Failed to upload template file:', uploadError)
       }
     }
 
     // Return the file
     const filename = `receipts_export_${new Date().toISOString().split('T')[0]}.xlsx`
 
-    return new NextResponse(buffer, {
+    // Convert Buffer to Uint8Array for proper binary transfer
+    const uint8Array = new Uint8Array(buffer)
+
+    console.log('[Smart Template Export] Returning file:', filename, uint8Array.length, 'bytes')
+
+    return new NextResponse(uint8Array, {
+      status: 200,
       headers: {
         'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         'Content-Disposition': `attachment; filename="${filename}"`,
+        'Content-Length': uint8Array.length.toString(),
       },
     })
   } catch (error) {
