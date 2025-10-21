@@ -229,11 +229,21 @@ export async function POST(request: NextRequest) {
     }
 
     // If user wants to save for reuse, create template record
+    console.log(`[Smart Template Export ${requestId}] Checking template save:`, {
+      save_for_reuse,
+      template_name,
+      hasTemplateName: !!template_name,
+    })
+
     if (save_for_reuse && template_name) {
-      console.log('[Smart Template Export] Saving template for reuse...')
+      console.log(`[Smart Template Export ${requestId}] Saving template for reuse...`)
+      console.log(`[Smart Template Export ${requestId}] Template name: "${template_name}"`)
 
       // Upload template file to storage
       const fileName = `${user.id}/templates/${Date.now()}_${template_name.replace(/[^a-zA-Z0-9]/g, '_')}.xlsx`
+
+      console.log(`[Smart Template Export ${requestId}] Uploading to storage:`, fileName)
+      console.log(`[Smart Template Export ${requestId}] Template buffer size:`, templateBuffer.length)
 
       const { error: uploadError } = await supabase.storage
         .from('receipts')
@@ -242,9 +252,18 @@ export async function POST(request: NextRequest) {
           upsert: false,
         })
 
-      if (!uploadError) {
+      if (uploadError) {
+        console.error(`[Smart Template Export ${requestId}] ❌ Upload error:`, {
+          message: uploadError.message,
+          name: uploadError.name,
+          cause: uploadError.cause,
+          stack: uploadError.stack,
+        })
+      } else {
+        console.log(`[Smart Template Export ${requestId}] ✓ File uploaded successfully`)
+
         // Create template record
-        const { error: insertError } = await supabase.from('export_templates').insert({
+        const templateRecord = {
           user_id: user.id,
           template_name: template_name,
           description: template_description || null,
@@ -253,16 +272,36 @@ export async function POST(request: NextRequest) {
           start_row: start_row,
           field_mapping: field_mapping,
           credits_spent: 0, // No additional charge since already charged for export
+        }
+
+        console.log(`[Smart Template Export ${requestId}] Inserting template record:`, {
+          user_id: templateRecord.user_id,
+          template_name: templateRecord.template_name,
+          file_path: templateRecord.file_path,
+          sheet_name: templateRecord.sheet_name,
+          start_row: templateRecord.start_row,
+          fieldMappingKeys: Object.keys(templateRecord.field_mapping),
         })
 
+        const { error: insertError } = await supabase.from('export_templates').insert(templateRecord)
+
         if (insertError) {
-          console.error('[Smart Template Export] Failed to save template:', insertError)
+          console.error(`[Smart Template Export ${requestId}] ❌ Insert error:`, {
+            message: insertError.message,
+            code: insertError.code,
+            details: insertError.details,
+            hint: insertError.hint,
+          })
         } else {
-          console.log('[Smart Template Export] Template saved for reuse')
+          console.log(`[Smart Template Export ${requestId}] ✓ Template saved successfully!`)
         }
-      } else {
-        console.error('[Smart Template Export] Failed to upload template file:', uploadError)
       }
+    } else {
+      console.log(`[Smart Template Export ${requestId}] Template save skipped:`, {
+        save_for_reuse,
+        template_name,
+        reason: !save_for_reuse ? 'save_for_reuse is false' : 'template_name is empty'
+      })
     }
 
     // Return the file
