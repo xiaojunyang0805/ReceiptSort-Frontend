@@ -184,10 +184,12 @@ export default function ExportDialog({
     }
   }
 
-  const handleExport = async () => {
+  const handleExport = async (overrideFormat?: ExportFormat) => {
     if (selectedIds.length === 0) return
 
     setIsExporting(true)
+
+    const exportFormat = overrideFormat || selectedFormat
 
     // Save template preference
     saveTemplatePreference(selectedTemplate, customColumns)
@@ -198,28 +200,47 @@ export default function ExportDialog({
         receipt_ids: selectedIds,
       }
 
+      console.log('[Export Dialog] handleExport called with format:', exportFormat)
+
       // Determine endpoint based on format
-      if (selectedFormat === 'csv') {
+      if (exportFormat === 'csv') {
         endpoint = '/api/export/csv'
         requestBody.locale = locale
         requestBody.template_id = selectedTemplate
         if (selectedTemplate === 'custom') {
           requestBody.custom_columns = customColumns
         }
-      } else if (selectedFormat === 'template') {
+      } else if (exportFormat === 'template') {
         endpoint = '/api/export/template'
         requestBody.template_id = selectedCustomTemplate
-      } else if (selectedFormat === 'smart-template') {
+      } else if (exportFormat === 'smart-template') {
         // Smart template with AI analysis
         if (!uploadedTemplate || !aiAnalysis) {
-          throw new Error('Template not uploaded or analyzed')
+          toast({
+            title: 'Template required',
+            description: 'Please upload and analyze a template first',
+            variant: 'destructive',
+          })
+          setIsExporting(false)
+          return
         }
 
         endpoint = '/api/export/smart-template'
 
+        console.log('[Export Dialog] Processing smart template:', {
+          fileName: uploadedTemplate.name,
+          fileSize: uploadedTemplate.size,
+          sheetName: aiAnalysis.sheetName,
+          startRow: aiAnalysis.startRow,
+          fieldCount: Object.keys(aiAnalysis.fieldMapping).length,
+          receiptCount: selectedIds.length,
+        })
+
         // Convert file to base64
         const arrayBuffer = await uploadedTemplate.arrayBuffer()
         const base64 = Buffer.from(arrayBuffer).toString('base64')
+
+        console.log('[Export Dialog] Base64 conversion complete, length:', base64.length)
 
         requestBody = {
           receipt_ids: selectedIds,
@@ -230,12 +251,12 @@ export default function ExportDialog({
           save_for_reuse: saveForReuse,
           template_name: saveForReuse ? templateNameForSave : undefined,
         }
-      } else if (selectedFormat === 'excel') {
+      } else if (exportFormat === 'excel') {
         requestBody.locale = locale
       }
 
       console.log('[Export Dialog] Starting export:', {
-        format: selectedFormat,
+        format: exportFormat,
         receiptCount: selectedIds.length,
         endpoint
       })
@@ -248,12 +269,21 @@ export default function ExportDialog({
         body: JSON.stringify(requestBody),
       })
 
-      console.log('[Export Dialog] Response status:', response.status)
+      console.log('[Export Dialog] Response status:', response.status, 'Content-Type:', response.headers.get('Content-Type'))
 
       if (!response.ok) {
-        const error = await response.json()
-        console.error('[Export Dialog] Export failed:', error)
-        throw new Error(error.error || 'Export failed')
+        const errorText = await response.text()
+        console.error('[Export Dialog] Export failed. Status:', response.status, 'Response:', errorText)
+
+        let errorMessage = 'Export failed'
+        try {
+          const error = JSON.parse(errorText)
+          errorMessage = error.error || error.details || 'Export failed'
+        } catch {
+          errorMessage = errorText || 'Export failed'
+        }
+
+        throw new Error(errorMessage)
       }
 
       console.log('[Export Dialog] Export succeeded, downloading file...')
@@ -297,7 +327,7 @@ export default function ExportDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-4xl max-h-[85vh]">
+      <DialogContent className="sm:max-w-6xl max-h-[95vh] flex flex-col">
         <DialogHeader>
           <DialogTitle>Export Receipts</DialogTitle>
           <DialogDescription>
@@ -305,7 +335,7 @@ export default function ExportDialog({
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-6 py-4 overflow-y-auto max-h-[calc(85vh-200px)]">
+        <div className="space-y-6 py-4 overflow-y-auto flex-1">
           {/* SECTION 1: Standard Export */}
           <div className="border rounded-lg p-4 bg-gradient-to-br from-gray-50 to-white">
             <div className="flex items-center justify-between mb-4">
@@ -483,11 +513,11 @@ export default function ExportDialog({
             {/* Export Button for Standard Formats */}
             <div className="flex justify-end pt-2">
               <Button
-                onClick={handleExport}
+                onClick={() => handleExport()}
                 disabled={isExporting || selectedIds.length === 0 || selectedIds.length > MAX_EXPORT_RECEIPTS || selectedFormat === 'smart-template'}
                 className="w-full sm:w-auto"
               >
-                {isExporting ? (
+                {isExporting && selectedFormat !== 'smart-template' ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                     Exporting...
@@ -617,7 +647,16 @@ export default function ExportDialog({
             {/* Export with Template Button */}
             <div className="flex justify-end pt-2">
               <Button
-                onClick={handleExport}
+                onClick={async () => {
+                  console.log('[Export Dialog] AI Template export button clicked', {
+                    hasTemplate: !!uploadedTemplate,
+                    hasAnalysis: !!aiAnalysis,
+                    receiptCount: selectedIds.length
+                  })
+
+                  // Call export with smart-template format
+                  await handleExport('smart-template')
+                }}
                 disabled={!aiAnalysis || isExporting || selectedIds.length === 0 || selectedIds.length > MAX_EXPORT_RECEIPTS}
                 className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
               >
