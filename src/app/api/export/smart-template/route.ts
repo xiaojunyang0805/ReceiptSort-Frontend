@@ -266,12 +266,14 @@ export async function POST(request: NextRequest) {
     console.log(`[Smart Template Export ${requestId}] Buffer type: ${buffer.constructor.name}`)
     console.log(`[Smart Template Export ${requestId}] Buffer length: ${buffer.byteLength}`)
 
-    // Return buffer directly - Next.js handles Buffer properly
-    return new NextResponse(buffer, {
+    // Return buffer with proper type casting (same as Excel export route)
+    return new NextResponse(buffer as unknown as BodyInit, {
       status: 200,
       headers: {
         'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         'Content-Disposition': `attachment; filename="${filename}"`,
+        'Content-Length': buffer.byteLength.toString(),
+        'Cache-Control': 'no-cache',
       },
     })
   } catch (error) {
