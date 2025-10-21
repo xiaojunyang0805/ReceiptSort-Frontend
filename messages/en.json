@@ -16,6 +16,7 @@
     "receipts": "Receipts",
     "exports": "Exports",
     "credits": "Credits",
+    "templates": "Templates",
     "profile": "Profile",
     "upload": "Upload",
     "export": "Export",
@@ -300,9 +301,11 @@
       "show": "Show",
       "filters": "Filters",
       "quickActions": "Quick Actions",
+      "viewAndExport": "View and Export",
       "quickActionsSubtitle": "View receipts or process pending ones",
       "selectReceipts": "Select receipts to perform actions",
       "receiptsSelected": "{count} receipt{count, plural, one {} other {s}} selected",
+      "exportHistory": "Export History",
       "viewDetails": "View Details",
       "viewDetailsCount": "View Details ({count})",
       "exportButton": "Export",
@@ -499,6 +502,107 @@
             "description": "For high-volume businesses"
           }
         }
+      },
+      "templates": {
+        "title": "Custom Export Templates",
+        "description": "Create reusable templates for VAT declarations, accounting, and more",
+        "cost": "Cost per template",
+        "credits": "credits",
+        "maxTemplates": "Maximum templates",
+        "exportCost": "Export with template",
+        "free": "FREE",
+        "perfectFor": "Perfect for:",
+        "useCase1": "VAT declarations and tax reporting",
+        "useCase2": "Custom accounting formats",
+        "useCase3": "Multi-country compliance",
+        "useCase4": "Automated workflows",
+        "manageButton": "Manage Templates"
+      }
+    },
+    "templates": {
+      "pageTitle": "Export Templates - ReceiptSort",
+      "pageDescription": "Manage your custom export templates for receipts",
+      "title": "Export Templates",
+      "description": "Create custom templates to export receipts in your preferred format",
+      "quota": {
+        "title": "Template Quota",
+        "description": "Your template usage",
+        "remaining": "{count, plural, =0 {No templates remaining} one {1 template remaining} other {{count} templates remaining}}",
+        "limitReached": "You've reached the maximum number of templates. Delete unused templates to create new ones."
+      },
+      "createButton": "Create New Template",
+      "noTemplates": "No templates created yet",
+      "noTemplatesDescription": "Create your first template to export receipts in custom formats like VAT declarations",
+      "createFirstTemplate": "Create Your First Template",
+      "exportCount": "Times used",
+      "fieldsMapped": "Fields mapped",
+      "created": "Created",
+      "lastUsed": "Last used",
+      "deleteSuccess": "Template deleted successfully",
+      "info": {
+        "title": "How Custom Templates Work",
+        "point1": "Pay {credits} credits once to create a template",
+        "point2": "Export unlimited times for FREE",
+        "point3": "Perfect for VAT declarations and accounting",
+        "point4": "Map receipt fields to your template columns"
+      },
+      "deleteDialog": {
+        "title": "Delete Template?",
+        "description": "Are you sure you want to delete \"{name}\"? This action cannot be undone.",
+        "warning": "Note: No credits will be refunded for deleted templates.",
+        "deleting": "Deleting..."
+      },
+      "errors": {
+        "fetchFailed": "Failed to load templates",
+        "deleteFailed": "Failed to delete template"
+      },
+      "uploadDialog": {
+        "title": "Create Export Template",
+        "description": "Upload your Excel template and configure field mapping",
+        "steps": {
+          "upload": "Upload",
+          "configure": "Configure",
+          "confirm": "Confirm"
+        },
+        "uploading": "Uploading template...",
+        "clickToUpload": "Click to upload template file",
+        "fileTypes": "Excel files (.xlsx, .xls)",
+        "maxSize": "Max file size: {size}MB",
+        "uploadHint": "Upload your VAT declaration form, accounting template, or any Excel file you want to populate with receipt data",
+        "uploadSuccess": "Template uploaded successfully",
+        "uploadError": "Failed to upload template",
+        "fields": {
+          "name": "Template Name",
+          "description": "Description (optional)",
+          "sheetName": "Sheet Name",
+          "startRow": "Start Row",
+          "mapping": "Field Mapping"
+        },
+        "placeholders": {
+          "name": "e.g., VAT Declaration Q4 2025",
+          "description": "e.g., Quarterly VAT report for Netherlands"
+        },
+        "mappingHint": "Enter the column letter (A, B, C, etc.) for each field you want to include",
+        "fieldsMapped": "fields mapped",
+        "next": "Next",
+        "confirm": {
+          "title": "Confirm Template Creation",
+          "creditCharge": "This will charge {credits} credits",
+          "balance": "Your balance: {balance} credits",
+          "insufficientCredits": "Insufficient credits. Please purchase more credits.",
+          "benefits": "What you get:",
+          "benefit1": "Unlimited exports with this template (FREE)",
+          "benefit2": "Auto-populate your Excel forms",
+          "benefit3": "Edit and update mapping anytime",
+          "saving": "Creating template...",
+          "createTemplate": "Create Template"
+        },
+        "errors": {
+          "nameRequired": "Template name is required",
+          "mappingRequired": "At least one field mapping is required"
+        },
+        "saveSuccess": "{credits} credits charged. Template created!",
+        "saveError": "Failed to create template"
       }
     },
     "exports": {
@@ -510,7 +614,8 @@
       },
       "history": {
         "title": "Export History",
-        "subtitle": "View your past receipt exports"
+        "subtitle": "View your past receipt exports",
+        "autoDelete": "Files are automatically deleted after 30 days"
       },
       "buttons": {
         "exportAll": "Export All",
@@ -545,7 +650,18 @@
         "date": "Export Date",
         "receipts": "Receipts",
         "format": "Format",
-        "download": "Download"
+        "download": "Download",
+        "expires": "Expires",
+        "actions": "Actions"
+      },
+      "status": {
+        "expired": "Expired",
+        "daysShort": "d"
+      },
+      "actions": {
+        "download": "Download",
+        "downloading": "Downloading...",
+        "unavailable": "Unavailable"
       }
     },
     "profile": {

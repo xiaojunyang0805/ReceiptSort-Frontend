@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { Link } from '@/lib/navigation'
 import { usePathname } from '@/lib/navigation'
 import { cn } from '@/lib/utils'
-import { Home, Upload, Receipt, Download, CreditCard, Shield, UserCircle } from 'lucide-react'
+import { Home, Upload, Receipt, CreditCard, Shield, UserCircle, FileSpreadsheet } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { checkIsAdmin } from '@/lib/admin'
 
@@ -25,7 +25,7 @@ export function Sidebar({ className }: SidebarProps) {
     { name: t('dashboard'), href: '/dashboard', icon: Home },
     { name: t('uploadReceipts'), href: '/upload', icon: Upload },
     { name: t('receipts'), href: '/receipts', icon: Receipt },
-    { name: t('exports'), href: '/exports', icon: Download },
+    { name: t('templates'), href: '/templates', icon: FileSpreadsheet },
     { name: t('credits'), href: '/credits', icon: CreditCard },
     { name: t('account'), href: '/account', icon: UserCircle },
   ]

@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/cleanup-exports",
+      "schedule": "0 2 * * *"
+    }
+  ]
+}

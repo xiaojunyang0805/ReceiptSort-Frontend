@@ -16,6 +16,7 @@
     "receipts": "收据",
     "exports": "导出",
     "credits": "积分",
+    "templates": "模板",
     "profile": "个人资料",
     "upload": "上传",
     "export": "导出",
@@ -300,9 +301,11 @@
       "show": "显示",
       "filters": "筛选",
       "quickActions": "快速操作",
+      "viewAndExport": "查看和导出",
       "quickActionsSubtitle": "查看收据或处理待处理的收据",
       "selectReceipts": "选择收据以执行操作",
       "receiptsSelected": "已选择 {count} 张收据",
+      "exportHistory": "导出历史",
       "viewDetails": "查看详情",
       "viewDetailsCount": "查看详情 ({count})",
       "exportButton": "导出",
@@ -499,6 +502,107 @@
             "description": "适合大量使用的企业"
           }
         }
+      },
+      "templates": {
+        "title": "自定义导出模板",
+        "description": "创建可重复使用的模板用于增值税申报、会计等",
+        "cost": "每个模板费用",
+        "credits": "积分",
+        "maxTemplates": "最大模板数",
+        "exportCost": "使用模板导出",
+        "free": "免费",
+        "perfectFor": "适用于：",
+        "useCase1": "增值税申报和税务报告",
+        "useCase2": "自定义会计格式",
+        "useCase3": "多国合规",
+        "useCase4": "自动化工作流程",
+        "manageButton": "管理模板"
+      }
+    },
+    "templates": {
+      "pageTitle": "导出模板 - ReceiptSort",
+      "pageDescription": "管理您的自定义收据导出模板",
+      "title": "导出模板",
+      "description": "创建自定义模板以您喜欢的格式导出收据",
+      "quota": {
+        "title": "模板配额",
+        "description": "您的模板使用情况",
+        "remaining": "{count, plural, =0 {没有剩余模板} other {剩余 {count} 个模板}}",
+        "limitReached": "您已达到最大模板数量。删除未使用的模板以创建新模板。"
+      },
+      "createButton": "创建新模板",
+      "noTemplates": "尚未创建模板",
+      "noTemplatesDescription": "创建您的第一个模板以自定义格式（如增值税申报）导出收据",
+      "createFirstTemplate": "创建您的第一个模板",
+      "exportCount": "使用次数",
+      "fieldsMapped": "已映射字段",
+      "created": "创建于",
+      "lastUsed": "最后使用",
+      "deleteSuccess": "模板删除成功",
+      "info": {
+        "title": "自定义模板如何工作",
+        "point1": "支付 {credits} 积分一次即可创建模板",
+        "point2": "无限次免费导出",
+        "point3": "非常适合增值税申报和会计",
+        "point4": "将收据字段映射到您的模板列"
+      },
+      "deleteDialog": {
+        "title": "删除模板？",
+        "description": "您确定要删除 \"{name}\" 吗？此操作无法撤销。",
+        "warning": "注意：删除的模板不会退还积分。",
+        "deleting": "删除中..."
+      },
+      "errors": {
+        "fetchFailed": "无法加载模板",
+        "deleteFailed": "无法删除模板"
+      },
+      "uploadDialog": {
+        "title": "创建导出模板",
+        "description": "上传您的 Excel 模板并配置字段映射",
+        "steps": {
+          "upload": "上传",
+          "configure": "配置",
+          "confirm": "确认"
+        },
+        "uploading": "上传模板中...",
+        "clickToUpload": "点击上传模板文件",
+        "fileTypes": "Excel 文件 (.xlsx, .xls)",
+        "maxSize": "最大文件大小：{size}MB",
+        "uploadHint": "上传您的增值税申报表、会计模板或任何您想用收据数据填充的 Excel 文件",
+        "uploadSuccess": "模板上传成功",
+        "uploadError": "上传模板失败",
+        "fields": {
+          "name": "模板名称",
+          "description": "描述（可选）",
+          "sheetName": "工作表名称",
+          "startRow": "起始行",
+          "mapping": "字段映射"
+        },
+        "placeholders": {
+          "name": "例如，2025年第四季度增值税申报",
+          "description": "例如，荷兰季度增值税报告"
+        },
+        "mappingHint": "为您想要包含的每个字段输入列字母（A、B、C 等）",
+        "fieldsMapped": "个已映射字段",
+        "next": "下一步",
+        "confirm": {
+          "title": "确认创建模板",
+          "creditCharge": "这将花费 {credits} 积分",
+          "balance": "您的余额：{balance} 积分",
+          "insufficientCredits": "积分不足。请购买更多积分。",
+          "benefits": "您将获得：",
+          "benefit1": "使用此模板无限次免费导出",
+          "benefit2": "自动填充您的 Excel 表格",
+          "benefit3": "随时编辑和更新映射",
+          "saving": "创建模板中...",
+          "createTemplate": "创建模板"
+        },
+        "errors": {
+          "nameRequired": "模板名称为必填项",
+          "mappingRequired": "至少需要一个字段映射"
+        },
+        "saveSuccess": "已扣除 {credits} 积分。模板已创建！",
+        "saveError": "创建模板失败"
       }
     },
     "exports": {
@@ -510,7 +614,8 @@
       },
       "history": {
         "title": "导出历史",
-        "subtitle": "查看您过去的收据导出"
+        "subtitle": "查看您过去的收据导出",
+        "autoDelete": "文件将在30天后自动删除"
       },
       "buttons": {
         "exportAll": "导出全部",
@@ -545,7 +650,18 @@
         "date": "导出日期",
         "receipts": "收据",
         "format": "格式",
-        "download": "下载"
+        "download": "下载",
+        "expires": "过期时间",
+        "actions": "操作"
+      },
+      "status": {
+        "expired": "已过期",
+        "daysShort": "天"
+      },
+      "actions": {
+        "download": "下载",
+        "downloading": "下载中...",
+        "unavailable": "不可用"
       }
     },
     "profile": {

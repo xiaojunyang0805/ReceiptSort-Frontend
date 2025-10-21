@@ -22,12 +22,14 @@ import {
   Loader2,
   CreditCard,
   Download,
+  History,
 } from 'lucide-react'
 import { formatDistanceToNow } from 'date-fns'
 import { toast } from 'sonner'
 import { Link } from '@/lib/navigation'
 import { Checkbox } from '@/components/ui/checkbox'
 import ExportDialog from './ExportDialog'
+import ExportHistoryDialog from './ExportHistoryDialog'
 import ReceiptFilters, { ReceiptFiltersState, INITIAL_FILTERS } from './ReceiptFilters'
 import { useTranslations } from 'next-intl'
 
@@ -67,6 +69,7 @@ export default function ReceiptList() {
   const [userCredits, setUserCredits] = useState<number>(0)
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set())
   const [exportDialogOpen, setExportDialogOpen] = useState(false)
+  const [exportHistoryOpen, setExportHistoryOpen] = useState(false)
   const [filters, setFilters] = useState<ReceiptFiltersState>(INITIAL_FILTERS)
   const [appliedFilters, setAppliedFilters] = useState<ReceiptFiltersState>(INITIAL_FILTERS)
   const supabase = createClient()
@@ -269,42 +272,57 @@ export default function ReceiptList() {
         </Card>
       )}
 
-      {/* Quick Actions Bar */}
+      {/* View and Export Actions Bar */}
       <Card className="p-4">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div>
-            <h3 className="font-semibold text-lg">{t('quickActions')}</h3>
+          <div className="flex-1">
+            <h3 className="font-semibold text-lg">{t('viewAndExport')}</h3>
             <p className="text-sm text-muted-foreground">
               {selectedCount > 0
                 ? t('receiptsSelected', { count: selectedCount })
                 : t('selectReceipts')}
             </p>
           </div>
-          <div className="flex gap-2 flex-wrap">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
+            {/* Primary Actions */}
+            <div className="flex gap-2 flex-wrap">
+              <Button
+                variant="outline"
+                disabled={selectedCount === 0}
+                onClick={() => {
+                  const firstSelectedReceipt = filteredReceipts.find(r => selectedIds.has(r.id))
+                  if (firstSelectedReceipt) {
+                    setSelectedReceipt(firstSelectedReceipt)
+                    setModalOpen(true)
+                  }
+                }}
+              >
+                <Eye className="mr-2 h-4 w-4" />
+                {selectedCount > 0 ? t('viewDetailsCount', { count: selectedCount }) : t('viewDetails')}
+              </Button>
+              <Button
+                variant="outline"
+                disabled={selectedCount === 0}
+                onClick={() => setExportDialogOpen(true)}
+              >
+                <Download className="mr-2 h-4 w-4" />
+                {selectedCount > 0 ? t('exportCount', { count: selectedCount }) : t('exportButton')}
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => setExportHistoryOpen(true)}
+              >
+                <History className="mr-2 h-4 w-4" />
+                {t('exportHistory')}
+              </Button>
+            </div>
+
+            {/* Separator - only visible on larger screens */}
+            <div className="hidden sm:block w-px h-8 bg-border" />
+
+            {/* Destructive Action - Separated */}
             <Button
               variant="outline"
-              disabled={selectedCount === 0}
-              onClick={() => {
-                const firstSelectedReceipt = filteredReceipts.find(r => selectedIds.has(r.id))
-                if (firstSelectedReceipt) {
-                  setSelectedReceipt(firstSelectedReceipt)
-                  setModalOpen(true)
-                }
-              }}
-            >
-              <Eye className="mr-2 h-4 w-4" />
-              {selectedCount > 0 ? t('viewDetailsCount', { count: selectedCount }) : t('viewDetails')}
-            </Button>
-            <Button
-              variant="outline"
-              disabled={selectedCount === 0}
-              onClick={() => setExportDialogOpen(true)}
-            >
-              <Download className="mr-2 h-4 w-4" />
-              {selectedCount > 0 ? t('exportCount', { count: selectedCount }) : t('exportButton')}
-            </Button>
-            <Button
-              variant="destructive"
               disabled={selectedCount === 0}
               onClick={async () => {
                 if (!confirm(t('deleteConfirm', { count: selectedCount }))) return
@@ -325,6 +343,7 @@ export default function ReceiptList() {
                   toast.error(t('deleteFailed'))
                 }
               }}
+              className="text-destructive hover:text-destructive hover:bg-destructive/10"
             >
               <Trash2 className="mr-2 h-4 w-4" />
               {selectedCount > 0 ? t('deleteCount', { count: selectedCount }) : t('deleteButton')}
@@ -500,6 +519,11 @@ export default function ReceiptList() {
           setSelectedIds(new Set())
           setExportDialogOpen(false)
         }}
+      />
+
+      <ExportHistoryDialog
+        open={exportHistoryOpen}
+        onOpenChange={setExportHistoryOpen}
       />
     </div>
   )

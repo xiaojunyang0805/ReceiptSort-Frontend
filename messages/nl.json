@@ -16,6 +16,7 @@
     "receipts": "Bonnetjes",
     "exports": "Exports",
     "credits": "Credits",
+    "templates": "Sjablonen",
     "profile": "Profiel",
     "upload": "Uploaden",
     "export": "Exporteren",
@@ -290,7 +291,20 @@
       "show": "Tonen",
       "filters": "Filters",
       "quickActions": "Snelle Acties",
+      "viewAndExport": "Bekijken en Exporteren",
       "quickActionsSubtitle": "Bonnetjes bekijken of openstaande verwerken",
+      "selectReceipts": "Selecteer bonnetjes om acties uit te voeren",
+      "receiptsSelected": "{count} bonnetje{count, plural, one {} other {s}} geselecteerd",
+      "exportHistory": "Exportgeschiedenis",
+      "viewDetails": "Details Bekijken",
+      "viewDetailsCount": "Details Bekijken ({count})",
+      "exportButton": "Exporteren",
+      "exportCount": "Exporteren {count}",
+      "deleteButton": "Verwijderen",
+      "deleteCount": "Verwijderen {count}",
+      "deleteConfirm": "Weet u zeker dat u {count} bonnetje{count, plural, one {} other {s}} wilt verwijderen?",
+      "deleteSuccess": "{count} bonnetje{count, plural, one {} other {s}} verwijderd",
+      "deleteFailed": "Verwijderen van bonnetjes mislukt",
       "viewAllReceipts": "Alle Bonnetjes Bekijken",
       "exportSelected": "Selectie Exporteren ({count})",
       "noMatchingReceipts": "Geen bonnetjes komen overeen met uw zoekcriteria",
@@ -468,6 +482,107 @@
             "description": "Voor hoogvolume bedrijven"
           }
         }
+      },
+      "templates": {
+        "title": "Aangepaste Export Sjablonen",
+        "description": "Maak herbruikbare sjablonen voor BTW-aangiften, boekhouding en meer",
+        "cost": "Kosten per sjabloon",
+        "credits": "credits",
+        "maxTemplates": "Maximum sjablonen",
+        "exportCost": "Exporteren met sjabloon",
+        "free": "GRATIS",
+        "perfectFor": "Perfect voor:",
+        "useCase1": "BTW-aangiften en belastingrapportage",
+        "useCase2": "Aangepaste boekhoudformaten",
+        "useCase3": "Multi-land naleving",
+        "useCase4": "Geautomatiseerde workflows",
+        "manageButton": "Sjablonen Beheren"
+      }
+    },
+    "templates": {
+      "pageTitle": "Export Sjablonen - ReceiptSort",
+      "pageDescription": "Beheer uw aangepaste export sjablonen voor bonnen",
+      "title": "Export Sjablonen",
+      "description": "Maak aangepaste sjablonen om bonnen te exporteren in uw gewenste formaat",
+      "quota": {
+        "title": "Sjabloon Quotum",
+        "description": "Uw sjabloongebruik",
+        "remaining": "{count, plural, =0 {Geen sjablonen over} one {1 sjabloon over} other {{count} sjablonen over}}",
+        "limitReached": "U heeft het maximum aantal sjablonen bereikt. Verwijder ongebruikte sjablonen om nieuwe te maken."
+      },
+      "createButton": "Nieuw Sjabloon Maken",
+      "noTemplates": "Nog geen sjablonen gemaakt",
+      "noTemplatesDescription": "Maak uw eerste sjabloon om bonnen te exporteren in aangepaste formaten zoals BTW-aangiften",
+      "createFirstTemplate": "Maak Uw Eerste Sjabloon",
+      "exportCount": "Keer gebruikt",
+      "fieldsMapped": "Velden toegewezen",
+      "created": "Gemaakt",
+      "lastUsed": "Laatst gebruikt",
+      "deleteSuccess": "Sjabloon succesvol verwijderd",
+      "info": {
+        "title": "Hoe Aangepaste Sjablonen Werken",
+        "point1": "Betaal {credits} credits één keer om een sjabloon te maken",
+        "point2": "Exporteer onbeperkt GRATIS",
+        "point3": "Perfect voor BTW-aangiften en boekhouding",
+        "point4": "Wijs bonvelden toe aan uw sjabloonkolommen"
+      },
+      "deleteDialog": {
+        "title": "Sjabloon Verwijderen?",
+        "description": "Weet u zeker dat u \"{name}\" wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt.",
+        "warning": "Let op: Er worden geen credits terugbetaald voor verwijderde sjablonen.",
+        "deleting": "Verwijderen..."
+      },
+      "errors": {
+        "fetchFailed": "Kan sjablonen niet laden",
+        "deleteFailed": "Kan sjabloon niet verwijderen"
+      },
+      "uploadDialog": {
+        "title": "Export Sjabloon Maken",
+        "description": "Upload uw Excel-sjabloon en configureer veldtoewijzing",
+        "steps": {
+          "upload": "Uploaden",
+          "configure": "Configureren",
+          "confirm": "Bevestigen"
+        },
+        "uploading": "Sjabloon uploaden...",
+        "clickToUpload": "Klik om sjabloonbestand te uploaden",
+        "fileTypes": "Excel-bestanden (.xlsx, .xls)",
+        "maxSize": "Max bestandsgrootte: {size}MB",
+        "uploadHint": "Upload uw BTW-aangifteformulier, boekhoudsjabloon of elk Excel-bestand dat u wilt vullen met bongegevens",
+        "uploadSuccess": "Sjabloon succesvol geüpload",
+        "uploadError": "Kan sjabloon niet uploaden",
+        "fields": {
+          "name": "Sjabloonnaam",
+          "description": "Beschrijving (optioneel)",
+          "sheetName": "Bladnaam",
+          "startRow": "Startrij",
+          "mapping": "Veldtoewijzing"
+        },
+        "placeholders": {
+          "name": "bijv., BTW-aangifte Q4 2025",
+          "description": "bijv., Kwartaal BTW-rapport voor Nederland"
+        },
+        "mappingHint": "Voer de kolomletter (A, B, C, enz.) in voor elk veld dat u wilt opnemen",
+        "fieldsMapped": "velden toegewezen",
+        "next": "Volgende",
+        "confirm": {
+          "title": "Sjabloon Maken Bevestigen",
+          "creditCharge": "Dit kost {credits} credits",
+          "balance": "Uw saldo: {balance} credits",
+          "insufficientCredits": "Onvoldoende credits. Koop meer credits.",
+          "benefits": "Wat u krijgt:",
+          "benefit1": "Onbeperkt exporteren met dit sjabloon (GRATIS)",
+          "benefit2": "Automatisch uw Excel-formulieren invullen",
+          "benefit3": "Toewijzing altijd bewerken en bijwerken",
+          "saving": "Sjabloon maken...",
+          "createTemplate": "Sjabloon Maken"
+        },
+        "errors": {
+          "nameRequired": "Sjabloonnaam is verplicht",
+          "mappingRequired": "Minimaal één veldtoewijzing is verplicht"
+        },
+        "saveSuccess": "{credits} credits in rekening gebracht. Sjabloon gemaakt!",
+        "saveError": "Kan sjabloon niet maken"
       }
     },
     "exports": {
@@ -514,7 +629,23 @@
         "date": "Exportdatum",
         "receipts": "Bonnetjes",
         "format": "Formaat",
-        "download": "Downloaden"
+        "download": "Downloaden",
+        "expires": "Verloopt",
+        "actions": "Acties"
+      },
+      "history": {
+        "title": "Exportgeschiedenis",
+        "subtitle": "Bekijk uw eerdere bonnetjesexporten",
+        "autoDelete": "Bestanden worden automatisch na 30 dagen verwijderd"
+      },
+      "status": {
+        "expired": "Verlopen",
+        "daysShort": "d"
+      },
+      "actions": {
+        "download": "Downloaden",
+        "downloading": "Downloaden...",
+        "unavailable": "Niet beschikbaar"
       }
     },
     "profile": {

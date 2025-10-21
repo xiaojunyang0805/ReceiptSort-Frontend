@@ -12,7 +12,16 @@ import {
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { Checkbox } from '@/components/ui/checkbox'
-import { FileSpreadsheet, FileText, Loader2, Download } from 'lucide-react'
+import { Input } from '@/components/ui/input'
+import { Badge } from '@/components/ui/badge'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { FileSpreadsheet, FileText, Loader2, Download, Sparkles, Upload } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 import {
   EXPORT_TEMPLATES,
@@ -29,7 +38,23 @@ interface ExportDialogProps {
   onExportComplete: () => void
 }
 
-type ExportFormat = 'csv' | 'excel'
+type ExportFormat = 'csv' | 'excel' | 'template' | 'smart-template'
+
+interface CustomTemplate {
+  id: string
+  template_name: string
+  description: string | null
+  export_count: number
+}
+
+interface AIAnalysis {
+  sheetName: string
+  startRow: number
+  fieldMapping: Record<string, string>
+  suggestedMappings: Record<string, { column: string; confidence: number; reason: string }>
+  aiAnalysis: string
+  headers: string[]
+}
 
 const MAX_EXPORT_RECEIPTS = 1000
 const LARGE_EXPORT_WARNING = 50
@@ -48,7 +73,14 @@ export default function ExportDialog({
     'total_amount',
     'receipt_date',
   ])
+  const [customTemplates, setCustomTemplates] = useState<CustomTemplate[]>([])
+  const [selectedCustomTemplate, setSelectedCustomTemplate] = useState<string>('')
   const [isExporting, setIsExporting] = useState(false)
+  const [uploadedTemplate, setUploadedTemplate] = useState<File | null>(null)
+  const [aiAnalysis, setAiAnalysis] = useState<AIAnalysis | null>(null)
+  const [isAnalyzing, setIsAnalyzing] = useState(false)
+  const [saveForReuse, setSaveForReuse] = useState(false)
+  const [templateNameForSave, setTemplateNameForSave] = useState('')
   const { toast } = useToast()
 
   // Load saved template preference
@@ -62,6 +94,96 @@ export default function ExportDialog({
     }
   }, [])
 
+  // Fetch custom templates when dialog opens
+  useEffect(() => {
+    if (open) {
+      fetchCustomTemplates()
+    }
+  }, [open])
+
+  const fetchCustomTemplates = async () => {
+    try {
+      const response = await fetch('/api/templates')
+      const data = await response.json()
+
+      if (response.ok && data.templates) {
+        setCustomTemplates(data.templates)
+        if (data.templates.length > 0 && !selectedCustomTemplate) {
+          setSelectedCustomTemplate(data.templates[0].id)
+        }
+      }
+    } catch (error) {
+      console.error('[Export Dialog] Failed to fetch custom templates:', error)
+    }
+  }
+
+  const handleTemplateUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (!file) return
+
+    // Validate file type
+    const validTypes = [
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      'application/vnd.ms-excel',
+    ]
+    if (!validTypes.includes(file.type) && !file.name.match(/\.(xlsx|xls)$/i)) {
+      toast({
+        title: 'Invalid file type',
+        description: 'Please upload an Excel file (.xlsx or .xls)',
+        variant: 'destructive',
+      })
+      return
+    }
+
+    // Validate file size (5MB max)
+    if (file.size > 5 * 1024 * 1024) {
+      toast({
+        title: 'File too large',
+        description: 'Please upload a file smaller than 5MB',
+        variant: 'destructive',
+      })
+      return
+    }
+
+    setUploadedTemplate(file)
+    setIsAnalyzing(true)
+
+    try {
+      // Call AI analysis API
+      const formData = new FormData()
+      formData.append('file', file)
+
+      const response = await fetch('/api/templates/analyze', {
+        method: 'POST',
+        body: formData,
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to analyze template')
+      }
+
+      setAiAnalysis(data.analysis)
+      setSelectedFormat('smart-template')
+
+      toast({
+        title: 'Template analyzed!',
+        description: `AI detected ${Object.keys(data.analysis.fieldMapping).length} field mappings. Review and export.`,
+      })
+    } catch (error) {
+      console.error('[Export Dialog] Template analysis failed:', error)
+      toast({
+        title: 'Analysis failed',
+        description: error instanceof Error ? error.message : 'Failed to analyze template',
+        variant: 'destructive',
+      })
+      setUploadedTemplate(null)
+    } finally {
+      setIsAnalyzing(false)
+    }
+  }
+
   const handleExport = async () => {
     if (selectedIds.length === 0) return
 
@@ -71,24 +193,45 @@ export default function ExportDialog({
     saveTemplatePreference(selectedTemplate, customColumns)
 
     try {
-      const endpoint = selectedFormat === 'csv' ? '/api/export/csv' : '/api/export/excel'
-
-      const requestBody: {
-        receipt_ids: string[]
-        locale: string
-        template_id?: string
-        custom_columns?: string[]
-      } = {
+      let endpoint = '/api/export/excel'
+      let requestBody: Record<string, unknown> = {
         receipt_ids: selectedIds,
-        locale,
       }
 
-      // Add template info for CSV exports
+      // Determine endpoint based on format
       if (selectedFormat === 'csv') {
+        endpoint = '/api/export/csv'
+        requestBody.locale = locale
         requestBody.template_id = selectedTemplate
         if (selectedTemplate === 'custom') {
           requestBody.custom_columns = customColumns
         }
+      } else if (selectedFormat === 'template') {
+        endpoint = '/api/export/template'
+        requestBody.template_id = selectedCustomTemplate
+      } else if (selectedFormat === 'smart-template') {
+        // Smart template with AI analysis
+        if (!uploadedTemplate || !aiAnalysis) {
+          throw new Error('Template not uploaded or analyzed')
+        }
+
+        endpoint = '/api/export/smart-template'
+
+        // Convert file to base64
+        const arrayBuffer = await uploadedTemplate.arrayBuffer()
+        const base64 = Buffer.from(arrayBuffer).toString('base64')
+
+        requestBody = {
+          receipt_ids: selectedIds,
+          template_file: base64,
+          sheet_name: aiAnalysis.sheetName,
+          start_row: aiAnalysis.startRow,
+          field_mapping: aiAnalysis.fieldMapping,
+          save_for_reuse: saveForReuse,
+          template_name: saveForReuse ? templateNameForSave : undefined,
+        }
+      } else if (selectedFormat === 'excel') {
+        requestBody.locale = locale
       }
 
       console.log('[Export Dialog] Starting export:', {
@@ -154,7 +297,7 @@ export default function ExportDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-4xl max-h-[85vh]">
         <DialogHeader>
           <DialogTitle>Export Receipts</DialogTitle>
           <DialogDescription>
@@ -162,114 +305,336 @@ export default function ExportDialog({
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-4 py-4">
-          <div className="text-sm font-medium mb-2">Select Format</div>
-          <div className="grid grid-cols-2 gap-4">
-            {/* Excel Option */}
-            <button
-              onClick={() => setSelectedFormat('excel')}
-              className={`p-4 rounded-lg border-2 transition-all ${
-                selectedFormat === 'excel'
-                  ? 'border-primary bg-primary/5'
-                  : 'border-muted hover:border-muted-foreground/50'
-              }`}
-              disabled={isExporting}
-            >
-              <div className="flex flex-col items-center gap-2">
-                <FileSpreadsheet
-                  className={`h-8 w-8 ${
-                    selectedFormat === 'excel'
-                      ? 'text-primary'
-                      : 'text-muted-foreground'
-                  }`}
-                />
-                <div className="text-sm font-medium">Excel</div>
-                <div className="text-xs text-muted-foreground text-center">
-                  Formatted with totals & charts
-                </div>
+        <div className="space-y-6 py-4 overflow-y-auto max-h-[calc(85vh-200px)]">
+          {/* SECTION 1: Standard Export */}
+          <div className="border rounded-lg p-4 bg-gradient-to-br from-gray-50 to-white">
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <h3 className="text-sm font-semibold text-gray-900">Standard Export</h3>
+                <p className="text-xs text-gray-500">Quick export to common formats</p>
               </div>
-            </button>
+            </div>
 
-            {/* CSV Option */}
-            <button
-              onClick={() => setSelectedFormat('csv')}
-              className={`p-4 rounded-lg border-2 transition-all ${
-                selectedFormat === 'csv'
-                  ? 'border-primary bg-primary/5'
-                  : 'border-muted hover:border-muted-foreground/50'
-              }`}
-              disabled={isExporting}
-            >
-              <div className="flex flex-col items-center gap-2">
-                <FileText
-                  className={`h-8 w-8 ${
-                    selectedFormat === 'csv'
-                      ? 'text-primary'
-                      : 'text-muted-foreground'
-                  }`}
-                />
-                <div className="text-sm font-medium">CSV</div>
-                <div className="text-xs text-muted-foreground text-center">
-                  Plain text for import
-                </div>
-              </div>
-            </button>
-          </div>
-
-          {/* Template Selection (CSV only) */}
-          {selectedFormat === 'csv' && (
-            <div className="space-y-2">
-              <Label>Export Template</Label>
-              <select
-                value={selectedTemplate}
-                onChange={(e) => setSelectedTemplate(e.target.value)}
-                className="w-full px-3 py-2 border rounded-md bg-background"
+            <div className="grid grid-cols-3 gap-3 mb-4">
+              {/* Excel Option */}
+              <button
+                onClick={() => setSelectedFormat('excel')}
+                className={`p-4 rounded-lg border-2 transition-all ${
+                  selectedFormat === 'excel'
+                    ? 'border-primary bg-primary/5'
+                    : 'border-muted hover:border-muted-foreground/50'
+                }`}
                 disabled={isExporting}
               >
-                {EXPORT_TEMPLATES.map((template) => (
-                  <option key={template.id} value={template.id}>
-                    {template.name} - {template.description}
-                  </option>
-                ))}
-                <option value="custom">Custom - Choose columns</option>
-              </select>
-            </div>
-          )}
-
-          {/* Custom Column Selection */}
-          {selectedFormat === 'csv' && selectedTemplate === 'custom' && (
-            <div className="space-y-2">
-              <Label>Select Columns</Label>
-              <div className="grid grid-cols-2 gap-2 p-3 border rounded-md max-h-40 overflow-y-auto">
-                {AVAILABLE_COLUMNS.map((column) => (
-                  <div key={column.key} className="flex items-center space-x-2">
-                    <Checkbox
-                      id={`col-${column.key}`}
-                      checked={customColumns.includes(column.key)}
-                      onCheckedChange={(checked) => {
-                        if (checked) {
-                          setCustomColumns([...customColumns, column.key])
-                        } else if (!column.required) {
-                          setCustomColumns(customColumns.filter(k => k !== column.key))
-                        }
-                      }}
-                      disabled={column.required || isExporting}
-                    />
-                    <label
-                      htmlFor={`col-${column.key}`}
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      {column.label}
-                      {column.required && <span className="text-red-500 ml-1">*</span>}
-                    </label>
+                <div className="flex flex-col items-center gap-2">
+                  <FileSpreadsheet
+                    className={`h-7 w-7 ${
+                      selectedFormat === 'excel'
+                        ? 'text-primary'
+                        : 'text-muted-foreground'
+                    }`}
+                  />
+                  <div className="text-sm font-medium">Excel</div>
+                  <div className="text-xs text-muted-foreground text-center">
+                    Formatted with totals
                   </div>
-                ))}
-              </div>
-              <p className="text-xs text-muted-foreground">
-                * Required fields cannot be deselected
-              </p>
+                </div>
+              </button>
+
+              {/* CSV Option */}
+              <button
+                onClick={() => setSelectedFormat('csv')}
+                className={`p-4 rounded-lg border-2 transition-all ${
+                  selectedFormat === 'csv'
+                    ? 'border-primary bg-primary/5'
+                    : 'border-muted hover:border-muted-foreground/50'
+                }`}
+                disabled={isExporting}
+              >
+                <div className="flex flex-col items-center gap-2">
+                  <FileText
+                    className={`h-7 w-7 ${
+                      selectedFormat === 'csv'
+                        ? 'text-primary'
+                        : 'text-muted-foreground'
+                    }`}
+                  />
+                  <div className="text-sm font-medium">CSV</div>
+                  <div className="text-xs text-muted-foreground text-center">
+                    Plain text format
+                  </div>
+                </div>
+              </button>
+
+              {/* Custom Template Option */}
+              <button
+                onClick={() => setSelectedFormat('template')}
+                className={`p-4 rounded-lg border-2 transition-all ${
+                  selectedFormat === 'template'
+                    ? 'border-primary bg-primary/5'
+                    : 'border-muted hover:border-muted-foreground/50'
+                } ${customTemplates.length === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                disabled={isExporting || customTemplates.length === 0}
+              >
+                <div className="flex flex-col items-center gap-2">
+                  <Sparkles
+                    className={`h-7 w-7 ${
+                      selectedFormat === 'template'
+                        ? 'text-primary'
+                        : 'text-muted-foreground'
+                    }`}
+                  />
+                  <div className="text-sm font-medium">Saved</div>
+                  <div className="text-xs text-muted-foreground text-center">
+                    {customTemplates.length > 0 ? `${customTemplates.length} templates` : 'No templates'}
+                  </div>
+                </div>
+              </button>
             </div>
-          )}
+
+            {/* Custom Template Selection */}
+            {selectedFormat === 'template' && customTemplates.length > 0 && (
+              <div className="space-y-2">
+                <Label>Select Template</Label>
+                <Select
+                  value={selectedCustomTemplate}
+                  onValueChange={setSelectedCustomTemplate}
+                  disabled={isExporting}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Choose a template" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {customTemplates.map((template) => (
+                      <SelectItem key={template.id} value={template.id}>
+                        <div className="flex flex-col">
+                          <span className="font-medium">{template.template_name}</span>
+                          {template.description && (
+                            <span className="text-xs text-muted-foreground">
+                              {template.description}
+                            </span>
+                          )}
+                        </div>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <p className="text-xs text-muted-foreground">
+                  ✓ Free to use • Used {customTemplates.find(t => t.id === selectedCustomTemplate)?.export_count || 0} times
+                </p>
+              </div>
+            )}
+
+            {/* Template Selection (CSV only) */}
+            {selectedFormat === 'csv' && (
+              <div className="space-y-2">
+                <Label>Export Template</Label>
+                <select
+                  value={selectedTemplate}
+                  onChange={(e) => setSelectedTemplate(e.target.value)}
+                  className="w-full px-3 py-2 border rounded-md bg-background"
+                  disabled={isExporting}
+                >
+                  {EXPORT_TEMPLATES.map((template) => (
+                    <option key={template.id} value={template.id}>
+                      {template.name} - {template.description}
+                    </option>
+                  ))}
+                  <option value="custom">Custom - Choose columns</option>
+                </select>
+              </div>
+            )}
+
+            {/* Custom Column Selection */}
+            {selectedFormat === 'csv' && selectedTemplate === 'custom' && (
+              <div className="space-y-2">
+                <Label>Select Columns</Label>
+                <div className="grid grid-cols-2 gap-2 p-3 border rounded-md max-h-32 overflow-y-auto">
+                  {AVAILABLE_COLUMNS.map((column) => (
+                    <div key={column.key} className="flex items-center space-x-2">
+                      <Checkbox
+                        id={`col-${column.key}`}
+                        checked={customColumns.includes(column.key)}
+                        onCheckedChange={(checked) => {
+                          if (checked) {
+                            setCustomColumns([...customColumns, column.key])
+                          } else if (!column.required) {
+                            setCustomColumns(customColumns.filter(k => k !== column.key))
+                          }
+                        }}
+                        disabled={column.required || isExporting}
+                      />
+                      <label
+                        htmlFor={`col-${column.key}`}
+                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      >
+                        {column.label}
+                        {column.required && <span className="text-red-500 ml-1">*</span>}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  * Required fields cannot be deselected
+                </p>
+              </div>
+            )}
+
+            {/* Export Button for Standard Formats */}
+            <div className="flex justify-end pt-2">
+              <Button
+                onClick={handleExport}
+                disabled={isExporting || selectedIds.length === 0 || selectedIds.length > MAX_EXPORT_RECEIPTS || selectedFormat === 'smart-template'}
+                className="w-full sm:w-auto"
+              >
+                {isExporting ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Exporting...
+                  </>
+                ) : (
+                  <>
+                    <Download className="mr-2 h-4 w-4" />
+                    Export {selectedFormat === 'excel' ? 'Excel' : selectedFormat === 'csv' ? 'CSV' : 'Saved Template'}
+                  </>
+                )}
+              </Button>
+            </div>
+          </div>
+
+          {/* SECTION 2: AI Template Export */}
+          <div className="border-2 border-blue-200 rounded-lg p-4 bg-gradient-to-br from-blue-50 to-purple-50">
+            <div className="flex items-center gap-2 mb-4">
+              <Sparkles className="h-5 w-5 text-blue-600" />
+              <div>
+                <h3 className="text-sm font-semibold text-blue-900">AI-Powered Template Export</h3>
+                <p className="text-xs text-blue-600">Upload your Excel template and let AI map fields automatically</p>
+              </div>
+            </div>
+
+            {/* Template Upload Area */}
+            <div className="mb-4">
+              <Label className="block mb-2 text-sm font-medium">Upload Template File</Label>
+              <label className={`flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer transition-all ${
+                uploadedTemplate
+                  ? 'border-blue-500 bg-blue-100/50'
+                  : 'border-blue-300 bg-white hover:bg-blue-50'
+              } ${isAnalyzing ? 'opacity-50 pointer-events-none' : ''}`}>
+                <input
+                  type="file"
+                  accept=".xlsx,.xls"
+                  onChange={handleTemplateUpload}
+                  className="hidden"
+                  disabled={isExporting || isAnalyzing}
+                />
+                <div className="flex flex-col items-center gap-2">
+                  {isAnalyzing ? (
+                    <>
+                      <Loader2 className="h-10 w-10 animate-spin text-blue-600" />
+                      <p className="text-sm font-medium text-blue-900">Analyzing template...</p>
+                    </>
+                  ) : uploadedTemplate ? (
+                    <>
+                      <Upload className="h-10 w-10 text-blue-600" />
+                      <p className="text-sm font-medium text-blue-900">{uploadedTemplate.name}</p>
+                      <p className="text-xs text-blue-600">Click to upload a different file</p>
+                    </>
+                  ) : (
+                    <>
+                      <Upload className="h-10 w-10 text-blue-400" />
+                      <p className="text-sm font-medium text-gray-700">Click to upload Excel template</p>
+                      <p className="text-xs text-gray-500">Supports .xlsx and .xls files (max 5MB)</p>
+                    </>
+                  )}
+                </div>
+              </label>
+            </div>
+
+            {/* AI Analysis Preview */}
+            {aiAnalysis && (
+              <div className="space-y-3 bg-white/80 rounded-lg p-4 border border-blue-300">
+                <div className="grid grid-cols-2 gap-4 mb-3">
+                  <div>
+                    <div className="text-xs text-gray-600">Sheet</div>
+                    <div className="font-medium text-sm">{aiAnalysis.sheetName}</div>
+                  </div>
+                  <div>
+                    <div className="text-xs text-gray-600">Start Row</div>
+                    <div className="font-medium text-sm">{aiAnalysis.startRow}</div>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded p-3 border border-green-200">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="h-2 w-2 rounded-full bg-green-500"></div>
+                    <div className="font-medium text-sm text-green-900">
+                      {Object.keys(aiAnalysis.fieldMapping).length} Fields Mapped
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2 text-xs max-h-40 overflow-y-auto">
+                    {Object.entries(aiAnalysis.fieldMapping).map(([field, column]) => (
+                      <div key={field} className="flex justify-between items-center bg-white/70 px-2 py-1 rounded">
+                        <span className="text-gray-700">{field.replace(/_/g, ' ')}</span>
+                        <Badge variant="secondary" className="text-xs">
+                          Col {column}
+                        </Badge>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {aiAnalysis.aiAnalysis && (
+                  <div className="text-xs text-gray-600 italic bg-yellow-50 border border-yellow-200 p-2 rounded">
+                    💡 {aiAnalysis.aiAnalysis}
+                  </div>
+                )}
+
+                {/* Save for Reuse Option */}
+                <div className="border-t border-blue-200 pt-3 space-y-2">
+                  <div className="flex items-center gap-2">
+                    <Checkbox
+                      id="save-for-reuse"
+                      checked={saveForReuse}
+                      onCheckedChange={(checked) => setSaveForReuse(checked as boolean)}
+                    />
+                    <Label htmlFor="save-for-reuse" className="text-sm cursor-pointer">
+                      Save this template for future use (optional)
+                    </Label>
+                  </div>
+
+                  {saveForReuse && (
+                    <Input
+                      placeholder="Template name (e.g., VAT Q4 2025)"
+                      value={templateNameForSave}
+                      onChange={(e) => setTemplateNameForSave(e.target.value)}
+                      className="text-sm"
+                    />
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Export with Template Button */}
+            <div className="flex justify-end pt-2">
+              <Button
+                onClick={handleExport}
+                disabled={!aiAnalysis || isExporting || selectedIds.length === 0 || selectedIds.length > MAX_EXPORT_RECEIPTS}
+                className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+              >
+                {isExporting ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Exporting...
+                  </>
+                ) : (
+                  <>
+                    <Sparkles className="mr-2 h-4 w-4" />
+                    Export with Template (20 credits)
+                  </>
+                )}
+              </Button>
+            </div>
+          </div>
 
           {/* Warnings */}
           {selectedIds.length > MAX_EXPORT_RECEIPTS && (
@@ -297,15 +662,12 @@ export default function ExportDialog({
 
           {/* Preview Info */}
           <div className="rounded-lg bg-muted p-3 space-y-1">
-            <div className="text-sm font-medium">Export Preview</div>
+            <div className="text-sm font-medium">Export Summary</div>
             <div className="text-xs text-muted-foreground">
-              • {selectedIds.length} receipt{selectedIds.length === 1 ? '' : 's'} will be exported
+              • {selectedIds.length} receipt{selectedIds.length === 1 ? '' : 's'} selected
             </div>
             <div className="text-xs text-muted-foreground">
-              • Only completed receipts are included
-            </div>
-            <div className="text-xs text-muted-foreground">
-              • {selectedFormat === 'excel' ? 'Excel file with formatting and summary sheet' : 'CSV file ready for import'}
+              • Only completed receipts will be included
             </div>
           </div>
         </div>
@@ -316,23 +678,7 @@ export default function ExportDialog({
             onClick={() => onOpenChange(false)}
             disabled={isExporting}
           >
-            Cancel
-          </Button>
-          <Button
-            onClick={handleExport}
-            disabled={isExporting || selectedIds.length === 0 || selectedIds.length > MAX_EXPORT_RECEIPTS}
-          >
-            {isExporting ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Exporting...
-              </>
-            ) : (
-              <>
-                <Download className="mr-2 h-4 w-4" />
-                Export {selectedFormat.toUpperCase()}
-              </>
-            )}
+            Close
           </Button>
         </DialogFooter>
       </DialogContent>

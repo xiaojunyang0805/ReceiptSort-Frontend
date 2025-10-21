@@ -114,34 +114,66 @@ export async function POST(request: NextRequest) {
     const csv = generateCSV(completedReceipts, template)
     const filename = generateCSVFilename()
 
-    // 7. Record export in exports table
+    // 7. Upload file to Supabase Storage
+    const filePath = `${user.id}/exports/${filename}`
+    let fileUrl = ''
+
     try {
-      const { error: insertError } = await supabase.from('exports').insert({
+      console.log('[CSV Export] Uploading to Storage:', filePath)
+
+      const { error: uploadError } = await supabase.storage
+        .from('receipts')
+        .upload(filePath, csv, {
+          contentType: 'text/csv; charset=utf-8',
+          cacheControl: '3600',
+          upsert: false,
+        })
+
+      if (uploadError) {
+        console.error('[CSV Export] Upload failed:', uploadError)
+        // Continue even if upload fails - still return file to user
+      } else {
+        // Get public URL
+        const { data: { publicUrl } } = supabase.storage
+          .from('receipts')
+          .getPublicUrl(filePath)
+
+        fileUrl = publicUrl
+        console.log('[CSV Export] File uploaded successfully:', fileUrl)
+      }
+    } catch (storageError) {
+      console.error('[CSV Export] Storage error:', storageError)
+    }
+
+    // 8. Record export in exports table
+    try {
+      const exportRecord = {
         user_id: user.id,
-        export_type: 'csv',
+        export_type: 'csv' as const,
         receipt_count: completedReceipts.length,
         file_name: filename,
-      })
+        file_path: filePath,
+        file_url: fileUrl || null,
+      }
+
+      console.log('[CSV Export] Recording export in database')
+
+      const { error: insertError } = await supabase
+        .from('exports')
+        .insert(exportRecord)
 
       if (insertError) {
-        console.error('[CSV Export] Failed to save export record:', insertError)
-        console.error('[CSV Export] Insert error details:', {
-          message: insertError.message,
-          code: insertError.code,
-          details: insertError.details,
-          hint: insertError.hint
-        })
+        console.error('[CSV Export] Failed to record export:', insertError)
       } else {
-        console.log('[CSV Export] Successfully saved export record')
+        console.log('[CSV Export] Export recorded successfully')
       }
     } catch (exportLogError) {
-      // Don't fail the export if logging fails
-      console.error('[CSV Export] Exception while logging export:', exportLogError)
+      console.error('[CSV Export] Exception recording export:', exportLogError)
     }
 
     console.log(`[CSV Export] Successfully generated ${filename}`)
 
-    // 8. Return CSV file with proper headers
+    // 9. Return CSV file with proper headers
     return new NextResponse(csv, {
       status: 200,
       headers: {

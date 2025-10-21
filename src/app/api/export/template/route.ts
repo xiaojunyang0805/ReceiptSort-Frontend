@@ -1,18 +1,28 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
-import { generateExcel, generateExcelFilename } from '@/lib/excel-generator'
+import { generateTemplateExport, generateTemplateExportFilename } from '@/lib/template-generator'
 
 interface ExportRequest {
   receipt_ids: string[]
-  locale?: string
+  template_id: string
 }
 
 // Export limits
 const MAX_EXPORT_RECEIPTS = 1000
 
 /**
- * POST /api/export/excel
- * Export receipts to Excel format with formatting
+ * POST /api/export/template
+ * Export receipts using a custom template
+ *
+ * This endpoint:
+ * 1. Validates user authentication
+ * 2. Fetches user's template configuration
+ * 3. Fetches receipts from database
+ * 4. Generates Excel file using template
+ * 5. Uploads to storage (optional)
+ * 6. Returns file to user
+ *
+ * Note: Exporting with template is FREE (no credit charge)
  */
 export async function POST(request: NextRequest) {
   try {
@@ -30,11 +40,18 @@ export async function POST(request: NextRequest) {
 
     // 2. Parse request body
     const body: ExportRequest = await request.json()
-    const { receipt_ids, locale = 'en' } = body
+    const { receipt_ids, template_id } = body
 
     if (!receipt_ids || !Array.isArray(receipt_ids) || receipt_ids.length === 0) {
       return NextResponse.json(
         { error: 'No receipt IDs provided' },
+        { status: 400 }
+      )
+    }
+
+    if (!template_id) {
+      return NextResponse.json(
+        { error: 'Template ID is required' },
         { status: 400 }
       )
     }
@@ -51,23 +68,41 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    console.log(`[Excel Export] User ${user.id} exporting ${receipt_ids.length} receipts`)
+    console.log(
+      `[Template Export] User ${user.id} exporting ${receipt_ids.length} receipts with template ${template_id}`
+    )
 
-    // 3. Fetch receipts from database (with ownership verification)
-    // Fetch all fields needed for export (Phase 1 + Phase 2 + Phase 3)
+    // 3. Fetch template
+    const { data: template, error: templateError } = await supabase
+      .from('export_templates')
+      .select('*')
+      .eq('id', template_id)
+      .eq('user_id', user.id)
+      .eq('is_active', true)
+      .single()
+
+    if (templateError || !template) {
+      return NextResponse.json(
+        { error: 'Template not found' },
+        { status: 404 }
+      )
+    }
+
+    console.log(`[Template Export] Using template: ${template.template_name}`)
+
+    // 4. Fetch receipts from database
     const { data: receipts, error: fetchError } = await supabase
       .from('receipts')
       .select(`
         id, processing_status, merchant_name, total_amount, currency, receipt_date, category, tax_amount, payment_method, notes, created_at,
         invoice_number, document_type, subtotal, vendor_address, due_date,
-        purchase_order_number, payment_reference, vendor_tax_id,
-        patient_dob, treatment_date, insurance_claim_number, diagnosis_codes, procedure_codes, provider_id
+        purchase_order_number, payment_reference, vendor_tax_id
       `)
       .in('id', receipt_ids)
       .eq('user_id', user.id)
 
     if (fetchError) {
-      console.error('[Excel Export] Failed to fetch receipts:', fetchError)
+      console.error('[Template Export] Failed to fetch receipts:', fetchError)
       return NextResponse.json(
         { error: 'Failed to fetch receipts' },
         { status: 500 }
@@ -81,7 +116,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // 4. Filter only completed receipts
+    // 5. Filter only completed receipts
     const completedReceipts = receipts.filter(r => r.processing_status === 'completed')
 
     if (completedReceipts.length === 0) {
@@ -91,73 +126,70 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    console.log(`[Excel Export] Found ${completedReceipts.length} completed receipts`)
+    console.log(`[Template Export] Found ${completedReceipts.length} completed receipts`)
 
-    // 5. Generate Excel file with translated headers
-    const excelBuffer = await generateExcel(completedReceipts, locale)
-    const filename = generateExcelFilename()
+    // 6. Generate Excel file using template
+    const excelBuffer = await generateTemplateExport(completedReceipts, {
+      filePath: template.file_path,
+      sheetName: template.sheet_name,
+      startRow: template.start_row,
+      fieldMapping: template.field_mapping as Record<string, string>,
+    })
 
-    // 6. Upload file to Supabase Storage
-    const filePath = `${user.id}/exports/${filename}`
+    const filename = generateTemplateExportFilename(template.template_name)
+
+    // 7. Update template usage stats
+    await supabase
+      .from('export_templates')
+      .update({
+        export_count: template.export_count + 1,
+        last_used_at: new Date().toISOString(),
+      })
+      .eq('id', template_id)
+
+    // 8. Optionally upload to storage for export history
+    const exportFilePath = `${user.id}/exports/${filename}`
     let fileUrl = ''
 
     try {
-      console.log('[Excel Export] Uploading to Storage:', filePath)
-
       const { error: uploadError } = await supabase.storage
         .from('receipts')
-        .upload(filePath, excelBuffer, {
+        .upload(exportFilePath, excelBuffer, {
           contentType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
           cacheControl: '3600',
           upsert: false,
         })
 
-      if (uploadError) {
-        console.error('[Excel Export] Upload failed:', uploadError)
-        // Continue even if upload fails - still return file to user
-      } else {
-        // Get public URL
-        const { data: { publicUrl } } = supabase.storage
-          .from('receipts')
-          .getPublicUrl(filePath)
+      if (!uploadError) {
+        const {
+          data: { publicUrl },
+        } = supabase.storage.from('receipts').getPublicUrl(exportFilePath)
 
         fileUrl = publicUrl
-        console.log('[Excel Export] File uploaded successfully:', fileUrl)
       }
     } catch (storageError) {
-      console.error('[Excel Export] Storage error:', storageError)
+      console.error('[Template Export] Storage error:', storageError)
+      // Non-critical, continue
     }
 
-    // 7. Record export in exports table
+    // 9. Record export in exports table
     try {
-      const exportRecord = {
+      await supabase.from('exports').insert({
         user_id: user.id,
-        export_type: 'excel' as const,
+        export_type: 'excel',
         receipt_count: completedReceipts.length,
         file_name: filename,
-        file_path: filePath,
+        file_path: exportFilePath,
         file_url: fileUrl || null,
-      }
-
-      console.log('[Excel Export] Recording export in database')
-
-      const { error: insertError } = await supabase
-        .from('exports')
-        .insert(exportRecord)
-
-      if (insertError) {
-        console.error('[Excel Export] Failed to record export:', insertError)
-      } else {
-        console.log('[Excel Export] Export recorded successfully')
-      }
+      })
     } catch (exportLogError) {
-      console.error('[Excel Export] Exception recording export:', exportLogError)
+      console.error('[Template Export] Failed to log export:', exportLogError)
+      // Non-critical, continue
     }
 
-    console.log(`[Excel Export] Successfully generated ${filename} (${excelBuffer.length} bytes)`)
+    console.log(`[Template Export] Successfully generated ${filename} (${excelBuffer.length} bytes)`)
 
-    // 8. Return Excel file with proper headers
-    // Add debug header to check if export was logged (for debugging only)
+    // 10. Return Excel file
     const headers: Record<string, string> = {
       'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
       'Content-Disposition': `attachment; filename="${filename}"`,
@@ -170,9 +202,9 @@ export async function POST(request: NextRequest) {
       headers,
     })
   } catch (error) {
-    console.error('[Excel Export] Unexpected error:', error)
+    console.error('[Template Export] Unexpected error:', error)
     return NextResponse.json(
-      { error: 'Failed to export receipts to Excel' },
+      { error: 'Failed to export receipts with template' },
       { status: 500 }
     )
   }

@@ -1,0 +1,315 @@
+{
+  "INSTRUCTIONS": "Add these translations to messages/en.json, messages/nl.json, and messages/zh.json",
+
+  "en": {
+    "dashboard.credits.templates": {
+      "title": "Custom Export Templates",
+      "description": "Create reusable templates for VAT declarations, accounting, and more",
+      "cost": "Cost per template",
+      "credits": "credits",
+      "maxTemplates": "Maximum templates",
+      "exportCost": "Export with template",
+      "free": "FREE",
+      "perfectFor": "Perfect for:",
+      "useCase1": "VAT declarations and tax reporting",
+      "useCase2": "Custom accounting formats",
+      "useCase3": "Multi-country compliance",
+      "useCase4": "Automated workflows",
+      "manageButton": "Manage Templates"
+    },
+    "dashboard.templates": {
+      "pageTitle": "Export Templates - ReceiptSort",
+      "pageDescription": "Manage your custom export templates for receipts",
+      "title": "Export Templates",
+      "description": "Create custom templates to export receipts in your preferred format",
+      "quota": {
+        "title": "Template Quota",
+        "description": "Your template usage",
+        "remaining": "{count, plural, =0 {No templates remaining} one {1 template remaining} other {{count} templates remaining}}",
+        "limitReached": "You've reached the maximum number of templates. Delete unused templates to create new ones."
+      },
+      "createButton": "Create New Template",
+      "noTemplates": "No templates created yet",
+      "noTemplatesDescription": "Create your first template to export receipts in custom formats like VAT declarations",
+      "createFirstTemplate": "Create Your First Template",
+      "exportCount": "Times used",
+      "fieldsMapped": "Fields mapped",
+      "created": "Created",
+      "lastUsed": "Last used",
+      "deleteSuccess": "Template deleted successfully",
+      "info": {
+        "title": "How Custom Templates Work",
+        "point1": "Pay {credits} credits once to create a template",
+        "point2": "Export unlimited times for FREE",
+        "point3": "Perfect for VAT declarations and accounting",
+        "point4": "Map receipt fields to your template columns"
+      },
+      "deleteDialog": {
+        "title": "Delete Template?",
+        "description": "Are you sure you want to delete \"{name}\"? This action cannot be undone.",
+        "warning": "Note: No credits will be refunded for deleted templates.",
+        "deleting": "Deleting..."
+      },
+      "errors": {
+        "fetchFailed": "Failed to load templates",
+        "deleteFailed": "Failed to delete template"
+      },
+      "uploadDialog": {
+        "title": "Create Export Template",
+        "description": "Upload your Excel template and configure field mapping",
+        "steps": {
+          "upload": "Upload",
+          "configure": "Configure",
+          "confirm": "Confirm"
+        },
+        "uploading": "Uploading template...",
+        "clickToUpload": "Click to upload template file",
+        "fileTypes": "Excel files (.xlsx, .xls)",
+        "maxSize": "Max file size: {size}MB",
+        "uploadHint": "Upload your VAT declaration form, accounting template, or any Excel file you want to populate with receipt data",
+        "uploadSuccess": "Template uploaded successfully",
+        "uploadError": "Failed to upload template",
+        "fields": {
+          "name": "Template Name",
+          "description": "Description (optional)",
+          "sheetName": "Sheet Name",
+          "startRow": "Start Row",
+          "mapping": "Field Mapping"
+        },
+        "placeholders": {
+          "name": "e.g., VAT Declaration Q4 2025",
+          "description": "e.g., Quarterly VAT report for Netherlands"
+        },
+        "mappingHint": "Enter the column letter (A, B, C, etc.) for each field you want to include",
+        "fieldsMapped": "fields mapped",
+        "next": "Next",
+        "confirm": {
+          "title": "Confirm Template Creation",
+          "creditCharge": "This will charge {credits} credits",
+          "balance": "Your balance: {balance} credits",
+          "insufficientCredits": "Insufficient credits. Please purchase more credits.",
+          "benefits": "What you get:",
+          "benefit1": "Unlimited exports with this template (FREE)",
+          "benefit2": "Auto-populate your Excel forms",
+          "benefit3": "Edit and update mapping anytime",
+          "saving": "Creating template...",
+          "createTemplate": "Create Template"
+        },
+        "errors": {
+          "nameRequired": "Template name is required",
+          "mappingRequired": "At least one field mapping is required"
+        },
+        "saveSuccess": "{credits} credits charged. Template created!",
+        "saveError": "Failed to create template"
+      }
+    }
+  },
+
+  "nl": {
+    "dashboard.credits.templates": {
+      "title": "Aangepaste Export Sjablonen",
+      "description": "Maak herbruikbare sjablonen voor BTW-aangiften, boekhouding en meer",
+      "cost": "Kosten per sjabloon",
+      "credits": "credits",
+      "maxTemplates": "Maximum sjablonen",
+      "exportCost": "Exporteren met sjabloon",
+      "free": "GRATIS",
+      "perfectFor": "Perfect voor:",
+      "useCase1": "BTW-aangiften en belastingrapportage",
+      "useCase2": "Aangepaste boekhoudformaten",
+      "useCase3": "Multi-land naleving",
+      "useCase4": "Geautomatiseerde workflows",
+      "manageButton": "Sjablonen Beheren"
+    },
+    "dashboard.templates": {
+      "pageTitle": "Export Sjablonen - ReceiptSort",
+      "pageDescription": "Beheer uw aangepaste export sjablonen voor bonnen",
+      "title": "Export Sjablonen",
+      "description": "Maak aangepaste sjablonen om bonnen te exporteren in uw gewenste formaat",
+      "quota": {
+        "title": "Sjabloon Quotum",
+        "description": "Uw sjabloongebruik",
+        "remaining": "{count, plural, =0 {Geen sjablonen over} one {1 sjabloon over} other {{count} sjablonen over}}",
+        "limitReached": "U heeft het maximum aantal sjablonen bereikt. Verwijder ongebruikte sjablonen om nieuwe te maken."
+      },
+      "createButton": "Nieuw Sjabloon Maken",
+      "noTemplates": "Nog geen sjablonen gemaakt",
+      "noTemplatesDescription": "Maak uw eerste sjabloon om bonnen te exporteren in aangepaste formaten zoals BTW-aangiften",
+      "createFirstTemplate": "Maak Uw Eerste Sjabloon",
+      "exportCount": "Keer gebruikt",
+      "fieldsMapped": "Velden toegewezen",
+      "created": "Gemaakt",
+      "lastUsed": "Laatst gebruikt",
+      "deleteSuccess": "Sjabloon succesvol verwijderd",
+      "info": {
+        "title": "Hoe Aangepaste Sjablonen Werken",
+        "point1": "Betaal {credits} credits één keer om een sjabloon te maken",
+        "point2": "Exporteer onbeperkt GRATIS",
+        "point3": "Perfect voor BTW-aangiften en boekhouding",
+        "point4": "Wijs bonvelden toe aan uw sjabloonkolommen"
+      },
+      "deleteDialog": {
+        "title": "Sjabloon Verwijderen?",
+        "description": "Weet u zeker dat u \"{name}\" wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt.",
+        "warning": "Let op: Er worden geen credits terugbetaald voor verwijderde sjablonen.",
+        "deleting": "Verwijderen..."
+      },
+      "errors": {
+        "fetchFailed": "Kan sjablonen niet laden",
+        "deleteFailed": "Kan sjabloon niet verwijderen"
+      },
+      "uploadDialog": {
+        "title": "Export Sjabloon Maken",
+        "description": "Upload uw Excel-sjabloon en configureer veldtoewijzing",
+        "steps": {
+          "upload": "Uploaden",
+          "configure": "Configureren",
+          "confirm": "Bevestigen"
+        },
+        "uploading": "Sjabloon uploaden...",
+        "clickToUpload": "Klik om sjabloonbestand te uploaden",
+        "fileTypes": "Excel-bestanden (.xlsx, .xls)",
+        "maxSize": "Max bestandsgrootte: {size}MB",
+        "uploadHint": "Upload uw BTW-aangifteformulier, boekhoudsjabloon of elk Excel-bestand dat u wilt vullen met bongegevens",
+        "uploadSuccess": "Sjabloon succesvol geüpload",
+        "uploadError": "Kan sjabloon niet uploaden",
+        "fields": {
+          "name": "Sjabloonnaam",
+          "description": "Beschrijving (optioneel)",
+          "sheetName": "Bladnaam",
+          "startRow": "Startrij",
+          "mapping": "Veldtoewijzing"
+        },
+        "placeholders": {
+          "name": "bijv., BTW-aangifte Q4 2025",
+          "description": "bijv., Kwartaal BTW-rapport voor Nederland"
+        },
+        "mappingHint": "Voer de kolomletter (A, B, C, enz.) in voor elk veld dat u wilt opnemen",
+        "fieldsMapped": "velden toegewezen",
+        "next": "Volgende",
+        "confirm": {
+          "title": "Sjabloon Maken Bevestigen",
+          "creditCharge": "Dit kost {credits} credits",
+          "balance": "Uw saldo: {balance} credits",
+          "insufficientCredits": "Onvoldoende credits. Koop meer credits.",
+          "benefits": "Wat u krijgt:",
+          "benefit1": "Onbeperkt exporteren met dit sjabloon (GRATIS)",
+          "benefit2": "Automatisch uw Excel-formulieren invullen",
+          "benefit3": "Toewijzing altijd bewerken en bijwerken",
+          "saving": "Sjabloon maken...",
+          "createTemplate": "Sjabloon Maken"
+        },
+        "errors": {
+          "nameRequired": "Sjabloonnaam is verplicht",
+          "mappingRequired": "Minimaal één veldtoewijzing is verplicht"
+        },
+        "saveSuccess": "{credits} credits in rekening gebracht. Sjabloon gemaakt!",
+        "saveError": "Kan sjabloon niet maken"
+      }
+    }
+  },
+
+  "zh": {
+    "dashboard.credits.templates": {
+      "title": "自定义导出模板",
+      "description": "创建可重复使用的模板用于增值税申报、会计等",
+      "cost": "每个模板费用",
+      "credits": "积分",
+      "maxTemplates": "最大模板数",
+      "exportCost": "使用模板导出",
+      "free": "免费",
+      "perfectFor": "适用于：",
+      "useCase1": "增值税申报和税务报告",
+      "useCase2": "自定义会计格式",
+      "useCase3": "多国合规",
+      "useCase4": "自动化工作流程",
+      "manageButton": "管理模板"
+    },
+    "dashboard.templates": {
+      "pageTitle": "导出模板 - ReceiptSort",
+      "pageDescription": "管理您的自定义收据导出模板",
+      "title": "导出模板",
+      "description": "创建自定义模板以您喜欢的格式导出收据",
+      "quota": {
+        "title": "模板配额",
+        "description": "您的模板使用情况",
+        "remaining": "{count, plural, =0 {没有剩余模板} other {剩余 {count} 个模板}}",
+        "limitReached": "您已达到最大模板数量。删除未使用的模板以创建新模板。"
+      },
+      "createButton": "创建新模板",
+      "noTemplates": "尚未创建模板",
+      "noTemplatesDescription": "创建您的第一个模板以自定义格式（如增值税申报）导出收据",
+      "createFirstTemplate": "创建您的第一个模板",
+      "exportCount": "使用次数",
+      "fieldsMapped": "已映射字段",
+      "created": "创建于",
+      "lastUsed": "最后使用",
+      "deleteSuccess": "模板删除成功",
+      "info": {
+        "title": "自定义模板如何工作",
+        "point1": "支付 {credits} 积分一次即可创建模板",
+        "point2": "无限次免费导出",
+        "point3": "非常适合增值税申报和会计",
+        "point4": "将收据字段映射到您的模板列"
+      },
+      "deleteDialog": {
+        "title": "删除模板？",
+        "description": "您确定要删除 \"{name}\" 吗？此操作无法撤销。",
+        "warning": "注意：删除的模板不会退还积分。",
+        "deleting": "删除中..."
+      },
+      "errors": {
+        "fetchFailed": "无法加载模板",
+        "deleteFailed": "无法删除模板"
+      },
+      "uploadDialog": {
+        "title": "创建导出模板",
+        "description": "上传您的 Excel 模板并配置字段映射",
+        "steps": {
+          "upload": "上传",
+          "configure": "配置",
+          "confirm": "确认"
+        },
+        "uploading": "上传模板中...",
+        "clickToUpload": "点击上传模板文件",
+        "fileTypes": "Excel 文件 (.xlsx, .xls)",
+        "maxSize": "最大文件大小：{size}MB",
+        "uploadHint": "上传您的增值税申报表、会计模板或任何您想用收据数据填充的 Excel 文件",
+        "uploadSuccess": "模板上传成功",
+        "uploadError": "上传模板失败",
+        "fields": {
+          "name": "模板名称",
+          "description": "描述（可选）",
+          "sheetName": "工作表名称",
+          "startRow": "起始行",
+          "mapping": "字段映射"
+        },
+        "placeholders": {
+          "name": "例如，2025年第四季度增值税申报",
+          "description": "例如，荷兰季度增值税报告"
+        },
+        "mappingHint": "为您想要包含的每个字段输入列字母（A、B、C 等）",
+        "fieldsMapped": "个已映射字段",
+        "next": "下一步",
+        "confirm": {
+          "title": "确认创建模板",
+          "creditCharge": "这将花费 {credits} 积分",
+          "balance": "您的余额：{balance} 积分",
+          "insufficientCredits": "积分不足。请购买更多积分。",
+          "benefits": "您将获得：",
+          "benefit1": "使用此模板无限次免费导出",
+          "benefit2": "自动填充您的 Excel 表格",
+          "benefit3": "随时编辑和更新映射",
+          "saving": "创建模板中...",
+          "createTemplate": "创建模板"
+        },
+        "errors": {
+          "nameRequired": "模板名称为必填项",
+          "mappingRequired": "至少需要一个字段映射"
+        },
+        "saveSuccess": "已扣除 {credits} 积分。模板已创建！",
+        "saveError": "创建模板失败"
+      }
+    }
+  }
+}
