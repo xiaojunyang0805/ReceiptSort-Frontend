@@ -434,30 +434,32 @@ export default function ExportDialog({
                 </div>
               </button>
 
-              {/* Custom Template Option */}
-              <button
-                onClick={() => setSelectedFormat('template')}
-                className={`p-4 rounded-lg border-2 transition-all ${
-                  selectedFormat === 'template'
-                    ? 'border-primary bg-primary/5'
-                    : 'border-muted hover:border-muted-foreground/50'
-                } ${customTemplates.length === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
-                disabled={isExporting || customTemplates.length === 0}
-              >
-                <div className="flex flex-col items-center gap-2">
-                  <Sparkles
-                    className={`h-7 w-7 ${
-                      selectedFormat === 'template'
-                        ? 'text-primary'
-                        : 'text-muted-foreground'
-                    }`}
-                  />
-                  <div className="text-sm font-medium">Saved</div>
-                  <div className="text-xs text-muted-foreground text-center">
-                    {customTemplates.length > 0 ? `${customTemplates.length} templates` : 'No templates'}
+              {/* Custom Template Option - Only show if user has saved templates */}
+              {customTemplates.length > 0 && (
+                <button
+                  onClick={() => setSelectedFormat('template')}
+                  className={`p-4 rounded-lg border-2 transition-all ${
+                    selectedFormat === 'template'
+                      ? 'border-primary bg-primary/5'
+                      : 'border-muted hover:border-muted-foreground/50'
+                  }`}
+                  disabled={isExporting}
+                >
+                  <div className="flex flex-col items-center gap-2">
+                    <Sparkles
+                      className={`h-7 w-7 ${
+                        selectedFormat === 'template'
+                          ? 'text-primary'
+                          : 'text-muted-foreground'
+                      }`}
+                    />
+                    <div className="text-sm font-medium">Saved</div>
+                    <div className="text-xs text-muted-foreground text-center">
+                      {customTemplates.length} {customTemplates.length === 1 ? 'template' : 'templates'}
+                    </div>
                   </div>
-                </div>
-              </button>
+                </button>
+              )}
             </div>
 
             {/* Custom Template Selection */}
