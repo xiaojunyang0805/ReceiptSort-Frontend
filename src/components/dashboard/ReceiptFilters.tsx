@@ -31,8 +31,6 @@ const CATEGORIES: ReceiptCategory[] = [
 ]
 
 const STATUSES = [
-  { value: 'pending', label: 'Pending' },
-  { value: 'processing', label: 'Processing' },
   { value: 'completed', label: 'Completed' },
   { value: 'failed', label: 'Failed' },
 ]

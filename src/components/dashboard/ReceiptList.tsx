@@ -355,8 +355,6 @@ export default function ReceiptList() {
           className="px-3 py-2 border rounded-md bg-background"
         >
           <option value="all">{t('allStatus')}</option>
-          <option value="pending">{tTable('status.pending')}</option>
-          <option value="processing">{tTable('status.processing')}</option>
           <option value="completed">{tTable('status.completed')}</option>
           <option value="failed">{tTable('status.failed')}</option>
         </select>
