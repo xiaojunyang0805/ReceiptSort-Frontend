@@ -312,6 +312,30 @@ export async function POST(request: NextRequest) {
     console.log(`[Smart Template Export ${requestId}] Buffer type: ${buffer.constructor.name}`)
     console.log(`[Smart Template Export ${requestId}] Buffer length: ${buffer.length}`)
 
+    // Record export in exports table for history
+    console.log(`[Smart Template Export ${requestId}] Recording export in history...`)
+    try {
+      const exportRecord = {
+        user_id: user.id,
+        export_type: 'smart-template' as const,
+        receipt_count: receipts.length,
+        file_name: filename,
+        file_size: buffer.length,
+      }
+
+      const { error: exportError } = await supabase
+        .from('exports')
+        .insert(exportRecord)
+
+      if (exportError) {
+        console.error(`[Smart Template Export ${requestId}] ❌ Failed to record export:`, exportError)
+      } else {
+        console.log(`[Smart Template Export ${requestId}] ✓ Export recorded in history`)
+      }
+    } catch (exportLogError) {
+      console.error(`[Smart Template Export ${requestId}] ❌ Exception recording export:`, exportLogError)
+    }
+
     // Return buffer with proper type casting (same as Excel export route)
     return new NextResponse(buffer as unknown as BodyInit, {
       status: 200,
