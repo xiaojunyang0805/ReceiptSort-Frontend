@@ -20,36 +20,52 @@ interface SmartTemplateExportRequest {
  * Charges 20 credits only on successful export
  */
 export async function POST(request: NextRequest) {
+  const requestId = Math.random().toString(36).substring(7)
+  console.log(`[Smart Template Export ${requestId}] ========== REQUEST START ==========`)
+
   try {
     const supabase = await createClient()
 
     // Verify authentication
+    console.log(`[Smart Template Export ${requestId}] Step 1: Authenticating...`)
     const {
       data: { user },
       error: authError,
     } = await supabase.auth.getUser()
 
     if (authError || !user) {
+      console.error(`[Smart Template Export ${requestId}] Auth failed:`, authError)
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
+    console.log(`[Smart Template Export ${requestId}] ✓ Authenticated user:`, user.id)
+
+    console.log(`[Smart Template Export ${requestId}] Step 2: Parsing request body...`)
     const body = await request.json() as SmartTemplateExportRequest
     const { receipt_ids, template_file, sheet_name, start_row, field_mapping, save_for_reuse, template_name, template_description } = body
 
+    console.log(`[Smart Template Export ${requestId}] Request details:`, {
+      receiptCount: receipt_ids?.length,
+      hasTemplateFile: !!template_file,
+      templateFileLength: template_file?.length,
+      sheetName: sheet_name,
+      startRow: start_row,
+      fieldMappingKeys: Object.keys(field_mapping || {}),
+      saveForReuse: save_for_reuse,
+      templateName: template_name
+    })
+
     if (!receipt_ids || receipt_ids.length === 0) {
+      console.error(`[Smart Template Export ${requestId}] ❌ No receipts selected`)
       return NextResponse.json({ error: 'No receipts selected' }, { status: 400 })
     }
 
     if (!template_file || !field_mapping) {
+      console.error(`[Smart Template Export ${requestId}] ❌ Missing template or mapping`)
       return NextResponse.json({ error: 'Template file and mapping required' }, { status: 400 })
     }
 
-    console.log('[Smart Template Export] Processing:', {
-      receiptCount: receipt_ids.length,
-      sheetName: sheet_name,
-      startRow: start_row,
-      mappings: Object.keys(field_mapping).length,
-    })
+    console.log(`[Smart Template Export ${requestId}] Step 3: Fetching receipts...`)
 
     // Fetch receipts
     const { data: receipts, error: fetchError } = await supabase
@@ -59,10 +75,14 @@ export async function POST(request: NextRequest) {
       .eq('processing_status', 'completed')
 
     if (fetchError) {
+      console.error(`[Smart Template Export ${requestId}] ❌ Fetch error:`, fetchError)
       throw new Error(`Failed to fetch receipts: ${fetchError.message}`)
     }
 
+    console.log(`[Smart Template Export ${requestId}] ✓ Found ${receipts?.length || 0} receipts`)
+
     if (!receipts || receipts.length === 0) {
+      console.error(`[Smart Template Export ${requestId}] ❌ No completed receipts`)
       return NextResponse.json({ error: 'No completed receipts found' }, { status: 400 })
     }
 

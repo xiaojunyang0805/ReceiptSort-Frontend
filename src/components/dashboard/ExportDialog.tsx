@@ -305,26 +305,49 @@ export default function ExportDialog({
 
       // Download the file
       const blob = await response.blob()
+      console.log('[Export Dialog] Blob created:', {
+        size: blob.size,
+        type: blob.type
+      })
+
+      if (blob.size === 0) {
+        console.error('[Export Dialog] ❌ Empty blob received!')
+        throw new Error('Export generated an empty file')
+      }
+
       const url = window.URL.createObjectURL(blob)
+      console.log('[Export Dialog] Object URL created:', url)
+
       const a = document.createElement('a')
       a.href = url
 
       // Get filename from Content-Disposition header or use default
       const contentDisposition = response.headers.get('Content-Disposition')
+      console.log('[Export Dialog] Content-Disposition:', contentDisposition)
+
       const filenameMatch = contentDisposition?.match(/filename="(.+)"/)
       const filename = filenameMatch
         ? filenameMatch[1]
         : `receipts-${new Date().toISOString().split('T')[0]}.${selectedFormat === 'csv' ? 'csv' : 'xlsx'}`
 
+      console.log('[Export Dialog] Filename:', filename)
+
       a.download = filename
       document.body.appendChild(a)
+
+      console.log('[Export Dialog] Triggering download click...')
       a.click()
-      document.body.removeChild(a)
-      window.URL.revokeObjectURL(url)
+
+      // Small delay before cleanup to ensure download starts
+      setTimeout(() => {
+        document.body.removeChild(a)
+        window.URL.revokeObjectURL(url)
+        console.log('[Export Dialog] Download cleanup complete')
+      }, 100)
 
       toast({
         title: 'Export successful',
-        description: `${selectedIds.length} receipt${selectedIds.length === 1 ? '' : 's'} exported to ${selectedFormat.toUpperCase()}`,
+        description: `${selectedIds.length} receipt${selectedIds.length === 1 ? '' : 's'} exported. File: ${filename}`,
       })
 
       onExportComplete()
