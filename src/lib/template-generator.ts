@@ -1,4 +1,4 @@
-import ExcelJS from 'exceljs'
+import * as XLSX from 'xlsx'
 import { createClient } from '@/lib/supabase/server'
 
 interface Receipt {
@@ -51,13 +51,15 @@ export async function generateTemplateExport(
     throw new Error('Failed to download template file')
   }
 
-  // 2. Load template into ExcelJS
-  const workbook = new ExcelJS.Workbook()
+  // 2. Load template using xlsx library (for WPS Office compatibility)
   const arrayBuffer = await fileData.arrayBuffer()
-  await workbook.xlsx.load(arrayBuffer)
+  const workbook = XLSX.read(arrayBuffer, { cellStyles: true })
+
+  console.log(`[Template Export] Loaded template with xlsx library`)
+  console.log(`[Template Export] Sheet names:`, workbook.SheetNames)
 
   // 3. Get the specified worksheet
-  const worksheet = workbook.getWorksheet(sheetName)
+  const worksheet = workbook.Sheets[sheetName]
   if (!worksheet) {
     throw new Error(`Worksheet "${sheetName}" not found in template`)
   }
@@ -75,16 +77,67 @@ export async function generateTemplateExport(
     // Write each mapped field to its column
     Object.entries(fieldMapping).forEach(([field, column]) => {
       const cellAddress = `${column}${rowNum}`
-      const cell = worksheet.getCell(cellAddress)
 
       // Get value from receipt
-      const value = getReceiptValue(receipt, field)
+      let value: string | number | Date | null = null
 
-      // Set cell value
-      cell.value = value
+      switch (field) {
+        case 'invoice_number':
+          value = receipt.invoice_number || ''
+          break
+        case 'merchant_name':
+          value = receipt.merchant_name || ''
+          break
+        case 'receipt_date':
+          value = receipt.receipt_date ? new Date(receipt.receipt_date) : ''
+          break
+        case 'total_amount':
+          value = receipt.total_amount || 0
+          break
+        case 'subtotal':
+          value = receipt.subtotal || 0
+          break
+        case 'tax_amount':
+          value = receipt.tax_amount || 0
+          break
+        case 'currency':
+          value = receipt.currency || 'EUR'
+          break
+        case 'category':
+          value = receipt.category || ''
+          break
+        case 'payment_method':
+          value = receipt.payment_method || ''
+          break
+        case 'vendor_tax_id':
+          value = receipt.vendor_tax_id || ''
+          break
+        case 'vendor_address':
+          value = receipt.vendor_address || ''
+          break
+        default:
+          value = ''
+      }
 
-      // Apply formatting based on field type
-      applyFieldFormatting(cell, field, value)
+      // Set cell value using xlsx format
+      if (!worksheet[cellAddress]) {
+        worksheet[cellAddress] = {}
+      }
+
+      if (value instanceof Date) {
+        worksheet[cellAddress].v = value
+        worksheet[cellAddress].t = 'd'
+        worksheet[cellAddress].z = 'yyyy-mm-dd'
+      } else if (typeof value === 'number') {
+        worksheet[cellAddress].v = value
+        worksheet[cellAddress].t = 'n'
+        if (field.includes('amount') || field === 'subtotal') {
+          worksheet[cellAddress].z = '#,##0.00'
+        }
+      } else {
+        worksheet[cellAddress].v = value
+        worksheet[cellAddress].t = 's'
+      }
     })
   })
 
@@ -92,48 +145,9 @@ export async function generateTemplateExport(
     `[Template Export] Successfully populated ${receipts.length} receipts`
   )
 
-  // 5. Generate buffer
-  const buffer = await workbook.xlsx.writeBuffer()
+  // 5. Generate buffer using xlsx library (WPS Office compatible)
+  const buffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'buffer' })
   return Buffer.from(buffer)
-}
-
-/**
- * Get value from receipt for a specific field
- */
-function getReceiptValue(receipt: Receipt, field: string): any {
-  const value = (receipt as any)[field]
-
-  // Convert date strings to Date objects
-  if (field.includes('date') && value) {
-    return new Date(value)
-  }
-
-  return value ?? ''
-}
-
-/**
- * Apply formatting to cell based on field type
- */
-function applyFieldFormatting(
-  cell: ExcelJS.Cell,
-  field: string,
-  value: any
-): void {
-  // Number formatting for amounts
-  if (
-    field === 'total_amount' ||
-    field === 'subtotal' ||
-    field === 'tax_amount'
-  ) {
-    if (typeof value === 'number') {
-      cell.numFmt = '#,##0.00'
-    }
-  }
-
-  // Date formatting
-  if (field.includes('date') && value instanceof Date) {
-    cell.numFmt = 'mm/dd/yyyy'
-  }
 }
 
 /**
