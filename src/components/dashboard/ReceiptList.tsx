@@ -14,7 +14,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
-import { Card } from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   Eye,
   Trash2,
@@ -227,21 +227,23 @@ export default function ReceiptList() {
 
   if (receipts.length === 0) {
     return (
-      <Card className="p-12 text-center">
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center">
-            <FileText className="h-8 w-8 text-muted-foreground" />
+      <Card>
+        <CardContent className="text-center py-12">
+          <div className="flex flex-col items-center gap-4">
+            <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center">
+              <FileText className="h-8 w-8 text-muted-foreground" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold">{t('noReceipts')}</h3>
+              <p className="text-sm text-muted-foreground mt-1">
+                {t('noReceiptsDescription')}
+              </p>
+            </div>
+            <Button asChild>
+              <a href="/upload">{t('uploadButton')}</a>
+            </Button>
           </div>
-          <div>
-            <h3 className="text-lg font-semibold">{t('noReceipts')}</h3>
-            <p className="text-sm text-muted-foreground mt-1">
-              {t('noReceiptsDescription')}
-            </p>
-          </div>
-          <Button asChild>
-            <a href="/upload">{t('uploadButton')}</a>
-          </Button>
-        </div>
+        </CardContent>
       </Card>
     )
   }
@@ -250,39 +252,41 @@ export default function ReceiptList() {
     <div className="space-y-4">
       {/* Credit Warning */}
       {userCredits < 5 && userCredits >= 0 && (
-        <Card className="bg-yellow-50 dark:bg-yellow-900/10 border-yellow-200 dark:border-yellow-900/50 p-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <CreditCard className="h-5 w-5 text-yellow-600 dark:text-yellow-500" />
-              <div>
-                <p className="font-medium text-yellow-900 dark:text-yellow-100">
-                  {userCredits === 0 ? 'Out of credits!' : 'Low on credits'}
-                </p>
-                <p className="text-sm text-yellow-700 dark:text-yellow-300">
-                  {userCredits === 0
-                    ? 'Purchase credits to process receipts'
-                    : `You have ${userCredits} credit${userCredits === 1 ? '' : 's'} remaining`}
-                </p>
+        <Card className="bg-yellow-50 dark:bg-yellow-900/10 border-yellow-200 dark:border-yellow-900/50">
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <CreditCard className="h-5 w-5 text-yellow-600 dark:text-yellow-500" />
+                <div>
+                  <p className="font-medium text-yellow-900 dark:text-yellow-100">
+                    {userCredits === 0 ? 'Out of credits!' : 'Low on credits'}
+                  </p>
+                  <p className="text-sm text-yellow-700 dark:text-yellow-300">
+                    {userCredits === 0
+                      ? 'Purchase credits to process receipts'
+                      : `You have ${userCredits} credit${userCredits === 1 ? '' : 's'} remaining`}
+                  </p>
+                </div>
               </div>
+              <Button asChild variant="outline" className="border-yellow-600 text-yellow-600 hover:bg-yellow-100">
+                <Link href="/credits">Buy Credits</Link>
+              </Button>
             </div>
-            <Button asChild variant="outline" className="border-yellow-600 text-yellow-600 hover:bg-yellow-100">
-              <Link href="/credits">Buy Credits</Link>
-            </Button>
-          </div>
+          </CardContent>
         </Card>
       )}
 
       {/* View and Export Actions Bar */}
-      <Card className="p-2 sm:p-4">
-        <div className="flex flex-col gap-4">
-          <div>
-            <h3 className="font-semibold text-lg">{t('viewAndExport')}</h3>
-            <p className="text-sm text-muted-foreground">
-              {selectedCount > 0
-                ? t('receiptsSelected', { count: selectedCount })
-                : t('selectReceipts')}
-            </p>
-          </div>
+      <Card>
+        <CardHeader>
+          <CardTitle>{t('viewAndExport')}</CardTitle>
+          <CardDescription>
+            {selectedCount > 0
+              ? t('receiptsSelected', { count: selectedCount })
+              : t('selectReceipts')}
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
           <div className="flex flex-col gap-2">
             {/* Primary Actions */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -349,7 +353,7 @@ export default function ReceiptList() {
               {selectedCount > 0 ? t('deleteCount', { count: selectedCount }) : t('deleteButton')}
             </Button>
           </div>
-        </div>
+        </CardContent>
       </Card>
 
       {/* Advanced Filters */}
@@ -447,55 +451,59 @@ export default function ReceiptList() {
       {/* Mobile Card View */}
       <div className="md:hidden space-y-4">
         {filteredReceipts.map((receipt) => (
-          <Card key={receipt.id} className="p-4">
-            <div className="flex items-start gap-4">
-              <Checkbox
-                checked={selectedIds.has(receipt.id)}
-                onCheckedChange={() => handleSelectReceipt(receipt.id)}
-                disabled={receipt.processing_status !== 'completed'}
-                className="flex-shrink-0 mt-1"
-              />
-              <div className="w-16 h-16 rounded bg-muted flex items-center justify-center flex-shrink-0">
-                <FileText className="h-8 w-8 text-muted-foreground" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <h3 className="font-medium truncate">{receipt.file_name}</h3>
-                <div className="mt-2 space-y-1 text-sm">
-                  {receipt.merchant_name && (
-                    <p className="text-muted-foreground">
-                      Merchant: {receipt.merchant_name}
-                    </p>
-                  )}
-                  {receipt.total_amount && (
-                    <p className="text-muted-foreground">
-                      Amount: ${receipt.total_amount.toFixed(2)}
-                    </p>
-                  )}
-                  <div className="flex items-center gap-2 mt-2">
-                    <Badge className={statusConfig[receipt.processing_status].color}>
-                      {receipt.processing_status === 'processing' && (
-                        <Loader2 className="mr-1 h-3 w-3 animate-spin" />
-                      )}
-                      {statusConfig[receipt.processing_status].label}
-                    </Badge>
-                    <span className="text-xs text-muted-foreground">
-                      {formatDistanceToNow(new Date(receipt.created_at), {
-                        addSuffix: true,
-                      })}
-                    </span>
+          <Card key={receipt.id}>
+            <CardContent className="pt-6">
+              <div className="flex items-start gap-4">
+                <Checkbox
+                  checked={selectedIds.has(receipt.id)}
+                  onCheckedChange={() => handleSelectReceipt(receipt.id)}
+                  disabled={receipt.processing_status !== 'completed'}
+                  className="flex-shrink-0 mt-1"
+                />
+                <div className="w-16 h-16 rounded bg-muted flex items-center justify-center flex-shrink-0">
+                  <FileText className="h-8 w-8 text-muted-foreground" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-medium truncate">{receipt.file_name}</h3>
+                  <div className="mt-2 space-y-1 text-sm">
+                    {receipt.merchant_name && (
+                      <p className="text-muted-foreground">
+                        Merchant: {receipt.merchant_name}
+                      </p>
+                    )}
+                    {receipt.total_amount && (
+                      <p className="text-muted-foreground">
+                        Amount: ${receipt.total_amount.toFixed(2)}
+                      </p>
+                    )}
+                    <div className="flex items-center gap-2 mt-2">
+                      <Badge className={statusConfig[receipt.processing_status].color}>
+                        {receipt.processing_status === 'processing' && (
+                          <Loader2 className="mr-1 h-3 w-3 animate-spin" />
+                        )}
+                        {statusConfig[receipt.processing_status].label}
+                      </Badge>
+                      <span className="text-xs text-muted-foreground">
+                        {formatDistanceToNow(new Date(receipt.created_at), {
+                          addSuffix: true,
+                        })}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </CardContent>
           </Card>
         ))}
       </div>
 
       {filteredReceipts.length === 0 && receipts.length > 0 && (
-        <Card className="p-8 text-center">
-          <p className="text-muted-foreground">
-            {t('noMatchingReceipts')}
-          </p>
+        <Card>
+          <CardContent className="text-center py-8">
+            <p className="text-muted-foreground">
+              {t('noMatchingReceipts')}
+            </p>
+          </CardContent>
         </Card>
       )}
 

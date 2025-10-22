@@ -31,7 +31,7 @@ export default async function CreditsPage({ searchParams }: CreditsPageProps) {
   const sessionId = params.session_id as string | undefined
 
   return (
-    <div className="space-y-8 pb-32 md:pb-8">
+    <div className="space-y-8 pb-48 md:pb-8">
       <div>
         <h1 className="text-3xl font-bold tracking-tight">{t('title')}</h1>
         <p className="text-muted-foreground mt-2">
