@@ -272,23 +272,36 @@ export default function ExportDialog({
 
   const autoSaveTemplate = async (file: File, analysis: AIAnalysis, templateName: string) => {
     try {
-      console.log('[Export Dialog] Auto-saving template...', file.name)
+      console.log('[Export Dialog] Auto-saving template...', {
+        fileName: file.name,
+        fileSize: file.size,
+        templateName,
+        analysisSheetName: analysis.sheetName,
+        analysisStartRow: analysis.startRow,
+        fieldMappingCount: Object.keys(analysis.fieldMapping).length,
+      })
 
       // Use provided template name
       const finalTemplateName = templateName.trim() || file.name.replace(/\.(xlsx|xls)$/i, '')
 
       // Convert file to base64
+      console.log('[Export Dialog] Converting file to base64...')
       const reader = new FileReader()
       const base64 = await new Promise<string>((resolve, reject) => {
         reader.onload = () => {
           const result = reader.result as string
           const base64String = result.split(',')[1]
+          console.log('[Export Dialog] Base64 conversion complete, length:', base64String.length)
           resolve(base64String)
         }
-        reader.onerror = reject
+        reader.onerror = (error) => {
+          console.error('[Export Dialog] FileReader error:', error)
+          reject(error)
+        }
         reader.readAsDataURL(file)
       })
 
+      console.log('[Export Dialog] Sending save request to API...')
       const response = await fetch('/api/templates/save', {
         method: 'POST',
         headers: {
@@ -304,7 +317,9 @@ export default function ExportDialog({
         }),
       })
 
+      console.log('[Export Dialog] Response status:', response.status)
       const data = await response.json()
+      console.log('[Export Dialog] Response data:', data)
 
       if (!response.ok) {
         // Don't show error if template already exists
@@ -317,6 +332,13 @@ export default function ExportDialog({
           })
           return
         }
+
+        // Show detailed error to user
+        toast({
+          title: 'Failed to save template',
+          description: `Error: ${data.error || 'Unknown error'} (Status: ${response.status})`,
+          variant: 'destructive',
+        })
         throw new Error(data.error || 'Failed to save template')
       }
 
@@ -331,7 +353,13 @@ export default function ExportDialog({
       })
     } catch (error) {
       console.error('[Export Dialog] Auto-save failed:', error)
-      // Don't show error to user - auto-save failure is not critical
+
+      // Show error to user with details
+      toast({
+        title: 'Save failed',
+        description: error instanceof Error ? error.message : 'Unknown error occurred',
+        variant: 'destructive',
+      })
     }
   }
 
