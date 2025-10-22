@@ -255,11 +255,8 @@ export default function ExportDialog({
 
       toast({
         title: 'Template analyzed!',
-        description: `AI detected ${Object.keys(data.analysis.fieldMapping).length} field mappings.`,
+        description: `AI detected ${Object.keys(data.analysis.fieldMapping).length} field mappings. Click Save to store it.`,
       })
-
-      // Auto-save template after successful analysis with default name
-      await autoSaveTemplate(file, data.analysis, defaultName)
     } catch (error) {
       console.error('[Export Dialog] Template analysis failed:', error)
       toast({
@@ -838,8 +835,13 @@ export default function ExportDialog({
                         </Button>
                       </div>
                       <p className="text-xs text-gray-500">
-                        Edit name and click Save to update template
+                        Click Save to store template for reuse (FREE)
                       </p>
+                    </div>
+
+                    {/* Info message */}
+                    <div className="bg-blue-50 border border-blue-200 rounded p-2 text-xs text-blue-700">
+                      💡 Click Save button above to store this template
                     </div>
                   </div>
                 )}
