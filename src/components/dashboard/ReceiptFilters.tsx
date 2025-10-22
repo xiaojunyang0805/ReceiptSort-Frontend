@@ -14,7 +14,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Badge } from '@/components/ui/badge'
 import { Checkbox } from '@/components/ui/checkbox'
-import { Card } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { ReceiptCategory } from '@/types/receipt'
 import { useTranslations } from 'next-intl'
 
@@ -87,8 +87,9 @@ export default function ReceiptFilters({
   }
 
   return (
-    <Card className="p-4">
-      <div className="space-y-4">
+    <Card>
+      <CardContent className="pt-6">
+        <div className="space-y-4">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -276,7 +277,8 @@ export default function ReceiptFilters({
             </Button>
           </div>
         )}
-      </div>
+        </div>
+      </CardContent>
     </Card>
   )
 }

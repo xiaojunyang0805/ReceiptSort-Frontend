@@ -1,6 +1,6 @@
 'use client'
 
-import { Card } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
 import { CheckCircle, XCircle, Loader2 } from 'lucide-react'
 
@@ -25,8 +25,9 @@ export function ProcessingProgress({
   const isDone = current === total
 
   return (
-    <Card className="p-4 bg-blue-50 dark:bg-blue-900/10 border-blue-200 dark:border-blue-900/50">
-      <div className="space-y-3">
+    <Card className="bg-blue-50 dark:bg-blue-900/10 border-blue-200 dark:border-blue-900/50">
+      <CardContent className="pt-6">
+        <div className="space-y-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             {isProcessing && !isDone ? (
@@ -61,7 +62,8 @@ export function ProcessingProgress({
             </div>
           )}
         </div>
-      </div>
+        </div>
+      </CardContent>
     </Card>
   )
 }
