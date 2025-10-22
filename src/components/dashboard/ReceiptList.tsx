@@ -273,7 +273,7 @@ export default function ReceiptList() {
       )}
 
       {/* View and Export Actions Bar */}
-      <Card className="p-4">
+      <Card className="p-2 sm:p-4">
         <div className="flex flex-col gap-4">
           <div>
             <h3 className="font-semibold text-lg">{t('viewAndExport')}</h3>
@@ -296,26 +296,26 @@ export default function ReceiptList() {
                     setModalOpen(true)
                   }
                 }}
-                className="w-full"
+                className="w-full text-xs sm:text-sm py-2"
               >
-                <Eye className="mr-2 h-4 w-4" />
+                <Eye className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                 {selectedCount > 0 ? t('viewDetailsCount', { count: selectedCount }) : t('viewDetails')}
               </Button>
               <Button
                 variant="outline"
                 disabled={selectedCount === 0}
                 onClick={() => setExportDialogOpen(true)}
-                className="w-full"
+                className="w-full text-xs sm:text-sm py-2"
               >
-                <Download className="mr-2 h-4 w-4" />
+                <Download className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                 {selectedCount > 0 ? t('exportCount', { count: selectedCount }) : t('exportButton')}
               </Button>
               <Button
                 variant="outline"
                 onClick={() => setExportHistoryOpen(true)}
-                className="w-full"
+                className="w-full text-xs sm:text-sm py-2"
               >
-                <History className="mr-2 h-4 w-4" />
+                <History className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                 {t('exportHistory')}
               </Button>
             </div>
@@ -343,9 +343,9 @@ export default function ReceiptList() {
                   toast.error(t('deleteFailed'))
                 }
               }}
-              className="w-full text-destructive hover:text-destructive hover:bg-destructive/10"
+              className="w-full text-xs sm:text-sm py-2 text-destructive hover:text-destructive hover:bg-destructive/10"
             >
-              <Trash2 className="mr-2 h-4 w-4" />
+              <Trash2 className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
               {selectedCount > 0 ? t('deleteCount', { count: selectedCount }) : t('deleteButton')}
             </Button>
           </div>

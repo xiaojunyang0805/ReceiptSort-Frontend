@@ -22,7 +22,7 @@ export default async function UploadPage() {
     .limit(5)
 
   return (
-    <div className="space-y-8 pb-32 md:pb-8">
+    <div className="space-y-8 pb-40 md:pb-8">
       {/* Header */}
       <div>
         <h1 className="text-3xl font-bold tracking-tight">{t('uploadSection.title')}</h1>
