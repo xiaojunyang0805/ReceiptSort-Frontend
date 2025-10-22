@@ -998,17 +998,17 @@ export default function ExportDialog({
   // Render Drawer for mobile
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>
-      <DrawerContent className="max-h-[96vh]">
-        <DrawerHeader>
+      <DrawerContent className="max-h-[85vh] flex flex-col">
+        <DrawerHeader className="flex-shrink-0">
           <DrawerTitle>Export Receipts</DrawerTitle>
           <DrawerDescription>
             Export {selectedIds.length} selected receipt{selectedIds.length === 1 ? '' : 's'} to your preferred format
           </DrawerDescription>
         </DrawerHeader>
-        <div className="overflow-y-auto px-4">
+        <div className="flex-1 overflow-y-auto px-4 min-h-0">
           <ExportContent />
         </div>
-        <DrawerFooter>
+        <DrawerFooter className="flex-shrink-0 border-t">
           <DrawerClose asChild>
             <Button variant="outline" disabled={isExporting}>
               Close
