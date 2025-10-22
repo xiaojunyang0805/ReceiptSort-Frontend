@@ -581,37 +581,37 @@ export default function ExportDialog({
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-6 py-4 overflow-y-auto flex-1">
+        <div className="space-y-4 sm:space-y-6 py-2 sm:py-4 overflow-y-auto flex-1">
           {/* SECTION 1: Standard Export */}
-          <div className="border rounded-lg p-4 bg-gradient-to-br from-gray-50 to-white">
-            <div className="flex items-center justify-between mb-4">
+          <div className="border rounded-lg p-3 sm:p-4 bg-gradient-to-br from-gray-50 to-white">
+            <div className="flex items-center justify-between mb-3">
               <div>
                 <h3 className="text-sm font-semibold text-gray-900">Standard Export</h3>
                 <p className="text-xs text-gray-500">Quick export to common formats</p>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+            <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-3 sm:mb-4">
               {/* Excel Option */}
               <button
                 onClick={() => setSelectedFormat('excel')}
-                className={`p-4 rounded-lg border-2 transition-all ${
+                className={`p-2 sm:p-4 rounded-lg border-2 transition-all ${
                   selectedFormat === 'excel'
                     ? 'border-primary bg-primary/5'
                     : 'border-muted hover:border-muted-foreground/50'
                 }`}
                 disabled={isExporting}
               >
-                <div className="flex flex-col items-center gap-2">
+                <div className="flex flex-col items-center gap-1 sm:gap-2">
                   <FileSpreadsheet
-                    className={`h-7 w-7 ${
+                    className={`h-5 w-5 sm:h-7 sm:w-7 ${
                       selectedFormat === 'excel'
                         ? 'text-primary'
                         : 'text-muted-foreground'
                     }`}
                   />
-                  <div className="text-sm font-medium">Excel</div>
-                  <div className="text-xs text-muted-foreground text-center">
+                  <div className="text-xs sm:text-sm font-medium">Excel</div>
+                  <div className="text-[10px] sm:text-xs text-muted-foreground text-center leading-tight">
                     Formatted with totals
                   </div>
                 </div>
@@ -620,23 +620,23 @@ export default function ExportDialog({
               {/* CSV Option */}
               <button
                 onClick={() => setSelectedFormat('csv')}
-                className={`p-4 rounded-lg border-2 transition-all ${
+                className={`p-2 sm:p-4 rounded-lg border-2 transition-all ${
                   selectedFormat === 'csv'
                     ? 'border-primary bg-primary/5'
                     : 'border-muted hover:border-muted-foreground/50'
                 }`}
                 disabled={isExporting}
               >
-                <div className="flex flex-col items-center gap-2">
+                <div className="flex flex-col items-center gap-1 sm:gap-2">
                   <FileText
-                    className={`h-7 w-7 ${
+                    className={`h-5 w-5 sm:h-7 sm:w-7 ${
                       selectedFormat === 'csv'
                         ? 'text-primary'
                         : 'text-muted-foreground'
                     }`}
                   />
-                  <div className="text-sm font-medium">CSV</div>
-                  <div className="text-xs text-muted-foreground text-center">
+                  <div className="text-xs sm:text-sm font-medium">CSV</div>
+                  <div className="text-[10px] sm:text-xs text-muted-foreground text-center leading-tight">
                     Plain text format
                   </div>
                 </div>
@@ -721,12 +721,12 @@ export default function ExportDialog({
           </div>
 
           {/* SECTION 2: AI Template Export */}
-          <div className="border-2 border-blue-200 rounded-lg p-4 bg-gradient-to-br from-blue-50 to-purple-50">
-            <div className="flex items-center gap-2 mb-4">
-              <Sparkles className="h-5 w-5 text-blue-600" />
+          <div className="border-2 border-blue-200 rounded-lg p-3 sm:p-4 bg-gradient-to-br from-blue-50 to-purple-50">
+            <div className="flex items-center gap-2 mb-3">
+              <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />
               <div>
                 <h3 className="text-sm font-semibold text-blue-900">AI-Powered Template Export</h3>
-                <p className="text-xs text-blue-600">Upload your Excel template and let AI map fields automatically</p>
+                <p className="text-xs text-blue-600 hidden sm:block">Upload your Excel template and let AI map fields automatically</p>
               </div>
             </div>
 
