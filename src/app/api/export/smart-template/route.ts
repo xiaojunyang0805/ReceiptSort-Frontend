@@ -86,18 +86,18 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'No completed receipts found' }, { status: 400 })
     }
 
-    // Check user has enough credits (20 for smart template export)
+    // Check user has enough credits (1 credit per template export)
     const { data: profile } = await supabase
       .from('profiles')
       .select('credits')
       .eq('id', user.id)
       .single()
 
-    if (!profile || profile.credits < TEMPLATE_PRICING.COST_PER_TEMPLATE) {
+    if (!profile || profile.credits < TEMPLATE_PRICING.COST_PER_EXPORT) {
       return NextResponse.json(
         {
           error: 'Insufficient credits',
-          required: TEMPLATE_PRICING.COST_PER_TEMPLATE,
+          required: TEMPLATE_PRICING.COST_PER_EXPORT,
           available: profile?.credits || 0,
         },
         { status: 402 }
@@ -198,12 +198,12 @@ export async function POST(request: NextRequest) {
     console.log(`[Smart Template Export ${requestId}] Generated buffer: ${buffer.length} bytes`)
 
     // CHARGE CREDITS NOW (only after successful generation)
-    console.log(`[Smart Template Export ${requestId}] Charging ${TEMPLATE_PRICING.COST_PER_TEMPLATE} credits...`)
-    console.log(`[Smart Template Export ${requestId}] Current credits: ${profile.credits}, After: ${profile.credits - TEMPLATE_PRICING.COST_PER_TEMPLATE}`)
+    console.log(`[Smart Template Export ${requestId}] Charging ${TEMPLATE_PRICING.COST_PER_EXPORT} credit...`)
+    console.log(`[Smart Template Export ${requestId}] Current credits: ${profile.credits}, After: ${profile.credits - TEMPLATE_PRICING.COST_PER_EXPORT}`)
 
     const { error: deductError } = await supabase
       .from('profiles')
-      .update({ credits: profile.credits - TEMPLATE_PRICING.COST_PER_TEMPLATE })
+      .update({ credits: profile.credits - TEMPLATE_PRICING.COST_PER_EXPORT })
       .eq('id', user.id)
 
     if (deductError) {
@@ -217,7 +217,7 @@ export async function POST(request: NextRequest) {
     console.log(`[Smart Template Export ${requestId}] Recording transaction...`)
     const { error: txError } = await supabase.from('credit_transactions').insert({
       user_id: user.id,
-      amount: -TEMPLATE_PRICING.COST_PER_TEMPLATE,
+      amount: -TEMPLATE_PRICING.COST_PER_EXPORT,
       transaction_type: 'usage',
       description: `Smart template export: ${receipts.length} receipts`,
     })

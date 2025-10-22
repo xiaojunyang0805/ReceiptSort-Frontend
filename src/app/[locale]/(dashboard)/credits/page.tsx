@@ -89,7 +89,7 @@ export default async function CreditsPage({ searchParams }: CreditsPageProps) {
               <span className="text-sm font-medium">{t('templates.cost')}</span>
               <div className="flex items-center gap-1">
                 <Coins className="h-4 w-4 text-yellow-600" />
-                <span className="font-bold text-lg">{TEMPLATE_PRICING.COST_PER_TEMPLATE}</span>
+                <span className="font-bold text-lg">{TEMPLATE_PRICING.COST_PER_EXPORT}</span>
                 <span className="text-sm text-muted-foreground">{t('templates.credits')}</span>
               </div>
             </div>

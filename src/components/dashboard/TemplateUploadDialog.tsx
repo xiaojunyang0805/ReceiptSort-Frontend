@@ -255,7 +255,7 @@ export default function TemplateUploadDialog({
   const canProceedToConfirm =
     config.name.trim() && Object.keys(config.fieldMapping).length > 0
 
-  const hasEnoughCredits = userCredits >= TEMPLATE_PRICING.COST_PER_TEMPLATE
+  const hasEnoughCredits = userCredits >= TEMPLATE_PRICING.COST_PER_EXPORT
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
@@ -530,7 +530,7 @@ export default function TemplateUploadDialog({
               <Coins className={`h-4 w-4 ${hasEnoughCredits ? 'text-blue-600' : 'text-destructive'}`} />
               <AlertDescription>
                 <p className="font-medium mb-1">
-                  {t('confirm.creditCharge', { credits: TEMPLATE_PRICING.COST_PER_TEMPLATE })}
+                  {t('confirm.creditCharge', { credits: TEMPLATE_PRICING.COST_PER_EXPORT })}
                 </p>
                 <p className="text-sm">
                   {t('confirm.balance', { balance: userCredits })}

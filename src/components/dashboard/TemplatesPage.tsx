@@ -269,7 +269,7 @@ export default function TemplatesPage() {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-2 text-sm">
-          <p>✓ {t('info.point1', { credits: TEMPLATE_PRICING.COST_PER_TEMPLATE })}</p>
+          <p>✓ {t('info.point1', { credits: TEMPLATE_PRICING.COST_PER_EXPORT })}</p>
           <p>✓ {t('info.point2')}</p>
           <p>✓ {t('info.point3')}</p>
           <p>✓ {t('info.point4')}</p>

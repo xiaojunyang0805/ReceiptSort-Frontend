@@ -2,12 +2,12 @@
  * Custom Export Template Pricing Configuration
  *
  * Users can create custom Excel templates for VAT declarations, accounting, etc.
- * Each template costs credits to create, but exports using templates are FREE.
+ * AI analysis is FREE, but each export costs 1 credit.
  */
 
 export const TEMPLATE_PRICING = {
-  // Credit cost per template (flat rate)
-  COST_PER_TEMPLATE: 20,
+  // Credit cost per export (1 credit per export)
+  COST_PER_EXPORT: 1,
 
   // Template limits
   MAX_TEMPLATES_PER_USER: 10,
@@ -15,7 +15,8 @@ export const TEMPLATE_PRICING = {
   MAX_TEMPLATE_FILE_SIZE_MB: 5,
 
   // Free operations
-  EXPORT_WITH_TEMPLATE_COST: 0, // Free to export using template
+  AI_ANALYSIS_COST: 0, // Free AI template analysis
+  SAVE_TEMPLATE_COST: 0, // Free to save template for reuse
   EDIT_TEMPLATE_COST: 0, // Free to edit mapping
   DELETE_TEMPLATE_COST: 0, // Free to delete (no refund)
 
@@ -28,15 +29,15 @@ export const TEMPLATE_PRICING = {
 } as const
 
 /**
- * Calculate template creation cost
- * Currently flat rate of 20 credits
+ * Calculate template export cost
+ * Currently flat rate of 1 credit per export
  *
- * @param existingTemplateCount - Number of templates user already has
- * @returns Credit cost for next template
+ * @param existingTemplateCount - Number of templates user already has (unused, for future pricing tiers)
+ * @returns Credit cost for export
  */
 export function calculateTemplateCost(existingTemplateCount: number): number {
-  // Flat rate pricing: 20 credits per template
-  return TEMPLATE_PRICING.COST_PER_TEMPLATE
+  // Flat rate pricing: 1 credit per export
+  return TEMPLATE_PRICING.COST_PER_EXPORT
 }
 
 /**
