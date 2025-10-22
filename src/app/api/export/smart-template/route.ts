@@ -272,6 +272,7 @@ export async function POST(request: NextRequest) {
           start_row: start_row,
           field_mapping: field_mapping,
           credits_spent: 0, // No additional charge since already charged for export
+          is_active: true, // Template is active by default
         }
 
         console.log(`[Smart Template Export ${requestId}] Inserting template record:`, {
@@ -312,6 +313,36 @@ export async function POST(request: NextRequest) {
     console.log(`[Smart Template Export ${requestId}] Buffer type: ${buffer.constructor.name}`)
     console.log(`[Smart Template Export ${requestId}] Buffer length: ${buffer.length}`)
 
+    // Upload file to Supabase Storage for export history
+    const filePath = `${user.id}/exports/${filename}`
+    let fileUrl = ''
+
+    console.log(`[Smart Template Export ${requestId}] Uploading to storage: ${filePath}`)
+    try {
+      const { error: uploadError } = await supabase.storage
+        .from('receipts')
+        .upload(filePath, buffer, {
+          contentType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+          cacheControl: '3600',
+          upsert: false,
+        })
+
+      if (uploadError) {
+        console.error(`[Smart Template Export ${requestId}] ❌ Upload failed:`, uploadError)
+        // Continue even if upload fails - still return file to user
+      } else {
+        // Get public URL
+        const { data: { publicUrl } } = supabase.storage
+          .from('receipts')
+          .getPublicUrl(filePath)
+
+        fileUrl = publicUrl
+        console.log(`[Smart Template Export ${requestId}] ✓ File uploaded successfully: ${fileUrl}`)
+      }
+    } catch (storageError) {
+      console.error(`[Smart Template Export ${requestId}] ❌ Storage error:`, storageError)
+    }
+
     // Record export in exports table for history
     console.log(`[Smart Template Export ${requestId}] Recording export in history...`)
     try {
@@ -320,6 +351,8 @@ export async function POST(request: NextRequest) {
         export_type: 'smart-template' as const,
         receipt_count: receipts.length,
         file_name: filename,
+        file_path: filePath,
+        file_url: fileUrl || null,
         file_size: buffer.length,
       }
 
