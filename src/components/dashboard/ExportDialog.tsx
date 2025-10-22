@@ -319,7 +319,7 @@ export default function ExportDialog({
 
       console.log('[Export Dialog] Response status:', response.status)
       const data = await response.json()
-      console.log('[Export Dialog] Response data:', data)
+      console.log('[Export Dialog] Response data:', JSON.stringify(data, null, 2))
 
       if (!response.ok) {
         // Don't show error if template already exists
@@ -393,42 +393,59 @@ export default function ExportDialog({
         endpoint = '/api/export/template'
         requestBody.template_id = selectedCustomTemplate
       } else if (exportFormat === 'smart-template') {
-        // Smart template with AI analysis
-        if (!uploadedTemplate || !aiAnalysis) {
+        // Smart template export - can use either uploaded template OR saved template
+
+        // Check if we have either an uploaded template with AI analysis OR a saved template selected
+        if (uploadedTemplate && aiAnalysis) {
+          // Case 1: Using newly uploaded template with AI analysis
+          endpoint = '/api/export/smart-template'
+
+          console.log('[Export Dialog] Processing uploaded template:', {
+            fileName: uploadedTemplate.name,
+            fileSize: uploadedTemplate.size,
+            sheetName: aiAnalysis.sheetName,
+            startRow: aiAnalysis.startRow,
+            fieldCount: Object.keys(aiAnalysis.fieldMapping).length,
+            receiptCount: selectedIds.length,
+          })
+
+          // Convert file to base64
+          const arrayBuffer = await uploadedTemplate.arrayBuffer()
+          const base64 = Buffer.from(arrayBuffer).toString('base64')
+
+          console.log('[Export Dialog] Base64 conversion complete, length:', base64.length)
+
+          requestBody = {
+            receipt_ids: selectedIds,
+            template_file: base64,
+            sheet_name: aiAnalysis.sheetName,
+            start_row: aiAnalysis.startRow,
+            field_mapping: aiAnalysis.fieldMapping,
+            save_for_reuse: saveForReuse,
+            template_name: saveForReuse ? templateNameForSave : undefined,
+          }
+        } else if (selectedCustomTemplate) {
+          // Case 2: Using saved template
+          endpoint = '/api/export/template'
+
+          console.log('[Export Dialog] Processing saved template:', {
+            templateId: selectedCustomTemplate,
+            receiptCount: selectedIds.length,
+          })
+
+          requestBody = {
+            receipt_ids: selectedIds,
+            template_id: selectedCustomTemplate,
+          }
+        } else {
+          // No template available
           toast({
             title: 'Template required',
-            description: 'Please upload and analyze a template first',
+            description: 'Please upload a new template or select a saved template',
             variant: 'destructive',
           })
           setIsExporting(false)
           return
-        }
-
-        endpoint = '/api/export/smart-template'
-
-        console.log('[Export Dialog] Processing smart template:', {
-          fileName: uploadedTemplate.name,
-          fileSize: uploadedTemplate.size,
-          sheetName: aiAnalysis.sheetName,
-          startRow: aiAnalysis.startRow,
-          fieldCount: Object.keys(aiAnalysis.fieldMapping).length,
-          receiptCount: selectedIds.length,
-        })
-
-        // Convert file to base64
-        const arrayBuffer = await uploadedTemplate.arrayBuffer()
-        const base64 = Buffer.from(arrayBuffer).toString('base64')
-
-        console.log('[Export Dialog] Base64 conversion complete, length:', base64.length)
-
-        requestBody = {
-          receipt_ids: selectedIds,
-          template_file: base64,
-          sheet_name: aiAnalysis.sheetName,
-          start_row: aiAnalysis.startRow,
-          field_mapping: aiAnalysis.fieldMapping,
-          save_for_reuse: saveForReuse,
-          template_name: saveForReuse ? templateNameForSave : undefined,
         }
       } else if (exportFormat === 'excel') {
         requestBody.locale = locale
@@ -612,67 +629,7 @@ export default function ExportDialog({
                   </div>
                 </div>
               </button>
-
-              {/* Custom Template Option - Only show if user has saved templates */}
-              {customTemplates.length > 0 && (
-                <button
-                  onClick={() => setSelectedFormat('template')}
-                  className={`p-4 rounded-lg border-2 transition-all ${
-                    selectedFormat === 'template'
-                      ? 'border-primary bg-primary/5'
-                      : 'border-muted hover:border-muted-foreground/50'
-                  }`}
-                  disabled={isExporting}
-                >
-                  <div className="flex flex-col items-center gap-2">
-                    <Sparkles
-                      className={`h-7 w-7 ${
-                        selectedFormat === 'template'
-                          ? 'text-primary'
-                          : 'text-muted-foreground'
-                      }`}
-                    />
-                    <div className="text-sm font-medium">Saved</div>
-                    <div className="text-xs text-muted-foreground text-center">
-                      {customTemplates.length} {customTemplates.length === 1 ? 'template' : 'templates'}
-                    </div>
-                  </div>
-                </button>
-              )}
             </div>
-
-            {/* Custom Template Selection */}
-            {selectedFormat === 'template' && customTemplates.length > 0 && (
-              <div className="space-y-2">
-                <Label>Select Template</Label>
-                <Select
-                  value={selectedCustomTemplate}
-                  onValueChange={setSelectedCustomTemplate}
-                  disabled={isExporting}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Choose a template" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {customTemplates.map((template) => (
-                      <SelectItem key={template.id} value={template.id}>
-                        <div className="flex flex-col">
-                          <span className="font-medium">{template.template_name}</span>
-                          {template.description && (
-                            <span className="text-xs text-muted-foreground">
-                              {template.description}
-                            </span>
-                          )}
-                        </div>
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <p className="text-xs text-muted-foreground">
-                  ✓ Free to use • Used {customTemplates.find(t => t.id === selectedCustomTemplate)?.export_count || 0} times
-                </p>
-              </div>
-            )}
 
             {/* Template Selection (CSV only) */}
             {selectedFormat === 'csv' && (
@@ -960,34 +917,38 @@ export default function ExportDialog({
           </div>
 
           {/* Export with Template Button - Always visible at bottom */}
-          {aiAnalysis && (
-            <div className="flex justify-end pt-2">
-              <Button
-                onClick={async () => {
-                  console.log('[Export Dialog] AI Template export button clicked', {
-                    hasTemplate: !!uploadedTemplate,
-                    hasAnalysis: !!aiAnalysis,
-                    receiptCount: selectedIds.length
-                  })
-                  await handleExport('smart-template')
-                }}
-                disabled={!aiAnalysis || isExporting || selectedIds.length === 0 || selectedIds.length > MAX_EXPORT_RECEIPTS}
-                className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
-              >
-                {isExporting && selectedFormat === 'smart-template' ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Exporting...
-                  </>
-                ) : (
-                  <>
-                    <Sparkles className="mr-2 h-4 w-4" />
-                    Export with Template (1 credit)
-                  </>
-                )}
-              </Button>
-            </div>
-          )}
+          <div className="flex justify-end pt-2">
+            <Button
+              onClick={async () => {
+                console.log('[Export Dialog] Template export button clicked', {
+                  hasUploadedTemplate: !!uploadedTemplate,
+                  hasAiAnalysis: !!aiAnalysis,
+                  selectedCustomTemplate: selectedCustomTemplate,
+                  receiptCount: selectedIds.length
+                })
+                await handleExport('smart-template')
+              }}
+              disabled={
+                isExporting ||
+                selectedIds.length === 0 ||
+                selectedIds.length > MAX_EXPORT_RECEIPTS ||
+                (!aiAnalysis && !selectedCustomTemplate) // Disabled only if neither uploaded nor saved template is selected
+              }
+              className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+            >
+              {isExporting && selectedFormat === 'smart-template' ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Exporting...
+                </>
+              ) : (
+                <>
+                  <Sparkles className="mr-2 h-4 w-4" />
+                  Export with Template (1 credit)
+                </>
+              )}
+            </Button>
+          </div>
         </div>
 
         <DialogFooter>
