@@ -173,7 +173,7 @@ export default function ExportsPage() {
   }
 
   return (
-    <div className="container mx-auto py-8 space-y-6 pb-20 md:pb-8">
+    <div className="container mx-auto py-8 space-y-6 pb-32 md:pb-8">
       <div>
         <h1 className="text-3xl font-bold">{t('title')}</h1>
         <p className="text-muted-foreground mt-2">
