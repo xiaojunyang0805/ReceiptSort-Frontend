@@ -573,7 +573,7 @@ export default function ExportDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-6xl max-h-[95vh] flex flex-col">
+      <DialogContent className="sm:max-w-6xl max-h-[95vh] flex flex-col px-4 sm:px-6">
         <DialogHeader>
           <DialogTitle>Export Receipts</DialogTitle>
           <DialogDescription>
@@ -731,7 +731,7 @@ export default function ExportDialog({
             </div>
 
             {/* Two-column layout: Upload New (Left) | Use Saved (Right) */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {/* LEFT COLUMN: Upload New Template */}
               <div className="space-y-4">
                 <h4 className="text-sm font-medium text-gray-700">Upload New Template</h4>
@@ -929,7 +929,7 @@ export default function ExportDialog({
           </div>
 
           {/* Export with Template Button - Always visible at bottom */}
-          <div className="flex justify-end pt-2">
+          <div className="flex justify-end pt-2 pb-4">
             <Button
               onClick={async () => {
                 console.log('[Export Dialog] Template export button clicked', {
