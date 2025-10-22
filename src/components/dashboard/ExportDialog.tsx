@@ -878,36 +878,6 @@ export default function ExportDialog({
                 )}
               </div>
             </div>
-
-            {/* Export with Template Button - Bottom Right */}
-            {aiAnalysis && (
-              <div className="flex justify-end pt-3">
-                <Button
-                  onClick={async () => {
-                    console.log('[Export Dialog] AI Template export button clicked', {
-                      hasTemplate: !!uploadedTemplate,
-                      hasAnalysis: !!aiAnalysis,
-                      receiptCount: selectedIds.length
-                    })
-                    await handleExport('smart-template')
-                  }}
-                  disabled={!aiAnalysis || isExporting || selectedIds.length === 0 || selectedIds.length > MAX_EXPORT_RECEIPTS}
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
-                >
-                  {isExporting && selectedFormat === 'smart-template' ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Exporting...
-                    </>
-                  ) : (
-                    <>
-                      <Sparkles className="mr-2 h-4 w-4" />
-                      Export with Template (1 credit)
-                    </>
-                  )}
-                </Button>
-              </div>
-            )}
           </div>
 
           {/* Warnings */}
@@ -944,6 +914,36 @@ export default function ExportDialog({
               • Only completed receipts will be included
             </div>
           </div>
+
+          {/* Export with Template Button - Always visible at bottom */}
+          {aiAnalysis && (
+            <div className="flex justify-end pt-2">
+              <Button
+                onClick={async () => {
+                  console.log('[Export Dialog] AI Template export button clicked', {
+                    hasTemplate: !!uploadedTemplate,
+                    hasAnalysis: !!aiAnalysis,
+                    receiptCount: selectedIds.length
+                  })
+                  await handleExport('smart-template')
+                }}
+                disabled={!aiAnalysis || isExporting || selectedIds.length === 0 || selectedIds.length > MAX_EXPORT_RECEIPTS}
+                className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+              >
+                {isExporting && selectedFormat === 'smart-template' ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Exporting...
+                  </>
+                ) : (
+                  <>
+                    <Sparkles className="mr-2 h-4 w-4" />
+                    Export with Template (1 credit)
+                  </>
+                )}
+              </Button>
+            </div>
+          )}
         </div>
 
         <DialogFooter>
