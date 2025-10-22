@@ -369,6 +369,14 @@ export default function ExportDialog({
 
     const exportFormat = overrideFormat || selectedFormat
 
+    console.log('[Export Dialog] ========== EXPORT STARTED ==========')
+    console.log('[Export Dialog] overrideFormat:', overrideFormat)
+    console.log('[Export Dialog] selectedFormat:', selectedFormat)
+    console.log('[Export Dialog] Final exportFormat:', exportFormat)
+    console.log('[Export Dialog] selectedCustomTemplate:', selectedCustomTemplate)
+    console.log('[Export Dialog] has aiAnalysis:', !!aiAnalysis)
+    console.log('[Export Dialog] has uploadedTemplate:', !!uploadedTemplate)
+
     setIsExporting(true)
     setActiveExportFormat(exportFormat) // Track which format is actively exporting
 
