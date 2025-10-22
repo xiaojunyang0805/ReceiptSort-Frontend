@@ -449,19 +449,17 @@ export default function ReceiptList() {
         {filteredReceipts.map((receipt) => (
           <Card key={receipt.id} className="p-4">
             <div className="flex items-start gap-4">
+              <Checkbox
+                checked={selectedIds.has(receipt.id)}
+                onCheckedChange={() => handleSelectReceipt(receipt.id)}
+                disabled={receipt.processing_status !== 'completed'}
+                className="flex-shrink-0 mt-1"
+              />
               <div className="w-16 h-16 rounded bg-muted flex items-center justify-center flex-shrink-0">
                 <FileText className="h-8 w-8 text-muted-foreground" />
               </div>
               <div className="flex-1 min-w-0">
-                <div className="flex items-start justify-between gap-2">
-                  <h3 className="font-medium truncate">{receipt.file_name}</h3>
-                  <Checkbox
-                    checked={selectedIds.has(receipt.id)}
-                    onCheckedChange={() => handleSelectReceipt(receipt.id)}
-                    disabled={receipt.processing_status !== 'completed'}
-                    className="flex-shrink-0"
-                  />
-                </div>
+                <h3 className="font-medium truncate">{receipt.file_name}</h3>
                 <div className="mt-2 space-y-1 text-sm">
                   {receipt.merchant_name && (
                     <p className="text-muted-foreground">
