@@ -158,6 +158,7 @@ export default function ExportDialog({
   const [customTemplates, setCustomTemplates] = useState<CustomTemplate[]>([])
   const [selectedCustomTemplate, setSelectedCustomTemplate] = useState<string>('')
   const [isExporting, setIsExporting] = useState(false)
+  const [activeExportFormat, setActiveExportFormat] = useState<ExportFormat | null>(null) // Track which button is actually exporting
   const [uploadedTemplate, setUploadedTemplate] = useState<File | null>(null)
   const [aiAnalysis, setAiAnalysis] = useState<AIAnalysis | null>(null)
   const [isAnalyzing, setIsAnalyzing] = useState(false)
@@ -366,9 +367,10 @@ export default function ExportDialog({
   const handleExport = async (overrideFormat?: ExportFormat) => {
     if (selectedIds.length === 0) return
 
-    setIsExporting(true)
-
     const exportFormat = overrideFormat || selectedFormat
+
+    setIsExporting(true)
+    setActiveExportFormat(exportFormat) // Track which format is actively exporting
 
     // Save template preference
     saveTemplatePreference(selectedTemplate, customColumns)
@@ -445,6 +447,7 @@ export default function ExportDialog({
             variant: 'destructive',
           })
           setIsExporting(false)
+          setActiveExportFormat(null)
           return
         }
       } else if (exportFormat === 'excel') {
@@ -556,6 +559,7 @@ export default function ExportDialog({
       })
     } finally {
       setIsExporting(false)
+      setActiveExportFormat(null)
     }
   }
 
@@ -690,10 +694,10 @@ export default function ExportDialog({
             <div className="flex justify-end pt-2">
               <Button
                 onClick={() => handleExport()}
-                disabled={isExporting || selectedIds.length === 0 || selectedIds.length > MAX_EXPORT_RECEIPTS || selectedFormat === 'smart-template'}
+                disabled={isExporting || selectedIds.length === 0 || selectedIds.length > MAX_EXPORT_RECEIPTS}
                 className="w-full sm:w-auto"
               >
-                {isExporting && selectedFormat !== 'smart-template' ? (
+                {isExporting && activeExportFormat !== 'smart-template' && (activeExportFormat === selectedFormat || activeExportFormat === 'excel' || activeExportFormat === 'csv') ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                     Exporting...
@@ -701,7 +705,7 @@ export default function ExportDialog({
                 ) : (
                   <>
                     <Download className="mr-2 h-4 w-4" />
-                    Export {selectedFormat === 'excel' ? 'Excel' : selectedFormat === 'csv' ? 'CSV' : 'Saved Template'}
+                    Export {selectedFormat === 'excel' ? 'Excel' : selectedFormat === 'csv' ? 'CSV' : 'Format'}
                   </>
                 )}
               </Button>
@@ -936,7 +940,7 @@ export default function ExportDialog({
               }
               className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
             >
-              {isExporting && selectedFormat === 'smart-template' ? (
+              {isExporting && activeExportFormat === 'smart-template' ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   Exporting...
