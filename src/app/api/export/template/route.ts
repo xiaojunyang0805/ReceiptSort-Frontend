@@ -147,43 +147,58 @@ export async function POST(request: NextRequest) {
       })
       .eq('id', template_id)
 
-    // 8. Optionally upload to storage for export history
-    const exportFilePath = `${user.id}/exports/${filename}`
+    // 8. Upload to storage for export history
+    const timestamp = Date.now()
+    const exportFilePath = `${user.id}/exports/${timestamp}_${filename}`
     let fileUrl = ''
 
+    console.log(`[Template Export] Uploading to storage: ${exportFilePath}`)
     try {
       const { error: uploadError } = await supabase.storage
         .from('receipts')
         .upload(exportFilePath, excelBuffer, {
           contentType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
           cacheControl: '3600',
-          upsert: false,
+          upsert: true, // Allow overwriting if same filename exists
         })
 
-      if (!uploadError) {
+      if (uploadError) {
+        console.error('[Template Export] Upload error:', uploadError)
+      } else {
         const {
           data: { publicUrl },
         } = supabase.storage.from('receipts').getPublicUrl(exportFilePath)
 
         fileUrl = publicUrl
+        console.log(`[Template Export] ✓ File uploaded successfully: ${fileUrl}`)
       }
     } catch (storageError) {
-      console.error('[Template Export] Storage error:', storageError)
+      console.error('[Template Export] Storage exception:', storageError)
       // Non-critical, continue
     }
 
     // 9. Record export in exports table
+    console.log(`[Template Export] Recording export in history...`)
     try {
-      await supabase.from('exports').insert({
+      const exportRecord = {
         user_id: user.id,
-        export_type: 'excel',
+        export_type: 'template' as const, // Changed from 'excel' to 'template'
         receipt_count: completedReceipts.length,
         file_name: filename,
         file_path: exportFilePath,
         file_url: fileUrl || null,
-      })
+        file_size: excelBuffer.length,
+      }
+
+      const { error: exportError } = await supabase.from('exports').insert(exportRecord)
+
+      if (exportError) {
+        console.error('[Template Export] ❌ Failed to record export:', exportError)
+      } else {
+        console.log('[Template Export] ✓ Export recorded in history')
+      }
     } catch (exportLogError) {
-      console.error('[Template Export] Failed to log export:', exportLogError)
+      console.error('[Template Export] Exception recording export:', exportLogError)
       // Non-critical, continue
     }
 
