@@ -67,7 +67,7 @@ export default async function DashboardPage() {
     : t('overview.lastExport.never')
 
   return (
-    <div className="space-y-8 pb-48 md:pb-8">
+    <div className="space-y-8 pb-72 md:pb-8">
       {/* Low Credit Banner */}
       <LowCreditBanner credits={profile?.credits ?? 0} />
 

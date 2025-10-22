@@ -30,7 +30,7 @@ export default async function DashboardLayout({
         </div>
 
         {/* Main Content */}
-        <main className="flex-1 md:pl-64 p-6">
+        <main className="flex-1 md:pl-64 p-4 md:p-6">
           {children}
         </main>
       </div>
