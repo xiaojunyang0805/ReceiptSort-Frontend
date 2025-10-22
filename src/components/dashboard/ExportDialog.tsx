@@ -249,13 +249,17 @@ export default function ExportDialog({
       setAiAnalysis(data.analysis)
       setSelectedFormat('smart-template')
 
+      // Set default template name from filename
+      const defaultName = file.name.replace(/\.(xlsx|xls)$/i, '')
+      setTemplateNameForSave(defaultName)
+
       toast({
         title: 'Template analyzed!',
-        description: `AI detected ${Object.keys(data.analysis.fieldMapping).length} field mappings. Saving for reuse...`,
+        description: `AI detected ${Object.keys(data.analysis.fieldMapping).length} field mappings.`,
       })
 
-      // Auto-save template after successful analysis
-      await autoSaveTemplate(file, data.analysis)
+      // Auto-save template after successful analysis with default name
+      await autoSaveTemplate(file, data.analysis, defaultName)
     } catch (error) {
       console.error('[Export Dialog] Template analysis failed:', error)
       toast({
@@ -269,12 +273,12 @@ export default function ExportDialog({
     }
   }
 
-  const autoSaveTemplate = async (file: File, analysis: AIAnalysis) => {
+  const autoSaveTemplate = async (file: File, analysis: AIAnalysis, templateName: string) => {
     try {
       console.log('[Export Dialog] Auto-saving template...', file.name)
 
-      // Use template name from input, or default to filename
-      const finalTemplateName = templateNameForSave.trim() || file.name.replace(/\.(xlsx|xls)$/i, '')
+      // Use provided template name
+      const finalTemplateName = templateName.trim() || file.name.replace(/\.(xlsx|xls)$/i, '')
 
       // Convert file to base64
       const reader = new FileReader()
@@ -809,23 +813,33 @@ export default function ExportDialog({
                     {/* Template Name Input */}
                     <div className="space-y-2">
                       <Label htmlFor="template-name" className="text-xs">
-                        Template Name (optional)
+                        Template Name
                       </Label>
-                      <Input
-                        id="template-name"
-                        placeholder="e.g., VAT Q4 2025"
-                        value={templateNameForSave}
-                        onChange={(e) => setTemplateNameForSave(e.target.value)}
-                        className="text-sm h-8"
-                      />
+                      <div className="flex gap-2">
+                        <Input
+                          id="template-name"
+                          placeholder="e.g., VAT Q4 2025"
+                          value={templateNameForSave}
+                          onChange={(e) => setTemplateNameForSave(e.target.value)}
+                          className="text-sm h-8 flex-1"
+                        />
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={async () => {
+                            if (uploadedTemplate && aiAnalysis && templateNameForSave.trim()) {
+                              await autoSaveTemplate(uploadedTemplate, aiAnalysis, templateNameForSave)
+                            }
+                          }}
+                          disabled={!templateNameForSave.trim() || isAnalyzing}
+                          className="h-8"
+                        >
+                          Save
+                        </Button>
+                      </div>
                       <p className="text-xs text-gray-500">
-                        Leave blank to use filename
+                        Edit name and click Save to update template
                       </p>
-                    </div>
-
-                    {/* Auto-save info */}
-                    <div className="bg-green-50 border border-green-200 rounded p-2 text-xs text-green-700">
-                      ✓ Template will be saved automatically (FREE)
                     </div>
                   </div>
                 )}
