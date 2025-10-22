@@ -998,7 +998,7 @@ export default function ExportDialog({
   // Render Drawer for mobile
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>
-      <DrawerContent className="max-h-[85vh] flex flex-col">
+      <DrawerContent className="max-h-[80vh] flex flex-col">
         <DrawerHeader className="flex-shrink-0">
           <DrawerTitle>Export Receipts</DrawerTitle>
           <DrawerDescription>
