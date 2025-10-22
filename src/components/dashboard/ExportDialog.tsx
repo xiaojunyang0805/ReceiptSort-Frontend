@@ -579,7 +579,7 @@ export default function ExportDialog({
               </div>
             </div>
 
-            <div className={`grid gap-3 mb-4 ${customTemplates.length > 0 ? 'grid-cols-3' : 'grid-cols-2'}`}>
+            <div className="grid grid-cols-2 gap-3 mb-4">
               {/* Excel Option */}
               <button
                 onClick={() => setSelectedFormat('excel')}
