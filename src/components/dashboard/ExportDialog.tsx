@@ -14,13 +14,6 @@ import { Label } from '@/components/ui/label'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
 import { FileSpreadsheet, FileText, Loader2, Download, Sparkles, Upload, Trash2, ChevronDown, ChevronUp } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 import {
@@ -957,21 +950,21 @@ export default function ExportDialog({
         </div>
   )
 
-  // Use Dialog for all screen sizes with responsive styling
+  // Use Dialog everywhere - full-screen on mobile, centered on desktop
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="w-[calc(100vw-2rem)] sm:w-[90vw] max-h-[85vh] max-w-3xl sm:max-w-5xl lg:max-w-6xl flex flex-col p-0 gap-0">
-        <DialogHeader className="px-4 sm:px-6 pt-4 sm:pt-6 pb-3 sm:pb-4 flex-shrink-0">
-          <DialogTitle className="text-lg sm:text-xl">Export Receipts</DialogTitle>
+      <DialogContent className="w-screen h-screen max-w-none lg:w-auto lg:h-auto lg:max-w-6xl lg:max-h-[90vh] flex flex-col p-0 gap-0 lg:rounded-lg">
+        <DialogHeader className="px-4 lg:px-6 pt-4 lg:pt-6 pb-3 lg:pb-4 flex-shrink-0 border-b">
+          <DialogTitle className="text-lg lg:text-xl">Export Receipts</DialogTitle>
           <DialogDescription className="text-sm">
             Export {selectedIds.length} selected receipt{selectedIds.length === 1 ? '' : 's'} to your preferred format
           </DialogDescription>
         </DialogHeader>
-        <div className="flex-1 overflow-y-auto px-4 sm:px-6 min-h-0">
+        <div className="flex-1 overflow-y-auto px-4 lg:px-6 min-h-0">
           <ExportContent />
         </div>
-        <DialogFooter className="px-4 sm:px-6 py-3 sm:py-4 flex-shrink-0 border-t">
-          <Button variant="outline" onClick={() => onOpenChange(false)} disabled={isExporting} className="w-full sm:w-auto">
+        <DialogFooter className="px-4 lg:px-6 py-3 lg:py-4 flex-shrink-0 border-t">
+          <Button variant="outline" onClick={() => onOpenChange(false)} disabled={isExporting} className="w-full lg:w-auto">
             Close
           </Button>
         </DialogFooter>
