@@ -573,7 +573,7 @@ export default function ExportDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-6xl max-h-[95vh] flex flex-col px-4 sm:px-6">
+      <DialogContent className="max-w-[95vw] sm:max-w-6xl max-h-[95vh] flex flex-col px-4 sm:px-6">
         <DialogHeader>
           <DialogTitle>Export Receipts</DialogTitle>
           <DialogDescription>
@@ -591,7 +591,7 @@ export default function ExportDialog({
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-3 mb-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
               {/* Excel Option */}
               <button
                 onClick={() => setSelectedFormat('excel')}
