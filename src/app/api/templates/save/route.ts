@@ -27,21 +27,37 @@ interface SaveTemplateRequest {
  * 6. No credit charge - saving templates is free
  */
 export async function POST(request: NextRequest) {
+  const requestId = Math.random().toString(36).substring(7)
+  console.log(`[Template Save ${requestId}] ========== REQUEST START ==========`)
+
   try {
     const supabase = await createClient()
 
     // 1. Verify authentication
+    console.log(`[Template Save ${requestId}] Step 1: Authenticating...`)
     const {
       data: { user },
       error: authError,
     } = await supabase.auth.getUser()
 
     if (authError || !user) {
+      console.error(`[Template Save ${requestId}] Auth failed:`, authError)
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
+    console.log(`[Template Save ${requestId}] ✓ User authenticated:`, user.id)
+
     // 2. Parse request body
+    console.log(`[Template Save ${requestId}] Step 2: Parsing request...`)
     const body: SaveTemplateRequest = await request.json()
+    console.log(`[Template Save ${requestId}] Request body:`, {
+      templateName: body.templateName,
+      hasTemplateFile: !!body.templateFile,
+      templateFileLength: body.templateFile?.length,
+      sheetName: body.sheetName,
+      startRow: body.startRow,
+      fieldMappingKeys: Object.keys(body.fieldMapping || {}),
+    })
     const {
       templateName,
       description,
@@ -139,26 +155,35 @@ export async function POST(request: NextRequest) {
     }
 
     // 6. Create export_templates record (FREE - no credit charge)
+    console.log(`[Template Save ${requestId}] Step 6: Inserting template record...`)
+    const templateRecord = {
+      user_id: user.id,
+      template_name: templateName,
+      description: description || null,
+      file_path: filePath,
+      file_url: fileUrl || null,
+      file_size: fileSize || null,
+      sheet_name: sheetName,
+      start_row: startRow,
+      field_mapping: fieldMapping,
+      credits_spent: 0, // FREE - saving templates costs 0 credits
+      is_active: true,
+    }
+    console.log(`[Template Save ${requestId}] Template record:`, templateRecord)
+
     const { data: template, error: templateError } = await supabase
       .from('export_templates')
-      .insert({
-        user_id: user.id,
-        template_name: templateName,
-        description: description || null,
-        file_path: filePath,
-        file_url: fileUrl || null,
-        file_size: fileSize || null,
-        sheet_name: sheetName,
-        start_row: startRow,
-        field_mapping: fieldMapping,
-        credits_spent: 0, // FREE - saving templates costs 0 credits
-        is_active: true,
-      })
+      .insert(templateRecord)
       .select()
       .single()
 
     if (templateError) {
-      console.error('[Template Save] Failed to create template:', templateError)
+      console.error(`[Template Save ${requestId}] ❌ Failed to create template:`, {
+        message: templateError.message,
+        code: templateError.code,
+        details: templateError.details,
+        hint: templateError.hint,
+      })
 
       // Check for unique constraint violation
       if (templateError.code === '23505') {
