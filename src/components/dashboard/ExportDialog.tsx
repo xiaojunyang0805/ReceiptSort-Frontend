@@ -273,6 +273,9 @@ export default function ExportDialog({
     try {
       console.log('[Export Dialog] Auto-saving template...', file.name)
 
+      // Use template name from input, or default to filename
+      const finalTemplateName = templateNameForSave.trim() || file.name.replace(/\.(xlsx|xls)$/i, '')
+
       // Convert file to base64
       const reader = new FileReader()
       const base64 = await new Promise<string>((resolve, reject) => {
@@ -285,17 +288,14 @@ export default function ExportDialog({
         reader.readAsDataURL(file)
       })
 
-      // Generate auto-save template name from filename
-      const autoTemplateName = file.name.replace(/\.(xlsx|xls)$/i, '')
-
       const response = await fetch('/api/templates/save', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          templateName: autoTemplateName,
-          description: `Auto-saved from ${file.name}`,
+          templateName: finalTemplateName,
+          description: `Saved from ${file.name}`,
           sheetName: analysis.sheetName,
           startRow: analysis.startRow,
           fieldMapping: analysis.fieldMapping,
@@ -309,6 +309,11 @@ export default function ExportDialog({
         // Don't show error if template already exists
         if (data.error?.includes('already exists')) {
           console.log('[Export Dialog] Template already exists, skipping auto-save')
+          toast({
+            title: 'Template exists',
+            description: `"${finalTemplateName}" is already saved`,
+            variant: 'default',
+          })
           return
         }
         throw new Error(data.error || 'Failed to save template')
@@ -316,12 +321,12 @@ export default function ExportDialog({
 
       console.log('[Export Dialog] Template auto-saved successfully:', data.template.id)
 
-      // Refresh template list
-      fetchCustomTemplates()
+      // Refresh template list immediately
+      await fetchCustomTemplates()
 
       toast({
         title: 'Template saved!',
-        description: `"${autoTemplateName}" is now available for reuse (FREE)`,
+        description: `"${finalTemplateName}" is now available for reuse (FREE)`,
       })
     } catch (error) {
       console.error('[Export Dialog] Auto-save failed:', error)
@@ -801,37 +806,27 @@ export default function ExportDialog({
                       </div>
                     </div>
 
-                    {/* Auto-save info */}
-                    <div className="bg-green-50 border border-green-200 rounded p-2 text-xs text-green-700">
-                      ✓ Template auto-saved for reuse (FREE)
+                    {/* Template Name Input */}
+                    <div className="space-y-2">
+                      <Label htmlFor="template-name" className="text-xs">
+                        Template Name (optional)
+                      </Label>
+                      <Input
+                        id="template-name"
+                        placeholder="e.g., VAT Q4 2025"
+                        value={templateNameForSave}
+                        onChange={(e) => setTemplateNameForSave(e.target.value)}
+                        className="text-sm h-8"
+                      />
+                      <p className="text-xs text-gray-500">
+                        Leave blank to use filename
+                      </p>
                     </div>
 
-                    {/* Export Button */}
-                    <Button
-                      onClick={async () => {
-                        console.log('[Export Dialog] AI Template export button clicked', {
-                          hasTemplate: !!uploadedTemplate,
-                          hasAnalysis: !!aiAnalysis,
-                          receiptCount: selectedIds.length
-                        })
-                        await handleExport('smart-template')
-                      }}
-                      disabled={!aiAnalysis || isExporting || selectedIds.length === 0 || selectedIds.length > MAX_EXPORT_RECEIPTS}
-                      className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
-                      size="sm"
-                    >
-                      {isExporting ? (
-                        <>
-                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                          Exporting...
-                        </>
-                      ) : (
-                        <>
-                          <Sparkles className="mr-2 h-4 w-4" />
-                          Export (1 credit)
-                        </>
-                      )}
-                    </Button>
+                    {/* Auto-save info */}
+                    <div className="bg-green-50 border border-green-200 rounded p-2 text-xs text-green-700">
+                      ✓ Template will be saved automatically (FREE)
+                    </div>
                   </div>
                 )}
               </div>
@@ -883,6 +878,36 @@ export default function ExportDialog({
                 )}
               </div>
             </div>
+
+            {/* Export with Template Button - Bottom Right */}
+            {aiAnalysis && (
+              <div className="flex justify-end pt-3">
+                <Button
+                  onClick={async () => {
+                    console.log('[Export Dialog] AI Template export button clicked', {
+                      hasTemplate: !!uploadedTemplate,
+                      hasAnalysis: !!aiAnalysis,
+                      receiptCount: selectedIds.length
+                    })
+                    await handleExport('smart-template')
+                  }}
+                  disabled={!aiAnalysis || isExporting || selectedIds.length === 0 || selectedIds.length > MAX_EXPORT_RECEIPTS}
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                >
+                  {isExporting && selectedFormat === 'smart-template' ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Exporting...
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="mr-2 h-4 w-4" />
+                      Export with Template (1 credit)
+                    </>
+                  )}
+                </Button>
+              </div>
+            )}
           </div>
 
           {/* Warnings */}
