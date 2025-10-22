@@ -274,8 +274,8 @@ export default function ReceiptList() {
 
       {/* View and Export Actions Bar */}
       <Card className="p-4">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div className="flex-1">
+        <div className="flex flex-col gap-4">
+          <div>
             <h3 className="font-semibold text-lg">{t('viewAndExport')}</h3>
             <p className="text-sm text-muted-foreground">
               {selectedCount > 0
@@ -283,9 +283,9 @@ export default function ReceiptList() {
                 : t('selectReceipts')}
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
+          <div className="flex flex-col gap-2">
             {/* Primary Actions */}
-            <div className="flex gap-2 flex-wrap">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
               <Button
                 variant="outline"
                 disabled={selectedCount === 0}
@@ -296,6 +296,7 @@ export default function ReceiptList() {
                     setModalOpen(true)
                   }
                 }}
+                className="w-full"
               >
                 <Eye className="mr-2 h-4 w-4" />
                 {selectedCount > 0 ? t('viewDetailsCount', { count: selectedCount }) : t('viewDetails')}
@@ -304,6 +305,7 @@ export default function ReceiptList() {
                 variant="outline"
                 disabled={selectedCount === 0}
                 onClick={() => setExportDialogOpen(true)}
+                className="w-full"
               >
                 <Download className="mr-2 h-4 w-4" />
                 {selectedCount > 0 ? t('exportCount', { count: selectedCount }) : t('exportButton')}
@@ -311,14 +313,12 @@ export default function ReceiptList() {
               <Button
                 variant="outline"
                 onClick={() => setExportHistoryOpen(true)}
+                className="w-full"
               >
                 <History className="mr-2 h-4 w-4" />
                 {t('exportHistory')}
               </Button>
             </div>
-
-            {/* Separator - only visible on larger screens */}
-            <div className="hidden sm:block w-px h-8 bg-border" />
 
             {/* Destructive Action - Separated */}
             <Button
@@ -343,7 +343,7 @@ export default function ReceiptList() {
                   toast.error(t('deleteFailed'))
                 }
               }}
-              className="text-destructive hover:text-destructive hover:bg-destructive/10"
+              className="w-full text-destructive hover:text-destructive hover:bg-destructive/10"
             >
               <Trash2 className="mr-2 h-4 w-4" />
               {selectedCount > 0 ? t('deleteCount', { count: selectedCount }) : t('deleteButton')}
