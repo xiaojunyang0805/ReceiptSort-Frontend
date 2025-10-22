@@ -960,7 +960,7 @@ export default function ExportDialog({
   // Use Dialog for all screen sizes with responsive styling
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="w-[95vw] max-h-[85vh] max-w-6xl flex flex-col p-0 gap-0">
+      <DialogContent className="w-[calc(100vw-2rem)] sm:w-[90vw] max-h-[85vh] max-w-3xl sm:max-w-5xl lg:max-w-6xl flex flex-col p-0 gap-0">
         <DialogHeader className="px-4 sm:px-6 pt-4 sm:pt-6 pb-3 sm:pb-4 flex-shrink-0">
           <DialogTitle className="text-lg sm:text-xl">Export Receipts</DialogTitle>
           <DialogDescription className="text-sm">
