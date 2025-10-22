@@ -168,6 +168,10 @@
         "question": "Can I export to QuickBooks or Xero?",
         "answer": "We export to Excel and CSV formats, which are compatible with QuickBooks, Xero, and all major accounting software. Simply import the downloaded file into your accounting system."
       },
+      "customTemplates": {
+        "question": "How do Custom Templates work?",
+        "answer": "Custom Templates let you create reusable export formats for VAT declarations, accounting, and more. When you export with 'Save for reuse' checked, our AI maps receipt fields to your template columns automatically. You can save up to 10 templates for FREE (no credits charged), then use them unlimited times. Each export with a template costs just 1 credit."
+      },
       "wrongExtraction": {
         "question": "What if the extraction is wrong?",
         "answer": "You can manually edit any extracted data before exporting. If extraction completely fails, we'll refund the credit."

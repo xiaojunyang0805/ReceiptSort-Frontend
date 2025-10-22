@@ -46,6 +46,7 @@ export default function FAQ() {
     { id: 'expiration' },
     { id: 'security' },
     { id: 'export' },
+    { id: 'customTemplates' },
     { id: 'wrongExtraction' },
     { id: 'refunds' },
     { id: 'business' },
