@@ -251,8 +251,11 @@ export default function ExportDialog({
 
       toast({
         title: 'Template analyzed!',
-        description: `AI detected ${Object.keys(data.analysis.fieldMapping).length} field mappings. Review and export.`,
+        description: `AI detected ${Object.keys(data.analysis.fieldMapping).length} field mappings. Saving for reuse...`,
       })
+
+      // Auto-save template after successful analysis
+      await autoSaveTemplate(file, data.analysis)
     } catch (error) {
       console.error('[Export Dialog] Template analysis failed:', error)
       toast({
@@ -263,6 +266,66 @@ export default function ExportDialog({
       setUploadedTemplate(null)
     } finally {
       setIsAnalyzing(false)
+    }
+  }
+
+  const autoSaveTemplate = async (file: File, analysis: AIAnalysis) => {
+    try {
+      console.log('[Export Dialog] Auto-saving template...', file.name)
+
+      // Convert file to base64
+      const reader = new FileReader()
+      const base64 = await new Promise<string>((resolve, reject) => {
+        reader.onload = () => {
+          const result = reader.result as string
+          const base64String = result.split(',')[1]
+          resolve(base64String)
+        }
+        reader.onerror = reject
+        reader.readAsDataURL(file)
+      })
+
+      // Generate auto-save template name from filename
+      const autoTemplateName = file.name.replace(/\.(xlsx|xls)$/i, '')
+
+      const response = await fetch('/api/templates/save', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          templateName: autoTemplateName,
+          description: `Auto-saved from ${file.name}`,
+          sheetName: analysis.sheetName,
+          startRow: analysis.startRow,
+          fieldMapping: analysis.fieldMapping,
+          templateFile: base64,
+        }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        // Don't show error if template already exists
+        if (data.error?.includes('already exists')) {
+          console.log('[Export Dialog] Template already exists, skipping auto-save')
+          return
+        }
+        throw new Error(data.error || 'Failed to save template')
+      }
+
+      console.log('[Export Dialog] Template auto-saved successfully:', data.template.id)
+
+      // Refresh template list
+      fetchCustomTemplates()
+
+      toast({
+        title: 'Template saved!',
+        description: `"${autoTemplateName}" is now available for reuse (FREE)`,
+      })
+    } catch (error) {
+      console.error('[Export Dialog] Auto-save failed:', error)
+      // Don't show error to user - auto-save failure is not critical
     }
   }
 
@@ -738,27 +801,9 @@ export default function ExportDialog({
                       </div>
                     </div>
 
-                    {/* Save for Reuse Option */}
-                    <div className="border-t border-blue-200 pt-2 space-y-2">
-                      <div className="flex items-center gap-2">
-                        <Checkbox
-                          id="save-for-reuse"
-                          checked={saveForReuse}
-                          onCheckedChange={(checked) => setSaveForReuse(checked as boolean)}
-                        />
-                        <Label htmlFor="save-for-reuse" className="text-xs cursor-pointer">
-                          Save for future use
-                        </Label>
-                      </div>
-
-                      {saveForReuse && (
-                        <Input
-                          placeholder="Template name (e.g., VAT Q4 2025)"
-                          value={templateNameForSave}
-                          onChange={(e) => setTemplateNameForSave(e.target.value)}
-                          className="text-sm h-8"
-                        />
-                      )}
+                    {/* Auto-save info */}
+                    <div className="bg-green-50 border border-green-200 rounded p-2 text-xs text-green-700">
+                      ✓ Template auto-saved for reuse (FREE)
                     </div>
 
                     {/* Export Button */}

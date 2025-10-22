@@ -5,25 +5,26 @@ import { TEMPLATE_PRICING, calculateTemplateCost } from '@/lib/template-pricing'
 interface SaveTemplateRequest {
   templateName: string
   description?: string
-  filePath: string
-  fileUrl: string
-  fileSize: number
+  filePath?: string
+  fileUrl?: string
+  fileSize?: number
   sheetName: string
   startRow: number
   fieldMapping: Record<string, string>
+  templateFile?: string // base64 encoded file for auto-save
 }
 
 /**
  * POST /api/templates/save
- * Save template configuration and charge credits
+ * Save template configuration (FREE - no credit charge)
  *
  * This endpoint:
  * 1. Validates user authentication
- * 2. Checks user has enough credits
- * 3. Validates template configuration
- * 4. Charges credits (20 per template)
- * 5. Creates export_templates record
- * 6. Records transaction in template_transactions
+ * 2. Validates template configuration
+ * 3. Checks template quota (max 10)
+ * 4. Uploads file if provided (base64)
+ * 5. Creates export_templates record (FREE)
+ * 6. No credit charge - saving templates is free
  */
 export async function POST(request: NextRequest) {
   try {
@@ -44,16 +45,17 @@ export async function POST(request: NextRequest) {
     const {
       templateName,
       description,
-      filePath,
-      fileUrl,
-      fileSize,
+      filePath: providedFilePath,
+      fileUrl: providedFileUrl,
+      fileSize: providedFileSize,
       sheetName,
       startRow,
       fieldMapping,
+      templateFile,
     } = body
 
     // 3. Validate required fields
-    if (!templateName || !filePath || !sheetName || !startRow || !fieldMapping) {
+    if (!templateName || !sheetName || !startRow || !fieldMapping) {
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
@@ -92,46 +94,51 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // 5. Calculate credit cost
-    const creditCost = calculateTemplateCost(templateCount || 0)
+    // 5. Upload file if provided (for auto-save)
+    let filePath = providedFilePath
+    let fileUrl = providedFileUrl
+    let fileSize = providedFileSize
 
-    // 6. Check user has enough credits
-    const { data: profile } = await supabase
-      .from('profiles')
-      .select('credits')
-      .eq('id', user.id)
-      .single()
+    if (templateFile) {
+      console.log(`[Template Save] Uploading template file...`)
+      const templateBuffer = Buffer.from(templateFile, 'base64')
+      const fileName = `${user.id}/templates/${Date.now()}_${templateName.replace(/[^a-zA-Z0-9]/g, '_')}.xlsx`
 
-    if (!profile || profile.credits < creditCost) {
+      const { error: uploadError } = await supabase.storage
+        .from('receipts')
+        .upload(fileName, templateBuffer, {
+          contentType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+          upsert: false,
+        })
+
+      if (uploadError) {
+        console.error('[Template Save] Upload error:', uploadError)
+        return NextResponse.json(
+          { error: 'Failed to upload template file' },
+          { status: 500 }
+        )
+      }
+
+      filePath = fileName
+      fileSize = templateBuffer.length
+
+      // Get public URL
+      const { data: { publicUrl } } = supabase.storage
+        .from('receipts')
+        .getPublicUrl(fileName)
+      fileUrl = publicUrl
+
+      console.log(`[Template Save] File uploaded: ${fileName}`)
+    }
+
+    if (!filePath) {
       return NextResponse.json(
-        {
-          error: 'Insufficient credits',
-          required: creditCost,
-          available: profile?.credits || 0,
-        },
+        { error: 'No file provided' },
         { status: 400 }
       )
     }
 
-    console.log(
-      `[Template Save] User has ${profile.credits} credits, charging ${creditCost}`
-    )
-
-    // 7. Deduct credits
-    const { error: creditError } = await supabase
-      .from('profiles')
-      .update({ credits: profile.credits - creditCost })
-      .eq('id', user.id)
-
-    if (creditError) {
-      console.error('[Template Save] Failed to deduct credits:', creditError)
-      return NextResponse.json(
-        { error: 'Failed to charge credits' },
-        { status: 500 }
-      )
-    }
-
-    // 8. Create export_templates record
+    // 6. Create export_templates record (FREE - no credit charge)
     const { data: template, error: templateError } = await supabase
       .from('export_templates')
       .insert({
@@ -139,12 +146,12 @@ export async function POST(request: NextRequest) {
         template_name: templateName,
         description: description || null,
         file_path: filePath,
-        file_url: fileUrl,
-        file_size: fileSize,
+        file_url: fileUrl || null,
+        file_size: fileSize || null,
         sheet_name: sheetName,
         start_row: startRow,
         field_mapping: fieldMapping,
-        credits_spent: creditCost,
+        credits_spent: 0, // FREE - saving templates costs 0 credits
         is_active: true,
       })
       .select()
@@ -152,12 +159,6 @@ export async function POST(request: NextRequest) {
 
     if (templateError) {
       console.error('[Template Save] Failed to create template:', templateError)
-
-      // Refund credits on failure
-      await supabase
-        .from('profiles')
-        .update({ credits: profile.credits })
-        .eq('id', user.id)
 
       // Check for unique constraint violation
       if (templateError.code === '23505') {
@@ -173,38 +174,16 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // 9. Record transaction
-    const { error: transactionError } = await supabase
-      .from('template_transactions')
-      .insert({
-        user_id: user.id,
-        template_id: template.id,
-        transaction_type: 'create',
-        credits_charged: creditCost,
-        metadata: {
-          template_name: templateName,
-          sheet_name: sheetName,
-          fields_mapped: Object.keys(fieldMapping).length,
-        },
-      })
-
-    if (transactionError) {
-      console.error('[Template Save] Failed to record transaction:', transactionError)
-      // Non-critical error, continue
-    }
-
-    console.log(`[Template Save] Template created successfully: ${template.id}`)
-    console.log(`[Template Save] Credits charged: ${creditCost}`)
+    console.log(`[Template Save] Template created successfully: ${template.id} (FREE - no credits charged)`)
 
     return NextResponse.json({
       success: true,
       template: {
         id: template.id,
         name: template.template_name,
-        creditsCharged: creditCost,
-        remainingCredits: profile.credits - creditCost,
+        creditsCharged: 0,
       },
-      message: `Template created successfully. ${creditCost} credits charged.`,
+      message: `Template saved successfully (FREE)`,
     })
   } catch (error) {
     console.error('[Template Save] Unexpected error:', error)
