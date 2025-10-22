@@ -75,4 +75,9 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Fix for vaul drawer content cutoff on mobile */
+  [data-vaul-drawer][data-vaul-drawer-direction='bottom']::after {
+    height: unset !important;
+  }
 }

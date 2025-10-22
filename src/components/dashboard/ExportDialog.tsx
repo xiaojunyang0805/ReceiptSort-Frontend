@@ -998,7 +998,7 @@ export default function ExportDialog({
   // Render Drawer for mobile
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>
-      <DrawerContent className="max-h-[80vh] flex flex-col">
+      <DrawerContent className="h-[85vh] flex flex-col">
         <DrawerHeader className="flex-shrink-0">
           <DrawerTitle>Export Receipts</DrawerTitle>
           <DrawerDescription>
@@ -1008,7 +1008,7 @@ export default function ExportDialog({
         <div className="flex-1 overflow-y-auto px-4 min-h-0">
           <ExportContent />
         </div>
-        <DrawerFooter className="flex-shrink-0 border-t">
+        <DrawerFooter className="flex-shrink-0 border-t bg-background">
           <DrawerClose asChild>
             <Button variant="outline" disabled={isExporting}>
               Close
