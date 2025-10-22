@@ -995,17 +995,17 @@ export default function ExportDialog({
     )
   }
 
-  // Render Drawer for mobile with snap point at 85% of screen height
+  // Render Drawer for mobile - drawer covers most of screen but leaves space at top
   return (
-    <Drawer open={open} onOpenChange={onOpenChange} snapPoints={[0.85]}>
-      <DrawerContent className="flex flex-col">
+    <Drawer open={open} onOpenChange={onOpenChange}>
+      <DrawerContent className="flex flex-col max-h-[90%]">
         <DrawerHeader className="flex-shrink-0">
           <DrawerTitle>Export Receipts</DrawerTitle>
           <DrawerDescription>
             Export {selectedIds.length} selected receipt{selectedIds.length === 1 ? '' : 's'} to your preferred format
           </DrawerDescription>
         </DrawerHeader>
-        <div className="flex-1 overflow-y-auto px-4 min-h-0">
+        <div className="flex-1 overflow-y-auto px-4 min-h-0 pb-4">
           <ExportContent />
         </div>
         <DrawerFooter className="flex-shrink-0 border-t bg-background">
