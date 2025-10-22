@@ -21,7 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { FileSpreadsheet, FileText, Loader2, Download, Sparkles, Upload } from 'lucide-react'
+import { FileSpreadsheet, FileText, Loader2, Download, Sparkles, Upload, Trash2, ChevronDown, ChevronUp } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 import {
   EXPORT_TEMPLATES,
@@ -58,6 +58,88 @@ interface AIAnalysis {
 
 const MAX_EXPORT_RECEIPTS = 1000
 const LARGE_EXPORT_WARNING = 50
+
+// Template Card Component with expand/collapse
+interface TemplateCardProps {
+  template: CustomTemplate
+  onSelect: (id: string) => void
+  onDelete: (id: string) => void
+  isSelected: boolean
+}
+
+function TemplateCard({ template, onSelect, onDelete, isSelected }: TemplateCardProps) {
+  const [isExpanded, setIsExpanded] = useState(false)
+
+  return (
+    <div className={`border-2 rounded-lg p-3 transition-all ${
+      isSelected ? 'border-blue-500 bg-blue-50' : 'border-gray-200 bg-white hover:border-gray-300'
+    }`}>
+      {/* Collapsed View */}
+      <div className="flex items-start justify-between gap-2">
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2 mb-1">
+            <FileSpreadsheet className="h-4 w-4 text-blue-600 flex-shrink-0" />
+            <h5 className="text-sm font-medium truncate">{template.template_name}</h5>
+          </div>
+          {!isExpanded && (
+            <div className="flex items-center gap-3 text-xs text-gray-500">
+              <span>Used {template.export_count}x</span>
+            </div>
+          )}
+        </div>
+
+        {/* Actions */}
+        <div className="flex items-center gap-1">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="h-7 w-7 p-0"
+          >
+            {isExpanded ? (
+              <ChevronUp className="h-4 w-4" />
+            ) : (
+              <ChevronDown className="h-4 w-4" />
+            )}
+          </Button>
+        </div>
+      </div>
+
+      {/* Expanded View */}
+      {isExpanded && (
+        <div className="mt-3 pt-3 border-t border-gray-200 space-y-3">
+          {template.description && (
+            <p className="text-xs text-gray-600">{template.description}</p>
+          )}
+
+          <div className="flex items-center justify-between text-xs">
+            <span className="text-gray-500">Used</span>
+            <span className="font-medium">{template.export_count} times</span>
+          </div>
+
+          <div className="flex gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => onSelect(template.id)}
+              className="flex-1 h-8"
+            >
+              Select
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => onDelete(template.id)}
+              className="h-8 px-2 text-red-600 hover:text-red-700 hover:bg-red-50"
+            >
+              <Trash2 className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
 
 export default function ExportDialog({
   open,
@@ -582,136 +664,179 @@ export default function ExportDialog({
               </div>
             </div>
 
-            {/* Template Upload Area */}
-            <div className="mb-4">
-              <Label className="block mb-2 text-sm font-medium">Upload Template File</Label>
-              <label className={`flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer transition-all ${
-                uploadedTemplate
-                  ? 'border-blue-500 bg-blue-100/50'
-                  : 'border-blue-300 bg-white hover:bg-blue-50'
-              } ${isAnalyzing ? 'opacity-50 pointer-events-none' : ''}`}>
-                <input
-                  type="file"
-                  accept=".xlsx,.xls"
-                  onChange={handleTemplateUpload}
-                  className="hidden"
-                  disabled={isExporting || isAnalyzing}
-                />
-                <div className="flex flex-col items-center gap-2">
-                  {isAnalyzing ? (
-                    <>
-                      <Loader2 className="h-10 w-10 animate-spin text-blue-600" />
-                      <p className="text-sm font-medium text-blue-900">Analyzing template...</p>
-                    </>
-                  ) : uploadedTemplate ? (
-                    <>
-                      <Upload className="h-10 w-10 text-blue-600" />
-                      <p className="text-sm font-medium text-blue-900">{uploadedTemplate.name}</p>
-                      <p className="text-xs text-blue-600">Click to upload a different file</p>
-                    </>
-                  ) : (
-                    <>
-                      <Upload className="h-10 w-10 text-blue-400" />
-                      <p className="text-sm font-medium text-gray-700">Click to upload Excel template</p>
-                      <p className="text-xs text-gray-500">Supports .xlsx and .xls files (max 5MB)</p>
-                    </>
-                  )}
-                </div>
-              </label>
-            </div>
+            {/* Two-column layout: Upload New (Left) | Use Saved (Right) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* LEFT COLUMN: Upload New Template */}
+              <div className="space-y-4">
+                <h4 className="text-sm font-medium text-gray-700">Upload New Template</h4>
 
-            {/* AI Analysis Preview */}
-            {aiAnalysis && (
-              <div className="space-y-3 bg-white/80 rounded-lg p-4 border border-blue-300">
-                <div className="grid grid-cols-2 gap-4 mb-3">
-                  <div>
-                    <div className="text-xs text-gray-600">Sheet</div>
-                    <div className="font-medium text-sm">{aiAnalysis.sheetName}</div>
+                {/* Template Upload Area */}
+                <label className={`flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer transition-all ${
+                  uploadedTemplate
+                    ? 'border-blue-500 bg-blue-100/50'
+                    : 'border-blue-300 bg-white hover:bg-blue-50'
+                } ${isAnalyzing ? 'opacity-50 pointer-events-none' : ''}`}>
+                  <input
+                    type="file"
+                    accept=".xlsx,.xls"
+                    onChange={handleTemplateUpload}
+                    className="hidden"
+                    disabled={isExporting || isAnalyzing}
+                  />
+                  <div className="flex flex-col items-center gap-2">
+                    {isAnalyzing ? (
+                      <>
+                        <Loader2 className="h-10 w-10 animate-spin text-blue-600" />
+                        <p className="text-sm font-medium text-blue-900">Analyzing...</p>
+                      </>
+                    ) : uploadedTemplate ? (
+                      <>
+                        <Upload className="h-10 w-10 text-blue-600" />
+                        <p className="text-sm font-medium text-blue-900">{uploadedTemplate.name}</p>
+                        <p className="text-xs text-blue-600">Click to change</p>
+                      </>
+                    ) : (
+                      <>
+                        <Upload className="h-10 w-10 text-blue-400" />
+                        <p className="text-sm font-medium text-gray-700">Click to upload</p>
+                        <p className="text-xs text-gray-500">.xlsx, .xls (max 5MB)</p>
+                      </>
+                    )}
                   </div>
-                  <div>
-                    <div className="text-xs text-gray-600">Start Row</div>
-                    <div className="font-medium text-sm">{aiAnalysis.startRow}</div>
-                  </div>
-                </div>
+                </label>
 
-                <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded p-3 border border-green-200">
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="h-2 w-2 rounded-full bg-green-500"></div>
-                    <div className="font-medium text-sm text-green-900">
-                      {Object.keys(aiAnalysis.fieldMapping).length} Fields Mapped
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-2 gap-2 text-xs max-h-40 overflow-y-auto">
-                    {Object.entries(aiAnalysis.fieldMapping).map(([field, column]) => (
-                      <div key={field} className="flex justify-between items-center bg-white/70 px-2 py-1 rounded">
-                        <span className="text-gray-700">{field.replace(/_/g, ' ')}</span>
-                        <Badge variant="secondary" className="text-xs">
-                          Col {column}
-                        </Badge>
+                {/* AI Analysis Preview */}
+                {aiAnalysis && (
+                  <div className="space-y-3 bg-white/80 rounded-lg p-3 border border-blue-300">
+                    <div className="grid grid-cols-2 gap-2">
+                      <div>
+                        <div className="text-xs text-gray-600">Sheet</div>
+                        <div className="font-medium text-sm">{aiAnalysis.sheetName}</div>
                       </div>
+                      <div>
+                        <div className="text-xs text-gray-600">Start Row</div>
+                        <div className="font-medium text-sm">{aiAnalysis.startRow}</div>
+                      </div>
+                    </div>
+
+                    <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded p-2 border border-green-200">
+                      <div className="flex items-center gap-2 mb-2">
+                        <div className="h-2 w-2 rounded-full bg-green-500"></div>
+                        <div className="font-medium text-xs text-green-900">
+                          {Object.keys(aiAnalysis.fieldMapping).length} Fields Mapped
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-1 text-xs max-h-32 overflow-y-auto">
+                        {Object.entries(aiAnalysis.fieldMapping).map(([field, column]) => (
+                          <div key={field} className="flex justify-between items-center bg-white/70 px-2 py-1 rounded">
+                            <span className="text-gray-700 truncate">{field.replace(/_/g, ' ')}</span>
+                            <Badge variant="secondary" className="text-xs ml-1">
+                              {column}
+                            </Badge>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Save for Reuse Option */}
+                    <div className="border-t border-blue-200 pt-2 space-y-2">
+                      <div className="flex items-center gap-2">
+                        <Checkbox
+                          id="save-for-reuse"
+                          checked={saveForReuse}
+                          onCheckedChange={(checked) => setSaveForReuse(checked as boolean)}
+                        />
+                        <Label htmlFor="save-for-reuse" className="text-xs cursor-pointer">
+                          Save for future use
+                        </Label>
+                      </div>
+
+                      {saveForReuse && (
+                        <Input
+                          placeholder="Template name (e.g., VAT Q4 2025)"
+                          value={templateNameForSave}
+                          onChange={(e) => setTemplateNameForSave(e.target.value)}
+                          className="text-sm h-8"
+                        />
+                      )}
+                    </div>
+
+                    {/* Export Button */}
+                    <Button
+                      onClick={async () => {
+                        console.log('[Export Dialog] AI Template export button clicked', {
+                          hasTemplate: !!uploadedTemplate,
+                          hasAnalysis: !!aiAnalysis,
+                          receiptCount: selectedIds.length
+                        })
+                        await handleExport('smart-template')
+                      }}
+                      disabled={!aiAnalysis || isExporting || selectedIds.length === 0 || selectedIds.length > MAX_EXPORT_RECEIPTS}
+                      className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                      size="sm"
+                    >
+                      {isExporting ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Exporting...
+                        </>
+                      ) : (
+                        <>
+                          <Sparkles className="mr-2 h-4 w-4" />
+                          Export (1 credit)
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                )}
+              </div>
+
+              {/* RIGHT COLUMN: Use Saved Templates */}
+              <div className="space-y-4">
+                <h4 className="text-sm font-medium text-gray-700">Use Saved Template</h4>
+
+                {customTemplates.length === 0 ? (
+                  <div className="flex flex-col items-center justify-center h-32 border-2 border-dashed border-gray-300 rounded-lg bg-gray-50">
+                    <FileSpreadsheet className="h-8 w-8 text-gray-400 mb-2" />
+                    <p className="text-sm text-gray-500">No saved templates</p>
+                    <p className="text-xs text-gray-400">Upload and save to reuse</p>
+                  </div>
+                ) : (
+                  <div className="space-y-2 max-h-96 overflow-y-auto">
+                    {customTemplates.map((template) => (
+                      <TemplateCard
+                        key={template.id}
+                        template={template}
+                        onSelect={(id) => {
+                          setSelectedCustomTemplate(id)
+                          // TODO: Load template and trigger export
+                        }}
+                        onDelete={async (id) => {
+                          try {
+                            const response = await fetch(`/api/templates?id=${id}`, {
+                              method: 'DELETE',
+                            })
+                            if (response.ok) {
+                              toast({
+                                title: 'Template deleted',
+                                description: 'Template has been removed',
+                              })
+                              fetchCustomTemplates()
+                            }
+                          } catch (error) {
+                            toast({
+                              title: 'Delete failed',
+                              description: 'Failed to delete template',
+                              variant: 'destructive',
+                            })
+                          }
+                        }}
+                        isSelected={selectedCustomTemplate === template.id}
+                      />
                     ))}
                   </div>
-                </div>
-
-                {aiAnalysis.aiAnalysis && (
-                  <div className="text-xs text-gray-600 italic bg-yellow-50 border border-yellow-200 p-2 rounded">
-                    💡 {aiAnalysis.aiAnalysis}
-                  </div>
                 )}
-
-                {/* Save for Reuse Option */}
-                <div className="border-t border-blue-200 pt-3 space-y-2">
-                  <div className="flex items-center gap-2">
-                    <Checkbox
-                      id="save-for-reuse"
-                      checked={saveForReuse}
-                      onCheckedChange={(checked) => setSaveForReuse(checked as boolean)}
-                    />
-                    <Label htmlFor="save-for-reuse" className="text-sm cursor-pointer">
-                      Save this template for future use (optional)
-                    </Label>
-                  </div>
-
-                  {saveForReuse && (
-                    <Input
-                      placeholder="Template name (e.g., VAT Q4 2025)"
-                      value={templateNameForSave}
-                      onChange={(e) => setTemplateNameForSave(e.target.value)}
-                      className="text-sm"
-                    />
-                  )}
-                </div>
               </div>
-            )}
-
-            {/* Export with Template Button */}
-            <div className="flex justify-end pt-2">
-              <Button
-                onClick={async () => {
-                  console.log('[Export Dialog] AI Template export button clicked', {
-                    hasTemplate: !!uploadedTemplate,
-                    hasAnalysis: !!aiAnalysis,
-                    receiptCount: selectedIds.length
-                  })
-
-                  // Call export with smart-template format
-                  await handleExport('smart-template')
-                }}
-                disabled={!aiAnalysis || isExporting || selectedIds.length === 0 || selectedIds.length > MAX_EXPORT_RECEIPTS}
-                className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
-              >
-                {isExporting ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Exporting...
-                  </>
-                ) : (
-                  <>
-                    <Sparkles className="mr-2 h-4 w-4" />
-                    Export with Template (1 credit)
-                  </>
-                )}
-              </Button>
             </div>
           </div>
 
