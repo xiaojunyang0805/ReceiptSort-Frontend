@@ -995,10 +995,10 @@ export default function ExportDialog({
     )
   }
 
-  // Render Drawer for mobile
+  // Render Drawer for mobile with snap point at 85% of screen height
   return (
-    <Drawer open={open} onOpenChange={onOpenChange}>
-      <DrawerContent className="h-[85vh] flex flex-col">
+    <Drawer open={open} onOpenChange={onOpenChange} snapPoints={[0.85]}>
+      <DrawerContent className="flex flex-col">
         <DrawerHeader className="flex-shrink-0">
           <DrawerTitle>Export Receipts</DrawerTitle>
           <DrawerDescription>
