@@ -9,15 +9,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-} from '@/components/ui/drawer'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -39,7 +30,6 @@ import {
   loadTemplatePreference,
 } from '@/lib/export-templates'
 import { useLocale } from 'next-intl'
-import { useMediaQuery } from '@/hooks/use-media-query'
 
 interface ExportDialogProps {
   open: boolean
@@ -581,8 +571,6 @@ export default function ExportDialog({
     }
   }
 
-  // Use drawer on mobile, dialog on desktop
-  const isDesktop = useMediaQuery("(min-width: 768px)")
 
   // Shared content component
   const ExportContent = () => (
@@ -969,53 +957,25 @@ export default function ExportDialog({
         </div>
   )
 
-  // Render Dialog for desktop
-  if (isDesktop) {
-    return (
-      <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent className="sm:max-w-6xl max-h-[95vh] flex flex-col">
-          <DialogHeader>
-            <DialogTitle>Export Receipts</DialogTitle>
-            <DialogDescription>
-              Export {selectedIds.length} selected receipt{selectedIds.length === 1 ? '' : 's'} to your preferred format
-            </DialogDescription>
-          </DialogHeader>
-          <ExportContent />
-          <DialogFooter>
-            <Button
-              variant="outline"
-              onClick={() => onOpenChange(false)}
-              disabled={isExporting}
-            >
-              Close
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-    )
-  }
-
-  // Render Drawer for mobile - drawer covers most of screen but leaves space at top
+  // Use Dialog for all screen sizes with responsive styling
   return (
-    <Drawer open={open} onOpenChange={onOpenChange}>
-      <DrawerContent className="flex flex-col max-h-[90%]">
-        <DrawerHeader className="flex-shrink-0">
-          <DrawerTitle>Export Receipts</DrawerTitle>
-          <DrawerDescription>
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="w-[95vw] h-[90vh] max-w-6xl flex flex-col p-0 gap-0">
+        <DialogHeader className="px-6 pt-6 pb-4 flex-shrink-0">
+          <DialogTitle>Export Receipts</DialogTitle>
+          <DialogDescription>
             Export {selectedIds.length} selected receipt{selectedIds.length === 1 ? '' : 's'} to your preferred format
-          </DrawerDescription>
-        </DrawerHeader>
-        <div className="flex-1 overflow-y-auto px-4 min-h-0 pb-4">
+          </DialogDescription>
+        </DialogHeader>
+        <div className="flex-1 overflow-y-auto px-6 min-h-0">
           <ExportContent />
         </div>
-        <DrawerFooter className="flex-shrink-0 border-t bg-background">
-          <DrawerClose asChild>
-            <Button variant="outline" disabled={isExporting}>
-              Close
-            </Button>
-          </DrawerClose>
-        </DrawerFooter>
-      </DrawerContent>
-    </Drawer>
+        <DialogFooter className="px-6 py-4 flex-shrink-0 border-t">
+          <Button variant="outline" onClick={() => onOpenChange(false)} disabled={isExporting}>
+            Close
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   )
 }
