@@ -30,7 +30,7 @@ interface NavItemProps {
 function NavItem({ icon: Icon, label, isActive, href, asChild = false, onClick }: NavItemProps) {
   const content = (
     <div
-      className="flex flex-col items-center justify-center min-w-[64px] h-14 relative cursor-pointer"
+      className="flex flex-col items-center justify-center min-w-[64px] h-14 relative cursor-pointer flex-shrink-0"
       onClick={onClick}
     >
       {/* Active indicator - top border */}
@@ -94,8 +94,8 @@ export function MobileBottomNav({ className }: MobileBottomNavProps) {
   const isMoreActive = moreMenuItems.some(item => pathname === item.href)
 
   return (
-    <nav className={cn('w-full', className)}>
-      <div className="flex items-center justify-around h-16 px-2">
+    <nav className={cn('w-full overflow-x-auto', className)}>
+      <div className="flex items-center justify-around h-16 px-2 min-w-full">
         {/* Main navigation items */}
         {mainNavigation.map((item) => (
           <NavItem
@@ -110,7 +110,7 @@ export function MobileBottomNav({ className }: MobileBottomNavProps) {
         {/* More dropdown */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <button className="tap-highlight-transparent focus:outline-none">
+            <button className="tap-highlight-transparent focus:outline-none flex-shrink-0">
               <NavItem
                 icon={MoreHorizontal}
                 label="More"

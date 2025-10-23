@@ -22,16 +22,16 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col max-w-full overflow-x-hidden">
       <Navbar />
-      <div className="flex flex-1">
+      <div className="flex flex-1 max-w-full">
         {/* Desktop Sidebar */}
         <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0 md:pt-16 border-r overflow-y-auto">
           <Sidebar />
         </div>
 
         {/* Main Content */}
-        <main className="flex-1 md:pl-64 p-4 md:p-6 pb-24 md:pb-6">
+        <main className="flex-1 md:pl-64 p-4 md:p-6 pb-24 md:pb-6 max-w-full overflow-x-hidden">
           {children}
         </main>
       </div>
