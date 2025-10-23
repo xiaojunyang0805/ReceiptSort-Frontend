@@ -6,9 +6,9 @@ export default async function ReceiptsPage() {
   const tPage = await getTranslations('dashboard.receiptsPage')
 
   return (
-    <div className="space-y-6 pb-72 md:pb-8">
+    <div className="w-full max-w-full space-y-6 pb-72 md:pb-8">
       {/* Header */}
-      <div>
+      <div className="w-full max-w-full">
         <h1 className="text-3xl font-bold tracking-tight">{t('title')}</h1>
         <p className="text-muted-foreground mt-2">
           {tPage('subtitle')}

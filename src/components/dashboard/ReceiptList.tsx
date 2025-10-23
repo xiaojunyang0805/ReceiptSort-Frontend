@@ -227,8 +227,8 @@ export default function ReceiptList() {
 
   if (receipts.length === 0) {
     return (
-      <Card>
-        <CardContent className="text-center py-12">
+      <Card className="w-full max-w-full">
+        <CardContent className="text-center py-12 w-full max-w-full">
           <div className="flex flex-col items-center gap-4">
             <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center">
               <FileText className="h-8 w-8 text-muted-foreground" />
@@ -249,10 +249,10 @@ export default function ReceiptList() {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="w-full max-w-full space-y-4">
       {/* Credit Warning */}
       {userCredits < 5 && userCredits >= 0 && (
-        <Card className="bg-yellow-50 dark:bg-yellow-900/10 border-yellow-200 dark:border-yellow-900/50">
+        <Card className="w-full max-w-full bg-yellow-50 dark:bg-yellow-900/10 border-yellow-200 dark:border-yellow-900/50">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -277,8 +277,8 @@ export default function ReceiptList() {
       )}
 
       {/* View and Export Actions Bar */}
-      <Card>
-        <CardHeader>
+      <Card className="w-full max-w-full overflow-hidden">
+        <CardHeader className="w-full max-w-full">
           <CardTitle>{t('viewAndExport')}</CardTitle>
           <CardDescription>
             {selectedCount > 0
@@ -286,8 +286,8 @@ export default function ReceiptList() {
               : t('selectReceipts')}
           </CardDescription>
         </CardHeader>
-        <CardContent>
-          <div className="flex flex-col gap-2">
+        <CardContent className="w-full max-w-full">
+          <div className="flex flex-col gap-2 w-full max-w-full">
             {/* Primary Actions */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
               <Button
@@ -384,8 +384,8 @@ export default function ReceiptList() {
       </div>
 
       {/* Desktop Table View */}
-      <div className="hidden md:block border rounded-lg">
-        <Table>
+      <div className="hidden md:block border rounded-lg w-full max-w-full overflow-x-auto">
+        <Table className="w-full">
           <TableHeader>
             <TableRow>
               <TableHead className="w-12">
@@ -449,10 +449,10 @@ export default function ReceiptList() {
       </div>
 
       {/* Mobile Card View */}
-      <div className="md:hidden space-y-4">
+      <div className="md:hidden space-y-4 w-full max-w-full">
         {filteredReceipts.map((receipt) => (
-          <Card key={receipt.id}>
-            <CardContent className="pt-6">
+          <Card key={receipt.id} className="w-full max-w-full overflow-hidden">
+            <CardContent className="pt-6 w-full max-w-full">
               <div className="flex items-start gap-4">
                 <Checkbox
                   checked={selectedIds.has(receipt.id)}
@@ -498,8 +498,8 @@ export default function ReceiptList() {
       </div>
 
       {filteredReceipts.length === 0 && receipts.length > 0 && (
-        <Card>
-          <CardContent className="text-center py-8">
+        <Card className="w-full max-w-full">
+          <CardContent className="text-center py-8 w-full max-w-full">
             <p className="text-muted-foreground">
               {t('noMatchingReceipts')}
             </p>
