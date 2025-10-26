@@ -293,10 +293,17 @@ export default function ReceiptList() {
 
       // Retry each receipt
       const results = await Promise.allSettled(
-        retryableReceipts.map(receipt =>
-          fetch(`/api/receipts/${receipt.id}/retry`, { method: 'POST' })
-            .then(res => res.json())
-        )
+        retryableReceipts.map(async receipt => {
+          const res = await fetch(`/api/receipts/${receipt.id}/retry`, { method: 'POST' })
+          const data = await res.json()
+
+          if (!res.ok) {
+            console.error(`Failed to process ${receipt.file_name}:`, res.status, data)
+            throw new Error(data.error || `HTTP ${res.status}`)
+          }
+
+          return data
+        })
       )
 
       const successful = results.filter(r => r.status === 'fulfilled').length
@@ -306,7 +313,9 @@ export default function ReceiptList() {
         toast.success(`Processing started for ${successful} receipt${successful === 1 ? '' : 's'}`)
       }
       if (failed > 0) {
-        toast.error(`Failed to process ${failed} receipt${failed === 1 ? '' : 's'}`)
+        const firstError = results.find(r => r.status === 'rejected')
+        const errorMsg = firstError && 'reason' in firstError ? firstError.reason.message : 'Unknown error'
+        toast.error(`Failed to process ${failed} receipt${failed === 1 ? '' : 's'}: ${errorMsg}`)
       }
 
       // Clear selection and refresh

@@ -13,9 +13,11 @@ export async function POST(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  console.log('[Retry] Starting retry for receipt:', params.id)
   try {
     const supabase = await createClient()
     const receiptId = params.id
+    console.log('[Retry] Receipt ID:', receiptId)
 
     // 1. Verify authentication
     const {
@@ -24,8 +26,10 @@ export async function POST(
     } = await supabase.auth.getUser()
 
     if (authError || !user) {
+      console.log('[Retry] Auth failed:', authError)
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
+    console.log('[Retry] User authenticated:', user.id)
 
     // 2. Get receipt and verify ownership
     const { data: receipt, error: receiptError } = await supabase
