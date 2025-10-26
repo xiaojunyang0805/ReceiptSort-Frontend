@@ -11,7 +11,7 @@ import * as pdfjsLib from 'pdfjs-dist'
 // Configure PDF.js worker
 // Use the worker from the public directory
 if (typeof window !== 'undefined') {
-  pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs'
+  pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.js'
 }
 
 export interface PdfToImageOptions {
