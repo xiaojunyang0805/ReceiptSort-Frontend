@@ -31,9 +31,12 @@ export async function convertPdfToPngWithChromium(pdfUrl: string): Promise<strin
     console.log('[Puppeteer PDF Converter] Launching Chromium...')
     browser = await puppeteer.default.launch({
       args: chromium.default.args,
-      defaultViewport: chromium.default.defaultViewport,
+      defaultViewport: {
+        width: 1920,
+        height: 1080,
+      },
       executablePath: await chromium.default.executablePath(),
-      headless: chromium.default.headless,
+      headless: true,
     })
 
     console.log('[Puppeteer PDF Converter] Chromium launched successfully')
