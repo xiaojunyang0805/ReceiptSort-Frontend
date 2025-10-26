@@ -6,6 +6,7 @@ import {
   DocumentType,
   ReceiptLineItem,
 } from '@/types/receipt'
+import { convertPdfToImage, isPdfUrl } from './pdf-converter'
 import { needsImageConversion, convertImageToJpeg } from './image-converter'
 
 // Initialize OpenAI client (lazy initialization for scripts)
@@ -405,14 +406,14 @@ CRITICAL RULES:
 IMPORTANT: You MUST return valid JSON. Do not add any explanations or markdown formatting.`
 
 /**
- * Extract receipt data from an image using OpenAI Vision API
+ * Extract receipt data from an image or PDF using OpenAI Vision API
  *
- * @param imageUrl - Publicly accessible URL or base64 data URL of the receipt image
+ * @param imageUrl - Publicly accessible URL or base64 data URL of the receipt (supports images and PDFs)
  * @returns Structured receipt data
  * @throws Error if extraction fails
  *
- * Note: PDFs are now converted to images on the client-side before upload,
- * so this function only processes images.
+ * Note: All files (images and PDFs) are processed using GPT-4o Vision API for better accuracy.
+ * PDFs are converted to high-resolution images first to preserve visual layout (critical for Chinese invoices).
  */
 export async function extractReceiptData(
   imageUrl: string
@@ -425,10 +426,24 @@ export async function extractReceiptData(
 
     const client = getOpenAIClient()
 
+    // Check if URL is a PDF and convert to image if necessary
+    const isPdf = isPdfUrl(imageUrl)
     let processedImageUrl = imageUrl
 
+    if (isPdf) {
+      console.log('[OpenAI] Detected PDF file, converting to image for Vision API...')
+      try {
+        processedImageUrl = await convertPdfToImage(imageUrl)
+        console.log('[OpenAI] PDF successfully converted to image')
+      } catch (conversionError) {
+        console.error('[OpenAI] PDF to image conversion failed:', conversionError)
+        throw new Error(
+          `Failed to convert PDF to image: ${conversionError instanceof Error ? conversionError.message : 'Conversion error'}`
+        )
+      }
+    }
     // Check if image needs conversion (BMP, TIFF) and convert if necessary
-    if (needsImageConversion(imageUrl)) {
+    else if (needsImageConversion(imageUrl)) {
       console.log('[OpenAI] Detected unsupported image format (BMP/TIFF), converting to JPEG...')
       try {
         processedImageUrl = await convertImageToJpeg(imageUrl)
@@ -447,35 +462,30 @@ export async function extractReceiptData(
     // Call OpenAI API with Vision (works for all image types including converted PDFs)
     let response
     try {
-      response = await client.chat.completions.create(
-        {
-          model: 'gpt-4o',
-          messages: [
-            {
-              role: 'user',
-              content: [
-                {
-                  type: 'text',
-                  text: RECEIPT_EXTRACTION_PROMPT,
+      response = await client.chat.completions.create({
+        model: 'gpt-4o',
+        messages: [
+          {
+            role: 'user',
+            content: [
+              {
+                type: 'text',
+                text: RECEIPT_EXTRACTION_PROMPT,
+              },
+              {
+                type: 'image_url',
+                image_url: {
+                  url: processedImageUrl,
+                  detail: 'high', // Use high detail for better accuracy
                 },
-                {
-                  type: 'image_url',
-                  image_url: {
-                    url: processedImageUrl,
-                    detail: 'high', // High detail required for accurate Chinese text recognition
-                  },
-                },
-              ],
-            },
-          ],
-          max_tokens: 1500, // Reduced from 2000 to speed up response generation
-          temperature: 0.1, // Low temperature for consistent output
-          response_format: { type: 'json_object' }, // Force JSON response
-        },
-        {
-          timeout: 8000, // 8 second timeout (leave 2s buffer for Vercel 10s limit)
-        }
-      )
+              },
+            ],
+          },
+        ],
+        max_tokens: 2000, // Increased for PDFs and complex receipts with line items
+        temperature: 0.1, // Low temperature for consistent output
+        response_format: { type: 'json_object' }, // Force JSON response
+      })
     } catch (apiError) {
       console.error('[OpenAI] API call failed:', apiError)
       throw new Error(

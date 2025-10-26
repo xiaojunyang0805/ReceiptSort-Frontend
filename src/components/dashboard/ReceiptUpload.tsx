@@ -11,7 +11,6 @@ import { Card } from '@/components/ui/card'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
-import { convertPdfToImage, isPdfFile } from '@/lib/client-pdf-converter'
 
 interface UploadFile {
   file: File
@@ -41,7 +40,7 @@ export default function ReceiptUpload() {
   const [isUploading, setIsUploading] = useState(false)
   const supabase = createClient()
 
-  const onDrop = useCallback(async (acceptedFiles: File[], rejectedFiles: FileRejection[]) => {
+  const onDrop = useCallback((acceptedFiles: File[], rejectedFiles: FileRejection[]) => {
     // Handle rejected files
     rejectedFiles.forEach((rejection) => {
       const { file, errors } = rejection
@@ -56,30 +55,8 @@ export default function ReceiptUpload() {
       })
     })
 
-    // Convert PDFs to images on client-side before upload
-    // This is REQUIRED because OpenAI Vision API doesn't accept PDFs
-    const processedFiles: File[] = []
-
-    for (const file of acceptedFiles) {
-      if (isPdfFile(file)) {
-        try {
-          toast.info(`Converting ${file.name} to image...`)
-          const imageFile = await convertPdfToImage(file)
-          processedFiles.push(imageFile)
-          toast.success(`${file.name} converted successfully`)
-        } catch (error) {
-          console.error('PDF conversion error:', error)
-          const errorMsg = error instanceof Error ? error.message : 'Conversion failed'
-          toast.error(`Failed to convert ${file.name}: ${errorMsg}`)
-          // Skip this file
-        }
-      } else {
-        processedFiles.push(file)
-      }
-    }
-
-    // Add processed files to upload queue
-    const newFiles: UploadFile[] = processedFiles.map((file) => ({
+    // Add accepted files to upload queue
+    const newFiles: UploadFile[] = acceptedFiles.map((file) => ({
       file,
       id: `${Date.now()}-${Math.random().toString(36).substring(7)}`,
       preview: file.type.startsWith('image/') ? URL.createObjectURL(file) : undefined,
@@ -133,19 +110,13 @@ export default function ReceiptUpload() {
 
   const processReceipt = async (uploadFileId: string, receiptId: string) => {
     try {
-      // Call the process API endpoint with 15-second timeout
-      const controller = new AbortController()
-      const timeoutId = setTimeout(() => controller.abort(), 15000) // 15 seconds
-
+      // Call the process API endpoint
       const response = await fetch(`/api/receipts/${receiptId}/process`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        signal: controller.signal,
       })
-
-      clearTimeout(timeoutId)
 
       if (!response.ok) {
         // Try to parse error, but handle case where response is not JSON
@@ -179,16 +150,7 @@ export default function ReceiptUpload() {
       toast.success(`${fileName} processed successfully!`)
     } catch (error) {
       console.error('Processing error:', error)
-
-      // Handle timeout specifically
-      let errorMessage = 'Processing failed'
-      if (error instanceof Error) {
-        if (error.name === 'AbortError') {
-          errorMessage = 'Processing timed out after 15 seconds. Please click Retry to try again.'
-        } else {
-          errorMessage = error.message
-        }
-      }
+      const errorMessage = error instanceof Error ? error.message : 'Processing failed'
 
       // Update status to error
       setUploadFiles((prev) =>
@@ -268,9 +230,20 @@ export default function ReceiptUpload() {
         prev.map((f) => (f.id === id ? { ...f, status: 'processing', progress: 70, receiptId: receiptData.id } : f))
       )
 
-      // Auto-process the receipt with OpenAI Vision
-      // Note: All files are now images (PDFs are converted client-side)
-      await processReceipt(id, receiptData.id)
+      // Mark upload as complete - user can process manually from receipts page
+      setUploadFiles((prev) =>
+        prev.map((f) => (f.id === id ? { ...f, status: 'success', progress: 100 } : f))
+      )
+
+      toast.success(`${file.name} uploaded successfully! Go to Receipts page to process it.`)
+
+      // Skip auto-processing for PDFs to avoid timeout issues
+      // User can process manually from the receipts page using the "Process" button
+      const isPDF = file.name.toLowerCase().endsWith('.pdf')
+      if (!isPDF) {
+        // Only auto-process images (faster, less likely to timeout)
+        await processReceipt(id, receiptData.id)
+      }
     } catch (error) {
       console.error('Upload error:', error)
       const errorMessage = error instanceof Error ? error.message : 'Upload failed'
