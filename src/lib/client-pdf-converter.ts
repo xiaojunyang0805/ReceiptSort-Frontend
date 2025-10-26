@@ -9,9 +9,9 @@
 import * as pdfjsLib from 'pdfjs-dist'
 
 // Configure PDF.js worker
-// In browser environment, use CDN worker
+// Use the worker from the public directory
 if (typeof window !== 'undefined') {
-  pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`
+  pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs'
 }
 
 export interface PdfToImageOptions {
