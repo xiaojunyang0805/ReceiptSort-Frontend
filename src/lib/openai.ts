@@ -27,6 +27,8 @@ function getOpenAIClient(): OpenAI {
  */
 const RECEIPT_EXTRACTION_PROMPT = `You are a receipt data extraction expert. Extract structured data from receipts, invoices, and bills with high accuracy.
 
+CRITICAL: Extract data EXACTLY as shown on the receipt. NEVER generate, infer, or create synthetic values.
+
 You MUST return valid JSON in this exact format (no markdown, no explanations):
 {
   "merchant_name": "Business name from receipt",
@@ -65,6 +67,12 @@ You MUST return valid JSON in this exact format (no markdown, no explanations):
   "provider_id": "12065201"
 }
 
+NOTE: The above is just a FORMAT EXAMPLE with sample Western values. For Chinese electronic invoices (电子发票):
+- invoice_number will be 20-24 digits like "25337000000484274975" (NOT "INV-2025-001" format)
+- merchant_name will be in Chinese like "杭州优行科技有限公司"
+- currency will be "CNY"
+Extract ACTUAL values from the receipt, not placeholder patterns!
+
 CRITICAL RULES:
 
 1. AMOUNT EXTRACTION:
@@ -76,19 +84,25 @@ CRITICAL RULES:
 2. DATE EXTRACTION:
    - Format: YYYY-MM-DD (convert all dates to this format)
    - Parse various formats: "3/15/12" → "2012-03-15", "11/02/2020" → "2020-11-02"
+   - CHINESE FORMAT: "2025年10月14日" → "2025-10-14", "开票日期: 2025年10月14日" → "2025-10-14"
    - Look near top of receipt or near transaction details
+   - Chinese receipts: look for "开票日期", "日期", "Date"
    - If year is 2 digits: assume 20XX for 00-25, 19XX for 26-99
    - If no date found: use null (DO NOT use today's date)
 
 3. MERCHANT NAME:
    - Extract from the TOP of receipt (first 1-3 lines)
+   - CHINESE RECEIPTS: Look for "销售方" (seller) section, typically on RIGHT side
+   - For 电子发票 (electronic invoice): Extract SELLER company name (销售方), NOT buyer (购买方)
+   - The buyer appears on the LEFT (购买方信息) - ignore this section
+   - Extract the company name after "名称:" label in the seller section
    - If only generic name visible (like "SUPERMARKET"), still use it - don't leave null
    - Lower confidence to 0.7 if merchant name is generic/placeholder
    - Avoid extracting: addresses, phone numbers, or footer text as merchant name
 
 4. CATEGORY SELECTION:
    - Food & Dining: Restaurants, cafes, grocery stores, supermarkets, bars
-   - Transportation: Gas stations, auto parts, car repairs, parking, tolls, rideshare
+   - Transportation: Gas stations, auto parts, car repairs, parking, tolls, rideshare, taxi, ride-hailing (滴滴/Didi), passenger transport (旅客运输服务)
    - Shopping: Retail stores, online purchases, clothing, electronics
    - Office Supplies: Stationery, printing, office equipment
    - Travel: Hotels, flights, accommodation, luggage
@@ -102,15 +116,16 @@ CRITICAL RULES:
    - "Post Office" → Utilities
    - "Grocery Depot" → Food & Dining
    - "East Repair Inc." (bike repair) → Transportation
+   - "旅客运输服务" or "passenger transport" → Transportation
 
 5. CURRENCY:
    - $ or USD → USD
    - € or EUR → EUR
    - £ or GBP → GBP
    - CHF or Fr. → CHF
-   - ¥ or CNY or RMB or 元 → CNY (Chinese Yuan)
+   - ¥ or CNY or RMB or 元 or 人民币 → CNY (Chinese Yuan)
    - ¥ or JPY or 円 → JPY (Japanese Yen)
-   - Note: ¥ symbol is used for both CNY and JPY - use context to determine (Chinese text → CNY, Japanese text → JPY)
+   - Note: ¥ symbol is used for both CNY and JPY - use context to determine (Chinese text/电子发票 → CNY, Japanese text → JPY)
    - If symbol unclear: use USD as default
 
 6. PAYMENT METHOD:
@@ -139,10 +154,26 @@ CRITICAL RULES:
 9. PHASE 1: ESSENTIAL FIELDS (NEW) 🆕
 
    A. INVOICE NUMBER:
+      ⚠️ CRITICAL: Extract ONLY what you SEE on the receipt. NEVER generate invoice numbers!
+
       - Look for: "Invoice #", "Invoice No", "Receipt #", "Bill #", "Transaction ID", "Reference #"
-      - Extract the alphanumeric string following these keywords
-      - Examples: "INV-2025-001", "5227 4217 0820 71", "A123456"
-      - Set to null if not found
+      - CHINESE RECEIPTS: Also look for "发票号码", "发票编号", "发票代码" (these are the PRIMARY keywords)
+      - Extract the alphanumeric string following these keywords EXACTLY as shown
+      - DO NOT modify, reformat, shorten, or generate invoice numbers
+      - Chinese e-invoices (电子发票) typically have 20-24 digit numeric invoice numbers
+
+      Examples of CORRECT extraction:
+        * Chinese e-invoice showing "发票号码: 25337000000484274975" → extract "25337000000484274975"
+        * Western invoice showing "Invoice #: INV-2025-001" → extract "INV-2025-001"
+        * Receipt showing "Receipt #5227 4217 0820 71" → extract "5227 4217 0820 71"
+
+      ⚠️ NEVER DO THIS:
+        * If you see "发票号码: 25337000000484274975", DO NOT return "INV-2025-001"
+        * DO NOT generate invoice numbers based on dates or other fields
+        * DO NOT create placeholder values like "INV-YYYY-XXX"
+
+      - If you cannot find a clear invoice number on the receipt, set to null
+      - When in doubt, use null instead of guessing
 
    B. DOCUMENT TYPE (Auto-detect):
       - "receipt": Simple store receipt with merchant, amount, date only (e.g., grocery receipt, coffee shop receipt)
@@ -257,7 +288,47 @@ CRITICAL RULES:
       - If no itemized table found, return empty array: "line_items": []
       - Maximum 50 line items per receipt (if more, extract first 50)
 
-11. PHASE 3: MEDICAL RECEIPTS (NEW) 🆕
+11. CHINESE ELECTRONIC INVOICES (电子发票) 🆕
+
+   A. RECOGNITION:
+      - Chinese e-invoices have distinctive header: "电子发票" or "增值税电子普通发票"
+      - Look for red official stamp/seal (usually circular)
+      - Typically include QR code for verification
+      - Layout: Buyer info on right (购买方), Seller info on left (销售方)
+
+   B. INVOICE NUMBER (发票号码):
+      - Label: "发票号码", "发票编号", or "Invoice Number"
+      - Format: Usually 20-24 digit numeric string
+      - Examples: "25337000000484274975", "33308619010009456789"
+      - Extract EXACTLY as shown - do not reformat or modify
+      - DO NOT confuse with "发票代码" (invoice code) which is a separate field
+
+   C. MERCHANT NAME (销售方/Seller):
+      - Look for section labeled "销售方" or "销方" (SELLER section, typically on RIGHT side)
+      - Extract company name following "名称:" or "Name:" label in the SELLER section
+      - CRITICAL: Extract SELLER name (销售方), NOT buyer name (购买方)
+      - The buyer section (购买方信息) appears on the LEFT - DO NOT extract from there
+      - Example: In seller section showing "名称: 杭州优行科技有限公司" → extract "杭州优行科技有限公司"
+      - Be careful with similar characters: 汀(tīng) vs 汇(huì), 优(yōu) vs 扰(rǎo)
+
+   D. DATE EXTRACTION:
+      - Label: "开票日期" (invoice issue date)
+      - Format: "YYYY年MM月DD日" → convert to "YYYY-MM-DD"
+      - Example: "2025年10月14日" → "2025-10-14"
+
+   E. AMOUNTS:
+      - Currency symbol: ¥ (always CNY for Chinese invoices)
+      - Small amount label: "小写" (lowercase/numeric)
+      - Large amount label: "大写" (uppercase/Chinese characters)
+      - Use the numeric "小写" value for the amount field
+      - Tax amount: Look for "税额" (tax amount)
+
+   F. ADDITIONAL FIELDS:
+      - Unified Social Credit Code: "统一社会信用代码/纳税人识别号" (use as vendor_tax_id)
+      - Purchase order: "采购订单号" (purchase_order_number)
+      - Payment reference: "付款参考号" (payment_reference)
+
+12. PHASE 3: MEDICAL RECEIPTS (NEW) 🆕
 
    A. PATIENT DATE OF BIRTH:
       - Look for: "DOB", "Date of Birth", "Born", "Geboortedatum", "Patient DOB"
@@ -463,9 +534,7 @@ export async function extractReceiptData(
       raw_text: String(extractedData.raw_text || '').trim(),
 
       // Phase 1: Essential Fields
-      invoice_number: extractedData.invoice_number
-        ? String(extractedData.invoice_number).trim()
-        : null,
+      invoice_number: validateInvoiceNumber(extractedData.invoice_number),
       document_type: validateDocumentType(extractedData.document_type),
       subtotal: extractedData.subtotal ? Number(extractedData.subtotal) : null,
       vendor_address: extractedData.vendor_address
@@ -517,6 +586,37 @@ export async function extractReceiptData(
 
     throw new Error('Failed to extract receipt data')
   }
+}
+
+/**
+ * Validate invoice number and detect synthetic/generated values
+ * Returns null if the invoice number appears to be generated rather than extracted
+ */
+function validateInvoiceNumber(invoiceNumber: unknown): string | null {
+  if (!invoiceNumber || typeof invoiceNumber !== 'string') {
+    return null
+  }
+
+  const trimmed = String(invoiceNumber).trim()
+
+  // Detect common synthetic invoice number patterns that GPT might generate
+  const syntheticPatterns = [
+    /^INV-\d{4}-\d{3}$/i, // INV-2025-001, INV-2024-123
+    /^INVOICE-\d{4}-\d+$/i, // INVOICE-2025-001
+    /^[A-Z]{3}-\d{4}-\d{3}$/i, // ABC-2025-001
+    /^REC-\d{4}-\d{3}$/i, // REC-2025-001
+  ]
+
+  // Check if it matches synthetic patterns
+  for (const pattern of syntheticPatterns) {
+    if (pattern.test(trimmed)) {
+      console.warn(`[Validation] Detected synthetic invoice number pattern: "${trimmed}" - setting to null`)
+      return null
+    }
+  }
+
+  // If it passes validation, return the trimmed value
+  return trimmed
 }
 
 /**
