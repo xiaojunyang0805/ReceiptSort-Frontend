@@ -760,12 +760,12 @@ export async function extractReceiptDataWithVision(
     console.log('[OpenAI Vision Fallback] Fetching PDF for base64 conversion...')
 
     // Download PDF and convert to base64 (OpenAI requires base64 for PDF files)
-    const response = await fetch(pdfUrl)
-    if (!response.ok) {
-      throw new Error(`Failed to fetch PDF: ${response.statusText}`)
+    const pdfResponse = await fetch(pdfUrl)
+    if (!pdfResponse.ok) {
+      throw new Error(`Failed to fetch PDF: ${pdfResponse.statusText}`)
     }
 
-    const arrayBuffer = await response.arrayBuffer()
+    const arrayBuffer = await pdfResponse.arrayBuffer()
     const base64Pdf = Buffer.from(arrayBuffer).toString('base64')
     const pdfDataUrl = `data:application/pdf;base64,${base64Pdf}`
 
