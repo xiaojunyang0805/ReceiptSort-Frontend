@@ -253,15 +253,8 @@ export default function ReceiptUpload() {
         prev.map((f) => (f.id === id ? { ...f, status: 'processing', progress: 70, receiptId: receiptData.id } : f))
       )
 
-      // Mark upload as complete - user can process manually from receipts page
-      setUploadFiles((prev) =>
-        prev.map((f) => (f.id === id ? { ...f, status: 'success', progress: 100 } : f))
-      )
-
-      toast.success(`${file.name} uploaded successfully! Go to Receipts page to process it.`)
-
+      // Auto-process the receipt with OpenAI Vision
       // Note: All files are now images (PDFs are converted client-side)
-      // Auto-process all uploaded files
       await processReceipt(id, receiptData.id)
     } catch (error) {
       console.error('Upload error:', error)

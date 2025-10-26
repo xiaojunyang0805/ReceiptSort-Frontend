@@ -58,16 +58,23 @@ export async function POST(
       return NextResponse.json({ error: 'Receipt not found' }, { status: 404 })
     }
 
-    // 3. Verify receipt can be retried (pending, failed, or low confidence)
-    // Allow: pending (stuck during upload), failed, or completed with low confidence
+    // 3. Verify receipt can be retried (pending, failed, processing stuck, or low confidence)
+    // Allow: pending, failed, processing (stuck due to timeout), or completed with low confidence
+    // Also allow processing receipts that have been stuck for more than 30 seconds
+    const now = new Date()
+    const updatedAt = new Date(receipt.updated_at)
+    const stuckProcessing = receipt.processing_status === 'processing' &&
+                           (now.getTime() - updatedAt.getTime()) > 30000 // 30 seconds
+
     const canRetry =
       receipt.processing_status === 'pending' ||
       receipt.processing_status === 'failed' ||
+      stuckProcessing ||
       (receipt.processing_status === 'completed' && (receipt.confidence_score ?? 1) < 0.7)
 
     if (!canRetry) {
       return NextResponse.json(
-        { error: 'Only pending, failed, or low confidence receipts can be retried' },
+        { error: 'Receipt is still being processed or cannot be retried' },
         { status: 400 }
       )
     }
