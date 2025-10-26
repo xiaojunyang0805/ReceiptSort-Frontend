@@ -36,14 +36,14 @@ export async function convertPdfToImage(pdfUrl: string): Promise<string> {
 /**
  * Fallback PDF-to-image converter using unpdf (serverless-optimized)
  * unpdf is specifically designed for serverless environments like Vercel
- * Has limited font support (may not render Chinese fonts correctly)
+ * Configures CMap files for proper Chinese font rendering (Adobe-GB1)
  */
 async function convertPdfToImageWithPdfJs(pdfUrl: string): Promise<string> {
   try {
-    console.log('[PDF Converter] Starting unpdf serverless conversion')
+    console.log('[PDF Converter] Starting unpdf serverless conversion with CMap support')
 
-    // Dynamic import of unpdf's renderPageAsImage
-    const { renderPageAsImage } = await import('unpdf')
+    // Dynamic import of unpdf functions
+    const { getDocumentProxy, renderPageAsImage } = await import('unpdf')
 
     // Fetch the PDF
     const response = await fetch(pdfUrl)
@@ -54,15 +54,26 @@ async function convertPdfToImageWithPdfJs(pdfUrl: string): Promise<string> {
     const arrayBuffer = await response.arrayBuffer()
     console.log('[PDF Converter] PDF fetched, size:', arrayBuffer.byteLength, 'bytes')
 
-    // Render first page as image using unpdf's built-in function
+    // Load PDF with CMap configuration for Chinese font support
+    console.log('[PDF Converter] Loading PDF with CMap configuration for Adobe-GB1 fonts...')
+    const pdfProxy = await getDocumentProxy(arrayBuffer, {
+      cMapUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/cmaps/',
+      cMapPacked: true, // Use compressed .bcmap files
+      standardFontDataUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/standard_fonts/',
+    })
+
+    console.log('[PDF Converter] PDF loaded successfully, rendering page with CMaps...')
+
+    // Render first page as image using unpdf with the proxy
     // Must provide canvasImport for Node.js environment
-    const dataUrl = await renderPageAsImage(arrayBuffer, 1, {
+    const dataUrl = await renderPageAsImage(pdfProxy, 1, {
       canvasImport: () => import('@napi-rs/canvas'), // Required for Node.js/serverless
       scale: 3.0,
       toDataURL: true, // Return as data URL instead of ArrayBuffer
     })
 
     console.log('[PDF Converter] unpdf conversion complete, size:', (dataUrl.length / 1024).toFixed(2), 'KB')
+    console.log('[PDF Converter] ✓ CMap-enabled rendering complete for Chinese fonts')
 
     return dataUrl
   } catch (error) {
