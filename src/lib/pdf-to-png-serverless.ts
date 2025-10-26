@@ -13,6 +13,39 @@
 import { getDocument } from 'pdfjs-dist/legacy/build/pdf.mjs'
 
 /**
+ * Polyfill browser APIs for pdfjs-dist in Node.js environment
+ * pdfjs-dist expects browser Canvas APIs that don't exist in Node.js
+ */
+function setupNodeCanvasPolyfills() {
+  // Only polyfill if not already defined (avoid errors in browser environments)
+  if (typeof globalThis.DOMMatrix === 'undefined') {
+    // Simple DOMMatrix polyfill for pdfjs-dist
+    // pdfjs-dist only uses basic transformation methods
+    globalThis.DOMMatrix = class DOMMatrix {
+      a = 1; b = 0; c = 0; d = 1; e = 0; f = 0;
+
+      constructor(init?: number[] | string) {
+        if (Array.isArray(init)) {
+          [this.a, this.b, this.c, this.d, this.e, this.f] = init;
+        }
+      }
+
+      translate(tx: number, ty: number) {
+        this.e += tx;
+        this.f += ty;
+        return this;
+      }
+
+      scale(scaleX: number, scaleY?: number) {
+        this.a *= scaleX;
+        this.d *= (scaleY ?? scaleX);
+        return this;
+      }
+    } as any;
+  }
+}
+
+/**
  * Convert first page of PDF to PNG base64 data URL
  * Uses pdfjs-dist canvas rendering which has proper font support
  *
@@ -23,6 +56,17 @@ import { getDocument } from 'pdfjs-dist/legacy/build/pdf.mjs'
 export async function convertPdfToPng(pdfUrl: string): Promise<string> {
   try {
     console.log('[PDF to PNG] Starting conversion for:', pdfUrl)
+
+    // Setup polyfills for browser APIs that pdfjs-dist expects
+    setupNodeCanvasPolyfills()
+
+    // Import Node.js canvas module
+    const { createCanvas, ImageData } = await import('canvas')
+
+    // Polyfill ImageData if needed
+    if (typeof globalThis.ImageData === 'undefined') {
+      globalThis.ImageData = ImageData as any
+    }
 
     // Fetch the PDF
     const response = await fetch(pdfUrl)
@@ -36,9 +80,10 @@ export async function convertPdfToPng(pdfUrl: string): Promise<string> {
     // Load PDF document
     const loadingTask = getDocument({
       data: arrayBuffer,
-      useSystemFonts: true, // Use system fonts for better rendering
+      useSystemFonts: false, // Don't use system fonts - causes issues in serverless
+      standardFontDataUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.379/standard_fonts/',
       cMapUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.379/cmaps/',
-      cMapPacked: true, // Use compressed CMaps for Chinese fonts
+      cMapPacked: true, // Use compressed CMaps for Chinese fonts (Adobe-GB1)
     })
 
     const pdfDocument = await loadingTask.promise
@@ -61,8 +106,6 @@ export async function convertPdfToPng(pdfUrl: string): Promise<string> {
     })
 
     // Create canvas using Node.js canvas module
-    // This is the only native module we need, but it's already in package.json
-    const { createCanvas } = await import('canvas')
     const canvas = createCanvas(viewport.width, viewport.height)
     const context = canvas.getContext('2d')
 
