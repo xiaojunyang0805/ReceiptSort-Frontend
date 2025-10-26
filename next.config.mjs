@@ -13,6 +13,20 @@ const nextConfig = {
       },
     ],
   },
+
+  // Configure webpack to handle canvas native module
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      // For server-side rendering, mark canvas as external
+      // This prevents webpack from bundling the native .node files
+      config.externals = config.externals || [];
+      config.externals.push({
+        canvas: 'commonjs canvas',
+      });
+    }
+
+    return config;
+  },
 };
 
 export default withNextIntl(nextConfig);
