@@ -9,6 +9,18 @@ export const revalidate = 0
 export const maxDuration = 10
 
 /**
+ * OPTIONS handler - required for CORS and route recognition
+ */
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 200,
+    headers: {
+      'Allow': 'POST, OPTIONS',
+    },
+  })
+}
+
+/**
  * POST /api/receipts/[id]/retry
  * Retry processing a failed receipt without deducting credits
  */

@@ -8,6 +8,18 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 export const maxDuration = 10
 
+/**
+ * OPTIONS handler - required for CORS and route recognition
+ */
+export async function OPTIONS() {
+  return NextResponse.json(null, {
+    status: 200,
+    headers: {
+      'Allow': 'POST, OPTIONS',
+    },
+  })
+}
+
 export async function POST(
   request: Request,
   { params }: { params: { id: string } }
