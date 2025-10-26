@@ -6,7 +6,7 @@ import {
   DocumentType,
   ReceiptLineItem,
 } from '@/types/receipt'
-import { extractTextFromPdf, isPdfUrl } from './pdf-converter'
+import { extractTextFromPdf, isPdfUrl, convertPdfToImage } from './pdf-converter'
 import { needsImageConversion, convertImageToJpeg } from './image-converter'
 
 // Initialize OpenAI client (lazy initialization for scripts)
@@ -742,5 +742,130 @@ export async function testOpenAIConnection(): Promise<boolean> {
   } catch (error) {
     console.error('OpenAI connection test failed:', error)
     return false
+  }
+}
+
+/**
+ * Extract receipt data using Vision API with PDF-to-image conversion
+ * This is used as a fallback when text extraction yields low confidence results
+ *
+ * @param pdfUrl - URL to the PDF file
+ * @returns Structured receipt data extracted via Vision API
+ * @throws Error if extraction fails
+ */
+export async function extractReceiptDataWithVision(
+  pdfUrl: string
+): Promise<ExtractedReceiptData> {
+  try {
+    console.log('[OpenAI Vision Fallback] Starting PDF-to-image conversion...')
+
+    // Convert PDF to high-resolution image
+    const imageDataUrl = await convertPdfToImage(pdfUrl)
+    console.log('[OpenAI Vision Fallback] PDF converted to image successfully')
+
+    // Validate API key
+    if (!process.env.OPENAI_API_KEY) {
+      throw new Error('OPENAI_API_KEY is not configured')
+    }
+
+    const client = getOpenAIClient()
+
+    console.log('[OpenAI Vision Fallback] Calling Vision API with converted image...')
+
+    // Call Vision API with the converted image
+    const response = await client.chat.completions.create({
+      model: 'gpt-4o',
+      messages: [
+        {
+          role: 'user',
+          content: [
+            {
+              type: 'text',
+              text: RECEIPT_EXTRACTION_PROMPT,
+            },
+            {
+              type: 'image_url',
+              image_url: {
+                url: imageDataUrl,
+                detail: 'high', // Use high detail for better accuracy
+              },
+            },
+          ],
+        },
+      ],
+      max_tokens: 2000, // Slightly higher for complex PDFs
+      temperature: 0.1,
+      response_format: { type: 'json_object' },
+    })
+
+    // Extract the response text
+    const content = response.choices[0]?.message?.content
+    if (!content) {
+      throw new Error('No response from OpenAI Vision API')
+    }
+
+    console.log('[OpenAI Vision Fallback] Response received, parsing JSON...')
+
+    // Parse and validate the JSON response
+    let parsedData
+    try {
+      parsedData = JSON.parse(content)
+    } catch (parseError) {
+      console.error('[OpenAI Vision Fallback] JSON parse error:', parseError)
+      console.error('[OpenAI Vision Fallback] Raw content:', content)
+      throw new Error('Failed to parse OpenAI Vision API response as JSON')
+    }
+
+    // Validate and transform the data
+    const extractedData: ExtractedReceiptData = {
+      merchant_name: parsedData.merchant_name || 'Unknown',
+      amount: parseFloat(parsedData.amount) || 0,
+      currency: parsedData.currency || 'USD',
+      receipt_date: parsedData.receipt_date || null,
+      category: validateCategory(parsedData.category),
+      tax_amount: parsedData.tax_amount ? parseFloat(parsedData.tax_amount) : null,
+      payment_method: validatePaymentMethod(parsedData.payment_method),
+      confidence_score: parsedData.confidence_score || 0.5,
+      raw_text: parsedData.raw_text || '',
+
+      // Phase 1: Essential fields
+      invoice_number: parsedData.invoice_number || null,
+      document_type: validateDocumentType(parsedData.document_type),
+      subtotal: parsedData.subtotal ? parseFloat(parsedData.subtotal) : null,
+      vendor_address: parsedData.vendor_address || null,
+      due_date: parsedData.due_date || null,
+
+      // Phase 2: Business invoices
+      purchase_order_number: parsedData.purchase_order_number || null,
+      payment_reference: parsedData.payment_reference || null,
+      vendor_tax_id: parsedData.vendor_tax_id || null,
+      line_items: Array.isArray(parsedData.line_items)
+        ? parsedData.line_items.map((item: any, index: number) => ({
+            line_number: item.line_number || index + 1,
+            description: item.description || '',
+            quantity: item.quantity ? parseFloat(item.quantity) : null,
+            unit_price: item.unit_price ? parseFloat(item.unit_price) : null,
+            line_total: item.line_total ? parseFloat(item.line_total) : null,
+            item_code: item.item_code || null,
+            tax_rate: item.tax_rate ? parseFloat(item.tax_rate) : null,
+          }))
+        : [],
+
+      // Phase 3: Medical receipts
+      patient_dob: parsedData.patient_dob || null,
+      treatment_date: parsedData.treatment_date || null,
+      insurance_claim_number: parsedData.insurance_claim_number || null,
+      diagnosis_codes: parsedData.diagnosis_codes || null,
+      procedure_codes: parsedData.procedure_codes || null,
+      provider_id: parsedData.provider_id || null,
+    }
+
+    console.log('[OpenAI Vision Fallback] Successfully extracted data with confidence:', extractedData.confidence_score)
+    return extractedData
+  } catch (error) {
+    console.error('[OpenAI Vision Fallback] Extraction failed:', error)
+    throw new Error(
+      `Vision API extraction failed: ${error instanceof Error ? error.message : 'Unknown error'}`
+    )
   }
 }

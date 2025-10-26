@@ -1,6 +1,12 @@
 import { createClient } from '@/lib/supabase/server'
 import { NextResponse } from 'next/server'
-import { extractReceiptData } from '@/lib/openai'
+import { extractReceiptData, extractReceiptDataWithVision } from '@/lib/openai'
+
+// Configure route segment for Vercel dynamic API route
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+export const maxDuration = 30 // Increased to 30s to allow time for Vision API fallback
 
 export async function POST(
   request: Request,
@@ -120,20 +126,62 @@ export async function POST(
 
       console.log(`[Process Receipt] Generated signed URL for file: ${receipt.file_path}`)
 
-      // 7. Call OpenAI Vision API
-      console.log('[Process Receipt] Calling OpenAI Vision API...')
-      const extractedData = await extractReceiptData(signedUrlData.signedUrl)
+      // 7. Call OpenAI extraction (text-based for PDFs, Vision for images)
+      console.log('[Process Receipt] Calling OpenAI extraction...')
+      let extractedData = await extractReceiptData(signedUrlData.signedUrl)
       console.log('[Process Receipt] Successfully extracted data from OpenAI:', extractedData)
 
       // 7.5. Validate extracted data
-      const validationErrors = validateExtractedData(extractedData)
-      const hasValidationErrors = validationErrors.length > 0
+      let validationErrors = validateExtractedData(extractedData)
+      let hasValidationErrors = validationErrors.length > 0
 
       // Lower confidence if validation errors exist
       let finalConfidence = extractedData.confidence_score
       if (hasValidationErrors) {
         finalConfidence = Math.min(finalConfidence, 0.6)
         console.log('[Process Receipt] Validation errors found:', validationErrors)
+      }
+
+      // 7.6. **AUTOMATIC RETRY WITH VISION API** if confidence is low and file is PDF
+      const CONFIDENCE_THRESHOLD = 0.70 // 70% threshold
+      const isPDF = receipt.file_name.toLowerCase().endsWith('.pdf')
+
+      if (finalConfidence < CONFIDENCE_THRESHOLD && isPDF) {
+        console.log(`[Process Receipt] Low confidence (${(finalConfidence * 100).toFixed(0)}%) detected for PDF. Retrying with Vision API fallback...`)
+
+        try {
+          // Retry with Vision API (PDF-to-image + Vision)
+          const retryData = await extractReceiptDataWithVision(signedUrlData.signedUrl)
+          console.log('[Process Receipt] Vision API retry completed:', retryData)
+
+          // Re-validate the retry result
+          const retryValidationErrors = validateExtractedData(retryData)
+          const retryHasValidationErrors = retryValidationErrors.length > 0
+          let retryConfidence = retryData.confidence_score
+
+          if (retryHasValidationErrors) {
+            retryConfidence = Math.min(retryConfidence, 0.6)
+          }
+
+          // Use the better result (higher confidence)
+          if (retryConfidence > finalConfidence) {
+            console.log(`[Process Receipt] Vision API retry improved confidence: ${(finalConfidence * 100).toFixed(0)}% → ${(retryConfidence * 100).toFixed(0)}%`)
+            extractedData = retryData
+            validationErrors = retryValidationErrors
+            hasValidationErrors = retryHasValidationErrors
+            finalConfidence = retryConfidence
+          } else {
+            console.log(`[Process Receipt] Vision API retry did not improve confidence. Using original result.`)
+          }
+        } catch (retryError) {
+          // Log retry error but continue with original result
+          console.error('[Process Receipt] Vision API retry failed:', retryError)
+          console.log('[Process Receipt] Continuing with original extraction result')
+        }
+      } else if (finalConfidence < CONFIDENCE_THRESHOLD) {
+        console.log(`[Process Receipt] Low confidence (${(finalConfidence * 100).toFixed(0)}%) but file is not PDF. Skipping Vision API retry.`)
+      } else {
+        console.log(`[Process Receipt] Confidence (${(finalConfidence * 100).toFixed(0)}%) is acceptable. No retry needed.`)
       }
 
       // 8. Update receipt with extracted data
