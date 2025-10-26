@@ -13,15 +13,6 @@ const nextConfig = {
       },
     ],
   },
-  webpack: (config, { isServer }) => {
-    if (isServer) {
-      // Externalize @napi-rs/canvas to avoid webpack bundling issues
-      config.externals.push({
-        '@napi-rs/canvas': 'commonjs @napi-rs/canvas',
-      });
-    }
-    return config;
-  },
 };
 
 export default withNextIntl(nextConfig);

@@ -6,7 +6,6 @@ import {
   DocumentType,
   ReceiptLineItem,
 } from '@/types/receipt'
-import { convertPdfToImage, isPdfUrl } from './pdf-converter'
 import { needsImageConversion, convertImageToJpeg } from './image-converter'
 
 // Initialize OpenAI client (lazy initialization for scripts)
@@ -406,14 +405,14 @@ CRITICAL RULES:
 IMPORTANT: You MUST return valid JSON. Do not add any explanations or markdown formatting.`
 
 /**
- * Extract receipt data from an image or PDF using OpenAI Vision API
+ * Extract receipt data from an image using OpenAI Vision API
  *
- * @param imageUrl - Publicly accessible URL or base64 data URL of the receipt (supports images and PDFs)
+ * @param imageUrl - Publicly accessible URL or base64 data URL of the receipt image
  * @returns Structured receipt data
  * @throws Error if extraction fails
  *
- * Note: All files (images and PDFs) are processed using GPT-4o Vision API for better accuracy.
- * PDFs are converted to high-resolution images first to preserve visual layout (critical for Chinese invoices).
+ * Note: PDFs are now converted to images on the client-side before upload,
+ * so this function only processes images.
  */
 export async function extractReceiptData(
   imageUrl: string
@@ -426,24 +425,10 @@ export async function extractReceiptData(
 
     const client = getOpenAIClient()
 
-    // Check if URL is a PDF and convert to image if necessary
-    const isPdf = isPdfUrl(imageUrl)
     let processedImageUrl = imageUrl
 
-    if (isPdf) {
-      console.log('[OpenAI] Detected PDF file, converting to image for Vision API...')
-      try {
-        processedImageUrl = await convertPdfToImage(imageUrl)
-        console.log('[OpenAI] PDF successfully converted to image')
-      } catch (conversionError) {
-        console.error('[OpenAI] PDF to image conversion failed:', conversionError)
-        throw new Error(
-          `Failed to convert PDF to image: ${conversionError instanceof Error ? conversionError.message : 'Conversion error'}`
-        )
-      }
-    }
     // Check if image needs conversion (BMP, TIFF) and convert if necessary
-    else if (needsImageConversion(imageUrl)) {
+    if (needsImageConversion(imageUrl)) {
       console.log('[OpenAI] Detected unsupported image format (BMP/TIFF), converting to JPEG...')
       try {
         processedImageUrl = await convertImageToJpeg(imageUrl)
