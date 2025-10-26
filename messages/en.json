@@ -312,6 +312,8 @@
       "exportHistory": "Export History",
       "viewDetails": "View Details",
       "viewDetailsCount": "View Details ({count})",
+      "processButton": "Process",
+      "processCount": "Process {count}",
       "exportButton": "Export",
       "exportCount": "Export {count}",
       "deleteButton": "Delete",

@@ -308,6 +308,8 @@
       "exportHistory": "导出历史",
       "viewDetails": "查看详情",
       "viewDetailsCount": "查看详情 ({count})",
+      "processButton": "处理",
+      "processCount": "处理 {count}",
       "exportButton": "导出",
       "exportCount": "导出 {count}",
       "deleteButton": "删除",

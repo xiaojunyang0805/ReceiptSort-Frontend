@@ -78,10 +78,38 @@ function formatAmount(amount: number, currency?: string): string {
   return `${symbol}${amount.toFixed(2)}`
 }
 
+// Map category display names to translation keys
+const categoryKeyMap: Record<string, string> = {
+  'Food & Dining': 'foodDining',
+  'Transportation': 'transportation',
+  'Shopping': 'shopping',
+  'Office Supplies': 'officeSupplies',
+  'Travel': 'travel',
+  'Entertainment': 'entertainment',
+  'Utilities': 'utilities',
+  'Healthcare': 'healthcare',
+  'Other': 'other',
+}
+
 export default function ReceiptList() {
   const t = useTranslations('dashboard.receiptsPage')
   const tTable = useTranslations('dashboard.receiptsTable')
+  const tCategories = useTranslations('receiptDetails.categories')
   const [receipts, setReceipts] = useState<Receipt[]>([])
+
+  // Translate category name
+  const translateCategory = (category?: string): string => {
+    if (!category) return '-'
+    const key = categoryKeyMap[category]
+    if (key) {
+      try {
+        return tCategories(key as any)
+      } catch {
+        return category
+      }
+    }
+    return category
+  }
   const [loading, setLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState('')
   const [statusFilter, setStatusFilter] = useState<string>('all')
@@ -384,7 +412,7 @@ export default function ReceiptList() {
                 ) : (
                   <RefreshCw className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                 )}
-                Process
+                {selectedCount > 0 ? t('processCount', { count: selectedCount }) : t('processButton')}
               </Button>
               <Button
                 variant="outline"
@@ -509,7 +537,7 @@ export default function ReceiptList() {
                     ? new Date(receipt.receipt_date).toLocaleDateString()
                     : '-'}
                 </TableCell>
-                <TableCell>{receipt.category || '-'}</TableCell>
+                <TableCell>{translateCategory(receipt.category)}</TableCell>
                 <TableCell>
                   <Badge className={statusConfig[receipt.processing_status].color}>
                     {receipt.processing_status === 'processing' && (
