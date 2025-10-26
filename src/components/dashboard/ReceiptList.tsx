@@ -45,6 +45,7 @@ interface Receipt {
   processing_status: 'pending' | 'processing' | 'completed' | 'failed'
   merchant_name?: string
   total_amount?: number
+  currency?: string
   receipt_date?: string
   category?: string
   created_at: string
@@ -56,6 +57,25 @@ const statusConfig = {
   processing: { label: 'Processing', color: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400' },
   completed: { label: 'Completed', color: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' },
   failed: { label: 'Failed', color: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400' },
+}
+
+// Currency symbol mapping
+const currencySymbols: Record<string, string> = {
+  USD: '$',
+  EUR: '€',
+  GBP: '£',
+  CNY: '¥',
+  JPY: '¥',
+  CHF: 'CHF',
+  CAD: 'CA$',
+  AUD: 'AU$',
+}
+
+// Format amount with correct currency symbol
+function formatAmount(amount: number, currency?: string): string {
+  const currencyCode = currency || 'USD'
+  const symbol = currencySymbols[currencyCode] || currencyCode
+  return `${symbol}${amount.toFixed(2)}`
 }
 
 export default function ReceiptList() {
@@ -481,7 +501,7 @@ export default function ReceiptList() {
                 <TableCell>{receipt.merchant_name || '-'}</TableCell>
                 <TableCell>
                   {receipt.total_amount
-                    ? `$${receipt.total_amount.toFixed(2)}`
+                    ? formatAmount(receipt.total_amount, receipt.currency)
                     : '-'}
                 </TableCell>
                 <TableCell>
@@ -534,7 +554,7 @@ export default function ReceiptList() {
                     )}
                     {receipt.total_amount && (
                       <p className="text-muted-foreground">
-                        Amount: ${receipt.total_amount.toFixed(2)}
+                        Amount: {formatAmount(receipt.total_amount, receipt.currency)}
                       </p>
                     )}
                     <div className="flex items-center gap-2 mt-2">
