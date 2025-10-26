@@ -1,9 +1,6 @@
 {
   "functions": {
-    "src/app/api/receipts/[id]/process/route.ts": {
-      "maxDuration": 60
-    },
-    "src/app/api/receipts/[id]/retry/route.ts": {
+    "api/receipts/**": {
       "maxDuration": 60
     }
   },
