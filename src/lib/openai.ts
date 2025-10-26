@@ -757,20 +757,14 @@ export async function extractReceiptDataWithVision(
   pdfUrl: string
 ): Promise<ExtractedReceiptData> {
   try {
-    console.log('[OpenAI Vision Fallback] Fetching PDF for base64 conversion...')
+    console.log('[OpenAI Vision Fallback] Converting PDF to PNG for Vision API...')
 
-    // Download PDF and convert to base64 (OpenAI requires base64 for PDF files)
-    const pdfResponse = await fetch(pdfUrl)
-    if (!pdfResponse.ok) {
-      throw new Error(`Failed to fetch PDF: ${pdfResponse.statusText}`)
-    }
+    // Convert PDF to PNG image (OpenAI Vision API only accepts images, not PDFs)
+    const { convertPdfToImage } = await import('./pdf-converter')
+    const pngDataUrl = await convertPdfToImage(pdfUrl)
 
-    const arrayBuffer = await pdfResponse.arrayBuffer()
-    const base64Pdf = Buffer.from(arrayBuffer).toString('base64')
-    const pdfDataUrl = `data:application/pdf;base64,${base64Pdf}`
-
-    console.log('[OpenAI Vision Fallback] PDF converted to base64, size:', (base64Pdf.length / 1024).toFixed(2), 'KB')
-    console.log('[OpenAI Vision Fallback] Sending PDF directly to Vision API (GPT-4o supports PDFs)...')
+    console.log('[OpenAI Vision Fallback] PDF successfully converted to PNG')
+    console.log('[OpenAI Vision Fallback] PNG size:', (pngDataUrl.length / 1024).toFixed(2), 'KB')
 
     // Validate API key
     if (!process.env.OPENAI_API_KEY) {
@@ -779,9 +773,9 @@ export async function extractReceiptDataWithVision(
 
     const client = getOpenAIClient()
 
-    console.log('[OpenAI Vision Fallback] Calling Vision API with PDF...')
+    console.log('[OpenAI Vision Fallback] Calling Vision API with PNG image...')
 
-    // Call Vision API with the PDF (GPT-4o can process PDFs directly)
+    // Call Vision API with the PNG image
     const response = await client.chat.completions.create({
       model: 'gpt-4o',
       messages: [
@@ -795,7 +789,7 @@ export async function extractReceiptDataWithVision(
             {
               type: 'image_url',
               image_url: {
-                url: pdfDataUrl, // Send PDF as base64 data URL
+                url: pngDataUrl, // Send PNG as base64 data URL
                 detail: 'high', // Use high detail for better accuracy
               },
             },

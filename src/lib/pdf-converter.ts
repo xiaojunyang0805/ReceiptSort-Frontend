@@ -43,6 +43,25 @@ async function convertPdfToImageWithPdfJs(pdfUrl: string): Promise<string> {
     const { createCanvas } = await import('canvas')
     const pdfjsLib = await import('pdfjs-dist/legacy/build/pdf.mjs')
 
+    // Polyfill DOMMatrix for Node.js environment
+    if (typeof globalThis.DOMMatrix === 'undefined') {
+      console.log('[PDF Converter] Adding DOMMatrix polyfill')
+      // Simple identity matrix polyfill
+      ;(globalThis as any).DOMMatrix = class DOMMatrix {
+        a = 1
+        b = 0
+        c = 0
+        d = 1
+        e = 0
+        f = 0
+        constructor(init?: any) {
+          if (Array.isArray(init) && init.length === 6) {
+            ;[this.a, this.b, this.c, this.d, this.e, this.f] = init
+          }
+        }
+      }
+    }
+
     // Set worker source for server-side rendering
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'pdfjs-dist/legacy/build/pdf.worker.min.mjs'
 
