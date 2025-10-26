@@ -33,16 +33,16 @@ export async function convertPdfToImage(pdfUrl: string): Promise<string> {
     // Get first page
     const page = await pdfDocument.getPage(1)
 
-    // Get viewport at very reduced scale for fastest processing
-    // Hobby plan has 10s limit, need aggressive compression
-    let viewport = page.getViewport({ scale: 0.5 })
+    // Get viewport at 2x scale for clear Chinese character recognition
+    // Higher quality needed for Chinese characters (smaller strokes)
+    let viewport = page.getViewport({ scale: 2.0 })
 
-    // Limit maximum dimensions for fastest processing (Hobby plan 10s timeout)
-    const MAX_DIMENSION = 1000 // pixels (aggressively reduced for 10s timeout)
+    // Limit maximum dimensions to prevent excessive file size
+    const MAX_DIMENSION = 2400 // pixels (balanced for Chinese character clarity)
     const maxScale = Math.min(
       MAX_DIMENSION / viewport.width,
       MAX_DIMENSION / viewport.height,
-      0.5 // Very low scale for fastest processing (Hobby plan)
+      2.0 // 2x scale for Chinese character recognition
     )
 
     if (maxScale < 1.0) {
@@ -64,15 +64,15 @@ export async function convertPdfToImage(pdfUrl: string): Promise<string> {
     await page.render(renderContext).promise
     console.log('[PDF Converter] Page rendered to canvas')
 
-    // Convert canvas to base64 JPEG with maximum compression
-    // Quality 0.6 = optimized for 10s Hobby plan timeout (still readable for OCR)
-    const dataUrl = canvas.toDataURL('image/jpeg', 0.6)
+    // Convert canvas to base64 PNG for best Chinese character quality
+    // PNG is lossless - critical for accurate Chinese character recognition
+    const dataUrl = canvas.toDataURL('image/png')
     const sizeKB = (dataUrl.length / 1024).toFixed(2)
     const sizeMB = (dataUrl.length / 1024 / 1024).toFixed(2)
     console.log('[PDF Converter] PDF converted successfully')
     console.log('[PDF Converter] Canvas size:', viewport.width, 'x', viewport.height, 'pixels')
     console.log('[PDF Converter] Base64 data URL size:', sizeKB, 'KB (', sizeMB, 'MB )')
-    console.log('[PDF Converter] Format: JPEG (quality: 0.6, scale: 0.5) - Optimized for Hobby plan')
+    console.log('[PDF Converter] Format: PNG (lossless), scale: 2.0x - Optimized for Chinese characters')
 
     // Warn if still too large (Vision API has ~20MB limit for base64)
     if (dataUrl.length > 15 * 1024 * 1024) {

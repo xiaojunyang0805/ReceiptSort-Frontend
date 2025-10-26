@@ -2,10 +2,11 @@ import { createClient } from '@/lib/supabase/server'
 import { NextResponse } from 'next/server'
 import { extractReceiptData } from '@/lib/openai'
 
-// Configure route segment (Hobby plan max is 10s, Pro supports up to 300s)
-export const maxDuration = 10
-export const dynamic = 'force-dynamic'
+// Configure route segment for Vercel dynamic API route
 export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+export const maxDuration = 10
 
 export async function POST(
   request: Request,
