@@ -1,16 +1,20 @@
-import pdf from 'pdf-parse-fork'
+import { createCanvas } from 'canvas'
+import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf.mjs'
+
+// Set worker source for server-side rendering (use string path)
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'pdfjs-dist/legacy/build/pdf.worker.min.mjs'
 
 /**
- * Extract text from PDF
- * Extracts all text content from a PDF file
+ * Convert PDF to image (PNG) for better OCR extraction
+ * Uses GPT-4o Vision API which can better understand visual layout of Chinese invoices
  *
  * @param pdfUrl - URL to the PDF file (must be accessible)
- * @returns Extracted text from the PDF
- * @throws Error if extraction fails
+ * @returns Base64 data URL of the first page as PNG image
+ * @throws Error if conversion fails
  */
-export async function extractTextFromPdf(pdfUrl: string): Promise<string> {
+export async function convertPdfToImage(pdfUrl: string): Promise<string> {
   try {
-    console.log('[PDF Converter] Starting text extraction for URL:', pdfUrl)
+    console.log('[PDF Converter] Starting PDF to image conversion for URL:', pdfUrl)
 
     // Fetch the PDF
     const response = await fetch(pdfUrl)
@@ -19,27 +23,53 @@ export async function extractTextFromPdf(pdfUrl: string): Promise<string> {
     }
 
     const arrayBuffer = await response.arrayBuffer()
-    const buffer = Buffer.from(arrayBuffer)
-    console.log('[PDF Converter] PDF fetched, size:', buffer.length, 'bytes')
+    console.log('[PDF Converter] PDF fetched, size:', arrayBuffer.byteLength, 'bytes')
 
-    // Parse PDF and extract text
-    console.log('[PDF Converter] Extracting text from PDF...')
-    const data = await pdf(buffer)
+    // Load PDF document
+    const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer })
+    const pdfDocument = await loadingTask.promise
+    console.log('[PDF Converter] PDF loaded, pages:', pdfDocument.numPages)
 
-    if (!data.text || data.text.trim().length === 0) {
-      throw new Error('No text could be extracted from PDF')
+    // Get first page
+    const page = await pdfDocument.getPage(1)
+
+    // Get viewport at 2x scale for better quality
+    const viewport = page.getViewport({ scale: 2.0 })
+
+    // Create canvas
+    const canvas = createCanvas(viewport.width, viewport.height)
+    const context = canvas.getContext('2d')
+
+    // Render PDF page to canvas
+    const renderContext = {
+      canvasContext: context as any,
+      viewport: viewport,
+      canvas: canvas as any,
     }
 
-    console.log('[PDF Converter] Text extraction complete, length:', data.text.length, 'characters')
-    console.log('[PDF Converter] Number of pages:', data.numpages)
+    await page.render(renderContext).promise
+    console.log('[PDF Converter] Page rendered to canvas')
 
-    return data.text
+    // Convert canvas to base64 PNG
+    const dataUrl = canvas.toDataURL('image/png')
+    console.log('[PDF Converter] PDF converted successfully, data URL length:', dataUrl.length)
+
+    return dataUrl
   } catch (error) {
-    console.error('[PDF Converter] Text extraction failed:', error)
+    console.error('[PDF Converter] PDF to image conversion failed:', error)
     throw new Error(
-      `Failed to extract text from PDF: ${error instanceof Error ? error.message : 'Unknown error'}`
+      `Failed to convert PDF to image: ${error instanceof Error ? error.message : 'Unknown error'}`
     )
   }
+}
+
+/**
+ * Legacy text extraction (kept for backwards compatibility)
+ * @deprecated Use convertPdfToImage for better accuracy with Chinese invoices
+ */
+export async function extractTextFromPdf(_pdfUrl: string): Promise<string> {
+  // Redirect to image conversion for better results
+  throw new Error('Text extraction deprecated. Use convertPdfToImage() instead.')
 }
 
 /**

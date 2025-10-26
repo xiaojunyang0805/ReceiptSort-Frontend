@@ -6,7 +6,7 @@ import {
   DocumentType,
   ReceiptLineItem,
 } from '@/types/receipt'
-import { extractTextFromPdf, isPdfUrl } from './pdf-converter'
+import { convertPdfToImage, isPdfUrl } from './pdf-converter'
 import { needsImageConversion, convertImageToJpeg } from './image-converter'
 
 // Initialize OpenAI client (lazy initialization for scripts)
@@ -406,13 +406,14 @@ CRITICAL RULES:
 IMPORTANT: You MUST return valid JSON. Do not add any explanations or markdown formatting.`
 
 /**
- * Extract receipt data from an image or PDF using OpenAI API
+ * Extract receipt data from an image or PDF using OpenAI Vision API
  *
  * @param imageUrl - Publicly accessible URL or base64 data URL of the receipt (supports images and PDFs)
  * @returns Structured receipt data
  * @throws Error if extraction fails
  *
- * Note: For images, uses OpenAI Vision API. For PDFs, extracts text first and processes it with GPT-4o.
+ * Note: All files (images and PDFs) are processed using GPT-4o Vision API for better accuracy.
+ * PDFs are converted to high-resolution images first to preserve visual layout (critical for Chinese invoices).
  */
 export async function extractReceiptData(
   imageUrl: string
@@ -425,26 +426,24 @@ export async function extractReceiptData(
 
     const client = getOpenAIClient()
 
-    // Check if URL is a PDF and extract text if necessary
+    // Check if URL is a PDF and convert to image if necessary
     const isPdf = isPdfUrl(imageUrl)
-    let extractedText: string | null = null
+    let processedImageUrl = imageUrl
 
     if (isPdf) {
-      console.log('[OpenAI] Detected PDF file, extracting text...')
+      console.log('[OpenAI] Detected PDF file, converting to image for Vision API...')
       try {
-        extractedText = await extractTextFromPdf(imageUrl)
-        console.log('[OpenAI] PDF text successfully extracted')
-      } catch (extractionError) {
-        console.error('[OpenAI] PDF text extraction failed:', extractionError)
+        processedImageUrl = await convertPdfToImage(imageUrl)
+        console.log('[OpenAI] PDF successfully converted to image')
+      } catch (conversionError) {
+        console.error('[OpenAI] PDF to image conversion failed:', conversionError)
         throw new Error(
-          `Failed to extract text from PDF: ${extractionError instanceof Error ? extractionError.message : 'Extraction error'}`
+          `Failed to convert PDF to image: ${conversionError instanceof Error ? conversionError.message : 'Conversion error'}`
         )
       }
     }
-
     // Check if image needs conversion (BMP, TIFF) and convert if necessary
-    let processedImageUrl = imageUrl
-    if (!isPdf && needsImageConversion(imageUrl)) {
+    else if (needsImageConversion(imageUrl)) {
       console.log('[OpenAI] Detected unsupported image format (BMP/TIFF), converting to JPEG...')
       try {
         processedImageUrl = await convertImageToJpeg(imageUrl)
@@ -457,36 +456,27 @@ export async function extractReceiptData(
       }
     }
 
-    // Call OpenAI API (Vision for images, Chat for PDF text)
+    // Call OpenAI API with Vision (works for all image types including converted PDFs)
     const response = await client.chat.completions.create({
       model: 'gpt-4o',
-      messages: isPdf
-        ? [
-            // For PDFs: send text with prompt
+      messages: [
+        {
+          role: 'user',
+          content: [
             {
-              role: 'user',
-              content: `${RECEIPT_EXTRACTION_PROMPT}\n\nExtracted text from receipt PDF:\n\n${extractedText}`,
+              type: 'text',
+              text: RECEIPT_EXTRACTION_PROMPT,
             },
-          ]
-        : [
-            // For images: use Vision API
             {
-              role: 'user',
-              content: [
-                {
-                  type: 'text',
-                  text: RECEIPT_EXTRACTION_PROMPT,
-                },
-                {
-                  type: 'image_url',
-                  image_url: {
-                    url: processedImageUrl,
-                    detail: 'high', // Use high detail for better accuracy
-                  },
-                },
-              ],
+              type: 'image_url',
+              image_url: {
+                url: processedImageUrl,
+                detail: 'high', // Use high detail for better accuracy
+              },
             },
           ],
+        },
+      ],
       max_tokens: 1500, // Increased for line items support (Phase 2)
       temperature: 0.1, // Low temperature for consistent output
       response_format: { type: 'json_object' }, // Force JSON response
