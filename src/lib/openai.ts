@@ -6,7 +6,7 @@ import {
   DocumentType,
   ReceiptLineItem,
 } from '@/types/receipt'
-import { convertPdfToImage, isPdfUrl } from './pdf-converter'
+import { extractTextFromPdf, isPdfUrl } from './pdf-converter'
 import { needsImageConversion, convertImageToJpeg } from './image-converter'
 
 // Initialize OpenAI client (lazy initialization for scripts)
@@ -406,14 +406,13 @@ CRITICAL RULES:
 IMPORTANT: You MUST return valid JSON. Do not add any explanations or markdown formatting.`
 
 /**
- * Extract receipt data from an image or PDF using OpenAI Vision API
+ * Extract receipt data from an image or PDF using OpenAI API
  *
  * @param imageUrl - Publicly accessible URL or base64 data URL of the receipt (supports images and PDFs)
  * @returns Structured receipt data
  * @throws Error if extraction fails
  *
- * Note: All files (images and PDFs) are processed using GPT-4o Vision API for better accuracy.
- * PDFs are converted to high-resolution images first to preserve visual layout (critical for Chinese invoices).
+ * Note: For images, uses OpenAI Vision API. For PDFs, extracts text first and processes it with GPT-4o.
  */
 export async function extractReceiptData(
   imageUrl: string
@@ -426,24 +425,26 @@ export async function extractReceiptData(
 
     const client = getOpenAIClient()
 
-    // Check if URL is a PDF and convert to image if necessary
+    // Check if URL is a PDF and extract text if necessary
     const isPdf = isPdfUrl(imageUrl)
-    let processedImageUrl = imageUrl
+    let extractedText: string | null = null
 
     if (isPdf) {
-      console.log('[OpenAI] Detected PDF file, converting to image for Vision API...')
+      console.log('[OpenAI] Detected PDF file, extracting text...')
       try {
-        processedImageUrl = await convertPdfToImage(imageUrl)
-        console.log('[OpenAI] PDF successfully converted to image')
-      } catch (conversionError) {
-        console.error('[OpenAI] PDF to image conversion failed:', conversionError)
+        extractedText = await extractTextFromPdf(imageUrl)
+        console.log('[OpenAI] PDF text successfully extracted')
+      } catch (extractionError) {
+        console.error('[OpenAI] PDF text extraction failed:', extractionError)
         throw new Error(
-          `Failed to convert PDF to image: ${conversionError instanceof Error ? conversionError.message : 'Conversion error'}`
+          `Failed to extract text from PDF: ${extractionError instanceof Error ? extractionError.message : 'Extraction error'}`
         )
       }
     }
+
     // Check if image needs conversion (BMP, TIFF) and convert if necessary
-    else if (needsImageConversion(imageUrl)) {
+    let processedImageUrl = imageUrl
+    if (!isPdf && needsImageConversion(imageUrl)) {
       console.log('[OpenAI] Detected unsupported image format (BMP/TIFF), converting to JPEG...')
       try {
         processedImageUrl = await convertImageToJpeg(imageUrl)
@@ -456,56 +457,45 @@ export async function extractReceiptData(
       }
     }
 
-    // Log image size for debugging
-    console.log('[OpenAI] Sending image to Vision API, size:', processedImageUrl.length, 'bytes')
-
-    // Call OpenAI API with Vision (works for all image types including converted PDFs)
-    let response
-    try {
-      response = await client.chat.completions.create({
-        model: 'gpt-4o',
-        messages: [
-          {
-            role: 'user',
-            content: [
-              {
-                type: 'text',
-                text: RECEIPT_EXTRACTION_PROMPT,
-              },
-              {
-                type: 'image_url',
-                image_url: {
-                  url: processedImageUrl,
-                  detail: 'high', // Use high detail for better accuracy
+    // Call OpenAI API (Vision for images, Chat for PDF text)
+    const response = await client.chat.completions.create({
+      model: 'gpt-4o',
+      messages: isPdf
+        ? [
+            // For PDFs: send text with prompt
+            {
+              role: 'user',
+              content: `${RECEIPT_EXTRACTION_PROMPT}\n\nExtracted text from receipt PDF:\n\n${extractedText}`,
+            },
+          ]
+        : [
+            // For images: use Vision API
+            {
+              role: 'user',
+              content: [
+                {
+                  type: 'text',
+                  text: RECEIPT_EXTRACTION_PROMPT,
                 },
-              },
-            ],
-          },
-        ],
-        max_tokens: 2000, // Increased for PDFs and complex receipts with line items
-        temperature: 0.1, // Low temperature for consistent output
-        response_format: { type: 'json_object' }, // Force JSON response
-      })
-    } catch (apiError) {
-      console.error('[OpenAI] API call failed:', apiError)
-      throw new Error(
-        `OpenAI Vision API error: ${apiError instanceof Error ? apiError.message : 'Unknown API error'}`
-      )
-    }
+                {
+                  type: 'image_url',
+                  image_url: {
+                    url: processedImageUrl,
+                    detail: 'high', // Use high detail for better accuracy
+                  },
+                },
+              ],
+            },
+          ],
+      max_tokens: 1500, // Increased for line items support (Phase 2)
+      temperature: 0.1, // Low temperature for consistent output
+      response_format: { type: 'json_object' }, // Force JSON response
+    })
 
     // Extract the response text
     const content = response.choices[0]?.message?.content
-    console.log('[OpenAI] Response received, length:', content?.length || 0, 'chars')
-
     if (!content) {
       throw new Error('No response from OpenAI Vision API')
-    }
-
-    // Check if response was truncated due to max_tokens
-    const finishReason = response.choices[0]?.finish_reason
-    if (finishReason === 'length') {
-      console.warn('[OpenAI] WARNING: Response truncated due to max_tokens limit')
-      console.log('[OpenAI] Partial response:', content)
     }
 
     // Parse JSON response
@@ -517,16 +507,12 @@ export async function extractReceiptData(
         .replace(/```\n?/g, '')
         .trim()
 
-      console.log('[OpenAI] Attempting to parse JSON, cleaned length:', cleanedContent.length)
       extractedData = JSON.parse(cleanedContent)
-      console.log('[OpenAI] JSON parsed successfully')
     } catch (parseError) {
-      console.error('[OpenAI] Failed to parse response as JSON')
-      console.error('[OpenAI] Raw response:', content)
-      console.error('[OpenAI] Parse error:', parseError)
-      console.error('[OpenAI] Finish reason:', finishReason)
+      console.error('Failed to parse OpenAI response:', content)
+      console.error('Parse error:', parseError)
       throw new Error(
-        `Invalid JSON response from OpenAI Vision API. Finish reason: ${finishReason}. Response preview: ${content.substring(0, 200)}...`
+        `Invalid JSON response from OpenAI Vision API. Response preview: ${content.substring(0, 200)}...`
       )
     }
 
