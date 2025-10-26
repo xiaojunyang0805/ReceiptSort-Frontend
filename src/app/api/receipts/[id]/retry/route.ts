@@ -4,6 +4,8 @@ import { extractReceiptData } from '@/lib/openai'
 
 // Configure route segment (Hobby plan max is 10s, Pro supports up to 300s)
 export const maxDuration = 10
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
 
 /**
  * POST /api/receipts/[id]/retry
