@@ -13,6 +13,10 @@ const nextConfig = {
       },
     ],
   },
+  experimental: {
+    // Externalize packages with native binaries for serverless
+    serverComponentsExternalPackages: ['@napi-rs/canvas', 'canvas'],
+  },
 };
 
 export default withNextIntl(nextConfig);
