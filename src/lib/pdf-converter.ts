@@ -1,18 +1,41 @@
 import pdf from 'pdf-parse-fork'
+import { convertPdfToPngWithChromium } from './pdf-to-png-puppeteer'
 
 /**
  * Convert PDF to high-resolution PNG image for Vision API
  * Used as fallback when text extraction yields low confidence
  *
- * NOTE: Uses dynamic imports to avoid DOMMatrix errors in Vercel serverless
+ * Uses Chromium/Puppeteer for better font support (especially Chinese fonts with Adobe-GB1 encoding)
+ * Falls back to pdfjs-dist if Chromium fails
  *
  * @param pdfUrl - URL to the PDF file (must be accessible)
  * @returns Base64 data URL of the first page as PNG image
  * @throws Error if conversion fails
  */
 export async function convertPdfToImage(pdfUrl: string): Promise<string> {
+  console.log('[PDF Converter] Starting PDF to PNG conversion')
+
   try {
-    console.log('[PDF Converter] Starting PDF to image conversion for URL:', pdfUrl)
+    // Try Chromium-based conversion first (best font support)
+    console.log('[PDF Converter] Attempting Chromium-based conversion (best for Chinese fonts)...')
+    const result = await convertPdfToPngWithChromium(pdfUrl)
+    console.log('[PDF Converter] Chromium conversion successful')
+    return result
+  } catch (chromiumError) {
+    console.warn('[PDF Converter] Chromium conversion failed, falling back to pdfjs-dist:', chromiumError)
+
+    // Fallback to pdfjs-dist (may have font issues but better than nothing)
+    return await convertPdfToImageWithPdfJs(pdfUrl)
+  }
+}
+
+/**
+ * Fallback PDF-to-image converter using pdfjs-dist
+ * Has limited font support (may not render Chinese fonts correctly)
+ */
+async function convertPdfToImageWithPdfJs(pdfUrl: string): Promise<string> {
+  try {
+    console.log('[PDF Converter] Starting pdfjs-dist fallback conversion')
 
     // Dynamic imports to avoid DOMMatrix issues in Vercel
     const { createCanvas } = await import('canvas')
@@ -30,38 +53,19 @@ export async function convertPdfToImage(pdfUrl: string): Promise<string> {
     const arrayBuffer = await response.arrayBuffer()
     console.log('[PDF Converter] PDF fetched, size:', arrayBuffer.byteLength, 'bytes')
 
-    // Load PDF document with font fallback enabled
-    const loadingTask = pdfjsLib.getDocument({
-      data: arrayBuffer,
-      // Enable standard font fallback for problematic fonts
-      useSystemFonts: false,
-      standardFontDataUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.379/standard_fonts/',
-    })
+    // Load PDF document
+    const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer })
     const pdfDocument = await loadingTask.promise
     console.log('[PDF Converter] PDF loaded, pages:', pdfDocument.numPages)
-
-    // Log font information to help debug font encoding issues
-    const page1 = await pdfDocument.getPage(1)
-    const fonts = await page1.getOperatorList().then((ops: any) => {
-      const fontNames = new Set<string>()
-      for (let i = 0; i < ops.fnArray.length; i++) {
-        if (ops.fnArray[i] === pdfjsLib.OPS.setFont) {
-          fontNames.add(ops.argsArray[i][0])
-        }
-      }
-      return Array.from(fontNames)
-    })
-    console.log('[PDF Converter] Fonts used in PDF:', fonts)
 
     // Get first page
     const page = await pdfDocument.getPage(1)
 
-    // Get viewport at 3x scale for EXTRA clear text recognition (especially problematic Chinese fonts)
-    // Increased from 2x to 3x to better handle font encoding issues
+    // Get viewport at 3x scale for better clarity
     let viewport = page.getViewport({ scale: 3.0 })
 
     // Limit maximum dimensions to prevent excessive file size
-    const MAX_DIMENSION = 3600 // pixels (increased from 2400 to support 3x scale)
+    const MAX_DIMENSION = 3600
     const maxScale = Math.min(
       MAX_DIMENSION / viewport.width,
       MAX_DIMENSION / viewport.height,
@@ -69,43 +73,29 @@ export async function convertPdfToImage(pdfUrl: string): Promise<string> {
     )
 
     if (maxScale < 3.0) {
-      console.log('[PDF Converter] Scaling down large PDF:', viewport.width, 'x', viewport.height, '-> scale', maxScale)
       viewport = page.getViewport({ scale: maxScale })
     }
 
-    console.log('[PDF Converter] Rendering with scale:', maxScale, 'viewport:', viewport.width, 'x', viewport.height)
-
-    // Create canvas with white background (important for proper contrast)
+    // Create canvas with white background
     const canvas = createCanvas(viewport.width, viewport.height)
     const context = canvas.getContext('2d')
-
-    // Fill with white background
     context.fillStyle = 'white'
     context.fillRect(0, 0, viewport.width, viewport.height)
 
-    // Render PDF page to canvas with enhanced settings
-    const renderContext = {
+    // Render PDF page to canvas
+    await page.render({
       canvasContext: context as any,
       viewport: viewport,
       canvas: canvas as any,
-      // Enable text rendering even if fonts are problematic
-      intent: 'display',
-    }
+    }).promise
 
-    await page.render(renderContext).promise
-    console.log('[PDF Converter] Page rendered to canvas with enhanced settings')
-
-    // Convert canvas to base64 PNG (lossless - critical for text accuracy)
+    // Convert to base64 PNG
     const dataUrl = canvas.toDataURL('image/png')
-    const sizeKB = (dataUrl.length / 1024).toFixed(2)
-    console.log('[PDF Converter] PDF converted successfully')
-    console.log('[PDF Converter] Canvas size:', viewport.width, 'x', viewport.height, 'pixels')
-    console.log('[PDF Converter] Base64 data URL size:', sizeKB, 'KB')
-    console.log('[PDF Converter] Format: PNG (lossless), scale: 2.0x - Optimized for text recognition')
+    console.log('[PDF Converter] pdfjs-dist conversion complete, size:', (dataUrl.length / 1024).toFixed(2), 'KB')
 
     return dataUrl
   } catch (error) {
-    console.error('[PDF Converter] PDF to image conversion failed:', error)
+    console.error('[PDF Converter] pdfjs-dist conversion failed:', error)
     throw new Error(
       `Failed to convert PDF to image: ${error instanceof Error ? error.message : 'Unknown error'}`
     )
