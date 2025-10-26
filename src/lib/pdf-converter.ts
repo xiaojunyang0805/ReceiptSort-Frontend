@@ -33,9 +33,22 @@ export async function convertPdfToImage(pdfUrl: string): Promise<string> {
     // Get first page
     const page = await pdfDocument.getPage(1)
 
-    // Get viewport at 1.5x scale (balance between quality and base64 size)
-    // Note: 2x scale can create very large base64 images that may hit Vision API limits
-    const viewport = page.getViewport({ scale: 1.5 })
+    // Get viewport at 1x scale (original size)
+    // Lower scale = smaller file size for Vision API
+    let viewport = page.getViewport({ scale: 1.0 })
+
+    // Limit maximum dimensions to prevent huge images
+    const MAX_DIMENSION = 1600 // pixels
+    const maxScale = Math.min(
+      MAX_DIMENSION / viewport.width,
+      MAX_DIMENSION / viewport.height,
+      1.0 // Never upscale
+    )
+
+    if (maxScale < 1.0) {
+      console.log('[PDF Converter] Scaling down large PDF:', viewport.width, 'x', viewport.height, '-> scale', maxScale)
+      viewport = page.getViewport({ scale: maxScale })
+    }
 
     // Create canvas
     const canvas = createCanvas(viewport.width, viewport.height)
@@ -51,15 +64,20 @@ export async function convertPdfToImage(pdfUrl: string): Promise<string> {
     await page.render(renderContext).promise
     console.log('[PDF Converter] Page rendered to canvas')
 
-    // Convert canvas to base64 JPEG with compression (much smaller than PNG)
-    // Quality 0.92 provides good balance between size and quality
-    const dataUrl = canvas.toDataURL('image/jpeg', 0.92)
+    // Convert canvas to base64 JPEG with aggressive compression
+    // Quality 0.85 = good balance between size and quality for documents
+    const dataUrl = canvas.toDataURL('image/jpeg', 0.85)
     const sizeKB = (dataUrl.length / 1024).toFixed(2)
     const sizeMB = (dataUrl.length / 1024 / 1024).toFixed(2)
     console.log('[PDF Converter] PDF converted successfully')
     console.log('[PDF Converter] Canvas size:', viewport.width, 'x', viewport.height, 'pixels')
     console.log('[PDF Converter] Base64 data URL size:', sizeKB, 'KB (', sizeMB, 'MB )')
-    console.log('[PDF Converter] Format: JPEG (quality: 0.92)')
+    console.log('[PDF Converter] Format: JPEG (quality: 0.85)')
+
+    // Warn if still too large (Vision API has ~20MB limit for base64)
+    if (dataUrl.length > 15 * 1024 * 1024) {
+      console.warn('[PDF Converter] WARNING: Image is very large (>15MB), may cause issues with Vision API')
+    }
 
     return dataUrl
   } catch (error) {
