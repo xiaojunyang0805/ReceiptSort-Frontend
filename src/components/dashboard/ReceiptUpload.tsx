@@ -133,13 +133,19 @@ export default function ReceiptUpload() {
 
   const processReceipt = async (uploadFileId: string, receiptId: string) => {
     try {
-      // Call the process API endpoint
+      // Call the process API endpoint with 15-second timeout
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 15000) // 15 seconds
+
       const response = await fetch(`/api/receipts/${receiptId}/process`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        signal: controller.signal,
       })
+
+      clearTimeout(timeoutId)
 
       if (!response.ok) {
         // Try to parse error, but handle case where response is not JSON
@@ -173,7 +179,16 @@ export default function ReceiptUpload() {
       toast.success(`${fileName} processed successfully!`)
     } catch (error) {
       console.error('Processing error:', error)
-      const errorMessage = error instanceof Error ? error.message : 'Processing failed'
+
+      // Handle timeout specifically
+      let errorMessage = 'Processing failed'
+      if (error instanceof Error) {
+        if (error.name === 'AbortError') {
+          errorMessage = 'Processing timed out after 15 seconds. Please click Retry to try again.'
+        } else {
+          errorMessage = error.message
+        }
+      }
 
       // Update status to error
       setUploadFiles((prev) =>
