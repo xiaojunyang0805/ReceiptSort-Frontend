@@ -9,9 +9,9 @@
 import * as pdfjsLib from 'pdfjs-dist'
 
 // Configure PDF.js worker
-// Use the worker from the public directory
+// Use unpkg CDN which is more reliable for ES modules
 if (typeof window !== 'undefined') {
-  pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.js'
+  pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`
 }
 
 export interface PdfToImageOptions {
