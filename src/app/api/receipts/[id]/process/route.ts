@@ -146,13 +146,15 @@ export async function POST(
       const CONFIDENCE_THRESHOLD = 0.70 // 70% threshold
       const isPDF = receipt.file_name.toLowerCase().endsWith('.pdf')
 
+      console.log(`[Process Receipt] Retry decision: finalConfidence=${(finalConfidence * 100).toFixed(0)}%, isPDF=${isPDF}, fileName=${receipt.file_name}`)
+
       if (finalConfidence < CONFIDENCE_THRESHOLD && isPDF) {
         console.log(`[Process Receipt] Low confidence (${(finalConfidence * 100).toFixed(0)}%) detected for PDF. Retrying with Vision API fallback...`)
 
         try {
           // Retry with Vision API (PDF-to-image + Vision)
           const retryData = await extractReceiptDataWithVision(signedUrlData.signedUrl)
-          console.log('[Process Receipt] Vision API retry completed:', retryData)
+          console.log('[Process Receipt] Vision API retry raw confidence:', retryData.confidence_score)
 
           // Re-validate the retry result
           const retryValidationErrors = validateExtractedData(retryData)
@@ -160,18 +162,21 @@ export async function POST(
           let retryConfidence = retryData.confidence_score
 
           if (retryHasValidationErrors) {
+            console.log('[Process Receipt] Retry has validation errors:', retryValidationErrors)
             retryConfidence = Math.min(retryConfidence, 0.6)
           }
 
+          console.log(`[Process Receipt] Retry final confidence: ${(retryConfidence * 100).toFixed(0)}%, Original: ${(finalConfidence * 100).toFixed(0)}%`)
+
           // Use the better result (higher confidence)
           if (retryConfidence > finalConfidence) {
-            console.log(`[Process Receipt] Vision API retry improved confidence: ${(finalConfidence * 100).toFixed(0)}% → ${(retryConfidence * 100).toFixed(0)}%`)
+            console.log(`[Process Receipt] ✓ Vision API retry improved confidence: ${(finalConfidence * 100).toFixed(0)}% → ${(retryConfidence * 100).toFixed(0)}%`)
             extractedData = retryData
             validationErrors = retryValidationErrors
             hasValidationErrors = retryHasValidationErrors
             finalConfidence = retryConfidence
           } else {
-            console.log(`[Process Receipt] Vision API retry did not improve confidence. Using original result.`)
+            console.log(`[Process Receipt] ✗ Vision API retry did not improve confidence (retry: ${(retryConfidence * 100).toFixed(0)}%, original: ${(finalConfidence * 100).toFixed(0)}%). Using original result.`)
           }
         } catch (retryError) {
           // Log retry error but continue with original result
@@ -179,7 +184,7 @@ export async function POST(
           console.log('[Process Receipt] Continuing with original extraction result')
         }
       } else if (finalConfidence < CONFIDENCE_THRESHOLD) {
-        console.log(`[Process Receipt] Low confidence (${(finalConfidence * 100).toFixed(0)}%) but file is not PDF. Skipping Vision API retry.`)
+        console.log(`[Process Receipt] Low confidence (${(finalConfidence * 100).toFixed(0)}%) but file is not PDF (fileName=${receipt.file_name}). Skipping Vision API retry.`)
       } else {
         console.log(`[Process Receipt] Confidence (${(finalConfidence * 100).toFixed(0)}%) is acceptable. No retry needed.`)
       }
