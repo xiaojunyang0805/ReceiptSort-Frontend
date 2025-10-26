@@ -127,20 +127,29 @@ export async function POST(
     console.log(`[Process Receipt] Status updated to 'processing'`)
 
     try {
-      // 6. Generate signed URL (60 seconds)
-      const { data: signedUrlData, error: signedUrlError } = await supabase.storage
+      // 6. Download image from Supabase and convert to base64
+      // This is MUCH faster than giving OpenAI a URL (eliminates network round-trip)
+      const { data: imageData, error: downloadError } = await supabase.storage
         .from('receipts')
-        .createSignedUrl(receipt.file_path, 60)
+        .download(receipt.file_path)
 
-      if (signedUrlError || !signedUrlData) {
-        throw new Error('Failed to generate signed URL for receipt file')
+      if (downloadError || !imageData) {
+        throw new Error('Failed to download receipt file from storage')
       }
 
-      console.log(`[Process Receipt] Generated signed URL for file: ${receipt.file_path}`)
+      console.log(`[Process Receipt] Downloaded image: ${receipt.file_path}, size: ${imageData.size} bytes`)
 
-      // 7. Call OpenAI Vision API
-      console.log('[Process Receipt] Calling OpenAI Vision API...')
-      const extractedData = await extractReceiptData(signedUrlData.signedUrl)
+      // Convert Blob to base64
+      const arrayBuffer = await imageData.arrayBuffer()
+      const base64 = Buffer.from(arrayBuffer).toString('base64')
+      const mimeType = receipt.file_type || 'image/png'
+      const base64DataUrl = `data:${mimeType};base64,${base64}`
+
+      console.log(`[Process Receipt] Converted to base64, length: ${base64.length} chars`)
+
+      // 7. Call OpenAI Vision API with base64 data (faster than URL)
+      console.log('[Process Receipt] Calling OpenAI Vision API with base64 data...')
+      const extractedData = await extractReceiptData(base64DataUrl)
       console.log('[Process Receipt] Successfully extracted data from OpenAI:', extractedData)
 
       // 7.5. Validate extracted data
