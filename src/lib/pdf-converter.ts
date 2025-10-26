@@ -81,8 +81,9 @@ async function convertPdfToImageWithPdfJs(pdfUrl: string): Promise<string> {
     const { createCanvas } = await import('canvas')
     const pdfjsLib = await import('pdfjs-dist/legacy/build/pdf.mjs')
 
-    // Set worker source for server-side rendering
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'pdfjs-dist/legacy/build/pdf.worker.min.mjs'
+    // Disable worker for serverless environment (use main thread instead)
+    pdfjsLib.GlobalWorkerOptions.workerSrc = ''
+    console.log('[PDF Converter] Disabled PDF.js worker (using main thread in serverless)')
 
     // Fetch the PDF
     const response = await fetch(pdfUrl)
