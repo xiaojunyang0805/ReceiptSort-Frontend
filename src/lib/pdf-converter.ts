@@ -1,4 +1,4 @@
-import { createCanvas } from 'canvas'
+import { createCanvas } from '@napi-rs/canvas'
 import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf.mjs'
 
 // Set worker source for server-side rendering (use string path)
