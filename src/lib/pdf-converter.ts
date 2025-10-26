@@ -1,6 +1,43 @@
 import pdf from 'pdf-parse-fork'
 import { convertPdfToPngWithChromium } from './pdf-to-png-puppeteer'
 
+// Polyfill browser APIs for pdfjs-dist in Node.js environment
+// Must be set before pdfjs-dist is imported anywhere
+if (typeof globalThis.DOMMatrix === 'undefined') {
+  ;(globalThis as any).DOMMatrix = class DOMMatrix {
+    a = 1
+    b = 0
+    c = 0
+    d = 1
+    e = 0
+    f = 0
+    constructor(init?: any) {
+      if (Array.isArray(init) && init.length === 6) {
+        ;[this.a, this.b, this.c, this.d, this.e, this.f] = init
+      }
+    }
+  }
+}
+
+if (typeof globalThis.ImageData === 'undefined') {
+  ;(globalThis as any).ImageData = class ImageData {
+    data: Uint8ClampedArray
+    width: number
+    height: number
+    constructor(width: number, height: number) {
+      this.width = width
+      this.height = height
+      this.data = new Uint8ClampedArray(width * height * 4)
+    }
+  }
+}
+
+if (typeof globalThis.Path2D === 'undefined') {
+  ;(globalThis as any).Path2D = class Path2D {
+    constructor() {}
+  }
+}
+
 /**
  * Convert PDF to high-resolution PNG image for Vision API
  * Used as fallback when text extraction yields low confidence
@@ -38,29 +75,11 @@ export async function convertPdfToImage(pdfUrl: string): Promise<string> {
 async function convertPdfToImageWithPdfJs(pdfUrl: string): Promise<string> {
   try {
     console.log('[PDF Converter] Starting pdfjs-dist fallback conversion')
+    console.log('[PDF Converter] Using polyfilled browser APIs (DOMMatrix, ImageData, Path2D)')
 
-    // Dynamic imports to avoid DOMMatrix issues in Vercel
+    // Dynamic imports (polyfills already set at module level)
     const { createCanvas } = await import('canvas')
     const pdfjsLib = await import('pdfjs-dist/legacy/build/pdf.mjs')
-
-    // Polyfill DOMMatrix for Node.js environment
-    if (typeof globalThis.DOMMatrix === 'undefined') {
-      console.log('[PDF Converter] Adding DOMMatrix polyfill')
-      // Simple identity matrix polyfill
-      ;(globalThis as any).DOMMatrix = class DOMMatrix {
-        a = 1
-        b = 0
-        c = 0
-        d = 1
-        e = 0
-        f = 0
-        constructor(init?: any) {
-          if (Array.isArray(init) && init.length === 6) {
-            ;[this.a, this.b, this.c, this.d, this.e, this.f] = init
-          }
-        }
-      }
-    }
 
     // Set worker source for server-side rendering
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'pdfjs-dist/legacy/build/pdf.worker.min.mjs'
