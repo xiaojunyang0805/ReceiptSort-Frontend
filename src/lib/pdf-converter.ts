@@ -1,42 +1,7 @@
 import pdf from 'pdf-parse-fork'
 import { convertPdfToPngWithChromium } from './pdf-to-png-puppeteer'
 
-// Polyfill browser APIs for pdfjs-dist in Node.js environment
-// Must be set before pdfjs-dist is imported anywhere
-if (typeof globalThis.DOMMatrix === 'undefined') {
-  ;(globalThis as any).DOMMatrix = class DOMMatrix {
-    a = 1
-    b = 0
-    c = 0
-    d = 1
-    e = 0
-    f = 0
-    constructor(init?: any) {
-      if (Array.isArray(init) && init.length === 6) {
-        ;[this.a, this.b, this.c, this.d, this.e, this.f] = init
-      }
-    }
-  }
-}
-
-if (typeof globalThis.ImageData === 'undefined') {
-  ;(globalThis as any).ImageData = class ImageData {
-    data: Uint8ClampedArray
-    width: number
-    height: number
-    constructor(width: number, height: number) {
-      this.width = width
-      this.height = height
-      this.data = new Uint8ClampedArray(width * height * 4)
-    }
-  }
-}
-
-if (typeof globalThis.Path2D === 'undefined') {
-  ;(globalThis as any).Path2D = class Path2D {
-    constructor() {}
-  }
-}
+// No polyfills needed - unpdf handles everything for serverless environments
 
 /**
  * Convert PDF to high-resolution PNG image for Vision API
@@ -69,22 +34,16 @@ export async function convertPdfToImage(pdfUrl: string): Promise<string> {
 }
 
 /**
- * Fallback PDF-to-image converter using pdfjs-dist
+ * Fallback PDF-to-image converter using unpdf (serverless-optimized)
+ * unpdf is specifically designed for serverless environments like Vercel
  * Has limited font support (may not render Chinese fonts correctly)
  */
 async function convertPdfToImageWithPdfJs(pdfUrl: string): Promise<string> {
   try {
-    console.log('[PDF Converter] Starting pdfjs-dist fallback conversion')
-    console.log('[PDF Converter] Using polyfilled browser APIs (DOMMatrix, ImageData, Path2D)')
+    console.log('[PDF Converter] Starting unpdf serverless conversion')
 
-    // Dynamic imports (polyfills already set at module level)
-    const { createCanvas } = await import('canvas')
-    const pdfjsLib = await import('pdfjs-dist/legacy/build/pdf.mjs')
-
-    // Disable worker for serverless environment (use main thread instead)
-    // Setting disableWorker prevents "No GlobalWorkerOptions.workerSrc specified" error
-    ;(pdfjsLib as any).disableWorker = true
-    console.log('[PDF Converter] Disabled PDF.js worker (using main thread in serverless)')
+    // Dynamic import of unpdf's renderPageAsImage
+    const { renderPageAsImage } = await import('unpdf')
 
     // Fetch the PDF
     const response = await fetch(pdfUrl)
@@ -95,49 +54,18 @@ async function convertPdfToImageWithPdfJs(pdfUrl: string): Promise<string> {
     const arrayBuffer = await response.arrayBuffer()
     console.log('[PDF Converter] PDF fetched, size:', arrayBuffer.byteLength, 'bytes')
 
-    // Load PDF document
-    const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer })
-    const pdfDocument = await loadingTask.promise
-    console.log('[PDF Converter] PDF loaded, pages:', pdfDocument.numPages)
+    // Render first page as image using unpdf's built-in function
+    // Scale 3x for better quality
+    const dataUrl = await renderPageAsImage(arrayBuffer, 1, {
+      scale: 3.0,
+      toDataURL: true, // Return as data URL instead of ArrayBuffer
+    })
 
-    // Get first page
-    const page = await pdfDocument.getPage(1)
-
-    // Get viewport at 3x scale for better clarity
-    let viewport = page.getViewport({ scale: 3.0 })
-
-    // Limit maximum dimensions to prevent excessive file size
-    const MAX_DIMENSION = 3600
-    const maxScale = Math.min(
-      MAX_DIMENSION / viewport.width,
-      MAX_DIMENSION / viewport.height,
-      3.0
-    )
-
-    if (maxScale < 3.0) {
-      viewport = page.getViewport({ scale: maxScale })
-    }
-
-    // Create canvas with white background
-    const canvas = createCanvas(viewport.width, viewport.height)
-    const context = canvas.getContext('2d')
-    context.fillStyle = 'white'
-    context.fillRect(0, 0, viewport.width, viewport.height)
-
-    // Render PDF page to canvas
-    await page.render({
-      canvasContext: context as any,
-      viewport: viewport,
-      canvas: canvas as any,
-    }).promise
-
-    // Convert to base64 PNG
-    const dataUrl = canvas.toDataURL('image/png')
-    console.log('[PDF Converter] pdfjs-dist conversion complete, size:', (dataUrl.length / 1024).toFixed(2), 'KB')
+    console.log('[PDF Converter] unpdf conversion complete, size:', (dataUrl.length / 1024).toFixed(2), 'KB')
 
     return dataUrl
   } catch (error) {
-    console.error('[PDF Converter] pdfjs-dist conversion failed:', error)
+    console.error('[PDF Converter] unpdf conversion failed:', error)
     throw new Error(
       `Failed to convert PDF to image: ${error instanceof Error ? error.message : 'Unknown error'}`
     )
