@@ -19,10 +19,12 @@ export async function convertPdfToImage(pdfUrl: string): Promise<string> {
     // Try Chromium-based conversion first (best font support)
     console.log('[PDF Converter] Attempting Chromium-based conversion (best for Chinese fonts)...')
     const result = await convertPdfToPngWithChromium(pdfUrl)
-    console.log('[PDF Converter] Chromium conversion successful')
+    console.log('[PDF Converter] ✓ Chromium conversion successful!')
     return result
   } catch (chromiumError) {
-    console.warn('[PDF Converter] Chromium conversion failed, falling back to pdfjs-dist:', chromiumError)
+    console.error('[PDF Converter] ✗ Chromium conversion failed with error:', chromiumError)
+    console.error('[PDF Converter] Error details:', chromiumError instanceof Error ? chromiumError.message : String(chromiumError))
+    console.log('[PDF Converter] Falling back to pdfjs-dist (may have font rendering issues)...')
 
     // Fallback to pdfjs-dist (may have font issues but better than nothing)
     return await convertPdfToImageWithPdfJs(pdfUrl)

@@ -27,15 +27,22 @@ export async function convertPdfToPngWithChromium(pdfUrl: string): Promise<strin
     const puppeteer = await import('puppeteer-core')
     const chromium = await import('@sparticuz/chromium')
 
+    console.log('[Puppeteer PDF Converter] Modules loaded successfully')
+
+    // Get executable path
+    const executablePath = await chromium.default.executablePath()
+    console.log('[Puppeteer PDF Converter] Chromium executable path:', executablePath)
+
     // Launch headless Chromium
-    console.log('[Puppeteer PDF Converter] Launching Chromium...')
+    console.log('[Puppeteer PDF Converter] Launching Chromium with args:', chromium.default.args.length, 'args')
+
     browser = await puppeteer.default.launch({
       args: chromium.default.args,
       defaultViewport: {
         width: 1920,
         height: 1080,
       },
-      executablePath: await chromium.default.executablePath(),
+      executablePath,
       headless: true,
     })
 
