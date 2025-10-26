@@ -447,31 +447,35 @@ export async function extractReceiptData(
     // Call OpenAI API with Vision (works for all image types including converted PDFs)
     let response
     try {
-      response = await client.chat.completions.create({
-        model: 'gpt-4o',
-        messages: [
-          {
-            role: 'user',
-            content: [
-              {
-                type: 'text',
-                text: RECEIPT_EXTRACTION_PROMPT,
-              },
-              {
-                type: 'image_url',
-                image_url: {
-                  url: processedImageUrl,
-                  detail: 'auto', // Changed from 'high' to 'auto' for faster processing (4x speed improvement)
+      response = await client.chat.completions.create(
+        {
+          model: 'gpt-4o',
+          messages: [
+            {
+              role: 'user',
+              content: [
+                {
+                  type: 'text',
+                  text: RECEIPT_EXTRACTION_PROMPT,
                 },
-              },
-            ],
-          },
-        ],
-        max_tokens: 1500, // Reduced from 2000 to speed up response generation
-        temperature: 0.1, // Low temperature for consistent output
-        response_format: { type: 'json_object' }, // Force JSON response
-        timeout: 8000, // 8 second timeout (leave 2s buffer for Vercel 10s limit)
-      })
+                {
+                  type: 'image_url',
+                  image_url: {
+                    url: processedImageUrl,
+                    detail: 'auto', // Changed from 'high' to 'auto' for faster processing (4x speed improvement)
+                  },
+                },
+              ],
+            },
+          ],
+          max_tokens: 1500, // Reduced from 2000 to speed up response generation
+          temperature: 0.1, // Low temperature for consistent output
+          response_format: { type: 'json_object' }, // Force JSON response
+        },
+        {
+          timeout: 8000, // 8 second timeout (leave 2s buffer for Vercel 10s limit)
+        }
+      )
     } catch (apiError) {
       console.error('[OpenAI] API call failed:', apiError)
       throw new Error(
