@@ -119,12 +119,27 @@ export default function ReceiptUpload() {
       })
 
       if (!response.ok) {
-        const errorData = await response.json()
+        // Try to parse error, but handle case where response is not JSON
+        let errorData
+        try {
+          errorData = await response.json()
+        } catch {
+          throw new Error(`Server error: ${response.status} ${response.statusText}`)
+        }
         throw new Error(errorData.error || 'Failed to process receipt')
       }
 
-      const result = await response.json()
-      console.log('Receipt processed successfully:', result)
+      // Parse response with better error handling
+      let result
+      try {
+        const responseText = await response.text()
+        console.log('Raw response length:', responseText.length)
+        result = JSON.parse(responseText)
+        console.log('Receipt processed successfully:', result)
+      } catch (parseError) {
+        console.error('JSON parse error:', parseError)
+        throw new Error('Server returned invalid response. The file may be too complex to process automatically.')
+      }
 
       // Update status to success
       setUploadFiles((prev) =>
@@ -215,10 +230,20 @@ export default function ReceiptUpload() {
         prev.map((f) => (f.id === id ? { ...f, status: 'processing', progress: 70, receiptId: receiptData.id } : f))
       )
 
-      toast.success(`${file.name} uploaded successfully, processing...`)
+      // Mark upload as complete - user can process manually from receipts page
+      setUploadFiles((prev) =>
+        prev.map((f) => (f.id === id ? { ...f, status: 'success', progress: 100 } : f))
+      )
 
-      // Auto-process the receipt
-      await processReceipt(id, receiptData.id)
+      toast.success(`${file.name} uploaded successfully! Go to Receipts page to process it.`)
+
+      // Skip auto-processing for PDFs to avoid timeout issues
+      // User can process manually from the receipts page using the "Process" button
+      const isPDF = file.name.toLowerCase().endsWith('.pdf')
+      if (!isPDF) {
+        // Only auto-process images (faster, less likely to timeout)
+        await processReceipt(id, receiptData.id)
+      }
     } catch (error) {
       console.error('Upload error:', error)
       const errorMessage = error instanceof Error ? error.message : 'Upload failed'
