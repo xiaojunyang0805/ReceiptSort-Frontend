@@ -6,7 +6,7 @@ import {
   DocumentType,
   ReceiptLineItem,
 } from '@/types/receipt'
-import { extractTextFromPdf, isPdfUrl, convertPdfToImage } from './pdf-converter'
+import { extractTextFromPdf, isPdfUrl } from './pdf-converter'
 import { needsImageConversion, convertImageToJpeg } from './image-converter'
 
 // Initialize OpenAI client (lazy initialization for scripts)
@@ -757,14 +757,7 @@ export async function extractReceiptDataWithVision(
   pdfUrl: string
 ): Promise<ExtractedReceiptData> {
   try {
-    console.log('[OpenAI Vision Fallback] Converting PDF to PNG for Vision API...')
-
-    // Convert PDF to PNG image (OpenAI Vision API only accepts images, not PDFs)
-    const { convertPdfToImage } = await import('./pdf-converter')
-    const pngDataUrl = await convertPdfToImage(pdfUrl)
-
-    console.log('[OpenAI Vision Fallback] PDF successfully converted to PNG')
-    console.log('[OpenAI Vision Fallback] PNG size:', (pngDataUrl.length / 1024).toFixed(2), 'KB')
+    console.log('[OpenAI Vision Fallback] Sending PDF directly to Vision API (native PDF support)...')
 
     // Validate API key
     if (!process.env.OPENAI_API_KEY) {
@@ -773,9 +766,10 @@ export async function extractReceiptDataWithVision(
 
     const client = getOpenAIClient()
 
-    console.log('[OpenAI Vision Fallback] Calling Vision API with PNG image...')
+    console.log('[OpenAI Vision Fallback] Calling Vision API with PDF URL:', pdfUrl)
 
-    // Call Vision API with the PNG image
+    // Call Vision API with the PDF URL directly
+    // GPT-4o supports PDF files natively as of March 2025
     const response = await client.chat.completions.create({
       model: 'gpt-4o',
       messages: [
@@ -789,7 +783,7 @@ export async function extractReceiptDataWithVision(
             {
               type: 'image_url',
               image_url: {
-                url: pngDataUrl, // Send PNG as base64 data URL
+                url: pdfUrl, // Send PDF URL directly (GPT-4o supports PDFs)
                 detail: 'high', // Use high detail for better accuracy
               },
             },
