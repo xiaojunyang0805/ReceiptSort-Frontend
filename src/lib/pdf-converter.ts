@@ -51,13 +51,15 @@ export async function convertPdfToImage(pdfUrl: string): Promise<string> {
     await page.render(renderContext).promise
     console.log('[PDF Converter] Page rendered to canvas')
 
-    // Convert canvas to base64 PNG
-    const dataUrl = canvas.toDataURL('image/png')
+    // Convert canvas to base64 JPEG with compression (much smaller than PNG)
+    // Quality 0.92 provides good balance between size and quality
+    const dataUrl = canvas.toDataURL('image/jpeg', 0.92)
     const sizeKB = (dataUrl.length / 1024).toFixed(2)
     const sizeMB = (dataUrl.length / 1024 / 1024).toFixed(2)
     console.log('[PDF Converter] PDF converted successfully')
     console.log('[PDF Converter] Canvas size:', viewport.width, 'x', viewport.height, 'pixels')
     console.log('[PDF Converter] Base64 data URL size:', sizeKB, 'KB (', sizeMB, 'MB )')
+    console.log('[PDF Converter] Format: JPEG (quality: 0.92)')
 
     return dataUrl
   } catch (error) {

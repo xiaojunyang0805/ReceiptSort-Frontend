@@ -460,30 +460,38 @@ export async function extractReceiptData(
     console.log('[OpenAI] Sending image to Vision API, size:', processedImageUrl.length, 'bytes')
 
     // Call OpenAI API with Vision (works for all image types including converted PDFs)
-    const response = await client.chat.completions.create({
-      model: 'gpt-4o',
-      messages: [
-        {
-          role: 'user',
-          content: [
-            {
-              type: 'text',
-              text: RECEIPT_EXTRACTION_PROMPT,
-            },
-            {
-              type: 'image_url',
-              image_url: {
-                url: processedImageUrl,
-                detail: 'high', // Use high detail for better accuracy
+    let response
+    try {
+      response = await client.chat.completions.create({
+        model: 'gpt-4o',
+        messages: [
+          {
+            role: 'user',
+            content: [
+              {
+                type: 'text',
+                text: RECEIPT_EXTRACTION_PROMPT,
               },
-            },
-          ],
-        },
-      ],
-      max_tokens: 2000, // Increased for PDFs and complex receipts with line items
-      temperature: 0.1, // Low temperature for consistent output
-      response_format: { type: 'json_object' }, // Force JSON response
-    })
+              {
+                type: 'image_url',
+                image_url: {
+                  url: processedImageUrl,
+                  detail: 'high', // Use high detail for better accuracy
+                },
+              },
+            ],
+          },
+        ],
+        max_tokens: 2000, // Increased for PDFs and complex receipts with line items
+        temperature: 0.1, // Low temperature for consistent output
+        response_format: { type: 'json_object' }, // Force JSON response
+      })
+    } catch (apiError) {
+      console.error('[OpenAI] API call failed:', apiError)
+      throw new Error(
+        `OpenAI Vision API error: ${apiError instanceof Error ? apiError.message : 'Unknown API error'}`
+      )
+    }
 
     // Extract the response text
     const content = response.choices[0]?.message?.content
