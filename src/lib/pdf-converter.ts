@@ -33,8 +33,9 @@ export async function convertPdfToImage(pdfUrl: string): Promise<string> {
     // Get first page
     const page = await pdfDocument.getPage(1)
 
-    // Get viewport at 2x scale for better quality
-    const viewport = page.getViewport({ scale: 2.0 })
+    // Get viewport at 1.5x scale (balance between quality and base64 size)
+    // Note: 2x scale can create very large base64 images that may hit Vision API limits
+    const viewport = page.getViewport({ scale: 1.5 })
 
     // Create canvas
     const canvas = createCanvas(viewport.width, viewport.height)
@@ -52,7 +53,11 @@ export async function convertPdfToImage(pdfUrl: string): Promise<string> {
 
     // Convert canvas to base64 PNG
     const dataUrl = canvas.toDataURL('image/png')
-    console.log('[PDF Converter] PDF converted successfully, data URL length:', dataUrl.length)
+    const sizeKB = (dataUrl.length / 1024).toFixed(2)
+    const sizeMB = (dataUrl.length / 1024 / 1024).toFixed(2)
+    console.log('[PDF Converter] PDF converted successfully')
+    console.log('[PDF Converter] Canvas size:', viewport.width, 'x', viewport.height, 'pixels')
+    console.log('[PDF Converter] Base64 data URL size:', sizeKB, 'KB (', sizeMB, 'MB )')
 
     return dataUrl
   } catch (error) {
