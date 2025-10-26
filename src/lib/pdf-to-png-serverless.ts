@@ -87,13 +87,12 @@ export async function convertPdfToPng(pdfUrl: string): Promise<string> {
     const arrayBuffer = await response.arrayBuffer()
     console.log('[PDF to PNG] PDF fetched, size:', arrayBuffer.byteLength, 'bytes')
 
-    // Load PDF document
+    // Load PDF document (worker is disabled via GlobalWorkerOptions.workerSrc = '')
     const loadingTask = pdfjsLib.getDocument({
       data: arrayBuffer,
       useSystemFonts: false, // Don't use system fonts - causes issues in serverless
       useWorkerFetch: false, // Disable worker fetch
       isEvalSupported: false, // Disable eval for security
-      disableWorker: true, // CRITICAL: Disable worker completely in serverless
       standardFontDataUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.379/standard_fonts/',
       cMapUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.379/cmaps/',
       cMapPacked: true, // Use compressed CMaps for Chinese fonts (Adobe-GB1)
