@@ -36,11 +36,16 @@ export async function POST(
       return NextResponse.json({ error: 'Receipt not found' }, { status: 404 })
     }
 
-    // 3. Verify receipt can be retried (must be failed or low confidence)
-    if (receipt.processing_status !== 'failed' &&
-        (receipt.processing_status === 'completed' && (receipt.confidence_score ?? 1) >= 0.7)) {
+    // 3. Verify receipt can be retried (pending, failed, or low confidence)
+    // Allow: pending (stuck during upload), failed, or completed with low confidence
+    const canRetry =
+      receipt.processing_status === 'pending' ||
+      receipt.processing_status === 'failed' ||
+      (receipt.processing_status === 'completed' && (receipt.confidence_score ?? 1) < 0.7)
+
+    if (!canRetry) {
       return NextResponse.json(
-        { error: 'Only failed receipts or low confidence receipts can be retried' },
+        { error: 'Only pending, failed, or low confidence receipts can be retried' },
         { status: 400 }
       )
     }

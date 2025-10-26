@@ -23,6 +23,7 @@ import {
   CreditCard,
   Download,
   History,
+  RefreshCw,
 } from 'lucide-react'
 import { formatDistanceToNow } from 'date-fns'
 import { toast } from 'sonner'
@@ -72,6 +73,7 @@ export default function ReceiptList() {
   const [exportHistoryOpen, setExportHistoryOpen] = useState(false)
   const [filters, setFilters] = useState<ReceiptFiltersState>(INITIAL_FILTERS)
   const [appliedFilters, setAppliedFilters] = useState<ReceiptFiltersState>(INITIAL_FILTERS)
+  const [retrying, setRetrying] = useState(false)
   const supabase = createClient()
 
   useEffect(() => {
@@ -179,14 +181,15 @@ export default function ReceiptList() {
   })
 
   // Checkbox handlers
-  const completedReceipts = filteredReceipts.filter(r => r.processing_status === 'completed')
-  const allCompletedSelected = completedReceipts.length > 0 && completedReceipts.every(r => selectedIds.has(r.id))
+  // Allow selection of completed, pending, and failed receipts (not processing)
+  const selectableReceipts = filteredReceipts.filter(r => r.processing_status !== 'processing')
+  const allSelectableSelected = selectableReceipts.length > 0 && selectableReceipts.every(r => selectedIds.has(r.id))
 
   const handleSelectAll = () => {
-    if (allCompletedSelected) {
+    if (allSelectableSelected) {
       setSelectedIds(new Set())
     } else {
-      setSelectedIds(new Set(completedReceipts.map(r => r.id)))
+      setSelectedIds(new Set(selectableReceipts.map(r => r.id)))
     }
   }
 
@@ -212,6 +215,51 @@ export default function ReceiptList() {
     setFilters(INITIAL_FILTERS)
     setAppliedFilters(INITIAL_FILTERS)
     setLoading(true)
+  }
+
+  // Retry handler for pending/failed receipts
+  const handleRetrySelected = async () => {
+    if (selectedCount === 0) return
+
+    setRetrying(true)
+    try {
+      const selectedReceipts = filteredReceipts.filter(r => selectedIds.has(r.id))
+      const retryableReceipts = selectedReceipts.filter(
+        r => r.processing_status === 'pending' || r.processing_status === 'failed'
+      )
+
+      if (retryableReceipts.length === 0) {
+        toast.error('No pending or failed receipts selected')
+        return
+      }
+
+      // Retry each receipt
+      const results = await Promise.allSettled(
+        retryableReceipts.map(receipt =>
+          fetch(`/api/receipts/${receipt.id}/retry`, { method: 'POST' })
+            .then(res => res.json())
+        )
+      )
+
+      const successful = results.filter(r => r.status === 'fulfilled').length
+      const failed = results.filter(r => r.status === 'rejected').length
+
+      if (successful > 0) {
+        toast.success(`Processing started for ${successful} receipt${successful === 1 ? '' : 's'}`)
+      }
+      if (failed > 0) {
+        toast.error(`Failed to process ${failed} receipt${failed === 1 ? '' : 's'}`)
+      }
+
+      // Clear selection and refresh
+      setSelectedIds(new Set())
+      fetchReceipts()
+    } catch (error) {
+      console.error('Error retrying receipts:', error)
+      toast.error('Failed to process receipts')
+    } finally {
+      setRetrying(false)
+    }
   }
 
 
@@ -289,7 +337,7 @@ export default function ReceiptList() {
         <CardContent className="w-full max-w-full">
           <div className="flex flex-col gap-2 w-full max-w-full">
             {/* Primary Actions */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-4 gap-2">
               <Button
                 variant="outline"
                 disabled={selectedCount === 0}
@@ -304,6 +352,19 @@ export default function ReceiptList() {
               >
                 <Eye className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                 {selectedCount > 0 ? t('viewDetailsCount', { count: selectedCount }) : t('viewDetails')}
+              </Button>
+              <Button
+                variant="outline"
+                disabled={selectedCount === 0 || retrying}
+                onClick={handleRetrySelected}
+                className="w-full text-xs sm:text-sm py-2"
+              >
+                {retrying ? (
+                  <Loader2 className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4 animate-spin" />
+                ) : (
+                  <RefreshCw className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+                )}
+                Process
               </Button>
               <Button
                 variant="outline"
@@ -390,9 +451,9 @@ export default function ReceiptList() {
             <TableRow>
               <TableHead className="w-12">
                 <Checkbox
-                  checked={allCompletedSelected}
+                  checked={allSelectableSelected}
                   onCheckedChange={handleSelectAll}
-                  disabled={completedReceipts.length === 0}
+                  disabled={selectableReceipts.length === 0}
                 />
               </TableHead>
               <TableHead>{tTable('columns.fileName')}</TableHead>
@@ -411,7 +472,7 @@ export default function ReceiptList() {
                   <Checkbox
                     checked={selectedIds.has(receipt.id)}
                     onCheckedChange={() => handleSelectReceipt(receipt.id)}
-                    disabled={receipt.processing_status !== 'completed'}
+                    disabled={receipt.processing_status === 'processing'}
                   />
                 </TableCell>
                 <TableCell className="font-medium max-w-xs truncate">
@@ -457,7 +518,7 @@ export default function ReceiptList() {
                 <Checkbox
                   checked={selectedIds.has(receipt.id)}
                   onCheckedChange={() => handleSelectReceipt(receipt.id)}
-                  disabled={receipt.processing_status !== 'completed'}
+                  disabled={receipt.processing_status === 'processing'}
                   className="flex-shrink-0 mt-1"
                 />
                 <div className="w-16 h-16 rounded bg-muted flex items-center justify-center flex-shrink-0">
