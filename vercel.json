@@ -1,6 +1,6 @@
 {
   "functions": {
-    "api/receipts/**": {
+    "app/api/receipts/**/route.ts": {
       "maxDuration": 60
     }
   },
