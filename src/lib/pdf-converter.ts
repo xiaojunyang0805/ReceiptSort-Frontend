@@ -55,8 +55,9 @@ async function convertPdfToImageWithPdfJs(pdfUrl: string): Promise<string> {
     console.log('[PDF Converter] PDF fetched, size:', arrayBuffer.byteLength, 'bytes')
 
     // Render first page as image using unpdf's built-in function
-    // Scale 3x for better quality
+    // Must provide canvasImport for Node.js environment
     const dataUrl = await renderPageAsImage(arrayBuffer, 1, {
+      canvasImport: () => import('canvas'), // Required for Node.js/serverless
       scale: 3.0,
       toDataURL: true, // Return as data URL instead of ArrayBuffer
     })
