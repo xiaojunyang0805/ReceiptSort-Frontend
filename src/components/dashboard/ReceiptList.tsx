@@ -26,7 +26,9 @@ import {
   RefreshCw,
 } from 'lucide-react'
 import { formatDistanceToNow } from 'date-fns'
+import { zhCN, enUS } from 'date-fns/locale'
 import { toast } from 'sonner'
+import { useLocale } from 'next-intl'
 import { Link } from '@/lib/navigation'
 import { Checkbox } from '@/components/ui/checkbox'
 import ExportDialog from './ExportDialog'
@@ -52,12 +54,13 @@ interface Receipt {
   updated_at: string
 }
 
-const statusConfig = {
-  pending: { label: 'Pending', color: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300' },
-  processing: { label: 'Processing', color: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400' },
-  completed: { label: 'Completed', color: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' },
-  failed: { label: 'Failed', color: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400' },
-}
+// Status config - labels will be translated dynamically
+const getStatusConfig = () => ({
+  pending: { labelKey: 'status.pending', color: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300' },
+  processing: { labelKey: 'status.processing', color: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400' },
+  completed: { labelKey: 'status.completed', color: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' },
+  failed: { labelKey: 'status.failed', color: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400' },
+})
 
 // Currency symbol mapping
 const currencySymbols: Record<string, string> = {
@@ -95,7 +98,14 @@ export default function ReceiptList() {
   const t = useTranslations('dashboard.receiptsPage')
   const tTable = useTranslations('dashboard.receiptsTable')
   const tCategories = useTranslations('receiptDetails.categories')
+  const locale = useLocale()
   const [receipts, setReceipts] = useState<Receipt[]>([])
+
+  // Get status config with translations
+  const statusConfig = getStatusConfig()
+
+  // Get date-fns locale
+  const dateLocale = locale === 'zh' ? zhCN : enUS
 
   // Translate category name
   const translateCategory = (category?: string): string => {
@@ -487,6 +497,7 @@ export default function ReceiptList() {
           className="px-3 py-2 border rounded-md bg-background"
         >
           <option value="all">{t('allStatus')}</option>
+          <option value="pending">{tTable('status.pending')}</option>
           <option value="completed">{tTable('status.completed')}</option>
           <option value="failed">{tTable('status.failed')}</option>
         </select>
@@ -543,12 +554,13 @@ export default function ReceiptList() {
                     {receipt.processing_status === 'processing' && (
                       <Loader2 className="mr-1 h-3 w-3 animate-spin" />
                     )}
-                    {statusConfig[receipt.processing_status].label}
+                    {tTable(statusConfig[receipt.processing_status].labelKey as any)}
                   </Badge>
                 </TableCell>
                 <TableCell className="text-sm text-muted-foreground">
                   {formatDistanceToNow(new Date(receipt.created_at), {
                     addSuffix: true,
+                    locale: dateLocale,
                   })}
                 </TableCell>
               </TableRow>
@@ -590,11 +602,12 @@ export default function ReceiptList() {
                         {receipt.processing_status === 'processing' && (
                           <Loader2 className="mr-1 h-3 w-3 animate-spin" />
                         )}
-                        {statusConfig[receipt.processing_status].label}
+                        {tTable(statusConfig[receipt.processing_status].labelKey as any)}
                       </Badge>
                       <span className="text-xs text-muted-foreground">
                         {formatDistanceToNow(new Date(receipt.created_at), {
                           addSuffix: true,
+                          locale: dateLocale,
                         })}
                       </span>
                     </div>
