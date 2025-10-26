@@ -230,20 +230,8 @@ export default function ReceiptUpload() {
         prev.map((f) => (f.id === id ? { ...f, status: 'processing', progress: 70, receiptId: receiptData.id } : f))
       )
 
-      // Mark upload as complete - user can process manually from receipts page
-      setUploadFiles((prev) =>
-        prev.map((f) => (f.id === id ? { ...f, status: 'success', progress: 100 } : f))
-      )
-
-      toast.success(`${file.name} uploaded successfully! Go to Receipts page to process it.`)
-
-      // Skip auto-processing for PDFs to avoid timeout issues
-      // User can process manually from the receipts page using the "Process" button
-      const isPDF = file.name.toLowerCase().endsWith('.pdf')
-      if (!isPDF) {
-        // Only auto-process images (faster, less likely to timeout)
-        await processReceipt(id, receiptData.id)
-      }
+      // Auto-process all files (images and PDFs)
+      await processReceipt(id, receiptData.id)
     } catch (error) {
       console.error('Upload error:', error)
       const errorMessage = error instanceof Error ? error.message : 'Upload failed'
