@@ -52,7 +52,7 @@ export async function convertPdfToPngWithChromium(pdfUrl: string): Promise<strin
     })
 
     // Wait a bit for PDF to fully render
-    await page.waitForTimeout(1000)
+    await new Promise(resolve => setTimeout(resolve, 1000))
 
     console.log('[Puppeteer PDF Converter] PDF loaded, taking screenshot...')
 
