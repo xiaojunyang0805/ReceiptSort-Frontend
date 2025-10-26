@@ -1,13 +1,10 @@
 import pdf from 'pdf-parse-fork'
-import { createCanvas } from 'canvas'
-import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf.mjs'
-
-// Set worker source for server-side rendering
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'pdfjs-dist/legacy/build/pdf.worker.min.mjs'
 
 /**
  * Convert PDF to high-resolution PNG image for Vision API
  * Used as fallback when text extraction yields low confidence
+ *
+ * NOTE: Uses dynamic imports to avoid DOMMatrix errors in Vercel serverless
  *
  * @param pdfUrl - URL to the PDF file (must be accessible)
  * @returns Base64 data URL of the first page as PNG image
@@ -16,6 +13,13 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = 'pdfjs-dist/legacy/build/pdf.worker.min
 export async function convertPdfToImage(pdfUrl: string): Promise<string> {
   try {
     console.log('[PDF Converter] Starting PDF to image conversion for URL:', pdfUrl)
+
+    // Dynamic imports to avoid DOMMatrix issues in Vercel
+    const { createCanvas } = await import('canvas')
+    const pdfjsLib = await import('pdfjs-dist/legacy/build/pdf.mjs')
+
+    // Set worker source for server-side rendering
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'pdfjs-dist/legacy/build/pdf.worker.min.mjs'
 
     // Fetch the PDF
     const response = await fetch(pdfUrl)
