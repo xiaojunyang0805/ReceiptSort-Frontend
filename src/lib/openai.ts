@@ -462,7 +462,7 @@ export async function extractReceiptData(
                   type: 'image_url',
                   image_url: {
                     url: processedImageUrl,
-                    detail: 'auto', // Changed from 'high' to 'auto' for faster processing (4x speed improvement)
+                    detail: 'high', // High detail required for accurate Chinese text recognition
                   },
                 },
               ],

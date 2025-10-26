@@ -11,7 +11,6 @@ import { Card } from '@/components/ui/card'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
-import { convertPdfToImage, isPdfFile } from '@/lib/client-pdf-converter'
 
 interface UploadFile {
   file: File
@@ -41,7 +40,7 @@ export default function ReceiptUpload() {
   const [isUploading, setIsUploading] = useState(false)
   const supabase = createClient()
 
-  const onDrop = useCallback(async (acceptedFiles: File[], rejectedFiles: FileRejection[]) => {
+  const onDrop = useCallback((acceptedFiles: File[], rejectedFiles: FileRejection[]) => {
     // Handle rejected files
     rejectedFiles.forEach((rejection) => {
       const { file, errors } = rejection
@@ -56,30 +55,8 @@ export default function ReceiptUpload() {
       })
     })
 
-    // Process accepted files - convert PDFs to images
-    const processedFiles: File[] = []
-
-    for (const file of acceptedFiles) {
-      if (isPdfFile(file)) {
-        try {
-          toast.info(`Converting ${file.name} to image...`)
-          const imageFile = await convertPdfToImage(file)
-          processedFiles.push(imageFile)
-          toast.success(`${file.name} converted to ${imageFile.name}`)
-        } catch (error) {
-          console.error('PDF conversion error:', error)
-          const errorMsg = error instanceof Error ? error.message : 'Conversion failed'
-          toast.error(`Failed to convert ${file.name}: ${errorMsg}`)
-          // Skip this file
-        }
-      } else {
-        // Regular image file - add as-is
-        processedFiles.push(file)
-      }
-    }
-
-    // Add processed files to upload queue
-    const newFiles: UploadFile[] = processedFiles.map((file) => ({
+    // Add accepted files to upload queue directly (NO automatic PDF conversion)
+    const newFiles: UploadFile[] = acceptedFiles.map((file) => ({
       file,
       id: `${Date.now()}-${Math.random().toString(36).substring(7)}`,
       preview: file.type.startsWith('image/') ? URL.createObjectURL(file) : undefined,
