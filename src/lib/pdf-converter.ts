@@ -30,43 +30,70 @@ export async function convertPdfToImage(pdfUrl: string): Promise<string> {
     const arrayBuffer = await response.arrayBuffer()
     console.log('[PDF Converter] PDF fetched, size:', arrayBuffer.byteLength, 'bytes')
 
-    // Load PDF document
-    const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer })
+    // Load PDF document with font fallback enabled
+    const loadingTask = pdfjsLib.getDocument({
+      data: arrayBuffer,
+      // Enable standard font fallback for problematic fonts
+      useSystemFonts: false,
+      standardFontDataUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.379/standard_fonts/',
+    })
     const pdfDocument = await loadingTask.promise
     console.log('[PDF Converter] PDF loaded, pages:', pdfDocument.numPages)
+
+    // Log font information to help debug font encoding issues
+    const page1 = await pdfDocument.getPage(1)
+    const fonts = await page1.getOperatorList().then((ops: any) => {
+      const fontNames = new Set<string>()
+      for (let i = 0; i < ops.fnArray.length; i++) {
+        if (ops.fnArray[i] === pdfjsLib.OPS.setFont) {
+          fontNames.add(ops.argsArray[i][0])
+        }
+      }
+      return Array.from(fontNames)
+    })
+    console.log('[PDF Converter] Fonts used in PDF:', fonts)
 
     // Get first page
     const page = await pdfDocument.getPage(1)
 
-    // Get viewport at 2x scale for clear text recognition (especially Chinese characters)
-    let viewport = page.getViewport({ scale: 2.0 })
+    // Get viewport at 3x scale for EXTRA clear text recognition (especially problematic Chinese fonts)
+    // Increased from 2x to 3x to better handle font encoding issues
+    let viewport = page.getViewport({ scale: 3.0 })
 
     // Limit maximum dimensions to prevent excessive file size
-    const MAX_DIMENSION = 2400 // pixels
+    const MAX_DIMENSION = 3600 // pixels (increased from 2400 to support 3x scale)
     const maxScale = Math.min(
       MAX_DIMENSION / viewport.width,
       MAX_DIMENSION / viewport.height,
-      2.0
+      3.0
     )
 
-    if (maxScale < 2.0) {
+    if (maxScale < 3.0) {
       console.log('[PDF Converter] Scaling down large PDF:', viewport.width, 'x', viewport.height, '-> scale', maxScale)
       viewport = page.getViewport({ scale: maxScale })
     }
 
-    // Create canvas
+    console.log('[PDF Converter] Rendering with scale:', maxScale, 'viewport:', viewport.width, 'x', viewport.height)
+
+    // Create canvas with white background (important for proper contrast)
     const canvas = createCanvas(viewport.width, viewport.height)
     const context = canvas.getContext('2d')
 
-    // Render PDF page to canvas
+    // Fill with white background
+    context.fillStyle = 'white'
+    context.fillRect(0, 0, viewport.width, viewport.height)
+
+    // Render PDF page to canvas with enhanced settings
     const renderContext = {
       canvasContext: context as any,
       viewport: viewport,
       canvas: canvas as any,
+      // Enable text rendering even if fonts are problematic
+      intent: 'display',
     }
 
     await page.render(renderContext).promise
-    console.log('[PDF Converter] Page rendered to canvas')
+    console.log('[PDF Converter] Page rendered to canvas with enhanced settings')
 
     // Convert canvas to base64 PNG (lossless - critical for text accuracy)
     const dataUrl = canvas.toDataURL('image/png')
