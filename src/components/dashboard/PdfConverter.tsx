@@ -38,10 +38,15 @@ export function PdfConverter({ pdfFile, onConversionComplete, onCancel }: PdfCon
 
       // Load PDF document with CMap support for Chinese characters
       console.log('[PDF Converter] Loading PDF with CMap support...')
+
+      // Use absolute URL to bypass i18n routing (next-intl adds /zh/ /en/ prefixes)
+      const cMapUrl = `${window.location.origin}/pdfjs/cmaps/`
+      console.log('[PDF Converter] CMap URL:', cMapUrl)
+
       const loadingTask = pdfjsLib.getDocument({
         data: arrayBuffer,
-        // Use local CMaps from public directory (no CORS issues)
-        cMapUrl: '/pdfjs/cmaps/',
+        // Use absolute URL to avoid i18n path prefix issues
+        cMapUrl: cMapUrl,
         cMapPacked: true,
         // Enable all text rendering modes
         disableFontFace: false,
