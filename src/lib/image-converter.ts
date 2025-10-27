@@ -4,7 +4,6 @@
  */
 
 import sharp from 'sharp'
-import { Jimp } from 'jimp'
 
 /**
  * Check if a URL/filename indicates an unsupported image format that needs conversion
@@ -42,47 +41,36 @@ export async function convertImageToJpeg(imageUrl: string): Promise<string> {
     const imageBuffer = Buffer.from(await response.arrayBuffer())
     console.log(`[Image Converter] Fetched image: ${imageBuffer.length} bytes`)
 
-    // Try Sharp first (faster and better quality), fallback to Jimp for problematic formats
+    // Use Sharp for image conversion (handles BMP, TIFF, and other formats)
     let jpegBuffer: Buffer
 
-    try {
-      // Get image metadata for debugging
-      const metadata = await sharp(imageBuffer).metadata()
-      console.log(
-        `[Image Converter] Sharp metadata: ${metadata.format}, ${metadata.width}x${metadata.height}, ` +
-          `channels: ${metadata.channels}, space: ${metadata.space}`
-      )
+    // Get image metadata for debugging
+    const metadata = await sharp(imageBuffer).metadata()
+    console.log(
+      `[Image Converter] Sharp metadata: ${metadata.format}, ${metadata.width}x${metadata.height}, ` +
+        `channels: ${metadata.channels}, space: ${metadata.space}`
+    )
 
-      // Try Sharp conversion with enhanced handling
-      try {
-        jpegBuffer = await sharp(imageBuffer)
-          .toColorspace('srgb')
-          .normalise()
-          .jpeg({
-            quality: 95,
-            mozjpeg: true,
-          })
-          .toBuffer()
-        console.log(`[Image Converter] Sharp conversion successful: ${jpegBuffer.length} bytes`)
-      } catch {
-        console.log('[Image Converter] Sharp colorspace conversion failed, trying simple Sharp...')
-        jpegBuffer = await sharp(imageBuffer)
-          .jpeg({
-            quality: 95,
-            mozjpeg: true,
-          })
-          .toBuffer()
-        console.log(`[Image Converter] Simple Sharp conversion successful: ${jpegBuffer.length} bytes`)
-      }
+    // Try Sharp conversion with enhanced handling
+    try {
+      jpegBuffer = await sharp(imageBuffer)
+        .toColorspace('srgb')
+        .normalise()
+        .jpeg({
+          quality: 95,
+          mozjpeg: true,
+        })
+        .toBuffer()
+      console.log(`[Image Converter] Sharp conversion successful: ${jpegBuffer.length} bytes`)
     } catch {
-      // Sharp cannot handle this format (e.g., 1-bit BMP), use Jimp as fallback
-      console.log(
-        '[Image Converter] Sharp failed entirely, using Jimp as fallback for this format...'
-      )
-      const jimpImage = await Jimp.read(imageBuffer)
-      console.log(`[Image Converter] Jimp loaded image: ${jimpImage.width}x${jimpImage.height}`)
-      jpegBuffer = await jimpImage.getBuffer('image/jpeg')
-      console.log(`[Image Converter] Jimp conversion successful: ${jpegBuffer.length} bytes`)
+      console.log('[Image Converter] Sharp colorspace conversion failed, trying simple Sharp...')
+      jpegBuffer = await sharp(imageBuffer)
+        .jpeg({
+          quality: 95,
+          mozjpeg: true,
+        })
+        .toBuffer()
+      console.log(`[Image Converter] Simple Sharp conversion successful: ${jpegBuffer.length} bytes`)
     }
 
     // Convert to base64 data URL
