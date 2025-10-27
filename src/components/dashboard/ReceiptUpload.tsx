@@ -110,6 +110,157 @@ export default function ReceiptUpload() {
     })
   }
 
+  /**
+   * Automatically convert PDF to PNG and re-upload for better extraction
+   * This reuses the proven manual conversion workflow automatically
+   */
+  const automaticPdfConversion = async (uploadFileId: string, pdfFile: File, receiptId: string) => {
+    try {
+      console.log('[ReceiptUpload] Starting automatic PDF-to-PNG conversion...')
+
+      // Dynamically import pdfjs (same as manual PdfConverter component)
+      const pdfjsLib = await import('pdfjs-dist')
+      pdfjsLib.GlobalWorkerOptions.workerSrc =
+        `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`
+
+      // Update progress: Loading PDF
+      setUploadFiles((prev) =>
+        prev.map((f) => (f.id === uploadFileId ? { ...f, progress: 80 } : f))
+      )
+
+      // Read PDF file
+      const arrayBuffer = await pdfFile.arrayBuffer()
+
+      // Load PDF with CMap support for Chinese characters
+      const cMapUrl = `${window.location.origin}/pdfjs/cmaps/`
+      const loadingTask = pdfjsLib.getDocument({
+        data: arrayBuffer,
+        cMapUrl: cMapUrl,
+        cMapPacked: true,
+        disableFontFace: false,
+        useSystemFonts: false,
+      })
+
+      const pdf = await loadingTask.promise
+      console.log('[ReceiptUpload] PDF loaded, converting first page to PNG...')
+
+      // Get first page
+      const page = await pdf.getPage(1)
+
+      // Update progress: Rendering
+      setUploadFiles((prev) =>
+        prev.map((f) => (f.id === uploadFileId ? { ...f, progress: 85 } : f))
+      )
+
+      // High resolution for Chinese characters (3x scale = 216 DPI)
+      const scale = 3.0
+      const viewport = page.getViewport({ scale })
+
+      // Create canvas
+      const canvas = document.createElement('canvas')
+      const context = canvas.getContext('2d')
+      if (!context) throw new Error('Failed to get canvas context')
+
+      canvas.width = viewport.width
+      canvas.height = viewport.height
+
+      // White background
+      context.fillStyle = 'white'
+      context.fillRect(0, 0, canvas.width, canvas.height)
+
+      // Render PDF to canvas
+      await page.render({
+        canvasContext: context,
+        viewport: viewport,
+        intent: 'display',
+        enableWebGL: false,
+        renderInteractiveForms: false,
+      }).promise
+
+      console.log('[ReceiptUpload] PDF rendered to canvas, converting to PNG blob...')
+
+      // Update progress: Converting
+      setUploadFiles((prev) =>
+        prev.map((f) => (f.id === uploadFileId ? { ...f, progress: 90 } : f))
+      )
+
+      // Convert canvas to PNG blob
+      const blob = await new Promise<Blob>((resolve, reject) => {
+        canvas.toBlob(
+          (b) => {
+            if (b) resolve(b)
+            else reject(new Error('Canvas to Blob conversion failed'))
+          },
+          'image/png',
+          1.0
+        )
+      })
+
+      // Create PNG file
+      const pngFileName = pdfFile.name.replace(/\.pdf$/i, '.png')
+      const pngFile = new File([blob], pngFileName, { type: 'image/png' })
+
+      console.log('[ReceiptUpload] PNG created, uploading to server...')
+
+      // Update progress: Uploading PNG
+      setUploadFiles((prev) =>
+        prev.map((f) => (f.id === uploadFileId ? { ...f, progress: 95 } : f))
+      )
+
+      // Upload converted PNG to server (same as manual workflow)
+      const formData = new FormData()
+      formData.append('file', pngFile)
+
+      const uploadResponse = await fetch(`/api/receipts/${receiptId}/upload-converted`, {
+        method: 'POST',
+        body: formData,
+      })
+
+      if (!uploadResponse.ok) {
+        throw new Error('Failed to upload converted PNG')
+      }
+
+      const uploadResult = await uploadResponse.json()
+      console.log('[ReceiptUpload] Automatic conversion successful:', uploadResult)
+
+      // Update to success
+      setUploadFiles((prev) =>
+        prev.map((f) =>
+          f.id === uploadFileId
+            ? {
+                ...f,
+                status: 'success',
+                progress: 100,
+                confidenceScore: uploadResult.confidence_score || 0.95,
+              }
+            : f
+        )
+      )
+
+      const fileName = pdfFile.name
+      toast.success(`${fileName} automatically converted and processed successfully!`)
+    } catch (error) {
+      console.error('[ReceiptUpload] Automatic conversion failed:', error)
+      const errorMessage = error instanceof Error ? error.message : 'Automatic conversion failed'
+
+      // Update to error
+      setUploadFiles((prev) =>
+        prev.map((f) =>
+          f.id === uploadFileId
+            ? {
+                ...f,
+                status: 'error',
+                error: errorMessage,
+                progress: 0,
+              }
+            : f
+        )
+      )
+
+      toast.error(`Automatic conversion failed: ${errorMessage}`)
+    }
+  }
+
   const processReceipt = async (uploadFileId: string, receiptId: string) => {
     try {
       // Call the process API endpoint
@@ -151,26 +302,30 @@ export default function ReceiptUpload() {
 
       console.log(`[ReceiptUpload] Final confidence: ${(finalConfidence * 100).toFixed(0)}%, isPDF: ${isPDF}`)
 
-      // If automatic conversion was enabled, PDF, and still low confidence → offer manual conversion
+      // If automatic conversion enabled, PDF, and low confidence → automatically convert PDF to PNG
       if (isAutoPdfConversionEnabled() && isPDF && finalConfidence < confidenceThreshold) {
-        console.log('[ReceiptUpload] Automatic retry completed but confidence still low. Flagging for manual conversion.')
+        console.log('[ReceiptUpload] Low confidence detected. Automatically converting PDF to PNG...')
+
+        // Update status to converting
         setUploadFiles((prev) =>
           prev.map((f) =>
             f.id === uploadFileId
               ? {
                   ...f,
-                  status: 'success',
-                  progress: 100,
+                  status: 'converting',
+                  progress: 75,
                   confidenceScore: finalConfidence,
                   receiptId: result.receipt_id,
-                  needsManualConversion: true, // Flag for manual dialog
                 }
               : f
           )
         )
 
-        const fileName = uploadFiles.find(f => f.id === uploadFileId)?.file.name || 'Receipt'
-        toast.warning(`${fileName} processed with low confidence (${(finalConfidence * 100).toFixed(0)}%). Manual conversion recommended.`)
+        // Trigger automatic PDF-to-PNG conversion
+        const uploadFileToConvert = uploadFiles.find(f => f.id === uploadFileId)
+        if (uploadFileToConvert) {
+          await automaticPdfConversion(uploadFileId, uploadFileToConvert.file, result.receipt_id)
+        }
       } else {
         // Normal success
         setUploadFiles((prev) =>
