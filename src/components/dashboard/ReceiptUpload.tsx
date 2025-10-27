@@ -172,9 +172,6 @@ export default function ReceiptUpload() {
       await page.render({
         canvasContext: context,
         viewport: viewport,
-        intent: 'display',
-        enableWebGL: false,
-        renderInteractiveForms: false,
       }).promise
 
       console.log('[ReceiptUpload] PDF rendered to canvas, converting to PNG blob...')
