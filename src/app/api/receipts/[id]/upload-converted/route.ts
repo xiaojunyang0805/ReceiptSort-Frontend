@@ -86,7 +86,7 @@ export async function POST(
 
     console.log(`[Upload Converted] Uploading to storage: ${filePath}`)
 
-    const { data: uploadData, error: uploadError } = await supabase.storage
+    const { error: uploadError } = await supabase.storage
       .from('receipts')
       .upload(filePath, file, {
         cacheControl: '3600',
