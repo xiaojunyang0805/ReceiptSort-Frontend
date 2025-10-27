@@ -432,7 +432,14 @@ export default function ReceiptList() {
               </Button>
               <Button
                 variant="outline"
-                disabled={selectedCount === 0 || retrying}
+                disabled={
+                  selectedCount === 0 ||
+                  retrying ||
+                  Array.from(selectedIds).every(id => {
+                    const receipt = filteredReceipts.find(r => r.id === id)
+                    return receipt?.processing_status === 'completed'
+                  })
+                }
                 onClick={handleRetrySelected}
                 className="w-full text-xs sm:text-sm py-2"
               >
