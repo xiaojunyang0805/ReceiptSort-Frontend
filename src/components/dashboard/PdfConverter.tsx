@@ -37,22 +37,34 @@ export function PdfConverter({ pdfFile, onConversionComplete, onCancel }: PdfCon
       setProgress(30)
 
       // Load PDF document with CMap support for Chinese characters
+      console.log('[PDF Converter] Loading PDF with CMap support...')
       const loadingTask = pdfjsLib.getDocument({
         data: arrayBuffer,
-        cMapUrl: `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/cmaps/`,
+        // Use local CMaps from public directory (no CORS issues)
+        cMapUrl: '/pdfjs/cmaps/',
         cMapPacked: true,
-        standardFontDataUrl: `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/standard_fonts/`,
+        // Enable all text rendering modes
+        disableFontFace: false,
+        useSystemFonts: false,
       })
+
+      loadingTask.onProgress = (progress: any) => {
+        console.log(`[PDF Converter] Loading progress: ${progress.loaded} / ${progress.total}`)
+      }
+
       const pdf = await loadingTask.promise
+      console.log('[PDF Converter] PDF loaded successfully, pages:', pdf.numPages)
       setProgress(50)
 
       // Get first page
       const page = await pdf.getPage(1)
+      console.log('[PDF Converter] Page loaded, rendering...')
       setProgress(60)
 
       // Set up canvas with high resolution for Chinese characters
       const scale = 3.0 // 3x for better Chinese character OCR
       const viewport = page.getViewport({ scale })
+      console.log('[PDF Converter] Viewport size:', viewport.width, 'x', viewport.height)
 
       const canvas = document.createElement('canvas')
       const context = canvas.getContext('2d')
@@ -67,14 +79,23 @@ export function PdfConverter({ pdfFile, onConversionComplete, onCancel }: PdfCon
       // Fill with white background first (important for transparent PDFs)
       context.fillStyle = 'white'
       context.fillRect(0, 0, canvas.width, canvas.height)
+      console.log('[PDF Converter] Canvas prepared with white background')
 
       setProgress(70)
 
-      // Render PDF page to canvas
-      await page.render({
+      // Render PDF page to canvas with text rendering enabled
+      console.log('[PDF Converter] Starting render...')
+      const renderContext = {
         canvasContext: context,
         viewport: viewport,
-      }).promise
+        // Force text rendering
+        intent: 'display',
+        enableWebGL: false,
+        renderInteractiveForms: false,
+      }
+
+      await page.render(renderContext).promise
+      console.log('[PDF Converter] Render complete!')
       setProgress(90)
 
       // Convert canvas to PNG blob
