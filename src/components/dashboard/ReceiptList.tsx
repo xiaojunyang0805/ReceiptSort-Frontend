@@ -413,8 +413,8 @@ export default function ReceiptList() {
         </CardHeader>
         <CardContent className="w-full max-w-full">
           <div className="flex flex-col gap-2 w-full max-w-full">
-            {/* Primary Actions */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            {/* Primary Actions Row - 4 buttons */}
+            <div className="grid grid-cols-1 sm:grid-cols-4 gap-2">
               <Button
                 variant="outline"
                 disabled={selectedCount === 0}
@@ -452,10 +452,6 @@ export default function ReceiptList() {
                 <Download className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                 {selectedCount > 0 ? t('exportCount', { count: selectedCount }) : t('exportButton')}
               </Button>
-            </div>
-
-            {/* Secondary Actions Row */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <Button
                 variant="outline"
                 onClick={() => setExportHistoryOpen(true)}
@@ -466,34 +462,36 @@ export default function ReceiptList() {
               </Button>
             </div>
 
-            {/* Destructive Action - Separated */}
-            <Button
-              variant="outline"
-              disabled={selectedCount === 0}
-              onClick={async () => {
-                if (!confirm(t('deleteConfirm', { count: selectedCount }))) return
+            {/* Destructive Action Row - 1 button */}
+            <div className="grid grid-cols-1 gap-2">
+              <Button
+                variant="outline"
+                disabled={selectedCount === 0}
+                onClick={async () => {
+                  if (!confirm(t('deleteConfirm', { count: selectedCount }))) return
 
-                try {
-                  const { error } = await supabase
-                    .from('receipts')
-                    .delete()
-                    .in('id', Array.from(selectedIds))
+                  try {
+                    const { error } = await supabase
+                      .from('receipts')
+                      .delete()
+                      .in('id', Array.from(selectedIds))
 
-                  if (error) throw error
+                    if (error) throw error
 
-                  toast.success(t('deleteSuccess', { count: selectedCount }))
-                  setSelectedIds(new Set())
-                  fetchReceipts()
-                } catch (error) {
-                  console.error('Error deleting receipts:', error)
-                  toast.error(t('deleteFailed'))
-                }
-              }}
-              className="w-full text-xs sm:text-sm py-2 text-destructive hover:text-destructive hover:bg-destructive/10"
-            >
-              <Trash2 className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
-              {selectedCount > 0 ? t('deleteCount', { count: selectedCount }) : t('deleteButton')}
-            </Button>
+                    toast.success(t('deleteSuccess', { count: selectedCount }))
+                    setSelectedIds(new Set())
+                    fetchReceipts()
+                  } catch (error) {
+                    console.error('Error deleting receipts:', error)
+                    toast.error(t('deleteFailed'))
+                  }
+                }}
+                className="w-full text-xs sm:text-sm py-2 text-destructive hover:text-destructive hover:bg-destructive/10"
+              >
+                <Trash2 className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+                {selectedCount > 0 ? t('deleteCount', { count: selectedCount }) : t('deleteButton')}
+              </Button>
+            </div>
           </div>
         </CardContent>
       </Card>
