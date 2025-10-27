@@ -2566,12 +2566,35 @@ Chinese invoices have a standard two-column table layout:
 **Problem:** Chinese invoice extracting buyer name as merchant
 **Solution:** Enhanced OpenAI prompt with detailed instructions and validation
 **Deployment:** ✅ Complete
-**Testing:** Pending user verification with reprocessed receipt
+**Testing:** ✅ Verified by user - working correctly
 
-**Next Step:** User needs to reprocess the receipt or upload new Chinese invoices to verify the fix works correctly.
+### User Verification Results
+
+**User reprocessed the problematic receipt and confirmed:**
+
+✅ **Merchant Name:** Now correctly showing "昆明盛智易联科技有限公司吉安分公司" (seller/transport provider)
+✅ **Total Amount:** ¥18.39
+✅ **Date:** 2025/10/14
+✅ **Category:** 交通 (Transportation)
+✅ **Invoice Number:** 25367000000135592123
+
+**User Feedback:**
+> "Nice, it works now."
+
+### Final Result
+
+The enhanced OpenAI prompt successfully fixed the merchant extraction issue for Chinese electronic invoices (电子发票). The system now correctly:
+- Identifies the two-column layout (购买方 | 销售方)
+- Extracts merchant name from RIGHT column (销售方信息)
+- Ignores buyer name from LEFT column (购买方信息)
+- Works for all types of Chinese invoices including transportation receipts
+
+This fix is now live in production and will apply to:
+- All newly uploaded Chinese invoices
+- All reprocessed existing invoices
 
 ---
 
-**Last Updated:** 2025-10-27 (Session 6 - Enhanced Chinese Invoice Merchant Extraction)
-**Status:** 🔄 Deployed, awaiting user verification
+**Last Updated:** 2025-10-27 (Session 6 - Chinese Invoice Merchant Extraction COMPLETE)
+**Status:** ✅ Fixed and verified by user
 **Production URL:** https://receiptsort.seenano.nl
