@@ -36,8 +36,13 @@ export function PdfConverter({ pdfFile, onConversionComplete, onCancel }: PdfCon
       const arrayBuffer = await pdfFile.arrayBuffer()
       setProgress(30)
 
-      // Load PDF document
-      const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer })
+      // Load PDF document with CMap support for Chinese characters
+      const loadingTask = pdfjsLib.getDocument({
+        data: arrayBuffer,
+        cMapUrl: `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/cmaps/`,
+        cMapPacked: true,
+        standardFontDataUrl: `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/standard_fonts/`,
+      })
       const pdf = await loadingTask.promise
       setProgress(50)
 
@@ -45,8 +50,8 @@ export function PdfConverter({ pdfFile, onConversionComplete, onCancel }: PdfCon
       const page = await pdf.getPage(1)
       setProgress(60)
 
-      // Set up canvas with high resolution
-      const scale = 2.0 // 2x for better OCR
+      // Set up canvas with high resolution for Chinese characters
+      const scale = 3.0 // 3x for better Chinese character OCR
       const viewport = page.getViewport({ scale })
 
       const canvas = document.createElement('canvas')
@@ -58,6 +63,11 @@ export function PdfConverter({ pdfFile, onConversionComplete, onCancel }: PdfCon
 
       canvas.width = viewport.width
       canvas.height = viewport.height
+
+      // Fill with white background first (important for transparent PDFs)
+      context.fillStyle = 'white'
+      context.fillRect(0, 0, canvas.width, canvas.height)
+
       setProgress(70)
 
       // Render PDF page to canvas
