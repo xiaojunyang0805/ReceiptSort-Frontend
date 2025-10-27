@@ -174,17 +174,17 @@ export async function generateExcel(receipts: Receipt[], locale: string = 'en'):
   totalRow.getCell('merchant').value = 'TOTAL'
   totalRow.getCell('merchant').font = { bold: true, size: 12 }
 
-  // SUM formula for amounts
+  // SUM formula for amounts (Column D)
   totalRow.getCell('amount').value = {
-    formula: `SUM(B2:B${totalRowNum - 1})`,
+    formula: `SUM(D2:D${totalRowNum - 1})`,
     result: completedReceipts.reduce((sum, r) => sum + (r.total_amount || 0), 0),
   }
   totalRow.getCell('amount').numFmt = '$#,##0.00'
   totalRow.getCell('amount').font = { bold: true }
 
-  // SUM formula for taxes
+  // SUM formula for taxes (Column I)
   totalRow.getCell('tax').value = {
-    formula: `SUM(F2:F${totalRowNum - 1})`,
+    formula: `SUM(I2:I${totalRowNum - 1})`,
     result: completedReceipts.reduce((sum, r) => sum + (r.tax_amount || 0), 0),
   }
   totalRow.getCell('tax').numFmt = '$#,##0.00'
