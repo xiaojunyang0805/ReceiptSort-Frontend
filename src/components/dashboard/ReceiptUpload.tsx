@@ -247,7 +247,7 @@ export default function ReceiptUpload() {
       )
 
       const fileName = pdfFile.name
-      toast.success(`${fileName} automatically converted and processed successfully!`)
+      toast.success(`${fileName} processed successfully!`)
     } catch (error) {
       console.error('[ReceiptUpload] Automatic conversion failed:', error)
       const errorMessage = error instanceof Error ? error.message : 'Automatic conversion failed'

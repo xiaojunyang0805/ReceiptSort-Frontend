@@ -414,7 +414,7 @@ export default function ReceiptList() {
         <CardContent className="w-full max-w-full">
           <div className="flex flex-col gap-2 w-full max-w-full">
             {/* Primary Actions */}
-            <div className="grid grid-cols-1 sm:grid-cols-4 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
               <Button
                 variant="outline"
                 disabled={selectedCount === 0}
@@ -442,32 +442,6 @@ export default function ReceiptList() {
                   <RefreshCw className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                 )}
                 {selectedCount > 0 ? t('processCount', { count: selectedCount }) : t('processButton')}
-              </Button>
-              <Button
-                variant="outline"
-                disabled={selectedCount !== 1 || (() => {
-                  const selected = filteredReceipts.find(r => selectedIds.has(r.id))
-                  if (!selected) return true
-                  const isPdf = selected.file_name.toLowerCase().endsWith('.pdf')
-                  const isCompleted = selected.processing_status === 'completed'
-                  const isLowConfidence = (selected.confidence_score ?? 1) < 0.7
-                  return !isPdf || !isCompleted || !isLowConfidence
-                })()}
-                onClick={() => {
-                  const selected = filteredReceipts.find(r => selectedIds.has(r.id))
-                  if (selected) {
-                    setConversionDialog({
-                      receiptId: selected.id,
-                      pdfFileUrl: selected.file_url,
-                      pdfFileName: selected.file_name,
-                      currentConfidence: selected.confidence_score ?? 0,
-                    })
-                  }
-                }}
-                className="w-full text-xs sm:text-sm py-2"
-              >
-                <ImageIcon className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
-                Convert to PNG
               </Button>
               <Button
                 variant="outline"
