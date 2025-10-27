@@ -713,8 +713,8 @@ export default function ExportDialog({
             <div className="flex items-center gap-2 mb-3">
               <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />
               <div>
-                <h3 className="text-sm font-semibold text-blue-900">{t('aiPoweredTemplateExport')}</h3>
-                <p className="text-xs text-blue-600 hidden sm:block">{t('uploadYourExcelTemplate')}</p>
+                <h3 className="text-sm font-semibold text-blue-900">{t('aiTemplateExport')}</h3>
+                <p className="text-xs text-blue-600 hidden sm:block">{t('aiTemplateDescription')}</p>
               </div>
             </div>
 
@@ -753,7 +753,7 @@ export default function ExportDialog({
                       <>
                         <Upload className="h-10 w-10 text-blue-400" />
                         <p className="text-sm font-medium text-gray-700">{t('clickToUpload')}</p>
-                        <p className="text-xs text-gray-500">{t('fileFormat')}</p>
+                        <p className="text-xs text-gray-500">{t('fileTypeHint')}</p>
                       </>
                     )}
                   </div>
@@ -820,13 +820,13 @@ export default function ExportDialog({
                         </Button>
                       </div>
                       <p className="text-xs text-gray-500">
-                        {t('clickSaveToStore')}
+                        {t('saveTemplateHint')}
                       </p>
                     </div>
 
                     {/* Info message */}
                     <div className="bg-blue-50 border border-blue-200 rounded p-2 text-xs text-blue-700">
-                      {t('infoSaveTemplate')}
+                      {t('saveTemplateInfo')}
                     </div>
                   </div>
                 )}
@@ -840,7 +840,7 @@ export default function ExportDialog({
                   <div className="flex flex-col items-center justify-center h-32 border-2 border-dashed border-gray-300 rounded-lg bg-gray-50">
                     <FileSpreadsheet className="h-8 w-8 text-gray-400 mb-2" />
                     <p className="text-sm text-gray-500">{t('noSavedTemplates')}</p>
-                    <p className="text-xs text-gray-400">{t('uploadAndSaveToReuse')}</p>
+                    <p className="text-xs text-gray-400">{t('noSavedTemplatesHint')}</p>
                   </div>
                 ) : (
                   <div className="space-y-2 max-h-96 overflow-y-auto">
@@ -912,7 +912,7 @@ export default function ExportDialog({
               • {t('receiptsSelected', { count: selectedIds.length, plural: selectedIds.length === 1 ? '' : 's' })}
             </div>
             <div className="text-xs text-muted-foreground">
-              • {t('onlyCompletedReceipts')}
+              • {t('onlyCompletedIncluded')}
             </div>
           </div>
 
