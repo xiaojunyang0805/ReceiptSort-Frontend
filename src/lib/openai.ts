@@ -94,17 +94,33 @@ CRITICAL RULES:
    - Extract from the TOP of receipt (first 1-3 lines)
 
    - **CRITICAL FOR CHINESE ELECTRONIC INVOICES (电子发票):**
-     * Chinese invoices have TWO sections side by side:
-       - LEFT side: "购买方" or "购买方信息" (BUYER) - **DO NOT USE THIS**
-       - RIGHT side: "销售方" or "销售方信息" (SELLER/MERCHANT) - **USE THIS**
-     * ALWAYS extract from the SELLER section (销售方), NEVER from buyer section (购买方)
-     * Look for these keywords to identify the SELLER section:
-       - "销售方:" or "销售方信息"
-       - "名称:" following "销售方" heading
-       - Company name will be after the "名称:" label
-     * Visual layout: Seller section typically on RIGHT side of invoice
-     * Example: If you see "购买方: 上海丁上智能科技有限公司" and "销售方: 杭州优行科技有限公司"
-       → Extract "杭州优行科技有限公司" (the seller), NOT "上海丁上智能科技有限公司" (the buyer)
+     * Chinese invoices ALWAYS have TWO sections displayed side by side in a table layout:
+       - LEFT column: "购买方" or "购买方信息" (BUYER/PURCHASER) - **NEVER USE THIS**
+       - RIGHT column: "销售方" or "销售方信息" (SELLER/MERCHANT) - **ALWAYS USE THIS**
+
+     * STEP-BY-STEP EXTRACTION PROCESS:
+       1. First, identify the table with "购买方信息" and "销售方信息" headers
+       2. Locate the RIGHT column labeled "销售方" or "销售方信息"
+       3. Find "名称:" field within the RIGHT column
+       4. Extract the company name that appears after "名称:" in the RIGHT column
+       5. VERIFY: The extracted name should NOT match the buyer name in the LEFT column
+
+     * VISUAL LAYOUT RECOGNITION:
+       - Invoice is divided into LEFT and RIGHT sections
+       - LEFT section contains BUYER info (customer who purchased)
+       - RIGHT section contains SELLER info (merchant/service provider)
+       - You MUST extract from the RIGHT section only
+
+     * CONCRETE EXAMPLE FROM REAL INVOICE:
+       LEFT column shows: "购买方信息 - 名称: 上海汀上智能科技有限公司"
+       RIGHT column shows: "销售方信息 - 名称: 昆明盛智易联科技有限公司吉安分公司"
+       → CORRECT: Extract "昆明盛智易联科技有限公司吉安分公司" (from RIGHT column - seller)
+       → WRONG: "上海汀上智能科技有限公司" (this is from LEFT column - buyer, not merchant)
+
+     * VALIDATION CHECK:
+       - If extracted name contains characters like "购买方" or appears in LEFT column, you made an error
+       - The merchant is ALWAYS the service/product provider, NOT the customer
+       - For transportation invoices (旅客运输服务), extract the transport company name, not the passenger's company
 
    - If only generic name visible (like "SUPERMARKET"), still use it - don't leave null
    - Lower confidence to 0.7 if merchant name is generic/placeholder
