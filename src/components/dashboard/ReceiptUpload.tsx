@@ -143,13 +143,53 @@ export default function ReceiptUpload() {
         throw new Error('Server returned invalid response. The file may be too complex to process automatically.')
       }
 
-      // Update status to success
-      setUploadFiles((prev) =>
-        prev.map((f) => (f.id === uploadFileId ? { ...f, status: 'success', progress: 100 } : f))
-      )
+      // Check if automatic retry happened but confidence is still low
+      const { isAutoPdfConversionEnabled, getAutoConversionThreshold } = await import('@/lib/features')
+      const confidenceThreshold = getAutoConversionThreshold()
+      const finalConfidence = result.confidence_score ?? 1.0
+      const isPDF = result.file_name?.toLowerCase().endsWith('.pdf') ?? false
 
-      const fileName = uploadFiles.find(f => f.id === uploadFileId)?.file.name || 'Receipt'
-      toast.success(`${fileName} processed successfully!`)
+      console.log(`[ReceiptUpload] Final confidence: ${(finalConfidence * 100).toFixed(0)}%, isPDF: ${isPDF}`)
+
+      // If automatic conversion was enabled, PDF, and still low confidence → offer manual conversion
+      if (isAutoPdfConversionEnabled() && isPDF && finalConfidence < confidenceThreshold) {
+        console.log('[ReceiptUpload] Automatic retry completed but confidence still low. Flagging for manual conversion.')
+        setUploadFiles((prev) =>
+          prev.map((f) =>
+            f.id === uploadFileId
+              ? {
+                  ...f,
+                  status: 'success',
+                  progress: 100,
+                  confidenceScore: finalConfidence,
+                  receiptId: result.receipt_id,
+                  needsManualConversion: true, // Flag for manual dialog
+                }
+              : f
+          )
+        )
+
+        const fileName = uploadFiles.find(f => f.id === uploadFileId)?.file.name || 'Receipt'
+        toast.warning(`${fileName} processed with low confidence (${(finalConfidence * 100).toFixed(0)}%). Manual conversion recommended.`)
+      } else {
+        // Normal success
+        setUploadFiles((prev) =>
+          prev.map((f) =>
+            f.id === uploadFileId
+              ? {
+                  ...f,
+                  status: 'success',
+                  progress: 100,
+                  confidenceScore: finalConfidence,
+                  receiptId: result.receipt_id,
+                }
+              : f
+          )
+        )
+
+        const fileName = uploadFiles.find(f => f.id === uploadFileId)?.file.name || 'Receipt'
+        toast.success(`${fileName} processed successfully!`)
+      }
     } catch (error) {
       console.error('Processing error:', error)
       const errorMessage = error instanceof Error ? error.message : 'Processing failed'

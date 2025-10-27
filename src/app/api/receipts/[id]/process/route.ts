@@ -143,12 +143,15 @@ export async function POST(
       }
 
       // 7.6. **AUTOMATIC RETRY WITH VISION API** if confidence is low and file is PDF
-      const CONFIDENCE_THRESHOLD = 0.70 // 70% threshold
+      // Import feature flags
+      const { isAutoPdfConversionEnabled, getAutoConversionThreshold } = await import('@/lib/features')
+      const isAutoConversionEnabled = isAutoPdfConversionEnabled()
+      const CONFIDENCE_THRESHOLD = getAutoConversionThreshold()
       const isPDF = receipt.file_name.toLowerCase().endsWith('.pdf')
 
-      console.log(`[Process Receipt] Retry decision: finalConfidence=${(finalConfidence * 100).toFixed(0)}%, isPDF=${isPDF}, fileName=${receipt.file_name}`)
+      console.log(`[Process Receipt] Retry decision: finalConfidence=${(finalConfidence * 100).toFixed(0)}%, isPDF=${isPDF}, fileName=${receipt.file_name}, autoConversionEnabled=${isAutoConversionEnabled}`)
 
-      if (finalConfidence < CONFIDENCE_THRESHOLD && isPDF) {
+      if (isAutoConversionEnabled && finalConfidence < CONFIDENCE_THRESHOLD && isPDF) {
         console.log(`[Process Receipt] Low confidence (${(finalConfidence * 100).toFixed(0)}%) detected for PDF. Retrying with Vision API fallback...`)
 
         try {
