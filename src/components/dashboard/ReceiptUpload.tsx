@@ -120,8 +120,12 @@ export default function ReceiptUpload() {
 
       // Dynamically import pdfjs (same as manual PdfConverter component)
       const pdfjsLib = await import('pdfjs-dist')
-      pdfjsLib.GlobalWorkerOptions.workerSrc =
-        `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`
+
+      // Set worker from CDN
+      if (pdfjsLib.GlobalWorkerOptions) {
+        pdfjsLib.GlobalWorkerOptions.workerSrc =
+          `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`
+      }
 
       // Update progress: Loading PDF
       setUploadFiles((prev) =>
@@ -133,7 +137,12 @@ export default function ReceiptUpload() {
 
       // Load PDF with CMap support for Chinese characters
       const cMapUrl = `${window.location.origin}/pdfjs/cmaps/`
-      const loadingTask = pdfjsLib.getDocument({
+      const getDocument = pdfjsLib.getDocument || (pdfjsLib as any).default?.getDocument
+      if (!getDocument) {
+        throw new Error('Failed to load PDF.js getDocument function')
+      }
+
+      const loadingTask = getDocument({
         data: arrayBuffer,
         cMapUrl: cMapUrl,
         cMapPacked: true,
