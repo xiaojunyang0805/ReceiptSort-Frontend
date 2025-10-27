@@ -17,9 +17,11 @@ interface UploadFile {
   id: string
   preview?: string
   progress: number
-  status: 'pending' | 'uploading' | 'processing' | 'success' | 'error'
+  status: 'pending' | 'uploading' | 'processing' | 'converting' | 'success' | 'error'
   error?: string
   receiptId?: string // Store receipt ID for processing
+  confidenceScore?: number // Track confidence for automatic conversion decision
+  needsManualConversion?: boolean // Flag for showing manual conversion dialog
 }
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024 // 10MB

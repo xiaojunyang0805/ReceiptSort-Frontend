@@ -313,6 +313,11 @@ export async function POST(
         data: extractedData,
         credits_remaining: (profile.credits ?? 0) - 1,
         processing_time_ms: processingTime,
+        // Additional fields for automatic PDF conversion
+        confidence_score: finalConfidence,
+        file_name: receipt.file_name,
+        file_type: receipt.file_type,
+        receipt_id: params.id,
       })
     } catch (processingError) {
       // Handle processing failure
