@@ -314,6 +314,14 @@ CRITICAL RULES:
       - If no itemized table found, return empty array: "line_items": []
       - Maximum 50 line items per receipt (if more, extract first 50)
 
+      - **CRITICAL: READ COMPLETE NUMBERS - DO NOT TRUNCATE DIGITS**
+        * For line_total amounts, read the ENTIRE number including ALL leading digits
+        * Pay special attention to multi-digit amounts (4+ digits)
+        * Common OCR error: "8592.14" misread as "592.14" (missing leading "8")
+        * If a line_total seems too small compared to quantity × unit_price, re-check for missing leading digits
+        * Example: If qty=1302.48, unit_price=6.59, line_total should be ~8580 (NOT ~580)
+        * Always cross-verify: Does sum of all line_total values equal the subtotal/total?
+
 11. CHINESE ELECTRONIC INVOICES (电子发票) 🆕
 
    A. RECOGNITION:
