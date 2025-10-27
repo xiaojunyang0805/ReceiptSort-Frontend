@@ -3251,3 +3251,167 @@ totalRow.getCell('amount').value = {
 **Last Updated:** 2025-10-27 (Session 8 - Excel Export Formulas COMPLETE)
 **Status:** ✅ Fixed and deployed
 **Production URL:** https://receiptsort-4dqdbguf5-xiaojunyang0805s-projects.vercel.app
+
+---
+
+# Session 9: Export Dialog Translation Key Fixes
+
+**Date:** 2025-10-27  
+**Issue:** Translation keys displaying as raw text (e.g., `exportDialog.aiPoweredTemplateExport`) instead of Chinese translations  
+**Root Cause:** Mismatch between translation keys used in component and keys defined in JSON files
+
+## Problem Description
+
+After implementing Export Dialog translations, user reported that AI Template Export section was showing translation key names instead of actual Chinese text. Screenshot showed keys like:
+- `exportDialog.aiPoweredTemplateExport`
+- `exportDialog.uploadYourExcelTemplate`
+- `exportDialog.fileFormat`
+- `exportDialog.uploadAndSaveToReuse`
+- `exportDialog.onlyCompletedReceipts`
+
+## Root Cause Analysis
+
+Investigation revealed that I had used incorrect translation keys in `ExportDialog.tsx` that didn't match the keys defined in `messages/en.json` and `messages/zh.json`.
+
+**Key Mismatches Found:**
+| Component Key (Wrong) | JSON Key (Correct) |
+|----------------------|-------------------|
+| `aiPoweredTemplateExport` | `aiTemplateExport` |
+| `uploadYourExcelTemplate` | `aiTemplateDescription` |
+| `fileFormat` | `fileTypeHint` |
+| `uploadAndSaveToReuse` | `noSavedTemplatesHint` |
+| `onlyCompletedReceipts` | `onlyCompletedIncluded` |
+| `clickSaveToStore` | `saveTemplateHint` |
+| `infoSaveTemplate` | `saveTemplateInfo` |
+
+## Solution Implementation
+
+### Files Modified
+**`src/components/dashboard/ExportDialog.tsx`** - Fixed 7 translation key mismatches
+
+**Changes Made:**
+
+1. **AI Section Headers (Lines 716-717)**
+```typescript
+// Before
+<h3>{t('aiPoweredTemplateExport')}</h3>
+<p>{t('uploadYourExcelTemplate')}</p>
+
+// After  
+<h3>{t('aiTemplateExport')}</h3>
+<p>{t('aiTemplateDescription')}</p>
+```
+
+2. **File Format Hint (Line 756)**
+```typescript
+// Before
+<p>{t('fileFormat')}</p>
+
+// After
+<p>{t('fileTypeHint')}</p>
+```
+
+3. **Template Save Hints (Lines 823, 829)**
+```typescript
+// Before
+{t('clickSaveToStore')}
+{t('infoSaveTemplate')}
+
+// After
+{t('saveTemplateHint')}
+{t('saveTemplateInfo')}
+```
+
+4. **Saved Templates Empty State (Line 843)**
+```typescript
+// Before
+<p>{t('uploadAndSaveToReuse')}</p>
+
+// After
+<p>{t('noSavedTemplatesHint')}</p>
+```
+
+5. **Export Summary (Line 915)**
+```typescript
+// Before
+• {t('onlyCompletedReceipts')}
+
+// After
+• {t('onlyCompletedIncluded')}
+```
+
+## Testing & Verification
+
+**Build Verification:**
+```bash
+npm run build
+✓ Compiled successfully
+```
+
+**Translation Keys Verified:**
+- All keys now match definitions in `messages/en.json` (lines 975-1002)
+- All keys now match definitions in `messages/zh.json` (lines 971-998)
+- No compilation errors
+- Only linting warnings (unrelated to translations)
+
+## Deployment
+
+**Commit:** `6c2a4e5`
+```
+Fix Export Dialog translation key mismatches
+
+CRITICAL FIX: Corrected translation keys that were causing text to display
+as 'exportDialog.keyName' instead of translated Chinese text.
+
+Fixed key mismatches:
+- aiPoweredTemplateExport → aiTemplateExport
+- uploadYourExcelTemplate → aiTemplateDescription  
+- fileFormat → fileTypeHint
+- uploadAndSaveToReuse → noSavedTemplatesHint
+- onlyCompletedReceipts → onlyCompletedIncluded
+- clickSaveToStore → saveTemplateHint
+- infoSaveTemplate → saveTemplateInfo
+
+Now all text in AI Template Export section displays correctly in Chinese.
+Build verified successfully.
+```
+
+**Deployed to Production:**
+- URL: https://receiptsort-c9bduf16x-xiaojunyang0805s-projects.vercel.app
+- Status: ✅ Successful
+- Verification: User confirmed "it works now"
+
+## Key Learnings
+
+1. **Translation Key Consistency is Critical**
+   - Component keys must EXACTLY match JSON file keys
+   - Case sensitivity matters
+   - Use JSON files as source of truth
+
+2. **Verification Process**
+   - Always check both `messages/en.json` and `messages/zh.json`
+   - Run build to catch missing/incorrect keys
+   - Test in both languages before deployment
+
+3. **Common Pitfalls**
+   - Using descriptive names that seem logical but don't match JSON
+   - Not verifying keys against existing translation files
+   - Assuming key names without checking
+
+## Impact
+
+✅ **Fixed Issues:**
+- AI Template Export section now displays correct Chinese translations
+- All user-visible text in Export Dialog properly internationalized
+- Consistent translation behavior across entire component
+
+✅ **User Experience:**
+- Chinese language users can now see all text translated
+- No more raw translation key names showing in UI
+- Professional, polished interface in both English and Chinese
+
+---
+
+**Last Updated:** 2025-10-27 (Session 9 - Translation Key Fixes COMPLETE)  
+**Status:** ✅ Fixed and deployed  
+**Production URL:** https://receiptsort-c9bduf16x-xiaojunyang0805s-projects.vercel.app
