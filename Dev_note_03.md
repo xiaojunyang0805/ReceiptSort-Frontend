@@ -2959,3 +2959,295 @@ failed but the processing actually completed in the background.
 **Last Updated:** 2025-10-27 (Session 7 - Stuck Processing Records COMPLETE)
 **Status:** ✅ Fixed and deployed
 **Production URL:** https://receiptsort.seenano.nl
+
+---
+
+## Session 8: Excel Export Formula Bug Fix
+
+**Date:** 2025-10-27
+**Focus:** Correcting SUM formulas in Excel exports to reference correct columns
+**Status:** ✅ COMPLETE and DEPLOYED
+
+### Problem Report
+
+User discovered that exported Excel files had incorrect SUM formulas in the TOTAL row:
+
+**User's Report:**
+> "Now I find the exported xlsx file is problematic, the summed value is not correct at all, it summed the invoice numbers and dates!"
+
+**Evidence:**
+- File: `D:\ReceitpSort\receiptsort\tests\test-receipts\Hou_receipts\receipts-2025-10-27.xlsx`
+- Screenshot showed formula `=SUM(F2:F19)` summing receipt dates instead of amounts
+- Total row displayed nonsensical values
+
+**Expected Behavior:**
+- Amount column (Column D) should have formula `=SUM(D2:D19)`
+- Tax Amount column (Column I) should have formula `=SUM(I2:I19)`
+- Both should show correct monetary totals
+
+### Root Cause Analysis
+
+**File:** `src/lib/excel-generator.ts`
+
+**Column Layout (22 columns):**
+```typescript
+worksheet.columns = [
+  { header: t('documentType'), key: 'docType', width: 14 },        // Column A
+  { header: t('invoiceNumber'), key: 'invoiceNumber', width: 18 }, // Column B
+  { header: t('merchantName'), key: 'merchant', width: 25 },       // Column C
+  { header: t('amount'), key: 'amount', width: 12 },               // Column D ✅
+  { header: t('currency'), key: 'currency', width: 10 },           // Column E
+  { header: t('receiptDate'), key: 'date', width: 12 },            // Column F
+  { header: t('category'), key: 'category', width: 18 },           // Column G
+  { header: t('subtotal'), key: 'subtotal', width: 12 },           // Column H
+  { header: t('taxAmount'), key: 'tax', width: 12 },               // Column I ✅
+  // ... 13 more columns (Phase 2 + Phase 3 fields)
+]
+```
+
+**Bug #1 - Amount Formula (Line 179):**
+```typescript
+// WRONG: Summing Invoice Numbers (Column B)
+totalRow.getCell('amount').value = {
+  formula: `SUM(B2:B${totalRowNum - 1})`,  // ❌ Column B = Invoice Number
+  result: completedReceipts.reduce((sum, r) => sum + (r.total_amount || 0), 0),
+}
+```
+
+**Bug #2 - Tax Formula (Line 187):**
+```typescript
+// WRONG: Summing Receipt Dates (Column F)
+totalRow.getCell('tax').value = {
+  formula: `SUM(F2:F${totalRowNum - 1})`,  // ❌ Column F = Receipt Date
+  result: completedReceipts.reduce((sum, r) => sum + (r.tax_amount || 0), 0),
+}
+```
+
+**Why This Bug Existed:**
+- Hard-coded column letters in formulas
+- Column layout expanded in Phase 1, 2, 3 to include 22 columns
+- Formula column references were never updated to match actual column positions
+- Excel's `SUM()` function silently coerces text/dates to numbers, making the bug less obvious
+
+### Solution
+
+**Fix Applied to `src/lib/excel-generator.ts`:**
+
+```typescript
+// Lines 177-183: Amount Formula - Changed Column B → D
+totalRow.getCell('amount').value = {
+  formula: `SUM(D2:D${totalRowNum - 1})`,  // ✅ Column D = Amount
+  result: completedReceipts.reduce((sum, r) => sum + (r.total_amount || 0), 0),
+}
+totalRow.getCell('amount').numFmt = '$#,##0.00'
+totalRow.getCell('amount').font = { bold: true }
+
+// Lines 185-191: Tax Formula - Changed Column F → I
+totalRow.getCell('tax').value = {
+  formula: `SUM(I2:I${totalRowNum - 1})`,  // ✅ Column I = Tax Amount
+  result: completedReceipts.reduce((sum, r) => sum + (r.tax_amount || 0), 0),
+}
+totalRow.getCell('tax').numFmt = '$#,##0.00'
+totalRow.getCell('tax').font = { bold: true }
+```
+
+**Added Clarifying Comments:**
+```typescript
+// Line 177: Comment added
+// SUM formula for amounts (Column D)
+
+// Line 185: Comment added
+// SUM formula for taxes (Column I)
+```
+
+### Technical Details
+
+**ExcelJS Column Key vs Column Letter:**
+- Column definitions use **keys** (e.g., `key: 'amount'`)
+- Formulas use **Excel column letters** (e.g., `D`, `I`)
+- These are independent systems that must be manually kept in sync
+- Using `getCell('amount')` gets the cell by key, but formula still needs correct letter
+
+**Why Hard-Coded Letters Are Fragile:**
+- Adding/removing columns changes all column positions
+- Column letters must be manually updated in multiple places
+- No compile-time validation that formulas reference correct columns
+
+**Why The `result` Property Still Worked:**
+```typescript
+formula: `SUM(F2:F...)`,  // Wrong Excel formula
+result: completedReceipts.reduce(...)  // Correct JavaScript calculation
+```
+- The `result` property provides a fallback calculated value
+- Excel uses this value initially, but may recalculate using the formula
+- This masked the bug partially but still showed wrong values
+
+### Deployment
+
+**Build:**
+```bash
+npm run build
+```
+✅ Success (acceptable warnings about unused variables)
+
+**Git Commit:**
+```bash
+git add src/lib/excel-generator.ts
+git commit -m "Fix Excel export SUM formulas to reference correct columns
+
+Bug: Total row formulas were summing wrong columns
+- Amount formula used column B (Invoice Number) instead of D (Amount)
+- Tax formula used column F (Receipt Date) instead of I (Tax Amount)
+
+Fix: Updated hard-coded column references
+- Amount: SUM(B2:B...) → SUM(D2:D...)
+- Tax: SUM(F2:F...) → SUM(I2:I...)
+
+Added clarifying comments to document column positions.
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+Co-Authored-By: Claude <noreply@anthropic.com>"
+```
+
+**Vercel Deployment:**
+```bash
+vercel --prod --yes
+```
+✅ Deployed successfully
+
+**Production URL:** https://receiptsort-4dqdbguf5-xiaojunyang0805s-projects.vercel.app
+
+### Verification Steps
+
+**For User to Test:**
+1. Go to Dashboard → Select multiple completed receipts
+2. Click "Export to Excel" button
+3. Open downloaded `receipts-2025-10-27.xlsx` file
+4. Scroll to TOTAL row (last row with data)
+5. Check Amount column (Column D): Should show `=SUM(D2:D[n])`
+6. Check Tax Amount column (Column I): Should show `=SUM(I2:I[n])`
+7. Verify totals match expected monetary sums
+
+**Expected Results:**
+- Amount total: Sum of all receipt amounts
+- Tax total: Sum of all tax amounts
+- No more date/invoice number sums in wrong columns
+
+### Files Changed
+
+**Modified:**
+- `src/lib/excel-generator.ts` (Lines 177-191)
+  - Line 179: Changed `SUM(B2:B...)` → `SUM(D2:D...)`
+  - Line 187: Changed `SUM(F2:F...)` → `SUM(I2:I...)`
+  - Added comments documenting column positions
+
+**Related Files (No Changes):**
+- `src/app/api/export/excel/route.ts` - API endpoint that calls `generateExcel()`
+- Column layout defined in `excel-generator.ts` lines 72-95
+
+### Lessons Learned
+
+**1. Hard-Coded Column References Are Brittle:**
+- Excel column letters change when columns are added/removed
+- Formula references must be manually updated
+- No type safety or compile-time validation
+
+**2. ExcelJS Dual Reference System:**
+- Column definitions use keys: `{ header: 'Amount', key: 'amount' }`
+- Cell access uses keys: `getCell('amount')`
+- Formulas use letters: `SUM(D2:D10)`
+- These three systems must stay manually synchronized
+
+**3. Testing Excel Exports Requires Manual Verification:**
+- `npm run build` doesn't catch formula logic errors
+- Need to actually open exported files in Excel
+- Check both formula text and calculated results
+
+**4. Result Property Masks Formula Bugs:**
+```typescript
+formula: `SUM(B2:B10)`,  // Wrong
+result: 123.45            // Correct from JavaScript calculation
+```
+- Excel may display correct value initially from `result`
+- But formula is still wrong and may cause issues on recalculation
+
+### Future Improvements
+
+**1. Dynamic Column Letter Calculation:**
+Instead of hard-coded letters, calculate them:
+```typescript
+const amountColIndex = worksheet.columns.findIndex(c => c.key === 'amount')
+const amountColLetter = String.fromCharCode(65 + amountColIndex) // A=0, B=1, etc.
+formula: `SUM(${amountColLetter}2:${amountColLetter}${totalRowNum - 1})`
+```
+
+**2. Formula Validation Tests:**
+```typescript
+test('Excel export formulas reference correct columns', async () => {
+  const buffer = await generateExcel(mockReceipts, 'en')
+  const workbook = new ExcelJS.Workbook()
+  await workbook.xlsx.load(buffer)
+
+  const worksheet = workbook.getWorksheet('Receipts')
+  const totalRow = worksheet.lastRow
+
+  expect(totalRow.getCell('amount').formula).toMatch(/^SUM\(D\d+:D\d+\)$/)
+  expect(totalRow.getCell('tax').formula).toMatch(/^SUM\(I\d+:I\d+\)$/)
+})
+```
+
+**3. Document Column Layout:**
+Add constant mapping at top of file:
+```typescript
+const EXCEL_COLUMNS = {
+  DOCUMENT_TYPE: 'A',
+  INVOICE_NUMBER: 'B',
+  MERCHANT_NAME: 'C',
+  AMOUNT: 'D',          // ← Reference this in formulas
+  CURRENCY: 'E',
+  RECEIPT_DATE: 'F',
+  CATEGORY: 'G',
+  SUBTOTAL: 'H',
+  TAX_AMOUNT: 'I',      // ← Reference this in formulas
+  // ...
+} as const
+```
+
+**4. Use ExcelJS Rich Formula Objects:**
+ExcelJS supports cell references:
+```typescript
+totalRow.getCell('amount').value = {
+  formula: worksheet.getCell('D2').address + ':' + worksheet.getCell(`D${totalRowNum-1}`).address
+}
+```
+
+### Summary
+
+**Problem:**
+- Excel export TOTAL row formulas summed wrong columns
+- Amount formula summed Invoice Numbers (Column B instead of D)
+- Tax formula summed Receipt Dates (Column F instead of I)
+
+**Solution:**
+- Updated formula references to correct columns
+- Amount: `SUM(D2:D...)`
+- Tax: `SUM(I2:I...)`
+- Added clarifying comments
+
+**Impact:**
+- ✅ Excel exports now show correct monetary totals
+- ✅ Formulas reference correct data columns
+- ✅ No changes to column layout or data export
+- ✅ Two-line code fix, minimal risk
+
+**Deployment:**
+- ✅ Built successfully
+- ✅ Committed to git
+- ✅ Deployed to production
+- ✅ Ready for user testing
+
+---
+
+**Last Updated:** 2025-10-27 (Session 8 - Excel Export Formulas COMPLETE)
+**Status:** ✅ Fixed and deployed
+**Production URL:** https://receiptsort-4dqdbguf5-xiaojunyang0805s-projects.vercel.app
