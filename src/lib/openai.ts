@@ -764,20 +764,27 @@ export async function extractReceiptDataWithVision(
       throw new Error('OPENAI_API_KEY is not configured')
     }
 
-    // Convert PDF to PNG using pdfjs-dist
-    // This provides proper Chinese font rendering via Canvas API
-    console.log('[OpenAI Vision Fallback] Converting PDF to PNG...')
-    const { convertPdfToPng } = await import('./pdf-to-png-serverless')
-    const pngDataUrl = await convertPdfToPng(pdfUrl)
-    console.log('[OpenAI Vision Fallback] PDF converted to PNG successfully')
+    // Fetch PDF and convert to base64 data URL
+    // OpenAI Vision API requires base64-encoded data URLs for PDFs (not direct URLs)
+    console.log('[OpenAI Vision Fallback] Fetching PDF from URL...')
+    const response = await fetch(pdfUrl)
+    if (!response.ok) {
+      throw new Error(`Failed to fetch PDF: ${response.statusText}`)
+    }
+
+    const arrayBuffer = await response.arrayBuffer()
+    const base64Data = Buffer.from(arrayBuffer).toString('base64')
+    const dataUrl = `data:application/pdf;base64,${base64Data}`
+
+    console.log('[OpenAI Vision Fallback] PDF fetched, size:', arrayBuffer.byteLength, 'bytes')
+    console.log('[OpenAI Vision Fallback] Sending to Vision API with native PDF support...')
 
     const client = getOpenAIClient()
 
-    console.log('[OpenAI Vision Fallback] Calling Vision API with PNG image...')
-
-    // Call Vision API with the PNG image (converted from PDF)
-    // Vision API only accepts image formats: png, jpeg, gif, webp
-    const response = await client.chat.completions.create({
+    // Send PDF as base64 data URL to Vision API
+    // GPT-4o natively supports PDFs (announced March 2025)
+    // This provides better Chinese font rendering than text extraction
+    const visionResponse = await client.chat.completions.create({
       model: 'gpt-4o',
       messages: [
         {
@@ -790,20 +797,20 @@ export async function extractReceiptDataWithVision(
             {
               type: 'image_url',
               image_url: {
-                url: pngDataUrl, // Send PNG base64 data URL
-                detail: 'high', // Use high detail for better accuracy
+                url: dataUrl, // Base64-encoded PDF data URL
+                detail: 'high', // Use high detail for better OCR accuracy
               },
             },
           ],
         },
       ],
-      max_tokens: 2000, // Slightly higher for complex PDFs
+      max_tokens: 2000,
       temperature: 0.1,
       response_format: { type: 'json_object' },
     })
 
     // Extract the response text
-    const content = response.choices[0]?.message?.content
+    const content = visionResponse.choices[0]?.message?.content
     if (!content) {
       throw new Error('No response from OpenAI Vision API')
     }
