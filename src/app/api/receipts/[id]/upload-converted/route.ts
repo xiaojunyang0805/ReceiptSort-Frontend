@@ -130,7 +130,15 @@ export async function POST(
     // 8. Process the PNG with Vision API
     console.log(`[Upload Converted] Processing PNG with Vision API`)
 
-    const extractedData = await extractReceiptDataWithVision(publicUrl)
+    // CRITICAL FIX: OpenAI cannot download from Supabase Storage URLs
+    // We need to convert the file to base64 data URL first
+    const arrayBuffer = await file.arrayBuffer()
+    const base64 = Buffer.from(arrayBuffer).toString('base64')
+    const dataUrl = `data:${file.type};base64,${base64}`
+
+    console.log(`[Upload Converted] Converted PNG to base64 data URL (${base64.length} chars)`)
+
+    const extractedData = await extractReceiptDataWithVision(dataUrl)
 
     console.log(
       `[Upload Converted] Vision API extraction complete. Confidence: ${(extractedData.confidence_score * 100).toFixed(0)}%`
