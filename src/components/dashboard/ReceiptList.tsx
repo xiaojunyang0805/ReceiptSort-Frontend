@@ -24,6 +24,8 @@ import {
   Download,
   History,
   RefreshCw,
+  AlertTriangle,
+  ImageIcon,
 } from 'lucide-react'
 import { formatDistanceToNow } from 'date-fns'
 import { zhCN, enUS } from 'date-fns/locale'
@@ -35,6 +37,7 @@ import ExportDialog from './ExportDialog'
 import ExportHistoryDialog from './ExportHistoryDialog'
 import ReceiptFilters, { ReceiptFiltersState, INITIAL_FILTERS } from './ReceiptFilters'
 import { useTranslations } from 'next-intl'
+import { ConversionDialog } from './ConversionDialog'
 
 interface Receipt {
   id: string
@@ -50,6 +53,7 @@ interface Receipt {
   currency?: string
   receipt_date?: string
   category?: string
+  confidence_score?: number
   created_at: string
   updated_at: string
 }
@@ -132,6 +136,12 @@ export default function ReceiptList() {
   const [filters, setFilters] = useState<ReceiptFiltersState>(INITIAL_FILTERS)
   const [appliedFilters, setAppliedFilters] = useState<ReceiptFiltersState>(INITIAL_FILTERS)
   const [retrying, setRetrying] = useState(false)
+  const [conversionDialog, setConversionDialog] = useState<{
+    receiptId: string
+    pdfFileUrl: string
+    pdfFileName: string
+    currentConfidence: number
+  } | null>(null)
   const supabase = createClient()
 
   useEffect(() => {
@@ -435,6 +445,32 @@ export default function ReceiptList() {
               </Button>
               <Button
                 variant="outline"
+                disabled={selectedCount !== 1 || (() => {
+                  const selected = filteredReceipts.find(r => selectedIds.has(r.id))
+                  if (!selected) return true
+                  const isPdf = selected.file_name.toLowerCase().endsWith('.pdf')
+                  const isCompleted = selected.processing_status === 'completed'
+                  const isLowConfidence = (selected.confidence_score ?? 1) < 0.7
+                  return !isPdf || !isCompleted || !isLowConfidence
+                })()}
+                onClick={() => {
+                  const selected = filteredReceipts.find(r => selectedIds.has(r.id))
+                  if (selected) {
+                    setConversionDialog({
+                      receiptId: selected.id,
+                      pdfFileUrl: selected.file_url,
+                      pdfFileName: selected.file_name,
+                      currentConfidence: selected.confidence_score ?? 0,
+                    })
+                  }
+                }}
+                className="w-full text-xs sm:text-sm py-2"
+              >
+                <ImageIcon className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+                Convert to PNG
+              </Button>
+              <Button
+                variant="outline"
                 disabled={selectedCount === 0}
                 onClick={() => setExportDialogOpen(true)}
                 className="w-full text-xs sm:text-sm py-2"
@@ -442,6 +478,10 @@ export default function ReceiptList() {
                 <Download className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                 {selectedCount > 0 ? t('exportCount', { count: selectedCount }) : t('exportButton')}
               </Button>
+            </div>
+
+            {/* Secondary Actions Row */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <Button
                 variant="outline"
                 onClick={() => setExportHistoryOpen(true)}
@@ -559,12 +599,22 @@ export default function ReceiptList() {
                 </TableCell>
                 <TableCell>{translateCategory(receipt.category)}</TableCell>
                 <TableCell>
-                  <Badge className={statusConfig[receipt.processing_status].color}>
-                    {receipt.processing_status === 'processing' && (
-                      <Loader2 className="mr-1 h-3 w-3 animate-spin" />
-                    )}
-                    {tTable(statusConfig[receipt.processing_status].labelKey as any)}
-                  </Badge>
+                  <div className="flex flex-col gap-1">
+                    <Badge className={statusConfig[receipt.processing_status].color}>
+                      {receipt.processing_status === 'processing' && (
+                        <Loader2 className="mr-1 h-3 w-3 animate-spin" />
+                      )}
+                      {tTable(statusConfig[receipt.processing_status].labelKey as any)}
+                    </Badge>
+                    {receipt.processing_status === 'completed' &&
+                      receipt.file_name.toLowerCase().endsWith('.pdf') &&
+                      (receipt.confidence_score ?? 1) < 0.7 && (
+                        <Badge className="bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400">
+                          <AlertTriangle className="mr-1 h-3 w-3" />
+                          Low Confidence ({((receipt.confidence_score ?? 0) * 100).toFixed(0)}%)
+                        </Badge>
+                      )}
+                  </div>
                 </TableCell>
                 <TableCell className="text-sm text-muted-foreground">
                   {formatDistanceToNow(new Date(receipt.created_at), {
@@ -606,19 +656,29 @@ export default function ReceiptList() {
                         Amount: {formatAmount(receipt.total_amount, receipt.currency)}
                       </p>
                     )}
-                    <div className="flex items-center gap-2 mt-2">
-                      <Badge className={statusConfig[receipt.processing_status].color}>
-                        {receipt.processing_status === 'processing' && (
-                          <Loader2 className="mr-1 h-3 w-3 animate-spin" />
+                    <div className="flex flex-col gap-1 mt-2">
+                      <div className="flex items-center gap-2">
+                        <Badge className={statusConfig[receipt.processing_status].color}>
+                          {receipt.processing_status === 'processing' && (
+                            <Loader2 className="mr-1 h-3 w-3 animate-spin" />
+                          )}
+                          {tTable(statusConfig[receipt.processing_status].labelKey as any)}
+                        </Badge>
+                        <span className="text-xs text-muted-foreground">
+                          {formatDistanceToNow(new Date(receipt.created_at), {
+                            addSuffix: true,
+                            locale: dateLocale,
+                          })}
+                        </span>
+                      </div>
+                      {receipt.processing_status === 'completed' &&
+                        receipt.file_name.toLowerCase().endsWith('.pdf') &&
+                        (receipt.confidence_score ?? 1) < 0.7 && (
+                          <Badge className="bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400 w-fit">
+                            <AlertTriangle className="mr-1 h-3 w-3" />
+                            Low Confidence ({((receipt.confidence_score ?? 0) * 100).toFixed(0)}%)
+                          </Badge>
                         )}
-                        {tTable(statusConfig[receipt.processing_status].labelKey as any)}
-                      </Badge>
-                      <span className="text-xs text-muted-foreground">
-                        {formatDistanceToNow(new Date(receipt.created_at), {
-                          addSuffix: true,
-                          locale: dateLocale,
-                        })}
-                      </span>
                     </div>
                   </div>
                 </div>
@@ -662,6 +722,21 @@ export default function ReceiptList() {
         open={exportHistoryOpen}
         onOpenChange={setExportHistoryOpen}
       />
+
+      {conversionDialog && (
+        <ConversionDialog
+          open={true}
+          onOpenChange={(open) => !open && setConversionDialog(null)}
+          receiptId={conversionDialog.receiptId}
+          pdfFileUrl={conversionDialog.pdfFileUrl}
+          pdfFileName={conversionDialog.pdfFileName}
+          currentConfidence={conversionDialog.currentConfidence}
+          onSuccess={() => {
+            setConversionDialog(null)
+            fetchReceipts()
+          }}
+        />
+      )}
     </div>
   )
 }
