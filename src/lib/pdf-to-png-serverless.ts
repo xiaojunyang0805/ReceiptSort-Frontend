@@ -74,9 +74,10 @@ export async function convertPdfToPng(pdfUrl: string): Promise<string> {
     // NOW dynamically import pdfjs-dist AFTER polyfills are ready
     const pdfjsLib = await import('pdfjs-dist/legacy/build/pdf.mjs')
 
-    // Disable worker in serverless environment
-    // Workers don't work in Vercel serverless functions
-    pdfjsLib.GlobalWorkerOptions.workerSrc = ''
+    // Set worker source to data URL to disable worker
+    // This must be set before calling getDocument
+    // Using empty data URL prevents worker initialization
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'data:application/javascript,'
 
     // Fetch the PDF
     const response = await fetch(pdfUrl)
@@ -87,7 +88,8 @@ export async function convertPdfToPng(pdfUrl: string): Promise<string> {
     const arrayBuffer = await response.arrayBuffer()
     console.log('[PDF to PNG] PDF fetched, size:', arrayBuffer.byteLength, 'bytes')
 
-    // Load PDF document (worker is disabled via GlobalWorkerOptions.workerSrc = '')
+    // Load PDF document
+    // Worker is disabled via GlobalWorkerOptions.workerSrc data URL
     const loadingTask = pdfjsLib.getDocument({
       data: arrayBuffer,
       useSystemFonts: false, // Don't use system fonts - causes issues in serverless
