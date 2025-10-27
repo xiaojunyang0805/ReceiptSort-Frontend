@@ -202,9 +202,12 @@ export default function ReceiptUpload() {
         )
       })
 
-      // Create PNG file
+      // Create PNG file (compatible with all browsers)
       const pngFileName = pdfFile.name.replace(/\.pdf$/i, '.png')
-      const pngFile = new (File as any)([blob], pngFileName, { type: 'image/png' }) as File
+      // Use Blob with File-like properties for better compatibility
+      const pngFile = new Blob([blob], { type: 'image/png' }) as any
+      pngFile.name = pngFileName
+      pngFile.lastModified = Date.now()
 
       console.log('[ReceiptUpload] PNG created, uploading to server...')
 
