@@ -2595,6 +2595,367 @@ This fix is now live in production and will apply to:
 
 ---
 
-**Last Updated:** 2025-10-27 (Session 6 - Chinese Invoice Merchant Extraction COMPLETE)
-**Status:** ✅ Fixed and verified by user
+## Session 7: Allow Deletion of Stuck Processing Records
+
+**Date:** 2025-10-27
+
+### Problem Report
+
+**Issue:** Duplicate receipt entry stuck in "处理中" (processing) status after 504 timeout
+**File:** `1760581218121-4y69el.pdf`
+**Problem:**
+- Upload encountered 504 Gateway Timeout error
+- Database record created but never completed
+- Status stuck in "processing" for 11+ minutes
+- Checkbox disabled, cannot be deleted
+
+**User Request:**
+> "However, we need to kill the prior file that is in endless processing."
+
+### Root Cause Analysis
+
+**Why Records Get Stuck:**
+1. PDF processing takes longer than serverless timeout (60s paid tier)
+2. HTTP response times out with 504 error
+3. Background processing may complete, but record never updates
+4. Database record left in "processing" status permanently
+5. User cannot clean up without database access
+
+**Why Checkboxes Were Disabled:**
+
+**Previous Code (`ReceiptList.tsx`):**
+```typescript
+// Line 253: Filter out processing records from selection
+const selectableReceipts = filteredReceipts.filter(r => r.processing_status !== 'processing')
+
+// Line 562: Checkbox disabled for processing status
+<Checkbox
+  checked={selectedIds.has(receipt.id)}
+  onCheckedChange={() => handleSelectReceipt(receipt.id)}
+  disabled={receipt.processing_status === 'processing'}  // ❌ Cannot select
+/>
+```
+
+**Design Rationale (Original):**
+- Processing records shouldn't be exported/viewed (actively changing)
+- Prevents accidental deletion of in-progress uploads
+- Protects legitimate processing operations
+
+**Problem:**
+- Stuck records are NOT actually processing anymore
+- No way to clean them up from UI
+- Forces user to use database tools or ask developer
+
+### Solution: Allow Selecting Processing Records for Deletion
+
+**File Modified:** `src/components/dashboard/ReceiptList.tsx`
+
+**Changes Made:**
+
+1. **Remove Processing Filter** (Line 253)
+   ```typescript
+   // Before
+   const selectableReceipts = filteredReceipts.filter(r => r.processing_status !== 'processing')
+
+   // After
+   const selectableReceipts = filteredReceipts  // Allow all records
+   ```
+
+2. **Enable Checkboxes for All Records** (Lines 540-562)
+   ```typescript
+   // Desktop table header
+   <Checkbox
+     checked={allSelectableSelected}
+     onCheckedChange={handleSelectAll}
+     disabled={filteredReceipts.length === 0}  // Changed from selectableReceipts
+   />
+
+   // Desktop table row
+   <Checkbox
+     checked={selectedIds.has(receipt.id)}
+     onCheckedChange={() => handleSelectReceipt(receipt.id)}
+     // disabled attribute removed
+   />
+   ```
+
+3. **Enable Mobile Checkboxes** (Line 615-618)
+   ```typescript
+   // Mobile card view
+   <Checkbox
+     checked={selectedIds.has(receipt.id)}
+     onCheckedChange={() => handleSelectReceipt(receipt.id)}
+     // disabled attribute removed
+   />
+   ```
+
+**Why This Is Safe:**
+
+1. ✅ Delete button still requires confirmation dialog
+2. ✅ User explicitly selects records to delete
+3. ✅ Normal processing records complete quickly (< 1 minute)
+4. ✅ Truly stuck records are obvious (10+ minutes, no progress)
+5. ✅ View/Export/Process buttons still work correctly
+6. ✅ User can distinguish stuck vs active processing by time ("11 分钟前" vs "2 秒前")
+
+### Technical Details
+
+**Delete Functionality (Already Exists):**
+
+**File:** `src/components/dashboard/ReceiptList.tsx` (Lines 477-495)
+
+```typescript
+<Button
+  variant="outline"
+  disabled={selectedCount === 0}
+  onClick={async () => {
+    // ✅ Confirmation dialog
+    if (!confirm(t('deleteConfirm', { count: selectedCount }))) return
+
+    try {
+      // ✅ Direct Supabase delete
+      const { error } = await supabase
+        .from('receipts')
+        .delete()
+        .in('id', Array.from(selectedIds))
+
+      if (error) throw error
+
+      toast.success(t('deleteSuccess', { count: selectedCount }))
+      setSelectedIds(new Set())
+      fetchReceipts()
+    } catch (error) {
+      console.error('Error deleting receipts:', error)
+      toast.error(t('deleteFailed'))
+    }
+  }}
+>
+  <Trash2 className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+  {selectedCount > 0 ? t('deleteCount', { count: selectedCount }) : t('deleteButton')}
+</Button>
+```
+
+**How It Works:**
+1. User selects stuck record(s) by clicking checkbox
+2. Clicks "Delete" button
+3. Confirmation dialog appears: "Are you sure you want to delete X receipt(s)?"
+4. User confirms
+5. Direct Supabase query deletes records
+6. Success toast shown
+7. Receipt list refreshes
+
+**Database Impact:**
+- Only deletes from `receipts` table
+- Files remain in Supabase Storage (orphaned)
+- No cascade delete configured
+- Clean, simple operation
+
+### User Experience Flow
+
+**Before Fix:**
+1. User uploads PDF
+2. 504 timeout occurs
+3. Duplicate record stuck in "处理中"
+4. Checkbox grayed out (disabled)
+5. Cannot delete
+6. ❌ User stuck
+
+**After Fix:**
+1. User uploads PDF
+2. 504 timeout occurs
+3. Duplicate record stuck in "处理中"
+4. Checkbox enabled ✅
+5. User clicks checkbox
+6. User clicks Delete button
+7. Confirms deletion
+8. Stuck record removed
+9. ✅ User can continue
+
+### Deployment
+
+**Build Status:** ✅ Successful
+**Deployment:** ✅ Deployed to production via Vercel
+**Commit:** `8ba162f` - "Allow selecting processing receipts for deletion"
+**Production URL:** https://receiptsort-k6yuvrg91-xiaojunyang0805s-projects.vercel.app
+
+**Commit Message:**
+```
+Allow selecting processing receipts for deletion
+
+Problem: Stuck processing records (from 504 timeouts) cannot be deleted
+because checkboxes are disabled for processing status.
+
+Solution:
+- Remove filter that excludes processing records from selection
+- Remove disabled attribute from checkboxes
+- Users can now select and delete stuck processing records
+
+This allows manual cleanup of stuck records without database access.
+The record is likely stuck from a 504 timeout where the HTTP response
+failed but the processing actually completed in the background.
+```
+
+### Testing Results
+
+**Scenario:** Stuck record from 504 timeout
+
+**Before Fix:**
+- ❌ Checkbox disabled (grayed out)
+- ❌ Cannot select stuck record
+- ❌ Cannot use Delete button
+- ❌ Record stuck permanently
+
+**After Fix:**
+- ✅ Checkbox enabled
+- ✅ Can select stuck record
+- ✅ Can use Delete button
+- ✅ Confirmation dialog appears
+- ✅ Record deleted successfully
+- ✅ List refreshes
+
+**Files Modified:**
+1. `src/components/dashboard/ReceiptList.tsx` (3 changes)
+   - Line 253: Remove processing filter
+   - Line 543: Enable select-all checkbox
+   - Line 561: Remove disabled attribute (desktop table)
+   - Line 617: Remove disabled attribute (mobile card)
+
+### Considerations
+
+**Potential Edge Cases:**
+
+1. **User Deletes Legitimately Processing Record:**
+   - ⚠️ Possible if user clicks delete < 1 minute after upload
+   - 🛡️ Confirmation dialog provides safety
+   - 🛡️ Processing records complete quickly (usually < 10s)
+   - 🛡️ Timestamp shown ("2 秒前" vs "11 分钟前")
+
+2. **Orphaned Files in Storage:**
+   - ⚠️ Deleting receipt doesn't delete file from Supabase Storage
+   - 📝 Could implement cleanup cron job in future
+   - 💡 Low priority - storage is cheap
+
+3. **Multiple Users Processing Same PDF:**
+   - ⚠️ Theoretical race condition
+   - 🛡️ Receipts are user-scoped (user_id filter)
+   - 🛡️ Each user sees only their own records
+
+### Alternative Approaches Considered
+
+**Option 1: Add "Force Delete" Button**
+- ❌ More UI complexity
+- ❌ Need new translations
+- ❌ Extra button clutters interface
+- ❌ User confusion (when to use Delete vs Force Delete?)
+
+**Option 2: Auto-Cleanup of Stuck Records**
+- ❌ Requires cron job or background worker
+- ❌ How to determine "stuck"? (5min? 10min? 60min?)
+- ❌ What if legitimately slow processing?
+- ❌ Over-engineering for rare edge case
+
+**Option 3: Database-Level Cleanup**
+- ❌ Requires database access
+- ❌ Manual SQL queries
+- ❌ Not user-friendly
+- ❌ User can't self-serve
+
+**Option 4: Update Status After Timeout** (Best long-term solution)
+- ✅ Process records should auto-update to "failed" after timeout
+- ✅ Prevents "stuck processing" state entirely
+- ❌ Requires serverless function refactoring
+- 📝 Future improvement
+
+**Chosen Solution (Enable Checkboxes):**
+- ✅ Minimal code changes (3 lines)
+- ✅ No new UI elements needed
+- ✅ No translations required
+- ✅ Uses existing delete functionality
+- ✅ User can self-serve
+- ✅ Immediate solution
+
+### Lessons Learned
+
+1. **504 Timeouts Create Zombie Records:**
+   - HTTP response fails, but background processing may continue
+   - Database record never updates from "processing" to "completed"
+   - Need better timeout handling
+
+2. **UI Safety vs. User Control:**
+   - Original design protected against accidental deletion
+   - But blocked legitimate cleanup use case
+   - Sometimes need to trust user judgment
+   - Confirmation dialogs provide adequate safety
+
+3. **Serverless Timeout Challenges:**
+   - 60s limit on paid tier
+   - PDF processing (conversion + Vision API) can exceed this
+   - 504 doesn't mean processing failed
+   - Need better async handling or status polling
+
+4. **Delete Functionality Already Existed:**
+   - No API endpoint needed
+   - Direct Supabase delete from client
+   - Simple, secure (RLS policies apply)
+   - Just needed to enable selection
+
+### Best Practices Established
+
+**Stuck Record Handling:**
+1. ✅ Allow users to clean up stuck records themselves
+2. ✅ Use confirmation dialogs for destructive actions
+3. ✅ Show timestamps so users can identify stuck vs. active
+4. ✅ Don't over-complicate with multiple delete buttons
+
+**Serverless Function Design:**
+1. ✅ Expect timeouts for long-running operations
+2. ✅ Consider status polling pattern for operations > 10s
+3. ✅ Update database status even if HTTP response times out
+4. ✅ Log success/failure in database, not just HTTP response
+
+**UI Defensive Design:**
+1. ✅ Disable controls when they shouldn't be used
+2. ✅ But allow user override when necessary
+3. ✅ Confirmation dialogs for irreversible actions
+4. ✅ Visual feedback (timestamps, status badges)
+
+### Future Improvements
+
+**Short Term:**
+- [ ] Automatic status update after timeout (processing → failed)
+- [ ] Retry mechanism for stuck records
+- [ ] Better logging of 504 timeouts
+
+**Long Term:**
+- [ ] Async processing with webhooks/polling
+- [ ] Background job cleanup for orphaned files
+- [ ] Status dashboard for processing operations
+- [ ] Timeout handling at infrastructure level
+
+### Summary
+
+**Problem:** Stuck processing records from 504 timeouts cannot be deleted
+
+**Root Cause:** Checkboxes disabled for processing status
+
+**Solution:** Enable checkboxes for all records, including processing
+
+**Key Changes:**
+1. Remove processing filter from selectable receipts
+2. Remove disabled attribute from checkboxes (desktop + mobile)
+3. Users can now select and delete stuck records
+
+**Result:**
+- ✅ Users can self-serve cleanup of stuck records
+- ✅ No database access required
+- ✅ Minimal code changes (3 lines)
+- ✅ Existing delete functionality reused
+- ✅ Confirmation dialog provides safety
+- ✅ Deployed to production
+
+**Status:** ✅ COMPLETE and DEPLOYED
+
+---
+
+**Last Updated:** 2025-10-27 (Session 7 - Stuck Processing Records COMPLETE)
+**Status:** ✅ Fixed and deployed
 **Production URL:** https://receiptsort.seenano.nl
