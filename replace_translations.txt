@@ -1,0 +1,15 @@
+This file tracks all the string replacements needed for ExportDialog translation:
+
+COMPLETED:
+- useTranslations import ✓
+- const t = useTranslations('exportDialog') ✓
+- TemplateCard component: Used, times, Select ✓
+- File validation: Invalid file type, File too large messages ✓
+- Template analysis: Template analyzed, Analysis failed messages ✓
+
+REMAINING (need to do manually in batches):
+1. autoSaveTemplate toast messages (lines ~322-356)
+2. handleExport error/success messages (lines ~445-561)
+3. ExportContent JSX: All UI text (lines ~569-951)
+4. Dialog title/description (lines ~958-961)
+5. Close button (line ~968)

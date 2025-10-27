@@ -22,7 +22,7 @@ import {
   saveTemplatePreference,
   loadTemplatePreference,
 } from '@/lib/export-templates'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 
 interface ExportDialogProps {
   open: boolean
@@ -62,6 +62,7 @@ interface TemplateCardProps {
 
 function TemplateCard({ template, onSelect, onDelete, isSelected }: TemplateCardProps) {
   const [isExpanded, setIsExpanded] = useState(false)
+  const t = useTranslations('exportDialog')
 
   return (
     <div className={`border-2 rounded-lg p-3 transition-all ${
@@ -76,7 +77,7 @@ function TemplateCard({ template, onSelect, onDelete, isSelected }: TemplateCard
           </div>
           {!isExpanded && (
             <div className="flex items-center gap-3 text-xs text-gray-500">
-              <span>Used {template.export_count}x</span>
+              <span>{t('used')} {template.export_count}x</span>
             </div>
           )}
         </div>
@@ -106,8 +107,8 @@ function TemplateCard({ template, onSelect, onDelete, isSelected }: TemplateCard
           )}
 
           <div className="flex items-center justify-between text-xs">
-            <span className="text-gray-500">Used</span>
-            <span className="font-medium">{template.export_count} times</span>
+            <span className="text-gray-500">{t('used')}</span>
+            <span className="font-medium">{template.export_count} {t('times')}</span>
           </div>
 
           <div className="flex gap-2">
@@ -117,7 +118,7 @@ function TemplateCard({ template, onSelect, onDelete, isSelected }: TemplateCard
               onClick={() => onSelect(template.id)}
               className="flex-1 h-8"
             >
-              Select
+              {t('select')}
             </Button>
             <Button
               variant="ghost"
@@ -141,6 +142,7 @@ export default function ExportDialog({
   onExportComplete,
 }: ExportDialogProps) {
   const locale = useLocale()
+  const t = useTranslations('exportDialog')
   const [selectedFormat, setSelectedFormat] = useState<ExportFormat>('excel')
   const [selectedTemplate, setSelectedTemplate] = useState('standard')
   const [customColumns, setCustomColumns] = useState<string[]>([
@@ -204,8 +206,8 @@ export default function ExportDialog({
     ]
     if (!validTypes.includes(file.type) && !file.name.match(/\.(xlsx|xls)$/i)) {
       toast({
-        title: 'Invalid file type',
-        description: 'Please upload an Excel file (.xlsx or .xls)',
+        title: t('invalidFileType'),
+        description: t('invalidFileTypeDesc'),
         variant: 'destructive',
       })
       return
@@ -214,8 +216,8 @@ export default function ExportDialog({
     // Validate file size (5MB max)
     if (file.size > 5 * 1024 * 1024) {
       toast({
-        title: 'File too large',
-        description: 'Please upload a file smaller than 5MB',
+        title: t('fileTooLarge'),
+        description: t('fileTooLargeDesc'),
         variant: 'destructive',
       })
       return
@@ -248,14 +250,14 @@ export default function ExportDialog({
       setTemplateNameForSave(defaultName)
 
       toast({
-        title: 'Template analyzed!',
-        description: `AI detected ${Object.keys(data.analysis.fieldMapping).length} field mappings. Click Save to store it.`,
+        title: t('templateAnalyzed'),
+        description: t('templateAnalyzedDesc', { count: Object.keys(data.analysis.fieldMapping).length }),
       })
     } catch (error) {
       console.error('[Export Dialog] Template analysis failed:', error)
       toast({
-        title: 'Analysis failed',
-        description: error instanceof Error ? error.message : 'Failed to analyze template',
+        title: t('analysisFailed'),
+        description: error instanceof Error ? error.message : t('analysisFailedDesc'),
         variant: 'destructive',
       })
       setUploadedTemplate(null)
@@ -320,8 +322,8 @@ export default function ExportDialog({
         if (data.error?.includes('already exists')) {
           console.log('[Export Dialog] Template already exists, skipping auto-save')
           toast({
-            title: 'Template exists',
-            description: `"${finalTemplateName}" is already saved`,
+            title: t('templateExists'),
+            description: t('templateExistsDesc', { name: finalTemplateName }),
             variant: 'default',
           })
           return
@@ -329,8 +331,8 @@ export default function ExportDialog({
 
         // Show detailed error to user
         toast({
-          title: 'Failed to save template',
-          description: `Error: ${data.error || 'Unknown error'} (Status: ${response.status})`,
+          title: t('failedToSaveTemplate'),
+          description: t('failedToSaveTemplateDesc', { error: data.error || 'Unknown error', status: response.status }),
           variant: 'destructive',
         })
         throw new Error(data.error || 'Failed to save template')
@@ -342,16 +344,16 @@ export default function ExportDialog({
       await fetchCustomTemplates()
 
       toast({
-        title: 'Template saved!',
-        description: `"${finalTemplateName}" is now available for reuse (FREE)`,
+        title: t('templateSaved'),
+        description: t('templateSavedDesc', { name: finalTemplateName }),
       })
     } catch (error) {
       console.error('[Export Dialog] Auto-save failed:', error)
 
       // Show error to user with details
       toast({
-        title: 'Save failed',
-        description: error instanceof Error ? error.message : 'Unknown error occurred',
+        title: t('saveFailed'),
+        description: error instanceof Error ? error.message : t('unknownError'),
         variant: 'destructive',
       })
     }
@@ -443,8 +445,8 @@ export default function ExportDialog({
         } else {
           // No template available
           toast({
-            title: 'Template required',
-            description: 'Please upload a new template or select a saved template',
+            title: t('templateRequired'),
+            description: t('templateRequiredDesc'),
             variant: 'destructive',
           })
           setIsExporting(false)
@@ -494,7 +496,7 @@ export default function ExportDialog({
 
         toast({
           title: errorMessage,
-          description: errorDescription || 'Please try again or contact support',
+          description: errorDescription || t('exportErrorGeneric'),
           variant: 'destructive',
         })
 
@@ -512,7 +514,7 @@ export default function ExportDialog({
 
       if (blob.size === 0) {
         console.error('[Export Dialog] ❌ Empty blob received!')
-        throw new Error('Export generated an empty file')
+        throw new Error(t('exportEmptyFile'))
       }
 
       const url = window.URL.createObjectURL(blob)
@@ -546,16 +548,16 @@ export default function ExportDialog({
       }, 100)
 
       toast({
-        title: 'Export successful',
-        description: `${selectedIds.length} receipt${selectedIds.length === 1 ? '' : 's'} exported. File: ${filename}`,
+        title: t('exportSuccessful'),
+        description: t('exportSuccessfulDesc', { count: selectedIds.length, plural: selectedIds.length === 1 ? '' : 's', filename }),
       })
 
       onExportComplete()
     } catch (error) {
       console.error('[Export] Error:', error)
       toast({
-        title: 'Export failed',
-        description: error instanceof Error ? error.message : 'Failed to export receipts',
+        title: t('exportFailed'),
+        description: error instanceof Error ? error.message : t('exportFailedDesc'),
         variant: 'destructive',
       })
     } finally {
@@ -572,8 +574,8 @@ export default function ExportDialog({
           <div className="border rounded-lg p-3 sm:p-4 bg-gradient-to-br from-gray-50 to-white">
             <div className="flex items-center justify-between mb-3">
               <div>
-                <h3 className="text-sm font-semibold text-gray-900">Standard Export</h3>
-                <p className="text-xs text-gray-500">Quick export to common formats</p>
+                <h3 className="text-sm font-semibold text-gray-900">{t('standardExport')}</h3>
+                <p className="text-xs text-gray-500">{t('standardExportDescription')}</p>
               </div>
             </div>
 
@@ -596,9 +598,9 @@ export default function ExportDialog({
                         : 'text-muted-foreground'
                     }`}
                   />
-                  <div className="text-xs sm:text-sm font-medium">Excel</div>
+                  <div className="text-xs sm:text-sm font-medium">{t('excel')}</div>
                   <div className="text-[10px] sm:text-xs text-muted-foreground text-center leading-tight">
-                    Formatted with totals
+                    {t('excelDescription')}
                   </div>
                 </div>
               </button>
@@ -621,9 +623,9 @@ export default function ExportDialog({
                         : 'text-muted-foreground'
                     }`}
                   />
-                  <div className="text-xs sm:text-sm font-medium">CSV</div>
+                  <div className="text-xs sm:text-sm font-medium">{t('csv')}</div>
                   <div className="text-[10px] sm:text-xs text-muted-foreground text-center leading-tight">
-                    Plain text format
+                    {t('csvDescription')}
                   </div>
                 </div>
               </button>
@@ -632,7 +634,7 @@ export default function ExportDialog({
             {/* Template Selection (CSV only) */}
             {selectedFormat === 'csv' && (
               <div className="space-y-2">
-                <Label>Export Template</Label>
+                <Label>{t('exportTemplate')}</Label>
                 <select
                   value={selectedTemplate}
                   onChange={(e) => setSelectedTemplate(e.target.value)}
@@ -955,9 +957,9 @@ export default function ExportDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="w-screen h-screen max-w-none lg:w-auto lg:h-auto lg:max-w-6xl lg:max-h-[90vh] flex flex-col p-0 gap-0 lg:rounded-lg">
         <DialogHeader className="px-4 lg:px-6 pt-4 lg:pt-6 pb-3 lg:pb-4 flex-shrink-0 border-b">
-          <DialogTitle className="text-lg lg:text-xl">Export Receipts</DialogTitle>
+          <DialogTitle className="text-lg lg:text-xl">{t('title')}</DialogTitle>
           <DialogDescription className="text-sm">
-            Export {selectedIds.length} selected receipt{selectedIds.length === 1 ? '' : 's'} to your preferred format
+            {t('description', { count: selectedIds.length, plural: selectedIds.length === 1 ? '' : 's' })}
           </DialogDescription>
         </DialogHeader>
         <div className="flex-1 overflow-y-auto px-4 lg:px-6 min-h-0">
@@ -965,7 +967,7 @@ export default function ExportDialog({
         </div>
         <DialogFooter className="px-4 lg:px-6 py-3 lg:py-4 flex-shrink-0 border-t">
           <Button variant="outline" onClick={() => onOpenChange(false)} disabled={isExporting} className="w-full lg:w-auto">
-            Close
+            {t('close')}
           </Button>
         </DialogFooter>
       </DialogContent>
