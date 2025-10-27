@@ -249,8 +249,8 @@ export default function ReceiptList() {
   })
 
   // Checkbox handlers
-  // Allow selection of completed, pending, and failed receipts (not processing)
-  const selectableReceipts = filteredReceipts.filter(r => r.processing_status !== 'processing')
+  // Allow selection of all receipts (including processing for cleanup)
+  const selectableReceipts = filteredReceipts
   const allSelectableSelected = selectableReceipts.length > 0 && selectableReceipts.every(r => selectedIds.has(r.id))
 
   const handleSelectAll = () => {
@@ -540,7 +540,7 @@ export default function ReceiptList() {
                 <Checkbox
                   checked={allSelectableSelected}
                   onCheckedChange={handleSelectAll}
-                  disabled={selectableReceipts.length === 0}
+                  disabled={filteredReceipts.length === 0}
                 />
               </TableHead>
               <TableHead>{tTable('columns.fileName')}</TableHead>
@@ -559,7 +559,6 @@ export default function ReceiptList() {
                   <Checkbox
                     checked={selectedIds.has(receipt.id)}
                     onCheckedChange={() => handleSelectReceipt(receipt.id)}
-                    disabled={receipt.processing_status === 'processing'}
                   />
                 </TableCell>
                 <TableCell className="font-medium max-w-xs truncate">
@@ -616,7 +615,6 @@ export default function ReceiptList() {
                 <Checkbox
                   checked={selectedIds.has(receipt.id)}
                   onCheckedChange={() => handleSelectReceipt(receipt.id)}
-                  disabled={receipt.processing_status === 'processing'}
                   className="flex-shrink-0 mt-1"
                 />
                 <div className="w-16 h-16 rounded bg-muted flex items-center justify-center flex-shrink-0">
