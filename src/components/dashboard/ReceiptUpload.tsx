@@ -204,10 +204,7 @@ export default function ReceiptUpload() {
 
       // Create PNG file with proper filename
       const pngFileName = pdfFile.name.replace(/\.pdf$/i, '.png')
-      const pngFile = new (File as any)([blob], pngFileName, {
-        type: 'image/png',
-        lastModified: Date.now(),
-      })
+      const pngFile = new Blob([blob], { type: 'image/png' })
 
       console.log('[ReceiptUpload] PNG created, uploading to server...')
 
@@ -218,7 +215,7 @@ export default function ReceiptUpload() {
 
       // Upload converted PNG to server (same as manual workflow)
       const formData = new FormData()
-      formData.append('file', pngFile)
+      formData.append('file', pngFile, pngFileName)
 
       const uploadResponse = await fetch(`/api/receipts/${receiptId}/upload-converted`, {
         method: 'POST',
