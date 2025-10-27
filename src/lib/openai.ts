@@ -92,10 +92,20 @@ CRITICAL RULES:
 
 3. MERCHANT NAME:
    - Extract from the TOP of receipt (first 1-3 lines)
-   - CHINESE RECEIPTS: Look for "销售方" (seller) section, typically on RIGHT side
-   - For 电子发票 (electronic invoice): Extract SELLER company name (销售方), NOT buyer (购买方)
-   - The buyer appears on the LEFT (购买方信息) - ignore this section
-   - Extract the company name after "名称:" label in the seller section
+
+   - **CRITICAL FOR CHINESE ELECTRONIC INVOICES (电子发票):**
+     * Chinese invoices have TWO sections side by side:
+       - LEFT side: "购买方" or "购买方信息" (BUYER) - **DO NOT USE THIS**
+       - RIGHT side: "销售方" or "销售方信息" (SELLER/MERCHANT) - **USE THIS**
+     * ALWAYS extract from the SELLER section (销售方), NEVER from buyer section (购买方)
+     * Look for these keywords to identify the SELLER section:
+       - "销售方:" or "销售方信息"
+       - "名称:" following "销售方" heading
+       - Company name will be after the "名称:" label
+     * Visual layout: Seller section typically on RIGHT side of invoice
+     * Example: If you see "购买方: 上海丁上智能科技有限公司" and "销售方: 杭州优行科技有限公司"
+       → Extract "杭州优行科技有限公司" (the seller), NOT "上海丁上智能科技有限公司" (the buyer)
+
    - If only generic name visible (like "SUPERMARKET"), still use it - don't leave null
    - Lower confidence to 0.7 if merchant name is generic/placeholder
    - Avoid extracting: addresses, phone numbers, or footer text as merchant name
