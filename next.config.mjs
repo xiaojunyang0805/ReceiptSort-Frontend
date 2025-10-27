@@ -14,6 +14,17 @@ const nextConfig = {
     ],
   },
 
+  // Rewrite locale-prefixed paths to root for static assets
+  // This makes /zh/pdfjs/cmaps/* work alongside /pdfjs/cmaps/*
+  async rewrites() {
+    return [
+      {
+        source: '/:locale/pdfjs/cmaps/:path*',
+        destination: '/pdfjs/cmaps/:path*',
+      },
+    ];
+  },
+
   // Configure webpack to handle canvas native module
   webpack: (config, { isServer }) => {
     if (isServer) {
