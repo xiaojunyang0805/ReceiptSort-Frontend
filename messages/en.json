@@ -937,5 +937,23 @@
     "updateSuccess": "Profile updated successfully!",
     "updateError": "Failed to update profile. Please try again.",
     "emailCannotChange": "Email address cannot be changed"
+  },
+  "pdfRetryDialog": {
+    "title": "Improve Extraction Accuracy",
+    "description": "Low confidence detected. Converting to PNG may improve accuracy.",
+    "lowConfidenceWarning": "Low confidence detected",
+    "currentConfidence": "Current confidence",
+    "convertButton": "Convert & Retry",
+    "converting": "Converting...",
+    "uploading": "Uploading...",
+    "processing": "Processing...",
+    "completed": "Completed",
+    "conversionSuccess": "Converted successfully",
+    "uploadSuccess": "Uploaded successfully",
+    "processingSuccess": "Processed with {confidence}% confidence",
+    "conversionFailed": "Conversion failed",
+    "fetchFailed": "Failed to fetch file",
+    "retryFailed": "Retry failed",
+    "preview": "Preview"
   }
 }

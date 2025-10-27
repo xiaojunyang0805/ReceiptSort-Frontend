@@ -933,5 +933,23 @@
     "updateSuccess": "个人资料更新成功！",
     "updateError": "更新个人资料失败。请重试。",
     "emailCannotChange": "电子邮箱无法更改"
+  },
+  "pdfRetryDialog": {
+    "title": "提高提取准确率",
+    "description": "检测到低置信度。转换为PNG可能会提高准确率。",
+    "lowConfidenceWarning": "检测到低置信度",
+    "currentConfidence": "当前置信度",
+    "convertButton": "转换并重试",
+    "converting": "正在转换...",
+    "uploading": "正在上传...",
+    "processing": "正在处理...",
+    "completed": "已完成",
+    "conversionSuccess": "转换成功",
+    "uploadSuccess": "上传成功",
+    "processingSuccess": "已处理，置信度 {confidence}%",
+    "conversionFailed": "转换失败",
+    "fetchFailed": "获取文件失败",
+    "retryFailed": "重试失败",
+    "preview": "预览"
   }
 }
