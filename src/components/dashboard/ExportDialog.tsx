@@ -696,12 +696,12 @@ export default function ExportDialog({
                 {isExporting && activeExportFormat !== 'smart-template' && (activeExportFormat === selectedFormat || activeExportFormat === 'excel' || activeExportFormat === 'csv') ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Exporting...
+                    {t('exporting')}
                   </>
                 ) : (
                   <>
                     <Download className="mr-2 h-4 w-4" />
-                    Export {selectedFormat === 'excel' ? 'Excel' : selectedFormat === 'csv' ? 'CSV' : 'Format'}
+                    {selectedFormat === 'excel' ? t('exportExcel') : selectedFormat === 'csv' ? t('exportCsv') : t('exportFormat')}
                   </>
                 )}
               </Button>
@@ -713,8 +713,8 @@ export default function ExportDialog({
             <div className="flex items-center gap-2 mb-3">
               <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />
               <div>
-                <h3 className="text-sm font-semibold text-blue-900">AI-Powered Template Export</h3>
-                <p className="text-xs text-blue-600 hidden sm:block">Upload your Excel template and let AI map fields automatically</p>
+                <h3 className="text-sm font-semibold text-blue-900">{t('aiPoweredTemplateExport')}</h3>
+                <p className="text-xs text-blue-600 hidden sm:block">{t('uploadYourExcelTemplate')}</p>
               </div>
             </div>
 
@@ -722,7 +722,7 @@ export default function ExportDialog({
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {/* LEFT COLUMN: Upload New Template */}
               <div className="space-y-4">
-                <h4 className="text-sm font-medium text-gray-700">Upload New Template</h4>
+                <h4 className="text-sm font-medium text-gray-700">{t('uploadNewTemplate')}</h4>
 
                 {/* Template Upload Area */}
                 <label className={`flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer transition-all ${
@@ -741,19 +741,19 @@ export default function ExportDialog({
                     {isAnalyzing ? (
                       <>
                         <Loader2 className="h-10 w-10 animate-spin text-blue-600" />
-                        <p className="text-sm font-medium text-blue-900">Analyzing...</p>
+                        <p className="text-sm font-medium text-blue-900">{t('analyzing')}</p>
                       </>
                     ) : uploadedTemplate ? (
                       <>
                         <Upload className="h-10 w-10 text-blue-600" />
                         <p className="text-sm font-medium text-blue-900">{uploadedTemplate.name}</p>
-                        <p className="text-xs text-blue-600">Click to change</p>
+                        <p className="text-xs text-blue-600">{t('clickToChange')}</p>
                       </>
                     ) : (
                       <>
                         <Upload className="h-10 w-10 text-blue-400" />
-                        <p className="text-sm font-medium text-gray-700">Click to upload</p>
-                        <p className="text-xs text-gray-500">.xlsx, .xls (max 5MB)</p>
+                        <p className="text-sm font-medium text-gray-700">{t('clickToUpload')}</p>
+                        <p className="text-xs text-gray-500">{t('fileFormat')}</p>
                       </>
                     )}
                   </div>
@@ -764,11 +764,11 @@ export default function ExportDialog({
                   <div className="space-y-3 bg-white/80 rounded-lg p-3 border border-blue-300">
                     <div className="grid grid-cols-2 gap-2">
                       <div>
-                        <div className="text-xs text-gray-600">Sheet</div>
+                        <div className="text-xs text-gray-600">{t('sheet')}</div>
                         <div className="font-medium text-sm">{aiAnalysis.sheetName}</div>
                       </div>
                       <div>
-                        <div className="text-xs text-gray-600">Start Row</div>
+                        <div className="text-xs text-gray-600">{t('startRow')}</div>
                         <div className="font-medium text-sm">{aiAnalysis.startRow}</div>
                       </div>
                     </div>
@@ -777,7 +777,7 @@ export default function ExportDialog({
                       <div className="flex items-center gap-2 mb-2">
                         <div className="h-2 w-2 rounded-full bg-green-500"></div>
                         <div className="font-medium text-xs text-green-900">
-                          {Object.keys(aiAnalysis.fieldMapping).length} Fields Mapped
+                          {t('fieldsMapped', { count: Object.keys(aiAnalysis.fieldMapping).length })}
                         </div>
                       </div>
                       <div className="grid grid-cols-2 gap-1 text-xs max-h-32 overflow-y-auto">
@@ -795,12 +795,12 @@ export default function ExportDialog({
                     {/* Template Name Input */}
                     <div className="space-y-2">
                       <Label htmlFor="template-name" className="text-xs">
-                        Template Name
+                        {t('templateName')}
                       </Label>
                       <div className="flex gap-2">
                         <Input
                           id="template-name"
-                          placeholder="e.g., VAT Q4 2025"
+                          placeholder={t('templateNamePlaceholder')}
                           value={templateNameForSave}
                           onChange={(e) => setTemplateNameForSave(e.target.value)}
                           className="text-sm h-8 flex-1"
@@ -816,17 +816,17 @@ export default function ExportDialog({
                           disabled={!templateNameForSave.trim() || isAnalyzing}
                           className="h-8"
                         >
-                          Save
+                          {t('save')}
                         </Button>
                       </div>
                       <p className="text-xs text-gray-500">
-                        Click Save to store template for reuse (FREE)
+                        {t('clickSaveToStore')}
                       </p>
                     </div>
 
                     {/* Info message */}
                     <div className="bg-blue-50 border border-blue-200 rounded p-2 text-xs text-blue-700">
-                      💡 Click Save button above to store this template
+                      {t('infoSaveTemplate')}
                     </div>
                   </div>
                 )}
@@ -834,13 +834,13 @@ export default function ExportDialog({
 
               {/* RIGHT COLUMN: Use Saved Templates */}
               <div className="space-y-4">
-                <h4 className="text-sm font-medium text-gray-700">Use Saved Template</h4>
+                <h4 className="text-sm font-medium text-gray-700">{t('useSavedTemplate')}</h4>
 
                 {customTemplates.length === 0 ? (
                   <div className="flex flex-col items-center justify-center h-32 border-2 border-dashed border-gray-300 rounded-lg bg-gray-50">
                     <FileSpreadsheet className="h-8 w-8 text-gray-400 mb-2" />
-                    <p className="text-sm text-gray-500">No saved templates</p>
-                    <p className="text-xs text-gray-400">Upload and save to reuse</p>
+                    <p className="text-sm text-gray-500">{t('noSavedTemplates')}</p>
+                    <p className="text-xs text-gray-400">{t('uploadAndSaveToReuse')}</p>
                   </div>
                 ) : (
                   <div className="space-y-2 max-h-96 overflow-y-auto">
@@ -907,12 +907,12 @@ export default function ExportDialog({
 
           {/* Preview Info */}
           <div className="rounded-lg bg-muted p-3 space-y-1">
-            <div className="text-sm font-medium">Export Summary</div>
+            <div className="text-sm font-medium">{t('exportSummary')}</div>
             <div className="text-xs text-muted-foreground">
-              • {selectedIds.length} receipt{selectedIds.length === 1 ? '' : 's'} selected
+              • {t('receiptsSelected', { count: selectedIds.length, plural: selectedIds.length === 1 ? '' : 's' })}
             </div>
             <div className="text-xs text-muted-foreground">
-              • Only completed receipts will be included
+              • {t('onlyCompletedReceipts')}
             </div>
           </div>
 
@@ -939,12 +939,12 @@ export default function ExportDialog({
               {isExporting && activeExportFormat === 'smart-template' ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Exporting...
+                  {t('exporting')}
                 </>
               ) : (
                 <>
                   <Sparkles className="mr-2 h-4 w-4" />
-                  Export with Template (1 credit)
+                  {t('exportWithTemplate')}
                 </>
               )}
             </Button>
