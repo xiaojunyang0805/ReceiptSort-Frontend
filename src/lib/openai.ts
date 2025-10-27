@@ -746,8 +746,11 @@ export async function testOpenAIConnection(): Promise<boolean> {
 }
 
 /**
- * Extract receipt data using Vision API with PDF-to-image conversion
+ * Extract receipt data using Vision API with PDF-to-PNG conversion
  * This is used as a fallback when text extraction yields low confidence results
+ *
+ * CRITICAL: OpenAI Vision API does NOT accept PDFs via image_url field.
+ * We must convert PDF to PNG first, then send the PNG to Vision API.
  *
  * @param pdfUrl - URL to the PDF file
  * @returns Structured receipt data extracted via Vision API
@@ -757,33 +760,25 @@ export async function extractReceiptDataWithVision(
   pdfUrl: string
 ): Promise<ExtractedReceiptData> {
   try {
-    console.log('[OpenAI Vision Fallback] Starting Vision API fallback for PDF...')
+    console.log('[OpenAI Vision Fallback] Starting Vision API fallback with PDF-to-PNG conversion...')
 
     // Validate API key
     if (!process.env.OPENAI_API_KEY) {
       throw new Error('OPENAI_API_KEY is not configured')
     }
 
-    // Fetch PDF and convert to base64 data URL
-    // OpenAI Vision API requires base64-encoded data URLs for PDFs (not direct URLs)
-    console.log('[OpenAI Vision Fallback] Fetching PDF from URL...')
-    const response = await fetch(pdfUrl)
-    if (!response.ok) {
-      throw new Error(`Failed to fetch PDF: ${response.statusText}`)
-    }
+    // Step 1: Convert PDF to PNG using server-side converter
+    console.log('[OpenAI Vision Fallback] Converting PDF to PNG...')
+    const { convertPdfToPng } = await import('./pdf-to-png-serverless')
 
-    const arrayBuffer = await response.arrayBuffer()
-    const base64Data = Buffer.from(arrayBuffer).toString('base64')
-    const dataUrl = `data:application/pdf;base64,${base64Data}`
+    // convertPdfToPng returns base64 PNG data URL
+    const pngDataUrl = await convertPdfToPng(pdfUrl)
+    console.log('[OpenAI Vision Fallback] PDF converted to PNG successfully')
 
-    console.log('[OpenAI Vision Fallback] PDF fetched, size:', arrayBuffer.byteLength, 'bytes')
-    console.log('[OpenAI Vision Fallback] Sending to Vision API with native PDF support...')
-
+    // Step 2: Send PNG to Vision API
+    console.log('[OpenAI Vision Fallback] Sending PNG to Vision API...')
     const client = getOpenAIClient()
 
-    // Send PDF as base64 data URL to Vision API
-    // GPT-4o natively supports PDFs (announced March 2025)
-    // This provides better Chinese font rendering than text extraction
     const visionResponse = await client.chat.completions.create({
       model: 'gpt-4o',
       messages: [
@@ -797,8 +792,8 @@ export async function extractReceiptDataWithVision(
             {
               type: 'image_url',
               image_url: {
-                url: dataUrl, // Base64-encoded PDF data URL
-                detail: 'high', // Use high detail for better OCR accuracy
+                url: pngDataUrl, // Base64-encoded PNG data URL (NOT PDF!)
+                detail: 'high', // Use high detail for better OCR accuracy on Chinese characters
               },
             },
           ],
@@ -871,7 +866,7 @@ export async function extractReceiptDataWithVision(
       provider_id: parsedData.provider_id || null,
     }
 
-    console.log('[OpenAI Vision Fallback] Successfully extracted data with confidence:', extractedData.confidence_score)
+    console.log('[OpenAI Vision Fallback] Successfully extracted data from PNG with confidence:', extractedData.confidence_score)
     return extractedData
   } catch (error) {
     console.error('[OpenAI Vision Fallback] Extraction failed:', error)
