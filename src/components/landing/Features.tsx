@@ -1,6 +1,6 @@
 'use client'
 
-import { Upload, Sparkles, Download, DollarSign, Shield, Clock, Wand2 } from 'lucide-react'
+import { Upload, Sparkles, Download, Shield, Clock, Wand2 } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { useTranslations } from 'next-intl'
 
@@ -27,11 +27,6 @@ export function Features() {
       icon: Wand2,
       titleKey: 'items.aiTemplates.title',
       descriptionKey: 'items.aiTemplates.description',
-    },
-    {
-      icon: DollarSign,
-      titleKey: 'items.pricing.title',
-      descriptionKey: 'items.pricing.description',
     },
     {
       icon: Shield,
