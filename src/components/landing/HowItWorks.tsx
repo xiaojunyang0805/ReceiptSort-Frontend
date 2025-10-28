@@ -1,6 +1,6 @@
 'use client'
 
-import { Upload, Sparkles, Download, ArrowRight, FileSparkles } from 'lucide-react'
+import { Upload, Sparkles, Download, ArrowRight, Wand2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Link } from '@/lib/navigation'
 import { useTranslations } from 'next-intl'
@@ -80,14 +80,14 @@ const steps = [
   },
   {
     number: '4',
-    icon: FileSparkles,
+    icon: Wand2,
     titleKey: 'customize.title',
     descriptionKey: 'customize.description',
     visual: (
       <div className="bg-white rounded-lg p-6 shadow-lg">
         <div className="space-y-3">
           <div className="flex items-center gap-2 text-primary mb-2">
-            <FileSparkles className="h-5 w-5" />
+            <Wand2 className="h-5 w-5" />
             <span className="text-sm font-medium">AI Template Options</span>
           </div>
           <div className="space-y-2">
