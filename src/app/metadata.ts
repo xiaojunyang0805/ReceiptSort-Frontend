@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     url: 'https://receiptsort.vercel.app',
     siteName: 'ReceiptSorter',
     title: 'ReceiptSorter - AI Receipt Data Extraction',
-    description: 'Turn receipt photos into organized Excel spreadsheets. AI-powered, 95%+ accuracy, $0.50 per receipt.',
+    description: 'Turn receipt photos into organized Excel spreadsheets. AI-powered, 98%+ accuracy, smart template export.',
     images: [
       {
         url: '/og-image.jpg',

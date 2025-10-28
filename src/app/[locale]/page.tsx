@@ -53,7 +53,7 @@ export default async function HomePage() {
       'AI-powered data extraction',
       'Export to Excel and CSV',
       'QuickBooks and Xero compatible',
-      '95%+ accuracy rate',
+      '98%+ accuracy rate',
       'GDPR compliant',
       'Bank-level security'
     ],

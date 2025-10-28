@@ -45,7 +45,7 @@
     "watchDemo": "Watch Demo",
     "trustBadge": "Trusted by 2000+ businesses worldwide",
     "valueProps": {
-      "accuracy": "95%+ Accuracy",
+      "accuracy": "98%+ Accuracy",
       "processing": "Process in Seconds",
       "support": "GPT-4 Vision AI"
     }
@@ -60,11 +60,15 @@
       },
       "aiExtraction": {
         "title": "AI-Powered Data Extraction",
-        "description": "GPT-4 Vision extracts merchant, amount, date, category, tax, and payment method with 95%+ accuracy."
+        "description": "GPT-4 Vision extracts merchant, amount, date, category, tax, and payment method with 98%+ accuracy."
       },
       "export": {
         "title": "Export to Excel or CSV",
         "description": "Download organized spreadsheets ready for QuickBooks, Xero, or any accounting software."
+      },
+      "aiTemplates": {
+        "title": "AI-Powered Template Export",
+        "description": "Smart templates adapt to your business needs. Our AI learns from your data and generates customized Excel templates with formulas, formatting, and structure tailored to your workflow."
       },
       "pricing": {
         "title": "Pay As You Go",
@@ -82,7 +86,7 @@
   },
   "howItWorks": {
     "title": "How It Works",
-    "subtitle": "Get started in 3 simple steps",
+    "subtitle": "Get started in 4 simple steps",
     "description": "From receipt photo to organized spreadsheet in under a minute",
     "steps": {
       "upload": {
@@ -96,6 +100,10 @@
       "export": {
         "title": "Export & Download",
         "description": "Download your organized data as Excel or CSV"
+      },
+      "customize": {
+        "title": "Customize Template",
+        "description": "Choose from AI-powered templates or create your own custom format"
       }
     }
   },
@@ -121,7 +129,7 @@
           "role": "Retail Store Owner"
         },
         {
-          "quote": "I was skeptical about AI accuracy, but ReceiptSort gets it right 95% of the time. The other 5% I can easily fix.",
+          "quote": "I was skeptical about AI accuracy, but ReceiptSort gets it right 98% of the time. The AI-powered templates save me hours every week.",
           "name": "Jennifer Martinez",
           "role": "Accountant"
         }
@@ -146,7 +154,7 @@
     "items": {
       "accuracy": {
         "question": "How accurate is the AI extraction?",
-        "answer": "Our AI achieves 95%+ accuracy on clear, standard receipts. You can always manually edit any extracted data before exporting."
+        "answer": "Our AI achieves 98%+ accuracy on clear, standard receipts. You can always manually edit any extracted data before exporting."
       },
       "formats": {
         "question": "What file formats do you support?",
