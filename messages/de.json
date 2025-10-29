@@ -43,7 +43,7 @@
     "watchDemo": "Demo Ansehen",
     "trustBadge": "Vertraut von über 2000 Unternehmen weltweit",
     "valueProps": {
-      "accuracy": "95%+ Genauigkeit",
+      "accuracy": "98%+ Genauigkeit",
       "processing": "Verarbeitung in Sekunden",
       "support": "GPT-4 Vision AI"
     },
@@ -59,7 +59,7 @@
       },
       "aiExtraction": {
         "title": "KI-gestützte Datenextraktion",
-        "description": "GPT-4 Vision extrahiert Händler, Betrag, Datum, Kategorie, Steuer und Zahlungsmethode mit 95%+ Genauigkeit."
+        "description": "GPT-4 Vision extrahiert Händler, Betrag, Datum, Kategorie, Steuer und Zahlungsmethode mit 98%+ Genauigkeit."
       },
       "export": {
         "title": "Nach Excel oder CSV Exportieren",
@@ -95,6 +95,10 @@
       "export": {
         "title": "Exportieren & Herunterladen",
         "description": "Laden Sie Ihre organisierten Daten als Excel oder CSV herunter"
+      },
+      "customize": {
+        "title": "Vorlage Anpassen (Optional)",
+        "description": "Erstellen Sie KI-Vorlagen für Ihre MwSt.- oder Buchhaltungsformate"
       }
     }
   },
@@ -120,7 +124,7 @@
           "role": "Einzelhandelsinhaber"
         },
         {
-          "quote": "Ich war skeptisch bezüglich der KI-Genauigkeit, aber ReceiptSort macht es zu 95% richtig. Die anderen 5% kann ich leicht korrigieren.",
+          "quote": "Ich war skeptisch bezüglich der KI-Genauigkeit, aber ReceiptSort macht es zu 98% richtig. Die KI-gestützten Vorlagen sparen mir jede Woche Stunden.",
           "name": "Jennifer Martinez",
           "role": "Buchhalterin"
         }
@@ -145,7 +149,7 @@
     "items": {
       "accuracy": {
         "question": "Wie genau ist die KI-Extraktion?",
-        "answer": "Unsere KI erreicht eine Genauigkeit von 95%+ bei klaren, standardmäßigen Belegen. Sie können alle extrahierten Daten vor dem Export jederzeit manuell bearbeiten."
+        "answer": "Unsere KI erreicht eine Genauigkeit von 98%+ bei klaren, standardmäßigen Belegen. Sie können alle extrahierten Daten vor dem Export jederzeit manuell bearbeiten."
       },
       "formats": {
         "question": "Welche Dateiformate unterstützen Sie?",
@@ -166,6 +170,10 @@
       "export": {
         "question": "Kann ich nach QuickBooks oder Xero exportieren?",
         "answer": "Wir exportieren in Excel- und CSV-Formate, die mit QuickBooks, Xero und allen wichtigen Buchhaltungsprogrammen kompatibel sind. Importieren Sie einfach die heruntergeladene Datei in Ihr Buchhaltungssystem."
+      },
+      "customTemplates": {
+        "question": "Wie funktionieren benutzerdefinierte Vorlagen?",
+        "answer": "Mit benutzerdefinierten Vorlagen können Sie wiederverwendbare Exportformate für Umsatzsteuererklärungen, Buchhaltung und mehr erstellen. Wenn Sie mit aktiviertem 'Zur Wiederverwendung speichern' exportieren, ordnet unsere KI automatisch die Belegfelder Ihren Vorlagenspalten zu. Sie können bis zu 10 Vorlagen KOSTENLOS speichern (keine Credits), und diese dann unbegrenzt oft verwenden. Jeder Export mit einer Vorlage kostet nur 1 Credit."
       },
       "wrongExtraction": {
         "question": "Was passiert, wenn die Extraktion falsch ist?",
@@ -629,7 +637,8 @@
     "dashboard": "Dashboard",
     "login": "Anmelden",
     "signup": "Registrieren",
-    "about": "Über Uns"
+    "about": "Über Uns",
+    "more": "Mehr"
   },
   "contact": {
     "title": "Kontaktieren Sie uns",

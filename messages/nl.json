@@ -44,7 +44,7 @@
     "watchDemo": "Bekijk Demo",
     "trustBadge": "Vertrouwd door 2000+ bedrijven wereldwijd",
     "valueProps": {
-      "accuracy": "95%+ Nauwkeurigheid",
+      "accuracy": "98%+ Nauwkeurigheid",
       "processing": "Verwerk in Seconden",
       "support": "GPT-4 Vision AI"
     },
@@ -60,7 +60,7 @@
       },
       "aiExtraction": {
         "title": "AI-Powered Gegevensextractie",
-        "description": "GPT-4 Vision extraheert handelaar, bedrag, datum, categorie, belasting en betaalmethode met 95%+ nauwkeurigheid."
+        "description": "GPT-4 Vision extraheert handelaar, bedrag, datum, categorie, belasting en betaalmethode met 98%+ nauwkeurigheid."
       },
       "export": {
         "title": "Exporteren naar Excel of CSV",
@@ -96,6 +96,10 @@
       "export": {
         "title": "Exporteren & Downloaden",
         "description": "Download uw georganiseerde gegevens als Excel of CSV"
+      },
+      "customize": {
+        "title": "Sjabloon Aanpassen (Optioneel)",
+        "description": "Maak AI-sjablonen voor uw BTW- of boekhoudformaten"
       }
     }
   },
@@ -121,7 +125,7 @@
           "role": "Winkeleigenaar"
         },
         {
-          "quote": "Ik was sceptisch over de AI-nauwkeurigheid, maar ReceiptSort doet het 95% van de tijd goed. De andere 5% kan ik gemakkelijk aanpassen.",
+          "quote": "Ik was sceptisch over de AI-nauwkeurigheid, maar ReceiptSort doet het 98% van de tijd goed. De AI-templates besparen me elke week uren.",
           "name": "Jennifer Martinez",
           "role": "Accountant"
         }
@@ -146,7 +150,7 @@
     "items": {
       "accuracy": {
         "question": "Hoe nauwkeurig is de AI-extractie?",
-        "answer": "Onze AI bereikt 95%+ nauwkeurigheid bij duidelijke, standaard bonnetjes. U kunt altijd handmatig alle geëxtraheerde gegevens bewerken voordat u exporteert."
+        "answer": "Onze AI bereikt 98%+ nauwkeurigheid bij duidelijke, standaard bonnetjes. U kunt altijd handmatig alle geëxtraheerde gegevens bewerken voordat u exporteert."
       },
       "formats": {
         "question": "Welke bestandsformaten ondersteunen jullie?",
@@ -167,6 +171,10 @@
       "export": {
         "question": "Kan ik exporteren naar QuickBooks of Xero?",
         "answer": "We exporteren naar Excel- en CSV-formaten, die compatibel zijn met QuickBooks, Xero en alle belangrijke boekhoudsoftware. Importeer het gedownloade bestand eenvoudig in uw boekhoudsysteem."
+      },
+      "customTemplates": {
+        "question": "Hoe werken aangepaste sjablonen?",
+        "answer": "Met aangepaste sjablonen kunt u herbruikbare exportformaten maken voor BTW-aangiften, boekhouding en meer. Wanneer u exporteert met 'Opslaan voor hergebruik' aangevinkt, koppelt onze AI automatisch de bonnetvelden aan uw sjabloonkolommen. U kunt tot 10 sjablonen GRATIS opslaan (geen credits), en deze onbeperkt gebruiken. Elke export met een sjabloon kost slechts 1 credit."
       },
       "wrongExtraction": {
         "question": "Wat als de extractie onjuist is?",
@@ -759,7 +767,8 @@
     "dashboard": "Dashboard",
     "login": "Inloggen",
     "signup": "Aanmelden",
-    "about": "Over Ons"
+    "about": "Over Ons",
+    "more": "Meer"
   },
   "contact": {
     "title": "Neem Contact Op",

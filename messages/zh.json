@@ -45,7 +45,7 @@
     "watchDemo": "观看演示",
     "trustBadge": "受到全球2000多家企业信赖",
     "valueProps": {
-      "accuracy": "95%以上准确率",
+      "accuracy": "98%以上准确率",
       "processing": "秒级处理",
       "support": "GPT-4 Vision AI"
     }
@@ -60,7 +60,7 @@
       },
       "aiExtraction": {
         "title": "AI驱动的数据提取",
-        "description": "GPT-4 Vision以95%以上的准确率提取商家、金额、日期、类别、税费和付款方式。"
+        "description": "GPT-4 Vision以98%以上的准确率提取商家、金额、日期、类别、税费和付款方式。"
       },
       "export": {
         "title": "导出为Excel或CSV",
@@ -96,6 +96,10 @@
       "export": {
         "title": "导出和下载",
         "description": "下载整理好的Excel或CSV数据"
+      },
+      "customize": {
+        "title": "自定义模板（可选）",
+        "description": "创建AI模板以匹配您的增值税或会计格式"
       }
     }
   },
@@ -121,7 +125,7 @@
           "role": "零售店老板"
         },
         {
-          "quote": "我对AI准确度持怀疑态度，但ReceiptSort有95%的时间都是正确的。另外5%我可以轻松修正。",
+          "quote": "我对AI准确度持怀疑态度，但ReceiptSort有98%的时间都是正确的。AI模板每周为我节省数小时。",
           "name": "Jennifer Martinez",
           "role": "会计师"
         }
@@ -146,7 +150,7 @@
     "items": {
       "accuracy": {
         "question": "AI提取的准确度如何？",
-        "answer": "我们的AI在清晰的标准收据上达到95%以上的准确率。您始终可以在导出前手动编辑任何提取的数据。"
+        "answer": "我们的AI在清晰的标准收据上达到98%以上的准确率。您始终可以在导出前手动编辑任何提取的数据。"
       },
       "formats": {
         "question": "支持哪些文件格式？",
@@ -167,6 +171,10 @@
       "export": {
         "question": "可以导出到QuickBooks或Xero吗？",
         "answer": "我们导出为Excel和CSV格式,这些格式与QuickBooks、Xero和所有主流会计软件兼容。只需将下载的文件导入您的会计系统即可。"
+      },
+      "customTemplates": {
+        "question": "自定义模板如何工作？",
+        "answer": "支付10积分一次即可创建自定义模板，然后可以无限次免费使用该模板导出收据。非常适合增值税申报、会计格式或任何需要特定Excel布局的场景。上传您的Excel模板，我们的AI会自动将收据字段映射到您的列。"
       },
       "wrongExtraction": {
         "question": "如果提取错误怎么办？",
@@ -778,7 +786,8 @@
     "dashboard": "控制面板",
     "login": "登录",
     "signup": "注册",
-    "about": "关于我们"
+    "about": "关于我们",
+    "more": "更多"
   },
   "contact": {
     "title": "联系我们",

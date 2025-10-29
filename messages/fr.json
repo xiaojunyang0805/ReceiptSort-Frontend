@@ -43,7 +43,7 @@
     "watchDemo": "Voir la Démo",
     "trustBadge": "Approuvé par plus de 2000 entreprises dans le monde",
     "valueProps": {
-      "accuracy": "95%+ de Précision",
+      "accuracy": "98%+ de Précision",
       "processing": "Traitement en Secondes",
       "support": "GPT-4 Vision AI"
     },
@@ -59,7 +59,7 @@
       },
       "aiExtraction": {
         "title": "Extraction de Données par IA",
-        "description": "GPT-4 Vision extrait le marchand, le montant, la date, la catégorie, la taxe et le mode de paiement avec une précision de 95%+."
+        "description": "GPT-4 Vision extrait le marchand, le montant, la date, la catégorie, la taxe et le mode de paiement avec une précision de 98%+."
       },
       "export": {
         "title": "Exporter vers Excel ou CSV",
@@ -95,6 +95,10 @@
       "export": {
         "title": "Exporter & Télécharger",
         "description": "Téléchargez vos données organisées au format Excel ou CSV"
+      },
+      "customize": {
+        "title": "Personnaliser le Modèle (Optionnel)",
+        "description": "Créez des modèles IA pour vos formats de TVA ou de comptabilité"
       }
     }
   },
@@ -120,7 +124,7 @@
           "role": "Propriétaire de Magasin"
         },
         {
-          "quote": "J'étais sceptique quant à la précision de l'IA, mais ReceiptSort l'obtient correctement 95% du temps. Les 5% restants, je peux facilement les corriger.",
+          "quote": "J'étais sceptique quant à la précision de l'IA, mais ReceiptSort l'obtient correctement 98% du temps. Les modèles basés sur l'IA me font gagner des heures chaque semaine.",
           "name": "Jennifer Martinez",
           "role": "Comptable"
         }
@@ -145,7 +149,7 @@
     "items": {
       "accuracy": {
         "question": "Quelle est la précision de l'extraction par IA?",
-        "answer": "Notre IA atteint une précision de 95%+ sur les reçus clairs et standards. Vous pouvez toujours modifier manuellement les données extraites avant l'exportation."
+        "answer": "Notre IA atteint une précision de 98%+ sur les reçus clairs et standards. Vous pouvez toujours modifier manuellement les données extraites avant l'exportation."
       },
       "formats": {
         "question": "Quels formats de fichiers prenez-vous en charge?",
@@ -166,6 +170,10 @@
       "export": {
         "question": "Puis-je exporter vers QuickBooks ou Xero?",
         "answer": "Nous exportons vers les formats Excel et CSV, qui sont compatibles avec QuickBooks, Xero et tous les principaux logiciels de comptabilité. Il suffit d'importer le fichier téléchargé dans votre système comptable."
+      },
+      "customTemplates": {
+        "question": "Comment fonctionnent les modèles personnalisés?",
+        "answer": "Les modèles personnalisés vous permettent de créer des formats d'exportation réutilisables pour les déclarations de TVA, la comptabilité et plus encore. Lorsque vous exportez avec 'Enregistrer pour réutiliser' coché, notre IA mappe automatiquement les champs de reçu à vos colonnes de modèle. Vous pouvez enregistrer jusqu'à 10 modèles GRATUITEMENT (sans crédits), puis les utiliser de manière illimitée. Chaque exportation avec un modèle ne coûte qu'1 crédit."
       },
       "wrongExtraction": {
         "question": "Que se passe-t-il si l'extraction est incorrecte?",
@@ -629,7 +637,8 @@
     "dashboard": "Tableau de Bord",
     "login": "Se Connecter",
     "signup": "S'inscrire",
-    "about": "À Propos"
+    "about": "À Propos",
+    "more": "Plus"
   },
   "contact": {
     "title": "Contactez-nous",

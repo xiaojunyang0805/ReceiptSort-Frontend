@@ -790,7 +790,8 @@
     "dashboard": "Dashboard",
     "login": "Login",
     "signup": "Sign Up",
-    "about": "About"
+    "about": "About",
+    "more": "More"
   },
   "contact": {
     "title": "Get in Touch",

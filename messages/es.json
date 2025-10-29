@@ -43,7 +43,7 @@
     "watchDemo": "Ver Demo",
     "trustBadge": "Confiado por más de 2000 empresas en todo el mundo",
     "valueProps": {
-      "accuracy": "95%+ Precisión",
+      "accuracy": "98%+ Precisión",
       "processing": "Procesar en Segundos",
       "support": "GPT-4 Vision AI"
     },
@@ -59,7 +59,7 @@
       },
       "aiExtraction": {
         "title": "Extracción de Datos con IA",
-        "description": "GPT-4 Vision extrae comerciante, monto, fecha, categoría, impuesto y método de pago con 95%+ de precisión."
+        "description": "GPT-4 Vision extrae comerciante, monto, fecha, categoría, impuesto y método de pago con 98%+ de precisión."
       },
       "export": {
         "title": "Exportar a Excel o CSV",
@@ -95,6 +95,10 @@
       "export": {
         "title": "Exportar y Descargar",
         "description": "Descarga tus datos organizados como Excel o CSV"
+      },
+      "customize": {
+        "title": "Personalizar Plantilla (Opcional)",
+        "description": "Crea plantillas de IA para tus formatos de IVA o contabilidad"
       }
     }
   },
@@ -120,7 +124,7 @@
           "role": "Propietario de Tienda"
         },
         {
-          "quote": "Era escéptico sobre la precisión de la IA, pero ReceiptSort lo hace bien el 95% del tiempo. El otro 5% puedo corregirlo fácilmente.",
+          "quote": "Era escéptico sobre la precisión de la IA, pero ReceiptSort lo hace bien el 98% del tiempo. Las plantillas con IA me ahorran horas cada semana.",
           "name": "Jennifer Martinez",
           "role": "Contadora"
         }
@@ -145,7 +149,7 @@
     "items": {
       "accuracy": {
         "question": "¿Qué tan precisa es la extracción por IA?",
-        "answer": "Nuestra IA alcanza una precisión del 95%+ en recibos claros y estándar. Siempre puedes editar manualmente cualquier dato extraído antes de exportar."
+        "answer": "Nuestra IA alcanza una precisión del 98%+ en recibos claros y estándar. Siempre puedes editar manualmente cualquier dato extraído antes de exportar."
       },
       "formats": {
         "question": "¿Qué formatos de archivo soportan?",
@@ -166,6 +170,10 @@
       "export": {
         "question": "¿Puedo exportar a QuickBooks o Xero?",
         "answer": "Exportamos a formatos Excel y CSV, que son compatibles con QuickBooks, Xero y todos los principales software de contabilidad. Simplemente importa el archivo descargado en tu sistema de contabilidad."
+      },
+      "customTemplates": {
+        "question": "¿Cómo funcionan las plantillas personalizadas?",
+        "answer": "Las plantillas personalizadas te permiten crear formatos de exportación reutilizables para declaraciones de IVA, contabilidad y más. Cuando exportas con 'Guardar para reutilizar' marcado, nuestra IA mapea automáticamente los campos del recibo a las columnas de tu plantilla. Puedes guardar hasta 10 plantillas GRATIS (sin créditos), y luego usarlas ilimitadamente. Cada exportación con una plantilla cuesta solo 1 crédito."
       },
       "wrongExtraction": {
         "question": "¿Qué pasa si la extracción es incorrecta?",
@@ -629,7 +637,8 @@
     "dashboard": "Panel",
     "login": "Iniciar Sesión",
     "signup": "Registrarse",
-    "about": "Acerca de"
+    "about": "Acerca de",
+    "more": "Más"
   },
   "contact": {
     "title": "Ponte en Contacto",

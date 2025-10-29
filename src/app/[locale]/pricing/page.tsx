@@ -13,6 +13,7 @@ import { getTranslations } from 'next-intl/server'
 
 export default async function PricingPage() {
   const t = await getTranslations('pricing')
+  const tPkg = await getTranslations('creditPackages')
   const supabase = await createClient()
   const {
     data: { user },
@@ -83,8 +84,8 @@ export default async function PricingPage() {
               )}
 
               <CardHeader className="text-center pb-4">
-                <CardTitle className="text-2xl">{pkg.name}</CardTitle>
-                <CardDescription>{pkg.description}</CardDescription>
+                <CardTitle className="text-2xl">{tPkg(`${pkg.id}.name`)}</CardTitle>
+                <CardDescription>{tPkg(`${pkg.id}.description`)}</CardDescription>
               </CardHeader>
 
               <CardContent className="space-y-4">
