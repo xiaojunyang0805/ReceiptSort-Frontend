@@ -37,8 +37,8 @@
     "account": "Account"
   },
   "hero": {
-    "headline": "Verspil geen uren meer aan het invoeren van bonnen",
-    "headlineHighlight": "Bonnetje Invoer",
+    "headline": "Uw Bonnetjes, Uw Formaat, Automatisch",
+    "headlineHighlight": "Uw Formaat",
     "subheadline": "Extraheer gegevens van bonnetjes in seconden met AI.",
     "subheadlineDetails": "Upload bonnetjes → AI extraheert gegevens → Download Excel.",
     "watchDemo": "Bekijk Demo",
@@ -781,7 +781,8 @@
     "login": "Inloggen",
     "signup": "Aanmelden",
     "about": "Over Ons",
-    "more": "Meer"
+    "more": "Meer",
+    "customTemplates": "Aangepaste Sjablonen"
   },
   "contact": {
     "title": "Neem Contact Op",

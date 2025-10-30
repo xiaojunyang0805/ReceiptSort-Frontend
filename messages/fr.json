@@ -36,8 +36,8 @@
     "account": "Compte"
   },
   "hero": {
-    "headline": "Arrêtez de Perdre des Heures sur la Saisie de Reçus",
-    "headlineHighlight": "Saisie de Reçus",
+    "headline": "Vos Reçus, Votre Format, Automatiquement",
+    "headlineHighlight": "Votre Format",
     "subheadline": "Extrayez les données des reçus en quelques secondes avec l'IA.",
     "subheadlineDetails": "Téléchargez des reçus → L'IA extrait les données → Téléchargez Excel.",
     "watchDemo": "Voir la Démo",
@@ -655,7 +655,8 @@
     "login": "Se Connecter",
     "signup": "S'inscrire",
     "about": "À Propos",
-    "more": "Plus"
+    "more": "Plus",
+    "customTemplates": "Modèles Personnalisés"
   },
   "contact": {
     "title": "Contactez-nous",

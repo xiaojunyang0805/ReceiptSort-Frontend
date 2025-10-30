@@ -36,8 +36,8 @@
     "account": "Cuenta"
   },
   "hero": {
-    "headline": "Deja de Perder Horas en la Entrada de Recibos",
-    "headlineHighlight": "Entrada de Recibos",
+    "headline": "Sus Recibos, Su Formato, Automáticamente",
+    "headlineHighlight": "Su Formato",
     "subheadline": "Extrae datos de recibos en segundos con IA.",
     "subheadlineDetails": "Sube recibos → IA extrae datos → Descarga Excel.",
     "watchDemo": "Ver Demo",
@@ -655,7 +655,8 @@
     "login": "Iniciar Sesión",
     "signup": "Registrarse",
     "about": "Acerca de",
-    "more": "Más"
+    "more": "Más",
+    "customTemplates": "Plantillas Personalizadas"
   },
   "contact": {
     "title": "Ponte en Contacto",

@@ -36,8 +36,8 @@
     "account": "アカウント"
   },
   "hero": {
-    "headline": "レシート入力に費やす時間をなくしましょう",
-    "headlineHighlight": "レシート入力",
+    "headline": "あなたのレシート、あなたの形式、自動的に",
+    "headlineHighlight": "あなたの形式",
     "subheadline": "AIで数秒でレシートからデータを抽出します。",
     "subheadlineDetails": "レシートアップロード → AIがデータ抽出 → Excelダウンロード",
     "watchDemo": "デモを見る",
@@ -655,7 +655,8 @@
     "login": "ログイン",
     "signup": "サインアップ",
     "about": "私たちについて",
-    "more": "もっと見る"
+    "more": "もっと見る",
+    "customTemplates": "カスタムテンプレート"
   },
   "contact": {
     "title": "お問い合わせ",

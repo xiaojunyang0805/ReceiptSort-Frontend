@@ -37,8 +37,8 @@
     "account": "账户"
   },
   "hero": {
-    "headline": "不再浪费时间手工录入收据",
-    "headlineHighlight": "收据录入",
+    "headline": "您的收据，您的格式，自动完成",
+    "headlineHighlight": "您的格式",
     "subheadline": "使用AI在几秒钟内提取收据数据。",
     "subheadlineDetails": "上传收据 → AI提取数据 → 下载Excel。",
     "getStarted": "免费开始",
@@ -804,7 +804,8 @@
     "login": "登录",
     "signup": "注册",
     "about": "关于我们",
-    "more": "更多"
+    "more": "更多",
+    "customTemplates": "自定义模板"
   },
   "contact": {
     "title": "联系我们",

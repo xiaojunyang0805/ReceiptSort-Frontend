@@ -99,7 +99,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/privacy" className="text-gray-600 hover:text-primary transition-colors">
-                  {t('cookiePolicy')}
+                  {t('privacyPolicy')}
                 </Link>
               </li>
             </ul>

@@ -36,8 +36,8 @@
     "account": "Konto"
   },
   "hero": {
-    "headline": "Verschwenden Sie keine Stunden mehr mit Belegerfassung",
-    "headlineHighlight": "Belegerfassung",
+    "headline": "Ihre Belege, Ihr Format, Automatisch",
+    "headlineHighlight": "Ihr Format",
     "subheadline": "Extrahieren Sie Daten aus Belegen in Sekunden mit KI.",
     "subheadlineDetails": "Belege hochladen → KI extrahiert Daten → Excel herunterladen.",
     "watchDemo": "Demo Ansehen",
@@ -655,7 +655,8 @@
     "login": "Anmelden",
     "signup": "Registrieren",
     "about": "Über Uns",
-    "more": "Mehr"
+    "more": "Mehr",
+    "customTemplates": "Benutzerdefinierte Vorlagen"
   },
   "contact": {
     "title": "Kontaktieren Sie uns",
