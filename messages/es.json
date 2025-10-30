@@ -87,28 +87,24 @@
   },
   "howItWorks": {
     "title": "Cómo Funciona",
-    "subtitle": "Comienza en 3 simples pasos",
+    "subtitle": "Comienza en 4 simples pasos",
     "description": "De la foto del recibo a la hoja de cálculo organizada en menos de un minuto",
     "steps": {
-      "upload": {
-        "title": "Subir Recibos",
-        "description": "Arrastra y suelta o haz clic para subir imágenes de recibos"
-      },
-      "process": {
-        "title": "IA Procesa Datos",
-        "description": "Nuestra IA extrae automáticamente toda la información clave"
-      },
-      "export": {
-        "title": "Exportar y Descargar",
-        "description": "Descarga tus datos organizados como Excel o CSV"
-      },
-      "customize": {
-        "title": "Personalizar Plantilla (Opcional)",
-        "description": "Crea plantillas de IA para tus formatos de IVA o contabilidad"
-      },
       "template": {
         "title": "Diseñe Su Formato de Exportación Perfecto",
         "description": "Cree una plantilla personalizada con sus nombres exactos de columna y estructura. Toma 2 minutos. Guarde hasta 10 plantillas gratis—sin cargos de créditos."
+      },
+      "upload": {
+        "title": "Suba Sus Recibos",
+        "description": "Arrastra y suelta recibos, facturas o notas médicas. Funciona con fotos o PDFs desde cualquier dispositivo. Soporta todos los formatos de imagen principales."
+      },
+      "process": {
+        "title": "IA Extrae y Mapea a Su Plantilla",
+        "description": "Nuestra IA lee el documento y mapea inteligentemente los datos extraídos a las columnas de SU plantilla—incluso manejando diferentes terminologías automáticamente."
+      },
+      "export": {
+        "title": "Descargue en Su Formato",
+        "description": "Obtenga un archivo Excel o CSV perfectamente formateado que coincida con su plantilla—listo para importar directamente a su sistema contable o presentar a las autoridades."
       }
     },
     "cta": "Comience Gratis: Cree Su Primera Plantilla"
@@ -126,19 +122,19 @@
       "title": "Lo que dicen nuestros clientes",
       "items": [
         {
-          "quote": "ReceiptSort me ahorró horas de entrada manual de datos. La precisión de la IA es impresionante y exportar a Excel es perfecto.",
-          "name": "Sarah Chen",
-          "role": "Diseñadora Freelance"
+          "quote": "La función de mapeo de plantillas es brillante. Creé una plantilla para mis declaraciones de IVA, y ahora cada recibo se formatea automáticamente para cumplir con los requisitos de la oficina de impuestos. Me ahorra más de 20 minutos cada mes, y nunca cometo errores de formato.",
+          "name": "Lisa van Dijk",
+          "role": "Consultora Independiente, Países Bajos"
         },
         {
-          "quote": "Como propietario de una pequeña empresa, no tengo tiempo para la contabilidad. Esta herramienta es revolucionaria para el seguimiento de gastos.",
+          "quote": "Como propietario de un pequeño negocio, no tengo tiempo para la contabilidad. Esta herramienta es un cambio radical para el seguimiento de gastos.",
           "name": "Marcus Johnson",
-          "role": "Propietario de Tienda"
+          "role": "Propietario de Tienda Minorista"
         },
         {
-          "quote": "Era escéptico sobre la precisión de la IA, pero ReceiptSort lo hace bien el 98% del tiempo. Las plantillas con IA me ahorran horas cada semana.",
+          "quote": "Tenía dudas sobre la precisión de la IA, pero ReceiptSort acierta el 98% de las veces. Sin embargo, el verdadero cambio de juego es el mapeo de plantillas—mis recibos se exportan exactamente como mi contador los necesita. Ya no hay reformateo manual.",
           "name": "Jennifer Martinez",
-          "role": "Contadora"
+          "role": "Propietaria de Pequeño Negocio"
         }
       ]
     },

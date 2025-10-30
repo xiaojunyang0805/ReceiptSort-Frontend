@@ -88,28 +88,24 @@
   },
   "howItWorks": {
     "title": "Hoe Het Werkt",
-    "subtitle": "Ga aan de slag in 3 eenvoudige stappen",
+    "subtitle": "Ga aan de slag in 4 eenvoudige stappen",
     "description": "Van bonnetjefoto naar georganiseerde spreadsheet in minder dan een minuut",
     "steps": {
-      "upload": {
-        "title": "Upload Bonnetjes",
-        "description": "Sleep en zet bonnetjeafbeeldingen neer of klik om te uploaden"
-      },
-      "process": {
-        "title": "AI Verwerkt Gegevens",
-        "description": "Onze AI extraheert automatisch alle belangrijke informatie"
-      },
-      "export": {
-        "title": "Exporteren & Downloaden",
-        "description": "Download uw georganiseerde gegevens als Excel of CSV"
-      },
-      "customize": {
-        "title": "Sjabloon Aanpassen (Optioneel)",
-        "description": "Maak AI-sjablonen voor uw BTW- of boekhoudformaten"
-      },
       "template": {
         "title": "Ontwerp Uw Perfecte Exportformaat",
         "description": "Maak een aangepast sjabloon met uw exacte kolomnamen en structuur. Duurt 2 minuten. Bewaar tot 10 sjablonen gratis—geen credits vereist."
+      },
+      "upload": {
+        "title": "Upload Uw Bonnetjes",
+        "description": "Sleep en zet bonnetjes, facturen of medische notities neer. Werkt met foto's of PDF's vanaf elk apparaat. Ondersteunt alle belangrijke beeldformaten."
+      },
+      "process": {
+        "title": "AI Extraheert & Koppelt aan Uw Sjabloon",
+        "description": "Onze AI leest het document en koppelt geëxtraheerde gegevens intelligent aan UW sjabloonkolommen—zelfs automatisch verschillende terminologieën afhandelend."
+      },
+      "export": {
+        "title": "Download in Uw Formaat",
+        "description": "Krijg een perfect geformatteerd Excel- of CSV-bestand dat overeenkomt met uw sjabloon—klaar om direct te importeren in uw boekhoudsysteem of in te dienen bij autoriteiten."
       }
     },
     "cta": "Begin Gratis: Maak Uw Eerste Sjabloon"
@@ -127,19 +123,19 @@
       "title": "Wat onze klanten zeggen",
       "items": [
         {
-          "quote": "ReceiptSort heeft me uren handmatige gegevensinvoer bespaard. De AI-nauwkeurigheid is indrukwekkend en exporteren naar Excel is naadloos.",
-          "name": "Sarah Chen",
-          "role": "Freelance Designer"
+          "quote": "De sjabloonkoppelingsfunctie is briljant. Ik heb één sjabloon gemaakt voor mijn BTW-aangiftes, en nu formatteert elk bonnetje automatisch volgens de eisen van de belastingdienst. Bespaart me 20+ minuten per maand, en ik maak geen formateerfouten meer.",
+          "name": "Lisa van Dijk",
+          "role": "Freelance Consultant, Nederland"
         },
         {
-          "quote": "Als eigenaar van een klein bedrijf heb ik geen tijd voor boekhouding. Deze tool is een game-changer voor onkostenregistratie.",
+          "quote": "Als eigenaar van een klein bedrijf heb ik geen tijd voor boekhouding. Deze tool is een gamechanger voor het bijhouden van uitgaven.",
           "name": "Marcus Johnson",
           "role": "Winkeleigenaar"
         },
         {
-          "quote": "Ik was sceptisch over de AI-nauwkeurigheid, maar ReceiptSort doet het 98% van de tijd goed. De AI-templates besparen me elke week uren.",
+          "quote": "Ik was sceptisch over AI-nauwkeurigheid, maar ReceiptSort heeft het 98% van de tijd bij het juiste eind. Echter, de echte gamechanger is de sjabloonkoppeling—mijn bonnetjes exporteren precies zoals mijn accountant ze nodig heeft. Geen handmatig herformatteren meer.",
           "name": "Jennifer Martinez",
-          "role": "Accountant"
+          "role": "Eigenaar Klein Bedrijf"
         }
       ]
     },

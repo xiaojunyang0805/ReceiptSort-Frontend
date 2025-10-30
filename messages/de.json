@@ -87,28 +87,24 @@
   },
   "howItWorks": {
     "title": "Wie Es Funktioniert",
-    "subtitle": "Starten Sie in 3 einfachen Schritten",
+    "subtitle": "Starten Sie in 4 einfachen Schritten",
     "description": "Vom Belegfoto zur organisierten Tabelle in unter einer Minute",
     "steps": {
-      "upload": {
-        "title": "Belege Hochladen",
-        "description": "Ziehen Sie Belegbilder per Drag & Drop oder klicken Sie zum Hochladen"
-      },
-      "process": {
-        "title": "KI Verarbeitet Daten",
-        "description": "Unsere KI extrahiert automatisch alle wichtigen Informationen"
-      },
-      "export": {
-        "title": "Exportieren & Herunterladen",
-        "description": "Laden Sie Ihre organisierten Daten als Excel oder CSV herunter"
-      },
-      "customize": {
-        "title": "Vorlage Anpassen (Optional)",
-        "description": "Erstellen Sie KI-Vorlagen für Ihre MwSt.- oder Buchhaltungsformate"
-      },
       "template": {
         "title": "Gestalten Sie Ihr Perfektes Exportformat",
         "description": "Erstellen Sie eine benutzerdefinierte Vorlage mit Ihren exakten Spaltennamen und Struktur. Dauert 2 Minuten. Speichern Sie bis zu 10 Vorlagen kostenlos—keine Credits erforderlich."
+      },
+      "upload": {
+        "title": "Laden Sie Ihre Belege Hoch",
+        "description": "Ziehen Sie Belege, Rechnungen oder Arztberichte per Drag & Drop. Funktioniert mit Fotos oder PDFs von jedem Gerät. Unterstützt alle gängigen Bildformate."
+      },
+      "process": {
+        "title": "KI Extrahiert & Ordnet Ihrer Vorlage Zu",
+        "description": "Unsere KI liest das Dokument und ordnet die extrahierten Daten intelligent IHREN Vorlagenspalten zu—selbst unterschiedliche Terminologien werden automatisch behandelt."
+      },
+      "export": {
+        "title": "In Ihrem Format Herunterladen",
+        "description": "Erhalten Sie eine perfekt formatierte Excel- oder CSV-Datei, die zu Ihrer Vorlage passt—bereit für den direkten Import in Ihr Buchhaltungssystem oder zur Vorlage bei Behörden."
       }
     },
     "cta": "Kostenlos Starten: Erstellen Sie Ihre Erste Vorlage"
@@ -126,9 +122,9 @@
       "title": "Was unsere Kunden sagen",
       "items": [
         {
-          "quote": "ReceiptSort hat mir Stunden manueller Dateneingabe erspart. Die KI-Genauigkeit ist beeindruckend und der Export nach Excel ist nahtlos.",
-          "name": "Sarah Chen",
-          "role": "Freiberufliche Designerin"
+          "quote": "Die Vorlagen-Zuordnungsfunktion ist brillant. Ich habe eine Vorlage für meine MwSt.-Erklärungen erstellt, und jetzt formatiert sich jeder Beleg automatisch entsprechend den Anforderungen des Finanzamts. Spart mir jeden Monat über 20 Minuten, und ich mache keine Formatierungsfehler mehr.",
+          "name": "Lisa van Dijk",
+          "role": "Freiberufliche Beraterin, Niederlande"
         },
         {
           "quote": "Als Kleinunternehmer habe ich keine Zeit für die Buchhaltung. Dieses Tool ist ein Game-Changer für die Spesenverfolgung.",
@@ -136,9 +132,9 @@
           "role": "Einzelhandelsinhaber"
         },
         {
-          "quote": "Ich war skeptisch bezüglich der KI-Genauigkeit, aber ReceiptSort macht es zu 98% richtig. Die KI-gestützten Vorlagen sparen mir jede Woche Stunden.",
+          "quote": "Ich war skeptisch bezüglich der KI-Genauigkeit, aber ReceiptSort macht es zu 98% richtig. Die Vorlagen-Zuordnung ist jedoch der wahre Game-Changer—meine Belege werden genau so exportiert, wie mein Buchhalter sie braucht. Keine manuelle Neuformatierung mehr.",
           "name": "Jennifer Martinez",
-          "role": "Buchhalterin"
+          "role": "Kleinunternehmerin"
         }
       ]
     },

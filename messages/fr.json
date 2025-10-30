@@ -87,28 +87,24 @@
   },
   "howItWorks": {
     "title": "Comment Ça Marche",
-    "subtitle": "Commencez en 3 étapes simples",
+    "subtitle": "Commencez en 4 étapes simples",
     "description": "De la photo du reçu à la feuille de calcul organisée en moins d'une minute",
     "steps": {
-      "upload": {
-        "title": "Télécharger les Reçus",
-        "description": "Glissez-déposez ou cliquez pour télécharger des images de reçus"
-      },
-      "process": {
-        "title": "L'IA Traite les Données",
-        "description": "Notre IA extrait automatiquement toutes les informations clés"
-      },
-      "export": {
-        "title": "Exporter & Télécharger",
-        "description": "Téléchargez vos données organisées au format Excel ou CSV"
-      },
-      "customize": {
-        "title": "Personnaliser le Modèle (Optionnel)",
-        "description": "Créez des modèles IA pour vos formats de TVA ou de comptabilité"
-      },
       "template": {
         "title": "Concevez Votre Format d'Exportation Parfait",
         "description": "Créez un modèle personnalisé avec vos noms de colonnes exacts et votre structure. Prend 2 minutes. Enregistrez jusqu'à 10 modèles gratuitement—aucun crédit facturé."
+      },
+      "upload": {
+        "title": "Téléchargez Vos Reçus",
+        "description": "Glissez-déposez des reçus, factures ou notes médicales. Fonctionne avec des photos ou PDF depuis n'importe quel appareil. Supporte tous les formats d'image courants."
+      },
+      "process": {
+        "title": "L'IA Extrait et Mappe à Votre Modèle",
+        "description": "Notre IA lit le document et mappe intelligemment les données extraites aux colonnes de VOTRE modèle—même en gérant automatiquement différentes terminologies."
+      },
+      "export": {
+        "title": "Téléchargez dans Votre Format",
+        "description": "Obtenez un fichier Excel ou CSV parfaitement formaté correspondant à votre modèle—prêt à importer directement dans votre système comptable ou à soumettre aux autorités."
       }
     },
     "cta": "Commencez Gratuitement : Créez Votre Premier Modèle"
@@ -126,19 +122,19 @@
       "title": "Ce que disent nos clients",
       "items": [
         {
-          "quote": "ReceiptSort m'a fait gagner des heures de saisie manuelle de données. La précision de l'IA est impressionnante et l'exportation vers Excel est fluide.",
-          "name": "Sarah Chen",
-          "role": "Designer Freelance"
+          "quote": "La fonction de mappage des modèles est brillante. J'ai créé un modèle pour mes déclarations de TVA, et maintenant chaque reçu se formate automatiquement pour répondre aux exigences du bureau des impôts. M'économise plus de 20 minutes chaque mois, et je ne fais plus d'erreurs de formatage.",
+          "name": "Lisa van Dijk",
+          "role": "Consultante Indépendante, Pays-Bas"
         },
         {
           "quote": "En tant que propriétaire de petite entreprise, je n'ai pas le temps pour la comptabilité. Cet outil change la donne pour le suivi des dépenses.",
           "name": "Marcus Johnson",
-          "role": "Propriétaire de Magasin"
+          "role": "Propriétaire de Magasin de Détail"
         },
         {
-          "quote": "J'étais sceptique quant à la précision de l'IA, mais ReceiptSort l'obtient correctement 98% du temps. Les modèles basés sur l'IA me font gagner des heures chaque semaine.",
+          "quote": "J'étais sceptique quant à la précision de l'IA, mais ReceiptSort réussit 98% du temps. Cependant, le véritable changement de jeu est le mappage des modèles—mes reçus s'exportent exactement comme mon comptable en a besoin. Plus de reformatage manuel.",
           "name": "Jennifer Martinez",
-          "role": "Comptable"
+          "role": "Propriétaire de Petite Entreprise"
         }
       ]
     },
