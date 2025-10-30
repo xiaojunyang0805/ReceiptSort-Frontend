@@ -47,7 +47,8 @@
       "processing": "Verarbeitung in Sekunden",
       "support": "GPT-4 Vision AI"
     },
-    "getStarted": "Kostenlos Starten"
+    "getStarted": "Kostenlos Starten",
+    "processTagline": "Hochladen → KI ordnet Ihrer Vorlage zu → In Ihrem Format herunterladen"
   },
   "features": {
     "title": "Alles, was Sie zur Organisation von Belegen benötigen",
@@ -58,8 +59,8 @@
         "description": "Ziehen Sie Belege per Drag & Drop von Ihrem Telefon, E-Mail oder Scanner. Unterstützt alle gängigen Bildformate (JPG, PNG, WebP, TIFF, BMP, GIF) und PDFs bis 10MB pro Datei."
       },
       "aiExtraction": {
-        "title": "KI-gestützte Datenextraktion",
-        "description": "GPT-4 Vision extrahiert Händler, Betrag, Datum, Kategorie, Steuer und Zahlungsmethode mit 98%+ Genauigkeit."
+        "title": "Multi-Dokument-Intelligenz",
+        "description": "Funktioniert mit Belegen, Rechnungen UND Arztberichten—nicht nur Belege. KI passt sich nahtlos verschiedenen Dokumenttypen an. GPT-4 Vision erreicht 95%+ Genauigkeit bei allen Formaten. Verarbeitet automatisch mehrere Sprachen und Währungsformate."
       },
       "export": {
         "title": "Nach Excel oder CSV Exportieren",
@@ -76,6 +77,11 @@
       "timeSaving": {
         "title": "Sparen Sie 5+ Stunden Pro Woche",
         "description": "Stoppen Sie die manuelle Dateneingabe. Verarbeiten Sie 100 Belege in der Zeit, die Sie für 1 manuell benötigen. Jeder Beleg wird in unter 5 Sekunden verarbeitet."
+      },
+      "templateMapping": {
+        "title": "KI Lernt Ihr Format",
+        "description": "Erstellen Sie benutzerdefinierte Exportvorlagen mit IHREN Spaltennamen (MwSt-Betrag, Projektcode, Kunden-ID usw.). Unsere KI ordnet extrahierte Daten automatisch Ihrem Format zu—auch wenn Belege unterschiedliche Begriffe verwenden (Tax vs VAT vs Btw vs MwSt). Speichern Sie 10 Vorlagen kostenlos, unbegrenzt wiederverwendbar. Jeder Export kostet nur 1 Credit.",
+        "badge": "EINZIGARTIGES FEATURE"
       }
     }
   },
@@ -99,6 +105,10 @@
       "customize": {
         "title": "Vorlage Anpassen (Optional)",
         "description": "Erstellen Sie KI-Vorlagen für Ihre MwSt.- oder Buchhaltungsformate"
+      },
+      "template": {
+        "title": "Gestalten Sie Ihr Perfektes Exportformat",
+        "description": "Erstellen Sie eine benutzerdefinierte Vorlage mit Ihren exakten Spaltennamen und Struktur. Dauert 2 Minuten. Speichern Sie bis zu 10 Vorlagen kostenlos—keine Credits erforderlich."
       }
     }
   },
@@ -108,7 +118,8 @@
       "receipts": "Verarbeitete Belege",
       "users": "Aktive Nutzer",
       "accuracy": "Durchschnittliche Genauigkeit",
-      "timeSaved": "Eingesparte Stunden"
+      "timeSaved": "Eingesparte Stunden",
+      "timeSavedPerDoc": "Gespart Pro Dokument"
     },
     "testimonials": {
       "title": "Was unsere Kunden sagen",
@@ -198,7 +209,13 @@
     "subtitle": "Beginnen Sie noch heute mit der Verarbeitung von Belegen mit KI",
     "button": "Belege Verarbeiten Starten",
     "viewPricing": "Preise Ansehen",
-    "trustIndicator": "Schließen Sie sich 10.000+ Nutzern an, die ReceiptSorter vertrauen"
+    "trustIndicator": "Schließen Sie sich 10.000+ Nutzern an, die ReceiptSorter vertrauen",
+    "trustBadges": {
+      "creditsNeverExpire": "Credits verfallen nie",
+      "templatesReusable": "Vorlagen unbegrenzt wiederverwendbar",
+      "moneyBack": "30-Tage-Geld-zurück-Garantie",
+      "allSoftware": "Funktioniert mit jeder Buchhaltungssoftware"
+    }
   },
   "auth": {
     "loginTitle": "Anmelden",

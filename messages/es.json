@@ -47,7 +47,8 @@
       "processing": "Procesar en Segundos",
       "support": "GPT-4 Vision AI"
     },
-    "getStarted": "Empezar Gratis"
+    "getStarted": "Empezar Gratis",
+    "processTagline": "Subir → IA mapea a su plantilla → Descargar en su formato"
   },
   "features": {
     "title": "Todo lo que necesitas para organizar recibos",
@@ -58,8 +59,8 @@
         "description": "Arrastra y suelta recibos desde tu teléfono, correo o escáner. Soporta todos los formatos de imagen comunes (JPG, PNG, WebP, TIFF, BMP, GIF) y PDFs de hasta 10MB por archivo."
       },
       "aiExtraction": {
-        "title": "Extracción de Datos con IA",
-        "description": "GPT-4 Vision extrae comerciante, monto, fecha, categoría, impuesto y método de pago con 98%+ de precisión."
+        "title": "Inteligencia Multi-Documento",
+        "description": "Funciona con recibos, facturas Y notas médicas—no solo recibos. La IA se adapta perfectamente a diferentes tipos de documentos. GPT-4 Vision logra 95%+ de precisión en todos los formatos. Maneja automáticamente múltiples idiomas y formatos de moneda."
       },
       "export": {
         "title": "Exportar a Excel o CSV",
@@ -76,6 +77,11 @@
       "timeSaving": {
         "title": "Ahorra 5+ Horas Semanales",
         "description": "Deja la entrada manual de datos. Procesa 100 recibos en el tiempo que lleva hacer 1 manualmente. Cada recibo se procesa en menos de 5 segundos."
+      },
+      "templateMapping": {
+        "title": "IA Que Aprende Su Formato",
+        "description": "Cree plantillas de exportación personalizadas con SUS nombres de columna (Monto IVA, Código de Proyecto, ID de Cliente, etc.). Nuestra IA mapea automáticamente los datos extraídos a su formato—incluso cuando los recibos usan términos diferentes (Tax vs VAT vs Btw vs IVA). Guarde 10 plantillas gratis, reutilice ilimitadamente. Cada exportación cuesta solo 1 crédito.",
+        "badge": "FUNCIÓN ÚNICA"
       }
     }
   },
@@ -99,6 +105,10 @@
       "customize": {
         "title": "Personalizar Plantilla (Opcional)",
         "description": "Crea plantillas de IA para tus formatos de IVA o contabilidad"
+      },
+      "template": {
+        "title": "Diseñe Su Formato de Exportación Perfecto",
+        "description": "Cree una plantilla personalizada con sus nombres exactos de columna y estructura. Toma 2 minutos. Guarde hasta 10 plantillas gratis—sin cargos de créditos."
       }
     }
   },
@@ -108,7 +118,8 @@
       "receipts": "Recibos Procesados",
       "users": "Usuarios Activos",
       "accuracy": "Precisión Promedio",
-      "timeSaved": "Horas Ahorradas"
+      "timeSaved": "Horas Ahorradas",
+      "timeSavedPerDoc": "Ahorrado Por Documento"
     },
     "testimonials": {
       "title": "Lo que dicen nuestros clientes",
@@ -198,7 +209,13 @@
     "subtitle": "Comienza a procesar recibos con IA hoy",
     "button": "Comenzar a Procesar Recibos",
     "viewPricing": "Ver Precios",
-    "trustIndicator": "Únete a más de 10,000 usuarios que confían en ReceiptSorter"
+    "trustIndicator": "Únete a más de 10,000 usuarios que confían en ReceiptSorter",
+    "trustBadges": {
+      "creditsNeverExpire": "Los créditos nunca expiran",
+      "templatesReusable": "Plantillas reutilizables ilimitadamente",
+      "moneyBack": "Garantía de devolución de 30 días",
+      "allSoftware": "Funciona con todo software de contabilidad"
+    }
   },
   "auth": {
     "loginTitle": "Iniciar Sesión",

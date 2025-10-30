@@ -48,7 +48,8 @@
       "accuracy": "98%以上准确率",
       "processing": "秒级处理",
       "support": "GPT-4 Vision AI"
-    }
+    },
+    "processTagline": "上传 → AI映射到您的模板 → 以您的格式下载"
   },
   "features": {
     "title": "整理收据所需的一切功能",
@@ -59,8 +60,8 @@
         "description": "从手机、电子邮件或扫描仪拖放收据。支持所有常见图片格式（JPG、PNG、WebP、TIFF、BMP、GIF）和最大每个文件10MB的PDF。"
       },
       "aiExtraction": {
-        "title": "AI驱动的数据提取",
-        "description": "GPT-4 Vision以98%以上的准确率提取商家、金额、日期、类别、税费和付款方式。"
+        "title": "多文档智能识别",
+        "description": "适用于收据、发票和医疗记录——不仅仅是收据。AI无缝适应不同文档类型。GPT-4 Vision在所有格式上达到95%+准确率。自动处理多种语言和货币格式。"
       },
       "export": {
         "title": "导出为Excel或CSV",
@@ -77,6 +78,11 @@
       "timeSaving": {
         "title": "每周节省5小时以上",
         "description": "告别手工数据录入。在处理1张收据的时间内处理100张。每张收据处理时间不到5秒。"
+      },
+      "templateMapping": {
+        "title": "AI学习您的格式",
+        "description": "使用您的列名（增值税金额、项目代码、客户ID等）创建自定义导出模板。我们的AI自动将提取的数据映射到您的格式——即使收据使用不同术语（Tax vs VAT vs Btw vs MwSt）。免费保存10个模板，无限次重用。每次导出仅需1积分。",
+        "badge": "独特功能"
       }
     }
   },
@@ -100,6 +106,10 @@
       "customize": {
         "title": "自定义模板（可选）",
         "description": "创建AI模板以匹配您的增值税或会计格式"
+      },
+      "template": {
+        "title": "设计您的完美导出格式",
+        "description": "使用您确切的列名和结构创建自定义模板。只需2分钟。免费保存最多10个模板——无需积分。"
       }
     }
   },
@@ -109,7 +119,8 @@
       "receipts": "已处理收据",
       "users": "活跃用户",
       "accuracy": "平均准确率",
-      "timeSaved": "节省时间"
+      "timeSaved": "节省时间",
+      "timeSavedPerDoc": "每份文档节省"
     },
     "testimonials": {
       "title": "客户评价",
@@ -199,7 +210,13 @@
     "subtitle": "立即开始使用AI处理收据",
     "button": "开始处理收据",
     "viewPricing": "查看价格",
-    "trustIndicator": "加入信赖ReceiptSort的用户"
+    "trustIndicator": "加入信赖ReceiptSort的用户",
+    "trustBadges": {
+      "creditsNeverExpire": "积分永不过期",
+      "templatesReusable": "模板可无限次重用",
+      "moneyBack": "30天退款保证",
+      "allSoftware": "适用于所有会计软件"
+    }
   },
   "auth": {
     "loginTitle": "登录",

@@ -47,7 +47,8 @@
       "processing": "数秒で処理",
       "support": "GPT-4 Vision AI"
     },
-    "getStarted": "無料で始める"
+    "getStarted": "無料で始める",
+    "processTagline": "アップロード → AIがテンプレートにマッピング → あなたの形式でダウンロード"
   },
   "features": {
     "title": "レシートを整理するために必要なすべて",
@@ -58,8 +59,8 @@
         "description": "スマートフォン、メール、スキャナーからレシートをドラッグ&ドロップ。すべての一般的な画像形式（JPG、PNG、WebP、TIFF、BMP、GIF）および1ファイルあたり最大10MBのPDFに対応。"
       },
       "aiExtraction": {
-        "title": "AI搭載データ抽出",
-        "description": "GPT-4 Visionが店舗名、金額、日付、カテゴリ、税金、支払方法を98%以上の精度で抽出します。"
+        "title": "マルチドキュメント・インテリジェンス",
+        "description": "レシート、請求書、医療記録に対応—レシートだけではありません。AIは異なる文書タイプにシームレスに適応します。GPT-4 Visionは全ての形式で95%以上の精度を達成。複数の言語と通貨形式を自動的に処理します。"
       },
       "export": {
         "title": "ExcelまたはCSVにエクスポート",
@@ -76,6 +77,11 @@
       "timeSaving": {
         "title": "週5時間以上節約",
         "description": "手動でのデータ入力をやめましょう。手動で1枚処理する時間で100枚のレシートを処理できます。各レシートは5秒以内に処理されます。"
+      },
+      "templateMapping": {
+        "title": "AIがあなたの形式を学習",
+        "description": "あなたの列名（消費税額、プロジェクトコード、顧客IDなど）でカスタムエクスポートテンプレートを作成。当社のAIは、レシートが異なる用語を使用していても（Tax vs VAT vs Btw vs 消費税）、抽出データを自動的にあなたの形式にマッピングします。10個のテンプレートを無料で保存、無制限に再利用可能。各エクスポートはわずか1クレジット。",
+        "badge": "独自機能"
       }
     }
   },
@@ -99,6 +105,10 @@
       "customize": {
         "title": "テンプレートのカスタマイズ（オプション）",
         "description": "VAT申告や会計フォーマット用のAIテンプレートを作成"
+      },
+      "template": {
+        "title": "完璧なエクスポート形式を設計",
+        "description": "正確な列名と構造でカスタムテンプレートを作成します。わずか2分。最大10個のテンプレートを無料で保存—クレジット不要。"
       }
     }
   },
@@ -108,7 +118,8 @@
       "receipts": "処理されたレシート",
       "users": "アクティブユーザー",
       "accuracy": "平均精度",
-      "timeSaved": "節約された時間"
+      "timeSaved": "節約された時間",
+      "timeSavedPerDoc": "1文書あたりの節約時間"
     },
     "testimonials": {
       "title": "お客様の声",
@@ -198,7 +209,13 @@
     "subtitle": "今すぐAIでレシート処理を開始",
     "button": "レシート処理を開始",
     "viewPricing": "料金を見る",
-    "trustIndicator": "ReceiptSorterを信頼する10,000人以上のユーザーに参加しましょう"
+    "trustIndicator": "ReceiptSorterを信頼する10,000人以上のユーザーに参加しましょう",
+    "trustBadges": {
+      "creditsNeverExpire": "クレジットは無期限",
+      "templatesReusable": "テンプレートは無制限に再利用可能",
+      "moneyBack": "30日間返金保証",
+      "allSoftware": "全ての会計ソフトウェアに対応"
+    }
   },
   "auth": {
     "loginTitle": "ログイン",

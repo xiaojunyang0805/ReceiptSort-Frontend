@@ -47,7 +47,8 @@
       "processing": "Traitement en Secondes",
       "support": "GPT-4 Vision AI"
     },
-    "getStarted": "Commencer Gratuitement"
+    "getStarted": "Commencer Gratuitement",
+    "processTagline": "Télécharger → L'IA mappe à votre modèle → Télécharger dans votre format"
   },
   "features": {
     "title": "Tout ce dont vous avez besoin pour organiser vos reçus",
@@ -58,8 +59,8 @@
         "description": "Glissez et déposez des reçus depuis votre téléphone, e-mail ou scanner. Supporte tous les formats d'image courants (JPG, PNG, WebP, TIFF, BMP, GIF) et PDF jusqu'à 10MB par fichier."
       },
       "aiExtraction": {
-        "title": "Extraction de Données par IA",
-        "description": "GPT-4 Vision extrait le marchand, le montant, la date, la catégorie, la taxe et le mode de paiement avec une précision de 98%+."
+        "title": "Intelligence Multi-Documents",
+        "description": "Fonctionne avec les reçus, factures ET notes médicales—pas seulement les reçus. L'IA s'adapte parfaitement aux différents types de documents. GPT-4 Vision atteint 95%+ de précision sur tous les formats. Gère automatiquement plusieurs langues et formats de devises."
       },
       "export": {
         "title": "Exporter vers Excel ou CSV",
@@ -76,6 +77,11 @@
       "timeSaving": {
         "title": "Économisez 5+ Heures par Semaine",
         "description": "Arrêtez la saisie manuelle de données. Traitez 100 reçus dans le temps qu'il faut pour en faire 1 manuellement. Chaque reçu est traité en moins de 5 secondes."
+      },
+      "templateMapping": {
+        "title": "IA Qui Apprend Votre Format",
+        "description": "Créez des modèles d'exportation personnalisés avec VOS noms de colonnes (Montant TVA, Code Projet, ID Client, etc.). Notre IA mappe automatiquement les données extraites à votre format—même lorsque les reçus utilisent des termes différents (Tax vs VAT vs Btw vs TVA). Enregistrez 10 modèles gratuitement, réutilisez indéfiniment. Chaque exportation coûte seulement 1 crédit.",
+        "badge": "FONCTIONNALITÉ UNIQUE"
       }
     }
   },
@@ -99,6 +105,10 @@
       "customize": {
         "title": "Personnaliser le Modèle (Optionnel)",
         "description": "Créez des modèles IA pour vos formats de TVA ou de comptabilité"
+      },
+      "template": {
+        "title": "Concevez Votre Format d'Exportation Parfait",
+        "description": "Créez un modèle personnalisé avec vos noms de colonnes exacts et votre structure. Prend 2 minutes. Enregistrez jusqu'à 10 modèles gratuitement—aucun crédit facturé."
       }
     }
   },
@@ -108,7 +118,8 @@
       "receipts": "Reçus Traités",
       "users": "Utilisateurs Actifs",
       "accuracy": "Précision Moyenne",
-      "timeSaved": "Heures Économisées"
+      "timeSaved": "Heures Économisées",
+      "timeSavedPerDoc": "Économisé Par Document"
     },
     "testimonials": {
       "title": "Ce que disent nos clients",
@@ -198,7 +209,13 @@
     "subtitle": "Commencez à traiter des reçus avec l'IA aujourd'hui",
     "button": "Commencer à Traiter les Reçus",
     "viewPricing": "Voir les Tarifs",
-    "trustIndicator": "Rejoignez 10 000+ utilisateurs qui font confiance à ReceiptSorter"
+    "trustIndicator": "Rejoignez 10 000+ utilisateurs qui font confiance à ReceiptSorter",
+    "trustBadges": {
+      "creditsNeverExpire": "Les crédits n'expirent jamais",
+      "templatesReusable": "Modèles réutilisables indéfiniment",
+      "moneyBack": "Garantie satisfait ou remboursé 30 jours",
+      "allSoftware": "Fonctionne avec tous les logiciels comptables"
+    }
   },
   "auth": {
     "loginTitle": "Connexion",
