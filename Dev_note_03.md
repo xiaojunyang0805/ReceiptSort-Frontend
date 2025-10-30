@@ -233,6 +233,123 @@ This document tracks post-launch improvements focused on mobile optimization, mu
 
 ---
 
-**Last Updated:** 2025-10-28
+## Session 11 - Translation Completeness Fix (2025-10-29)
+
+**Goal:** Fix missing translations across all languages
+
+**Issues Found:**
+- Landing page FAQ showing raw key: `faq.items.customTemplates.question`
+- "How It Works" showing raw key: `howItWorks.steps.customize.title`
+- Pricing page displaying English package names in all languages
+
+**Fixes Applied:**
+
+**1. FAQ Section (All Languages)**
+- ✅ Added missing "Custom Templates" question/answer
+- ✅ Explains template creation, AI mapping, 10 free templates
+- ✅ Updated: Chinese, German, Spanish, French, Japanese, Dutch
+
+**2. How It Works - Step 4 (All Languages)**
+- ✅ Added "Customize Template (Optional)" step
+- ✅ Description: "Create AI templates for VAT/accounting formats"
+- ✅ Updated: Chinese, German, Spanish, French, Japanese, Dutch
+
+**3. Pricing Page Component**
+- ✅ Fixed hardcoded English strings from CREDIT_PACKAGES constant
+- ✅ Updated to use `creditPackages` translation namespace
+- ✅ Changed `{pkg.name}` → `{tPkg(\`${pkg.id}.name\`)}`
+- ✅ Changed `{pkg.description}` → `{tPkg(\`${pkg.id}.description\`)}`
+
+**Translation Examples:**
+- Chinese: 入门版, 基础版, 专业版, 商业版
+- German: Starter, Basis, Pro, Business
+- Spanish: Inicial, Básico, Pro, Empresa
+- French: Débutant, Basique, Pro, Entreprise
+- Japanese: スターター, ベーシック, プロ, ビジネス
+- Dutch: Starter, Basis, Pro, Zakelijk
+
+**Deployment:**
+- Commit: 45fae08
+- Build: Manual Vercel deployment
+- Status: ✅ Live
+
+**Result:** All languages now have complete translations with no missing keys or English fallbacks
+
+---
+
+## Session 12 - Landing Page Redesign & Translation (2025-10-30)
+
+**Goal:** Implement new 4-step workflow and complete translation overhaul
+
+**Major Changes:**
+
+**1. Landing Page Restructure**
+- ✅ Updated "How It Works" from 3 steps to 4 steps
+- ✅ New step order: Template Design → Upload → AI Maps → Download
+- ✅ Removed duplicate "AI-powered template export" feature (balanced 6-card layout)
+- ✅ Updated social proof accuracy from 95% to 98%
+- ✅ Fixed duplicate Privacy Policy link in footer
+
+**2. Complete Translation Overhaul (All 6 Languages)**
+- ✅ Fixed hero headline mistranslation ("Stop wasting time..." → "Your Receipts, Your Format, Automatically")
+- ✅ Fixed hero valueProps with correct keys (freeCredits, neverExpire, multiDocument)
+- ✅ Updated finalCTA title to "Ready to Stop Reorganizing Receipt Data?"
+- ✅ Updated finalCTA subtitle with free offer details (10 credits + 10 templates)
+- ✅ Updated trustIndicator to mention "freelancers, accountants, and small businesses"
+- ✅ Fixed howItWorks button translation key
+
+**3. Legal Document Translations**
+- ✅ Privacy Policy: Translated all 11 sections to 6 languages (de, es, fr, ja, nl, zh)
+- ✅ Terms of Service: Translated all 13 sections to 6 languages
+- ✅ Updated contact email to support@seenano.nl in both documents
+- ✅ Converted pages to use next-intl for full internationalization
+
+**4. How It Works - NEW 4-Step Content**
+Translated detailed descriptions for all steps:
+- Step 1: Design Your Perfect Export Format (2 min, save 10 free templates)
+- Step 2: Upload Your Receipts (receipts, invoices, medical notes)
+- Step 3: AI Extracts & Maps to Your Template (handles different terminologies)
+- Step 4: Download in Your Format (ready for accounting system/authorities)
+
+**5. Testimonials - Complete Refresh**
+- NEW Testimonial #1: Lisa van Dijk (Netherlands) - VAT template saves 20+ min/month
+- UPDATED Testimonial #2: Marcus Johnson - Small business bookkeeping
+- NEW Testimonial #3: Jennifer Martinez - 98% accuracy + template mapping
+
+**6. FAQ - Custom Templates Expansion**
+Updated from 1 short paragraph to 5 detailed paragraphs explaining:
+- What Custom Templates are (VAT declarations, accounting layouts, insurance forms)
+- Why they matter (other tools waste 2-3 min reorganizing per document)
+- How ReceiptSort solves it (AI auto-maps different terms: Tax/VAT/Btw/MwSt)
+- Pricing (10 templates FREE, 1 credit per export)
+- Example (Date | Vendor | Net Amount | VAT Amount | Total | Category)
+
+**7. Global Market Expansion**
+- ✅ Changed "EU Freelancer" → "Freelancer" for worldwide appeal
+- ✅ Updated tax types: Btw, VAT, MwSt, TVA, GST, Sales Tax
+- ✅ Replaced EU flag emoji (🇪🇺) with briefcase (💼) for global representation
+
+**8. Accuracy Updates**
+- ✅ Updated all instances of 95% → 98% across all languages (8 locations)
+- ✅ Updated feature descriptions and testimonials
+
+**Translation Languages Completed:**
+- Chinese (zh): 四个简单步骤, 准备好停止重组收据数据了吗？
+- German (de): 4 einfachen Schritten, Bereit, das Umorganisieren von Belegdaten zu beenden?
+- Spanish (es): 4 simples pasos, ¿Listo para dejar de reorganizar datos de recibos?
+- French (fr): 4 étapes simples, Prêt à arrêter de réorganiser les données de reçus?
+- Japanese (ja): 4つの簡単なステップ, レシートデータの再整理をやめる準備はできましたか？
+- Dutch (nl): 4 eenvoudige stappen, Klaar om te stoppen met het herorganiseren van bonnetjesgegevens?
+
+**Deployment:**
+- Commits: c35f6e2, 830ce14, b853bca, e606ed5, 3eb0a22, fd070b8, 023fa3b
+- Status: ✅ Live on https://receiptsort.seenano.nl
+- All 7 languages fully functional with no missing translations
+
+**Result:** Landing page completely redesigned with proper 4-step workflow, all content accurately translated to 6 languages, and messaging optimized for global market
+
+---
+
+**Last Updated:** 2025-10-30
 **Status:** ✅ Production Ready
 **Next Phase:** User acquisition and marketing
