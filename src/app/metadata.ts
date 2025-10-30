@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'ReceiptSorter - AI Receipt Data Extraction to Excel | Save Hours on Bookkeeping',
-  description: 'Extract data from receipts automatically with AI. Upload receipt photos, get organized Excel files. Perfect for small businesses, freelancers, and accountants. Try free!',
-  keywords: 'receipt scanner, receipt OCR, receipt to excel, expense tracking, invoice data extraction, AI receipt processing, bookkeeping automation, accounting software',
+  title: 'ReceiptSort - AI That Adapts to Your Spreadsheet Format | Smart Receipt Scanner',
+  description: 'The only receipt scanner with intelligent template mapping. AI exports to YOUR format automatically—not ours. Works with receipts, invoices, medical notes. $0.20-0.50 per document, no subscription. Try free!',
+  keywords: 'receipt scanner, custom templates, receipt OCR, receipt to excel, expense tracking, AI template mapping, pay per receipt, invoice scanner, medical receipt scanner',
   authors: [{ name: 'ReceiptSorter' }],
   creator: 'ReceiptSorter',
   publisher: 'ReceiptSorter',
@@ -13,9 +13,9 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://receiptsort.vercel.app',
-    siteName: 'ReceiptSorter',
-    title: 'ReceiptSorter - AI Receipt Data Extraction',
-    description: 'Turn receipt photos into organized Excel spreadsheets. AI-powered, 98%+ accuracy, smart template export.',
+    siteName: 'ReceiptSort',
+    title: 'ReceiptSort - AI That Adapts to Your Spreadsheet Format',
+    description: 'The only receipt scanner with intelligent template mapping. AI exports to YOUR format automatically. $0.20-0.50 per document, no subscription.',
     images: [
       {
         url: '/og-image.jpg',
@@ -30,8 +30,8 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@receiptsort',
     creator: '@receiptsort',
-    title: 'ReceiptSorter - AI Receipt Data Extraction',
-    description: 'Turn receipt photos into Excel. Save 5+ hours weekly.',
+    title: 'ReceiptSort - AI That Adapts to Your Format',
+    description: 'The only scanner with intelligent template mapping. AI adapts to YOUR spreadsheet format. $0.20-0.50 per document.',
     images: ['/twitter-image.jpg'],
   },
   alternates: {

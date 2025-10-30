@@ -69,6 +69,14 @@ export default function Footer() {
                   onClick={() => scrollToSection('faq')}
                   className="text-gray-600 hover:text-primary transition-colors"
                 >
+                  {tNav('customTemplates')}
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => scrollToSection('faq')}
+                  className="text-gray-600 hover:text-primary transition-colors"
+                >
                   {tNav('faq')}
                 </button>
               </li>
@@ -102,14 +110,19 @@ export default function Footer() {
         <div className="border-t pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             {/* Logo and Copyright */}
-            <div className="flex items-center gap-4">
-              <Link href="/" className="flex items-center gap-2">
-                <FileText className="h-5 w-5 text-primary" />
-                <span className="font-semibold text-gray-900">ReceiptSorter</span>
-              </Link>
-              <span className="text-sm text-gray-500">
-                © 2025 ReceiptSorter. {t('allRightsReserved')}.
-              </span>
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-4">
+                <Link href="/" className="flex items-center gap-2">
+                  <FileText className="h-5 w-5 text-primary" />
+                  <span className="font-semibold text-gray-900">ReceiptSort</span>
+                </Link>
+                <span className="text-sm text-gray-500">
+                  © 2025 ReceiptSort. {t('allRightsReserved')}.
+                </span>
+              </div>
+              <p className="text-sm text-gray-600">
+                {t('description')}
+              </p>
             </div>
 
             {/* Company Info */}

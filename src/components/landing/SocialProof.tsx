@@ -11,20 +11,20 @@ const stats = [
     labelKey: 'receipts',
   },
   {
-    icon: Target,
-    number: '98%+',
-    labelKey: 'accuracy',
+    icon: Clock,
+    number: '2-3 min',
+    labelKey: 'timeSavedPerDoc',
   },
   {
-    icon: Clock,
-    number: '5 Hours',
-    labelKey: 'timeSaved',
+    icon: Target,
+    number: '95%+',
+    labelKey: 'accuracy',
   },
 ]
 
 const testimonials = [
   {
-    avatar: 'SC',
+    avatar: 'LV',
     color: 'bg-blue-500',
     index: 0,
   },

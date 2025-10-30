@@ -9,12 +9,18 @@ export function Features() {
 
   const features = [
     {
+      icon: Sparkles,
+      titleKey: 'items.templateMapping.title',
+      descriptionKey: 'items.templateMapping.description',
+      badge: true,
+    },
+    {
       icon: Upload,
       titleKey: 'items.upload.title',
       descriptionKey: 'items.upload.description',
     },
     {
-      icon: Sparkles,
+      icon: Wand2,
       titleKey: 'items.aiExtraction.title',
       descriptionKey: 'items.aiExtraction.description',
     },
@@ -57,8 +63,15 @@ export function Features() {
           return (
             <Card
               key={index}
-              className="group hover:shadow-xl hover:scale-105 transition-all duration-300 border-2 hover:border-primary/50"
+              className="group hover:shadow-xl hover:scale-105 transition-all duration-300 border-2 hover:border-primary/50 relative"
             >
+              {feature.badge && (
+                <div className="absolute -top-3 right-4">
+                  <span className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+                    ⭐ {t('items.templateMapping.badge')}
+                  </span>
+                </div>
+              )}
               <CardHeader>
                 <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                   <Icon className="h-7 w-7 text-primary" />

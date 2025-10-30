@@ -2,7 +2,7 @@
 
 import { Link } from '@/lib/navigation';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Check } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 export default function FinalCTA() {
@@ -54,29 +54,28 @@ export default function FinalCTA() {
           </div>
 
           {/* Trust indicators */}
-          <div className="space-y-4">
-            <p className="text-sm text-primary-foreground/80">
-              {tPricing('freeCreditsNoCreditCard')}
+          <div className="space-y-6">
+            <p className="text-base text-primary-foreground/90">
+              {t('trustIndicator')}
             </p>
 
-            {/* Payment method logos */}
-            <div className="flex items-center justify-center gap-6 opacity-70">
-              <div className="flex items-center gap-2 text-xs font-medium text-primary-foreground/70">
-                <svg className="h-8 w-12" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="48" height="32" rx="4" fill="white" fillOpacity="0.9"/>
-                  <text x="24" y="20" fontSize="10" fontWeight="bold" fill="currentColor" textAnchor="middle">VISA</text>
-                </svg>
-
-                <svg className="h-8 w-12" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="48" height="32" rx="4" fill="white" fillOpacity="0.9"/>
-                  <circle cx="18" cy="16" r="6" fill="#EB001B" fillOpacity="0.7"/>
-                  <circle cx="30" cy="16" r="6" fill="#F79E1B" fillOpacity="0.7"/>
-                </svg>
-
-                <svg className="h-8 w-12" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="48" height="32" rx="4" fill="white" fillOpacity="0.9"/>
-                  <text x="24" y="20" fontSize="8" fontWeight="bold" fill="currentColor" textAnchor="middle">AMEX</text>
-                </svg>
+            {/* Trust badges grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+              <div className="flex items-center gap-2 text-sm text-primary-foreground/90">
+                <Check className="h-5 w-5 flex-shrink-0" />
+                <span>{t('trustBadges.creditsNeverExpire')}</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-primary-foreground/90">
+                <Check className="h-5 w-5 flex-shrink-0" />
+                <span>{t('trustBadges.templatesReusable')}</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-primary-foreground/90">
+                <Check className="h-5 w-5 flex-shrink-0" />
+                <span>{t('trustBadges.moneyBack')}</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-primary-foreground/90">
+                <Check className="h-5 w-5 flex-shrink-0" />
+                <span>{t('trustBadges.allSoftware')}</span>
               </div>
             </div>
           </div>

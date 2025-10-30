@@ -25,10 +25,12 @@ function FAQAccordionItem({ faq, isOpen, onClick, t }: { faq: FAQItem; isOpen: b
       </button>
       <div
         className={`overflow-hidden transition-all duration-200 ${
-          isOpen ? 'max-h-96' : 'max-h-0'
+          isOpen ? 'max-h-[600px]' : 'max-h-0'
         }`}
       >
-        <p className="px-6 pb-5 text-gray-600 leading-relaxed">{t(`items.${faq.id}.answer`)}</p>
+        <div className={`px-6 pb-5 text-gray-600 leading-relaxed whitespace-pre-line ${faq.id === 'customTemplates' ? 'bg-blue-50/50 rounded-b-lg' : ''}`}>
+          {t(`items.${faq.id}.answer`)}
+        </div>
       </div>
     </div>
   );
@@ -40,13 +42,13 @@ export default function FAQ() {
   const tSupport = useTranslations('support');
 
   const faqs: FAQItem[] = [
+    { id: 'customTemplates' },
     { id: 'accuracy' },
     { id: 'formats' },
     { id: 'cost' },
     { id: 'expiration' },
     { id: 'security' },
     { id: 'export' },
-    { id: 'customTemplates' },
     { id: 'wrongExtraction' },
     { id: 'refunds' },
     { id: 'business' },

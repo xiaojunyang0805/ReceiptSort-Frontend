@@ -47,6 +47,11 @@ export function Hero() {
               {t('subheadlineDetails')}
             </p>
 
+            {/* Process Tagline */}
+            <p className="text-base md:text-lg text-gray-700 font-medium">
+              {t('processTagline')}
+            </p>
+
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Button
@@ -72,18 +77,18 @@ export function Hero() {
             </div>
 
             {/* Trust Elements */}
-            <div className="grid sm:grid-cols-3 gap-4 pt-8 text-sm md:text-base">
-              <div className="flex items-center gap-2">
-                <Check className="h-5 w-5 text-blue-600 flex-shrink-0" />
-                <span className="text-gray-700">{t('valueProps.accuracy')}</span>
+            <div className="flex flex-col gap-3 pt-8 text-sm md:text-base">
+              <div className="flex items-start gap-2">
+                <Check className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                <span className="text-gray-700">{t('valueProps.freeCredits')}</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Check className="h-5 w-5 text-blue-600 flex-shrink-0" />
-                <span className="text-gray-700">{t('valueProps.processing')}</span>
+              <div className="flex items-start gap-2">
+                <Check className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                <span className="text-gray-700">{t('valueProps.neverExpire')}</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Check className="h-5 w-5 text-blue-600 flex-shrink-0" />
-                <span className="text-gray-700">{t('valueProps.support')}</span>
+              <div className="flex items-start gap-2">
+                <Check className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                <span className="text-gray-700">{t('valueProps.multiDocument')}</span>
               </div>
             </div>
           </div>

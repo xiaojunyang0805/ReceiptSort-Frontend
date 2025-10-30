@@ -1,6 +1,6 @@
 'use client'
 
-import { Upload, Sparkles, Download, ArrowRight, Wand2 } from 'lucide-react'
+import { Upload, Sparkles, Download, ArrowRight, Wand2, Layout } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Link } from '@/lib/navigation'
 import { useTranslations } from 'next-intl'
@@ -8,6 +8,30 @@ import { useTranslations } from 'next-intl'
 const steps = [
   {
     number: '1',
+    icon: Layout,
+    titleKey: 'template.title',
+    descriptionKey: 'template.description',
+    visual: (
+      <div className="bg-white rounded-lg p-6 shadow-lg">
+        <div className="space-y-2">
+          <div className="flex items-center gap-2 text-primary mb-2">
+            <Layout className="h-5 w-5" />
+            <span className="text-sm font-medium">Create Template</span>
+          </div>
+          <div className="bg-primary/5 rounded p-3 border-l-2 border-primary text-xs">
+            <div className="grid grid-cols-3 gap-2 font-semibold mb-2">
+              <span>Date</span>
+              <span>Vendor</span>
+              <span>VAT Amount</span>
+            </div>
+            <div className="text-muted-foreground text-[10px]">Your custom columns</div>
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    number: '2',
     icon: Upload,
     titleKey: 'upload.title',
     descriptionKey: 'upload.description',
@@ -21,7 +45,7 @@ const steps = [
     ),
   },
   {
-    number: '2',
+    number: '3',
     icon: Sparkles,
     titleKey: 'process.title',
     descriptionKey: 'process.description',
@@ -51,7 +75,7 @@ const steps = [
     ),
   },
   {
-    number: '3',
+    number: '4',
     icon: Download,
     titleKey: 'export.title',
     descriptionKey: 'export.description',
@@ -72,36 +96,6 @@ const steps = [
               <span>Starbucks</span>
               <span>$24.50</span>
               <span>10/5/25</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    ),
-  },
-  {
-    number: '4',
-    icon: Wand2,
-    titleKey: 'customize.title',
-    descriptionKey: 'customize.description',
-    visual: (
-      <div className="bg-white rounded-lg p-6 shadow-lg">
-        <div className="space-y-3">
-          <div className="flex items-center gap-2 text-primary mb-2">
-            <Wand2 className="h-5 w-5" />
-            <span className="text-sm font-medium">AI Template Options</span>
-          </div>
-          <div className="space-y-2">
-            <div className="bg-primary/5 rounded p-2 border-l-2 border-primary">
-              <div className="text-xs font-medium">Accounting Template</div>
-              <div className="text-xs text-muted-foreground">Tax categories & formulas</div>
-            </div>
-            <div className="bg-muted/50 rounded p-2">
-              <div className="text-xs font-medium">Expense Report</div>
-              <div className="text-xs text-muted-foreground">Department breakdown</div>
-            </div>
-            <div className="bg-muted/50 rounded p-2">
-              <div className="text-xs font-medium">QuickBooks Format</div>
-              <div className="text-xs text-muted-foreground">Direct import ready</div>
             </div>
           </div>
         </div>
@@ -183,7 +177,7 @@ export function HowItWorks() {
       <div className="text-center mt-16">
         <Button size="lg" asChild className="text-lg px-8 py-6 h-auto">
           <Link href="/signup">
-            {tPricing('tryItFree')}
+            {t('cta')}
             <span className="ml-2">→</span>
           </Link>
         </Button>
