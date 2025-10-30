@@ -43,9 +43,9 @@
     "watchDemo": "Demo Ansehen",
     "trustBadge": "Vertraut von über 2000 Unternehmen weltweit",
     "valueProps": {
-      "accuracy": "98%+ Genauigkeit",
-      "processing": "Verarbeitung in Sekunden",
-      "support": "GPT-4 Vision AI"
+      "freeCredits": "10 kostenlose Credits + 10 benutzerdefinierte Vorlagen • Keine Kreditkarte erforderlich",
+      "neverExpire": "Credits verfallen nie • Vorlagen unbegrenzt wiederverwendbar",
+      "multiDocument": "Funktioniert mit Belegen, Rechnungen und Arztberichten"
     },
     "getStarted": "Kostenlos Starten",
     "processTagline": "Hochladen → KI ordnet Ihrer Vorlage zu → In Ihrem Format herunterladen"

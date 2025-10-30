@@ -43,9 +43,9 @@
     "watchDemo": "Ver Demo",
     "trustBadge": "Confiado por más de 2000 empresas en todo el mundo",
     "valueProps": {
-      "accuracy": "98%+ Precisión",
-      "processing": "Procesar en Segundos",
-      "support": "GPT-4 Vision AI"
+      "freeCredits": "10 créditos gratis + 10 plantillas personalizadas • Sin tarjeta de crédito",
+      "neverExpire": "Los créditos nunca expiran • Plantillas reutilizables ilimitadamente",
+      "multiDocument": "Funciona con recibos, facturas y notas médicas"
     },
     "getStarted": "Empezar Gratis",
     "processTagline": "Subir → IA mapea a su plantilla → Descargar en su formato"

@@ -43,9 +43,9 @@
     "watchDemo": "デモを見る",
     "trustBadge": "世界中の2000社以上の企業に信頼されています",
     "valueProps": {
-      "accuracy": "98%以上の精度",
-      "processing": "数秒で処理",
-      "support": "GPT-4 Vision AI"
+      "freeCredits": "10個の無料クレジット + 10個のカスタムテンプレート • クレジットカード不要",
+      "neverExpire": "クレジットは無期限 • テンプレートは無制限に再利用可能",
+      "multiDocument": "レシート、請求書、医療記録に対応"
     },
     "getStarted": "無料で始める",
     "processTagline": "アップロード → AIがテンプレートにマッピング → あなたの形式でダウンロード"

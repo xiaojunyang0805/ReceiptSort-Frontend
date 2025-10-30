@@ -43,9 +43,9 @@
     "watchDemo": "Voir la Démo",
     "trustBadge": "Approuvé par plus de 2000 entreprises dans le monde",
     "valueProps": {
-      "accuracy": "98%+ de Précision",
-      "processing": "Traitement en Secondes",
-      "support": "GPT-4 Vision AI"
+      "freeCredits": "10 crédits gratuits + 10 modèles personnalisés • Aucune carte bancaire requise",
+      "neverExpire": "Les crédits n'expirent jamais • Modèles réutilisables indéfiniment",
+      "multiDocument": "Fonctionne avec les reçus, factures et notes médicales"
     },
     "getStarted": "Commencer Gratuitement",
     "processTagline": "Télécharger → L'IA mappe à votre modèle → Télécharger dans votre format"

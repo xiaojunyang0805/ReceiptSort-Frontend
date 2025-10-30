@@ -45,9 +45,9 @@
     "watchDemo": "观看演示",
     "trustBadge": "受到全球2000多家企业信赖",
     "valueProps": {
-      "accuracy": "98%以上准确率",
-      "processing": "秒级处理",
-      "support": "GPT-4 Vision AI"
+      "freeCredits": "10个免费积分 + 10个自定义模板 • 无需信用卡",
+      "neverExpire": "积分永不过期 • 模板可无限次重用",
+      "multiDocument": "适用于收据、发票和医疗记录"
     },
     "processTagline": "上传 → AI映射到您的模板 → 以您的格式下载"
   },
