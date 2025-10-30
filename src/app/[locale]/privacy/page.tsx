@@ -1,8 +1,22 @@
 import { Button } from '@/components/ui/button';
 import { Link } from '@/lib/navigation';
 import { ArrowLeft } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'privacyPage' });
+
+  return {
+    title: t('title'),
+    description: t('sections.introduction.content'),
+  };
+}
 
 export default function PrivacyPolicyPage() {
+  const t = useTranslations('privacyPage');
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -11,7 +25,7 @@ export default function PrivacyPolicyPage() {
           <Button variant="ghost" asChild>
             <Link href="/" className="gap-2">
               <ArrowLeft className="h-4 w-4" />
-              Back to Home
+              {t('backToHome')}
             </Link>
           </Button>
         </div>
@@ -19,126 +33,124 @@ export default function PrivacyPolicyPage() {
 
       {/* Content */}
       <div className="container mx-auto px-4 py-12 max-w-4xl">
-        <h1 className="text-4xl font-bold mb-4">Privacy Policy</h1>
-        <p className="text-muted-foreground mb-8">Last updated: October 6, 2025</p>
+        <h1 className="text-4xl font-bold mb-4">{t('title')}</h1>
+        <p className="text-muted-foreground mb-8">{t('lastUpdated')}</p>
 
         <div className="prose prose-gray max-w-none space-y-6">
+          {/* 1. Introduction */}
           <section>
-            <h2 className="text-2xl font-semibold mb-3">1. Introduction</h2>
+            <h2 className="text-2xl font-semibold mb-3">{t('sections.introduction.title')}</h2>
             <p className="text-gray-700 leading-relaxed">
-              Welcome to ReceiptSorter (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;). We are committed to protecting your
-              personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose,
-              and safeguard your information when you use our receipt processing service.
+              {t('sections.introduction.content')}
             </p>
           </section>
 
+          {/* 2. Information We Collect */}
           <section>
-            <h2 className="text-2xl font-semibold mb-3">2. Information We Collect</h2>
+            <h2 className="text-2xl font-semibold mb-3">{t('sections.informationWeCollect.title')}</h2>
             <p className="text-gray-700 leading-relaxed mb-3">
-              We collect information that you provide directly to us:
+              {t('sections.informationWeCollect.intro')}
             </p>
             <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
-              <li>Account information (email address, name)</li>
-              <li>Receipt images and PDFs that you upload</li>
-              <li>Payment information (processed securely through Stripe)</li>
-              <li>Usage data and analytics</li>
+              {t.raw('sections.informationWeCollect.items').map((item: string, i: number) => (
+                <li key={i}>{item}</li>
+              ))}
             </ul>
           </section>
 
+          {/* 3. How We Use Your Information */}
           <section>
-            <h2 className="text-2xl font-semibold mb-3">3. How We Use Your Information</h2>
+            <h2 className="text-2xl font-semibold mb-3">{t('sections.howWeUse.title')}</h2>
             <p className="text-gray-700 leading-relaxed mb-3">
-              We use your information to:
+              {t('sections.howWeUse.intro')}
             </p>
             <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
-              <li>Provide and maintain our receipt processing service</li>
-              <li>Process your receipts using AI technology</li>
-              <li>Process payments and manage your account</li>
-              <li>Send you service updates and promotional communications</li>
-              <li>Improve our services and develop new features</li>
-              <li>Comply with legal obligations</li>
+              {t.raw('sections.howWeUse.items').map((item: string, i: number) => (
+                <li key={i}>{item}</li>
+              ))}
             </ul>
           </section>
 
+          {/* 4. Data Security */}
           <section>
-            <h2 className="text-2xl font-semibold mb-3">4. Data Security</h2>
-            <p className="text-gray-700 leading-relaxed">
-              We implement industry-standard security measures to protect your data:
-            </p>
-            <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
-              <li>256-bit SSL encryption for data transmission</li>
-              <li>Secure cloud storage with access controls</li>
-              <li>Automatic deletion of receipt files after 90 days</li>
-              <li>Regular security audits and updates</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold mb-3">5. Data Sharing</h2>
-            <p className="text-gray-700 leading-relaxed">
-              We do not sell your personal information. We may share your data with:
-            </p>
-            <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
-              <li>Service providers (OpenAI for receipt processing, Stripe for payments)</li>
-              <li>Law enforcement when required by law</li>
-              <li>Business partners with your explicit consent</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold mb-3">6. Your Rights</h2>
+            <h2 className="text-2xl font-semibold mb-3">{t('sections.dataSecurity.title')}</h2>
             <p className="text-gray-700 leading-relaxed mb-3">
-              Under GDPR and other privacy laws, you have the right to:
+              {t('sections.dataSecurity.intro')}
             </p>
             <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
-              <li>Access your personal data</li>
-              <li>Correct inaccurate data</li>
-              <li>Request deletion of your data</li>
-              <li>Export your data in a portable format</li>
-              <li>Opt-out of marketing communications</li>
-              <li>Lodge a complaint with a supervisory authority</li>
+              {t.raw('sections.dataSecurity.items').map((item: string, i: number) => (
+                <li key={i}>{item}</li>
+              ))}
             </ul>
           </section>
 
+          {/* 5. Data Sharing */}
           <section>
-            <h2 className="text-2xl font-semibold mb-3">7. Cookies</h2>
+            <h2 className="text-2xl font-semibold mb-3">{t('sections.dataSharing.title')}</h2>
+            <p className="text-gray-700 leading-relaxed mb-3">
+              {t('sections.dataSharing.intro')}
+            </p>
+            <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
+              {t.raw('sections.dataSharing.items').map((item: string, i: number) => (
+                <li key={i}>{item}</li>
+              ))}
+            </ul>
+          </section>
+
+          {/* 6. Your Rights */}
+          <section>
+            <h2 className="text-2xl font-semibold mb-3">{t('sections.yourRights.title')}</h2>
+            <p className="text-gray-700 leading-relaxed mb-3">
+              {t('sections.yourRights.intro')}
+            </p>
+            <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
+              {t.raw('sections.yourRights.items').map((item: string, i: number) => (
+                <li key={i}>{item}</li>
+              ))}
+            </ul>
+          </section>
+
+          {/* 7. Cookies */}
+          <section>
+            <h2 className="text-2xl font-semibold mb-3">{t('sections.cookies.title')}</h2>
             <p className="text-gray-700 leading-relaxed">
-              We use essential cookies to provide our service and optional analytics cookies to improve user experience.
-              You can control cookie preferences through your browser settings.
+              {t('sections.cookies.content')}
             </p>
           </section>
 
+          {/* 8. Data Retention */}
           <section>
-            <h2 className="text-2xl font-semibold mb-3">8. Data Retention</h2>
+            <h2 className="text-2xl font-semibold mb-3">{t('sections.dataRetention.title')}</h2>
             <p className="text-gray-700 leading-relaxed">
-              We retain your data only as long as necessary to provide our services and comply with legal obligations.
-              Receipt files are automatically deleted after 90 days. Account data is retained until you request deletion.
+              {t('sections.dataRetention.content')}
             </p>
           </section>
 
+          {/* 9. Children's Privacy */}
           <section>
-            <h2 className="text-2xl font-semibold mb-3">9. Children&apos;s Privacy</h2>
+            <h2 className="text-2xl font-semibold mb-3">{t('sections.childrensPrivacy.title')}</h2>
             <p className="text-gray-700 leading-relaxed">
-              Our service is not intended for children under 18. We do not knowingly collect data from children.
+              {t('sections.childrensPrivacy.content')}
             </p>
           </section>
 
+          {/* 10. Changes to This Policy */}
           <section>
-            <h2 className="text-2xl font-semibold mb-3">10. Changes to This Policy</h2>
+            <h2 className="text-2xl font-semibold mb-3">{t('sections.changes.title')}</h2>
             <p className="text-gray-700 leading-relaxed">
-              We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new
-              policy on this page and updating the &quot;Last updated&quot; date.
+              {t('sections.changes.content')}
             </p>
           </section>
 
+          {/* 11. Contact Us */}
           <section>
-            <h2 className="text-2xl font-semibold mb-3">11. Contact Us</h2>
+            <h2 className="text-2xl font-semibold mb-3">{t('sections.contact.title')}</h2>
             <p className="text-gray-700 leading-relaxed">
-              If you have questions about this Privacy Policy, please contact us at:
+              {t('sections.contact.intro')}
             </p>
             <ul className="list-none space-y-2 text-gray-700 ml-4 mt-3">
-              <li>Email: privacy@receiptsort.com</li>
-              <li>Contact Form: <Link href="/contact" className="text-primary hover:underline">receiptsort.com/contact</Link></li>
+              <li>{t('sections.contact.email')}</li>
+              <li>{t('sections.contact.contactForm')}</li>
             </ul>
           </section>
         </div>

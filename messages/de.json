@@ -858,5 +858,91 @@
         "description": "Verarbeiten Sie 10 Dokumente in einem Monat, 100 im nächsten. Zahlen Sie nur für das, was Sie nutzen ($0.20-0.50 pro Dokument). Credits verfallen nie. Kein verschwenderisches Monatsabo."
       }
     }
+  },
+  "privacyPage": {
+    "backToHome": "Zurück zur Startseite",
+    "title": "Datenschutzerklärung",
+    "lastUpdated": "Zuletzt aktualisiert: 6. Oktober 2025",
+    "sections": {
+      "introduction": {
+        "title": "1. Einführung",
+        "content": "Willkommen bei ReceiptSorter (\"wir\", \"unser\"). Wir sind dem Schutz Ihrer persönlichen Daten und Ihres Rechts auf Privatsphäre verpflichtet. Diese Datenschutzerklärung erklärt, wie wir Ihre Informationen sammeln, verwenden, offenlegen und schützen, wenn Sie unseren Belegverarbeitungsdienst nutzen."
+      },
+      "informationWeCollect": {
+        "title": "2. Welche Informationen wir sammeln",
+        "intro": "Wir sammeln Informationen, die Sie uns direkt zur Verfügung stellen:",
+        "items": [
+          "Kontoinformationen (E-Mail-Adresse, Name)",
+          "Belegbilder und PDFs, die Sie hochladen",
+          "Zahlungsinformationen (sicher verarbeitet durch Stripe)",
+          "Nutzungsdaten und Analysen"
+        ]
+      },
+      "howWeUse": {
+        "title": "3. Wie wir Ihre Informationen verwenden",
+        "intro": "Wir verwenden Ihre Informationen, um:",
+        "items": [
+          "Unseren Belegverarbeitungsdienst bereitzustellen und zu pflegen",
+          "Ihre Belege mit KI-Technologie zu verarbeiten",
+          "Zahlungen zu verarbeiten und Ihr Konto zu verwalten",
+          "Ihnen Service-Updates und Werbemitteilungen zu senden",
+          "Unsere Dienste zu verbessern und neue Funktionen zu entwickeln",
+          "Gesetzliche Verpflichtungen zu erfüllen"
+        ]
+      },
+      "dataSecurity": {
+        "title": "4. Datensicherheit",
+        "intro": "Wir implementieren branchenübliche Sicherheitsmaßnahmen zum Schutz Ihrer Daten:",
+        "items": [
+          "256-Bit-SSL-Verschlüsselung für Datenübertragung",
+          "Sicherer Cloud-Speicher mit Zugriffskontrollen",
+          "Automatisches Löschen von Belegdateien nach 90 Tagen",
+          "Regelmäßige Sicherheitsaudits und Updates"
+        ]
+      },
+      "dataSharing": {
+        "title": "5. Datenweitergabe",
+        "intro": "Wir verkaufen Ihre persönlichen Daten nicht. Wir können Ihre Daten weitergeben an:",
+        "items": [
+          "Dienstleister (OpenAI für Belegverarbeitung, Stripe für Zahlungen)",
+          "Strafverfolgungsbehörden, wenn gesetzlich vorgeschrieben",
+          "Geschäftspartner mit Ihrer ausdrücklichen Zustimmung"
+        ]
+      },
+      "yourRights": {
+        "title": "6. Ihre Rechte",
+        "intro": "Gemäß DSGVO und anderen Datenschutzgesetzen haben Sie das Recht auf:",
+        "items": [
+          "Zugriff auf Ihre personenbezogenen Daten",
+          "Berichtigung unrichtiger Daten",
+          "Löschung Ihrer Daten",
+          "Export Ihrer Daten in einem portablen Format",
+          "Widerspruch gegen Marketing-Kommunikation",
+          "Beschwerde bei einer Aufsichtsbehörde"
+        ]
+      },
+      "cookies": {
+        "title": "7. Cookies",
+        "content": "Wir verwenden wesentliche Cookies, um unseren Service bereitzustellen, und optionale Analyse-Cookies, um die Benutzererfahrung zu verbessern. Sie können Cookie-Einstellungen über Ihre Browsereinstellungen steuern."
+      },
+      "dataRetention": {
+        "title": "8. Datenspeicherung",
+        "content": "Wir speichern Ihre Daten nur so lange, wie es zur Bereitstellung unserer Dienste und zur Erfüllung gesetzlicher Verpflichtungen erforderlich ist. Belegdateien werden nach 90 Tagen automatisch gelöscht. Kontodaten werden gespeichert, bis Sie eine Löschung beantragen."
+      },
+      "childrensPrivacy": {
+        "title": "9. Datenschutz für Kinder",
+        "content": "Unser Service richtet sich nicht an Kinder unter 18 Jahren. Wir sammeln wissentlich keine Daten von Kindern."
+      },
+      "changes": {
+        "title": "10. Änderungen dieser Richtlinie",
+        "content": "Wir können diese Datenschutzerklärung von Zeit zu Zeit aktualisieren. Wir werden Sie über Änderungen informieren, indem wir die neue Richtlinie auf dieser Seite veröffentlichen und das Datum \"Zuletzt aktualisiert\" aktualisieren."
+      },
+      "contact": {
+        "title": "11. Kontakt",
+        "intro": "Bei Fragen zu dieser Datenschutzerklärung kontaktieren Sie uns bitte unter:",
+        "email": "E-Mail: privacy@receiptsort.com",
+        "contactForm": "Kontaktformular: receiptsort.com/contact"
+      }
+    }
   }
 }

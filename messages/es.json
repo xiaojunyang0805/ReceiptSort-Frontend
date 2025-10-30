@@ -858,5 +858,91 @@
         "description": "Procese 10 documentos un mes, 100 el siguiente. Pague solo por lo que usa ($0.20-0.50 por documento). Los créditos nunca expiran. Sin suscripción mensual derrochadora."
       }
     }
+  },
+  "privacyPage": {
+    "backToHome": "Volver al Inicio",
+    "title": "Política de Privacidad",
+    "lastUpdated": "Última actualización: 6 de octubre de 2025",
+    "sections": {
+      "introduction": {
+        "title": "1. Introducción",
+        "content": "Bienvenido a ReceiptSorter (\"nosotros\", \"nuestro\"). Estamos comprometidos a proteger su información personal y su derecho a la privacidad. Esta Política de Privacidad explica cómo recopilamos, usamos, divulgamos y protegemos su información cuando utiliza nuestro servicio de procesamiento de recibos."
+      },
+      "informationWeCollect": {
+        "title": "2. Información que Recopilamos",
+        "intro": "Recopilamos información que nos proporciona directamente:",
+        "items": [
+          "Información de cuenta (dirección de correo electrónico, nombre)",
+          "Imágenes de recibos y archivos PDF que carga",
+          "Información de pago (procesada de forma segura a través de Stripe)",
+          "Datos de uso y analítica"
+        ]
+      },
+      "howWeUse": {
+        "title": "3. Cómo Usamos Su Información",
+        "intro": "Usamos su información para:",
+        "items": [
+          "Proporcionar y mantener nuestro servicio de procesamiento de recibos",
+          "Procesar sus recibos usando tecnología IA",
+          "Procesar pagos y administrar su cuenta",
+          "Enviarle actualizaciones del servicio y comunicaciones promocionales",
+          "Mejorar nuestros servicios y desarrollar nuevas funciones",
+          "Cumplir con obligaciones legales"
+        ]
+      },
+      "dataSecurity": {
+        "title": "4. Seguridad de Datos",
+        "intro": "Implementamos medidas de seguridad estándar de la industria para proteger sus datos:",
+        "items": [
+          "Cifrado SSL de 256 bits para transmisión de datos",
+          "Almacenamiento en la nube seguro con controles de acceso",
+          "Eliminación automática de archivos de recibos después de 90 días",
+          "Auditorías de seguridad y actualizaciones regulares"
+        ]
+      },
+      "dataSharing": {
+        "title": "5. Compartir Datos",
+        "intro": "No vendemos su información personal. Podemos compartir sus datos con:",
+        "items": [
+          "Proveedores de servicios (OpenAI para procesamiento de recibos, Stripe para pagos)",
+          "Autoridades policiales cuando lo exija la ley",
+          "Socios comerciales con su consentimiento explícito"
+        ]
+      },
+      "yourRights": {
+        "title": "6. Sus Derechos",
+        "intro": "Bajo el RGPD y otras leyes de privacidad, tiene derecho a:",
+        "items": [
+          "Acceder a sus datos personales",
+          "Corregir datos inexactos",
+          "Solicitar la eliminación de sus datos",
+          "Exportar sus datos en un formato portable",
+          "Rechazar comunicaciones de marketing",
+          "Presentar una queja ante una autoridad supervisora"
+        ]
+      },
+      "cookies": {
+        "title": "7. Cookies",
+        "content": "Usamos cookies esenciales para proporcionar nuestro servicio y cookies de análisis opcionales para mejorar la experiencia del usuario. Puede controlar las preferencias de cookies a través de la configuración de su navegador."
+      },
+      "dataRetention": {
+        "title": "8. Retención de Datos",
+        "content": "Retenemos sus datos solo el tiempo necesario para proporcionar nuestros servicios y cumplir con obligaciones legales. Los archivos de recibos se eliminan automáticamente después de 90 días. Los datos de cuenta se retienen hasta que solicite su eliminación."
+      },
+      "childrensPrivacy": {
+        "title": "9. Privacidad de Menores",
+        "content": "Nuestro servicio no está destinado a menores de 18 años. No recopilamos datos de menores a sabiendas."
+      },
+      "changes": {
+        "title": "10. Cambios a Esta Política",
+        "content": "Podemos actualizar esta Política de Privacidad de vez en cuando. Le notificaremos cualquier cambio publicando la nueva política en esta página y actualizando la fecha de \"Última actualización\"."
+      },
+      "contact": {
+        "title": "11. Contáctenos",
+        "intro": "Si tiene preguntas sobre esta Política de Privacidad, contáctenos en:",
+        "email": "Correo electrónico: privacy@receiptsort.com",
+        "contactForm": "Formulario de contacto: receiptsort.com/contact"
+      }
+    }
   }
 }

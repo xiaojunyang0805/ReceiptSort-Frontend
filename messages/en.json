@@ -1097,5 +1097,166 @@
     "templateDeletedDescription": "Template has been removed",
     "deleteFailed": "Delete failed",
     "deleteFailedDescription": "Failed to delete template"
+  },
+  "privacyPage": {
+    "backToHome": "Back to Home",
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: October 6, 2025",
+    "sections": {
+      "introduction": {
+        "title": "1. Introduction",
+        "content": "Welcome to ReceiptSorter (\"we,\" \"our,\" or \"us\"). We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our receipt processing service."
+      },
+      "informationWeCollect": {
+        "title": "2. Information We Collect",
+        "intro": "We collect information that you provide directly to us:",
+        "items": [
+          "Account information (email address, name)",
+          "Receipt images and PDFs that you upload",
+          "Payment information (processed securely through Stripe)",
+          "Usage data and analytics"
+        ]
+      },
+      "howWeUse": {
+        "title": "3. How We Use Your Information",
+        "intro": "We use your information to:",
+        "items": [
+          "Provide and maintain our receipt processing service",
+          "Process your receipts using AI technology",
+          "Process payments and manage your account",
+          "Send you service updates and promotional communications",
+          "Improve our services and develop new features",
+          "Comply with legal obligations"
+        ]
+      },
+      "dataSecurity": {
+        "title": "4. Data Security",
+        "intro": "We implement industry-standard security measures to protect your data:",
+        "items": [
+          "256-bit SSL encryption for data transmission",
+          "Secure cloud storage with access controls",
+          "Automatic deletion of receipt files after 90 days",
+          "Regular security audits and updates"
+        ]
+      },
+      "dataSharing": {
+        "title": "5. Data Sharing",
+        "intro": "We do not sell your personal information. We may share your data with:",
+        "items": [
+          "Service providers (OpenAI for receipt processing, Stripe for payments)",
+          "Law enforcement when required by law",
+          "Business partners with your explicit consent"
+        ]
+      },
+      "yourRights": {
+        "title": "6. Your Rights",
+        "intro": "Under GDPR and other privacy laws, you have the right to:",
+        "items": [
+          "Access your personal data",
+          "Correct inaccurate data",
+          "Request deletion of your data",
+          "Export your data in a portable format",
+          "Opt-out of marketing communications",
+          "Lodge a complaint with a supervisory authority"
+        ]
+      },
+      "cookies": {
+        "title": "7. Cookies",
+        "content": "We use essential cookies to provide our service and optional analytics cookies to improve user experience. You can control cookie preferences through your browser settings."
+      },
+      "dataRetention": {
+        "title": "8. Data Retention",
+        "content": "We retain your data only as long as necessary to provide our services and comply with legal obligations. Receipt files are automatically deleted after 90 days. Account data is retained until you request deletion."
+      },
+      "childrensPrivacy": {
+        "title": "9. Children's Privacy",
+        "content": "Our service is not intended for children under 18. We do not knowingly collect data from children."
+      },
+      "changes": {
+        "title": "10. Changes to This Policy",
+        "content": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the \"Last updated\" date."
+      },
+      "contact": {
+        "title": "11. Contact Us",
+        "intro": "If you have questions about this Privacy Policy, please contact us at:",
+        "email": "Email: privacy@receiptsort.com",
+        "contactForm": "Contact Form: receiptsort.com/contact"
+      }
+    }
+  },
+  "termsPage": {
+    "backToHome": "Back to Home",
+    "title": "Terms of Service",
+    "lastUpdated": "Last updated: October 6, 2025",
+    "sections": {
+      "acceptance": {
+        "title": "1. Acceptance of Terms",
+        "content": "By accessing or using ReceiptSorter (\"the Service\"), you agree to be bound by these Terms of Service (\"Terms\"). If you do not agree to these Terms, do not use the Service."
+      },
+      "description": {
+        "title": "2. Description of Service",
+        "content": "ReceiptSorter is a cloud-based receipt processing service that uses artificial intelligence to extract data from receipt images and PDFs. The Service allows you to upload receipts, extract merchant information, amounts, dates, and other data, and export the results to Excel or CSV formats."
+      },
+      "userAccounts": {
+        "title": "3. User Accounts",
+        "intro": "To use the Service, you must:",
+        "items": [
+          "Create an account with accurate information",
+          "Maintain the security of your account credentials",
+          "Be at least 18 years old",
+          "Notify us immediately of any unauthorized access",
+          "Be responsible for all activity under your account"
+        ]
+      },
+      "credits": {
+        "title": "4. Credits and Payment",
+        "content": "The Service operates on a credit-based system. Each receipt processed costs 1 credit. Credits can be purchased through our website using Stripe payment processing. Credits never expire. Prices are subject to change with notice. All sales are final unless otherwise stated in our refund policy."
+      },
+      "usePolicy": {
+        "title": "5. Acceptable Use",
+        "intro": "You agree not to:",
+        "items": [
+          "Upload illegal, fraudulent, or harmful content",
+          "Attempt to reverse engineer or hack the Service",
+          "Use the Service to violate any laws or regulations",
+          "Share your account credentials with others",
+          "Use automated scripts to abuse the Service"
+        ]
+      },
+      "intellectualProperty": {
+        "title": "6. Intellectual Property",
+        "content": "The Service, including all content, features, and functionality, is owned by ReceiptSorter and protected by international copyright, trademark, and other intellectual property laws. You retain ownership of your uploaded receipts and extracted data."
+      },
+      "dataProcessing": {
+        "title": "7. Data Processing",
+        "content": "We process your receipt data using OpenAI's GPT-4 Vision AI. Receipt files are stored securely and automatically deleted after 90 days. See our Privacy Policy for details on how we handle your data."
+      },
+      "warranties": {
+        "title": "8. Warranties and Disclaimers",
+        "content": "THE SERVICE IS PROVIDED \"AS IS\" WITHOUT WARRANTIES OF ANY KIND. We do not guarantee 100% accuracy in receipt data extraction. You are responsible for verifying extracted data before use."
+      },
+      "limitation": {
+        "title": "9. Limitation of Liability",
+        "content": "TO THE MAXIMUM EXTENT PERMITTED BY LAW, RECEIPTSORT SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES ARISING FROM YOUR USE OF THE SERVICE."
+      },
+      "termination": {
+        "title": "10. Termination",
+        "content": "We reserve the right to suspend or terminate your account at any time for violation of these Terms. You may delete your account at any time through your account settings."
+      },
+      "changes": {
+        "title": "11. Changes to Terms",
+        "content": "We may modify these Terms at any time. We will notify you of significant changes via email or through the Service. Continued use after changes constitutes acceptance."
+      },
+      "governing": {
+        "title": "12. Governing Law",
+        "content": "These Terms are governed by the laws of the Netherlands. Any disputes shall be resolved in the courts of the Netherlands."
+      },
+      "contact": {
+        "title": "13. Contact",
+        "intro": "Questions about these Terms? Contact us at:",
+        "email": "Email: support@receiptsort.com",
+        "contactForm": "Contact Form: receiptsort.com/contact"
+      }
+    }
   }
 }

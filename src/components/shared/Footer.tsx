@@ -97,11 +97,6 @@ export default function Footer() {
                   {t('termsOfService')}
                 </Link>
               </li>
-              <li>
-                <Link href="/privacy" className="text-gray-600 hover:text-primary transition-colors">
-                  {t('privacyPolicy')}
-                </Link>
-              </li>
             </ul>
           </div>
         </div>

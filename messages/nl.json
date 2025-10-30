@@ -984,5 +984,91 @@
         "description": "Verwerk 10 documenten in de ene maand, 100 in de volgende. Betaal alleen voor wat u gebruikt ($0.20-0.50 per document). Credits verlopen nooit. Geen verspillend maandelijks abonnement."
       }
     }
+  },
+  "privacyPage": {
+    "backToHome": "Terug naar Home",
+    "title": "Privacybeleid",
+    "lastUpdated": "Laatst bijgewerkt: 6 oktober 2025",
+    "sections": {
+      "introduction": {
+        "title": "1. Inleiding",
+        "content": "Welkom bij ReceiptSorter (\"wij\", \"ons\"). Wij zijn toegewijd aan het beschermen van uw persoonlijke informatie en uw recht op privacy. Dit Privacybeleid legt uit hoe wij uw informatie verzamelen, gebruiken, openbaar maken en beschermen wanneer u onze bonnetjesverwerkingsservice gebruikt."
+      },
+      "informationWeCollect": {
+        "title": "2. Informatie die We Verzamelen",
+        "intro": "We verzamelen informatie die u direct aan ons verstrekt:",
+        "items": [
+          "Accountinformatie (e-mailadres, naam)",
+          "Bonnetjesafbeeldingen en PDF-bestanden die u uploadt",
+          "Betalingsinformatie (veilig verwerkt via Stripe)",
+          "Gebruiksgegevens en analyses"
+        ]
+      },
+      "howWeUse": {
+        "title": "3. Hoe We Uw Informatie Gebruiken",
+        "intro": "We gebruiken uw informatie om:",
+        "items": [
+          "Onze bonnetjesverwerkingsservice te leveren en te onderhouden",
+          "Uw bonnetjes te verwerken met AI-technologie",
+          "Betalingen te verwerken en uw account te beheren",
+          "U service-updates en promotionele berichten te sturen",
+          "Onze diensten te verbeteren en nieuwe functies te ontwikkelen",
+          "Aan wettelijke verplichtingen te voldoen"
+        ]
+      },
+      "dataSecurity": {
+        "title": "4. Gegevensbeveiliging",
+        "intro": "We implementeren industriestandaard beveiligingsmaatregelen om uw gegevens te beschermen:",
+        "items": [
+          "256-bit SSL-versleuteling voor gegevensoverdracht",
+          "Veilige cloudopslag met toegangscontroles",
+          "Automatische verwijdering van bonnetjesbestanden na 90 dagen",
+          "Regelmatige beveiligingsaudits en updates"
+        ]
+      },
+      "dataSharing": {
+        "title": "5. Gegevensdeling",
+        "intro": "We verkopen uw persoonlijke informatie niet. We kunnen uw gegevens delen met:",
+        "items": [
+          "Dienstverleners (OpenAI voor bonnetjesverwerking, Stripe voor betalingen)",
+          "Wetshandhaving indien wettelijk vereist",
+          "Zakelijke partners met uw uitdrukkelijke toestemming"
+        ]
+      },
+      "yourRights": {
+        "title": "6. Uw Rechten",
+        "intro": "Onder de AVG en andere privacywetten heeft u het recht om:",
+        "items": [
+          "Toegang tot uw persoonlijke gegevens",
+          "Onjuiste gegevens te corrigeren",
+          "Verwijdering van uw gegevens aan te vragen",
+          "Uw gegevens in een draagbaar formaat te exporteren",
+          "Af te zien van marketingcommunicatie",
+          "Een klacht in te dienen bij een toezichthoudende autoriteit"
+        ]
+      },
+      "cookies": {
+        "title": "7. Cookies",
+        "content": "We gebruiken essentiële cookies om onze service te leveren en optionele analytische cookies om de gebruikerservaring te verbeteren. U kunt cookievoorkeuren beheren via uw browserinstellingen."
+      },
+      "dataRetention": {
+        "title": "8. Gegevensbewaring",
+        "content": "We bewaren uw gegevens alleen zolang als nodig is om onze diensten te leveren en aan wettelijke verplichtingen te voldoen. Bonnetjesbestanden worden na 90 dagen automatisch verwijderd. Accountgegevens worden bewaard totdat u verwijdering aanvraagt."
+      },
+      "childrensPrivacy": {
+        "title": "9. Privacy van Kinderen",
+        "content": "Onze service is niet bedoeld voor kinderen onder de 18 jaar. We verzamelen niet bewust gegevens van kinderen."
+      },
+      "changes": {
+        "title": "10. Wijzigingen in Dit Beleid",
+        "content": "We kunnen dit Privacybeleid van tijd tot tijd bijwerken. We zullen u op de hoogte brengen van wijzigingen door het nieuwe beleid op deze pagina te plaatsen en de datum \"Laatst bijgewerkt\" bij te werken."
+      },
+      "contact": {
+        "title": "11. Neem Contact Op",
+        "intro": "Als u vragen heeft over dit Privacybeleid, neem dan contact met ons op via:",
+        "email": "E-mail: privacy@receiptsort.com",
+        "contactForm": "Contactformulier: receiptsort.com/contact"
+      }
+    }
   }
 }

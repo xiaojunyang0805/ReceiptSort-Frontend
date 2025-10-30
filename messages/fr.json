@@ -858,5 +858,91 @@
         "description": "Traitez 10 documents un mois, 100 le suivant. Payez uniquement ce que vous utilisez ($0.20-0.50 par document). Les crédits n'expirent jamais. Pas d'abonnement mensuel gaspillé."
       }
     }
+  },
+  "privacyPage": {
+    "backToHome": "Retour à l'Accueil",
+    "title": "Politique de Confidentialité",
+    "lastUpdated": "Dernière mise à jour : 6 octobre 2025",
+    "sections": {
+      "introduction": {
+        "title": "1. Introduction",
+        "content": "Bienvenue chez ReceiptSorter (\"nous\", \"notre\"). Nous nous engageons à protéger vos informations personnelles et votre droit à la vie privée. Cette Politique de Confidentialité explique comment nous collectons, utilisons, divulguons et protégeons vos informations lorsque vous utilisez notre service de traitement de reçus."
+      },
+      "informationWeCollect": {
+        "title": "2. Informations que Nous Collectons",
+        "intro": "Nous collectons les informations que vous nous fournissez directement:",
+        "items": [
+          "Informations de compte (adresse e-mail, nom)",
+          "Images de reçus et fichiers PDF que vous téléchargez",
+          "Informations de paiement (traitées en toute sécurité via Stripe)",
+          "Données d'utilisation et analyses"
+        ]
+      },
+      "howWeUse": {
+        "title": "3. Comment Nous Utilisons Vos Informations",
+        "intro": "Nous utilisons vos informations pour:",
+        "items": [
+          "Fournir et maintenir notre service de traitement de reçus",
+          "Traiter vos reçus en utilisant la technologie IA",
+          "Traiter les paiements et gérer votre compte",
+          "Vous envoyer des mises à jour du service et des communications promotionnelles",
+          "Améliorer nos services et développer de nouvelles fonctionnalités",
+          "Respecter les obligations légales"
+        ]
+      },
+      "dataSecurity": {
+        "title": "4. Sécurité des Données",
+        "intro": "Nous mettons en œuvre des mesures de sécurité standard de l'industrie pour protéger vos données:",
+        "items": [
+          "Cryptage SSL 256 bits pour la transmission de données",
+          "Stockage cloud sécurisé avec contrôles d'accès",
+          "Suppression automatique des fichiers de reçus après 90 jours",
+          "Audits de sécurité et mises à jour régulières"
+        ]
+      },
+      "dataSharing": {
+        "title": "5. Partage de Données",
+        "intro": "Nous ne vendons pas vos informations personnelles. Nous pouvons partager vos données avec:",
+        "items": [
+          "Fournisseurs de services (OpenAI pour le traitement des reçus, Stripe pour les paiements)",
+          "Les forces de l'ordre lorsque requis par la loi",
+          "Partenaires commerciaux avec votre consentement explicite"
+        ]
+      },
+      "yourRights": {
+        "title": "6. Vos Droits",
+        "intro": "En vertu du RGPD et d'autres lois sur la protection de la vie privée, vous avez le droit de:",
+        "items": [
+          "Accéder à vos données personnelles",
+          "Corriger les données inexactes",
+          "Demander la suppression de vos données",
+          "Exporter vos données dans un format portable",
+          "Refuser les communications marketing",
+          "Déposer une plainte auprès d'une autorité de surveillance"
+        ]
+      },
+      "cookies": {
+        "title": "7. Cookies",
+        "content": "Nous utilisons des cookies essentiels pour fournir notre service et des cookies d'analyse optionnels pour améliorer l'expérience utilisateur. Vous pouvez contrôler les préférences de cookies via les paramètres de votre navigateur."
+      },
+      "dataRetention": {
+        "title": "8. Conservation des Données",
+        "content": "Nous conservons vos données uniquement aussi longtemps que nécessaire pour fournir nos services et respecter les obligations légales. Les fichiers de reçus sont automatiquement supprimés après 90 jours. Les données de compte sont conservées jusqu'à ce que vous demandiez leur suppression."
+      },
+      "childrensPrivacy": {
+        "title": "9. Confidentialité des Enfants",
+        "content": "Notre service n'est pas destiné aux enfants de moins de 18 ans. Nous ne collectons pas sciemment de données auprès d'enfants."
+      },
+      "changes": {
+        "title": "10. Modifications de Cette Politique",
+        "content": "Nous pouvons mettre à jour cette Politique de Confidentialité de temps à autre. Nous vous informerons de tout changement en publiant la nouvelle politique sur cette page et en mettant à jour la date \"Dernière mise à jour\"."
+      },
+      "contact": {
+        "title": "11. Nous Contacter",
+        "intro": "Si vous avez des questions sur cette Politique de Confidentialité, veuillez nous contacter à:",
+        "email": "E-mail: privacy@receiptsort.com",
+        "contactForm": "Formulaire de contact: receiptsort.com/contact"
+      }
+    }
   }
 }
