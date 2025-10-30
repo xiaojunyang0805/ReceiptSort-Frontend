@@ -23,7 +23,7 @@ export function UseCases() {
     },
     {
       icon: Globe2,
-      emoji: '🇪🇺',
+      emoji: '💼',
       key: 'euFreelancer',
     },
     {
