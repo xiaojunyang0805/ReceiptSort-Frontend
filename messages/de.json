@@ -944,5 +944,80 @@
         "contactForm": "Kontaktformular: receiptsort.com/contact"
       }
     }
+  },
+  "termsPage": {
+    "backToHome": "Zurück zur Startseite",
+    "title": "Nutzungsbedingungen",
+    "lastUpdated": "Zuletzt aktualisiert: 6. Oktober 2025",
+    "sections": {
+      "acceptance": {
+        "title": "1. Annahme der Bedingungen",
+        "content": "Durch den Zugriff auf oder die Nutzung von ReceiptSorter (\"der Dienst\") erklären Sie sich mit diesen Nutzungsbedingungen (\"Bedingungen\") einverstanden. Wenn Sie mit diesen Bedingungen nicht einverstanden sind, nutzen Sie den Dienst nicht."
+      },
+      "description": {
+        "title": "2. Beschreibung des Dienstes",
+        "content": "ReceiptSorter ist ein cloudbasierter Belegverarbeitungsdienst, der künstliche Intelligenz verwendet, um Daten aus Belegbildern und PDFs zu extrahieren. Der Dienst ermöglicht es Ihnen, Belege hochzuladen, Händlerinformationen, Beträge, Daten und andere Daten zu extrahieren und die Ergebnisse in Excel- oder CSV-Formate zu exportieren."
+      },
+      "userAccounts": {
+        "title": "3. Benutzerkonten",
+        "intro": "Um den Dienst zu nutzen, müssen Sie:",
+        "items": [
+          "Ein Konto mit genauen Informationen erstellen",
+          "Die Sicherheit Ihrer Kontoanmeldedaten aufrechterhalten",
+          "Mindestens 18 Jahre alt sein",
+          "Uns unverzüglich über unbefugten Zugriff informieren",
+          "Für alle Aktivitäten unter Ihrem Konto verantwortlich sein"
+        ]
+      },
+      "credits": {
+        "title": "4. Credits und Zahlung",
+        "content": "Der Dienst arbeitet mit einem kreditbasierten System. Jeder verarbeitete Beleg kostet 1 Credit. Credits können über unsere Website mit Stripe-Zahlungsabwicklung gekauft werden. Credits verfallen nie. Die Preise können sich mit Ankündigung ändern. Alle Verkäufe sind endgültig, sofern in unserer Rückerstattungsrichtlinie nicht anders angegeben."
+      },
+      "usePolicy": {
+        "title": "5. Akzeptable Nutzung",
+        "intro": "Sie verpflichten sich, Folgendes nicht zu tun:",
+        "items": [
+          "Illegale, betrügerische oder schädliche Inhalte hochladen",
+          "Versuchen, den Dienst zurückzuentwickeln oder zu hacken",
+          "Den Dienst zur Verletzung von Gesetzen oder Vorschriften nutzen",
+          "Ihre Kontoanmeldedaten mit anderen teilen",
+          "Automatisierte Skripte verwenden, um den Dienst zu missbrauchen"
+        ]
+      },
+      "intellectualProperty": {
+        "title": "6. Geistiges Eigentum",
+        "content": "Der Dienst, einschließlich aller Inhalte, Funktionen und Funktionalitäten, ist Eigentum von ReceiptSorter und durch internationale Urheberrechts-, Marken- und andere Gesetze zum Schutz geistigen Eigentums geschützt. Sie behalten das Eigentum an Ihren hochgeladenen Belegen und extrahierten Daten."
+      },
+      "dataProcessing": {
+        "title": "7. Datenverarbeitung",
+        "content": "Wir verarbeiten Ihre Belegdaten mit OpenAI's GPT-4 Vision AI. Belegdateien werden sicher gespeichert und nach 90 Tagen automatisch gelöscht. Einzelheiten zur Verarbeitung Ihrer Daten finden Sie in unserer Datenschutzerklärung."
+      },
+      "warranties": {
+        "title": "8. Gewährleistungen und Haftungsausschlüsse",
+        "content": "DER DIENST WIRD \"WIE BESEHEN\" OHNE JEGLICHE GEWÄHRLEISTUNG BEREITGESTELLT. Wir garantieren keine 100%ige Genauigkeit bei der Belegdatenextraktion. Sie sind dafür verantwortlich, extrahierte Daten vor der Verwendung zu überprüfen."
+      },
+      "limitation": {
+        "title": "9. Haftungsbeschränkung",
+        "content": "IM MAXIMAL GESETZLICH ZULÄSSIGEN UMFANG HAFTET RECEIPTSORT NICHT FÜR INDIREKTE, ZUFÄLLIGE, BESONDERE, FOLGESCHÄDEN ODER STRAFSCHADENERSATZ, DIE SICH AUS IHRER NUTZUNG DES DIENSTES ERGEBEN."
+      },
+      "termination": {
+        "title": "10. Kündigung",
+        "content": "Wir behalten uns das Recht vor, Ihr Konto jederzeit bei Verstoß gegen diese Bedingungen auszusetzen oder zu kündigen. Sie können Ihr Konto jederzeit über Ihre Kontoeinstellungen löschen."
+      },
+      "changes": {
+        "title": "11. Änderungen der Bedingungen",
+        "content": "Wir können diese Bedingungen jederzeit ändern. Wir werden Sie über wesentliche Änderungen per E-Mail oder über den Dienst informieren. Die fortgesetzte Nutzung nach Änderungen stellt eine Annahme dar."
+      },
+      "governing": {
+        "title": "12. Anwendbares Recht",
+        "content": "Diese Bedingungen unterliegen den Gesetzen der Niederlande. Alle Streitigkeiten werden vor den Gerichten der Niederlande beigelegt."
+      },
+      "contact": {
+        "title": "13. Kontakt",
+        "intro": "Fragen zu diesen Bedingungen? Kontaktieren Sie uns unter:",
+        "email": "E-Mail: support@seenano.nl",
+        "contactForm": "Kontaktformular: receiptsort.com/contact"
+      }
+    }
   }
 }

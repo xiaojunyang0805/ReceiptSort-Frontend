@@ -944,5 +944,80 @@
         "contactForm": "Formulario de contacto: receiptsort.com/contact"
       }
     }
+  },
+  "termsPage": {
+    "backToHome": "Volver al Inicio",
+    "title": "Términos de Servicio",
+    "lastUpdated": "Última actualización: 6 de octubre de 2025",
+    "sections": {
+      "acceptance": {
+        "title": "1. Aceptación de los Términos",
+        "content": "Al acceder o usar ReceiptSorter (\"el Servicio\"), usted acepta estar sujeto a estos Términos de Servicio (\"Términos\"). Si no está de acuerdo con estos Términos, no use el Servicio."
+      },
+      "description": {
+        "title": "2. Descripción del Servicio",
+        "content": "ReceiptSorter es un servicio de procesamiento de recibos basado en la nube que utiliza inteligencia artificial para extraer datos de imágenes de recibos y PDFs. El Servicio le permite cargar recibos, extraer información del comerciante, montos, fechas y otros datos, y exportar los resultados a formatos Excel o CSV."
+      },
+      "userAccounts": {
+        "title": "3. Cuentas de Usuario",
+        "intro": "Para usar el Servicio, debe:",
+        "items": [
+          "Crear una cuenta con información precisa",
+          "Mantener la seguridad de las credenciales de su cuenta",
+          "Tener al menos 18 años",
+          "Notificarnos inmediatamente de cualquier acceso no autorizado",
+          "Ser responsable de toda la actividad bajo su cuenta"
+        ]
+      },
+      "credits": {
+        "title": "4. Créditos y Pago",
+        "content": "El Servicio opera con un sistema basado en créditos. Cada recibo procesado cuesta 1 crédito. Los créditos se pueden comprar a través de nuestro sitio web usando el procesamiento de pagos de Stripe. Los créditos nunca expiran. Los precios están sujetos a cambios con aviso. Todas las ventas son finales a menos que se indique lo contrario en nuestra política de reembolso."
+      },
+      "usePolicy": {
+        "title": "5. Uso Aceptable",
+        "intro": "Usted acepta no:",
+        "items": [
+          "Cargar contenido ilegal, fraudulento o dañino",
+          "Intentar realizar ingeniería inversa o hackear el Servicio",
+          "Usar el Servicio para violar leyes o regulaciones",
+          "Compartir las credenciales de su cuenta con otros",
+          "Usar scripts automatizados para abusar del Servicio"
+        ]
+      },
+      "intellectualProperty": {
+        "title": "6. Propiedad Intelectual",
+        "content": "El Servicio, incluido todo el contenido, funciones y funcionalidad, es propiedad de ReceiptSorter y está protegido por leyes internacionales de derechos de autor, marcas registradas y otras leyes de propiedad intelectual. Usted conserva la propiedad de sus recibos cargados y datos extraídos."
+      },
+      "dataProcessing": {
+        "title": "7. Procesamiento de Datos",
+        "content": "Procesamos sus datos de recibos utilizando GPT-4 Vision AI de OpenAI. Los archivos de recibos se almacenan de forma segura y se eliminan automáticamente después de 90 días. Consulte nuestra Política de Privacidad para obtener detalles sobre cómo manejamos sus datos."
+      },
+      "warranties": {
+        "title": "8. Garantías y Exenciones de Responsabilidad",
+        "content": "EL SERVICIO SE PROPORCIONA \"TAL CUAL\" SIN GARANTÍAS DE NINGÚN TIPO. No garantizamos una precisión del 100% en la extracción de datos de recibos. Usted es responsable de verificar los datos extraídos antes de su uso."
+      },
+      "limitation": {
+        "title": "9. Limitación de Responsabilidad",
+        "content": "EN LA MÁXIMA MEDIDA PERMITIDA POR LA LEY, RECEIPTSORT NO SERÁ RESPONSABLE DE DAÑOS INDIRECTOS, INCIDENTALES, ESPECIALES, CONSECUENTES O PUNITIVOS QUE SURJAN DEL USO DEL SERVICIO."
+      },
+      "termination": {
+        "title": "10. Terminación",
+        "content": "Nos reservamos el derecho de suspender o terminar su cuenta en cualquier momento por violación de estos Términos. Puede eliminar su cuenta en cualquier momento a través de la configuración de su cuenta."
+      },
+      "changes": {
+        "title": "11. Cambios en los Términos",
+        "content": "Podemos modificar estos Términos en cualquier momento. Le notificaremos cambios significativos por correo electrónico o a través del Servicio. El uso continuado después de los cambios constituye aceptación."
+      },
+      "governing": {
+        "title": "12. Ley Aplicable",
+        "content": "Estos Términos se rigen por las leyes de los Países Bajos. Cualquier disputa se resolverá en los tribunales de los Países Bajos."
+      },
+      "contact": {
+        "title": "13. Contacto",
+        "intro": "¿Preguntas sobre estos Términos? Contáctenos en:",
+        "email": "Correo electrónico: support@seenano.nl",
+        "contactForm": "Formulario de contacto: receiptsort.com/contact"
+      }
+    }
   }
 }

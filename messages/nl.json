@@ -1070,5 +1070,80 @@
         "contactForm": "Contactformulier: receiptsort.com/contact"
       }
     }
+  },
+  "termsPage": {
+    "backToHome": "Terug naar Home",
+    "title": "Gebruiksvoorwaarden",
+    "lastUpdated": "Laatst bijgewerkt: 6 oktober 2025",
+    "sections": {
+      "acceptance": {
+        "title": "1. Acceptatie van Voorwaarden",
+        "content": "Door ReceiptSorter (\"de Service\") te openen of te gebruiken, gaat u ermee akkoord gebonden te zijn aan deze Gebruiksvoorwaarden (\"Voorwaarden\"). Als u niet akkoord gaat met deze Voorwaarden, gebruik de Service dan niet."
+      },
+      "description": {
+        "title": "2. Beschrijving van de Service",
+        "content": "ReceiptSorter is een cloudgebaseerde bonnetjesverwerkingsservice die kunstmatige intelligentie gebruikt om gegevens te extraheren uit bonnetjesafbeeldingen en PDF's. De Service stelt u in staat bonnetjes te uploaden, informatie over handelaars, bedragen, datums en andere gegevens te extraheren, en de resultaten te exporteren naar Excel- of CSV-formaten."
+      },
+      "userAccounts": {
+        "title": "3. Gebruikersaccounts",
+        "intro": "Om de Service te gebruiken, moet u:",
+        "items": [
+          "Een account aanmaken met nauwkeurige informatie",
+          "De beveiliging van uw accountgegevens handhaven",
+          "Ten minste 18 jaar oud zijn",
+          "Ons onmiddellijk op de hoogte stellen van ongeautoriseerde toegang",
+          "Verantwoordelijk zijn voor alle activiteit onder uw account"
+        ]
+      },
+      "credits": {
+        "title": "4. Credits en Betaling",
+        "content": "De Service werkt op een creditgebaseerd systeem. Elk verwerkt bonnetje kost 1 credit. Credits kunnen worden gekocht via onze website met Stripe-betalingsverwerking. Credits verlopen nooit. Prijzen kunnen met kennisgeving worden gewijzigd. Alle verkopen zijn definitief tenzij anders vermeld in ons restitutiebeleid."
+      },
+      "usePolicy": {
+        "title": "5. Acceptabel Gebruik",
+        "intro": "U stemt ermee in om niet:",
+        "items": [
+          "Illegale, frauduleuze of schadelijke inhoud te uploaden",
+          "Te proberen de Service reverse-engineeren of te hacken",
+          "De Service te gebruiken om wetten of voorschriften te schenden",
+          "Uw accountgegevens met anderen te delen",
+          "Geautomatiseerde scripts te gebruiken om de Service te misbruiken"
+        ]
+      },
+      "intellectualProperty": {
+        "title": "6. Intellectueel Eigendom",
+        "content": "De Service, inclusief alle inhoud, functies en functionaliteit, is eigendom van ReceiptSorter en wordt beschermd door internationale auteursrecht-, handelsmerk- en andere intellectuele eigendomswetten. U behoudt het eigendom van uw geüploade bonnetjes en geëxtraheerde gegevens."
+      },
+      "dataProcessing": {
+        "title": "7. Gegevensverwerking",
+        "content": "We verwerken uw bonnetjesgegevens met behulp van OpenAI's GPT-4 Vision AI. Bonnetjesbestanden worden veilig opgeslagen en na 90 dagen automatisch verwijderd. Zie ons Privacybeleid voor details over hoe we uw gegevens verwerken."
+      },
+      "warranties": {
+        "title": "8. Garanties en Vrijwaringen",
+        "content": "DE SERVICE WORDT GELEVERD \"ZOALS HET IS\" ZONDER ENIGE GARANTIES. We garanderen geen 100% nauwkeurigheid bij het extraheren van bonnetjesgegevens. U bent verantwoordelijk voor het verifiëren van geëxtraheerde gegevens voor gebruik."
+      },
+      "limitation": {
+        "title": "9. Beperking van Aansprakelijkheid",
+        "content": "IN DE MAXIMAAL TOEGESTANE MATE DOOR DE WET, ZAL RECEIPTSORT NIET AANSPRAKELIJK ZIJN VOOR INDIRECTE, INCIDENTELE, SPECIALE, GEVOLGSCHADE OF BESTRAFFENDE SCHADE DIE VOORTVLOEIT UIT UW GEBRUIK VAN DE SERVICE."
+      },
+      "termination": {
+        "title": "10. Beëindiging",
+        "content": "We behouden ons het recht voor om uw account op elk moment op te schorten of te beëindigen wegens schending van deze Voorwaarden. U kunt uw account op elk moment verwijderen via uw accountinstellingen."
+      },
+      "changes": {
+        "title": "11. Wijzigingen in Voorwaarden",
+        "content": "We kunnen deze Voorwaarden op elk moment wijzigen. We zullen u op de hoogte stellen van belangrijke wijzigingen via e-mail of via de Service. Voortgezet gebruik na wijzigingen vormt acceptatie."
+      },
+      "governing": {
+        "title": "12. Toepasselijk Recht",
+        "content": "Deze Voorwaarden worden beheerst door de wetten van Nederland. Eventuele geschillen zullen worden opgelost in de rechtbanken van Nederland."
+      },
+      "contact": {
+        "title": "13. Contact",
+        "intro": "Vragen over deze Voorwaarden? Neem contact met ons op via:",
+        "email": "E-mail: support@seenano.nl",
+        "contactForm": "Contactformulier: receiptsort.com/contact"
+      }
+    }
   }
 }
