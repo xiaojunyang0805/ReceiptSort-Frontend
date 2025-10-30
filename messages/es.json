@@ -180,8 +180,8 @@
         "answer": "Exportamos a formatos Excel y CSV, que son compatibles con QuickBooks, Xero y todos los principales software de contabilidad. Simplemente importa el archivo descargado en tu sistema de contabilidad."
       },
       "customTemplates": {
-        "question": "¿Cómo funcionan las plantillas personalizadas?",
-        "answer": "Las plantillas personalizadas te permiten crear formatos de exportación reutilizables para declaraciones de IVA, contabilidad y más. Cuando exportas con 'Guardar para reutilizar' marcado, nuestra IA mapea automáticamente los campos del recibo a las columnas de tu plantilla. Puedes guardar hasta 10 plantillas GRATIS (sin créditos), y luego usarlas ilimitadamente. Cada exportación con una plantilla cuesta solo 1 crédito."
+        "question": "¿Qué son las Plantillas Personalizadas y por qué las necesito?",
+        "answer": "Las Plantillas Personalizadas le permiten crear formatos de exportación reutilizables adaptados a SUS necesidades—como declaraciones de IVA, diseños contables específicos o formularios de seguros.\n\nPor qué importan: Otras herramientas de recibos exportan a SU formato fijo. Luego pierde 2-3 minutos por documento reorganizando columnas, renombrando encabezados y reformateando para que coincida con su sistema contable o requisitos gubernamentales.\n\nCon ReceiptSort: Crea su plantilla ideal UNA VEZ con sus nombres exactos de columna (Monto IVA, Código de Proyecto, etc.). Nuestra IA mapea automáticamente todos los recibos futuros a las columnas de su plantilla—incluso si los recibos usan términos diferentes (Tax vs VAT vs Btw vs IVA).\n\nPrecios: Guarde hasta 10 plantillas GRATIS (sin cargos de créditos), luego reutilícelas ilimitadamente. Cada exportación cuesta solo 1 crédito, independientemente de la complejidad de la plantilla.\n\nEjemplo: Cree una plantilla con columnas: Fecha | Proveedor | Monto Neto | Monto IVA | Total | Categoría. Cada recibo que procese se exportará automáticamente a este formato exacto—sin reorganización manual necesaria."
       },
       "wrongExtraction": {
         "question": "¿Qué pasa si la extracción es incorrecta?",

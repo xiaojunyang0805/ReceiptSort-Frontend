@@ -181,8 +181,8 @@
         "answer": "We exporteren naar Excel- en CSV-formaten, die compatibel zijn met QuickBooks, Xero en alle belangrijke boekhoudsoftware. Importeer het gedownloade bestand eenvoudig in uw boekhoudsysteem."
       },
       "customTemplates": {
-        "question": "Hoe werken aangepaste sjablonen?",
-        "answer": "Met aangepaste sjablonen kunt u herbruikbare exportformaten maken voor BTW-aangiften, boekhouding en meer. Wanneer u exporteert met 'Opslaan voor hergebruik' aangevinkt, koppelt onze AI automatisch de bonnetvelden aan uw sjabloonkolommen. U kunt tot 10 sjablonen GRATIS opslaan (geen credits), en deze onbeperkt gebruiken. Elke export met een sjabloon kost slechts 1 credit."
+        "question": "Wat zijn Aangepaste Sjablonen en waarom heb ik ze nodig?",
+        "answer": "Aangepaste Sjablonen stellen u in staat om herbruikbare exportformaten te maken die zijn afgestemd op UW behoeften—zoals BTW-aangiften, specifieke boekhoudindelingen of verzekeringsformulieren.\n\nWaarom ze belangrijk zijn: Andere bonnetjestools exporteren naar HUN vaste formaat. U verspilt vervolgens 2-3 minuten per document met het reorganiseren van kolommen, hernoemen van headers en herformatteren om overeen te komen met uw boekhoudsysteem of overheidsvereisten.\n\nMet ReceiptSort: U maakt ÉÉN KEER uw ideale sjabloon met uw exacte kolomnamen (BTW-bedrag, Projectcode, enz.). Onze AI koppelt automatisch alle toekomstige bonnetjes aan uw sjabloonkolommen—zelfs als bonnetjes verschillende termen gebruiken (Tax vs VAT vs Btw vs BTW).\n\nPrijzen: Bewaar tot 10 sjablonen GRATIS (geen credits in rekening gebracht), gebruik ze vervolgens onbeperkt opnieuw. Elke export kost slechts 1 credit, ongeacht de complexiteit van het sjabloon.\n\nVoorbeeld: Maak een sjabloon met kolommen: Datum | Leverancier | Nettobedrag | BTW-bedrag | Totaal | Categorie. Elk bonnetje dat u verwerkt, wordt automatisch geëxporteerd naar dit exacte formaat—geen handmatige reorganisatie nodig."
       },
       "wrongExtraction": {
         "question": "Wat als de extractie onjuist is?",
