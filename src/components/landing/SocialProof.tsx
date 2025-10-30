@@ -17,7 +17,7 @@ const stats = [
   },
   {
     icon: Target,
-    number: '95%+',
+    number: '98%+',
     labelKey: 'accuracy',
   },
 ]

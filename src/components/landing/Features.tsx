@@ -30,11 +30,6 @@ export function Features() {
       descriptionKey: 'items.export.description',
     },
     {
-      icon: Wand2,
-      titleKey: 'items.aiTemplates.title',
-      descriptionKey: 'items.aiTemplates.description',
-    },
-    {
       icon: Shield,
       titleKey: 'items.security.title',
       descriptionKey: 'items.security.description',
