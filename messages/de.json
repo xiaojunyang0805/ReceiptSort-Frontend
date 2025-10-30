@@ -793,5 +793,52 @@
     "updateSuccess": "Profil erfolgreich aktualisiert!",
     "updateError": "Profil konnte nicht aktualisiert werden. Bitte versuchen Sie es erneut.",
     "emailCannotChange": "E-Mail-Adresse kann nicht geändert werden"
+  },
+  "whatMakesUsDifferent": {
+    "title": "Was ReceiptSort Unterscheidet",
+    "others": {
+      "title": "Andere Beleg-Tools",
+      "fixedFormat": "Export in IHR festes Format",
+      "manualReorganization": "Sie reorganisieren Daten manuell (2-3 Min./Dokument)",
+      "subscription": "$20-60/Monat Abo erforderlich",
+      "receiptsOnly": "Nur Belege"
+    },
+    "receiptSort": {
+      "title": "ReceiptSort",
+      "badge": "Besserer Ansatz",
+      "aiAdapts": "KI passt sich automatisch IHRER Vorlage an",
+      "yourFormat": "Daten in Ihrem Format exportiert (keine Reorganisation)",
+      "payPerDocument": "Pro Dokument zahlen ($0.20-0.50, Credits verfallen nie)",
+      "allDocuments": "Belege, Rechnungen UND Arztberichte"
+    },
+    "savingsText": "Sparen Sie 2-3 Minuten pro Dokument durch Wegfall manueller Reorganisation.",
+    "freeTemplates": "Erstellen Sie 10 benutzerdefinierte Vorlagen KOSTENLOS, unbegrenzt wiederverwendbar.",
+    "cta": "Wie Vorlagen-Zuordnung Funktioniert"
+  },
+  "useCases": {
+    "title": "Für Ihren Workflow Entwickelt",
+    "subtitle": "ReceiptSort passt sich an, wie SIE arbeiten—nicht umgekehrt",
+    "items": {
+      "accountant": {
+        "tag": "Perfekt für: Buchhalter",
+        "title": "Buchhalter mit mehreren Kunden",
+        "description": "Erstellen Sie 5 Vorlagen (eine pro Kundenformat). KI ordnet alle Belege automatisch der richtigen Kundenvorlage zu. Rechnen Sie Kunden genau ab ohne manuelle Reorganisation. Sparen Sie 15+ Stunden pro Monat."
+      },
+      "medical": {
+        "tag": "Perfekt für: Arztpraxen",
+        "title": "Arztpraxis",
+        "description": "Erstellen Sie benutzerdefinierte Versicherungsantragsvorlagen. KI extrahiert aus Arztbelegen und Rechnungen, ordnet dem Format IHRER Versicherung zu. Keine manuelle Dateneingabe mehr für Erstattungen."
+      },
+      "euFreelancer": {
+        "tag": "Perfekt für: EU-Freiberufler",
+        "title": "EU-Freiberufler (Umsatzsteuer-Meldungen)",
+        "description": "Erstellen Sie Umsatzsteuererklärungsvorlagen nach den behördlichen Anforderungen Ihres Landes. KI behandelt verschiedene Belegformate (Btw, VAT, MwSt, TVA) automatisch. Export bereit zur Einreichung."
+      },
+      "variableVolume": {
+        "tag": "Perfekt für: Variables Volumen",
+        "title": "Unternehmen mit variablem Volumen",
+        "description": "Verarbeiten Sie 10 Dokumente in einem Monat, 100 im nächsten. Zahlen Sie nur für das, was Sie nutzen ($0.20-0.50 pro Dokument). Credits verfallen nie. Kein verschwenderisches Monatsabo."
+      }
+    }
   }
 }

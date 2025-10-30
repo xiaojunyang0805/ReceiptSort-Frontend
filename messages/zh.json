@@ -1031,5 +1031,52 @@
     "templateDeletedDescription": "模板已移除",
     "deleteFailed": "删除失败",
     "deleteFailedDescription": "删除模板失败"
+  },
+  "whatMakesUsDifferent": {
+    "title": "ReceiptSort的独特之处",
+    "others": {
+      "title": "其他收据工具",
+      "fixedFormat": "导出为他们的固定格式",
+      "manualReorganization": "您需手动重组数据（每份文档2-3分钟）",
+      "subscription": "需要$20-60/月订阅",
+      "receiptsOnly": "仅支持收据"
+    },
+    "receiptSort": {
+      "title": "ReceiptSort",
+      "badge": "更好的方式",
+      "aiAdapts": "AI自动适配您的模板",
+      "yourFormat": "数据以您的格式导出（无需重组）",
+      "payPerDocument": "按文档付费（$0.20-0.50，积分永不过期）",
+      "allDocuments": "收据、发票和医疗记录"
+    },
+    "savingsText": "通过消除手动重组，每份文档节省2-3分钟。",
+    "freeTemplates": "免费创建10个自定义模板，无限次重用。",
+    "cta": "查看模板映射的工作原理"
+  },
+  "useCases": {
+    "title": "为您的工作流程而设计",
+    "subtitle": "ReceiptSort适应您的工作方式——而非相反",
+    "items": {
+      "accountant": {
+        "tag": "最适合：会计师",
+        "title": "拥有多个客户的会计师",
+        "description": "创建5个模板（每个客户格式一个）。AI自动将所有收据映射到正确的客户模板。无需手动重组即可准确向客户开账单。每月节省15+小时。"
+      },
+      "medical": {
+        "tag": "最适合：医疗机构",
+        "title": "医疗机构",
+        "description": "创建自定义保险索赔模板。AI从医疗收据和发票中提取，映射到您的保险公司格式。无需手动输入数据即可报销。"
+      },
+      "euFreelancer": {
+        "tag": "最适合：欧盟自由职业者",
+        "title": "欧盟自由职业者（增值税申报）",
+        "description": "创建符合您所在国家政府要求的增值税申报模板。AI自动处理不同的收据格式（Btw、VAT、MwSt、TVA）。导出后即可提交。"
+      },
+      "variableVolume": {
+        "tag": "最适合：可变量",
+        "title": "业务量可变的企业",
+        "description": "一个月处理10份文档，下个月处理100份。只为您使用的付费（$0.20-0.50/文档）。积分永不过期。无需浪费的月度订阅。"
+      }
+    }
   }
 }

@@ -793,5 +793,52 @@
     "updateSuccess": "Profil mis à jour avec succès !",
     "updateError": "Échec de la mise à jour du profil. Veuillez réessayer.",
     "emailCannotChange": "L'adresse e-mail ne peut pas être modifiée"
+  },
+  "whatMakesUsDifferent": {
+    "title": "Ce Qui Distingue ReceiptSort",
+    "others": {
+      "title": "Autres Outils de Reçus",
+      "fixedFormat": "Exporter vers LEUR format fixe",
+      "manualReorganization": "Vous réorganisez les données manuellement (2-3 min/document)",
+      "subscription": "Abonnement de $20-60/mois requis",
+      "receiptsOnly": "Reçus uniquement"
+    },
+    "receiptSort": {
+      "title": "ReceiptSort",
+      "badge": "Meilleure Approche",
+      "aiAdapts": "L'IA s'adapte automatiquement à VOTRE modèle",
+      "yourFormat": "Données exportées dans votre format (pas de réorganisation)",
+      "payPerDocument": "Paiement par document ($0.20-0.50, crédits jamais expirés)",
+      "allDocuments": "Reçus, factures ET notes médicales"
+    },
+    "savingsText": "Économisez 2-3 minutes par document en éliminant la réorganisation manuelle.",
+    "freeTemplates": "Créez 10 modèles personnalisés GRATUITS, réutilisez indéfiniment.",
+    "cta": "Voir Comment Fonctionne le Mappage de Modèles"
+  },
+  "useCases": {
+    "title": "Conçu pour Votre Flux de Travail",
+    "subtitle": "ReceiptSort s'adapte à VOTRE façon de travailler—pas l'inverse",
+    "items": {
+      "accountant": {
+        "tag": "Parfait pour: Comptables",
+        "title": "Comptable avec Plusieurs Clients",
+        "description": "Créez 5 modèles (un par format de client). L'IA mappe tous les reçus automatiquement au bon modèle client. Facturez les clients avec précision sans réorganisation manuelle. Économisez 15+ heures par mois."
+      },
+      "medical": {
+        "tag": "Parfait pour: Cabinets Médicaux",
+        "title": "Cabinet Médical",
+        "description": "Créez des modèles de demande d'assurance personnalisés. L'IA extrait des reçus médicaux et factures, mappe au format de VOTRE compagnie d'assurance. Plus de saisie manuelle pour les remboursements."
+      },
+      "euFreelancer": {
+        "tag": "Parfait pour: Indépendants UE",
+        "title": "Indépendant UE (Déclarations TVA)",
+        "description": "Créez des modèles de déclaration de TVA correspondant aux exigences gouvernementales de votre pays. L'IA gère automatiquement différents formats de reçu (Btw, VAT, MwSt, TVA). Exportez prêt pour soumission."
+      },
+      "variableVolume": {
+        "tag": "Parfait pour: Volume Variable",
+        "title": "Entreprise à Volume Variable",
+        "description": "Traitez 10 documents un mois, 100 le suivant. Payez uniquement ce que vous utilisez ($0.20-0.50 par document). Les crédits n'expirent jamais. Pas d'abonnement mensuel gaspillé."
+      }
+    }
   }
 }

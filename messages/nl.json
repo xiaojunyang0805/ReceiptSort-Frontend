@@ -602,7 +602,8 @@
       },
       "history": {
         "title": "Exportgeschiedenis",
-        "subtitle": "Bekijk uw eerdere bonnetjesexports"
+        "subtitle": "Bekijk uw eerdere bonnetjesexporten",
+        "autoDelete": "Bestanden worden automatisch na 30 dagen verwijderd"
       },
       "noExports": "Nog geen exports",
       "noExportsDescription": "U heeft nog geen bonnetjes geëxporteerd. Upload en verwerk enkele bonnetjes om te beginnen.",
@@ -640,11 +641,6 @@
         "download": "Downloaden",
         "expires": "Verloopt",
         "actions": "Acties"
-      },
-      "history": {
-        "title": "Exportgeschiedenis",
-        "subtitle": "Bekijk uw eerdere bonnetjesexporten",
-        "autoDelete": "Bestanden worden automatisch na 30 dagen verwijderd"
       },
       "status": {
         "expired": "Verlopen",
@@ -923,5 +919,52 @@
     "updateSuccess": "Profiel succesvol bijgewerkt!",
     "updateError": "Profiel bijwerken mislukt. Probeer het opnieuw.",
     "emailCannotChange": "E-mailadres kan niet worden gewijzigd"
+  },
+  "whatMakesUsDifferent": {
+    "title": "Wat ReceiptSort Anders Maakt",
+    "others": {
+      "title": "Andere Bonnetjes-Tools",
+      "fixedFormat": "Exporteer naar HUN vaste formaat",
+      "manualReorganization": "U reorganiseert gegevens handmatig (2-3 min/document)",
+      "subscription": "$20-60/maand abonnement vereist",
+      "receiptsOnly": "Alleen bonnetjes"
+    },
+    "receiptSort": {
+      "title": "ReceiptSort",
+      "badge": "Betere Aanpak",
+      "aiAdapts": "AI past zich automatisch aan UW sjabloon aan",
+      "yourFormat": "Gegevens geëxporteerd in uw formaat (geen reorganisatie)",
+      "payPerDocument": "Betaal per document ($0.20-0.50, credits verlopen nooit)",
+      "allDocuments": "Bonnetjes, facturen EN medische notities"
+    },
+    "savingsText": "Bespaar 2-3 minuten per document door handmatige reorganisatie te elimineren.",
+    "freeTemplates": "Maak 10 aangepaste sjablonen GRATIS, hergebruik onbeperkt.",
+    "cta": "Zie Hoe Sjabloon Mapping Werkt"
+  },
+  "useCases": {
+    "title": "Gemaakt voor Uw Workflow",
+    "subtitle": "ReceiptSort past zich aan hoe U werkt—niet andersom",
+    "items": {
+      "accountant": {
+        "tag": "Perfect voor: Accountants",
+        "title": "Accountant met Meerdere Klanten",
+        "description": "Maak 5 sjablonen (één per klantformaat). AI wijst alle bonnetjes automatisch toe aan het juiste klantsjabloon. Factureer klanten nauwkeurig zonder handmatige reorganisatie. Bespaar 15+ uur per maand."
+      },
+      "medical": {
+        "tag": "Perfect voor: Medische Praktijken",
+        "title": "Medische Praktijk",
+        "description": "Maak aangepaste verzekeringsclaim sjablonen. AI extraheert uit medische bonnetjes en facturen, wijst toe aan het formaat van UW verzekeringsmaatschappij. Geen handmatige gegevensinvoer meer voor vergoedingen."
+      },
+      "euFreelancer": {
+        "tag": "Perfect voor: EU Freelancers",
+        "title": "EU Freelancer (BTW-aangiften)",
+        "description": "Maak BTW-aangiftesjablonen die overeenkomen met de overheidseisen van uw land. AI behandelt automatisch verschillende bonnetjesformaten (Btw, VAT, MwSt, TVA). Exporteer klaar voor indiening."
+      },
+      "variableVolume": {
+        "tag": "Perfect voor: Variabel Volume",
+        "title": "Variabel Volume Bedrijf",
+        "description": "Verwerk 10 documenten in de ene maand, 100 in de volgende. Betaal alleen voor wat u gebruikt ($0.20-0.50 per document). Credits verlopen nooit. Geen verspillend maandelijks abonnement."
+      }
+    }
   }
 }

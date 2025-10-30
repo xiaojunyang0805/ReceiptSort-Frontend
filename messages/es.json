@@ -793,5 +793,52 @@
     "updateSuccess": "¡Perfil actualizado exitosamente!",
     "updateError": "Error al actualizar el perfil. Por favor, inténtelo de nuevo.",
     "emailCannotChange": "La dirección de correo electrónico no se puede cambiar"
+  },
+  "whatMakesUsDifferent": {
+    "title": "Qué Hace Diferente a ReceiptSort",
+    "others": {
+      "title": "Otras Herramientas de Recibos",
+      "fixedFormat": "Exportar a SU formato fijo",
+      "manualReorganization": "Usted reorganiza datos manualmente (2-3 min/documento)",
+      "subscription": "Suscripción de $20-60/mes requerida",
+      "receiptsOnly": "Solo recibos"
+    },
+    "receiptSort": {
+      "title": "ReceiptSort",
+      "badge": "Mejor Enfoque",
+      "aiAdapts": "IA se adapta a SU plantilla automáticamente",
+      "yourFormat": "Datos exportados en su formato (sin reorganización)",
+      "payPerDocument": "Pago por documento ($0.20-0.50, créditos nunca expiran)",
+      "allDocuments": "Recibos, facturas Y notas médicas"
+    },
+    "savingsText": "Ahorre 2-3 minutos por documento eliminando la reorganización manual.",
+    "freeTemplates": "Cree 10 plantillas personalizadas GRATIS, reutilice ilimitadamente.",
+    "cta": "Ver Cómo Funciona el Mapeo de Plantillas"
+  },
+  "useCases": {
+    "title": "Diseñado para Su Flujo de Trabajo",
+    "subtitle": "ReceiptSort se adapta a cómo USTED trabaja—no al revés",
+    "items": {
+      "accountant": {
+        "tag": "Perfecto para: Contadores",
+        "title": "Contador con Múltiples Clientes",
+        "description": "Cree 5 plantillas (una por formato de cliente). IA mapea todos los recibos automáticamente a la plantilla correcta del cliente. Facture clientes con precisión sin reorganización manual. Ahorre 15+ horas por mes."
+      },
+      "medical": {
+        "tag": "Perfecto para: Prácticas Médicas",
+        "title": "Práctica Médica",
+        "description": "Cree plantillas personalizadas de reclamación de seguro. IA extrae de recibos médicos y facturas, mapea al formato de SU compañía de seguros. No más entrada manual de datos para reembolsos."
+      },
+      "euFreelancer": {
+        "tag": "Perfecto para: Autónomos UE",
+        "title": "Autónomo UE (Declaraciones IVA)",
+        "description": "Cree plantillas de declaración de IVA que coincidan con los requisitos gubernamentales de su país. IA maneja automáticamente diferentes formatos de recibo (Btw, VAT, MwSt, TVA). Exporte listo para envío."
+      },
+      "variableVolume": {
+        "tag": "Perfecto para: Volumen Variable",
+        "title": "Negocio de Volumen Variable",
+        "description": "Procese 10 documentos un mes, 100 el siguiente. Pague solo por lo que usa ($0.20-0.50 por documento). Los créditos nunca expiran. Sin suscripción mensual derrochadora."
+      }
+    }
   }
 }
