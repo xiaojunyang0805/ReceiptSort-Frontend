@@ -845,9 +845,9 @@
         "description": "Créez des modèles de demande d'assurance personnalisés. L'IA extrait des reçus médicaux et factures, mappe au format de VOTRE compagnie d'assurance. Plus de saisie manuelle pour les remboursements."
       },
       "euFreelancer": {
-        "tag": "Parfait pour: Indépendants UE",
-        "title": "Indépendant UE (Déclarations TVA)",
-        "description": "Créez des modèles de déclaration de TVA correspondant aux exigences gouvernementales de votre pays. L'IA gère automatiquement différents formats de reçu (Btw, VAT, MwSt, TVA). Exportez prêt pour soumission."
+        "tag": "Parfait pour : Freelances",
+        "title": "Freelance (Déclarations Fiscales/TVA)",
+        "description": "Créez des modèles de déclaration fiscale correspondant aux exigences gouvernementales de votre pays. L'IA gère automatiquement différents formats de reçus (Btw, VAT, MwSt, TVA, TPS, Taxe de Vente). Export prêt pour soumission."
       },
       "variableVolume": {
         "tag": "Parfait pour: Volume Variable",

@@ -845,9 +845,9 @@
         "description": "Cree plantillas personalizadas de reclamación de seguro. IA extrae de recibos médicos y facturas, mapea al formato de SU compañía de seguros. No más entrada manual de datos para reembolsos."
       },
       "euFreelancer": {
-        "tag": "Perfecto para: Autónomos UE",
-        "title": "Autónomo UE (Declaraciones IVA)",
-        "description": "Cree plantillas de declaración de IVA que coincidan con los requisitos gubernamentales de su país. IA maneja automáticamente diferentes formatos de recibo (Btw, VAT, MwSt, TVA). Exporte listo para envío."
+        "tag": "Perfecto para: Freelancers",
+        "title": "Freelancer (Declaraciones de Impuestos/IVA)",
+        "description": "Cree plantillas de declaración de impuestos que coincidan con los requisitos gubernamentales de su país. La IA maneja automáticamente diferentes formatos de recibos (Btw, VAT, MwSt, TVA, IVA, GST, Impuesto de Ventas). Exportación lista para enviar."
       },
       "variableVolume": {
         "tag": "Perfecto para: Volumen Variable",

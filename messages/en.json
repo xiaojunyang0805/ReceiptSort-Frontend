@@ -185,9 +185,9 @@
         "description": "Create custom insurance claim templates. AI extracts from medical receipts and invoices, maps to YOUR insurance company's format. No more manual data entry for reimbursements."
       },
       "euFreelancer": {
-        "tag": "Perfect for: EU Freelancers",
-        "title": "EU Freelancer (VAT Returns)",
-        "description": "Create VAT declaration templates matching your country's government requirements. AI handles different receipt formats (Btw, VAT, MwSt, TVA) automatically. Export ready for submission."
+        "tag": "Perfect for: Freelancers",
+        "title": "Freelancer (Tax/VAT Returns)",
+        "description": "Create tax declaration templates matching your country's government requirements. AI handles different receipt formats (Btw, VAT, MwSt, TVA, GST, Sales Tax) automatically. Export ready for submission."
       },
       "variableVolume": {
         "tag": "Perfect for: Variable Volume",

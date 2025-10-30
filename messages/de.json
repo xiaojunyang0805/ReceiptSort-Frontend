@@ -845,9 +845,9 @@
         "description": "Erstellen Sie benutzerdefinierte Versicherungsantragsvorlagen. KI extrahiert aus Arztbelegen und Rechnungen, ordnet dem Format IHRER Versicherung zu. Keine manuelle Dateneingabe mehr für Erstattungen."
       },
       "euFreelancer": {
-        "tag": "Perfekt für: EU-Freiberufler",
-        "title": "EU-Freiberufler (Umsatzsteuer-Meldungen)",
-        "description": "Erstellen Sie Umsatzsteuererklärungsvorlagen nach den behördlichen Anforderungen Ihres Landes. KI behandelt verschiedene Belegformate (Btw, VAT, MwSt, TVA) automatisch. Export bereit zur Einreichung."
+        "tag": "Perfekt für: Freelancer",
+        "title": "Freelancer (Steuer-/MwSt.-Erklärungen)",
+        "description": "Erstellen Sie Steuererklärungsvorlagen, die den staatlichen Anforderungen Ihres Landes entsprechen. KI behandelt automatisch verschiedene Belegformate (Btw, VAT, MwSt, TVA, GST, Umsatzsteuer). Export bereit zur Einreichung."
       },
       "variableVolume": {
         "tag": "Perfekt für: Variables Volumen",

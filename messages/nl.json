@@ -971,9 +971,9 @@
         "description": "Maak aangepaste verzekeringsclaim sjablonen. AI extraheert uit medische bonnetjes en facturen, wijst toe aan het formaat van UW verzekeringsmaatschappij. Geen handmatige gegevensinvoer meer voor vergoedingen."
       },
       "euFreelancer": {
-        "tag": "Perfect voor: EU Freelancers",
-        "title": "EU Freelancer (BTW-aangiften)",
-        "description": "Maak BTW-aangiftesjablonen die overeenkomen met de overheidseisen van uw land. AI behandelt automatisch verschillende bonnetjesformaten (Btw, VAT, MwSt, TVA). Exporteer klaar voor indiening."
+        "tag": "Perfect voor: Freelancers",
+        "title": "Freelancer (Belasting/BTW-aangiften)",
+        "description": "Maak belastingaangiftesjablonen die voldoen aan de overheidsvereisten van uw land. AI behandelt automatisch verschillende bonnetformaten (Btw, VAT, MwSt, TVA, GST, Omzetbelasting). Export klaar voor indiening."
       },
       "variableVolume": {
         "tag": "Perfect voor: Variabel Volume",
