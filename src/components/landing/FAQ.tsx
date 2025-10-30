@@ -95,7 +95,7 @@ export default function FAQ() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
-              href="mailto:support@receiptsort.com"
+              href="mailto:support@seenano.nl"
               className="inline-flex items-center px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors"
             >
               {tSupport('emailUs')}
@@ -109,7 +109,7 @@ export default function FAQ() {
             </a>
           </div>
           <p className="text-sm text-gray-500 mt-6">
-            support@receiptsort.com
+            support@seenano.nl
           </p>
         </div>
       </div>
