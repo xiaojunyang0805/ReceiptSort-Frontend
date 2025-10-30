@@ -60,7 +60,7 @@
       },
       "aiExtraction": {
         "title": "Multi-Dokument-Intelligenz",
-        "description": "Funktioniert mit Belegen, Rechnungen UND Arztberichten—nicht nur Belege. KI passt sich nahtlos verschiedenen Dokumenttypen an. GPT-4 Vision erreicht 95%+ Genauigkeit bei allen Formaten. Verarbeitet automatisch mehrere Sprachen und Währungsformate."
+        "description": "Funktioniert mit Belegen, Rechnungen UND Arztberichten—nicht nur Belege. KI passt sich nahtlos verschiedenen Dokumenttypen an. GPT-4 Vision erreicht 98%+ Genauigkeit bei allen Formaten. Verarbeitet automatisch mehrere Sprachen und Währungsformate."
       },
       "export": {
         "title": "Nach Excel oder CSV Exportieren",

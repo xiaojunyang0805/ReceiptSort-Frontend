@@ -60,7 +60,7 @@
       },
       "aiExtraction": {
         "title": "Inteligencia Multi-Documento",
-        "description": "Funciona con recibos, facturas Y notas médicas—no solo recibos. La IA se adapta perfectamente a diferentes tipos de documentos. GPT-4 Vision logra 95%+ de precisión en todos los formatos. Maneja automáticamente múltiples idiomas y formatos de moneda."
+        "description": "Funciona con recibos, facturas Y notas médicas—no solo recibos. La IA se adapta perfectamente a diferentes tipos de documentos. GPT-4 Vision logra 98%+ de precisión en todos los formatos. Maneja automáticamente múltiples idiomas y formatos de moneda."
       },
       "export": {
         "title": "Exportar a Excel o CSV",

@@ -61,7 +61,7 @@
       },
       "aiExtraction": {
         "title": "Multi-Document Intelligentie",
-        "description": "Werkt met bonnetjes, facturen EN medische notities—niet alleen bonnetjes. AI past zich naadloos aan aan verschillende documenttypen. GPT-4 Vision bereikt 95%+ nauwkeurigheid op alle formaten. Verwerkt automatisch meerdere talen en valutaformaten."
+        "description": "Werkt met bonnetjes, facturen EN medische notities—niet alleen bonnetjes. AI past zich naadloos aan aan verschillende documenttypen. GPT-4 Vision bereikt 98%+ nauwkeurigheid op alle formaten. Verwerkt automatisch meerdere talen en valutaformaten."
       },
       "export": {
         "title": "Exporteren naar Excel of CSV",

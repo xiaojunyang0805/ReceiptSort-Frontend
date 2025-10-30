@@ -87,7 +87,7 @@
       },
       "aiExtraction": {
         "title": "Multi-Document Intelligence",
-        "description": "Works across receipts, invoices, AND medical notes—not just receipts. AI adapts to different document types seamlessly. GPT-4 Vision achieves 95%+ accuracy on all formats. Handles multiple languages and currency formats automatically."
+        "description": "Works across receipts, invoices, AND medical notes—not just receipts. AI adapts to different document types seamlessly. GPT-4 Vision achieves 98%+ accuracy on all formats. Handles multiple languages and currency formats automatically."
       },
       "export": {
         "title": "Export to Excel or CSV",
@@ -158,7 +158,7 @@
           "role": "Retail Store Owner"
         },
         {
-          "quote": "I was skeptical about AI accuracy, but ReceiptSort gets it right 95% of the time. The template mapping is the real game-changer though—my receipts export exactly how my accountant needs them. No more manual reformatting.",
+          "quote": "I was skeptical about AI accuracy, but ReceiptSort gets it right 98% of the time. The template mapping is the real game-changer though—my receipts export exactly how my accountant needs them. No more manual reformatting.",
           "name": "Jennifer Martinez",
           "role": "Small Business Owner"
         }

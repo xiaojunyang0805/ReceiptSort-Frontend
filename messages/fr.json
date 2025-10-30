@@ -60,7 +60,7 @@
       },
       "aiExtraction": {
         "title": "Intelligence Multi-Documents",
-        "description": "Fonctionne avec les reçus, factures ET notes médicales—pas seulement les reçus. L'IA s'adapte parfaitement aux différents types de documents. GPT-4 Vision atteint 95%+ de précision sur tous les formats. Gère automatiquement plusieurs langues et formats de devises."
+        "description": "Fonctionne avec les reçus, factures ET notes médicales—pas seulement les reçus. L'IA s'adapte parfaitement aux différents types de documents. GPT-4 Vision atteint 98%+ de précision sur tous les formats. Gère automatiquement plusieurs langues et formats de devises."
       },
       "export": {
         "title": "Exporter vers Excel ou CSV",
