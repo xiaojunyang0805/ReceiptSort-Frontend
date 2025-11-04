@@ -195,10 +195,13 @@ export interface Receipt {
   line_items?: ReceiptLineItem[]
 
   // === Phase 3: Medical Receipts ===
+  patient_name?: string
   patient_dob?: string
   treatment_date?: string
   insurance_claim_number?: string
   diagnosis_codes?: string
   procedure_codes?: string
   provider_id?: string
+  insurance_covered_amount?: number
+  patient_responsibility_amount?: number
 }
