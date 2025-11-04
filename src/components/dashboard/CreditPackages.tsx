@@ -47,7 +47,7 @@ export function CreditPackages() {
   }
 
   const calculateDiscount = (price: number, credits: number) => {
-    const basePrice = 0.50 // Starter pack price per credit ($4.99 / 10)
+    const basePrice = 0.0665 // Starter pack price per credit ($4.99 / 75)
     const currentPrice = price / credits
     const discountPercent = ((basePrice - currentPrice) / basePrice) * 100
     return Math.round(discountPercent)

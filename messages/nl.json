@@ -69,7 +69,7 @@
       },
       "pricing": {
         "title": "Betaal Per Gebruik",
-        "description": "Vanaf €0,20 per bonnetje met bulkpakketten. Koop credits wanneer u ze nodig heeft, of neem een abonnement voor nog betere waarde."
+        "description": "Vanaf €0,067 per bonnetje met bulkpakketten. Koop credits wanneer u ze nodig heeft, of neem een abonnement voor nog betere waarde."
       },
       "security": {
         "title": "Beveiliging op Bankniveau",
@@ -166,7 +166,7 @@
       },
       "cost": {
         "question": "Hoeveel kost het?",
-        "answer": "We gebruiken een creditsysteem. Elk bonnetje kost 1 credit. Credits beginnen bij €0,50 per stuk voor kleine pakketten, of slechts €0,20 per stuk bij bulkaankoop (bijv. 25 voor €9,99, 500 voor €99,99). Neem maandelijks een abonnement voor nog betere waarde."
+        "answer": "We gebruiken een creditsysteem. Elk bonnetje kost 1 credit. Credits beginnen bij €0,067 per stuk voor kleine pakketten, of slechts €0,067 per stuk bij bulkaankoop (bijv. 150 voor €9,99, 1500 voor €99,99). Neem maandelijks een abonnement voor nog betere waarde."
       },
       "expiration": {
         "question": "Verlopen credits?",
@@ -956,7 +956,7 @@
       "badge": "Betere Aanpak",
       "aiAdapts": "AI past zich automatisch aan UW sjabloon aan",
       "yourFormat": "Gegevens geëxporteerd in uw formaat (geen reorganisatie)",
-      "payPerDocument": "Betaal per document ($0.20-0.50, credits verlopen nooit)",
+      "payPerDocument": "Betaal per document ($0.05-0.07, credits verlopen nooit)",
       "allDocuments": "Bonnetjes, facturen EN medische notities"
     },
     "savingsText": "Bespaar 2-3 minuten per document door handmatige reorganisatie te elimineren.",
@@ -985,7 +985,7 @@
       "variableVolume": {
         "tag": "Perfect voor: Variabel Volume",
         "title": "Variabel Volume Bedrijf",
-        "description": "Verwerk 10 documenten in de ene maand, 100 in de volgende. Betaal alleen voor wat u gebruikt ($0.20-0.50 per document). Credits verlopen nooit. Geen verspillend maandelijks abonnement."
+        "description": "Verwerk 10 documenten in de ene maand, 100 in de volgende. Betaal alleen voor wat u gebruikt ($0.05-0.07 per document). Credits verlopen nooit. Geen verspillend maandelijks abonnement."
       }
     }
   },

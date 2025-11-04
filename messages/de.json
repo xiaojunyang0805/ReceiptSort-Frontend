@@ -68,7 +68,7 @@
       },
       "pricing": {
         "title": "Bezahlen Sie Nach Bedarf",
-        "description": "Ab 0,20€ pro Beleg mit Massenpaketen. Kaufen Sie Credits, wenn Sie sie benötigen, oder abonnieren Sie für noch besseren Wert."
+        "description": "Ab 0,067€ pro Beleg mit Massenpaketen. Kaufen Sie Credits, wenn Sie sie benötigen, oder abonnieren Sie für noch besseren Wert."
       },
       "security": {
         "title": "Sicherheit auf Bankniveau",
@@ -165,7 +165,7 @@
       },
       "cost": {
         "question": "Wie viel kostet es?",
-        "answer": "Wir verwenden ein Credit-System. Jeder Beleg kostet 1 Credit. Credits beginnen bei 0,50€ pro Stück für kleine Pakete oder nur 0,20€ pro Stück beim Massenkauf (z.B. 25 für 9,99€, 500 für 99,99€). Abonnieren Sie monatlich für noch besseren Wert."
+        "answer": "Wir verwenden ein Credit-System. Jeder Beleg kostet 1 Credit. Credits beginnen bei 0,067€ pro Stück für kleine Pakete oder nur 0,067€ pro Stück beim Massenkauf (z.B. 150 für 9,99€, 1500 für 99,99€). Abonnieren Sie monatlich für noch besseren Wert."
       },
       "expiration": {
         "question": "Verfallen Credits?",
@@ -830,7 +830,7 @@
       "badge": "Besserer Ansatz",
       "aiAdapts": "KI passt sich automatisch IHRER Vorlage an",
       "yourFormat": "Daten in Ihrem Format exportiert (keine Reorganisation)",
-      "payPerDocument": "Pro Dokument zahlen ($0.20-0.50, Credits verfallen nie)",
+      "payPerDocument": "Pro Dokument zahlen ($0.05-0.07, Credits verfallen nie)",
       "allDocuments": "Belege, Rechnungen UND Arztberichte"
     },
     "savingsText": "Sparen Sie 2-3 Minuten pro Dokument durch Wegfall manueller Reorganisation.",
@@ -859,7 +859,7 @@
       "variableVolume": {
         "tag": "Perfekt für: Variables Volumen",
         "title": "Unternehmen mit variablem Volumen",
-        "description": "Verarbeiten Sie 10 Dokumente in einem Monat, 100 im nächsten. Zahlen Sie nur für das, was Sie nutzen ($0.20-0.50 pro Dokument). Credits verfallen nie. Kein verschwenderisches Monatsabo."
+        "description": "Verarbeiten Sie 10 Dokumente in einem Monat, 100 im nächsten. Zahlen Sie nur für das, was Sie nutzen ($0.05-0.07 pro Dokument). Credits verfallen nie. Kein verschwenderisches Monatsabo."
       }
     }
   },

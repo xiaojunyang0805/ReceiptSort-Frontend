@@ -54,7 +54,7 @@ export const CREDIT_PACKAGES: CreditPackage[] = [
   {
     id: 'starter',
     name: 'Starter',
-    credits: 10,
+    credits: 75,
     price: 4.99,
     priceId: cleanEnvVar(process.env.STRIPE_PRICE_STARTER, 'price_starter'),
     description: 'Perfect for trying out the service',
@@ -62,7 +62,7 @@ export const CREDIT_PACKAGES: CreditPackage[] = [
   {
     id: 'basic',
     name: 'Basic',
-    credits: 25,
+    credits: 150,
     price: 9.99,
     priceId: cleanEnvVar(process.env.STRIPE_PRICE_BASIC, 'price_basic'),
     description: 'Great for regular users',
@@ -71,7 +71,7 @@ export const CREDIT_PACKAGES: CreditPackage[] = [
   {
     id: 'pro',
     name: 'Pro',
-    credits: 100,
+    credits: 450,
     price: 29.99,
     priceId: cleanEnvVar(process.env.STRIPE_PRICE_PRO, 'price_pro'),
     description: 'Best value for power users',
@@ -79,7 +79,7 @@ export const CREDIT_PACKAGES: CreditPackage[] = [
   {
     id: 'business',
     name: 'Business',
-    credits: 500,
+    credits: 1500,
     price: 99.99,
     priceId: cleanEnvVar(process.env.STRIPE_PRICE_BUSINESS, 'price_business'),
     description: 'For high-volume businesses',

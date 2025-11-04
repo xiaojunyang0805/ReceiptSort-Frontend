@@ -68,7 +68,7 @@
       },
       "pricing": {
         "title": "Paga Según Uses",
-        "description": "Desde $0.20 por recibo con paquetes al por mayor. Compra créditos cuando los necesites, o suscríbete para obtener aún mejor valor."
+        "description": "Desde $0.067 por recibo con paquetes al por mayor. Compra créditos cuando los necesites, o suscríbete para obtener aún mejor valor."
       },
       "security": {
         "title": "Seguridad de Nivel Bancario",
@@ -165,7 +165,7 @@
       },
       "cost": {
         "question": "¿Cuánto cuesta?",
-        "answer": "Usamos un sistema de créditos. Cada recibo cuesta 1 crédito. Los créditos comienzan en $0.50 cada uno para paquetes pequeños, o tan bajos como $0.20 cada uno al comprar al por mayor (ej., 25 por $9.99, 500 por $99.99). Suscríbete mensualmente para obtener aún mejor valor."
+        "answer": "Usamos un sistema de créditos. Cada recibo cuesta 1 crédito. Los créditos comienzan en $0.067 cada uno para paquetes pequeños, o tan bajos como $0.067 cada uno al comprar al por mayor (ej., 150 por $9.99, 1500 por $99.99). Suscríbete mensualmente para obtener aún mejor valor."
       },
       "expiration": {
         "question": "¿Los créditos expiran?",
@@ -830,7 +830,7 @@
       "badge": "Mejor Enfoque",
       "aiAdapts": "IA se adapta a SU plantilla automáticamente",
       "yourFormat": "Datos exportados en su formato (sin reorganización)",
-      "payPerDocument": "Pago por documento ($0.20-0.50, créditos nunca expiran)",
+      "payPerDocument": "Pago por documento ($0.05-0.07, créditos nunca expiran)",
       "allDocuments": "Recibos, facturas Y notas médicas"
     },
     "savingsText": "Ahorre 2-3 minutos por documento eliminando la reorganización manual.",
@@ -859,7 +859,7 @@
       "variableVolume": {
         "tag": "Perfecto para: Volumen Variable",
         "title": "Negocio de Volumen Variable",
-        "description": "Procese 10 documentos un mes, 100 el siguiente. Pague solo por lo que usa ($0.20-0.50 por documento). Los créditos nunca expiran. Sin suscripción mensual derrochadora."
+        "description": "Procese 10 documentos un mes, 100 el siguiente. Pague solo por lo que usa ($0.05-0.07 por documento). Los créditos nunca expiran. Sin suscripción mensual derrochadora."
       }
     }
   },

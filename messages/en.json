@@ -65,7 +65,7 @@
       "badge": "Better Approach",
       "aiAdapts": "AI adapts to YOUR template automatically",
       "yourFormat": "Data exported in your format (no reorganization)",
-      "payPerDocument": "Pay per document ($0.20-0.50, credits never expire)",
+      "payPerDocument": "Pay per document ($0.05-0.07, credits never expire)",
       "allDocuments": "Receipts, invoices, AND medical notes"
     },
     "savingsText": "Save 2-3 minutes per document by eliminating manual reorganization.",
@@ -99,7 +99,7 @@
       },
       "pricing": {
         "title": "Pay As You Go",
-        "description": "Only $0.20-0.50 per document (not per-user subscription). Credits never expire—use them when you need them. No hidden fees, no monthly commitment. Variable volume? Perfect. Process 10 documents one month, 100 the next."
+        "description": "Only $0.05-0.07 per document (not per-user subscription). Credits never expire—use them when you need them. No hidden fees, no monthly commitment. Variable volume? Perfect. Process 10 documents one month, 100 the next."
       },
       "security": {
         "title": "Bank-Level Security",
@@ -192,7 +192,7 @@
       "variableVolume": {
         "tag": "Perfect for: Variable Volume",
         "title": "Variable Volume Business",
-        "description": "Process 10 documents one month, 100 the next. Pay only for what you use ($0.20-0.50 per document). Credits never expire. No wasteful monthly subscription."
+        "description": "Process 10 documents one month, 100 the next. Pay only for what you use ($0.05-0.07 per document). Credits never expire. No wasteful monthly subscription."
       }
     }
   },
@@ -217,7 +217,7 @@
       },
       "cost": {
         "question": "How much does it cost?",
-        "answer": "We use a credit system. Each receipt costs 1 credit. Credits start at $0.50 each for small packages, or as low as $0.20 each when buying in bulk (e.g., 25 for $9.99, 500 for $99.99). Subscribe monthly for even better value."
+        "answer": "We use a credit system. Each receipt costs 1 credit. Credits are now affordable: $0.067 each for starter packages (75 for $4.99), or as low as $0.067 when buying in bulk (e.g., 150 for $9.99, 1500 for $99.99). Credits never expire."
       },
       "expiration": {
         "question": "Do credits expire?",
