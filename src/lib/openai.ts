@@ -27,7 +27,10 @@ function getOpenAIClient(): OpenAI {
  */
 const RECEIPT_EXTRACTION_PROMPT = `You are a receipt data extraction expert. Extract structured data from receipts, invoices, and bills with high accuracy.
 
-CRITICAL: Extract data EXACTLY as shown on the receipt. NEVER generate, infer, or create synthetic values.
+🚨 CRITICAL INSTRUCTIONS - READ FIRST:
+1. For MEDICAL INVOICES: Look for "Patiëntgegevens" section and extract "Naam:" field as patient_name
+2. For LINE ITEMS: Count PHYSICAL ROWS in the table - if you see 3 rows, extract 3 items (DO NOT deduplicate identical items)
+3. Extract data EXACTLY as shown on the receipt. NEVER generate, infer, or create synthetic values.
 
 You MUST return valid JSON in this exact format (no markdown, no explanations):
 {
@@ -59,6 +62,7 @@ You MUST return valid JSON in this exact format (no markdown, no explanations):
       "tax_rate": 21.00
     }
   ],
+  "patient_name": "John Smith",
   "patient_dob": "1962-05-06",
   "treatment_date": "2025-09-18",
   "insurance_claim_number": "CLAIM-2025-789",
