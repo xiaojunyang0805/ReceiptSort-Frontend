@@ -6,7 +6,7 @@ import { extractReceiptData } from '@/lib/openai'
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
-export const maxDuration = 10
+export const maxDuration = 60 // Increased to 60s to allow time for image rotation + Vision API processing
 
 /**
  * OPTIONS handler - required for CORS and route recognition

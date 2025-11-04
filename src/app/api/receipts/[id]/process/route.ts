@@ -6,7 +6,7 @@ import { extractReceiptData, extractReceiptDataWithVision } from '@/lib/openai'
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
-export const maxDuration = 30 // Increased to 30s to allow time for Vision API fallback
+export const maxDuration = 60 // Increased to 60s to allow time for image rotation + Vision API processing
 
 export async function POST(
   request: Request,

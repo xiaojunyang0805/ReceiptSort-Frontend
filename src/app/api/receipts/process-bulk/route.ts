@@ -2,6 +2,12 @@ import { createClient } from '@/lib/supabase/server'
 import { NextResponse } from 'next/server'
 import { extractReceiptData } from '@/lib/openai'
 
+// Configure route segment for Vercel dynamic API route
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+export const maxDuration = 300 // 5 minutes for bulk processing (multiple receipts with rotation)
+
 interface BulkProcessRequest {
   receipt_ids: string[]
 }
