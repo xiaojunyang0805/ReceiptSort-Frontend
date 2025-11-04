@@ -969,6 +969,7 @@ export async function extractReceiptDataWithVision(
         : [],
 
       // Phase 3: Medical receipts
+      patient_name: parsedData.patient_name || null,
       patient_dob: parsedData.patient_dob || null,
       treatment_date: parsedData.treatment_date || null,
       insurance_claim_number: parsedData.insurance_claim_number || null,
