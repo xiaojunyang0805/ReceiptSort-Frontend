@@ -171,6 +171,50 @@ export default function ReceiptList() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [appliedFilters])
 
+  // Auto-detect and mark stuck receipts (stuck > 3 minutes)
+  useEffect(() => {
+    const checkStuckReceipts = async () => {
+      const STUCK_THRESHOLD_MS = 3 * 60 * 1000 // 3 minutes
+      const now = new Date()
+
+      const stuckReceipts = receipts.filter(receipt => {
+        if (receipt.processing_status !== 'processing') return false
+        const updatedAt = new Date(receipt.updated_at)
+        const timeDiff = now.getTime() - updatedAt.getTime()
+        return timeDiff > STUCK_THRESHOLD_MS
+      })
+
+      if (stuckReceipts.length > 0) {
+        console.log(`[ReceiptList] Found ${stuckReceipts.length} stuck receipt(s), marking as failed...`)
+
+        for (const receipt of stuckReceipts) {
+          try {
+            await fetch(`/api/receipts/${receipt.id}/mark-failed`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                error: 'Processing timeout - Receipt was stuck in processing status for more than 3 minutes. Please try uploading again.'
+              }),
+            })
+            console.log(`[ReceiptList] Marked ${receipt.file_name} as failed`)
+          } catch (error) {
+            console.error(`[ReceiptList] Failed to mark ${receipt.file_name} as failed:`, error)
+          }
+        }
+
+        // Refetch to update UI
+        fetchReceipts()
+      }
+    }
+
+    // Check immediately and then every 30 seconds
+    checkStuckReceipts()
+    const interval = setInterval(checkStuckReceipts, 30000)
+
+    return () => clearInterval(interval)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [receipts])
+
   const fetchReceipts = async () => {
     try {
       const { data: { user } } = await supabase.auth.getUser()
@@ -301,18 +345,49 @@ export default function ReceiptList() {
         return
       }
 
-      // Retry each receipt
+      // Retry each receipt with 3-minute timeout per receipt
+      const PROCESSING_TIMEOUT_MS = 3 * 60 * 1000 // 3 minutes per receipt
       const results = await Promise.allSettled(
         retryableReceipts.map(async receipt => {
-          const res = await fetch(`/api/receipts/${receipt.id}/retry`, { method: 'POST' })
-          const data = await res.json()
+          const controller = new AbortController()
+          const timeoutId = setTimeout(() => controller.abort(), PROCESSING_TIMEOUT_MS)
 
-          if (!res.ok) {
-            console.error(`Failed to process ${receipt.file_name}:`, res.status, data)
-            throw new Error(data.error || `HTTP ${res.status}`)
+          try {
+            const res = await fetch(`/api/receipts/${receipt.id}/retry`, {
+              method: 'POST',
+              signal: controller.signal,
+            })
+            clearTimeout(timeoutId)
+
+            const data = await res.json()
+
+            if (!res.ok) {
+              console.error(`Failed to process ${receipt.file_name}:`, res.status, data)
+              throw new Error(data.error || `HTTP ${res.status}`)
+            }
+
+            return data
+          } catch (error) {
+            clearTimeout(timeoutId)
+
+            // Handle timeout
+            if (error instanceof Error && error.name === 'AbortError') {
+              // Mark receipt as failed in database
+              try {
+                await fetch(`/api/receipts/${receipt.id}/mark-failed`, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({
+                    error: 'Processing timeout - Receipt processing exceeded 3 minutes.'
+                  }),
+                })
+              } catch (markFailedError) {
+                console.error('Failed to mark receipt as failed:', markFailedError)
+              }
+              throw new Error(`Processing timeout (exceeded 3 minutes) for ${receipt.file_name}`)
+            }
+            throw error
           }
-
-          return data
         })
       )
 

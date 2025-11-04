@@ -268,14 +268,29 @@ export default function ReceiptUpload() {
   }
 
   const processReceipt = async (uploadFileId: string, receiptId: string) => {
+    const PROCESSING_TIMEOUT_MS = 3 * 60 * 1000 // 3 minutes
+    let timeoutId: NodeJS.Timeout
+
     try {
-      // Call the process API endpoint
+      // Create abort controller for timeout
+      const controller = new AbortController()
+
+      // Set up timeout
+      timeoutId = setTimeout(() => {
+        controller.abort()
+      }, PROCESSING_TIMEOUT_MS)
+
+      // Call the process API endpoint with timeout
       const response = await fetch(`/api/receipts/${receiptId}/process`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        signal: controller.signal,
       })
+
+      // Clear timeout on successful response
+      clearTimeout(timeoutId)
 
       if (!response.ok) {
         // Try to parse error, but handle case where response is not JSON
@@ -353,7 +368,28 @@ export default function ReceiptUpload() {
       }
     } catch (error) {
       console.error('Processing error:', error)
-      const errorMessage = error instanceof Error ? error.message : 'Processing failed'
+
+      // Check if it's a timeout error
+      let errorMessage: string
+      if (error instanceof Error && error.name === 'AbortError') {
+        errorMessage = 'Processing timeout (exceeded 3 minutes). The file may be too complex or the server is busy. Please try again later or contact support.'
+        console.error('Processing timeout for receipt:', receiptId)
+
+        // Mark receipt as failed in database
+        try {
+          await fetch(`/api/receipts/${receiptId}/mark-failed`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              error: 'Processing timeout - exceeded 3 minutes'
+            }),
+          })
+        } catch (markFailedError) {
+          console.error('Failed to mark receipt as failed:', markFailedError)
+        }
+      } else {
+        errorMessage = error instanceof Error ? error.message : 'Processing failed'
+      }
 
       // Update status to error
       setUploadFiles((prev) =>

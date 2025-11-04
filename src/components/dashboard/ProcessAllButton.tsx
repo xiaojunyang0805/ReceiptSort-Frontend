@@ -46,6 +46,14 @@ export function ProcessAllButton({
       failed: 0,
     })
 
+    // Calculate timeout: 3 minutes per receipt + 1 minute buffer
+    const TIMEOUT_PER_RECEIPT_MS = 3 * 60 * 1000 // 3 minutes per receipt
+    const BUFFER_MS = 60 * 1000 // 1 minute buffer
+    const totalTimeout = (pendingCount * TIMEOUT_PER_RECEIPT_MS) + BUFFER_MS
+
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), totalTimeout)
+
     try {
       const response = await fetch('/api/receipts/process-bulk', {
         method: 'POST',
@@ -55,7 +63,10 @@ export function ProcessAllButton({
         body: JSON.stringify({
           receipt_ids: pendingIds,
         }),
+        signal: controller.signal,
       })
+
+      clearTimeout(timeoutId)
 
       const result = await response.json()
 
@@ -98,10 +109,19 @@ export function ProcessAllButton({
         window.location.reload()
       }, 2000)
     } catch (error) {
+      clearTimeout(timeoutId)
       console.error('Error processing receipts:', error)
-      toast.error(t('toast.failedTitle'), {
-        description: error instanceof Error ? error.message : t('toast.unknownError'),
-      })
+
+      // Handle timeout error
+      if (error instanceof Error && error.name === 'AbortError') {
+        toast.error(t('toast.failedTitle'), {
+          description: `Processing timeout - Bulk processing exceeded the time limit. Some receipts may still be processing. Please refresh the page in a few minutes.`,
+        })
+      } else {
+        toast.error(t('toast.failedTitle'), {
+          description: error instanceof Error ? error.message : t('toast.unknownError'),
+        })
+      }
       setIsProcessing(false)
     }
   }
