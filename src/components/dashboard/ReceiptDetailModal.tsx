@@ -69,6 +69,8 @@ interface Receipt {
   diagnosis_codes?: string
   procedure_codes?: string
   provider_id?: string
+  insurance_covered_amount?: number
+  patient_responsibility_amount?: number
 }
 
 interface LineItem {
@@ -604,43 +606,103 @@ export default function ReceiptDetailModal({
               </div>
             )}
 
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="amount">{t('amount')}</Label>
-                <Input
-                  id="amount"
-                  type="number"
-                  step="0.01"
-                  value={formData.total_amount || ''}
-                  onChange={(e) =>
-                    setFormData({ ...formData, total_amount: parseFloat(e.target.value) || 0 })
-                  }
-                  disabled={!isEditable}
-                  placeholder="0.00"
-                />
+            {/* Amount Display - Different format for medical invoices with insurance */}
+            {formData.document_type === 'medical_invoice' && receipt?.insurance_covered_amount ? (
+              <>
+                {/* Medical Invoice with Insurance - Special Format */}
+                <div className="space-y-3 p-4 bg-blue-50 dark:bg-blue-950 rounded-lg border border-blue-200 dark:border-blue-800">
+                  <h4 className="font-semibold text-sm text-blue-900 dark:text-blue-100">
+                    💊 {t('insuranceBreakdown') || 'Insurance Breakdown'}
+                  </h4>
+
+                  {/* Total Treatment Cost */}
+                  <div className="flex justify-between items-center text-sm">
+                    <span className="text-gray-600 dark:text-gray-400">{t('totalTreatmentCost') || 'Total Treatment Cost'}:</span>
+                    <span className="font-medium">{formData.currency} {formData.total_amount?.toFixed(2)}</span>
+                  </div>
+
+                  {/* Insurance Covered */}
+                  <div className="flex justify-between items-center text-sm">
+                    <span className="text-green-600 dark:text-green-400">− {t('insuranceCovered') || 'Insurance Covered'}:</span>
+                    <span className="font-medium text-green-600 dark:text-green-400">
+                      {formData.currency} {receipt.insurance_covered_amount?.toFixed(2)}
+                    </span>
+                  </div>
+
+                  <div className="border-t border-blue-300 dark:border-blue-700 my-2"></div>
+
+                  {/* Patient Responsibility - Highlighted */}
+                  <div className="flex justify-between items-center">
+                    <span className="font-semibold text-blue-900 dark:text-blue-100">{t('youPay') || 'You Pay'}:</span>
+                    <span className="font-bold text-lg text-blue-900 dark:text-blue-100">
+                      {formData.currency} {receipt.patient_responsibility_amount?.toFixed(2)}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Currency selector below for medical with insurance */}
+                <div>
+                  <Label htmlFor="currency">{t('currency')}</Label>
+                  <Select
+                    value={formData.currency}
+                    onValueChange={(value) =>
+                      setFormData({ ...formData, currency: value })
+                    }
+                    disabled={!isEditable}
+                  >
+                    <SelectTrigger id="currency">
+                      <SelectValue placeholder="Select currency" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {CURRENCIES.map((curr) => (
+                        <SelectItem key={curr} value={curr}>
+                          {curr}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </>
+            ) : (
+              /* Standard Amount Display for non-medical or medical without insurance */
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="amount">{t('amount')}</Label>
+                  <Input
+                    id="amount"
+                    type="number"
+                    step="0.01"
+                    value={formData.total_amount || ''}
+                    onChange={(e) =>
+                      setFormData({ ...formData, total_amount: parseFloat(e.target.value) || 0 })
+                    }
+                    disabled={!isEditable}
+                    placeholder="0.00"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="currency">{t('currency')}</Label>
+                  <Select
+                    value={formData.currency}
+                    onValueChange={(value) =>
+                      setFormData({ ...formData, currency: value })
+                    }
+                    disabled={!isEditable}
+                  >
+                    <SelectTrigger id="currency">
+                      <SelectValue placeholder="Select currency" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {CURRENCIES.map((curr) => (
+                        <SelectItem key={curr} value={curr}>
+                          {curr}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
-              <div>
-                <Label htmlFor="currency">{t('currency')}</Label>
-                <Select
-                  value={formData.currency}
-                  onValueChange={(value) =>
-                    setFormData({ ...formData, currency: value })
-                  }
-                  disabled={!isEditable}
-                >
-                  <SelectTrigger id="currency">
-                    <SelectValue placeholder="Select currency" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {CURRENCIES.map((curr) => (
-                      <SelectItem key={curr} value={curr}>
-                        {curr}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
+            )}
 
             <div>
               <Label htmlFor="date">{t('receiptDate')}</Label>
