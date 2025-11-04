@@ -291,6 +291,9 @@ CRITICAL RULES:
         * Calculate line_total = quantity × unit_price (verify against document)
         * For medical invoices: item_code = treatment code (e.g., "F517A", "CPT-99213")
         * For product invoices: item_code = SKU or product code
+        * **CRITICAL**: DO NOT deduplicate identical line items - if the same item appears
+          multiple times in the table (e.g., "RAGL Ragers Lactona 1 set" appears twice),
+          extract EACH occurrence as a SEPARATE line item with sequential line numbers
 
       - Examples:
 
