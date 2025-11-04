@@ -881,6 +881,7 @@
     "vendorAddress": "供应商地址",
     "lineItems": "行项目",
     "lineItemsCount": "行项目（{count}）",
+    "patientName": "患者姓名",
     "medicalInformation": "医疗信息",
     "patientDob": "患者出生日期",
     "treatmentDate": "治疗日期",

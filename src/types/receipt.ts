@@ -80,6 +80,9 @@ export interface ExtractedReceiptData {
   /** Healthcare provider ID (AGB code in Netherlands, NPI in USA) */
   provider_id: string | null
 
+  /** Patient full name (for medical invoices) */
+  patient_name: string | null
+
   /** Amount covered/paid by insurance (for medical receipts with insurance coverage) */
   insurance_covered_amount: number | null
 

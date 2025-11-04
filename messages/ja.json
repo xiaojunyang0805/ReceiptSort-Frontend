@@ -732,6 +732,7 @@
     "vendorAddress": "業者住所",
     "lineItems": "明細項目",
     "lineItemsCount": "明細項目（{count}件）",
+    "patientName": "患者名",
     "medicalInformation": "医療情報",
     "patientDob": "患者生年月日",
     "treatmentDate": "治療日",

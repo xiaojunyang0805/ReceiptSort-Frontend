@@ -858,6 +858,7 @@
     "vendorAddress": "Leveranciersadres",
     "lineItems": "Regelitems",
     "lineItemsCount": "Regelitems ({count})",
+    "patientName": "Patiëntnaam",
     "medicalInformation": "Medische Informatie",
     "patientDob": "Geboortedatum Patiënt",
     "treatmentDate": "Behandeldatum",

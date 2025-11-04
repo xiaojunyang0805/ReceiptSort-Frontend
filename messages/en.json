@@ -932,6 +932,7 @@
     "vendorAddress": "Vendor Address",
     "lineItems": "Line Items",
     "lineItemsCount": "Line Items ({count})",
+    "patientName": "Patient Name",
     "medicalInformation": "Medical Information",
     "patientDob": "Patient Date of Birth",
     "treatmentDate": "Treatment Date",

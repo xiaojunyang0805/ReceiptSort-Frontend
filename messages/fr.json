@@ -732,6 +732,7 @@
     "vendorAddress": "Adresse du Fournisseur",
     "lineItems": "Articles de Ligne",
     "lineItemsCount": "Articles de Ligne ({count})",
+    "patientName": "Nom du Patient",
     "medicalInformation": "Informations Médicales",
     "patientDob": "Date de Naissance du Patient",
     "treatmentDate": "Date du Traitement",

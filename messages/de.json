@@ -732,6 +732,7 @@
     "vendorAddress": "Anbieteradresse",
     "lineItems": "Positionsangaben",
     "lineItemsCount": "Positionsangaben ({count})",
+    "patientName": "Patientenname",
     "medicalInformation": "Medizinische Informationen",
     "patientDob": "Geburtsdatum des Patienten",
     "treatmentDate": "Behandlungsdatum",

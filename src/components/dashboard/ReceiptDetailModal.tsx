@@ -956,6 +956,19 @@ export default function ReceiptDetailModal({
                 <div className="space-y-2 pt-2">
                   <Label className="text-base font-semibold">{t('medicalInformation')}</Label>
                   <div className="border-t pt-3 space-y-4">
+                    <div>
+                      <Label htmlFor="patientName">{t('patientName')}</Label>
+                      <Input
+                        id="patientName"
+                        value={formData.patient_name || ''}
+                        onChange={(e) =>
+                          setFormData({ ...formData, patient_name: e.target.value })
+                        }
+                        disabled={!isEditable}
+                        placeholder="Patient full name"
+                      />
+                    </div>
+
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <Label htmlFor="patientDob">{t('patientDob')}</Label>

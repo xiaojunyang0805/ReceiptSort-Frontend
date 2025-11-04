@@ -169,12 +169,15 @@ export async function POST(
         payment_reference: extractedData.payment_reference,
         vendor_tax_id: extractedData.vendor_tax_id,
         // Phase 3 fields
+        patient_name: extractedData.patient_name,
         patient_dob: extractedData.patient_dob,
         treatment_date: extractedData.treatment_date,
         insurance_claim_number: extractedData.insurance_claim_number,
         diagnosis_codes: extractedData.diagnosis_codes,
         procedure_codes: extractedData.procedure_codes,
         provider_id: extractedData.provider_id,
+        insurance_covered_amount: extractedData.insurance_covered_amount,
+        patient_responsibility_amount: extractedData.patient_responsibility_amount,
       })
       .eq('id', newReceipt.id)
 

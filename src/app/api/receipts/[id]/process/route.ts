@@ -222,6 +222,7 @@ export async function POST(
           vendor_tax_id: extractedData.vendor_tax_id,
 
           // Phase 3: Medical Receipts
+          patient_name: extractedData.patient_name,
           patient_dob: extractedData.patient_dob,
           treatment_date: extractedData.treatment_date,
           insurance_claim_number: extractedData.insurance_claim_number,

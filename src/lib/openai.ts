@@ -369,7 +369,16 @@ CRITICAL RULES:
 
 12. PHASE 3: MEDICAL RECEIPTS (NEW) 🆕
 
-   A. PATIENT DATE OF BIRTH:
+   A. PATIENT NAME:
+      - Look for: "Patient Name", "Patient", "Name", "Naam" (Dutch), "Patiënt"
+      - Extract the full name of the patient receiving treatment
+      - Usually appears at top of medical invoice near patient information
+      - Examples: "C Lyu", "John Smith", "Maria Garcia"
+      - Format: First name + Last name (as shown on document)
+      - ONLY extract for medical_invoice document type
+      - Set to null if not found or not medical document
+
+   B. PATIENT DATE OF BIRTH:
       - Look for: "DOB", "Date of Birth", "Born", "Geboortedatum", "Patient DOB"
       - Format: YYYY-MM-DD (same as receipt_date)
       - Usually near patient name or identification section
@@ -623,6 +632,9 @@ export async function extractReceiptData(
       line_items: validateLineItems(extractedData.line_items),
 
       // Phase 3: Medical Receipts
+      patient_name: extractedData.patient_name
+        ? String(extractedData.patient_name).trim()
+        : null,
       patient_dob: extractedData.patient_dob || null,
       treatment_date: extractedData.treatment_date || null,
       insurance_claim_number: extractedData.insurance_claim_number
