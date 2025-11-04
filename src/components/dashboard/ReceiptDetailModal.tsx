@@ -182,6 +182,7 @@ export default function ReceiptDetailModal({
         vendor_tax_id: receipt.vendor_tax_id || '',
 
         // Phase 3: Medical Receipts
+        patient_name: receipt.patient_name || '',
         patient_dob: receipt.patient_dob || '',
         treatment_date: receipt.treatment_date || '',
         insurance_claim_number: receipt.insurance_claim_number || '',
@@ -310,6 +311,7 @@ export default function ReceiptDetailModal({
           vendor_tax_id: formData.vendor_tax_id || null,
 
           // Phase 3: Medical Receipts
+          patient_name: formData.patient_name || null,
           patient_dob: formData.patient_dob || null,
           treatment_date: formData.treatment_date || null,
           insurance_claim_number: formData.insurance_claim_number || null,
