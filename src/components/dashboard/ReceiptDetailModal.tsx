@@ -924,6 +924,29 @@ export default function ReceiptDetailModal({
                     Loading line items...
                   </div>
                 )}
+
+                {/* Medical Invoice: Show insurance breakdown after line items */}
+                {formData.document_type === 'medical_invoice' &&
+                 formData.total_amount !== undefined &&
+                 receipt?.insurance_covered_amount !== null &&
+                 receipt?.insurance_covered_amount !== undefined && (
+                  <div className="mt-3 p-3 bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded-lg space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span className="font-medium">{t('totalTreatmentCost')}:</span>
+                      <span className="font-semibold">{formData.currency} {formData.total_amount.toFixed(2)}</span>
+                    </div>
+                    <div className="flex justify-between text-sm text-green-700 dark:text-green-400">
+                      <span>− {t('insuranceCovered')}:</span>
+                      <span className="font-medium">{formData.currency} {receipt.insurance_covered_amount.toFixed(2)}</span>
+                    </div>
+                    <div className="border-t border-blue-300 dark:border-blue-700 pt-2 mt-2 flex justify-between">
+                      <span className="font-bold text-lg">{t('youPay')}:</span>
+                      <span className="font-bold text-lg text-blue-700 dark:text-blue-400">
+                        {formData.currency} {(receipt.patient_responsibility_amount || 0).toFixed(2)}
+                      </span>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
 
