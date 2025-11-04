@@ -291,9 +291,11 @@ CRITICAL RULES:
         * Calculate line_total = quantity × unit_price (verify against document)
         * For medical invoices: item_code = treatment code (e.g., "F517A", "CPT-99213")
         * For product invoices: item_code = SKU or product code
-        * **CRITICAL**: DO NOT deduplicate identical line items - if the same item appears
-          multiple times in the table (e.g., "RAGL Ragers Lactona 1 set" appears twice),
-          extract EACH occurrence as a SEPARATE line item with sequential line numbers
+        * **CRITICAL - NO DEDUPLICATION**: If you see the EXACT SAME item listed on MULTIPLE ROWS
+          in the line items table (e.g., "RAGL Ragers Lactona 1 set" appears on line 2 AND line 3),
+          you MUST extract EACH row as a SEPARATE line item with its own line_number.
+        * **IMPORTANT**: Count the PHYSICAL ROWS in the table - if you see 3 rows, extract 3 line items.
+          DO NOT merge or combine rows even if they have identical descriptions.
 
       - Examples:
 
@@ -373,8 +375,11 @@ CRITICAL RULES:
       - Look for: "Patient Name", "Patient", "Name", "Naam" (Dutch), "Patiënt"
       - Extract the full name of the patient receiving treatment
       - Usually appears at top of medical invoice near patient information
+      - **DUTCH MEDICAL INVOICES**: Look in "Patiëntgegevens" section for "Naam:" field
+      - **COMMON LOCATION**: After "REKENING" section, look for patient details table
       - Examples: "C Lyu", "John Smith", "Maria Garcia"
       - Format: First name + Last name (as shown on document)
+      - **CRITICAL**: This is the PATIENT name (person receiving treatment), NOT the merchant/provider name
       - ONLY extract for medical_invoice document type
       - Set to null if not found or not medical document
 
