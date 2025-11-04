@@ -69,6 +69,8 @@ export const STANDARD_TEMPLATE: ExportTemplate = {
     { key: 'diagnosis_codes', label: 'Diagnosis Codes (ICD)' },
     { key: 'procedure_codes', label: 'Procedure Codes (CPT)' },
     { key: 'provider_id', label: 'Provider ID (AGB/NPI)' },
+    { key: 'insurance_covered_amount', label: 'Insurance Covered Amount' },
+    { key: 'patient_responsibility_amount', label: 'Patient Responsibility Amount' },
   ],
 }
 

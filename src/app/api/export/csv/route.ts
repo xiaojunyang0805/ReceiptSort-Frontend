@@ -65,7 +65,8 @@ export async function POST(request: NextRequest) {
         id, processing_status, merchant_name, total_amount, currency, receipt_date, category, tax_amount, payment_method, notes, created_at,
         invoice_number, document_type, subtotal, vendor_address, due_date,
         purchase_order_number, payment_reference, vendor_tax_id,
-        patient_dob, treatment_date, insurance_claim_number, diagnosis_codes, procedure_codes, provider_id
+        patient_dob, treatment_date, insurance_claim_number, diagnosis_codes, procedure_codes, provider_id,
+        insurance_covered_amount, patient_responsibility_amount
       `)
       .in('id', receipt_ids)
       .eq('user_id', user.id)
