@@ -11,12 +11,20 @@ import sharp from 'sharp'
  * This includes:
  * - Unsupported formats (BMP, TIFF) that need conversion
  * - All images (JPEG, PNG) that may need EXIF rotation correction
+ * - Base64 data URLs (used by retry endpoint) that need rotation correction
  *
- * @param url - Image URL or filename
+ * @param url - Image URL, filename, or data URL
  * @returns True if image needs processing (format conversion or rotation correction)
  */
 export function needsImageConversion(url: string): boolean {
   const lowerUrl = url.toLowerCase()
+
+  // Check for data URLs (base64 images from retry endpoint)
+  // These ALWAYS need processing for EXIF rotation correction
+  if (lowerUrl.startsWith('data:image/')) {
+    return true
+  }
+
   // Process all common image formats to fix EXIF rotation issues
   return (
     lowerUrl.endsWith('.jpg') ||
@@ -49,16 +57,29 @@ export function needsImageConversion(url: string): boolean {
  */
 export async function convertImageToJpeg(imageUrl: string): Promise<string> {
   try {
-    console.log('[Image Converter] Processing image from URL:', imageUrl)
+    console.log('[Image Converter] Processing image from URL:', imageUrl.substring(0, 100) + '...')
 
-    // Fetch the image
-    const response = await fetch(imageUrl)
-    if (!response.ok) {
-      throw new Error(`Failed to fetch image: ${response.statusText}`)
+    let imageBuffer: Buffer
+
+    // Handle data URLs (base64 images from retry endpoint)
+    if (imageUrl.startsWith('data:')) {
+      console.log('[Image Converter] Detected data URL, extracting base64 data...')
+      // Extract base64 data from data URL: "data:image/jpeg;base64,XXXXXX"
+      const base64Data = imageUrl.split(',')[1]
+      if (!base64Data) {
+        throw new Error('Invalid data URL format')
+      }
+      imageBuffer = Buffer.from(base64Data, 'base64')
+      console.log(`[Image Converter] Extracted base64 data: ${imageBuffer.length} bytes`)
+    } else {
+      // Fetch the image from URL
+      const response = await fetch(imageUrl)
+      if (!response.ok) {
+        throw new Error(`Failed to fetch image: ${response.statusText}`)
+      }
+      imageBuffer = Buffer.from(await response.arrayBuffer())
+      console.log(`[Image Converter] Fetched image from URL: ${imageBuffer.length} bytes`)
     }
-
-    const imageBuffer = Buffer.from(await response.arrayBuffer())
-    console.log(`[Image Converter] Fetched image: ${imageBuffer.length} bytes`)
 
     // Get image metadata for debugging
     const metadata = await sharp(imageBuffer).metadata()
