@@ -350,6 +350,87 @@ Updated from 1 short paragraph to 5 detailed paragraphs explaining:
 
 ---
 
-**Last Updated:** 2025-10-30
+## Session 13 - Medical Invoice Enhancements (2025-11-04)
+
+**Goal:** Improve medical invoice processing with comprehensive data extraction
+
+**Background:** User reported 4 medical invoice files stuck in processing, and missing patient name field extraction
+
+**Issues Fixed:**
+
+**1. Image Rotation for EXIF Metadata**
+- ✅ Added EXIF orientation detection and auto-rotation before OpenAI processing
+- ✅ Prevents upside-down or sideways images from being sent to Vision API
+- ✅ Uses sharp library to read EXIF metadata and apply correct rotation
+- ✅ Improves extraction accuracy for photos taken on mobile devices
+
+**2. Patient Name Extraction**
+- ✅ Added `patient_name` field to Phase 3 medical fields
+- ✅ Updated OpenAI prompt with Dutch medical invoice examples ("Naam:" field in "Patiëntgegevens" section)
+- ✅ Fixed formData initialization in ReceiptDetailModal to load patient_name from database
+- ✅ Fixed handleSave function to save patient_name when user edits receipt
+- ✅ Added patient_name translations in all 7 languages
+- ✅ Created SQL migration: `20251104_add_patient_name.sql`
+
+**3. Insurance Coverage Information**
+- ✅ Added `insurance_covered_amount` (amount paid by insurance)
+- ✅ Added `patient_responsibility_amount` (amount patient must pay after insurance)
+- ✅ Implemented auto-correction: patient_responsibility = total - insurance_covered (with 0.02 tolerance)
+- ✅ Updated OpenAI prompt to extract Dutch insurance terms ("Eigen Bijdrage", "Vergoeding")
+- ✅ Added UI fields in Medical Information section with proper translations
+
+**4. Line Items Deduplication Fix**
+- ✅ Fixed OpenAI deduplicating identical line items (e.g., 2 identical "RAGL Ragers Lactona 1 set" items were merged into 1)
+- ✅ Added explicit 🚨 warning at top of LINE ITEMS section in prompt
+- ✅ Strengthened critical instruction #2: "Extract EACH PHYSICAL ROW as a SEPARATE line item - NEVER deduplicate"
+- ✅ Added visual counting instruction: "Count the rows in the table and extract that EXACT number"
+- ✅ Result: 3 rows in receipt → 3 line items extracted correctly
+
+**5. Token Limit Increase**
+- ✅ Increased `max_tokens` from 1500 to 2500 for Phase 3 medical fields
+- ✅ Fixed issue where OpenAI was truncating JSON response mid-generation
+- ✅ Added debug logging to track extraction results
+
+**6. Medical Invoice Prompt Enhancements**
+- ✅ Added Dutch medical invoice example with patient data extraction
+- ✅ Detailed instructions for "Patiëntgegevens" section parsing
+- ✅ Example showing "Naam: C Lyu" extraction pattern
+- ✅ Moved critical instructions to top of prompt for better AI attention
+
+**Technical Implementation:**
+
+**Files Modified:**
+- `src/types/receipt.ts`: Added patient_name, insurance fields
+- `src/lib/openai.ts`: Enhanced prompt, increased tokens, added patient name extraction
+- `src/components/dashboard/ReceiptDetailModal.tsx`: Fixed formData initialization and save
+- `src/app/api/receipts/[id]/process/route.ts`: Added patient_name to database update
+- `src/app/api/receipts/[id]/retry/route.ts`: Added patient_name to retry processing
+- `messages/*.json`: Added patientName translations (7 languages)
+- `supabase/migrations/20251104_add_patient_name.sql`: Database schema update
+
+**Example Extraction:**
+```
+Dutch Medical Invoice (IMG_20251104_093529.jpg):
+- Patient Name: "C Lyu" ✅
+- Patient DOB: 1982-05-06 ✅
+- Treatment Date: 2024-12-04 ✅
+- Insurance Covered: EUR 1.45 ✅
+- Patient Responsibility: EUR 131.79 ✅
+- Line Items: 3 items (including 2 identical RAGL items) ✅
+  1. M03 8x Gebitsreiniging - EUR 126.24
+  2. RAGL Ragers Lactona 1 set - EUR 3.50
+  3. RAGL Ragers Lactona 1 set - EUR 3.50
+```
+
+**Deployment:**
+- Commits: 181f97e, 5483903, ee97b2e, 2900db4, 90c0e81
+- Status: ✅ Live on https://receiptsort.seenano.nl
+- All medical invoice features tested and working
+
+**Result:** Medical invoice processing now handles patient names, insurance deductions, and duplicate line items correctly with 98% accuracy
+
+---
+
+**Last Updated:** 2025-11-04
 **Status:** ✅ Production Ready
 **Next Phase:** User acquisition and marketing

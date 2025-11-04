@@ -40,4 +40,18 @@ validate-schema.mjs
 validate-storage.mjs
 validate-rls.mjs
 
+# test outputs and temporary files
+tests/test-results/
+tests/fixtures/test-receipts/
+tests/ExportTemplate/*.xlsx
+*.test-output.json
+tools/temp/*
+!tools/temp/.gitkeep
+
+# additional env files
+.env*.check
+.env*.production*
+.env*.vercel*
+!tools/env/
+
 .vercel
