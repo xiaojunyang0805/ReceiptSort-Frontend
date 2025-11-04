@@ -69,6 +69,7 @@ function NavItem({ icon: Icon, label, isActive, href, asChild = false, onClick }
 
 export function MobileBottomNav({ className }: MobileBottomNavProps) {
   const t = useTranslations('common')
+  const tNav = useTranslations('navigation')
   const pathname = usePathname()
   const [isAdmin, setIsAdmin] = useState(false)
 
@@ -78,10 +79,10 @@ export function MobileBottomNav({ className }: MobileBottomNavProps) {
 
   // Main navigation items (always visible)
   const mainNavigation = [
-    { name: t('dashboard'), href: '/dashboard', icon: Home, label: 'Home' },
-    { name: t('uploadReceipts'), href: '/upload', icon: Upload, label: 'Upload' },
-    { name: t('receipts'), href: '/receipts', icon: Receipt, label: 'List' },
-    { name: t('credits'), href: '/credits', icon: CreditCard, label: 'Credits' },
+    { name: t('dashboard'), href: '/dashboard', icon: Home, label: tNav('home') },
+    { name: t('uploadReceipts'), href: '/upload', icon: Upload, label: t('upload') },
+    { name: t('receipts'), href: '/receipts', icon: Receipt, label: t('receipts') },
+    { name: t('credits'), href: '/credits', icon: CreditCard, label: t('credits') },
   ]
 
   // More menu items (in dropdown)
@@ -113,7 +114,7 @@ export function MobileBottomNav({ className }: MobileBottomNavProps) {
             <button className="tap-highlight-transparent focus:outline-none flex-shrink-0">
               <NavItem
                 icon={MoreHorizontal}
-                label="More"
+                label={tNav('more')}
                 isActive={isMoreActive}
                 asChild
               />

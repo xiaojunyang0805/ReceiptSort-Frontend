@@ -34,6 +34,8 @@ interface Receipt {
   diagnosis_codes?: string
   procedure_codes?: string
   provider_id?: string
+  insurance_covered_amount?: number
+  patient_responsibility_amount?: number
 }
 
 /**
@@ -91,6 +93,8 @@ export async function generateExcel(receipts: Receipt[], locale: string = 'en'):
     { header: t('diagnosisCodes'), key: 'diagnosisCodes', width: 20 },
     { header: t('procedureCodes'), key: 'procedureCodes', width: 20 },
     { header: t('providerId'), key: 'providerId', width: 16 },
+    { header: t('insuranceCoveredAmount'), key: 'insuranceCovered', width: 18 },
+    { header: t('patientResponsibilityAmount'), key: 'patientPays', width: 18 },
     { header: t('notes'), key: 'notes', width: 30 },
   ]
 
@@ -129,6 +133,8 @@ export async function generateExcel(receipts: Receipt[], locale: string = 'en'):
       diagnosisCodes: receipt.diagnosis_codes || '',
       procedureCodes: receipt.procedure_codes || '',
       providerId: receipt.provider_id || '',
+      insuranceCovered: receipt.insurance_covered_amount || null,
+      patientPays: receipt.patient_responsibility_amount || null,
       notes: receipt.notes || '',
     })
 
@@ -141,10 +147,12 @@ export async function generateExcel(receipts: Receipt[], locale: string = 'en'):
       }
     }
 
-    // Format amount, subtotal, and tax columns
+    // Format amount, subtotal, tax, and insurance columns
     row.getCell('amount').numFmt = '$#,##0.00'
     row.getCell('subtotal').numFmt = '$#,##0.00'
     row.getCell('tax').numFmt = '$#,##0.00'
+    row.getCell('insuranceCovered').numFmt = '$#,##0.00'
+    row.getCell('patientPays').numFmt = '$#,##0.00'
 
     // Format date columns
     if (receipt.receipt_date) {
@@ -195,10 +203,10 @@ export async function generateExcel(receipts: Receipt[], locale: string = 'en'):
     top: { style: 'double', color: { argb: 'FF000000' } },
   }
 
-  // Enable auto-filter (Phase 1 + Phase 2 + Phase 3: Updated to include all 22 columns)
+  // Enable auto-filter (Phase 1 + Phase 2 + Phase 3: Updated to include all 24 columns)
   worksheet.autoFilter = {
     from: { row: 1, column: 1 },
-    to: { row: 1, column: 22 },
+    to: { row: 1, column: 24 },
   }
 
   // Add summary worksheet

@@ -939,6 +939,8 @@
     "diagnosisCodes": "Diagnosis Codes (ICD)",
     "procedureCodes": "Procedure Codes (CPT)",
     "providerId": "Provider ID (AGB/NPI)",
+    "insuranceCoveredAmount": "Insurance Covered Amount",
+    "patientResponsibilityAmount": "Patient Responsibility Amount",
     "notes": "Notes",
     "saveChanges": "Save Changes",
     "saving": "Saving...",
