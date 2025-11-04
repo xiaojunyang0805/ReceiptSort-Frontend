@@ -587,7 +587,7 @@ export async function extractReceiptData(
               ],
             },
           ],
-      max_tokens: 1500, // Increased for line items support (Phase 2)
+      max_tokens: 2500, // Increased for Phase 3 medical fields (patient_name, insurance, etc.)
       temperature: 0.1, // Low temperature for consistent output
       response_format: { type: 'json_object' }, // Force JSON response
     })
