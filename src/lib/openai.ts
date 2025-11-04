@@ -29,7 +29,10 @@ const RECEIPT_EXTRACTION_PROMPT = `You are a receipt data extraction expert. Ext
 
 🚨 CRITICAL INSTRUCTIONS - READ FIRST:
 1. For MEDICAL INVOICES: Look for "Patiëntgegevens" section and extract "Naam:" field as patient_name
-2. For LINE ITEMS: Count PHYSICAL ROWS in the table - if you see 3 rows, extract 3 items (DO NOT deduplicate identical items)
+2. For LINE ITEMS: Extract EACH PHYSICAL ROW as a SEPARATE line item - NEVER deduplicate!
+   - If you see 3 rows in the table → extract 3 line items (even if 2 rows are identical)
+   - If 2 rows both say "RAGL Ragers Lactona 1 set" → extract BOTH as separate line items
+   - Count the rows visually and extract that EXACT number of line items
 3. Extract data EXACTLY as shown on the receipt. NEVER generate, infer, or create synthetic values.
 
 You MUST return valid JSON in this exact format (no markdown, no explanations):
@@ -276,6 +279,12 @@ CRITICAL RULES:
       - Set to null if not found
 
    D. LINE ITEMS (Critical for Business Invoices):
+
+      🚨 **ABSOLUTELY CRITICAL - NO DEDUPLICATION RULE**:
+      Extract EACH PHYSICAL ROW as a SEPARATE line item, even if rows have IDENTICAL descriptions.
+      If table shows 3 rows → extract 3 line items. If 2 rows say "RAGL Ragers Lactona 1 set" → extract BOTH.
+      NEVER merge, combine, or deduplicate rows. Count rows visually and extract that exact number.
+
       - Extract ONLY if document has a clear itemized list (table format)
       - Look for columns: Description/Item, Quantity/Qty, Price/Rate, Total/Amount
       - Each line item must include:
