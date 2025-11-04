@@ -608,6 +608,13 @@ export async function extractReceiptData(
         .trim()
 
       extractedData = JSON.parse(cleanedContent)
+
+      // DEBUG: Log extracted data to see what OpenAI returned
+      console.log('[OpenAI Extract] Patient name from AI:', extractedData.patient_name)
+      console.log('[OpenAI Extract] Line items count from AI:', Array.isArray(extractedData.line_items) ? extractedData.line_items.length : 0)
+      if (Array.isArray(extractedData.line_items)) {
+        console.log('[OpenAI Extract] Line items:', JSON.stringify(extractedData.line_items, null, 2))
+      }
     } catch (parseError) {
       console.error('Failed to parse OpenAI response:', content)
       console.error('Parse error:', parseError)
