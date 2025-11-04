@@ -315,6 +315,13 @@ CRITICAL RULES:
         F517A   Beugconsult              1      €52.14
         → Extract 1 line item with item_code="F517A"
 
+        DUTCH MEDICAL INVOICE WITH DUPLICATE ITEMS:
+        Behandeldatum    Omschrijving                      Totaal
+        04-12-2024       M03 8x Gebitsreiniging           €126.24
+        04-12-2024       RAGL Ragers Lactona 1 set        €3.50
+        04-12-2024       RAGL Ragers Lactona 1 set        €3.50
+        → Extract 3 line items (lines 1, 2, and 3) - DO NOT merge the two identical RAGL items
+
    E. LINE ITEMS VALIDATION:
       - Verify sum of line_total values ≈ subtotal or total amount
       - If mismatch > 10%, set confidence_score lower (0.85 or less)
@@ -382,6 +389,17 @@ CRITICAL RULES:
       - **CRITICAL**: This is the PATIENT name (person receiving treatment), NOT the merchant/provider name
       - ONLY extract for medical_invoice document type
       - Set to null if not found or not medical document
+
+      **DUTCH EXAMPLE**:
+      Document shows:
+        REKENING
+        Betalingskenmerk: 4225 1190 2410 71
+
+        Patiëntgegevens
+        Naam:           C Lyu
+        Geb.datum:      06-05-1982
+
+      → Extract patient_name: "C Lyu" (from the Naam field in Patiëntgegevens section)
 
    B. PATIENT DATE OF BIRTH:
       - Look for: "DOB", "Date of Birth", "Born", "Geboortedatum", "Patient DOB"
