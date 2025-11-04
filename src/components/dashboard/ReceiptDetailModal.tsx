@@ -63,6 +63,7 @@ interface Receipt {
   vendor_tax_id?: string
 
   // Phase 3: Medical Receipts
+  patient_name?: string
   patient_dob?: string
   treatment_date?: string
   insurance_claim_number?: string
