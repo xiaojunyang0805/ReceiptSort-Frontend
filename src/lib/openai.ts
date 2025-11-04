@@ -640,6 +640,40 @@ export async function extractReceiptData(
         : null,
     }
 
+    // **INSURANCE VALIDATION & AUTO-CORRECTION**
+    // If insurance fields are present, validate the math and auto-correct if needed
+    if (validatedData.insurance_covered_amount !== null) {
+      const total = validatedData.amount
+      const insuranceCovered = validatedData.insurance_covered_amount
+      const patientPays = validatedData.patient_responsibility_amount
+
+      // Case 1: Patient responsibility is missing - calculate it
+      if (patientPays === null) {
+        validatedData.patient_responsibility_amount = total - insuranceCovered
+        console.log(
+          `[Insurance Auto-Calc] Missing patient responsibility. Calculated: ${validatedData.patient_responsibility_amount.toFixed(2)} = ${total} - ${insuranceCovered}`
+        )
+      }
+      // Case 2: Math doesn't add up (tolerance: 0.02 for rounding)
+      else if (Math.abs(insuranceCovered + patientPays - total) > 0.02) {
+        // Recalculate patient responsibility (trust total and insurance_covered)
+        const correctedPatientPays = total - insuranceCovered
+        console.log(
+          `[Insurance Auto-Fix] Math error detected. Insurance (${insuranceCovered}) + Patient (${patientPays}) ≠ Total (${total}). Correcting patient responsibility to: ${correctedPatientPays.toFixed(2)}`
+        )
+        validatedData.patient_responsibility_amount = correctedPatientPays
+      }
+
+      // Ensure values are non-negative
+      if (
+        validatedData.patient_responsibility_amount !== null &&
+        validatedData.patient_responsibility_amount < 0
+      ) {
+        console.log(`[Insurance Auto-Fix] Negative patient responsibility detected. Setting to 0.`)
+        validatedData.patient_responsibility_amount = 0
+      }
+    }
+
     return validatedData
   } catch (error) {
     console.error('Receipt extraction error:', error)
