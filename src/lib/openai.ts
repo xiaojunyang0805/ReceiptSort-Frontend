@@ -64,7 +64,9 @@ You MUST return valid JSON in this exact format (no markdown, no explanations):
   "insurance_claim_number": "CLAIM-2025-789",
   "diagnosis_codes": "M54.5, Z79.899",
   "procedure_codes": "F517A, 99213",
-  "provider_id": "12065201"
+  "provider_id": "12065201",
+  "insurance_covered_amount": 68.28,
+  "patient_responsibility_amount": 22.76
 }
 
 NOTE: The above is just a FORMAT EXAMPLE with sample Western values. For Chinese electronic invoices (电子发票):
@@ -413,7 +415,36 @@ CRITICAL RULES:
       - Examples: "AGB: 12065201", "NPI: 1234567890"
       - Set to null if not found
 
-   G. MEDICAL DOCUMENT TYPE DETECTION:
+   G. INSURANCE COVERAGE AMOUNTS (NEW) 🆕:
+      ⚠️ CRITICAL FOR MEDICAL INVOICES WITH INSURANCE:
+
+      Many medical invoices show THREE amounts:
+      1. Total treatment cost (amount field - ALWAYS required)
+      2. Amount paid by insurance (insurance_covered_amount)
+      3. Amount patient must pay (patient_responsibility_amount)
+
+      **DUTCH MEDICAL INVOICES**:
+      - Look for: "Betaald door uw zorgverzekeraar" → insurance_covered_amount
+      - Look for: "Nog door u te betalen" or "Te betalen" → patient_responsibility_amount
+      - Total = insurance_covered_amount + patient_responsibility_amount
+
+      **US MEDICAL INVOICES**:
+      - Look for: "Insurance Payment", "Paid by Insurance" → insurance_covered_amount
+      - Look for: "Patient Responsibility", "You Owe", "Balance Due" → patient_responsibility_amount
+
+      Examples:
+      - "Total: €91.04, Betaald door uw zorgverzekeraar: €68.28, Nog door u te betalen: €22.76"
+        → amount: 91.04, insurance_covered_amount: 68.28, patient_responsibility_amount: 22.76
+      - "Total: $250, Insurance Paid: $200, Patient Owes: $50"
+        → amount: 250.00, insurance_covered_amount: 200.00, patient_responsibility_amount: 50.00
+
+      VALIDATION:
+      - insurance_covered_amount + patient_responsibility_amount should ≈ amount (total)
+      - Both should be ≥ 0 and ≤ amount
+      - Set to null if not found or not applicable (patient pays full amount)
+      - ONLY extract for medical_invoice documents
+
+   H. MEDICAL DOCUMENT TYPE DETECTION:
       - Set document_type = "medical_invoice" if you see ANY of:
         * Patient date of birth (DOB)
         * Treatment codes (CPT, ICD, treatment codes)
@@ -601,6 +632,12 @@ export async function extractReceiptData(
         ? String(extractedData.procedure_codes).trim()
         : null,
       provider_id: extractedData.provider_id ? String(extractedData.provider_id).trim() : null,
+      insurance_covered_amount: extractedData.insurance_covered_amount
+        ? parseFloat(String(extractedData.insurance_covered_amount))
+        : null,
+      patient_responsibility_amount: extractedData.patient_responsibility_amount
+        ? parseFloat(String(extractedData.patient_responsibility_amount))
+        : null,
     }
 
     return validatedData
@@ -889,6 +926,12 @@ export async function extractReceiptDataWithVision(
       diagnosis_codes: parsedData.diagnosis_codes || null,
       procedure_codes: parsedData.procedure_codes || null,
       provider_id: parsedData.provider_id || null,
+      insurance_covered_amount: parsedData.insurance_covered_amount
+        ? parseFloat(String(parsedData.insurance_covered_amount))
+        : null,
+      patient_responsibility_amount: parsedData.patient_responsibility_amount
+        ? parseFloat(String(parsedData.patient_responsibility_amount))
+        : null,
     }
 
     console.log('[OpenAI Vision Fallback] Successfully extracted data with confidence:', extractedData.confidence_score)
