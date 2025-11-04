@@ -165,6 +165,28 @@ export async function POST(
         raw_ocr_text: extractedData.raw_text,
         processing_error: hasValidationErrors ? validationErrors.join('; ') : null,
         updated_at: new Date().toISOString(),
+
+        // Phase 1: Essential Fields
+        invoice_number: extractedData.invoice_number,
+        document_type: extractedData.document_type,
+        subtotal: extractedData.subtotal,
+        vendor_address: extractedData.vendor_address,
+        due_date: extractedData.due_date,
+
+        // Phase 2: Business Invoices
+        purchase_order_number: extractedData.purchase_order_number,
+        payment_reference: extractedData.payment_reference,
+        vendor_tax_id: extractedData.vendor_tax_id,
+
+        // Phase 3: Medical Receipts
+        patient_dob: extractedData.patient_dob,
+        treatment_date: extractedData.treatment_date,
+        insurance_claim_number: extractedData.insurance_claim_number,
+        diagnosis_codes: extractedData.diagnosis_codes,
+        procedure_codes: extractedData.procedure_codes,
+        provider_id: extractedData.provider_id,
+        insurance_covered_amount: extractedData.insurance_covered_amount,
+        patient_responsibility_amount: extractedData.patient_responsibility_amount,
       })
       .eq('id', receiptId)
 

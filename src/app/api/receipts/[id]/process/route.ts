@@ -228,6 +228,8 @@ export async function POST(
           diagnosis_codes: extractedData.diagnosis_codes,
           procedure_codes: extractedData.procedure_codes,
           provider_id: extractedData.provider_id,
+          insurance_covered_amount: extractedData.insurance_covered_amount,
+          patient_responsibility_amount: extractedData.patient_responsibility_amount,
         })
         .eq('id', params.id)
 
