@@ -1,0 +1,1027 @@
+{
+  "common": {
+    "getStarted": "Kostenlos Starten",
+    "signUp": "Registrieren",
+    "login": "Anmelden",
+    "logout": "Abmelden",
+    "learnMore": "Mehr Erfahren",
+    "tryDemo": "Demo Testen",
+    "uploadReceipts": "Belege Hochladen",
+    "pricing": "Preise",
+    "features": "Funktionen",
+    "howItWorks": "Wie Es Funktioniert",
+    "faq": "FAQ",
+    "contact": "Kontakt",
+    "dashboard": "Dashboard",
+    "receipts": "Belege",
+    "exports": "Exporte",
+    "credits": "Credits",
+    "profile": "Profil",
+    "upload": "Hochladen",
+    "export": "Exportieren",
+    "download": "Herunterladen",
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "close": "Schließen",
+    "search": "Suchen",
+    "filter": "Filtern",
+    "select": "Auswählen",
+    "loading": "Lädt...",
+    "error": "Fehler",
+    "success": "Erfolg",
+    "confirm": "Bestätigen",
+    "billing": "Abrechnung",
+    "account": "Konto"
+  },
+  "hero": {
+    "headline": "Ihre Belege, Ihr Format, Automatisch",
+    "headlineHighlight": "Ihr Format",
+    "subheadline": "Extrahieren Sie Daten aus Belegen in Sekunden mit KI.",
+    "subheadlineDetails": "Belege hochladen → KI extrahiert Daten → Excel herunterladen.",
+    "watchDemo": "Demo Ansehen",
+    "trustBadge": "Vertraut von über 2000 Unternehmen weltweit",
+    "valueProps": {
+      "freeCredits": "10 kostenlose Credits + 10 benutzerdefinierte Vorlagen • Keine Kreditkarte erforderlich",
+      "neverExpire": "Credits verfallen nie • Vorlagen unbegrenzt wiederverwendbar",
+      "multiDocument": "Funktioniert mit Belegen, Rechnungen und Arztberichten"
+    },
+    "getStarted": "Kostenlos Starten",
+    "processTagline": "Hochladen → KI ordnet Ihrer Vorlage zu → In Ihrem Format herunterladen"
+  },
+  "features": {
+    "title": "Alles, was Sie zur Organisation von Belegen benötigen",
+    "subtitle": "Entwickelt für Kleinunternehmen, Freelancer und Buchhalter, die ihre Zeit schätzen.",
+    "items": {
+      "upload": {
+        "title": "Von Jedem Gerät Hochladen",
+        "description": "Ziehen Sie Belege per Drag & Drop von Ihrem Telefon, E-Mail oder Scanner. Unterstützt alle gängigen Bildformate (JPG, PNG, WebP, TIFF, BMP, GIF) und PDFs bis 10MB pro Datei."
+      },
+      "aiExtraction": {
+        "title": "Multi-Dokument-Intelligenz",
+        "description": "Funktioniert mit Belegen, Rechnungen UND Arztberichten—nicht nur Belege. KI passt sich nahtlos verschiedenen Dokumenttypen an. GPT-4 Vision erreicht 98%+ Genauigkeit bei allen Formaten. Verarbeitet automatisch mehrere Sprachen und Währungsformate."
+      },
+      "export": {
+        "title": "Nach Excel oder CSV Exportieren",
+        "description": "Laden Sie organisierte Tabellen herunter, die für QuickBooks, Xero oder jede Buchhaltungssoftware bereit sind."
+      },
+      "pricing": {
+        "title": "Bezahlen Sie Nach Bedarf",
+        "description": "Ab 0,067€ pro Beleg mit Massenpaketen. Kaufen Sie Credits, wenn Sie sie benötigen, oder abonnieren Sie für noch besseren Wert."
+      },
+      "security": {
+        "title": "Sicherheit auf Bankniveau",
+        "description": "Ihre Daten sind verschlüsselt und werden nie geteilt. DSGVO-konform. Belege werden nach 90 Tagen automatisch gelöscht."
+      },
+      "timeSaving": {
+        "title": "Sparen Sie 5+ Stunden Pro Woche",
+        "description": "Stoppen Sie die manuelle Dateneingabe. Verarbeiten Sie 100 Belege in der Zeit, die Sie für 1 manuell benötigen. Jeder Beleg wird in unter 5 Sekunden verarbeitet."
+      },
+      "templateMapping": {
+        "title": "KI Lernt Ihr Format",
+        "description": "Erstellen Sie benutzerdefinierte Exportvorlagen mit IHREN Spaltennamen (MwSt-Betrag, Projektcode, Kunden-ID usw.). Unsere KI ordnet extrahierte Daten automatisch Ihrem Format zu—auch wenn Belege unterschiedliche Begriffe verwenden (Tax vs VAT vs Btw vs MwSt). Speichern Sie 10 Vorlagen kostenlos, unbegrenzt wiederverwendbar. Jeder Export kostet nur 1 Credit.",
+        "badge": "EINZIGARTIGES FEATURE"
+      }
+    }
+  },
+  "howItWorks": {
+    "title": "Wie Es Funktioniert",
+    "subtitle": "Starten Sie in 4 einfachen Schritten",
+    "description": "Vom Belegfoto zur organisierten Tabelle in unter einer Minute",
+    "steps": {
+      "template": {
+        "title": "Gestalten Sie Ihr Perfektes Exportformat",
+        "description": "Erstellen Sie eine benutzerdefinierte Vorlage mit Ihren exakten Spaltennamen und Struktur. Dauert 2 Minuten. Speichern Sie bis zu 10 Vorlagen kostenlos—keine Credits erforderlich."
+      },
+      "upload": {
+        "title": "Laden Sie Ihre Belege Hoch",
+        "description": "Ziehen Sie Belege, Rechnungen oder Arztberichte per Drag & Drop. Funktioniert mit Fotos oder PDFs von jedem Gerät. Unterstützt alle gängigen Bildformate."
+      },
+      "process": {
+        "title": "KI Extrahiert & Ordnet Ihrer Vorlage Zu",
+        "description": "Unsere KI liest das Dokument und ordnet die extrahierten Daten intelligent IHREN Vorlagenspalten zu—selbst unterschiedliche Terminologien werden automatisch behandelt."
+      },
+      "export": {
+        "title": "In Ihrem Format Herunterladen",
+        "description": "Erhalten Sie eine perfekt formatierte Excel- oder CSV-Datei, die zu Ihrer Vorlage passt—bereit für den direkten Import in Ihr Buchhaltungssystem oder zur Vorlage bei Behörden."
+      }
+    },
+    "cta": "Kostenlos Starten: Erstellen Sie Ihre Erste Vorlage"
+  },
+  "socialProof": {
+    "title": "Vertraut von Unternehmen weltweit",
+    "stats": {
+      "receipts": "Verarbeitete Belege",
+      "users": "Aktive Nutzer",
+      "accuracy": "Durchschnittliche Genauigkeit",
+      "timeSaved": "Eingesparte Stunden",
+      "timeSavedPerDoc": "Gespart Pro Dokument"
+    },
+    "testimonials": {
+      "title": "Was unsere Kunden sagen",
+      "items": [
+        {
+          "quote": "Die Vorlagen-Zuordnungsfunktion ist brillant. Ich habe eine Vorlage für meine MwSt.-Erklärungen erstellt, und jetzt formatiert sich jeder Beleg automatisch entsprechend den Anforderungen des Finanzamts. Spart mir jeden Monat über 20 Minuten, und ich mache keine Formatierungsfehler mehr.",
+          "name": "Lisa van Dijk",
+          "role": "Freiberufliche Beraterin, Niederlande"
+        },
+        {
+          "quote": "Als Kleinunternehmer habe ich keine Zeit für die Buchhaltung. Dieses Tool ist ein Game-Changer für die Spesenverfolgung.",
+          "name": "Marcus Johnson",
+          "role": "Einzelhandelsinhaber"
+        },
+        {
+          "quote": "Ich war skeptisch bezüglich der KI-Genauigkeit, aber ReceiptSort macht es zu 98% richtig. Die Vorlagen-Zuordnung ist jedoch der wahre Game-Changer—meine Belege werden genau so exportiert, wie mein Buchhalter sie braucht. Keine manuelle Neuformatierung mehr.",
+          "name": "Jennifer Martinez",
+          "role": "Kleinunternehmerin"
+        }
+      ]
+    },
+    "trustBadges": {
+      "securePayment": "Sichere Zahlung über Stripe",
+      "gdpr": "DSGVO-konform",
+      "encryption": "256-Bit SSL-Verschlüsselung"
+    }
+  },
+  "support": {
+    "title": "Haben Sie noch Fragen?",
+    "subtitle": "Unser Support-Team hilft Ihnen gerne weiter. Kontaktieren Sie uns und wir antworten innerhalb von 24 Stunden.",
+    "emailUs": "E-Mail an uns",
+    "or": "oder",
+    "contactForm": "Kontaktformular"
+  },
+  "faq": {
+    "title": "Häufig Gestellte Fragen",
+    "subtitle": "Alles, was Sie über ReceiptSort wissen müssen",
+    "items": {
+      "accuracy": {
+        "question": "Wie genau ist die KI-Extraktion?",
+        "answer": "Unsere KI erreicht eine Genauigkeit von 98%+ bei klaren, standardmäßigen Belegen. Sie können alle extrahierten Daten vor dem Export jederzeit manuell bearbeiten."
+      },
+      "formats": {
+        "question": "Welche Dateiformate unterstützen Sie?",
+        "answer": "Wir unterstützen alle gängigen Bildformate (JPG, PNG, JPEG, WebP, TIFF, BMP, GIF) und PDF-Dateien bis 10MB pro Datei."
+      },
+      "cost": {
+        "question": "Wie viel kostet es?",
+        "answer": "Wir verwenden ein Credit-System. Jeder Beleg kostet 1 Credit. Credits beginnen bei 0,067€ pro Stück für kleine Pakete oder nur 0,067€ pro Stück beim Massenkauf (z.B. 150 für 9,99€, 1500 für 99,99€). Abonnieren Sie monatlich für noch besseren Wert."
+      },
+      "expiration": {
+        "question": "Verfallen Credits?",
+        "answer": "Nein, Credits verfallen nie. Verwenden Sie sie, wann immer Sie sie benötigen."
+      },
+      "security": {
+        "question": "Sind meine Daten sicher?",
+        "answer": "Ja. Wir verwenden Verschlüsselung auf Bankniveau (256-Bit SSL) und Ihre Belege werden nach 90 Tagen automatisch gelöscht. Wir teilen Ihre Daten niemals."
+      },
+      "export": {
+        "question": "Kann ich nach QuickBooks oder Xero exportieren?",
+        "answer": "Wir exportieren in Excel- und CSV-Formate, die mit QuickBooks, Xero und allen wichtigen Buchhaltungsprogrammen kompatibel sind. Importieren Sie einfach die heruntergeladene Datei in Ihr Buchhaltungssystem."
+      },
+      "customTemplates": {
+        "question": "Was sind Benutzerdefinierte Vorlagen und warum brauche ich sie?",
+        "answer": "Benutzerdefinierte Vorlagen ermöglichen es Ihnen, wiederverwendbare Exportformate zu erstellen, die auf IHRE Bedürfnisse zugeschnitten sind—wie MwSt.-Erklärungen, spezifische Buchhaltungslayouts oder Versicherungsformulare.\n\nWarum sie wichtig sind: Andere Belegtools exportieren in IHR festes Format. Sie verschwenden dann 2-3 Minuten pro Dokument damit, Spalten neu zu ordnen, Überschriften umzubenennen und neu zu formatieren, um Ihr Buchhaltungssystem oder Behördenanforderungen zu erfüllen.\n\nMit ReceiptSort: Sie erstellen Ihre ideale Vorlage EINMAL mit Ihren exakten Spaltennamen (MwSt.-Betrag, Projektcode usw.). Unsere KI ordnet automatisch alle zukünftigen Belege Ihren Vorlagenspalten zu—selbst wenn Belege unterschiedliche Begriffe verwenden (Tax vs VAT vs Btw vs MwSt).\n\nPreise: Speichern Sie bis zu 10 Vorlagen KOSTENLOS (keine Credits berechnet), verwenden Sie sie dann unbegrenzt oft wieder. Jeder Export kostet nur 1 Credit, unabhängig von der Vorlagenkomplexität.\n\nBeispiel: Erstellen Sie eine Vorlage mit Spalten: Datum | Lieferant | Nettobetrag | MwSt.-Betrag | Gesamt | Kategorie. Jeder Beleg, den Sie verarbeiten, wird automatisch in dieses exakte Format exportiert—keine manuelle Neuorganisation nötig."
+      },
+      "wrongExtraction": {
+        "question": "Was passiert, wenn die Extraktion falsch ist?",
+        "answer": "Sie können alle extrahierten Daten vor dem Export manuell bearbeiten. Wenn die Extraktion vollständig fehlschlägt, erstatten wir das Credit."
+      },
+      "refunds": {
+        "question": "Bieten Sie Rückerstattungen an?",
+        "answer": "Ja, wir bieten eine 30-tägige Geld-zurück-Garantie auf Credit-Käufe, wenn Sie nicht zufrieden sind."
+      },
+      "business": {
+        "question": "Kann ich dies für mein Unternehmen verwenden?",
+        "answer": "Absolut! Viele kleine Unternehmen, Freelancer und Buchhalter nutzen ReceiptSort für die Spesenabrechnung und Buchhaltung."
+      },
+      "software": {
+        "question": "Muss ich Software installieren?",
+        "answer": "Nein, ReceiptSort ist zu 100% webbasiert. Greifen Sie von jedem Gerät mit einem Webbrowser darauf zu."
+      }
+    }
+  },
+  "finalCTA": {
+    "title": "Bereit, das Umorganisieren von Belegdaten zu beenden?",
+    "subtitle": "Kostenlos starten: 10 Credits + 10 benutzerdefinierte Vorlagen. Keine Kreditkarte erforderlich.",
+    "button": "Belege Verarbeiten Starten",
+    "viewPricing": "Preise Ansehen",
+    "trustIndicator": "Schließen Sie sich Freelancern, Buchhaltern und kleinen Unternehmen an, die Belege automatisch in ihrem eigenen Format verarbeiten.",
+    "trustBadges": {
+      "creditsNeverExpire": "Credits verfallen nie",
+      "templatesReusable": "Vorlagen unbegrenzt wiederverwendbar",
+      "moneyBack": "30-Tage-Geld-zurück-Garantie",
+      "allSoftware": "Funktioniert mit jeder Buchhaltungssoftware"
+    }
+  },
+  "auth": {
+    "loginTitle": "Anmelden",
+    "loginSubtitle": "Geben Sie Ihre Anmeldedaten ein, um auf Ihr Konto zuzugreifen",
+    "signupTitle": "Konto Erstellen",
+    "signupSubtitle": "Registrieren Sie sich, um Ihre Belege zu organisieren",
+    "email": "E-Mail",
+    "emailPlaceholder": "name@beispiel.de",
+    "password": "Passwort",
+    "passwordPlaceholder": "••••••••",
+    "confirmPassword": "Passwort Bestätigen",
+    "fullName": "Vollständiger Name",
+    "fullNamePlaceholder": "Max Mustermann",
+    "forgotPassword": "Passwort vergessen?",
+    "noAccount": "Haben Sie kein Konto?",
+    "hasAccount": "Haben Sie bereits ein Konto?",
+    "signIn": "Anmelden",
+    "signUp": "Registrieren",
+    "logIn": "Anmelden",
+    "continueWithGoogle": "Mit Google fortfahren",
+    "orContinueWithEmail": "ODER MIT E-MAIL FORTFAHREN",
+    "loading": "Lädt...",
+    "termsAgree": "Durch die Registrierung stimmen Sie unseren",
+    "termsOfService": "Nutzungsbedingungen",
+    "privacyPolicy": "Datenschutzrichtlinie",
+    "and": "und",
+    "errors": {
+      "invalidEmail": "Ungültige E-Mail-Adresse",
+      "passwordMin": "Passwort muss mindestens 6 Zeichen enthalten",
+      "fullNameMin": "Vollständiger Name muss mindestens 2 Zeichen enthalten",
+      "passwordMismatch": "Passwörter stimmen nicht überein",
+      "invalidCredentials": "Ungültige E-Mail oder Passwort",
+      "emailNotConfirmed": "Bitte verifizieren Sie Ihre E-Mail, bevor Sie sich anmelden",
+      "emailAlreadyRegistered": "Diese E-Mail ist bereits registriert",
+      "unexpectedError": "Ein unerwarteter Fehler ist aufgetreten",
+      "googleSignInFailed": "Anmeldung mit Google fehlgeschlagen"
+    },
+    "success": {
+      "welcomeBack": "Willkommen zurück!",
+      "accountCreated": "Konto erfolgreich erstellt!",
+      "checkEmail": "Bitte überprüfen Sie Ihre E-Mail, um Ihr Konto zu bestätigen, bevor Sie sich anmelden"
+    }
+  },
+  "dashboard": {
+    "welcome": "Willkommen zurück",
+    "overview": {
+      "title": "Übersicht",
+      "subtitle": "Hier ist eine Übersicht Ihrer Belegverwaltung",
+      "lastExport": {
+        "never": "Nie"
+      }
+    },
+    "uploadSection": {
+      "title": "Belege Hochladen",
+      "dragDrop": "Ziehen Sie Belegbilder hierher",
+      "dropHere": "Belegdateien hier ablegen",
+      "clickToBrowse": "oder klicken Sie zum Durchsuchen",
+      "or": "oder",
+      "browse": "Dateien durchsuchen",
+      "supported": "Unterstützt: PNG, JPG, JPEG, WEBP, TIFF, BMP, GIF, PDF (max 10MB)",
+      "supportedFormats": "Unterstützte Formate: PNG, JPG, JPEG, WEBP, TIFF, BMP, GIF, PDF",
+      "maxFileSize": "Maximale Dateigröße: 10MB pro Datei",
+      "multipleFiles": "Laden Sie mehrere Dateien gleichzeitig hoch für eine schnellere Verarbeitung",
+      "secureStorage": "Ihre Belege werden sicher gespeichert und sind bereit für die KI-Verarbeitung",
+      "creditCost": "Die Verarbeitung kostet 1 Credit pro Beleg"
+    },
+    "stats": {
+      "allTimeProcessed": "Insgesamt verarbeitet",
+      "receiptsUploaded": "Belege hochgeladen",
+      "mostRecentExport": "Letzter Export"
+    },
+    "timePeriods": {
+      "thisMonth": "Dieser Monat",
+      "lastMonth": "Letzter Monat",
+      "thisYear": "Dieses Jahr",
+      "q1": "Q1",
+      "q2": "Q2",
+      "q3": "Q3",
+      "q4": "Q4",
+      "allTime": "Gesamte Zeit"
+    },
+    "timeAgo": {
+      "daysAgo": "Tage her",
+      "dayAgo": "Tag her",
+      "about17HoursAgo": "vor etwa 17 Stunden"
+    },
+    "recentUploads": {
+      "title": "Letzte Uploads",
+      "subtitle": "Ihre zuletzt hochgeladenen Belege"
+    },
+    "receiptsPage": {
+      "title": "Belege",
+      "subtitle": "Alle hochgeladenen Belege anzeigen und verwalten",
+      "quickExport": "Schnellexport",
+      "quickSearch": "Schnellsuche...",
+      "allStatus": "Alle Status",
+      "show": "Anzeigen",
+      "filters": "Filter",
+      "quickActions": "Schnellaktionen",
+      "quickActionsSubtitle": "Belege anzeigen oder ausstehende verarbeiten",
+      "viewAllReceipts": "Alle Belege Anzeigen",
+      "exportSelected": "Auswahl Exportieren ({count})",
+      "noMatchingReceipts": "Keine Belege entsprechen Ihren Suchkriterien",
+      "dropdownMenu": {
+        "viewDetails": "Details Anzeigen",
+        "editData": "Daten Bearbeiten",
+        "delete": "Löschen",
+        "process": "Verarbeiten (1 Credit)",
+        "processing": "Verarbeitung...",
+        "retry": "Erneut Versuchen (1 Credit)",
+        "retrying": "Erneut Versuchen..."
+      },
+      "filterPanel": {
+        "search": "Suchen",
+        "searchPlaceholder": "Händlername, Betrag...",
+        "fromDate": "Von Datum",
+        "toDate": "Bis Datum",
+        "pickDate": "Datum wählen",
+        "minAmount": "Mindestbetrag",
+        "maxAmount": "Höchstbetrag",
+        "categories": "Kategorien",
+        "status": "Status",
+        "applyFilters": "Filter Anwenden",
+        "clear": "Löschen",
+        "hide": "Ausblenden"
+      },
+      "processing": {
+        "processing": "Verarbeitung...",
+        "processAllButton": "Alle Ausstehenden Verarbeiten ({count})",
+        "dialogTitle": "Alle Ausstehenden Belege Verarbeiten?",
+        "dialogDescription": "Dies verarbeitet {count} Beleg{count, plural, one {} other {e}} mit {count} Credit{count, plural, one {} other {s}}.",
+        "receiptsToProcess": "Zu verarbeitende Belege:",
+        "creditsRequired": "Erforderliche Credits:",
+        "yourCredits": "Ihre Credits:",
+        "insufficientCreditsWarning": "Sie benötigen {creditsNeeded} weitere{creditsNeeded, plural, one {n} other {}} Credit{creditsNeeded, plural, one {} other {s}}, um alle Belege zu verarbeiten. Nur die ersten {userCredits} Beleg{userCredits, plural, one {} other {e}} werden verarbeitet.",
+        "processingTimeEstimate": "Die Verarbeitung dauert etwa {seconds} Sekunden (1-2 Sekunden pro Beleg).",
+        "cancel": "Abbrechen",
+        "processAll": "Alle Verarbeiten",
+        "processPartial": "{count} Verarbeiten",
+        "toast": {
+          "successTitle": "Alle Belege erfolgreich verarbeitet!",
+          "successDescription": "{successful} Beleg{successful, plural, one {} other {e}} verarbeitet. {creditsUsed} Credit{creditsUsed, plural, one {} other {s}} verwendet.",
+          "partialTitle": "Verarbeitung mit einigen Fehlern abgeschlossen",
+          "partialDescription": "{successful} erfolgreich, {failed} fehlgeschlagen. {creditsUsed} Credit{creditsUsed, plural, one {} other {s}} verwendet.",
+          "errorTitle": "Alle Belege konnten nicht verarbeitet werden",
+          "errorDescription": "Bitte überprüfen Sie einzelne Belege für Fehlerdetails.",
+          "failedTitle": "Verarbeitung der Belege fehlgeschlagen",
+          "unknownError": "Unbekannter Fehler"
+        }
+      },
+      "noReceipts": "Noch keine Belege",
+      "noReceiptsDescription": "Laden Sie Ihren ersten Beleg hoch, um loszulegen",
+      "uploadButton": "Beleg hochladen"
+    },
+    "receiptsTable": {
+      "title": "Ihre Belege",
+      "noReceipts": "Noch keine Belege",
+      "uploadFirst": "Laden Sie Ihren ersten Beleg hoch, um zu beginnen",
+      "columns": {
+        "fileName": "Dateiname",
+        "date": "Datum",
+        "merchant": "Händler",
+        "amount": "Betrag",
+        "category": "Kategorie",
+        "status": "Status",
+        "uploaded": "Hochgeladen",
+        "actions": "Aktionen"
+      },
+      "status": {
+        "pending": "Ausstehend",
+        "processing": "Verarbeitung",
+        "completed": "Abgeschlossen",
+        "failed": "Fehlgeschlagen"
+      }
+    },
+    "credits": {
+      "title": "Credits",
+      "balance": "Aktueller Saldo",
+      "creditsRemaining": "Credits verbleibend",
+      "description": "Verfügbare Credits für die Verarbeitung von Belegen",
+      "manageSubtitle": "Verwalten Sie Ihre Credits für die Belegverarbeitung",
+      "availableCredits": "Ihre verfügbaren Credits",
+      "buyCredits": "Credits Kaufen",
+      "history": "Credit-Verlauf",
+      "oneTimePurchase": "Einmaliger Kauf",
+      "monthlySubscription": "Monatliches Abonnement",
+      "packages": {
+        "title": "Wählen Sie ein Paket",
+        "credits": "Credits",
+        "mostPopular": "Am Beliebtesten",
+        "bestValue": "Bester Wert",
+        "basic": {
+          "name": "Basis",
+          "description": "Perfekt für gelegentliche Nutzung",
+          "features": [
+            "10 Beleg-Verarbeitungscredits",
+            "KI-gestützte Datenextraktion",
+            "Excel & CSV Export",
+            "E-Mail-Support",
+            "Credits verfallen nie"
+          ]
+        },
+        "popular": {
+          "name": "Beliebt",
+          "description": "Am besten für kleine Unternehmen",
+          "features": [
+            "50 Beleg-Verarbeitungscredits",
+            "KI-gestützte Datenextraktion",
+            "Excel & CSV Export",
+            "Prioritäts-E-Mail-Support",
+            "Credits verfallen nie",
+            "20% Ersparnis"
+          ]
+        },
+        "business": {
+          "name": "Business",
+          "description": "Für Vielnutzer",
+          "features": [
+            "200 Beleg-Verarbeitungscredits",
+            "KI-gestützte Datenextraktion",
+            "Excel & CSV Export",
+            "Prioritäts-E-Mail-Support",
+            "Credits verfallen nie",
+            "40% Ersparnis"
+          ]
+        }
+      },
+      "transactions": {
+        "title": "Transaktionsverlauf",
+        "subtitle": "Ihr Credit-Transaktionsverlauf",
+        "purchase": "Kauf",
+        "usage": "Verbrauch",
+        "refund": "Rückerstattung",
+        "bonus": "Bonus",
+        "purchasedBasicPackage": "Basispaket gekauft",
+        "date": "Datum",
+        "type": "Typ",
+        "amount": "Betrag",
+        "description": "Beschreibung",
+        "noTransactions": "Noch keine Transaktionen",
+        "purchaseCreditsToStart": "Kaufen Sie Credits, um zu beginnen",
+        "loading": "Lade Ihre Credit-Transaktionen...",
+        "showing": "Zeige {from} bis {to} von {total} Transaktionen",
+        "previous": "Zurück",
+        "next": "Weiter",
+        "page": "Seite {current} von {total}"
+      },
+      "subscriptions": {
+        "title": "Monatliche Abonnements",
+        "subtitle": "Erhalten Sie jeden Monat automatisch Credits. Jederzeit kündbar.",
+        "bestValue": "Bester Wert",
+        "save": "{percent}% Sparen",
+        "creditsPerMonth": "Credits pro Monat",
+        "perMonth": "pro Monat",
+        "receiptsPerMonth": "{count} Belege pro Monat",
+        "aiPoweredExtraction": "KI-gestützte Extraktion",
+        "automaticRenewal": "Automatische monatliche Verlängerung",
+        "prioritySupport": "Prioritäts-Support",
+        "bulkProcessing": "Massenverarbeitung",
+        "cancelAnytime": "Jederzeit kündbar",
+        "subscribe": "Abonnieren",
+        "processing": "Verarbeitung...",
+        "disclaimer": "Abonnements werden automatisch verlängert. Verwalten oder kündigen Sie jederzeit in Ihren Kontoeinstellungen.",
+        "plans": {
+          "basic": {
+            "name": "Basic",
+            "description": "Perfekt für regelmäßige Nutzer"
+          },
+          "pro": {
+            "name": "Pro",
+            "description": "Am besten für Vielnutzer"
+          },
+          "business": {
+            "name": "Business",
+            "description": "Für Unternehmen mit hohem Volumen"
+          }
+        }
+      }
+    },
+    "exports": {
+      "title": "Exporte",
+      "subtitle": "Exportieren und verwalten Sie Ihre Belegdaten",
+      "exportSection": {
+        "title": "Belege exportieren",
+        "description": "Filtern und exportieren Sie Ihre abgeschlossenen Belege"
+      },
+      "history": {
+        "title": "Export-Verlauf",
+        "subtitle": "Ihre bisherigen Belegexporte anzeigen"
+      },
+      "buttons": {
+        "exportAll": "Alle Exportieren",
+        "filters": "Filter",
+        "hide": "Ausblenden",
+        "clearFilters": "Alle Filter Löschen",
+        "loading": "Lädt..."
+      },
+      "filters": {
+        "fromDate": "Von Datum",
+        "toDate": "Bis Datum",
+        "merchantName": "Händlername",
+        "amountRange": "Betragsbereich",
+        "min": "Min",
+        "max": "Max",
+        "pickDate": "Datum wählen",
+        "searchPlaceholder": "Nach Händlername suchen...",
+        "activeFilters": "Aktive Filter",
+        "from": "Von",
+        "to": "Bis",
+        "merchant": "Händler",
+        "minAmount": "Mindestbetrag",
+        "maxAmount": "Höchstbetrag"
+      },
+      "noExports": "Noch keine Exporte",
+      "noExportsDescription": "Exportieren Sie Belege vom Dashboard, um sie hier zu sehen",
+      "type": "Typ",
+      "fileName": "Dateiname",
+      "receipts": "Belege",
+      "showingRecent": "Zeigt {count} neuesten Export{count, plural, one {} other {e}} an",
+      "columns": {
+        "date": "Exportdatum",
+        "receipts": "Belege",
+        "format": "Format",
+        "download": "Herunterladen"
+      }
+    },
+    "profile": {
+      "title": "Profileinstellungen",
+      "subtitle": "Verwalten Sie Ihre Kontoeinstellungen und Präferenzen",
+      "profileInfo": "Profilinformationen",
+      "profileInfoDescription": "Aktualisieren Sie Ihre persönlichen Informationen",
+      "loadingProfile": "Ihr Profil wird geladen...",
+      "personalInfo": "Persönliche Informationen",
+      "name": "Name",
+      "fullName": "Vollständiger Name",
+      "fullNamePlaceholder": "Geben Sie Ihren vollständigen Namen ein",
+      "email": "E-Mail",
+      "emailCannotBeChanged": "E-Mail kann nicht geändert werden",
+      "language": "Sprache",
+      "timezone": "Zeitzone",
+      "updateProfile": "Profil Aktualisieren",
+      "saveChanges": "Änderungen Speichern",
+      "saving": "Speichern...",
+      "changePassword": "Passwort Ändern",
+      "currentPassword": "Aktuelles Passwort",
+      "newPassword": "Neues Passwort",
+      "accountInfo": "Kontoinformationen",
+      "accountInfoDescription": "Ihre Kontodetails ansehen",
+      "userId": "Benutzer-ID",
+      "accountCreated": "Konto Erstellt",
+      "lastSignIn": "Letzte Anmeldung",
+      "user": "Benutzer",
+      "signOut": "Abmelden",
+      "home": "Startseite",
+      "creditsLabel": "Credits",
+      "toasts": {
+        "profileUpdated": "Profil erfolgreich aktualisiert",
+        "profileUpdateError": "Profil konnte nicht aktualisiert werden",
+        "profileLoadError": "Profil konnte nicht geladen werden"
+      }
+    }
+  },
+  "pricing": {
+    "title": "Einfache, transparente Preise",
+    "subtitle": "Wählen Sie den Plan, der zu Ihnen passt",
+    "subheadline": "Zahlen Sie pro Nutzung oder abonnieren Sie und sparen Sie",
+    "currentBalance": "Ihr aktueller Saldo",
+    "credits": "Credits",
+    "perCredit": "pro Credit",
+    "perReceipt": "pro Beleg",
+    "creditPacks": "Credit-Pakete",
+    "creditPackagesTitle": "Credit-Pakete",
+    "subscriptions": "Abonnements",
+    "buyNow": "Jetzt Kaufen",
+    "subscribe": "Abonnieren",
+    "popular": "Am Beliebtesten",
+    "purchaseCredits": "Credits Kaufen",
+    "getStarted": "Loslegen",
+    "readyTitle": "Bereit loszulegen?",
+    "readySubtitle": "Starten Sie mit 10 kostenlosen Credits, keine Kreditkarte erforderlich",
+    "goToDashboard": "Zum Dashboard",
+    "startFree": "Kostenlos Starten",
+    "signIn": "Anmelden",
+    "tryItFree": "Kostenlos testen",
+    "freeCreditsNoCreditCard": "10 kostenlose Credits • Keine Kreditkarte erforderlich",
+    "features": {
+      "allFeatures": "Alle Funktionen enthalten",
+      "aiExtraction": "KI-gestützte Extraktion",
+      "exportFormats": "Excel & CSV Export",
+      "support": "E-Mail-Support",
+      "security": "Sicherheit auf Bankniveau",
+      "gdpr": "DSGVO-konform"
+    },
+    "faq": {
+      "title": "Häufig Gestellte Fragen",
+      "howCreditsWork": {
+        "question": "Wie funktionieren Credits?",
+        "answer": "Jeder Beleg, den Sie hochladen und verarbeiten, kostet 1 Credit. Credits werden nur abgezogen, wenn die KI erfolgreich Daten aus Ihrem Beleg extrahiert. Sie können Credits in Paketen kaufen oder ein Abonnement für monatliche Credits zu einem ermäßigten Preis abschließen."
+      },
+      "doCreditsExpire": {
+        "question": "Verfallen Credits?",
+        "answer": "Nein, Credits verfallen nie. Sobald Sie Credits kaufen, bleiben sie in Ihrem Konto, bis Sie sie verwenden. Dies gibt Ihnen völlige Flexibilität, sie in Ihrem eigenen Tempo zu nutzen."
+      },
+      "canIGetRefund": {
+        "question": "Kann ich eine Rückerstattung erhalten?",
+        "answer": "Ja! Wir bieten eine 30-tägige Geld-zurück-Garantie. Wenn Sie mit unserem Service nicht zufrieden sind, kontaktieren Sie uns innerhalb von 30 Tagen nach Ihrem Kauf für eine vollständige Rückerstattung ungenutzter Credits."
+      },
+      "wrongExtraction": {
+        "question": "Was ist, wenn die Extraktion falsch ist?",
+        "answer": "Wenn die KI-Extraktion Fehler enthält oder Ihre Erwartungen nicht erfüllt, kontaktieren Sie unser Support-Team. Wir prüfen den Fall und bieten einen kostenlosen erneuten Versuch oder eine Credit-Rückerstattung an, wenn die Extraktionsqualität unter unseren Standards lag."
+      },
+      "needSubscription": {
+        "question": "Brauche ich ein Abonnement?",
+        "answer": "Nein, Abonnements sind völlig optional. Sie können Credits nach Bedarf mit unseren Pay-as-you-go-Paketen kaufen. Abonnements sind verfügbar, wenn Sie mit ermäßigten monatlichen Credits Geld sparen möchten, aber Sie können den Service so nutzen, wie es für Sie am besten funktioniert."
+      }
+    }
+  },
+  "footer": {
+    "description": "KI-gestützte Belegdatenextraktion für Unternehmen",
+    "product": "Produkt",
+    "company": "Unternehmen",
+    "legal": "Rechtliches",
+    "support": "Support",
+    "termsOfService": "Nutzungsbedingungen",
+    "privacyPolicy": "Datenschutzrichtlinie",
+    "cookiePolicy": "Cookie-Richtlinie",
+    "allRightsReserved": "Alle Rechte vorbehalten"
+  },
+  "navigation": {
+    "home": "Startseite",
+    "features": "Funktionen",
+    "pricing": "Preise",
+    "howItWorks": "Wie Es Funktioniert",
+    "faq": "FAQ",
+    "contact": "Kontakt",
+    "dashboard": "Dashboard",
+    "login": "Anmelden",
+    "signup": "Registrieren",
+    "about": "Über Uns",
+    "more": "Mehr",
+    "customTemplates": "Benutzerdefinierte Vorlagen"
+  },
+  "contact": {
+    "title": "Kontaktieren Sie uns",
+    "subtitle": "Haben Sie Fragen? Wir würden gerne von Ihnen hören. Senden Sie uns eine Nachricht und wir antworten innerhalb von 24 Stunden.",
+    "backToHome": "Zurück zur Startseite",
+    "sendMessage": "Senden Sie uns eine Nachricht",
+    "formDescription": "Füllen Sie das untenstehende Formular aus und wir melden uns so schnell wie möglich bei Ihnen.",
+    "name": "Name",
+    "namePlaceholder": "Ihr Name",
+    "email": "E-Mail",
+    "emailPlaceholder": "ihre@email.com",
+    "subject": "Betreff",
+    "subjectPlaceholder": "Wie können wir helfen?",
+    "message": "Nachricht",
+    "messagePlaceholder": "Erzählen Sie uns mehr über Ihre Anfrage...",
+    "sendButton": "Nachricht Senden",
+    "sending": "Wird gesendet...",
+    "successMessage": "Nachricht erfolgreich gesendet! Wir melden uns innerhalb von 24 Stunden bei Ihnen.",
+    "responseTime": "Wir antworten in der Regel innerhalb von 24 Stunden",
+    "preferEmail": "Bevorzugen Sie E-Mail?",
+    "reachDirectly": "Sie können uns auch direkt per E-Mail erreichen:",
+    "frequentlyAskedQuestions": "Häufig Gestellte Fragen",
+    "faqDescription": "Bevor Sie uns kontaktieren, finden Sie Ihre Antwort möglicherweise in unserem FAQ-Bereich.",
+    "viewFaq": "FAQ Ansehen",
+    "quickStartGuide": "Schnellstartanleitung",
+    "quickStartDescription": "Neu bei ReceiptSort? Lernen Sie in 3 einfachen Schritten, wie Sie loslegen.",
+    "howItWorks": "Wie Es Funktioniert"
+  },
+  "creditPackages": {
+    "title": "Credits Kaufen",
+    "starter": {
+      "name": "Starter",
+      "description": "Perfekt zum Ausprobieren des Dienstes"
+    },
+    "basic": {
+      "name": "Basis",
+      "description": "Ideal für regelmäßige Nutzer"
+    },
+    "pro": {
+      "name": "Pro",
+      "description": "Bester Wert für Vielnutzer"
+    },
+    "business": {
+      "name": "Business",
+      "description": "Für Unternehmen mit hohem Volumen"
+    },
+    "credits": "Credits",
+    "perCredit": "pro Credit",
+    "processReceipts": "{count} Belege verarbeiten",
+    "aiPoweredExtraction": "KI-gestützte Extraktion",
+    "prioritySupport": "Prioritäts-Support",
+    "bulkProcessing": "Massenverarbeitung",
+    "neverExpires": "Verfällt nie",
+    "purchase": "Kaufen",
+    "processing": "Verarbeitung...",
+    "bestValue": "Bester Wert",
+    "save": "{percent}% Sparen"
+  },
+  "receiptDetails": {
+    "title": "Belegdetails",
+    "receiptPreview": "Belegvorschau",
+    "documentType": "Dokumenttyp",
+    "merchantName": "Händlername",
+    "invoiceNumber": "Rechnungsnummer",
+    "amount": "Betrag",
+    "currency": "Währung",
+    "receiptDate": "Belegdatum",
+    "category": "Kategorie",
+    "subtotal": "Zwischensumme (Vor Steuern)",
+    "taxAmount": "Steuerbetrag",
+    "dueDate": "Fälligkeitsdatum",
+    "paymentMethod": "Zahlungsmethode",
+    "purchaseOrderNumber": "Bestellnummer",
+    "paymentReference": "Zahlungsreferenz",
+    "vendorTaxId": "Steuer-ID des Anbieters (USt-ID/EIN/BTW)",
+    "vendorAddress": "Anbieteradresse",
+    "lineItems": "Positionsangaben",
+    "lineItemsCount": "Positionsangaben ({count})",
+    "patientName": "Patientenname",
+    "medicalInformation": "Medizinische Informationen",
+    "patientDob": "Geburtsdatum des Patienten",
+    "treatmentDate": "Behandlungsdatum",
+    "insuranceClaimNumber": "Versicherungsanspruchsnummer",
+    "diagnosisCodes": "Diagnosecodes (ICD)",
+    "procedureCodes": "Verfahrenscodes (CPT)",
+    "providerId": "Anbieter-ID (AGB/NPI)",
+    "insuranceCoveredAmount": "Von Versicherung übernommen",
+    "patientResponsibilityAmount": "Eigenanteil",
+    "insuranceBreakdown": "Versicherungsaufschlüsselung",
+    "totalTreatmentCost": "Gesamtbehandlungskosten",
+    "insuranceCovered": "Von Versicherung übernommen",
+    "youPay": "Sie zahlen",
+    "notes": "Notizen",
+    "saveChanges": "Änderungen Speichern",
+    "saving": "Speichern...",
+    "delete": "Löschen",
+    "deleting": "Löschen...",
+    "retryProcessing": "Verarbeitung Wiederholen",
+    "retrying": "Wiederholen...",
+    "documentTypes": {
+      "receipt": "Beleg",
+      "invoice": "Rechnung",
+      "medicalInvoice": "Arztrechnung",
+      "bill": "Rechnung"
+    },
+    "categories": {
+      "foodDining": "Essen & Gastronomie",
+      "transportation": "Transport",
+      "shopping": "Einkaufen",
+      "officeSupplies": "Bürobedarf",
+      "travel": "Reisen",
+      "entertainment": "Unterhaltung",
+      "utilities": "Versorgungsleistungen",
+      "healthcare": "Gesundheitswesen",
+      "other": "Sonstiges"
+    },
+    "paymentMethods": {
+      "cash": "Bargeld",
+      "creditCard": "Kreditkarte",
+      "debitCard": "Debitkarte",
+      "bankTransfer": "Banküberweisung",
+      "other": "Sonstiges"
+    },
+    "lineItemColumns": {
+      "lineNumber": "#",
+      "description": "Beschreibung",
+      "quantity": "Menge",
+      "unitPrice": "Preis",
+      "lineTotal": "Gesamt",
+      "itemCode": "Code"
+    }
+  },
+  "billing": {
+    "title": "Abrechnung & Kaufhistorie",
+    "description": "Zeigen Sie Ihre Kaufrechnungen für Buchhaltung und Steuererklärung an und laden Sie sie herunter",
+    "noInvoices": "Keine Kaufhistorie",
+    "noInvoicesDescription": "Kaufen Sie Credits, um loszulegen und Rechnungen für Ihre Transaktionen zu erhalten",
+    "purchaseCredits": "Credits kaufen"
+  },
+  "account": {
+    "title": "Kontoeinstellungen",
+    "description": "Verwalten Sie Ihre Kontoinformationen und Einstellungen",
+    "profileTitle": "Profilinformationen",
+    "profileDescription": "Ihre persönlichen Informationen und Kontaktdaten",
+    "fullName": "Vollständiger Name",
+    "email": "E-Mail-Adresse",
+    "userId": "Benutzer-ID",
+    "notSet": "Nicht festgelegt",
+    "creditsTitle": "Credits-Guthaben",
+    "creditsDescription": "Ihr aktuelles Credits-Guthaben für die Belegverarbeitung",
+    "currentCredits": "Aktuelle Credits",
+    "purchaseCredits": "Weitere Credits kaufen",
+    "billingTitle": "Abrechnung & Rechnungen",
+    "billingDescription": "Zeigen Sie Ihre Kaufhistorie an und laden Sie Rechnungen herunter",
+    "viewBilling": "Abrechnungsverlauf anzeigen",
+    "accountCreated": "Konto erstellt am",
+    "enterName": "Geben Sie Ihren vollständigen Namen ein",
+    "saveChanges": "Änderungen speichern",
+    "updateSuccess": "Profil erfolgreich aktualisiert!",
+    "updateError": "Profil konnte nicht aktualisiert werden. Bitte versuchen Sie es erneut.",
+    "emailCannotChange": "E-Mail-Adresse kann nicht geändert werden"
+  },
+  "whatMakesUsDifferent": {
+    "title": "Was ReceiptSort Unterscheidet",
+    "others": {
+      "title": "Andere Beleg-Tools",
+      "fixedFormat": "Export in IHR festes Format",
+      "manualReorganization": "Sie reorganisieren Daten manuell (2-3 Min./Dokument)",
+      "subscription": "$20-60/Monat Abo erforderlich",
+      "receiptsOnly": "Nur Belege"
+    },
+    "receiptSort": {
+      "title": "ReceiptSort",
+      "badge": "Besserer Ansatz",
+      "aiAdapts": "KI passt sich automatisch IHRER Vorlage an",
+      "yourFormat": "Daten in Ihrem Format exportiert (keine Reorganisation)",
+      "payPerDocument": "Pro Dokument zahlen ($0.05-0.07, Credits verfallen nie)",
+      "allDocuments": "Belege, Rechnungen UND Arztberichte"
+    },
+    "savingsText": "Sparen Sie 2-3 Minuten pro Dokument durch Wegfall manueller Reorganisation.",
+    "freeTemplates": "Erstellen Sie 10 benutzerdefinierte Vorlagen KOSTENLOS, unbegrenzt wiederverwendbar.",
+    "cta": "Wie Vorlagen-Zuordnung Funktioniert"
+  },
+  "useCases": {
+    "title": "Für Ihren Workflow Entwickelt",
+    "subtitle": "ReceiptSort passt sich an, wie SIE arbeiten—nicht umgekehrt",
+    "items": {
+      "accountant": {
+        "tag": "Perfekt für: Buchhalter",
+        "title": "Buchhalter mit mehreren Kunden",
+        "description": "Erstellen Sie 5 Vorlagen (eine pro Kundenformat). KI ordnet alle Belege automatisch der richtigen Kundenvorlage zu. Rechnen Sie Kunden genau ab ohne manuelle Reorganisation. Sparen Sie 15+ Stunden pro Monat."
+      },
+      "medical": {
+        "tag": "Perfekt für: Arztpraxen",
+        "title": "Arztpraxis",
+        "description": "Erstellen Sie benutzerdefinierte Versicherungsantragsvorlagen. KI extrahiert aus Arztbelegen und Rechnungen, ordnet dem Format IHRER Versicherung zu. Keine manuelle Dateneingabe mehr für Erstattungen."
+      },
+      "euFreelancer": {
+        "tag": "Perfekt für: Freelancer",
+        "title": "Freelancer (Steuer-/MwSt.-Erklärungen)",
+        "description": "Erstellen Sie Steuererklärungsvorlagen, die den staatlichen Anforderungen Ihres Landes entsprechen. KI behandelt automatisch verschiedene Belegformate (Btw, VAT, MwSt, TVA, GST, Umsatzsteuer). Export bereit zur Einreichung."
+      },
+      "variableVolume": {
+        "tag": "Perfekt für: Variables Volumen",
+        "title": "Unternehmen mit variablem Volumen",
+        "description": "Verarbeiten Sie 10 Dokumente in einem Monat, 100 im nächsten. Zahlen Sie nur für das, was Sie nutzen ($0.05-0.07 pro Dokument). Credits verfallen nie. Kein verschwenderisches Monatsabo."
+      }
+    }
+  },
+  "privacyPage": {
+    "backToHome": "Zurück zur Startseite",
+    "title": "Datenschutzerklärung",
+    "lastUpdated": "Zuletzt aktualisiert: 6. Oktober 2025",
+    "sections": {
+      "introduction": {
+        "title": "1. Einführung",
+        "content": "Willkommen bei ReceiptSorter (\"wir\", \"unser\"). Wir sind dem Schutz Ihrer persönlichen Daten und Ihres Rechts auf Privatsphäre verpflichtet. Diese Datenschutzerklärung erklärt, wie wir Ihre Informationen sammeln, verwenden, offenlegen und schützen, wenn Sie unseren Belegverarbeitungsdienst nutzen."
+      },
+      "informationWeCollect": {
+        "title": "2. Welche Informationen wir sammeln",
+        "intro": "Wir sammeln Informationen, die Sie uns direkt zur Verfügung stellen:",
+        "items": [
+          "Kontoinformationen (E-Mail-Adresse, Name)",
+          "Belegbilder und PDFs, die Sie hochladen",
+          "Zahlungsinformationen (sicher verarbeitet durch Stripe)",
+          "Nutzungsdaten und Analysen"
+        ]
+      },
+      "howWeUse": {
+        "title": "3. Wie wir Ihre Informationen verwenden",
+        "intro": "Wir verwenden Ihre Informationen, um:",
+        "items": [
+          "Unseren Belegverarbeitungsdienst bereitzustellen und zu pflegen",
+          "Ihre Belege mit KI-Technologie zu verarbeiten",
+          "Zahlungen zu verarbeiten und Ihr Konto zu verwalten",
+          "Ihnen Service-Updates und Werbemitteilungen zu senden",
+          "Unsere Dienste zu verbessern und neue Funktionen zu entwickeln",
+          "Gesetzliche Verpflichtungen zu erfüllen"
+        ]
+      },
+      "dataSecurity": {
+        "title": "4. Datensicherheit",
+        "intro": "Wir implementieren branchenübliche Sicherheitsmaßnahmen zum Schutz Ihrer Daten:",
+        "items": [
+          "256-Bit-SSL-Verschlüsselung für Datenübertragung",
+          "Sicherer Cloud-Speicher mit Zugriffskontrollen",
+          "Automatisches Löschen von Belegdateien nach 90 Tagen",
+          "Regelmäßige Sicherheitsaudits und Updates"
+        ]
+      },
+      "dataSharing": {
+        "title": "5. Datenweitergabe",
+        "intro": "Wir verkaufen Ihre persönlichen Daten nicht. Wir können Ihre Daten weitergeben an:",
+        "items": [
+          "Dienstleister (OpenAI für Belegverarbeitung, Stripe für Zahlungen)",
+          "Strafverfolgungsbehörden, wenn gesetzlich vorgeschrieben",
+          "Geschäftspartner mit Ihrer ausdrücklichen Zustimmung"
+        ]
+      },
+      "yourRights": {
+        "title": "6. Ihre Rechte",
+        "intro": "Gemäß DSGVO und anderen Datenschutzgesetzen haben Sie das Recht auf:",
+        "items": [
+          "Zugriff auf Ihre personenbezogenen Daten",
+          "Berichtigung unrichtiger Daten",
+          "Löschung Ihrer Daten",
+          "Export Ihrer Daten in einem portablen Format",
+          "Widerspruch gegen Marketing-Kommunikation",
+          "Beschwerde bei einer Aufsichtsbehörde"
+        ]
+      },
+      "cookies": {
+        "title": "7. Cookies",
+        "content": "Wir verwenden wesentliche Cookies, um unseren Service bereitzustellen, und optionale Analyse-Cookies, um die Benutzererfahrung zu verbessern. Sie können Cookie-Einstellungen über Ihre Browsereinstellungen steuern."
+      },
+      "dataRetention": {
+        "title": "8. Datenspeicherung",
+        "content": "Wir speichern Ihre Daten nur so lange, wie es zur Bereitstellung unserer Dienste und zur Erfüllung gesetzlicher Verpflichtungen erforderlich ist. Belegdateien werden nach 90 Tagen automatisch gelöscht. Kontodaten werden gespeichert, bis Sie eine Löschung beantragen."
+      },
+      "childrensPrivacy": {
+        "title": "9. Datenschutz für Kinder",
+        "content": "Unser Service richtet sich nicht an Kinder unter 18 Jahren. Wir sammeln wissentlich keine Daten von Kindern."
+      },
+      "changes": {
+        "title": "10. Änderungen dieser Richtlinie",
+        "content": "Wir können diese Datenschutzerklärung von Zeit zu Zeit aktualisieren. Wir werden Sie über Änderungen informieren, indem wir die neue Richtlinie auf dieser Seite veröffentlichen und das Datum \"Zuletzt aktualisiert\" aktualisieren."
+      },
+      "contact": {
+        "title": "11. Kontakt",
+        "intro": "Bei Fragen zu dieser Datenschutzerklärung kontaktieren Sie uns bitte unter:",
+        "email": "E-Mail: support@seenano.nl",
+        "contactForm": "Kontaktformular: receiptsort.com/contact"
+      }
+    }
+  },
+  "termsPage": {
+    "backToHome": "Zurück zur Startseite",
+    "title": "Nutzungsbedingungen",
+    "lastUpdated": "Zuletzt aktualisiert: 6. Oktober 2025",
+    "sections": {
+      "acceptance": {
+        "title": "1. Annahme der Bedingungen",
+        "content": "Durch den Zugriff auf oder die Nutzung von ReceiptSorter (\"der Dienst\") erklären Sie sich mit diesen Nutzungsbedingungen (\"Bedingungen\") einverstanden. Wenn Sie mit diesen Bedingungen nicht einverstanden sind, nutzen Sie den Dienst nicht."
+      },
+      "description": {
+        "title": "2. Beschreibung des Dienstes",
+        "content": "ReceiptSorter ist ein cloudbasierter Belegverarbeitungsdienst, der künstliche Intelligenz verwendet, um Daten aus Belegbildern und PDFs zu extrahieren. Der Dienst ermöglicht es Ihnen, Belege hochzuladen, Händlerinformationen, Beträge, Daten und andere Daten zu extrahieren und die Ergebnisse in Excel- oder CSV-Formate zu exportieren."
+      },
+      "userAccounts": {
+        "title": "3. Benutzerkonten",
+        "intro": "Um den Dienst zu nutzen, müssen Sie:",
+        "items": [
+          "Ein Konto mit genauen Informationen erstellen",
+          "Die Sicherheit Ihrer Kontoanmeldedaten aufrechterhalten",
+          "Mindestens 18 Jahre alt sein",
+          "Uns unverzüglich über unbefugten Zugriff informieren",
+          "Für alle Aktivitäten unter Ihrem Konto verantwortlich sein"
+        ]
+      },
+      "credits": {
+        "title": "4. Credits und Zahlung",
+        "content": "Der Dienst arbeitet mit einem kreditbasierten System. Jeder verarbeitete Beleg kostet 1 Credit. Credits können über unsere Website mit Stripe-Zahlungsabwicklung gekauft werden. Credits verfallen nie. Die Preise können sich mit Ankündigung ändern. Alle Verkäufe sind endgültig, sofern in unserer Rückerstattungsrichtlinie nicht anders angegeben."
+      },
+      "usePolicy": {
+        "title": "5. Akzeptable Nutzung",
+        "intro": "Sie verpflichten sich, Folgendes nicht zu tun:",
+        "items": [
+          "Illegale, betrügerische oder schädliche Inhalte hochladen",
+          "Versuchen, den Dienst zurückzuentwickeln oder zu hacken",
+          "Den Dienst zur Verletzung von Gesetzen oder Vorschriften nutzen",
+          "Ihre Kontoanmeldedaten mit anderen teilen",
+          "Automatisierte Skripte verwenden, um den Dienst zu missbrauchen"
+        ]
+      },
+      "intellectualProperty": {
+        "title": "6. Geistiges Eigentum",
+        "content": "Der Dienst, einschließlich aller Inhalte, Funktionen und Funktionalitäten, ist Eigentum von ReceiptSorter und durch internationale Urheberrechts-, Marken- und andere Gesetze zum Schutz geistigen Eigentums geschützt. Sie behalten das Eigentum an Ihren hochgeladenen Belegen und extrahierten Daten."
+      },
+      "dataProcessing": {
+        "title": "7. Datenverarbeitung",
+        "content": "Wir verarbeiten Ihre Belegdaten mit OpenAI's GPT-4 Vision AI. Belegdateien werden sicher gespeichert und nach 90 Tagen automatisch gelöscht. Einzelheiten zur Verarbeitung Ihrer Daten finden Sie in unserer Datenschutzerklärung."
+      },
+      "warranties": {
+        "title": "8. Gewährleistungen und Haftungsausschlüsse",
+        "content": "DER DIENST WIRD \"WIE BESEHEN\" OHNE JEGLICHE GEWÄHRLEISTUNG BEREITGESTELLT. Wir garantieren keine 100%ige Genauigkeit bei der Belegdatenextraktion. Sie sind dafür verantwortlich, extrahierte Daten vor der Verwendung zu überprüfen."
+      },
+      "limitation": {
+        "title": "9. Haftungsbeschränkung",
+        "content": "IM MAXIMAL GESETZLICH ZULÄSSIGEN UMFANG HAFTET RECEIPTSORT NICHT FÜR INDIREKTE, ZUFÄLLIGE, BESONDERE, FOLGESCHÄDEN ODER STRAFSCHADENERSATZ, DIE SICH AUS IHRER NUTZUNG DES DIENSTES ERGEBEN."
+      },
+      "termination": {
+        "title": "10. Kündigung",
+        "content": "Wir behalten uns das Recht vor, Ihr Konto jederzeit bei Verstoß gegen diese Bedingungen auszusetzen oder zu kündigen. Sie können Ihr Konto jederzeit über Ihre Kontoeinstellungen löschen."
+      },
+      "changes": {
+        "title": "11. Änderungen der Bedingungen",
+        "content": "Wir können diese Bedingungen jederzeit ändern. Wir werden Sie über wesentliche Änderungen per E-Mail oder über den Dienst informieren. Die fortgesetzte Nutzung nach Änderungen stellt eine Annahme dar."
+      },
+      "governing": {
+        "title": "12. Anwendbares Recht",
+        "content": "Diese Bedingungen unterliegen den Gesetzen der Niederlande. Alle Streitigkeiten werden vor den Gerichten der Niederlande beigelegt."
+      },
+      "contact": {
+        "title": "13. Kontakt",
+        "intro": "Fragen zu diesen Bedingungen? Kontaktieren Sie uns unter:",
+        "email": "E-Mail: support@seenano.nl",
+        "contactForm": "Kontaktformular: receiptsort.com/contact"
+      }
+    }
+  }
+}

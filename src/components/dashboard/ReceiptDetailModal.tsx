@@ -1,0 +1,1114 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import { createClient } from '@/lib/supabase/client'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { Textarea } from '@/components/ui/textarea'
+import { Badge } from '@/components/ui/badge'
+import { toast } from 'sonner'
+import { Loader2, Save, Trash2, FileText, AlertTriangle, RefreshCw, ChevronLeft, ChevronRight } from 'lucide-react'
+import Image from 'next/image'
+import { format } from 'date-fns'
+import { Alert, AlertDescription } from '@/components/ui/alert'
+import { useTranslations } from 'next-intl'
+
+interface Receipt {
+  id: string
+  user_id: string
+  file_name: string
+  file_path: string
+  file_url: string
+  file_type: string
+  file_size: number
+  processing_status: 'pending' | 'processing' | 'completed' | 'failed'
+  merchant_name?: string
+  total_amount?: number
+  currency?: string
+  receipt_date?: string
+  category?: string
+  tax_amount?: number
+  payment_method?: string
+  notes?: string
+  confidence_score?: number
+  raw_ocr_text?: string
+  processing_error?: string
+  created_at: string
+  updated_at: string
+
+  // Phase 1: Essential Fields
+  invoice_number?: string
+  document_type?: string
+  subtotal?: number
+  vendor_address?: string
+  due_date?: string
+
+  // Phase 2: Business Invoices
+  purchase_order_number?: string
+  payment_reference?: string
+  vendor_tax_id?: string
+
+  // Phase 3: Medical Receipts
+  patient_name?: string
+  patient_dob?: string
+  treatment_date?: string
+  insurance_claim_number?: string
+  diagnosis_codes?: string
+  procedure_codes?: string
+  provider_id?: string
+  insurance_covered_amount?: number
+  patient_responsibility_amount?: number
+}
+
+interface LineItem {
+  id?: string
+  receipt_id?: string
+  line_number: number
+  description: string
+  quantity: number
+  unit_price: number
+  line_total: number
+  item_code?: string | null
+  tax_rate?: number | null
+}
+
+interface ReceiptDetailModalProps {
+  receipt: Receipt | null
+  open: boolean
+  onOpenChange: (open: boolean) => void
+  onUpdate?: () => void
+  onNavigate?: (receipt: Receipt) => void
+  allReceipts?: Receipt[]
+  selectedReceipts?: Receipt[]
+}
+
+const CURRENCIES = ['USD', 'EUR', 'GBP', 'CNY', 'JPY']
+
+export default function ReceiptDetailModal({
+  receipt,
+  open,
+  onOpenChange,
+  onUpdate,
+  onNavigate,
+  allReceipts = [],
+  selectedReceipts = [],
+}: ReceiptDetailModalProps) {
+  const t = useTranslations('receiptDetails')
+  const tTable = useTranslations('dashboard.receiptsTable')
+
+  const [formData, setFormData] = useState<Partial<Receipt>>({})
+  const [saving, setSaving] = useState(false)
+  const [deleting, setDeleting] = useState(false)
+  const [retrying, setRetrying] = useState(false)
+  const [signedUrl, setSignedUrl] = useState<string | null>(null)
+  const [urlLoading, setUrlLoading] = useState(false)
+  const [urlError, setUrlError] = useState<string | null>(null)
+  const [imageError, setImageError] = useState(false)
+  const [lineItems, setLineItems] = useState<LineItem[]>([])
+  const [lineItemsLoading, setLineItemsLoading] = useState(false)
+  const supabase = createClient()
+
+  // Translated options
+  const CATEGORIES = [
+    { value: 'Food & Dining', label: t('categories.foodDining') },
+    { value: 'Transportation', label: t('categories.transportation') },
+    { value: 'Shopping', label: t('categories.shopping') },
+    { value: 'Office Supplies', label: t('categories.officeSupplies') },
+    { value: 'Travel', label: t('categories.travel') },
+    { value: 'Entertainment', label: t('categories.entertainment') },
+    { value: 'Utilities', label: t('categories.utilities') },
+    { value: 'Healthcare', label: t('categories.healthcare') },
+    { value: 'Other', label: t('categories.other') },
+  ]
+
+  const PAYMENT_METHODS = [
+    { value: 'Cash', label: t('paymentMethods.cash') },
+    { value: 'Credit Card', label: t('paymentMethods.creditCard') },
+    { value: 'Debit Card', label: t('paymentMethods.debitCard') },
+    { value: 'Bank Transfer', label: t('paymentMethods.bankTransfer') },
+    { value: 'Other', label: t('paymentMethods.other') },
+  ]
+
+  const DOCUMENT_TYPES = [
+    { value: 'receipt', label: t('documentTypes.receipt') },
+    { value: 'invoice', label: t('documentTypes.invoice') },
+    { value: 'medical_invoice', label: t('documentTypes.medicalInvoice') },
+    { value: 'bill', label: t('documentTypes.bill') },
+  ]
+
+  const statusConfig = {
+    pending: { label: tTable('status.pending'), color: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300' },
+    processing: { label: tTable('status.processing'), color: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400' },
+    completed: { label: tTable('status.completed'), color: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' },
+    failed: { label: tTable('status.failed'), color: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400' },
+  }
+
+  useEffect(() => {
+    if (receipt) {
+      setFormData({
+        merchant_name: receipt.merchant_name || '',
+        total_amount: receipt.total_amount || 0,
+        currency: receipt.currency || 'USD',
+        receipt_date: receipt.receipt_date || '',
+        category: receipt.category || '',
+        tax_amount: receipt.tax_amount || 0,
+        payment_method: receipt.payment_method || '',
+        notes: receipt.notes || '',
+
+        // Phase 1: Essential Fields
+        invoice_number: receipt.invoice_number || '',
+        document_type: receipt.document_type || 'receipt',
+        subtotal: receipt.subtotal || 0,
+        vendor_address: receipt.vendor_address || '',
+        due_date: receipt.due_date || '',
+
+        // Phase 2: Business Invoices
+        purchase_order_number: receipt.purchase_order_number || '',
+        payment_reference: receipt.payment_reference || '',
+        vendor_tax_id: receipt.vendor_tax_id || '',
+
+        // Phase 3: Medical Receipts
+        patient_name: receipt.patient_name || '',
+        patient_dob: receipt.patient_dob || '',
+        treatment_date: receipt.treatment_date || '',
+        insurance_claim_number: receipt.insurance_claim_number || '',
+        diagnosis_codes: receipt.diagnosis_codes || '',
+        procedure_codes: receipt.procedure_codes || '',
+        provider_id: receipt.provider_id || '',
+      })
+
+      // Fetch line items when receipt changes
+      if (open) {
+        fetchLineItems()
+      }
+    }
+  }, [receipt, open])
+
+  // Fetch line items for this receipt
+  const fetchLineItems = async () => {
+    if (!receipt) return
+
+    setLineItemsLoading(true)
+    try {
+      const { data, error } = await supabase
+        .from('receipt_line_items')
+        .select('*')
+        .eq('receipt_id', receipt.id)
+        .order('line_number', { ascending: true })
+
+      if (error) throw error
+
+      setLineItems(data || [])
+    } catch (error) {
+      console.error('Error fetching line items:', error)
+      setLineItems([])
+    } finally {
+      setLineItemsLoading(false)
+    }
+  }
+
+  // Fetch signed URL when modal opens
+  useEffect(() => {
+    if (receipt && open) {
+      fetchSignedUrl()
+    }
+  }, [receipt?.id, open])
+
+  const fetchSignedUrl = async () => {
+    if (!receipt) return
+
+    setUrlLoading(true)
+    setUrlError(null)
+
+    try {
+      const response = await fetch(`/api/receipts/${receipt.id}/view`)
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch signed URL')
+      }
+
+      const data = await response.json()
+      setSignedUrl(data.signedUrl)
+
+      // Auto-refresh URL 30 seconds before expiration (4.5 minutes)
+      setTimeout(() => {
+        if (open) {
+          fetchSignedUrl()
+        }
+      }, 4.5 * 60 * 1000)
+    } catch (error) {
+      console.error('Error fetching signed URL:', error)
+      setUrlError('Failed to load receipt preview')
+    } finally {
+      setUrlLoading(false)
+    }
+  }
+
+  if (!receipt) return null
+
+  // Navigation logic
+  const receiptsToNavigate = selectedReceipts.length > 0 ? selectedReceipts : allReceipts
+  const currentIndex = receiptsToNavigate.findIndex(r => r.id === receipt.id)
+  const hasPrevious = currentIndex > 0
+  const hasNext = currentIndex < receiptsToNavigate.length - 1
+
+  const handlePrevious = () => {
+    if (hasPrevious && onNavigate) {
+      const prevReceipt = receiptsToNavigate[currentIndex - 1]
+      onNavigate(prevReceipt)
+      setImageError(false)
+    }
+  }
+
+  const handleNext = () => {
+    if (hasNext && onNavigate) {
+      const nextReceipt = receiptsToNavigate[currentIndex + 1]
+      onNavigate(nextReceipt)
+      setImageError(false)
+    }
+  }
+
+  const handleSave = async () => {
+    setSaving(true)
+    try {
+      const { error } = await supabase
+        .from('receipts')
+        .update({
+          merchant_name: formData.merchant_name,
+          total_amount: formData.total_amount,
+          currency: formData.currency,
+          receipt_date: formData.receipt_date,
+          category: formData.category,
+          tax_amount: formData.tax_amount,
+          payment_method: formData.payment_method,
+          notes: formData.notes,
+          updated_at: new Date().toISOString(),
+
+          // Phase 1: Essential Fields
+          invoice_number: formData.invoice_number || null,
+          document_type: formData.document_type,
+          subtotal: formData.subtotal || null,
+          vendor_address: formData.vendor_address || null,
+          due_date: formData.due_date || null,
+
+          // Phase 2: Business Invoices
+          purchase_order_number: formData.purchase_order_number || null,
+          payment_reference: formData.payment_reference || null,
+          vendor_tax_id: formData.vendor_tax_id || null,
+
+          // Phase 3: Medical Receipts
+          patient_name: formData.patient_name || null,
+          patient_dob: formData.patient_dob || null,
+          treatment_date: formData.treatment_date || null,
+          insurance_claim_number: formData.insurance_claim_number || null,
+          diagnosis_codes: formData.diagnosis_codes || null,
+          procedure_codes: formData.procedure_codes || null,
+          provider_id: formData.provider_id || null,
+        })
+        .eq('id', receipt.id)
+
+      if (error) throw error
+
+      toast.success('Receipt updated successfully')
+      onUpdate?.()
+      onOpenChange(false)
+    } catch (error) {
+      console.error('Error updating receipt:', error)
+      toast.error('Failed to update receipt')
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  const handleDelete = async () => {
+    if (!confirm('Are you sure you want to delete this receipt? This action cannot be undone.')) {
+      return
+    }
+
+    setDeleting(true)
+    try {
+      // Delete from storage
+      const { error: storageError } = await supabase.storage
+        .from('receipts')
+        .remove([receipt.file_path])
+
+      if (storageError) throw storageError
+
+      // Delete from database
+      const { error: dbError } = await supabase
+        .from('receipts')
+        .delete()
+        .eq('id', receipt.id)
+
+      if (dbError) throw dbError
+
+      toast.success('Receipt deleted successfully')
+      onUpdate?.()
+      onOpenChange(false)
+    } catch (error) {
+      console.error('Error deleting receipt:', error)
+      toast.error('Failed to delete receipt')
+    } finally {
+      setDeleting(false)
+    }
+  }
+
+  const handleRetry = async () => {
+    if (!receipt) return
+
+    setRetrying(true)
+    try {
+      const response = await fetch(`/api/receipts/${receipt.id}/retry`, {
+        method: 'POST',
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to retry processing')
+      }
+
+      toast.success('Receipt processed successfully')
+      onUpdate?.()
+    } catch (error) {
+      console.error('Error retrying receipt:', error)
+      toast.error(error instanceof Error ? error.message : 'Failed to retry processing')
+    } finally {
+      setRetrying(false)
+    }
+  }
+
+  const isEditable = receipt.processing_status === 'completed'
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto">
+        <DialogHeader>
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2">
+                <DialogTitle>{t('title')}</DialogTitle>
+                {receiptsToNavigate.length > 1 && (
+                  <span className="text-sm text-muted-foreground">
+                    ({currentIndex + 1} of {receiptsToNavigate.length})
+                  </span>
+                )}
+              </div>
+              <p className="text-sm text-muted-foreground mt-1 truncate">
+                {receipt.file_name}
+              </p>
+            </div>
+            <div className="flex items-center gap-2 flex-shrink-0">
+              {receiptsToNavigate.length > 1 && (
+                <div className="flex gap-1">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={handlePrevious}
+                    disabled={!hasPrevious}
+                    title="Previous receipt"
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={handleNext}
+                    disabled={!hasNext}
+                    title="Next receipt"
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              )}
+              <Badge className={statusConfig[receipt.processing_status].color}>
+                {statusConfig[receipt.processing_status].label}
+              </Badge>
+            </div>
+          </div>
+        </DialogHeader>
+
+        <div className="grid md:grid-cols-2 gap-6 mt-4">
+          {/* Left: Image Preview */}
+          <div className="space-y-4">
+            <Label>{t('receiptPreview')}</Label>
+            {urlLoading ? (
+              <div className="aspect-[3/4] w-full border rounded-lg flex items-center justify-center bg-muted">
+                <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+              </div>
+            ) : urlError ? (
+              <div className="aspect-[3/4] w-full border rounded-lg flex flex-col items-center justify-center bg-muted p-4">
+                <FileText className="h-16 w-16 text-muted-foreground mb-4" />
+                <p className="text-sm text-muted-foreground mb-4">{urlError}</p>
+                <Button onClick={fetchSignedUrl} variant="outline" size="sm">
+                  Retry
+                </Button>
+              </div>
+            ) : signedUrl && receipt.file_type.startsWith('image/') ? (
+              imageError ? (
+                <div className="aspect-[3/4] w-full border rounded-lg flex flex-col items-center justify-center bg-muted p-4">
+                  <FileText className="h-16 w-16 text-muted-foreground mb-4" />
+                  <p className="text-sm text-muted-foreground mb-2">Failed to load image</p>
+                  <p className="text-xs text-muted-foreground mb-4">Using direct link instead</p>
+                  <Button asChild variant="outline" size="sm">
+                    <a href={signedUrl} target="_blank" rel="noopener noreferrer">
+                      Open Image
+                    </a>
+                  </Button>
+                </div>
+              ) : (
+                <div className="relative aspect-[3/4] w-full border rounded-lg overflow-hidden bg-muted">
+                  <Image
+                    src={signedUrl}
+                    alt={receipt.file_name}
+                    fill
+                    className="object-contain"
+                    onError={() => setImageError(true)}
+                    unoptimized
+                  />
+                </div>
+              )
+            ) : signedUrl ? (
+              <div className="aspect-[3/4] w-full border rounded-lg flex flex-col items-center justify-center bg-muted">
+                <FileText className="h-16 w-16 text-muted-foreground mb-4" />
+                <p className="text-sm text-muted-foreground mb-4">PDF Document</p>
+                <Button asChild variant="outline">
+                  <a href={signedUrl} target="_blank" rel="noopener noreferrer">
+                    Open PDF
+                  </a>
+                </Button>
+              </div>
+            ) : null}
+            <div className="text-xs text-muted-foreground space-y-1">
+              <p>Size: {(receipt.file_size / 1024 / 1024).toFixed(2)} MB</p>
+              <p>Uploaded: {format(new Date(receipt.created_at), 'PPp')}</p>
+              {receipt.confidence_score && (
+                <p>Confidence: {(receipt.confidence_score * 100).toFixed(0)}%</p>
+              )}
+            </div>
+          </div>
+
+          {/* Right: Editable Form */}
+          <div className="space-y-4">
+            {/* Error Alert */}
+            {receipt.processing_status === 'failed' && receipt.processing_error && (
+              <Alert variant="destructive">
+                <AlertTriangle className="h-4 w-4" />
+                <AlertDescription>
+                  <div className="font-medium mb-1">Processing Failed</div>
+                  <div className="text-sm">{receipt.processing_error}</div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={handleRetry}
+                    disabled={retrying}
+                    className="mt-3"
+                  >
+                    {retrying ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        {t('retrying')}
+                      </>
+                    ) : (
+                      <>
+                        <RefreshCw className="mr-2 h-4 w-4" />
+                        {t('retryProcessing')}
+                      </>
+                    )}
+                  </Button>
+                </AlertDescription>
+              </Alert>
+            )}
+
+            {/* Low Confidence Warning */}
+            {receipt.processing_status === 'completed' &&
+              receipt.confidence_score !== undefined &&
+              receipt.confidence_score < 0.7 && (
+                <Alert>
+                  <AlertTriangle className="h-4 w-4" />
+                  <AlertDescription>
+                    <div className="font-medium mb-1">Low Confidence Detection</div>
+                    <div className="text-sm">
+                      The AI had low confidence ({(receipt.confidence_score * 100).toFixed(0)}%)
+                      in the extracted data. Please verify all fields carefully.
+                    </div>
+                    {receipt.processing_error && (
+                      <div className="text-sm mt-2 text-muted-foreground">
+                        Warnings: {receipt.processing_error}
+                      </div>
+                    )}
+                  </AlertDescription>
+                </Alert>
+              )}
+
+            {/* Phase 1: Document Type Selector */}
+            <div>
+              <Label htmlFor="documentType">{t('documentType')}</Label>
+              <Select
+                value={formData.document_type}
+                onValueChange={(value) =>
+                  setFormData({ ...formData, document_type: value })
+                }
+                disabled={!isEditable}
+              >
+                <SelectTrigger id="documentType">
+                  <SelectValue placeholder="Select document type" />
+                </SelectTrigger>
+                <SelectContent>
+                  {DOCUMENT_TYPES.map((type) => (
+                    <SelectItem key={type.value} value={type.value}>
+                      {type.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div>
+              <Label htmlFor="merchant">{t('merchantName')}</Label>
+              <Input
+                id="merchant"
+                value={formData.merchant_name || ''}
+                onChange={(e) =>
+                  setFormData({ ...formData, merchant_name: e.target.value })
+                }
+                disabled={!isEditable}
+                placeholder="Enter merchant name"
+              />
+            </div>
+
+            {/* Phase 1: Invoice Number (for invoices and bills) */}
+            {(formData.document_type === 'invoice' ||
+              formData.document_type === 'medical_invoice' ||
+              formData.document_type === 'bill') && (
+              <div>
+                <Label htmlFor="invoiceNumber">{t('invoiceNumber')}</Label>
+                <Input
+                  id="invoiceNumber"
+                  value={formData.invoice_number || ''}
+                  onChange={(e) =>
+                    setFormData({ ...formData, invoice_number: e.target.value })
+                  }
+                  disabled={!isEditable}
+                  placeholder="INV-2025-001"
+                />
+              </div>
+            )}
+
+            {/* Amount Display - Different format for medical invoices with insurance */}
+            {formData.document_type === 'medical_invoice' && receipt?.insurance_covered_amount ? (
+              <>
+                {/* Medical Invoice with Insurance - Special Format */}
+                <div className="space-y-3 p-4 bg-blue-50 dark:bg-blue-950 rounded-lg border border-blue-200 dark:border-blue-800">
+                  <h4 className="font-semibold text-sm text-blue-900 dark:text-blue-100">
+                    💊 {t('insuranceBreakdown') || 'Insurance Breakdown'}
+                  </h4>
+
+                  {/* Total Treatment Cost */}
+                  <div className="flex justify-between items-center text-sm">
+                    <span className="text-gray-600 dark:text-gray-400">{t('totalTreatmentCost') || 'Total Treatment Cost'}:</span>
+                    <span className="font-medium">{formData.currency} {formData.total_amount?.toFixed(2)}</span>
+                  </div>
+
+                  {/* Insurance Covered */}
+                  <div className="flex justify-between items-center text-sm">
+                    <span className="text-green-600 dark:text-green-400">− {t('insuranceCovered') || 'Insurance Covered'}:</span>
+                    <span className="font-medium text-green-600 dark:text-green-400">
+                      {formData.currency} {receipt.insurance_covered_amount?.toFixed(2)}
+                    </span>
+                  </div>
+
+                  <div className="border-t border-blue-300 dark:border-blue-700 my-2"></div>
+
+                  {/* Patient Responsibility - Highlighted */}
+                  <div className="flex justify-between items-center">
+                    <span className="font-semibold text-blue-900 dark:text-blue-100">{t('youPay') || 'You Pay'}:</span>
+                    <span className="font-bold text-lg text-blue-900 dark:text-blue-100">
+                      {formData.currency} {receipt.patient_responsibility_amount?.toFixed(2)}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Currency selector below for medical with insurance */}
+                <div>
+                  <Label htmlFor="currency">{t('currency')}</Label>
+                  <Select
+                    value={formData.currency}
+                    onValueChange={(value) =>
+                      setFormData({ ...formData, currency: value })
+                    }
+                    disabled={!isEditable}
+                  >
+                    <SelectTrigger id="currency">
+                      <SelectValue placeholder="Select currency" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {CURRENCIES.map((curr) => (
+                        <SelectItem key={curr} value={curr}>
+                          {curr}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </>
+            ) : (
+              /* Standard Amount Display for non-medical or medical without insurance */
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="amount">{t('amount')}</Label>
+                  <Input
+                    id="amount"
+                    type="number"
+                    step="0.01"
+                    value={formData.total_amount || ''}
+                    onChange={(e) =>
+                      setFormData({ ...formData, total_amount: parseFloat(e.target.value) || 0 })
+                    }
+                    disabled={!isEditable}
+                    placeholder="0.00"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="currency">{t('currency')}</Label>
+                  <Select
+                    value={formData.currency}
+                    onValueChange={(value) =>
+                      setFormData({ ...formData, currency: value })
+                    }
+                    disabled={!isEditable}
+                  >
+                    <SelectTrigger id="currency">
+                      <SelectValue placeholder="Select currency" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {CURRENCIES.map((curr) => (
+                        <SelectItem key={curr} value={curr}>
+                          {curr}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+            )}
+
+            <div>
+              <Label htmlFor="date">{t('receiptDate')}</Label>
+              <Input
+                id="date"
+                type="date"
+                value={formData.receipt_date || ''}
+                onChange={(e) =>
+                  setFormData({ ...formData, receipt_date: e.target.value })
+                }
+                disabled={!isEditable}
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="category">{t('category')}</Label>
+              <Select
+                value={formData.category}
+                onValueChange={(value) =>
+                  setFormData({ ...formData, category: value })
+                }
+                disabled={!isEditable}
+              >
+                <SelectTrigger id="category">
+                  <SelectValue placeholder="Select category" />
+                </SelectTrigger>
+                <SelectContent>
+                  {CATEGORIES.map((cat) => (
+                    <SelectItem key={cat.value} value={cat.value}>
+                      {cat.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Phase 1: Subtotal and Tax (side by side) */}
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="subtotal">{t('subtotal')}</Label>
+                <Input
+                  id="subtotal"
+                  type="number"
+                  step="0.01"
+                  value={formData.subtotal || ''}
+                  onChange={(e) =>
+                    setFormData({ ...formData, subtotal: parseFloat(e.target.value) || 0 })
+                  }
+                  disabled={!isEditable}
+                  placeholder="0.00"
+                />
+              </div>
+              <div>
+                <Label htmlFor="tax">{t('taxAmount')}</Label>
+                <Input
+                  id="tax"
+                  type="number"
+                  step="0.01"
+                  value={formData.tax_amount || ''}
+                  onChange={(e) =>
+                    setFormData({ ...formData, tax_amount: parseFloat(e.target.value) || 0 })
+                  }
+                  disabled={!isEditable}
+                  placeholder="0.00"
+                />
+              </div>
+            </div>
+
+            {/* Phase 1: Due Date (for invoices and bills) */}
+            {(formData.document_type === 'invoice' ||
+              formData.document_type === 'medical_invoice' ||
+              formData.document_type === 'bill') && (
+              <div>
+                <Label htmlFor="dueDate">{t('dueDate')}</Label>
+                <Input
+                  id="dueDate"
+                  type="date"
+                  value={formData.due_date || ''}
+                  onChange={(e) =>
+                    setFormData({ ...formData, due_date: e.target.value })
+                  }
+                  disabled={!isEditable}
+                />
+              </div>
+            )}
+
+            <div>
+              <Label htmlFor="payment">{t('paymentMethod')}</Label>
+              <Select
+                value={formData.payment_method}
+                onValueChange={(value) =>
+                  setFormData({ ...formData, payment_method: value })
+                }
+                disabled={!isEditable}
+              >
+                <SelectTrigger id="payment">
+                  <SelectValue placeholder="Select payment method" />
+                </SelectTrigger>
+                <SelectContent>
+                  {PAYMENT_METHODS.map((method) => (
+                    <SelectItem key={method.value} value={method.value}>
+                      {method.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Phase 2: Business Invoice Fields (for invoices) */}
+            {(formData.document_type === 'invoice' ||
+              formData.document_type === 'medical_invoice' ||
+              formData.document_type === 'bill') && (
+              <>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="purchaseOrderNumber">{t('purchaseOrderNumber')}</Label>
+                    <Input
+                      id="purchaseOrderNumber"
+                      value={formData.purchase_order_number || ''}
+                      onChange={(e) =>
+                        setFormData({ ...formData, purchase_order_number: e.target.value })
+                      }
+                      disabled={!isEditable}
+                      placeholder="PO-2025-456"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="paymentReference">{t('paymentReference')}</Label>
+                    <Input
+                      id="paymentReference"
+                      value={formData.payment_reference || ''}
+                      onChange={(e) =>
+                        setFormData({ ...formData, payment_reference: e.target.value })
+                      }
+                      disabled={!isEditable}
+                      placeholder="TXN-789012"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <Label htmlFor="vendorTaxId">{t('vendorTaxId')}</Label>
+                  <Input
+                    id="vendorTaxId"
+                    value={formData.vendor_tax_id || ''}
+                    onChange={(e) =>
+                      setFormData({ ...formData, vendor_tax_id: e.target.value })
+                    }
+                    disabled={!isEditable}
+                    placeholder="VAT123456789"
+                  />
+                </div>
+              </>
+            )}
+
+            {/* Phase 1: Vendor Address (for invoices) */}
+            {(formData.document_type === 'invoice' ||
+              formData.document_type === 'medical_invoice' ||
+              formData.document_type === 'bill') && (
+              <div>
+                <Label htmlFor="vendorAddress">{t('vendorAddress')}</Label>
+                <Textarea
+                  id="vendorAddress"
+                  value={formData.vendor_address || ''}
+                  onChange={(e) =>
+                    setFormData({ ...formData, vendor_address: e.target.value })
+                  }
+                  disabled={!isEditable}
+                  placeholder="123 Main Street, City, State 12345"
+                  rows={2}
+                />
+              </div>
+            )}
+
+            {/* Phase 2: Line Items Table */}
+            {lineItems.length > 0 && (
+              <div className="space-y-2">
+                <Label>{t('lineItemsCount', {count: lineItems.length})}</Label>
+                <div className="border rounded-lg overflow-hidden">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <thead className="bg-muted">
+                        <tr>
+                          <th className="px-3 py-2 text-left font-medium">{t('lineItemColumns.lineNumber')}</th>
+                          <th className="px-3 py-2 text-left font-medium">{t('lineItemColumns.description')}</th>
+                          <th className="px-3 py-2 text-right font-medium">{t('lineItemColumns.quantity')}</th>
+                          <th className="px-3 py-2 text-right font-medium">{t('lineItemColumns.unitPrice')}</th>
+                          <th className="px-3 py-2 text-right font-medium">{t('lineItemColumns.lineTotal')}</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y">
+                        {lineItems.map((item) => (
+                          <tr key={item.id || item.line_number} className="hover:bg-muted/50">
+                            <td className="px-3 py-2 text-muted-foreground">{item.line_number}</td>
+                            <td className="px-3 py-2">
+                              <div>{item.description}</div>
+                              {item.item_code && (
+                                <div className="text-xs text-muted-foreground mt-0.5">
+                                  {t('lineItemColumns.itemCode')}: {item.item_code}
+                                </div>
+                              )}
+                            </td>
+                            <td className="px-3 py-2 text-right">{item.quantity}</td>
+                            <td className="px-3 py-2 text-right">
+                              {formData.currency} {item.unit_price.toFixed(2)}
+                            </td>
+                            <td className="px-3 py-2 text-right font-medium">
+                              {formData.currency} {item.line_total.toFixed(2)}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                {lineItemsLoading && (
+                  <div className="text-sm text-muted-foreground flex items-center gap-2">
+                    <Loader2 className="h-3 w-3 animate-spin" />
+                    Loading line items...
+                  </div>
+                )}
+
+                {/* Medical Invoice: Show insurance breakdown after line items */}
+                {formData.document_type === 'medical_invoice' &&
+                 formData.total_amount !== undefined &&
+                 receipt?.insurance_covered_amount !== null &&
+                 receipt?.insurance_covered_amount !== undefined && (
+                  <div className="mt-3 p-3 bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded-lg space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span className="font-medium">{t('totalTreatmentCost')}:</span>
+                      <span className="font-semibold">{formData.currency} {formData.total_amount.toFixed(2)}</span>
+                    </div>
+                    <div className="flex justify-between text-sm text-green-700 dark:text-green-400">
+                      <span>− {t('insuranceCovered')}:</span>
+                      <span className="font-medium">{formData.currency} {receipt.insurance_covered_amount.toFixed(2)}</span>
+                    </div>
+                    <div className="border-t border-blue-300 dark:border-blue-700 pt-2 mt-2 flex justify-between">
+                      <span className="font-bold text-lg">{t('youPay')}:</span>
+                      <span className="font-bold text-lg text-blue-700 dark:text-blue-400">
+                        {formData.currency} {(receipt.patient_responsibility_amount || 0).toFixed(2)}
+                      </span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Phase 3: Medical Invoice Fields (for medical_invoice only) */}
+            {formData.document_type === 'medical_invoice' && (
+              <>
+                <div className="space-y-2 pt-2">
+                  <Label className="text-base font-semibold">{t('medicalInformation')}</Label>
+                  <div className="border-t pt-3 space-y-4">
+                    <div>
+                      <Label htmlFor="patientName">{t('patientName')}</Label>
+                      <Input
+                        id="patientName"
+                        value={formData.patient_name || ''}
+                        onChange={(e) =>
+                          setFormData({ ...formData, patient_name: e.target.value })
+                        }
+                        disabled={!isEditable}
+                        placeholder="Patient full name"
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="patientDob">{t('patientDob')}</Label>
+                        <Input
+                          id="patientDob"
+                          type="date"
+                          value={formData.patient_dob || ''}
+                          onChange={(e) =>
+                            setFormData({ ...formData, patient_dob: e.target.value })
+                          }
+                          disabled={!isEditable}
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="treatmentDate">{t('treatmentDate')}</Label>
+                        <Input
+                          id="treatmentDate"
+                          type="date"
+                          value={formData.treatment_date || ''}
+                          onChange={(e) =>
+                            setFormData({ ...formData, treatment_date: e.target.value })
+                          }
+                          disabled={!isEditable}
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="insuranceClaim">{t('insuranceClaimNumber')}</Label>
+                      <Input
+                        id="insuranceClaim"
+                        value={formData.insurance_claim_number || ''}
+                        onChange={(e) =>
+                          setFormData({ ...formData, insurance_claim_number: e.target.value })
+                        }
+                        disabled={!isEditable}
+                        placeholder="CLAIM-2025-789"
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="diagnosisCodes">{t('diagnosisCodes')}</Label>
+                        <Input
+                          id="diagnosisCodes"
+                          value={formData.diagnosis_codes || ''}
+                          onChange={(e) =>
+                            setFormData({ ...formData, diagnosis_codes: e.target.value })
+                          }
+                          disabled={!isEditable}
+                          placeholder="M54.5, Z79.899"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="procedureCodes">{t('procedureCodes')}</Label>
+                        <Input
+                          id="procedureCodes"
+                          value={formData.procedure_codes || ''}
+                          onChange={(e) =>
+                            setFormData({ ...formData, procedure_codes: e.target.value })
+                          }
+                          disabled={!isEditable}
+                          placeholder="F517A, 99213"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="providerId">{t('providerId')}</Label>
+                      <Input
+                        id="providerId"
+                        value={formData.provider_id || ''}
+                        onChange={(e) =>
+                          setFormData({ ...formData, provider_id: e.target.value })
+                        }
+                        disabled={!isEditable}
+                        placeholder="12065201 (AGB) or 1234567890 (NPI)"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
+
+            <div>
+              <Label htmlFor="notes">{t('notes')}</Label>
+              <Textarea
+                id="notes"
+                value={formData.notes || ''}
+                onChange={(e) =>
+                  setFormData({ ...formData, notes: e.target.value })
+                }
+                disabled={!isEditable}
+                placeholder="Add any additional notes..."
+                rows={3}
+              />
+            </div>
+
+            {!isEditable && (
+              <div className="bg-muted p-3 rounded-lg text-sm text-muted-foreground">
+                This receipt must be processed before you can edit the data.
+              </div>
+            )}
+
+            <div className="flex gap-3 pt-4">
+              <Button
+                onClick={handleSave}
+                disabled={!isEditable || saving}
+                className="flex-1"
+              >
+                {saving ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    {t('saving')}
+                  </>
+                ) : (
+                  <>
+                    <Save className="mr-2 h-4 w-4" />
+                    {t('saveChanges')}
+                  </>
+                )}
+              </Button>
+              <Button
+                variant="destructive"
+                onClick={handleDelete}
+                disabled={deleting}
+              >
+                {deleting ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <Trash2 className="h-4 w-4" />
+                )}
+              </Button>
+            </div>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  )
+}

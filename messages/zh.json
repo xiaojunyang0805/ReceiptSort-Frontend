@@ -1,0 +1,1265 @@
+{
+  "common": {
+    "getStarted": "免费开始",
+    "signUp": "注册",
+    "login": "登录",
+    "logout": "退出登录",
+    "learnMore": "了解更多",
+    "tryDemo": "试用演示",
+    "uploadReceipts": "上传收据",
+    "pricing": "价格",
+    "features": "功能特点",
+    "howItWorks": "使用方法",
+    "faq": "常见问题",
+    "contact": "联系我们",
+    "dashboard": "控制面板",
+    "receipts": "收据",
+    "exports": "导出",
+    "credits": "积分",
+    "templates": "模板",
+    "profile": "个人资料",
+    "upload": "上传",
+    "export": "导出",
+    "download": "下载",
+    "cancel": "取消",
+    "save": "保存",
+    "delete": "删除",
+    "edit": "编辑",
+    "close": "关闭",
+    "search": "搜索",
+    "filter": "筛选",
+    "select": "选择",
+    "loading": "加载中...",
+    "error": "错误",
+    "success": "成功",
+    "confirm": "确认",
+    "billing": "账单",
+    "account": "账户"
+  },
+  "hero": {
+    "headline": "您的收据，您的格式，自动完成",
+    "headlineHighlight": "您的格式",
+    "subheadline": "使用AI在几秒钟内提取收据数据。",
+    "subheadlineDetails": "上传收据 → AI提取数据 → 下载Excel。",
+    "getStarted": "免费开始",
+    "watchDemo": "观看演示",
+    "trustBadge": "受到全球2000多家企业信赖",
+    "valueProps": {
+      "freeCredits": "10个免费积分 + 10个自定义模板 • 无需信用卡",
+      "neverExpire": "积分永不过期 • 模板可无限次重用",
+      "multiDocument": "适用于收据、发票和医疗记录"
+    },
+    "processTagline": "上传 → AI映射到您的模板 → 以您的格式下载"
+  },
+  "features": {
+    "title": "整理收据所需的一切功能",
+    "subtitle": "专为重视时间的小型企业、自由职业者和会计师打造。",
+    "items": {
+      "upload": {
+        "title": "从任何设备上传",
+        "description": "从手机、电子邮件或扫描仪拖放收据。支持所有常见图片格式（JPG、PNG、WebP、TIFF、BMP、GIF）和最大每个文件10MB的PDF。"
+      },
+      "aiExtraction": {
+        "title": "多文档智能识别",
+        "description": "适用于收据、发票和医疗记录——不仅仅是收据。AI无缝适应不同文档类型。GPT-4 Vision在所有格式上达到98%+准确率。自动处理多种语言和货币格式。"
+      },
+      "export": {
+        "title": "导出为Excel或CSV",
+        "description": "下载已整理的电子表格，可直接用于QuickBooks、Xero或任何会计软件。"
+      },
+      "pricing": {
+        "title": "按需付费",
+        "description": "批量购买低至每张收据$0.067。需要时购买积分,或订阅获得更优惠的价格。"
+      },
+      "security": {
+        "title": "银行级安全",
+        "description": "您的数据经过加密且从不共享。符合GDPR规范。收据在90天后自动删除。"
+      },
+      "timeSaving": {
+        "title": "每周节省5小时以上",
+        "description": "告别手工数据录入。在处理1张收据的时间内处理100张。每张收据处理时间不到5秒。"
+      },
+      "templateMapping": {
+        "title": "AI学习您的格式",
+        "description": "使用您的列名（增值税金额、项目代码、客户ID等）创建自定义导出模板。我们的AI自动将提取的数据映射到您的格式——即使收据使用不同术语（Tax vs VAT vs Btw vs MwSt）。免费保存10个模板，无限次重用。每次导出仅需1积分。",
+        "badge": "独特功能"
+      }
+    }
+  },
+  "howItWorks": {
+    "title": "使用方法",
+    "subtitle": "四个简单步骤即可开始",
+    "description": "不到一分钟,从收据照片到整理好的电子表格",
+    "steps": {
+      "template": {
+        "title": "设计您的完美导出格式",
+        "description": "使用您确切的列名和结构创建自定义模板。只需2分钟。免费保存最多10个模板——无需积分。"
+      },
+      "upload": {
+        "title": "上传您的收据",
+        "description": "拖放收据、发票或医疗记录。支持任何设备的照片或PDF。支持所有主要图片格式。"
+      },
+      "process": {
+        "title": "AI提取并映射到您的模板",
+        "description": "我们的AI读取文档并智能地将提取的数据映射到您的模板列——甚至自动处理不同的术语。"
+      },
+      "export": {
+        "title": "以您的格式下载",
+        "description": "获取与您的模板完全匹配的格式化Excel或CSV文件——可直接导入您的会计系统或提交给主管部门。"
+      }
+    },
+    "cta": "免费开始：创建您的第一个模板"
+  },
+  "socialProof": {
+    "title": "受到全球企业信赖",
+    "stats": {
+      "receipts": "已处理收据",
+      "users": "活跃用户",
+      "accuracy": "平均准确率",
+      "timeSaved": "节省时间",
+      "timeSavedPerDoc": "每份文档节省"
+    },
+    "testimonials": {
+      "title": "客户评价",
+      "items": [
+        {
+          "quote": "模板映射功能非常出色。我为增值税申报创建了一个模板，现在每张收据都会自动格式化以符合税务局要求。每月为我节省20多分钟，而且我再也不会出现格式错误。",
+          "name": "Lisa van Dijk",
+          "role": "自由顾问，荷兰"
+        },
+        {
+          "quote": "作为小企业主，我没有时间记账。这个工具彻底改变了费用跟踪方式。",
+          "name": "Marcus Johnson",
+          "role": "零售店老板"
+        },
+        {
+          "quote": "我对AI准确度持怀疑态度，但ReceiptSort有98%的时间都是正确的。不过真正改变游戏规则的是模板映射——我的收据完全按照会计师需要的格式导出。不再需要手动重新格式化。",
+          "name": "Jennifer Martinez",
+          "role": "小企业主"
+        }
+      ]
+    },
+    "trustBadges": {
+      "securePayment": "Stripe安全支付",
+      "gdpr": "符合GDPR规范",
+      "encryption": "256位SSL加密"
+    }
+  },
+  "support": {
+    "title": "还有疑问？",
+    "subtitle": "我们的支持团队随时为您提供帮助。联系我们，我们将在24小时内回复。",
+    "emailUs": "发送邮件",
+    "or": "或",
+    "contactForm": "联系表单"
+  },
+  "faq": {
+    "title": "常见问题",
+    "subtitle": "关于ReceiptSort您需要了解的一切",
+    "items": {
+      "accuracy": {
+        "question": "AI提取的准确度如何？",
+        "answer": "我们的AI在清晰的标准收据上达到98%以上的准确率。您始终可以在导出前手动编辑任何提取的数据。"
+      },
+      "formats": {
+        "question": "支持哪些文件格式？",
+        "answer": "我们支持所有常见图片格式（JPG、PNG、JPEG、WebP、TIFF、BMP、GIF）和最大每个文件10MB的PDF文件。"
+      },
+      "cost": {
+        "question": "费用是多少？",
+        "answer": "我们使用积分系统。每张收据需要1积分。小包装每积分$0.067起,批量购买低至每积分$0.067（例如150积分$9.99、1500积分$99.99）。订阅月度套餐可获得更优惠的价格。"
+      },
+      "expiration": {
+        "question": "积分会过期吗？",
+        "answer": "不会，积分永不过期。您可以在需要时使用。"
+      },
+      "security": {
+        "question": "我的数据安全吗？",
+        "answer": "是的。我们使用银行级加密（256位SSL），您的收据会在90天后自动删除。我们从不分享您的数据。"
+      },
+      "export": {
+        "question": "可以导出到QuickBooks或Xero吗？",
+        "answer": "我们导出为Excel和CSV格式,这些格式与QuickBooks、Xero和所有主流会计软件兼容。只需将下载的文件导入您的会计系统即可。"
+      },
+      "customTemplates": {
+        "question": "自定义模板如何工作？",
+        "answer": "自定义模板让您创建可重复使用的导出格式，专为您的需求定制——如增值税申报、特定会计布局或保险表格。\n\n为什么重要：其他收据工具导出为它们的固定格式。您然后要浪费2-3分钟来重新组织列、重命名标题，并重新格式化以匹配您的会计系统或政府要求。\n\n使用ReceiptSort：您只需创建一次理想模板，使用您的确切列名（增值税金额、项目代码等）。我们的AI会自动将所有未来的收据映射到您的模板列——即使收据使用不同的术语（Tax vs VAT vs Btw vs MwSt）。\n\n价格：最多免费保存10个模板（不收取积分），然后无限次重复使用。每次导出只需1个积分，无论模板复杂度如何。\n\n示例：创建包含以下列的模板：日期 | 商家 | 净额 | 增值税额 | 总额 | 类别。您处理的每张收据都将自动导出为这种确切格式——无需手动重组。"
+      },
+      "wrongExtraction": {
+        "question": "如果提取错误怎么办？",
+        "answer": "您可以在导出前手动编辑任何提取的数据。如果提取完全失败，我们将退还积分。"
+      },
+      "refunds": {
+        "question": "提供退款吗？",
+        "answer": "是的，如果您不满意，我们对积分购买提供30天退款保证。"
+      },
+      "business": {
+        "question": "可以用于我的企业吗？",
+        "answer": "当然可以！许多小企业、自由职业者和会计师使用ReceiptSort进行费用跟踪和记账。"
+      },
+      "software": {
+        "question": "需要安装任何软件吗？",
+        "answer": "不需要，ReceiptSort是100%基于网页的。可从任何带有网络浏览器的设备访问。"
+      }
+    }
+  },
+  "finalCTA": {
+    "title": "准备好停止重组收据数据了吗？",
+    "subtitle": "免费开始：10个积分 + 10个自定义模板。无需信用卡。",
+    "button": "开始处理收据",
+    "viewPricing": "查看价格",
+    "trustIndicator": "加入自由职业者、会计师和小型企业的行列，以自己的格式自动处理收据。",
+    "trustBadges": {
+      "creditsNeverExpire": "积分永不过期",
+      "templatesReusable": "模板可无限次重用",
+      "moneyBack": "30天退款保证",
+      "allSoftware": "适用于所有会计软件"
+    }
+  },
+  "auth": {
+    "loginTitle": "登录",
+    "loginSubtitle": "输入您的凭据以访问您的账户",
+    "signupTitle": "创建账户",
+    "signupSubtitle": "注册以开始整理您的收据",
+    "email": "电子邮件",
+    "emailPlaceholder": "name@example.com",
+    "password": "密码",
+    "passwordPlaceholder": "••••••••",
+    "confirmPassword": "确认密码",
+    "fullName": "全名",
+    "fullNamePlaceholder": "张三",
+    "forgotPassword": "忘记密码？",
+    "noAccount": "没有账户？",
+    "hasAccount": "已经有账户了？",
+    "signIn": "登录",
+    "signUp": "注册",
+    "logIn": "登录",
+    "continueWithGoogle": "使用Google继续",
+    "orContinueWithEmail": "或使用电子邮件继续",
+    "loading": "加载中...",
+    "termsAgree": "注册即表示您同意我们的",
+    "termsOfService": "服务条款",
+    "privacyPolicy": "隐私政策",
+    "and": "和",
+    "errors": {
+      "invalidEmail": "无效的电子邮件地址",
+      "passwordMin": "密码必须至少包含6个字符",
+      "fullNameMin": "全名必须至少包含2个字符",
+      "passwordMismatch": "密码不匹配",
+      "invalidCredentials": "无效的电子邮件或密码",
+      "emailNotConfirmed": "请在登录前验证您的电子邮件",
+      "emailAlreadyRegistered": "此电子邮件已被注册",
+      "unexpectedError": "发生意外错误",
+      "googleSignInFailed": "使用Google登录失败"
+    },
+    "success": {
+      "welcomeBack": "欢迎回来！",
+      "accountCreated": "账户创建成功！",
+      "checkEmail": "请在登录前查看您的电子邮件以确认您的账户"
+    }
+  },
+  "dashboard": {
+    "welcome": "欢迎回来",
+    "overview": {
+      "title": "概览",
+      "subtitle": "这是您收据管理的概览",
+      "lastExport": {
+        "never": "从未"
+      }
+    },
+    "getStarted": {
+      "title": "开始使用",
+      "description": "上传您的第一张收据以开始整理",
+      "uploadButton": "上传您的第一张收据"
+    },
+    "pendingReceipts": {
+      "title": "待处理的收据",
+      "description": "您有 {count} 张收据等待处理",
+      "descriptionPlural": "您有 {count} 张收据等待处理"
+    },
+    "uploadSection": {
+      "title": "上传收据",
+      "dragDrop": "拖放收据图片到此处",
+      "dropHere": "将收据文件拖放到此处",
+      "clickToBrowse": "或点击浏览",
+      "or": "或",
+      "browse": "浏览文件",
+      "supported": "支持：PNG、JPG、JPEG、WEBP、TIFF、BMP、GIF、PDF（最大10MB）",
+      "supportedFormats": "支持格式：PNG、JPG、JPEG、WEBP、TIFF、BMP、GIF、PDF",
+      "maxFileSize": "最大文件大小：每个文件10MB",
+      "multipleFiles": "一次上传多个文件以加快处理速度",
+      "secureStorage": "您的收据将被安全存储并准备好进行AI处理",
+      "creditCost": "处理每张收据需要1积分"
+    },
+    "stats": {
+      "allTimeProcessed": "历史总处理量",
+      "receiptsUploaded": "已上传收据",
+      "mostRecentExport": "最近导出"
+    },
+    "timePeriods": {
+      "thisMonth": "本月",
+      "lastMonth": "上月",
+      "thisYear": "今年",
+      "q1": "第一季度",
+      "q2": "第二季度",
+      "q3": "第三季度",
+      "q4": "第四季度",
+      "allTime": "全部时间"
+    },
+    "timeAgo": {
+      "daysAgo": "天前",
+      "dayAgo": "天前",
+      "about17HoursAgo": "约17小时前"
+    },
+    "recentUploads": {
+      "title": "最近上传",
+      "subtitle": "您最近上传的收据"
+    },
+    "receiptsPage": {
+      "title": "收据",
+      "subtitle": "查看和管理所有已上传的收据",
+      "quickExport": "快速导出",
+      "quickSearch": "快速搜索...",
+      "allStatus": "所有状态",
+      "show": "显示",
+      "filters": "筛选",
+      "quickActions": "快速操作",
+      "viewAndExport": "查看和导出",
+      "quickActionsSubtitle": "查看收据或处理待处理的收据",
+      "selectReceipts": "选择收据以执行操作",
+      "receiptsSelected": "已选择 {count} 张收据",
+      "exportHistory": "导出历史",
+      "viewDetails": "查看详情",
+      "viewDetailsCount": "查看详情 ({count})",
+      "processButton": "处理",
+      "processCount": "处理 {count}",
+      "exportButton": "导出",
+      "exportCount": "导出 {count}",
+      "deleteButton": "删除",
+      "deleteCount": "删除 {count}",
+      "deleteConfirm": "确定要删除 {count} 张收据吗？",
+      "deleteSuccess": "已删除 {count} 张收据",
+      "deleteFailed": "删除收据失败",
+      "viewAllReceipts": "查看所有收据",
+      "exportSelected": "导出选中项 ({count})",
+      "noMatchingReceipts": "没有符合搜索条件的收据",
+      "dropdownMenu": {
+        "viewDetails": "查看详情",
+        "editData": "编辑数据",
+        "delete": "删除",
+        "process": "处理（1积分）",
+        "processing": "处理中...",
+        "retry": "重试（1积分）",
+        "retrying": "重试中..."
+      },
+      "filterPanel": {
+        "search": "搜索",
+        "searchPlaceholder": "商家名称、金额...",
+        "fromDate": "开始日期",
+        "toDate": "结束日期",
+        "pickDate": "选择日期",
+        "minAmount": "最小金额",
+        "maxAmount": "最大金额",
+        "categories": "类别",
+        "status": "状态",
+        "applyFilters": "应用筛选",
+        "clear": "清除",
+        "hide": "隐藏"
+      },
+      "processing": {
+        "processing": "处理中...",
+        "processAllButton": "处理所有待处理 ({count})",
+        "dialogTitle": "处理所有待处理的收据？",
+        "dialogDescription": "这将处理{count}张收据，使用{count}个积分。",
+        "receiptsToProcess": "要处理的收据：",
+        "creditsRequired": "所需积分：",
+        "yourCredits": "您的积分：",
+        "insufficientCreditsWarning": "您需要额外{creditsNeeded}个积分才能处理所有收据。只有前{userCredits}张收据将被处理。",
+        "processingTimeEstimate": "处理大约需要{seconds}秒（每张收据1-2秒）。",
+        "cancel": "取消",
+        "processAll": "处理所有",
+        "processPartial": "处理{count}张",
+        "toast": {
+          "successTitle": "所有收据处理成功！",
+          "successDescription": "已处理{successful}张收据。使用了{creditsUsed}个积分。",
+          "partialTitle": "处理完成，但有一些失败",
+          "partialDescription": "{successful}张成功，{failed}张失败。使用了{creditsUsed}个积分。",
+          "errorTitle": "所有收据处理失败",
+          "errorDescription": "请检查各个收据的错误详情。",
+          "failedTitle": "处理收据失败",
+          "unknownError": "未知错误"
+        }
+      },
+      "noReceipts": "暂无收据",
+      "noReceiptsDescription": "上传您的第一张收据以开始使用",
+      "uploadButton": "上传收据"
+    },
+    "receiptsTable": {
+      "title": "您的收据",
+      "noReceipts": "还没有收据",
+      "uploadFirst": "上传您的第一张收据以开始使用",
+      "columns": {
+        "fileName": "文件名",
+        "date": "日期",
+        "merchant": "商家",
+        "amount": "金额",
+        "category": "类别",
+        "status": "状态",
+        "uploaded": "已上传",
+        "actions": "操作"
+      },
+      "status": {
+        "pending": "待处理",
+        "processing": "处理中",
+        "completed": "已完成",
+        "failed": "失败"
+      }
+    },
+    "credits": {
+      "title": "积分",
+      "balance": "当前余额",
+      "creditsRemaining": "剩余积分",
+      "description": "可用于处理收据的积分",
+      "manageSubtitle": "管理您的收据处理积分",
+      "availableCredits": "您的可用积分",
+      "buyCredits": "购买积分",
+      "history": "积分历史",
+      "oneTimePurchase": "一次性购买",
+      "monthlySubscription": "月度订阅",
+      "paymentSuccess": {
+        "title": "支付成功！",
+        "description": "积分已添加到您的账户。您的新余额为 {credits} 积分。",
+        "processing": "正在处理支付...",
+        "processingDescription": "请稍候，我们正在确认您的购买。"
+      },
+      "paymentCanceled": {
+        "title": "支付已取消",
+        "description": "您的支付已取消。您的账户未被收取任何费用。"
+      },
+      "packages": {
+        "title": "选择套餐",
+        "credits": "积分",
+        "mostPopular": "最受欢迎",
+        "bestValue": "最超值",
+        "basic": {
+          "name": "基础版",
+          "description": "适合偶尔使用",
+          "features": [
+            "10个收据处理积分",
+            "AI驱动的数据提取",
+            "Excel和CSV导出",
+            "邮件支持",
+            "积分永不过期"
+          ]
+        },
+        "popular": {
+          "name": "热门版",
+          "description": "最适合小型企业",
+          "features": [
+            "50个收据处理积分",
+            "AI驱动的数据提取",
+            "Excel和CSV导出",
+            "优先邮件支持",
+            "积分永不过期",
+            "节省20%"
+          ]
+        },
+        "business": {
+          "name": "商业版",
+          "description": "适合大量使用的用户",
+          "features": [
+            "200个收据处理积分",
+            "AI驱动的数据提取",
+            "Excel和CSV导出",
+            "优先邮件支持",
+            "积分永不过期",
+            "节省40%"
+          ]
+        }
+      },
+      "transactions": {
+        "title": "交易历史",
+        "subtitle": "您的积分交易历史",
+        "purchase": "购买",
+        "usage": "使用",
+        "refund": "退款",
+        "bonus": "奖励",
+        "purchasedBasicPackage": "已购买基础套餐",
+        "date": "日期",
+        "type": "类型",
+        "amount": "金额",
+        "description": "说明",
+        "noTransactions": "还没有交易",
+        "purchaseCreditsToStart": "购买积分以开始使用",
+        "loading": "正在加载您的积分交易...",
+        "showing": "显示第{from}到{to}条，共{total}条交易",
+        "previous": "上一页",
+        "next": "下一页",
+        "page": "第{current}页，共{total}页"
+      },
+      "subscriptions": {
+        "title": "月度订阅",
+        "subtitle": "每月自动获取积分。随时取消。",
+        "bestValue": "最超值",
+        "save": "节省{percent}%",
+        "creditsPerMonth": "每月积分",
+        "perMonth": "每月",
+        "receiptsPerMonth": "每月{count}张收据",
+        "aiPoweredExtraction": "AI驱动的提取",
+        "automaticRenewal": "每月自动续订",
+        "prioritySupport": "优先支持",
+        "bulkProcessing": "批量处理",
+        "cancelAnytime": "随时取消",
+        "subscribe": "订阅",
+        "processing": "处理中...",
+        "disclaimer": "订阅会自动续订。随时从账户设置中管理或取消。",
+        "plans": {
+          "basic": {
+            "name": "Basic",
+            "description": "适合普通用户"
+          },
+          "pro": {
+            "name": "Pro",
+            "description": "高级用户的最佳选择"
+          },
+          "business": {
+            "name": "Business",
+            "description": "适合大量使用的企业"
+          }
+        }
+      },
+      "templates": {
+        "title": "自定义导出模板",
+        "description": "创建可重复使用的模板用于增值税申报、会计等",
+        "cost": "每个模板费用",
+        "credits": "积分",
+        "maxTemplates": "最大模板数",
+        "exportCost": "使用模板导出",
+        "free": "免费",
+        "perfectFor": "适用于：",
+        "useCase1": "增值税申报和税务报告",
+        "useCase2": "自定义会计格式",
+        "useCase3": "多国合规",
+        "useCase4": "自动化工作流程",
+        "manageButton": "管理模板"
+      }
+    },
+    "templates": {
+      "pageTitle": "导出模板 - ReceiptSort",
+      "pageDescription": "管理您的自定义收据导出模板",
+      "title": "导出模板",
+      "description": "创建自定义模板以您喜欢的格式导出收据",
+      "quota": {
+        "title": "模板配额",
+        "description": "您的模板使用情况",
+        "remaining": "{count, plural, =0 {没有剩余模板} other {剩余 {count} 个模板}}",
+        "limitReached": "您已达到最大模板数量。删除未使用的模板以创建新模板。"
+      },
+      "createButton": "创建新模板",
+      "noTemplates": "尚未创建模板",
+      "noTemplatesDescription": "创建您的第一个模板以自定义格式（如增值税申报）导出收据",
+      "createFirstTemplate": "创建您的第一个模板",
+      "exportCount": "使用次数",
+      "fieldsMapped": "已映射字段",
+      "created": "创建于",
+      "lastUsed": "最后使用",
+      "deleteSuccess": "模板删除成功",
+      "info": {
+        "title": "自定义模板如何工作",
+        "point1": "支付 {credits} 积分一次即可创建模板",
+        "point2": "无限次免费导出",
+        "point3": "非常适合增值税申报和会计",
+        "point4": "将收据字段映射到您的模板列"
+      },
+      "deleteDialog": {
+        "title": "删除模板？",
+        "description": "您确定要删除 \"{name}\" 吗？此操作无法撤销。",
+        "warning": "注意：删除的模板不会退还积分。",
+        "deleting": "删除中..."
+      },
+      "errors": {
+        "fetchFailed": "无法加载模板",
+        "deleteFailed": "无法删除模板"
+      },
+      "uploadDialog": {
+        "title": "创建导出模板",
+        "description": "上传您的 Excel 模板并配置字段映射",
+        "steps": {
+          "upload": "上传",
+          "configure": "配置",
+          "confirm": "确认"
+        },
+        "uploading": "上传模板中...",
+        "clickToUpload": "点击上传模板文件",
+        "fileTypes": "Excel 文件 (.xlsx, .xls)",
+        "maxSize": "最大文件大小：{size}MB",
+        "uploadHint": "上传您的增值税申报表、会计模板或任何您想用收据数据填充的 Excel 文件",
+        "uploadSuccess": "模板上传成功",
+        "uploadError": "上传模板失败",
+        "fields": {
+          "name": "模板名称",
+          "description": "描述（可选）",
+          "sheetName": "工作表名称",
+          "startRow": "起始行",
+          "mapping": "字段映射"
+        },
+        "placeholders": {
+          "name": "例如，2025年第四季度增值税申报",
+          "description": "例如，荷兰季度增值税报告"
+        },
+        "mappingHint": "为您想要包含的每个字段输入列字母（A、B、C 等）",
+        "fieldsMapped": "个已映射字段",
+        "next": "下一步",
+        "confirm": {
+          "title": "确认创建模板",
+          "creditCharge": "这将花费 {credits} 积分",
+          "balance": "您的余额：{balance} 积分",
+          "insufficientCredits": "积分不足。请购买更多积分。",
+          "benefits": "您将获得：",
+          "benefit1": "使用此模板无限次免费导出",
+          "benefit2": "自动填充您的 Excel 表格",
+          "benefit3": "随时编辑和更新映射",
+          "saving": "创建模板中...",
+          "createTemplate": "创建模板"
+        },
+        "errors": {
+          "nameRequired": "模板名称为必填项",
+          "mappingRequired": "至少需要一个字段映射"
+        },
+        "saveSuccess": "已扣除 {credits} 积分。模板已创建！",
+        "saveError": "创建模板失败"
+      }
+    },
+    "exports": {
+      "title": "导出",
+      "subtitle": "导出和管理您的收据数据",
+      "exportSection": {
+        "title": "导出收据",
+        "description": "筛选并导出您已完成的收据"
+      },
+      "history": {
+        "title": "导出历史",
+        "subtitle": "查看您过去的收据导出",
+        "autoDelete": "文件将在30天后自动删除"
+      },
+      "buttons": {
+        "exportAll": "导出全部",
+        "filters": "筛选",
+        "hide": "隐藏",
+        "clearFilters": "清除所有筛选",
+        "loading": "加载中..."
+      },
+      "filters": {
+        "fromDate": "开始日期",
+        "toDate": "结束日期",
+        "merchantName": "商家名称",
+        "amountRange": "金额范围",
+        "min": "最小值",
+        "max": "最大值",
+        "pickDate": "选择日期",
+        "searchPlaceholder": "按商家名称搜索...",
+        "activeFilters": "活动筛选",
+        "from": "从",
+        "to": "到",
+        "merchant": "商家",
+        "minAmount": "最小金额",
+        "maxAmount": "最大金额"
+      },
+      "noExports": "还没有导出",
+      "noExportsDescription": "从控制面板导出收据以在此处查看",
+      "type": "类型",
+      "fileName": "文件名",
+      "receipts": "收据",
+      "showingRecent": "显示{count}个最近的导出",
+      "columns": {
+        "date": "导出日期",
+        "receipts": "收据",
+        "format": "格式",
+        "download": "下载",
+        "expires": "过期时间",
+        "actions": "操作"
+      },
+      "status": {
+        "expired": "已过期",
+        "daysShort": "天"
+      },
+      "actions": {
+        "download": "下载",
+        "downloading": "下载中...",
+        "unavailable": "不可用"
+      }
+    },
+    "profile": {
+      "title": "个人资料设置",
+      "subtitle": "管理您的账户设置和偏好",
+      "profileInfo": "个人资料信息",
+      "profileInfoDescription": "更新您的个人信息",
+      "loadingProfile": "正在加载您的个人资料...",
+      "personalInfo": "个人信息",
+      "name": "姓名",
+      "fullName": "全名",
+      "fullNamePlaceholder": "输入您的全名",
+      "email": "电子邮件",
+      "emailCannotBeChanged": "电子邮件无法更改",
+      "language": "语言",
+      "timezone": "时区",
+      "updateProfile": "更新个人资料",
+      "saveChanges": "保存更改",
+      "saving": "保存中...",
+      "changePassword": "更改密码",
+      "currentPassword": "当前密码",
+      "newPassword": "新密码",
+      "accountInfo": "账户信息",
+      "accountInfoDescription": "查看您的账户详情",
+      "userId": "用户ID",
+      "accountCreated": "账户创建日期",
+      "lastSignIn": "上次登录",
+      "user": "用户",
+      "signOut": "退出登录",
+      "home": "首页",
+      "creditsLabel": "积分",
+      "toasts": {
+        "profileUpdated": "个人资料更新成功",
+        "profileUpdateError": "更新个人资料失败",
+        "profileLoadError": "加载个人资料失败"
+      }
+    }
+  },
+  "pricing": {
+    "title": "简单透明的价格",
+    "subtitle": "选择适合您的方案",
+    "subheadline": "按需付费或订阅并省钱",
+    "currentBalance": "您当前的余额",
+    "credits": "积分",
+    "perCredit": "每积分",
+    "perReceipt": "每张收据",
+    "creditPacks": "积分包",
+    "creditPackagesTitle": "积分套餐",
+    "subscriptions": "订阅",
+    "buyNow": "立即购买",
+    "subscribe": "订阅",
+    "popular": "最受欢迎",
+    "purchaseCredits": "购买积分",
+    "getStarted": "开始使用",
+    "readyTitle": "准备好开始了吗？",
+    "readySubtitle": "从10个免费积分开始，无需信用卡",
+    "goToDashboard": "前往控制面板",
+    "startFree": "免费开始",
+    "signIn": "登录",
+    "tryItFree": "免费试用",
+    "freeCreditsNoCreditCard": "10个免费积分 • 无需信用卡",
+    "features": {
+      "allFeatures": "包含所有功能",
+      "aiExtraction": "AI驱动的提取",
+      "exportFormats": "Excel和CSV导出",
+      "support": "邮件支持",
+      "security": "银行级安全",
+      "gdpr": "符合GDPR规范"
+    },
+    "faq": {
+      "title": "常见问题",
+      "howCreditsWork": {
+        "question": "积分如何运作？",
+        "answer": "您上传和处理的每张收据需要1积分。只有在AI成功从您的收据中提取数据时才会扣除积分。您可以批量购买积分或订阅以折扣价获得每月积分。"
+      },
+      "doCreditsExpire": {
+        "question": "积分会过期吗？",
+        "answer": "不会，积分永不过期。一旦购买积分，它们将保留在您的账户中直到使用。这让您可以完全灵活地按自己的节奏使用。"
+      },
+      "canIGetRefund": {
+        "question": "可以退款吗？",
+        "answer": "可以！我们提供30天退款保证。如果您对我们的服务不满意，请在购买后30天内联系我们，我们将全额退还未使用的积分。"
+      },
+      "wrongExtraction": {
+        "question": "如果提取错误怎么办？",
+        "answer": "如果AI提取包含错误或不符合您的期望，请联系我们的支持团队。我们将审查案例并提供免费重试或积分退款（如果提取质量低于我们的标准）。"
+      },
+      "needSubscription": {
+        "question": "需要订阅吗？",
+        "answer": "不需要，订阅完全可选。您可以使用我们的按需付费套餐根据需要购买积分。如果您想通过折扣月度积分省钱，订阅是可选的，但您可以自由选择最适合您的方式使用服务。"
+      }
+    }
+  },
+  "footer": {
+    "description": "为企业提供AI驱动的收据数据提取",
+    "product": "产品",
+    "company": "公司",
+    "legal": "法律",
+    "support": "支持",
+    "termsOfService": "服务条款",
+    "privacyPolicy": "隐私政策",
+    "cookiePolicy": "Cookie 政策",
+    "allRightsReserved": "版权所有"
+  },
+  "navigation": {
+    "home": "首页",
+    "features": "功能特点",
+    "pricing": "价格",
+    "howItWorks": "使用方法",
+    "faq": "常见问题",
+    "contact": "联系我们",
+    "dashboard": "控制面板",
+    "login": "登录",
+    "signup": "注册",
+    "about": "关于我们",
+    "more": "更多",
+    "customTemplates": "自定义模板"
+  },
+  "contact": {
+    "title": "联系我们",
+    "subtitle": "有疑问吗？我们很乐意听取您的意见。发送消息给我们，我们将在24小时内回复。",
+    "backToHome": "返回首页",
+    "sendMessage": "发送消息",
+    "formDescription": "填写下面的表单，我们会尽快回复您。",
+    "name": "姓名",
+    "namePlaceholder": "您的姓名",
+    "email": "电子邮件",
+    "emailPlaceholder": "your@email.com",
+    "subject": "主题",
+    "subjectPlaceholder": "我们能帮您什么？",
+    "message": "消息",
+    "messagePlaceholder": "告诉我们更多关于您的咨询...",
+    "sendButton": "发送消息",
+    "sending": "发送中...",
+    "successMessage": "消息发送成功！我们将在24小时内回复您。",
+    "responseTime": "我们通常在24小时内回复",
+    "preferEmail": "更喜欢电子邮件？",
+    "reachDirectly": "您也可以通过电子邮件直接联系我们：",
+    "frequentlyAskedQuestions": "常见问题",
+    "faqDescription": "在联系我们之前，您可能会在我们的常见问题部分找到答案。",
+    "viewFaq": "查看常见问题",
+    "quickStartGuide": "快速入门指南",
+    "quickStartDescription": "ReceiptSort新手？通过3个简单步骤学习如何开始使用。",
+    "howItWorks": "使用方法"
+  },
+  "creditPackages": {
+    "title": "购买积分",
+    "starter": {
+      "name": "入门版",
+      "description": "非常适合试用服务"
+    },
+    "basic": {
+      "name": "基础版",
+      "description": "适合普通用户"
+    },
+    "pro": {
+      "name": "专业版",
+      "description": "高级用户的最佳选择"
+    },
+    "business": {
+      "name": "商业版",
+      "description": "适合大量使用的企业"
+    },
+    "credits": "积分",
+    "perCredit": "每积分",
+    "processReceipts": "处理{count}张收据",
+    "aiPoweredExtraction": "AI驱动的提取",
+    "prioritySupport": "优先支持",
+    "bulkProcessing": "批量处理",
+    "neverExpires": "永不过期",
+    "purchase": "购买",
+    "processing": "处理中...",
+    "bestValue": "最超值",
+    "save": "节省{percent}%"
+  },
+  "receiptDetails": {
+    "title": "收据详情",
+    "receiptPreview": "收据预览",
+    "documentType": "文档类型",
+    "merchantName": "商家名称",
+    "invoiceNumber": "发票号码",
+    "amount": "金额",
+    "currency": "货币",
+    "receiptDate": "收据日期",
+    "category": "类别",
+    "subtotal": "小计（税前）",
+    "taxAmount": "税额",
+    "dueDate": "到期日期",
+    "paymentMethod": "付款方式",
+    "purchaseOrderNumber": "采购订单号",
+    "paymentReference": "付款参考号",
+    "vendorTaxId": "供应商税号（VAT/EIN/BTW）",
+    "vendorAddress": "供应商地址",
+    "lineItems": "行项目",
+    "lineItemsCount": "行项目（{count}）",
+    "patientName": "患者姓名",
+    "medicalInformation": "医疗信息",
+    "patientDob": "患者出生日期",
+    "treatmentDate": "治疗日期",
+    "insuranceClaimNumber": "保险索赔号",
+    "diagnosisCodes": "诊断代码（ICD）",
+    "procedureCodes": "程序代码（CPT）",
+    "providerId": "提供者ID（AGB/NPI）",
+    "insuranceCoveredAmount": "保险承担金额",
+    "patientResponsibilityAmount": "患者自付金额",
+    "insuranceBreakdown": "保险明细",
+    "totalTreatmentCost": "治疗总费用",
+    "insuranceCovered": "保险承担",
+    "youPay": "您需支付",
+    "notes": "备注",
+    "saveChanges": "保存更改",
+    "saving": "保存中...",
+    "delete": "删除",
+    "deleting": "删除中...",
+    "retryProcessing": "重试处理",
+    "retrying": "重试中...",
+    "documentTypes": {
+      "receipt": "收据",
+      "invoice": "发票",
+      "medicalInvoice": "医疗发票",
+      "bill": "账单"
+    },
+    "categories": {
+      "foodDining": "餐饮",
+      "transportation": "交通",
+      "shopping": "购物",
+      "officeSupplies": "办公用品",
+      "travel": "旅行",
+      "entertainment": "娱乐",
+      "utilities": "公用事业",
+      "healthcare": "医疗保健",
+      "other": "其他"
+    },
+    "paymentMethods": {
+      "cash": "现金",
+      "creditCard": "信用卡",
+      "debitCard": "借记卡",
+      "bankTransfer": "银行转账",
+      "other": "其他"
+    },
+    "lineItemColumns": {
+      "lineNumber": "#",
+      "description": "描述",
+      "quantity": "数量",
+      "unitPrice": "单价",
+      "lineTotal": "总计",
+      "itemCode": "代码"
+    }
+  },
+  "billing": {
+    "title": "账单与购买记录",
+    "description": "查看和下载您的购买发票，用于会计和报税",
+    "noInvoices": "暂无购买记录",
+    "noInvoicesDescription": "购买积分即可开始并获取交易发票",
+    "purchaseCredits": "购买积分"
+  },
+  "account": {
+    "title": "账户设置",
+    "description": "管理您的账户信息和偏好设置",
+    "profileTitle": "个人资料",
+    "profileDescription": "您的个人信息和联系方式",
+    "fullName": "姓名",
+    "email": "电子邮箱",
+    "userId": "用户ID",
+    "notSet": "未设置",
+    "creditsTitle": "积分余额",
+    "creditsDescription": "您当前的收据处理积分余额",
+    "currentCredits": "当前积分",
+    "purchaseCredits": "购买更多积分",
+    "billingTitle": "账单与发票",
+    "billingDescription": "查看您的购买历史并下载发票",
+    "viewBilling": "查看账单历史",
+    "accountCreated": "账户创建于",
+    "enterName": "输入您的全名",
+    "saveChanges": "保存更改",
+    "updateSuccess": "个人资料更新成功！",
+    "updateError": "更新个人资料失败。请重试。",
+    "emailCannotChange": "电子邮箱无法更改"
+  },
+  "pdfRetryDialog": {
+    "title": "提高提取准确率",
+    "description": "检测到低置信度。转换为PNG可能会提高准确率。",
+    "lowConfidenceWarning": "检测到低置信度",
+    "currentConfidence": "当前置信度",
+    "convertButton": "转换并重试",
+    "converting": "正在转换...",
+    "uploading": "正在上传...",
+    "processing": "正在处理...",
+    "completed": "已完成",
+    "conversionSuccess": "转换成功",
+    "uploadSuccess": "上传成功",
+    "processingSuccess": "已处理，置信度 {confidence}%",
+    "conversionFailed": "转换失败",
+    "fetchFailed": "获取文件失败",
+    "retryFailed": "重试失败",
+    "preview": "预览"
+  },
+  "exportDialog": {
+    "title": "导出收据",
+    "description": "将选中的 {count} 张收据{plural}导出为您偏好的格式",
+    "standardExport": "标准导出",
+    "standardExportDescription": "快速导出为常用格式",
+    "excel": "Excel",
+    "csv": "CSV",
+    "excelDescription": "带汇总的格式化表格",
+    "csvDescription": "纯文本格式",
+    "exportExcel": "导出 Excel",
+    "exportCsv": "导出 CSV",
+    "exportFormat": "导出 {format}",
+    "exporting": "正在导出...",
+    "exportTemplate": "导出模板",
+    "selectColumns": "选择列",
+    "requiredFieldsNote": "* 必填字段无法取消选择",
+    "aiTemplateExport": "AI 智能模板导出",
+    "aiTemplateDescription": "上传您的 Excel 模板，让 AI 自动映射字段",
+    "uploadNewTemplate": "上传新模板",
+    "useSavedTemplate": "使用已保存的模板",
+    "clickToUpload": "点击上传",
+    "fileTypeHint": ".xlsx, .xls (最大5MB)",
+    "analyzing": "正在分析...",
+    "clickToChange": "点击更换",
+    "sheet": "工作表",
+    "startRow": "起始行",
+    "fieldsMapped": "已映射 {count} 个字段",
+    "templateName": "模板名称",
+    "templateNamePlaceholder": "例如：2025年第四季度增值税",
+    "saveButton": "保存",
+    "saveTemplateHint": "点击保存以存储模板供重复使用（免费）",
+    "saveTemplateInfo": "💡 点击上方保存按钮以存储此模板",
+    "noSavedTemplates": "暂无保存的模板",
+    "noSavedTemplatesHint": "上传并保存以重复使用",
+    "select": "选择",
+    "used": "已使用",
+    "times": "次",
+    "exportLimitExceeded": "⚠️ 超出导出限制",
+    "exportLimitMessage": "您已选择 {count} 张收据。最多支持 {max} 张。请使用筛选功能减少选择数量。",
+    "largeExport": "⚠️ 大量导出",
+    "largeExportMessage": "这是一个大量导出（{count} 张收据）。可能需要几秒钟生成。",
+    "exportSummary": "导出摘要",
+    "receiptsSelected": "• 已选择 {count} 张收据{plural}",
+    "onlyCompletedIncluded": "• 仅包含已完成处理的收据",
+    "exportWithTemplate": "使用模板导出（1 积分）",
+    "close": "关闭",
+    "templateRequired": "需要模板",
+    "templateRequiredDescription": "请上传新模板或选择已保存的模板",
+    "invalidFileType": "无效的文件类型",
+    "invalidFileTypeDescription": "请上传 Excel 文件 (.xlsx 或 .xls)",
+    "fileTooLarge": "文件过大",
+    "fileTooLargeDescription": "请上传小于 5MB 的文件",
+    "templateAnalyzed": "模板已分析！",
+    "templateAnalyzedDescription": "AI 检测到 {count} 个字段映射。点击保存以存储。",
+    "analysisFailed": "分析失败",
+    "templateSaved": "模板已保存！",
+    "templateSavedDescription": "\"{name}\" 现已可供重复使用（免费）",
+    "templateExists": "模板已存在",
+    "templateExistsDescription": "\"{name}\" 已保存",
+    "saveFailed": "保存失败",
+    "exportSuccessful": "导出成功",
+    "exportSuccessfulDescription": "已导出 {count} 张收据{plural}。文件：{filename}",
+    "exportFailed": "导出失败",
+    "noCompletedReceipts": "未找到已完成的收据。请先处理收据再导出。",
+    "insufficientCredits": "您需要更多积分来执行此导出。请购买积分。",
+    "emptyFile": "导出生成了空文件",
+    "templateDeleted": "模板已删除",
+    "templateDeletedDescription": "模板已移除",
+    "deleteFailed": "删除失败",
+    "deleteFailedDescription": "删除模板失败"
+  },
+  "whatMakesUsDifferent": {
+    "title": "ReceiptSort的独特之处",
+    "others": {
+      "title": "其他收据工具",
+      "fixedFormat": "导出为他们的固定格式",
+      "manualReorganization": "您需手动重组数据（每份文档2-3分钟）",
+      "subscription": "需要$20-60/月订阅",
+      "receiptsOnly": "仅支持收据"
+    },
+    "receiptSort": {
+      "title": "ReceiptSort",
+      "badge": "更好的方式",
+      "aiAdapts": "AI自动适配您的模板",
+      "yourFormat": "数据以您的格式导出（无需重组）",
+      "payPerDocument": "按文档付费（$0.05-0.07，积分永不过期）",
+      "allDocuments": "收据、发票和医疗记录"
+    },
+    "savingsText": "通过消除手动重组，每份文档节省2-3分钟。",
+    "freeTemplates": "免费创建10个自定义模板，无限次重用。",
+    "cta": "查看模板映射的工作原理"
+  },
+  "useCases": {
+    "title": "为您的工作流程而设计",
+    "subtitle": "ReceiptSort适应您的工作方式——而非相反",
+    "items": {
+      "accountant": {
+        "tag": "最适合：会计师",
+        "title": "拥有多个客户的会计师",
+        "description": "创建5个模板（每个客户格式一个）。AI自动将所有收据映射到正确的客户模板。无需手动重组即可准确向客户开账单。每月节省15+小时。"
+      },
+      "medical": {
+        "tag": "最适合：医疗机构",
+        "title": "医疗机构",
+        "description": "创建自定义保险索赔模板。AI从医疗收据和发票中提取，映射到您的保险公司格式。无需手动输入数据即可报销。"
+      },
+      "euFreelancer": {
+        "tag": "最适合：自由职业者",
+        "title": "自由职业者（税务/增值税申报）",
+        "description": "创建符合您所在国家/地区政府要求的税务申报模板。AI自动处理不同的收据格式（Btw、VAT、MwSt、TVA、GST、销售税）。导出即可提交。"
+      },
+      "variableVolume": {
+        "tag": "最适合：可变量",
+        "title": "业务量可变的企业",
+        "description": "一个月处理10份文档，下个月处理100份。只为您使用的付费（$0.05-0.07/文档）。积分永不过期。无需浪费的月度订阅。"
+      }
+    }
+  },
+  "privacyPage": {
+    "backToHome": "返回首页",
+    "title": "隐私政策",
+    "lastUpdated": "最后更新：2025年10月6日",
+    "sections": {
+      "introduction": {
+        "title": "1. 简介",
+        "content": "欢迎使用ReceiptSorter（我们、我们的）。我们致力于保护您的个人信息和隐私权。本隐私政策说明我们在您使用收据处理服务时如何收集、使用、披露和保护您的信息。"
+      },
+      "informationWeCollect": {
+        "title": "2. 我们收集的信息",
+        "intro": "我们收集您直接提供给我们的信息：",
+        "items": [
+          "账户信息（电子邮件地址、姓名）",
+          "您上传的收据图片和PDF文件",
+          "支付信息（通过Stripe安全处理）",
+          "使用数据和分析"
+        ]
+      },
+      "howWeUse": {
+        "title": "3. 我们如何使用您的信息",
+        "intro": "我们使用您的信息用于：",
+        "items": [
+          "提供和维护我们的收据处理服务",
+          "使用AI技术处理您的收据",
+          "处理支付并管理您的账户",
+          "向您发送服务更新和促销通讯",
+          "改进我们的服务并开发新功能",
+          "遵守法律义务"
+        ]
+      },
+      "dataSecurity": {
+        "title": "4. 数据安全",
+        "intro": "我们实施行业标准的安全措施来保护您的数据：",
+        "items": [
+          "256位SSL加密进行数据传输",
+          "具有访问控制的安全云存储",
+          "90天后自动删除收据文件",
+          "定期安全审计和更新"
+        ]
+      },
+      "dataSharing": {
+        "title": "5. 数据共享",
+        "intro": "我们不会出售您的个人信息。我们可能会与以下方共享您的数据：",
+        "items": [
+          "服务提供商（OpenAI用于收据处理，Stripe用于支付）",
+          "法律要求时向执法部门",
+          "经您明确同意的商业合作伙伴"
+        ]
+      },
+      "yourRights": {
+        "title": "6. 您的权利",
+        "intro": "根据GDPR和其他隐私法，您有权：",
+        "items": [
+          "访问您的个人数据",
+          "更正不准确的数据",
+          "请求删除您的数据",
+          "以可移植格式导出您的数据",
+          "选择退出营销通讯",
+          "向监管机构投诉"
+        ]
+      },
+      "cookies": {
+        "title": "7. Cookie",
+        "content": "我们使用必要的cookie来提供服务，以及可选的分析cookie来改善用户体验。您可以通过浏览器设置控制cookie首选项。"
+      },
+      "dataRetention": {
+        "title": "8. 数据保留",
+        "content": "我们仅在提供服务和遵守法律义务所需的时间内保留您的数据。收据文件在90天后自动删除。账户数据在您请求删除之前保留。"
+      },
+      "childrensPrivacy": {
+        "title": "9. 儿童隐私",
+        "content": "我们的服务不面向18岁以下儿童。我们不会故意收集儿童的数据。"
+      },
+      "changes": {
+        "title": "10. 本政策的变更",
+        "content": "我们可能会不时更新本隐私政策。我们将通过在本页面发布新政策并更新最后更新日期来通知您任何变更。"
+      },
+      "contact": {
+        "title": "11. 联系我们",
+        "intro": "如果您对本隐私政策有疑问，请通过以下方式联系我们：",
+        "email": "电子邮件：support@seenano.nl",
+        "contactForm": "联系表单：receiptsort.com/contact"
+      }
+    }
+  },
+  "termsPage": {
+    "backToHome": "返回首页",
+    "title": "服务条款",
+    "lastUpdated": "最后更新：2025年10月6日",
+    "sections": {
+      "acceptance": {
+        "title": "1. 接受条款",
+        "content": "通过访问或使用ReceiptSorter（\"服务\"），您同意受这些服务条款（\"条款\"）的约束。如果您不同意这些条款，请勿使用本服务。"
+      },
+      "description": {
+        "title": "2. 服务描述",
+        "content": "ReceiptSorter是一个基于云的收据处理服务，使用人工智能从收据图像和PDF中提取数据。该服务允许您上传收据，提取商家信息、金额、日期和其他数据，并将结果导出为Excel或CSV格式。"
+      },
+      "userAccounts": {
+        "title": "3. 用户账户",
+        "intro": "要使用本服务，您必须：",
+        "items": [
+          "使用准确信息创建账户",
+          "维护账户凭据的安全",
+          "年满18岁",
+          "立即通知我们任何未经授权的访问",
+          "对您账户下的所有活动负责"
+        ]
+      },
+      "credits": {
+        "title": "4. 积分和付款",
+        "content": "本服务采用基于积分的系统运行。处理每张收据需要1个积分。积分可以通过我们的网站使用Stripe支付处理购买。积分永不过期。价格可能会在通知后变更。除非退款政策另有说明，否则所有销售均为最终销售。"
+      },
+      "usePolicy": {
+        "title": "5. 可接受使用",
+        "intro": "您同意不：",
+        "items": [
+          "上传非法、欺诈或有害内容",
+          "尝试逆向工程或破解服务",
+          "使用服务违反任何法律或法规",
+          "与他人共享您的账户凭据",
+          "使用自动化脚本滥用服务"
+        ]
+      },
+      "intellectualProperty": {
+        "title": "6. 知识产权",
+        "content": "包括所有内容、功能和功能在内的服务归ReceiptSorter所有，并受国际版权、商标和其他知识产权法保护。您保留对上传的收据和提取数据的所有权。"
+      },
+      "dataProcessing": {
+        "title": "7. 数据处理",
+        "content": "我们使用OpenAI的GPT-4 Vision AI处理您的收据数据。收据文件被安全存储并在90天后自动删除。有关我们如何处理您的数据的详细信息，请参阅我们的隐私政策。"
+      },
+      "warranties": {
+        "title": "8. 保证和免责声明",
+        "content": "服务按\"原样\"提供，不提供任何形式的保证。我们不保证收据数据提取100%准确。您有责任在使用前验证提取的数据。"
+      },
+      "limitation": {
+        "title": "9. 责任限制",
+        "content": "在法律允许的最大范围内，RECEIPTSORT不对因您使用服务而产生的任何间接、附带、特殊、后果性或惩罚性损害承担责任。"
+      },
+      "termination": {
+        "title": "10. 终止",
+        "content": "我们保留随时因违反这些条款而暂停或终止您的账户的权利。您可以随时通过账户设置删除您的账户。"
+      },
+      "changes": {
+        "title": "11. 条款变更",
+        "content": "我们可能随时修改这些条款。我们将通过电子邮件或通过服务通知您重大变更。变更后继续使用即表示接受。"
+      },
+      "governing": {
+        "title": "12. 适用法律",
+        "content": "这些条款受荷兰法律管辖。任何争议应在荷兰法院解决。"
+      },
+      "contact": {
+        "title": "13. 联系方式",
+        "intro": "对这些条款有疑问？请联系我们：",
+        "email": "电子邮件：support@seenano.nl",
+        "contactForm": "联系表单：receiptsort.com/contact"
+      }
+    }
+  }
+}

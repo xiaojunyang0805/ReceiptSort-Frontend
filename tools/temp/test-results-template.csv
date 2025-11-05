@@ -1,0 +1,12 @@
+filename,merchant_expected,merchant_extracted,merchant_match,amount_expected,amount_extracted,amount_match,date_expected,date_extracted,date_match,category_expected,category_extracted,category_reasonable,confidence_score,processing_time_ms,notes
+s01.webp,,,FALSE,0,0,FALSE,,, FALSE,,,FALSE,0,0,
+s02.png,,,FALSE,0,0,FALSE,,,FALSE,,,FALSE,0,0,
+s03.webp,,,FALSE,0,0,FALSE,,,FALSE,,,FALSE,0,0,
+s04.png,,,FALSE,0,0,FALSE,,,FALSE,,,FALSE,0,0,
+s05.png,,,FALSE,0,0,FALSE,,,FALSE,,,FALSE,0,0,
+s06.jpg,,,FALSE,0,0,FALSE,,,FALSE,,,FALSE,0,0,
+s06.png,,,FALSE,0,0,FALSE,,,FALSE,,,FALSE,0,0,
+s07.jpg,,,FALSE,0,0,FALSE,,,FALSE,,,FALSE,0,0,
+s08.jpg,,,FALSE,0,0,FALSE,,,FALSE,,,FALSE,0,0,
+s09.jpg,,,FALSE,0,0,FALSE,,,FALSE,,,FALSE,0,0,
+s10.jpg,,,FALSE,0,0,FALSE,,,FALSE,,,FALSE,0,0,

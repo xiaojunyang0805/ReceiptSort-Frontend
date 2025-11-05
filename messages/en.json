@@ -1,0 +1,1265 @@
+{
+  "common": {
+    "getStarted": "Get Started Free",
+    "signUp": "Sign Up",
+    "login": "Login",
+    "logout": "Logout",
+    "learnMore": "Learn More",
+    "tryDemo": "Try Demo",
+    "uploadReceipts": "Upload Receipts",
+    "pricing": "Pricing",
+    "features": "Features",
+    "howItWorks": "How It Works",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "dashboard": "Dashboard",
+    "receipts": "Receipts",
+    "exports": "Exports",
+    "credits": "Credits",
+    "templates": "Templates",
+    "profile": "Profile",
+    "upload": "Upload",
+    "export": "Export",
+    "download": "Download",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "search": "Search",
+    "filter": "Filter",
+    "select": "Select",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "confirm": "Confirm",
+    "billing": "Billing",
+    "account": "Account"
+  },
+  "hero": {
+    "headline": "Your Receipts, Your Format, Automatically",
+    "headlineHighlight": "Your Format",
+    "subheadline": "Our AI adapts to YOUR spreadsheet templates—not the other way around.",
+    "subheadlineDetails": "Create custom export formats once, reuse unlimited times.",
+    "processTagline": "Upload → AI maps to your template → Download in your format",
+    "getStarted": "Start Free",
+    "watchDemo": "Watch Demo",
+    "trustBadge": "Trusted by 2000+ businesses worldwide",
+    "valueProps": {
+      "freeCredits": "10 free credits + 10 custom templates • No credit card required",
+      "neverExpire": "Credits never expire • Templates reusable unlimited times",
+      "multiDocument": "Works with receipts, invoices, and medical notes"
+    }
+  },
+  "whatMakesUsDifferent": {
+    "title": "What Makes ReceiptSort Different",
+    "others": {
+      "title": "Other Receipt Tools",
+      "fixedFormat": "Export to THEIR fixed format",
+      "manualReorganization": "You reorganize data manually (2-3 min/document)",
+      "subscription": "$20-60/month subscription required",
+      "receiptsOnly": "Receipts only"
+    },
+    "receiptSort": {
+      "title": "ReceiptSort",
+      "badge": "Better Approach",
+      "aiAdapts": "AI adapts to YOUR template automatically",
+      "yourFormat": "Data exported in your format (no reorganization)",
+      "payPerDocument": "Pay per document ($0.05-0.07, credits never expire)",
+      "allDocuments": "Receipts, invoices, AND medical notes"
+    },
+    "savingsText": "Save 2-3 minutes per document by eliminating manual reorganization.",
+    "freeTemplates": "Create 10 custom templates FREE, reuse unlimited times.",
+    "cta": "See How Template Mapping Works"
+  },
+  "features": {
+    "title": "Everything you need to organize receipts",
+    "subtitle": "Built for small businesses, freelancers, and accountants who value their time.",
+    "items": {
+      "templateMapping": {
+        "title": "AI That Learns Your Format",
+        "description": "Create custom export templates with YOUR column names (VAT Amount, Project Code, Client ID, etc.). Our AI automatically maps extracted data to your format—even when receipts use different terms (Tax vs VAT vs Btw). Save 10 templates free, reuse unlimited times. Each export costs just 1 credit.",
+        "badge": "UNIQUE FEATURE"
+      },
+      "upload": {
+        "title": "Upload from Any Device",
+        "description": "Drag & drop receipts from your phone, email, or scanner. Supports all common image formats (JPG, PNG, WebP, TIFF, BMP, GIF) and PDFs up to 10MB per file."
+      },
+      "aiExtraction": {
+        "title": "Multi-Document Intelligence",
+        "description": "Works across receipts, invoices, AND medical notes—not just receipts. AI adapts to different document types seamlessly. GPT-4 Vision achieves 98%+ accuracy on all formats. Handles multiple languages and currency formats automatically."
+      },
+      "export": {
+        "title": "Export to Excel or CSV",
+        "description": "Download organized spreadsheets ready for QuickBooks, Xero, or any accounting software."
+      },
+      "aiTemplates": {
+        "title": "AI-Powered Template Export",
+        "description": "Smart templates adapt to your business needs. Our AI learns from your data and generates customized Excel templates with formulas, formatting, and structure tailored to your workflow."
+      },
+      "pricing": {
+        "title": "Pay As You Go",
+        "description": "Only $0.05-0.07 per document (not per-user subscription). Credits never expire—use them when you need them. No hidden fees, no monthly commitment. Variable volume? Perfect. Process 10 documents one month, 100 the next."
+      },
+      "security": {
+        "title": "Bank-Level Security",
+        "description": "Your data is encrypted and never shared. GDPR compliant. Receipts automatically deleted after 90 days."
+      },
+      "timeSaving": {
+        "title": "Save 5+ Hours Weekly",
+        "description": "Stop manual data entry. Process 100 receipts in the time it takes to do 1 manually. Each receipt processes in under 5 seconds."
+      }
+    }
+  },
+  "howItWorks": {
+    "title": "How It Works",
+    "subtitle": "Get started in 4 simple steps",
+    "description": "From receipt photo to organized spreadsheet in under a minute",
+    "steps": {
+      "template": {
+        "title": "Design Your Perfect Export Format",
+        "description": "Create a custom template with your exact column names and structure. Takes 2 minutes. Save up to 10 templates free—no credits charged."
+      },
+      "upload": {
+        "title": "Upload Your Receipts",
+        "description": "Drag and drop receipts, invoices, or medical notes. Works with photos or PDFs from any device. Supports all major image formats."
+      },
+      "process": {
+        "title": "AI Extracts & Maps to Your Template",
+        "description": "Our AI reads the document and intelligently maps extracted data to YOUR template columns—even handling different terminologies automatically."
+      },
+      "export": {
+        "title": "Download in Your Format",
+        "description": "Get a perfectly formatted Excel or CSV file matching your template—ready to import directly into your accounting system or submit to authorities."
+      }
+    },
+    "cta": "Start Free: Create Your First Template"
+  },
+  "socialProof": {
+    "title": "Trusted by businesses worldwide",
+    "stats": {
+      "receipts": "Documents Processed",
+      "users": "Active Users",
+      "accuracy": "Extraction Accuracy",
+      "timeSaved": "Hours Saved Weekly",
+      "timeSavedPerDoc": "Saved Per Document"
+    },
+    "testimonials": {
+      "title": "What our customers say",
+      "items": [
+        {
+          "quote": "The template mapping feature is brilliant. I created one template for my VAT returns, and now every receipt automatically formats to match the tax office requirements. Saves me 20+ minutes every month, and I never make formatting errors anymore.",
+          "name": "Lisa van Dijk",
+          "role": "Freelance Consultant, Netherlands"
+        },
+        {
+          "quote": "As a small business owner, I don't have time for bookkeeping. This tool is a game-changer for expense tracking.",
+          "name": "Marcus Johnson",
+          "role": "Retail Store Owner"
+        },
+        {
+          "quote": "I was skeptical about AI accuracy, but ReceiptSort gets it right 98% of the time. The template mapping is the real game-changer though—my receipts export exactly how my accountant needs them. No more manual reformatting.",
+          "name": "Jennifer Martinez",
+          "role": "Small Business Owner"
+        }
+      ]
+    },
+    "trustBadges": {
+      "securePayment": "Secure payment by Stripe",
+      "gdpr": "GDPR Compliant",
+      "encryption": "256-bit SSL Encryption"
+    }
+  },
+  "useCases": {
+    "title": "Built for Your Workflow",
+    "subtitle": "ReceiptSort adapts to how YOU work—not the other way around",
+    "items": {
+      "accountant": {
+        "tag": "Perfect for: Accountants",
+        "title": "Accountant with Multiple Clients",
+        "description": "Create 5 templates (one per client's format). AI maps all receipts automatically to the correct client template. Bill clients accurately without manual reorganization. Save 15+ hours per month."
+      },
+      "medical": {
+        "tag": "Perfect for: Medical Practices",
+        "title": "Medical Practice",
+        "description": "Create custom insurance claim templates. AI extracts from medical receipts and invoices, maps to YOUR insurance company's format. No more manual data entry for reimbursements."
+      },
+      "euFreelancer": {
+        "tag": "Perfect for: Freelancers",
+        "title": "Freelancer (Tax/VAT Returns)",
+        "description": "Create tax declaration templates matching your country's government requirements. AI handles different receipt formats (Btw, VAT, MwSt, TVA, GST, Sales Tax) automatically. Export ready for submission."
+      },
+      "variableVolume": {
+        "tag": "Perfect for: Variable Volume",
+        "title": "Variable Volume Business",
+        "description": "Process 10 documents one month, 100 the next. Pay only for what you use ($0.05-0.07 per document). Credits never expire. No wasteful monthly subscription."
+      }
+    }
+  },
+  "support": {
+    "title": "Still have questions?",
+    "subtitle": "Our support team is here to help. Get in touch and we'll respond within 24 hours.",
+    "emailUs": "Email Us",
+    "or": "or",
+    "contactForm": "Contact Form"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Everything you need to know about ReceiptSort",
+    "items": {
+      "accuracy": {
+        "question": "How accurate is the AI extraction?",
+        "answer": "Our AI achieves 98%+ accuracy on clear, standard receipts. You can always manually edit any extracted data before exporting."
+      },
+      "formats": {
+        "question": "What file formats do you support?",
+        "answer": "We support all common image formats (JPG, PNG, JPEG, WebP, TIFF, BMP, GIF) and PDF files up to 10MB per file."
+      },
+      "cost": {
+        "question": "How much does it cost?",
+        "answer": "We use a credit system. Each receipt costs 1 credit. Credits are now affordable: $0.067 each for starter packages (75 for $4.99), or as low as $0.067 when buying in bulk (e.g., 150 for $9.99, 1500 for $99.99). Credits never expire."
+      },
+      "expiration": {
+        "question": "Do credits expire?",
+        "answer": "No, credits never expire. Use them whenever you need them."
+      },
+      "security": {
+        "question": "Is my data secure?",
+        "answer": "Yes. We use bank-level encryption (256-bit SSL), and your receipts are automatically deleted after 90 days. We never share your data."
+      },
+      "export": {
+        "question": "Can I export to QuickBooks or Xero?",
+        "answer": "We export to Excel and CSV formats, which are compatible with QuickBooks, Xero, and all major accounting software. Simply import the downloaded file into your accounting system."
+      },
+      "customTemplates": {
+        "question": "What are Custom Templates and why do I need them?",
+        "answer": "Custom Templates let you create reusable export formats tailored to YOUR needs—like VAT declarations, specific accounting layouts, or insurance forms.\n\nWhy they matter: Other receipt tools export to THEIR fixed format. You then waste 2-3 minutes per document reorganizing columns, renaming headers, and reformatting to match your accounting system or government requirements.\n\nWith ReceiptSort: You create your ideal template ONCE with your exact column names (VAT Amount, Project Code, etc.). Our AI automatically maps all future receipts to your template columns—even if receipts use different terms (Tax vs VAT vs Btw vs MwSt).\n\nPricing: Save up to 10 templates for FREE (no credits charged), then reuse them unlimited times. Each export costs just 1 credit, regardless of template complexity.\n\nExample: Create a template with columns: Date | Vendor | Net Amount | VAT Amount | Total | Category. Every receipt you process will automatically export to this exact format—no manual reorganization needed."
+      },
+      "wrongExtraction": {
+        "question": "What if the extraction is wrong?",
+        "answer": "You can manually edit any extracted data before exporting. If extraction completely fails, we'll refund the credit."
+      },
+      "refunds": {
+        "question": "Do you offer refunds?",
+        "answer": "Yes, we offer a 30-day money-back guarantee on credit purchases if you're not satisfied."
+      },
+      "business": {
+        "question": "Can I use this for my business?",
+        "answer": "Absolutely! Many small businesses, freelancers, and accountants use ReceiptSort for expense tracking and bookkeeping."
+      },
+      "software": {
+        "question": "Do I need to install any software?",
+        "answer": "No, ReceiptSort is 100% web-based. Access it from any device with a web browser."
+      }
+    }
+  },
+  "finalCTA": {
+    "title": "Ready to Stop Reorganizing Receipt Data?",
+    "subtitle": "Start free: 10 credits + 10 custom templates. No credit card required.",
+    "button": "Start Processing Receipts",
+    "viewPricing": "View Pricing",
+    "trustIndicator": "Join freelancers, accountants, and small businesses who process receipts in their own format—automatically.",
+    "trustBadges": {
+      "creditsNeverExpire": "Credits never expire",
+      "templatesReusable": "Templates reusable unlimited times",
+      "moneyBack": "30-day money back guarantee",
+      "allSoftware": "Works with all accounting software"
+    }
+  },
+  "auth": {
+    "loginTitle": "Login",
+    "loginSubtitle": "Enter your credentials to access your account",
+    "signupTitle": "Create Account",
+    "signupSubtitle": "Sign up to start organizing your receipts",
+    "email": "Email",
+    "emailPlaceholder": "name@example.com",
+    "password": "Password",
+    "passwordPlaceholder": "••••••••",
+    "confirmPassword": "Confirm Password",
+    "fullName": "Full Name",
+    "fullNamePlaceholder": "John Doe",
+    "forgotPassword": "Forgot password?",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "signIn": "Sign In",
+    "signUp": "Sign up",
+    "logIn": "Log in",
+    "continueWithGoogle": "Continue with Google",
+    "orContinueWithEmail": "OR CONTINUE WITH EMAIL",
+    "loading": "Loading...",
+    "termsAgree": "By signing up, you agree to our",
+    "termsOfService": "Terms of Service",
+    "privacyPolicy": "Privacy Policy",
+    "and": "and",
+    "errors": {
+      "invalidEmail": "Invalid email address",
+      "passwordMin": "Password must be at least 6 characters",
+      "fullNameMin": "Full name must be at least 2 characters",
+      "passwordMismatch": "Passwords don't match",
+      "invalidCredentials": "Invalid email or password",
+      "emailNotConfirmed": "Please verify your email before logging in",
+      "emailAlreadyRegistered": "This email is already registered",
+      "unexpectedError": "An unexpected error occurred",
+      "googleSignInFailed": "Failed to sign in with Google"
+    },
+    "success": {
+      "welcomeBack": "Welcome back!",
+      "accountCreated": "Account created successfully!",
+      "checkEmail": "Please check your email to confirm your account before logging in"
+    }
+  },
+  "dashboard": {
+    "welcome": "Welcome back",
+    "overview": {
+      "title": "Overview",
+      "subtitle": "Here's an overview of your receipt management",
+      "lastExport": {
+        "never": "Never"
+      }
+    },
+    "getStarted": {
+      "title": "Get Started",
+      "description": "Upload your first receipt to start organizing",
+      "uploadButton": "Upload Your First Receipt"
+    },
+    "pendingReceipts": {
+      "title": "Pending Receipts",
+      "description": "You have {count} receipt waiting to be processed",
+      "descriptionPlural": "You have {count} receipts waiting to be processed"
+    },
+    "uploadSection": {
+      "title": "Upload Receipts",
+      "dragDrop": "Drag and drop receipt images here",
+      "dropHere": "Drop receipt files here",
+      "clickToBrowse": "or click to browse",
+      "or": "or",
+      "browse": "Browse files",
+      "supported": "Supports: PNG, JPG, JPEG, WEBP, TIFF, BMP, GIF, PDF (max 10MB)",
+      "supportedFormats": "Supported formats: PNG, JPG, JPEG, WEBP, TIFF, BMP, GIF, PDF",
+      "maxFileSize": "Maximum file size: 10MB per file",
+      "multipleFiles": "Upload multiple files at once for faster processing",
+      "secureStorage": "Your receipts will be securely stored and ready for AI processing",
+      "creditCost": "Processing costs 1 credit per receipt"
+    },
+    "stats": {
+      "allTimeProcessed": "All time processed",
+      "receiptsUploaded": "Receipts uploaded",
+      "mostRecentExport": "Most recent export"
+    },
+    "timePeriods": {
+      "thisMonth": "This Month",
+      "lastMonth": "Last Month",
+      "thisYear": "This Year",
+      "q1": "Q1",
+      "q2": "Q2",
+      "q3": "Q3",
+      "q4": "Q4",
+      "allTime": "All Time"
+    },
+    "timeAgo": {
+      "daysAgo": "days ago",
+      "dayAgo": "day ago",
+      "about17HoursAgo": "about 17 hours ago"
+    },
+    "recentUploads": {
+      "title": "Recent Uploads",
+      "subtitle": "Your most recently uploaded receipts"
+    },
+    "receiptsPage": {
+      "title": "Receipts",
+      "subtitle": "View and manage all your uploaded receipts",
+      "quickExport": "Quick Export",
+      "quickSearch": "Quick search...",
+      "allStatus": "All Status",
+      "show": "Show",
+      "filters": "Filters",
+      "quickActions": "Quick Actions",
+      "viewAndExport": "View and Export",
+      "quickActionsSubtitle": "View receipts or process pending ones",
+      "selectReceipts": "Select receipts to perform actions",
+      "receiptsSelected": "{count} receipt{count, plural, one {} other {s}} selected",
+      "exportHistory": "Export History",
+      "viewDetails": "View Details",
+      "viewDetailsCount": "View Details ({count})",
+      "processButton": "Process",
+      "processCount": "Process {count}",
+      "exportButton": "Export",
+      "exportCount": "Export {count}",
+      "deleteButton": "Delete",
+      "deleteCount": "Delete {count}",
+      "deleteConfirm": "Delete {count} receipt{count, plural, one {} other {s}}?",
+      "deleteSuccess": "Deleted {count} receipt{count, plural, one {} other {s}}",
+      "deleteFailed": "Failed to delete receipts",
+      "viewAllReceipts": "View All Receipts",
+      "exportSelected": "Export Selected ({count})",
+      "noMatchingReceipts": "No receipts match your search criteria",
+      "dropdownMenu": {
+        "viewDetails": "View Details",
+        "editData": "Edit Data",
+        "delete": "Delete",
+        "process": "Process (1 credit)",
+        "processing": "Processing...",
+        "retry": "Retry (1 credit)",
+        "retrying": "Retrying..."
+      },
+      "filterPanel": {
+        "search": "Search",
+        "searchPlaceholder": "Merchant name, amount...",
+        "fromDate": "From Date",
+        "toDate": "To Date",
+        "pickDate": "Pick a date",
+        "minAmount": "Min Amount",
+        "maxAmount": "Max Amount",
+        "categories": "Categories",
+        "status": "Status",
+        "applyFilters": "Apply Filters",
+        "clear": "Clear",
+        "hide": "Hide"
+      },
+      "processing": {
+        "processing": "Processing...",
+        "processAllButton": "Process All Pending ({count})",
+        "dialogTitle": "Process All Pending Receipts?",
+        "dialogDescription": "This will process {count} receipt{count, plural, one {} other {s}} using {count} credit{count, plural, one {} other {s}}.",
+        "receiptsToProcess": "Receipts to process:",
+        "creditsRequired": "Credits required:",
+        "yourCredits": "Your credits:",
+        "insufficientCreditsWarning": "You need {creditsNeeded} more credit{creditsNeeded, plural, one {} other {s}} to process all receipts. Only the first {userCredits} receipt{userCredits, plural, one {} other {s}} will be processed.",
+        "processingTimeEstimate": "Processing will take approximately {seconds} seconds (1-2 seconds per receipt).",
+        "cancel": "Cancel",
+        "processAll": "Process All",
+        "processPartial": "Process {count}",
+        "toast": {
+          "successTitle": "All receipts processed successfully!",
+          "successDescription": "Processed {successful} receipt{successful, plural, one {} other {s}}. {creditsUsed} credit{creditsUsed, plural, one {} other {s}} used.",
+          "partialTitle": "Processing completed with some failures",
+          "partialDescription": "{successful} successful, {failed} failed. {creditsUsed} credit{creditsUsed, plural, one {} other {s}} used.",
+          "errorTitle": "All receipts failed to process",
+          "errorDescription": "Please check individual receipts for error details.",
+          "failedTitle": "Failed to process receipts",
+          "unknownError": "Unknown error"
+        }
+      },
+      "noReceipts": "No receipts yet",
+      "noReceiptsDescription": "Upload your first receipt to get started",
+      "uploadButton": "Upload Receipt"
+    },
+    "receiptsTable": {
+      "title": "Your Receipts",
+      "noReceipts": "No receipts yet",
+      "uploadFirst": "Upload your first receipt to get started",
+      "columns": {
+        "fileName": "File Name",
+        "date": "Date",
+        "merchant": "Merchant",
+        "amount": "Amount",
+        "category": "Category",
+        "status": "Status",
+        "uploaded": "Uploaded",
+        "actions": "Actions"
+      },
+      "status": {
+        "pending": "Pending",
+        "processing": "Processing",
+        "completed": "Completed",
+        "failed": "Failed"
+      }
+    },
+    "credits": {
+      "title": "Credits",
+      "balance": "Current Balance",
+      "creditsRemaining": "credits remaining",
+      "description": "Available credits for processing receipts",
+      "manageSubtitle": "Manage your credits for processing receipts",
+      "availableCredits": "Your available credits",
+      "buyCredits": "Buy Credits",
+      "history": "Credit History",
+      "oneTimePurchase": "One-Time Purchase",
+      "monthlySubscription": "Monthly Subscription",
+      "paymentSuccess": {
+        "title": "Payment Successful!",
+        "description": "Credits have been added to your account. Your new balance is {credits} credits.",
+        "processing": "Processing payment...",
+        "processingDescription": "Please wait while we confirm your purchase."
+      },
+      "paymentCanceled": {
+        "title": "Payment Canceled",
+        "description": "Your payment was canceled. No charges were made to your account."
+      },
+      "packages": {
+        "title": "Choose a package",
+        "credits": "credits",
+        "mostPopular": "Most Popular",
+        "bestValue": "Best Value",
+        "basic": {
+          "name": "Basic",
+          "description": "Perfect for occasional use",
+          "features": [
+            "10 receipt processing credits",
+            "AI-powered data extraction",
+            "Excel & CSV export",
+            "Email support",
+            "Credits never expire"
+          ]
+        },
+        "popular": {
+          "name": "Popular",
+          "description": "Best for small businesses",
+          "features": [
+            "50 receipt processing credits",
+            "AI-powered data extraction",
+            "Excel & CSV export",
+            "Priority email support",
+            "Credits never expire",
+            "20% savings"
+          ]
+        },
+        "business": {
+          "name": "Business",
+          "description": "For high-volume users",
+          "features": [
+            "200 receipt processing credits",
+            "AI-powered data extraction",
+            "Excel & CSV export",
+            "Priority email support",
+            "Credits never expire",
+            "40% savings"
+          ]
+        }
+      },
+      "transactions": {
+        "title": "Transaction History",
+        "subtitle": "Your credit transaction history",
+        "purchase": "Purchase",
+        "usage": "Usage",
+        "refund": "Refund",
+        "bonus": "Bonus",
+        "purchasedBasicPackage": "Purchased basic package",
+        "date": "Date",
+        "type": "Type",
+        "amount": "Amount",
+        "description": "Description",
+        "noTransactions": "No transactions yet",
+        "purchaseCreditsToStart": "Purchase credits to get started",
+        "loading": "Loading your credit transactions...",
+        "showing": "Showing {from} to {to} of {total} transactions",
+        "previous": "Previous",
+        "next": "Next",
+        "page": "Page {current} of {total}"
+      },
+      "subscriptions": {
+        "title": "Monthly Subscriptions",
+        "subtitle": "Get credits automatically every month. Cancel anytime.",
+        "bestValue": "Best Value",
+        "save": "Save {percent}%",
+        "creditsPerMonth": "Credits per month",
+        "perMonth": "per month",
+        "receiptsPerMonth": "{count} receipts per month",
+        "aiPoweredExtraction": "AI-powered extraction",
+        "automaticRenewal": "Automatic monthly renewal",
+        "prioritySupport": "Priority support",
+        "bulkProcessing": "Bulk processing",
+        "cancelAnytime": "Cancel anytime",
+        "subscribe": "Subscribe",
+        "processing": "Processing...",
+        "disclaimer": "Subscriptions renew automatically. Manage or cancel anytime from your account settings.",
+        "plans": {
+          "basic": {
+            "name": "Basic",
+            "description": "Perfect for regular users"
+          },
+          "pro": {
+            "name": "Pro",
+            "description": "Best for power users"
+          },
+          "business": {
+            "name": "Business",
+            "description": "For high-volume businesses"
+          }
+        }
+      },
+      "templates": {
+        "title": "Custom Export Templates",
+        "description": "Create reusable templates for VAT declarations, accounting, and more",
+        "cost": "Cost per template",
+        "credits": "credits",
+        "maxTemplates": "Maximum templates",
+        "exportCost": "Export with template",
+        "free": "FREE",
+        "perfectFor": "Perfect for:",
+        "useCase1": "VAT declarations and tax reporting",
+        "useCase2": "Custom accounting formats",
+        "useCase3": "Multi-country compliance",
+        "useCase4": "Automated workflows",
+        "manageButton": "Manage Templates"
+      }
+    },
+    "templates": {
+      "pageTitle": "Export Templates - ReceiptSort",
+      "pageDescription": "Manage your custom export templates for receipts",
+      "title": "Export Templates",
+      "description": "Create custom templates to export receipts in your preferred format",
+      "quota": {
+        "title": "Template Quota",
+        "description": "Your template usage",
+        "remaining": "{count, plural, =0 {No templates remaining} one {1 template remaining} other {{count} templates remaining}}",
+        "limitReached": "You've reached the maximum number of templates. Delete unused templates to create new ones."
+      },
+      "createButton": "Create New Template",
+      "noTemplates": "No templates created yet",
+      "noTemplatesDescription": "Create your first template to export receipts in custom formats like VAT declarations",
+      "createFirstTemplate": "Create Your First Template",
+      "exportCount": "Times used",
+      "fieldsMapped": "Fields mapped",
+      "created": "Created",
+      "lastUsed": "Last used",
+      "deleteSuccess": "Template deleted successfully",
+      "info": {
+        "title": "How Custom Templates Work",
+        "point1": "Pay {credits} credits once to create a template",
+        "point2": "Export unlimited times for FREE",
+        "point3": "Perfect for VAT declarations and accounting",
+        "point4": "Map receipt fields to your template columns"
+      },
+      "deleteDialog": {
+        "title": "Delete Template?",
+        "description": "Are you sure you want to delete \"{name}\"? This action cannot be undone.",
+        "warning": "Note: No credits will be refunded for deleted templates.",
+        "deleting": "Deleting..."
+      },
+      "errors": {
+        "fetchFailed": "Failed to load templates",
+        "deleteFailed": "Failed to delete template"
+      },
+      "uploadDialog": {
+        "title": "Create Export Template",
+        "description": "Upload your Excel template and configure field mapping",
+        "steps": {
+          "upload": "Upload",
+          "configure": "Configure",
+          "confirm": "Confirm"
+        },
+        "uploading": "Uploading template...",
+        "clickToUpload": "Click to upload template file",
+        "fileTypes": "Excel files (.xlsx, .xls)",
+        "maxSize": "Max file size: {size}MB",
+        "uploadHint": "Upload your VAT declaration form, accounting template, or any Excel file you want to populate with receipt data",
+        "uploadSuccess": "Template uploaded successfully",
+        "uploadError": "Failed to upload template",
+        "fields": {
+          "name": "Template Name",
+          "description": "Description (optional)",
+          "sheetName": "Sheet Name",
+          "startRow": "Start Row",
+          "mapping": "Field Mapping"
+        },
+        "placeholders": {
+          "name": "e.g., VAT Declaration Q4 2025",
+          "description": "e.g., Quarterly VAT report for Netherlands"
+        },
+        "mappingHint": "Enter the column letter (A, B, C, etc.) for each field you want to include",
+        "fieldsMapped": "fields mapped",
+        "next": "Next",
+        "confirm": {
+          "title": "Confirm Template Creation",
+          "creditCharge": "This will charge {credits} credits",
+          "balance": "Your balance: {balance} credits",
+          "insufficientCredits": "Insufficient credits. Please purchase more credits.",
+          "benefits": "What you get:",
+          "benefit1": "Unlimited exports with this template (FREE)",
+          "benefit2": "Auto-populate your Excel forms",
+          "benefit3": "Edit and update mapping anytime",
+          "saving": "Creating template...",
+          "createTemplate": "Create Template"
+        },
+        "errors": {
+          "nameRequired": "Template name is required",
+          "mappingRequired": "At least one field mapping is required"
+        },
+        "saveSuccess": "{credits} credits charged. Template created!",
+        "saveError": "Failed to create template"
+      }
+    },
+    "exports": {
+      "title": "Exports",
+      "subtitle": "Export and manage your receipt data",
+      "exportSection": {
+        "title": "Export Receipts",
+        "description": "Filter and export your completed receipts"
+      },
+      "history": {
+        "title": "Export History",
+        "subtitle": "View your past receipt exports",
+        "autoDelete": "Files are automatically deleted after 30 days"
+      },
+      "buttons": {
+        "exportAll": "Export All",
+        "filters": "Filters",
+        "hide": "Hide",
+        "clearFilters": "Clear All Filters",
+        "loading": "Loading..."
+      },
+      "filters": {
+        "fromDate": "From Date",
+        "toDate": "To Date",
+        "merchantName": "Merchant Name",
+        "amountRange": "Amount Range",
+        "min": "Min",
+        "max": "Max",
+        "pickDate": "Pick a date",
+        "searchPlaceholder": "Search by merchant name...",
+        "activeFilters": "Active Filters",
+        "from": "From",
+        "to": "To",
+        "merchant": "Merchant",
+        "minAmount": "Min Amount",
+        "maxAmount": "Max Amount"
+      },
+      "noExports": "No exports yet",
+      "noExportsDescription": "Export receipts from the dashboard to see them here",
+      "type": "Type",
+      "fileName": "File Name",
+      "receipts": "receipts",
+      "showingRecent": "Showing {count} most recent export{count, plural, one {} other {s}}",
+      "columns": {
+        "date": "Export Date",
+        "receipts": "Receipts",
+        "format": "Format",
+        "download": "Download",
+        "expires": "Expires",
+        "actions": "Actions"
+      },
+      "status": {
+        "expired": "Expired",
+        "daysShort": "d"
+      },
+      "actions": {
+        "download": "Download",
+        "downloading": "Downloading...",
+        "unavailable": "Unavailable"
+      }
+    },
+    "profile": {
+      "title": "Profile Settings",
+      "subtitle": "Manage your account settings and preferences",
+      "profileInfo": "Profile Information",
+      "profileInfoDescription": "Update your personal information",
+      "loadingProfile": "Loading your profile...",
+      "personalInfo": "Personal Information",
+      "name": "Name",
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "Enter your full name",
+      "email": "Email",
+      "emailCannotBeChanged": "Email cannot be changed",
+      "language": "Language",
+      "timezone": "Timezone",
+      "updateProfile": "Update Profile",
+      "saveChanges": "Save Changes",
+      "saving": "Saving...",
+      "changePassword": "Change Password",
+      "currentPassword": "Current Password",
+      "newPassword": "New Password",
+      "accountInfo": "Account Information",
+      "accountInfoDescription": "View your account details",
+      "userId": "User ID",
+      "accountCreated": "Account Created",
+      "lastSignIn": "Last Sign In",
+      "user": "User",
+      "signOut": "Sign out",
+      "home": "Home",
+      "creditsLabel": "Credits",
+      "toasts": {
+        "profileUpdated": "Profile updated successfully",
+        "profileUpdateError": "Failed to update profile",
+        "profileLoadError": "Failed to load profile"
+      }
+    }
+  },
+  "pricing": {
+    "title": "Simple, transparent pricing",
+    "subtitle": "Choose the plan that works for you",
+    "subheadline": "Pay as you go or subscribe and save",
+    "currentBalance": "Your current balance",
+    "credits": "credits",
+    "perCredit": "per credit",
+    "perReceipt": "per receipt",
+    "creditPacks": "Credit Packs",
+    "creditPackagesTitle": "Credit Packages",
+    "subscriptions": "Subscriptions",
+    "buyNow": "Buy Now",
+    "subscribe": "Subscribe",
+    "popular": "Most Popular",
+    "purchaseCredits": "Purchase Credits",
+    "getStarted": "Get Started",
+    "readyTitle": "Ready to get started?",
+    "readySubtitle": "Start with 10 free credits, no credit card required",
+    "goToDashboard": "Go to Dashboard",
+    "startFree": "Start Free",
+    "signIn": "Sign In",
+    "tryItFree": "Try It Free",
+    "freeCreditsNoCreditCard": "10 free credits • No credit card required",
+    "features": {
+      "allFeatures": "All features included",
+      "aiExtraction": "AI-powered extraction",
+      "exportFormats": "Excel & CSV export",
+      "support": "Email support",
+      "security": "Bank-level security",
+      "gdpr": "GDPR compliant"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "howCreditsWork": {
+        "question": "How do credits work?",
+        "answer": "Each receipt you upload and process costs 1 credit. Credits are deducted only when the AI successfully extracts data from your receipt. You can purchase credits in packages or subscribe for monthly credits at a discounted rate."
+      },
+      "doCreditsExpire": {
+        "question": "Do credits expire?",
+        "answer": "No, credits never expire. Once you purchase credits, they remain in your account until you use them. This gives you complete flexibility to use them at your own pace."
+      },
+      "canIGetRefund": {
+        "question": "Can I get a refund?",
+        "answer": "Yes! We offer a 30-day money-back guarantee. If you're not satisfied with our service, contact us within 30 days of your purchase for a full refund on unused credits."
+      },
+      "wrongExtraction": {
+        "question": "What if the extraction is wrong?",
+        "answer": "If the AI extraction contains errors or doesn't meet your expectations, contact our support team. We'll review the case and provide a free retry or credit refund if the extraction quality was below our standards."
+      },
+      "needSubscription": {
+        "question": "Do I need a subscription?",
+        "answer": "No, subscriptions are completely optional. You can purchase credits as needed with our pay-as-you-go packages. Subscriptions are available if you want to save money with discounted monthly credits, but you're free to use the service however works best for you."
+      }
+    }
+  },
+  "footer": {
+    "description": "Smart receipt scanning with intelligent template mapping",
+    "product": "Product",
+    "company": "Company",
+    "legal": "Legal",
+    "support": "Support",
+    "termsOfService": "Terms of Service",
+    "privacyPolicy": "Privacy Policy",
+    "cookiePolicy": "Cookie Policy",
+    "allRightsReserved": "All rights reserved"
+  },
+  "navigation": {
+    "home": "Home",
+    "features": "Features",
+    "pricing": "Pricing",
+    "howItWorks": "How It Works",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "dashboard": "Dashboard",
+    "login": "Login",
+    "signup": "Sign Up",
+    "about": "About",
+    "more": "More",
+    "customTemplates": "Custom Templates"
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "subtitle": "Have questions? We'd love to hear from you. Send us a message and we'll respond within 24 hours.",
+    "backToHome": "Back to Home",
+    "sendMessage": "Send us a Message",
+    "formDescription": "Fill out the form below and we'll get back to you as soon as possible.",
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "email": "Email",
+    "emailPlaceholder": "your@email.com",
+    "subject": "Subject",
+    "subjectPlaceholder": "How can we help?",
+    "message": "Message",
+    "messagePlaceholder": "Tell us more about your inquiry...",
+    "sendButton": "Send Message",
+    "sending": "Sending...",
+    "successMessage": "Message sent successfully! We'll get back to you within 24 hours.",
+    "responseTime": "We typically respond within 24 hours",
+    "preferEmail": "Prefer Email?",
+    "reachDirectly": "You can also reach us directly via email:",
+    "frequentlyAskedQuestions": "Frequently Asked Questions",
+    "faqDescription": "Before reaching out, you might find your answer in our FAQ section.",
+    "viewFaq": "View FAQ",
+    "quickStartGuide": "Quick Start Guide",
+    "quickStartDescription": "New to ReceiptSort? Learn how to get started in 3 simple steps.",
+    "howItWorks": "How It Works"
+  },
+  "creditPackages": {
+    "title": "Purchase Credits",
+    "starter": {
+      "name": "Starter",
+      "description": "Perfect for trying out the service"
+    },
+    "basic": {
+      "name": "Basic",
+      "description": "Great for regular users"
+    },
+    "pro": {
+      "name": "Pro",
+      "description": "Best value for power users"
+    },
+    "business": {
+      "name": "Business",
+      "description": "For high-volume businesses"
+    },
+    "credits": "Credits",
+    "perCredit": "per credit",
+    "processReceipts": "Process {count} receipts",
+    "aiPoweredExtraction": "AI-powered extraction",
+    "prioritySupport": "Priority support",
+    "bulkProcessing": "Bulk processing",
+    "neverExpires": "Never expires",
+    "purchase": "Purchase",
+    "processing": "Processing...",
+    "bestValue": "Best Value",
+    "save": "Save {percent}%"
+  },
+  "receiptDetails": {
+    "title": "Receipt Details",
+    "receiptPreview": "Receipt Preview",
+    "documentType": "Document Type",
+    "merchantName": "Merchant Name",
+    "invoiceNumber": "Invoice Number",
+    "amount": "Amount",
+    "currency": "Currency",
+    "receiptDate": "Receipt Date",
+    "category": "Category",
+    "subtotal": "Subtotal (Before Tax)",
+    "taxAmount": "Tax Amount",
+    "dueDate": "Due Date",
+    "paymentMethod": "Payment Method",
+    "purchaseOrderNumber": "Purchase Order #",
+    "paymentReference": "Payment Reference",
+    "vendorTaxId": "Vendor Tax ID (VAT/EIN/BTW)",
+    "vendorAddress": "Vendor Address",
+    "lineItems": "Line Items",
+    "lineItemsCount": "Line Items ({count})",
+    "patientName": "Patient Name",
+    "medicalInformation": "Medical Information",
+    "patientDob": "Patient Date of Birth",
+    "treatmentDate": "Treatment Date",
+    "insuranceClaimNumber": "Insurance Claim Number",
+    "diagnosisCodes": "Diagnosis Codes (ICD)",
+    "procedureCodes": "Procedure Codes (CPT)",
+    "providerId": "Provider ID (AGB/NPI)",
+    "insuranceCoveredAmount": "Insurance Covered Amount",
+    "patientResponsibilityAmount": "Patient Responsibility Amount",
+    "notes": "Notes",
+    "saveChanges": "Save Changes",
+    "saving": "Saving...",
+    "delete": "Delete",
+    "deleting": "Deleting...",
+    "retryProcessing": "Retry Processing",
+    "retrying": "Retrying...",
+    "documentTypes": {
+      "receipt": "Receipt",
+      "invoice": "Invoice",
+      "medicalInvoice": "Medical Invoice",
+      "bill": "Bill"
+    },
+    "categories": {
+      "foodDining": "Food & Dining",
+      "transportation": "Transportation",
+      "shopping": "Shopping",
+      "officeSupplies": "Office Supplies",
+      "travel": "Travel",
+      "entertainment": "Entertainment",
+      "utilities": "Utilities",
+      "healthcare": "Healthcare",
+      "other": "Other"
+    },
+    "paymentMethods": {
+      "cash": "Cash",
+      "creditCard": "Credit Card",
+      "debitCard": "Debit Card",
+      "bankTransfer": "Bank Transfer",
+      "other": "Other"
+    },
+    "lineItemColumns": {
+      "lineNumber": "#",
+      "description": "Description",
+      "quantity": "Qty",
+      "unitPrice": "Price",
+      "lineTotal": "Total",
+      "itemCode": "Code"
+    }
+  },
+  "billing": {
+    "title": "Billing & Purchase History",
+    "description": "View and download your purchase invoices for accounting and tax filing",
+    "noInvoices": "No Purchase History",
+    "noInvoicesDescription": "Purchase credits to get started and receive invoices for your transactions",
+    "purchaseCredits": "Purchase Credits"
+  },
+  "account": {
+    "title": "Account Settings",
+    "description": "Manage your account information and preferences",
+    "profileTitle": "Profile Information",
+    "profileDescription": "Your personal information and contact details",
+    "fullName": "Full Name",
+    "email": "Email Address",
+    "userId": "User ID",
+    "notSet": "Not set",
+    "creditsTitle": "Credits Balance",
+    "creditsDescription": "Your current credit balance for receipt processing",
+    "currentCredits": "Current Credits",
+    "purchaseCredits": "Purchase More Credits",
+    "billingTitle": "Billing & Invoices",
+    "billingDescription": "View your purchase history and download invoices",
+    "viewBilling": "View Billing History",
+    "accountCreated": "Account created on",
+    "enterName": "Enter your full name",
+    "saveChanges": "Save Changes",
+    "updateSuccess": "Profile updated successfully!",
+    "updateError": "Failed to update profile. Please try again.",
+    "emailCannotChange": "Email address cannot be changed"
+  },
+  "pdfRetryDialog": {
+    "title": "Improve Extraction Accuracy",
+    "description": "Low confidence detected. Converting to PNG may improve accuracy.",
+    "lowConfidenceWarning": "Low confidence detected",
+    "currentConfidence": "Current confidence",
+    "convertButton": "Convert & Retry",
+    "converting": "Converting...",
+    "uploading": "Uploading...",
+    "processing": "Processing...",
+    "completed": "Completed",
+    "conversionSuccess": "Converted successfully",
+    "uploadSuccess": "Uploaded successfully",
+    "processingSuccess": "Processed with {confidence}% confidence",
+    "conversionFailed": "Conversion failed",
+    "fetchFailed": "Failed to fetch file",
+    "retryFailed": "Retry failed",
+    "preview": "Preview"
+  },
+  "exportDialog": {
+    "title": "Export Receipts",
+    "description": "Export {count} selected receipt{plural} to your preferred format",
+    "standardExport": "Standard Export",
+    "standardExportDescription": "Quick export to common formats",
+    "excel": "Excel",
+    "csv": "CSV",
+    "excelDescription": "Formatted with totals",
+    "csvDescription": "Plain text format",
+    "exportExcel": "Export Excel",
+    "exportCsv": "Export CSV",
+    "exportFormat": "Export {format}",
+    "exporting": "Exporting...",
+    "exportTemplate": "Export Template",
+    "selectColumns": "Select Columns",
+    "requiredFieldsNote": "* Required fields cannot be deselected",
+    "aiTemplateExport": "AI-Powered Template Export",
+    "aiTemplateDescription": "Upload your Excel template and let AI map fields automatically",
+    "uploadNewTemplate": "Upload New Template",
+    "useSavedTemplate": "Use Saved Template",
+    "clickToUpload": "Click to upload",
+    "fileTypeHint": ".xlsx, .xls (max 5MB)",
+    "analyzing": "Analyzing...",
+    "clickToChange": "Click to change",
+    "sheet": "Sheet",
+    "startRow": "Start Row",
+    "fieldsMapped": "{count} Fields Mapped",
+    "templateName": "Template Name",
+    "templateNamePlaceholder": "e.g., VAT Q4 2025",
+    "saveButton": "Save",
+    "saveTemplateHint": "Click Save to store template for reuse (FREE)",
+    "saveTemplateInfo": "💡 Click Save button above to store this template",
+    "noSavedTemplates": "No saved templates",
+    "noSavedTemplatesHint": "Upload and save to reuse",
+    "select": "Select",
+    "used": "Used",
+    "times": "times",
+    "exportLimitExceeded": "⚠️ Export Limit Exceeded",
+    "exportLimitMessage": "You've selected {count} receipts. Maximum is {max}. Please use filters to reduce the selection.",
+    "largeExport": "⚠️ Large Export",
+    "largeExportMessage": "This is a large export ({count} receipts). It may take a few seconds to generate.",
+    "exportSummary": "Export Summary",
+    "receiptsSelected": "• {count} receipt{plural} selected",
+    "onlyCompletedIncluded": "• Only completed receipts will be included",
+    "exportWithTemplate": "Export with Template (1 credit)",
+    "close": "Close",
+    "templateRequired": "Template required",
+    "templateRequiredDescription": "Please upload a new template or select a saved template",
+    "invalidFileType": "Invalid file type",
+    "invalidFileTypeDescription": "Please upload an Excel file (.xlsx or .xls)",
+    "fileTooLarge": "File too large",
+    "fileTooLargeDescription": "Please upload a file smaller than 5MB",
+    "templateAnalyzed": "Template analyzed!",
+    "templateAnalyzedDescription": "AI detected {count} field mappings. Click Save to store it.",
+    "analysisFailed": "Analysis failed",
+    "templateSaved": "Template saved!",
+    "templateSavedDescription": "\"{name}\" is now available for reuse (FREE)",
+    "templateExists": "Template exists",
+    "templateExistsDescription": "\"{name}\" is already saved",
+    "saveFailed": "Save failed",
+    "exportSuccessful": "Export successful",
+    "exportSuccessfulDescription": "{count} receipt{plural} exported. File: {filename}",
+    "exportFailed": "Export failed",
+    "noCompletedReceipts": "No completed receipts found. Please process receipts before exporting.",
+    "insufficientCredits": "You need more credits to perform this export. Please purchase credits.",
+    "emptyFile": "Export generated an empty file",
+    "templateDeleted": "Template deleted",
+    "templateDeletedDescription": "Template has been removed",
+    "deleteFailed": "Delete failed",
+    "deleteFailedDescription": "Failed to delete template"
+  },
+  "privacyPage": {
+    "backToHome": "Back to Home",
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: October 6, 2025",
+    "sections": {
+      "introduction": {
+        "title": "1. Introduction",
+        "content": "Welcome to ReceiptSorter (\"we,\" \"our,\" or \"us\"). We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our receipt processing service."
+      },
+      "informationWeCollect": {
+        "title": "2. Information We Collect",
+        "intro": "We collect information that you provide directly to us:",
+        "items": [
+          "Account information (email address, name)",
+          "Receipt images and PDFs that you upload",
+          "Payment information (processed securely through Stripe)",
+          "Usage data and analytics"
+        ]
+      },
+      "howWeUse": {
+        "title": "3. How We Use Your Information",
+        "intro": "We use your information to:",
+        "items": [
+          "Provide and maintain our receipt processing service",
+          "Process your receipts using AI technology",
+          "Process payments and manage your account",
+          "Send you service updates and promotional communications",
+          "Improve our services and develop new features",
+          "Comply with legal obligations"
+        ]
+      },
+      "dataSecurity": {
+        "title": "4. Data Security",
+        "intro": "We implement industry-standard security measures to protect your data:",
+        "items": [
+          "256-bit SSL encryption for data transmission",
+          "Secure cloud storage with access controls",
+          "Automatic deletion of receipt files after 90 days",
+          "Regular security audits and updates"
+        ]
+      },
+      "dataSharing": {
+        "title": "5. Data Sharing",
+        "intro": "We do not sell your personal information. We may share your data with:",
+        "items": [
+          "Service providers (OpenAI for receipt processing, Stripe for payments)",
+          "Law enforcement when required by law",
+          "Business partners with your explicit consent"
+        ]
+      },
+      "yourRights": {
+        "title": "6. Your Rights",
+        "intro": "Under GDPR and other privacy laws, you have the right to:",
+        "items": [
+          "Access your personal data",
+          "Correct inaccurate data",
+          "Request deletion of your data",
+          "Export your data in a portable format",
+          "Opt-out of marketing communications",
+          "Lodge a complaint with a supervisory authority"
+        ]
+      },
+      "cookies": {
+        "title": "7. Cookies",
+        "content": "We use essential cookies to provide our service and optional analytics cookies to improve user experience. You can control cookie preferences through your browser settings."
+      },
+      "dataRetention": {
+        "title": "8. Data Retention",
+        "content": "We retain your data only as long as necessary to provide our services and comply with legal obligations. Receipt files are automatically deleted after 90 days. Account data is retained until you request deletion."
+      },
+      "childrensPrivacy": {
+        "title": "9. Children's Privacy",
+        "content": "Our service is not intended for children under 18. We do not knowingly collect data from children."
+      },
+      "changes": {
+        "title": "10. Changes to This Policy",
+        "content": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the \"Last updated\" date."
+      },
+      "contact": {
+        "title": "11. Contact Us",
+        "intro": "If you have questions about this Privacy Policy, please contact us at:",
+        "email": "Email: support@seenano.nl",
+        "contactForm": "Contact Form: receiptsort.com/contact"
+      }
+    }
+  },
+  "termsPage": {
+    "backToHome": "Back to Home",
+    "title": "Terms of Service",
+    "lastUpdated": "Last updated: October 6, 2025",
+    "sections": {
+      "acceptance": {
+        "title": "1. Acceptance of Terms",
+        "content": "By accessing or using ReceiptSorter (\"the Service\"), you agree to be bound by these Terms of Service (\"Terms\"). If you do not agree to these Terms, do not use the Service."
+      },
+      "description": {
+        "title": "2. Description of Service",
+        "content": "ReceiptSorter is a cloud-based receipt processing service that uses artificial intelligence to extract data from receipt images and PDFs. The Service allows you to upload receipts, extract merchant information, amounts, dates, and other data, and export the results to Excel or CSV formats."
+      },
+      "userAccounts": {
+        "title": "3. User Accounts",
+        "intro": "To use the Service, you must:",
+        "items": [
+          "Create an account with accurate information",
+          "Maintain the security of your account credentials",
+          "Be at least 18 years old",
+          "Notify us immediately of any unauthorized access",
+          "Be responsible for all activity under your account"
+        ]
+      },
+      "credits": {
+        "title": "4. Credits and Payment",
+        "content": "The Service operates on a credit-based system. Each receipt processed costs 1 credit. Credits can be purchased through our website using Stripe payment processing. Credits never expire. Prices are subject to change with notice. All sales are final unless otherwise stated in our refund policy."
+      },
+      "usePolicy": {
+        "title": "5. Acceptable Use",
+        "intro": "You agree not to:",
+        "items": [
+          "Upload illegal, fraudulent, or harmful content",
+          "Attempt to reverse engineer or hack the Service",
+          "Use the Service to violate any laws or regulations",
+          "Share your account credentials with others",
+          "Use automated scripts to abuse the Service"
+        ]
+      },
+      "intellectualProperty": {
+        "title": "6. Intellectual Property",
+        "content": "The Service, including all content, features, and functionality, is owned by ReceiptSorter and protected by international copyright, trademark, and other intellectual property laws. You retain ownership of your uploaded receipts and extracted data."
+      },
+      "dataProcessing": {
+        "title": "7. Data Processing",
+        "content": "We process your receipt data using OpenAI's GPT-4 Vision AI. Receipt files are stored securely and automatically deleted after 90 days. See our Privacy Policy for details on how we handle your data."
+      },
+      "warranties": {
+        "title": "8. Warranties and Disclaimers",
+        "content": "THE SERVICE IS PROVIDED \"AS IS\" WITHOUT WARRANTIES OF ANY KIND. We do not guarantee 100% accuracy in receipt data extraction. You are responsible for verifying extracted data before use."
+      },
+      "limitation": {
+        "title": "9. Limitation of Liability",
+        "content": "TO THE MAXIMUM EXTENT PERMITTED BY LAW, RECEIPTSORT SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES ARISING FROM YOUR USE OF THE SERVICE."
+      },
+      "termination": {
+        "title": "10. Termination",
+        "content": "We reserve the right to suspend or terminate your account at any time for violation of these Terms. You may delete your account at any time through your account settings."
+      },
+      "changes": {
+        "title": "11. Changes to Terms",
+        "content": "We may modify these Terms at any time. We will notify you of significant changes via email or through the Service. Continued use after changes constitutes acceptance."
+      },
+      "governing": {
+        "title": "12. Governing Law",
+        "content": "These Terms are governed by the laws of the Netherlands. Any disputes shall be resolved in the courts of the Netherlands."
+      },
+      "contact": {
+        "title": "13. Contact",
+        "intro": "Questions about these Terms? Contact us at:",
+        "email": "Email: support@seenano.nl",
+        "contactForm": "Contact Form: receiptsort.com/contact"
+      }
+    }
+  }
+}

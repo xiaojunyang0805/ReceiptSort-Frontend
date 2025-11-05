@@ -1,0 +1,1027 @@
+{
+  "common": {
+    "getStarted": "無料で始める",
+    "signUp": "サインアップ",
+    "login": "ログイン",
+    "logout": "ログアウト",
+    "learnMore": "詳細を見る",
+    "tryDemo": "デモを試す",
+    "uploadReceipts": "レシートをアップロード",
+    "pricing": "料金",
+    "features": "機能",
+    "howItWorks": "使い方",
+    "faq": "よくある質問",
+    "contact": "お問い合わせ",
+    "dashboard": "ダッシュボード",
+    "receipts": "レシート",
+    "exports": "エクスポート",
+    "credits": "クレジット",
+    "profile": "プロフィール",
+    "upload": "アップロード",
+    "export": "エクスポート",
+    "download": "ダウンロード",
+    "cancel": "キャンセル",
+    "save": "保存",
+    "delete": "削除",
+    "edit": "編集",
+    "close": "閉じる",
+    "search": "検索",
+    "filter": "フィルター",
+    "select": "選択",
+    "loading": "読み込み中...",
+    "error": "エラー",
+    "success": "成功",
+    "confirm": "確認",
+    "billing": "請求",
+    "account": "アカウント"
+  },
+  "hero": {
+    "headline": "あなたのレシート、あなたの形式、自動的に",
+    "headlineHighlight": "あなたの形式",
+    "subheadline": "AIで数秒でレシートからデータを抽出します。",
+    "subheadlineDetails": "レシートアップロード → AIがデータ抽出 → Excelダウンロード",
+    "watchDemo": "デモを見る",
+    "trustBadge": "世界中の2000社以上の企業に信頼されています",
+    "valueProps": {
+      "freeCredits": "10個の無料クレジット + 10個のカスタムテンプレート • クレジットカード不要",
+      "neverExpire": "クレジットは無期限 • テンプレートは無制限に再利用可能",
+      "multiDocument": "レシート、請求書、医療記録に対応"
+    },
+    "getStarted": "無料で始める",
+    "processTagline": "アップロード → AIがテンプレートにマッピング → あなたの形式でダウンロード"
+  },
+  "features": {
+    "title": "レシートを整理するために必要なすべて",
+    "subtitle": "時間を大切にする中小企業、フリーランサー、会計士のために作られました。",
+    "items": {
+      "upload": {
+        "title": "あらゆるデバイスからアップロード",
+        "description": "スマートフォン、メール、スキャナーからレシートをドラッグ&ドロップ。すべての一般的な画像形式（JPG、PNG、WebP、TIFF、BMP、GIF）および1ファイルあたり最大10MBのPDFに対応。"
+      },
+      "aiExtraction": {
+        "title": "マルチドキュメント・インテリジェンス",
+        "description": "レシート、請求書、医療記録に対応—レシートだけではありません。AIは異なる文書タイプにシームレスに適応します。GPT-4 Visionは全ての形式で98%以上の精度を達成。複数の言語と通貨形式を自動的に処理します。"
+      },
+      "export": {
+        "title": "ExcelまたはCSVにエクスポート",
+        "description": "QuickBooks、Xero、その他の会計ソフトウェアですぐに使える整理されたスプレッドシートをダウンロードします。"
+      },
+      "pricing": {
+        "title": "従量課金制",
+        "description": "バルクパッケージで1枚あたり6.7円から。必要なときにクレジットを購入、またはサブスクリプションでさらにお得に。"
+      },
+      "security": {
+        "title": "銀行レベルのセキュリティ",
+        "description": "データは暗号化され、決して共有されません。GDPR準拠。レシートは90日後に自動的に削除されます。"
+      },
+      "timeSaving": {
+        "title": "週5時間以上節約",
+        "description": "手動でのデータ入力をやめましょう。手動で1枚処理する時間で100枚のレシートを処理できます。各レシートは5秒以内に処理されます。"
+      },
+      "templateMapping": {
+        "title": "AIがあなたの形式を学習",
+        "description": "あなたの列名（消費税額、プロジェクトコード、顧客IDなど）でカスタムエクスポートテンプレートを作成。当社のAIは、レシートが異なる用語を使用していても（Tax vs VAT vs Btw vs 消費税）、抽出データを自動的にあなたの形式にマッピングします。10個のテンプレートを無料で保存、無制限に再利用可能。各エクスポートはわずか1クレジット。",
+        "badge": "独自機能"
+      }
+    }
+  },
+  "howItWorks": {
+    "title": "使い方",
+    "subtitle": "4つの簡単なステップで始められます",
+    "description": "レシート写真から整理されたスプレッドシートまで1分以内",
+    "steps": {
+      "template": {
+        "title": "完璧なエクスポート形式を設計",
+        "description": "正確な列名と構造でカスタムテンプレートを作成します。わずか2分。最大10個のテンプレートを無料で保存—クレジット不要。"
+      },
+      "upload": {
+        "title": "レシートをアップロード",
+        "description": "レシート、請求書、医療記録をドラッグ&ドロップ。任意のデバイスから写真またはPDFで動作します。すべての主要な画像形式に対応。"
+      },
+      "process": {
+        "title": "AIが抽出してテンプレートにマッピング",
+        "description": "AIが文書を読み取り、抽出されたデータをあなたのテンプレート列にインテリジェントにマッピング—異なる用語も自動的に処理します。"
+      },
+      "export": {
+        "title": "あなたの形式でダウンロード",
+        "description": "テンプレートに完全に一致するフォーマット済みのExcelまたはCSVファイルを取得—会計システムに直接インポートするか、当局に提出する準備ができています。"
+      }
+    },
+    "cta": "無料で始める：最初のテンプレートを作成"
+  },
+  "socialProof": {
+    "title": "世界中の企業に信頼されています",
+    "stats": {
+      "receipts": "処理されたレシート",
+      "users": "アクティブユーザー",
+      "accuracy": "平均精度",
+      "timeSaved": "節約された時間",
+      "timeSavedPerDoc": "1文書あたりの節約時間"
+    },
+    "testimonials": {
+      "title": "お客様の声",
+      "items": [
+        {
+          "quote": "テンプレートマッピング機能は素晴らしいです。VAT申告用のテンプレートを1つ作成したところ、すべてのレシートが自動的に税務署の要件に合わせてフォーマットされるようになりました。毎月20分以上節約でき、フォーマットエラーもなくなりました。",
+          "name": "Lisa van Dijk",
+          "role": "フリーランスコンサルタント、オランダ"
+        },
+        {
+          "quote": "小規模ビジネスオーナーとして、経理に時間をかけられません。このツールは経費追跡のゲームチェンジャーです。",
+          "name": "Marcus Johnson",
+          "role": "小売店オーナー"
+        },
+        {
+          "quote": "AIの精度には懐疑的でしたが、ReceiptSortは98%の確率で正確です。しかし、真のゲームチェンジャーはテンプレートマッピングです—レシートが会計士が必要とする形式で正確にエクスポートされます。手動での再フォーマットは不要です。",
+          "name": "Jennifer Martinez",
+          "role": "小規模ビジネスオーナー"
+        }
+      ]
+    },
+    "trustBadges": {
+      "securePayment": "Stripeによる安全な決済",
+      "gdpr": "GDPR準拠",
+      "encryption": "256ビットSSL暗号化"
+    }
+  },
+  "support": {
+    "title": "まだ質問がありますか？",
+    "subtitle": "サポートチームがお手伝いします。お問い合わせいただければ、24時間以内にご返信いたします。",
+    "emailUs": "メールでお問い合わせ",
+    "or": "または",
+    "contactForm": "お問い合わせフォーム"
+  },
+  "faq": {
+    "title": "よくある質問",
+    "subtitle": "ReceiptSortについて知っておくべきすべて",
+    "items": {
+      "accuracy": {
+        "question": "AIの抽出精度はどのくらいですか？",
+        "answer": "当社のAIは、明確で標準的なレシートに対して98%以上の精度を達成しています。エクスポート前にいつでも抽出されたデータを手動で編集できます。"
+      },
+      "formats": {
+        "question": "どのファイル形式に対応していますか？",
+        "answer": "すべての一般的な画像形式（JPG、PNG、JPEG、WebP、TIFF、BMP、GIF）および1ファイルあたり最大10MBのPDFファイルに対応しています。"
+      },
+      "cost": {
+        "question": "料金はいくらですか？",
+        "answer": "クレジットシステムを使用しています。レシート1枚につき1クレジットです。クレジットは小パッケージで1枚6.7円から、バルク購入で1枚6.7円まで低価格化（例：150クレジット999円、1500クレジット9,999円）。月額サブスクリプションでさらにお得になります。"
+      },
+      "expiration": {
+        "question": "クレジットに有効期限はありますか？",
+        "answer": "いいえ、クレジットに有効期限はありません。必要なときにいつでもご使用いただけます。"
+      },
+      "security": {
+        "question": "データは安全ですか？",
+        "answer": "はい。銀行レベルの暗号化（256ビットSSL）を使用しており、レシートは90日後に自動的に削除されます。お客様のデータを共有することは決してありません。"
+      },
+      "export": {
+        "question": "QuickBooksやXeroにエクスポートできますか？",
+        "answer": "ExcelおよびCSV形式にエクスポートします。これらはQuickBooks、Xero、およびすべての主要な会計ソフトウェアと互換性があります。ダウンロードしたファイルを会計システムにインポートするだけです。"
+      },
+      "customTemplates": {
+        "question": "カスタムテンプレートとは何ですか？なぜ必要ですか？",
+        "answer": "カスタムテンプレートを使用すると、あなたのニーズに合わせた再利用可能なエクスポート形式を作成できます—VAT申告、特定の会計レイアウト、保険フォームなど。\n\nなぜ重要か：他のレシートツールは固定された形式にエクスポートします。その後、列の再編成、ヘッダーの名前変更、会計システムや政府要件に合わせた再フォーマットに1文書あたり2〜3分を無駄にします。\n\nReceiptSortでは：正確な列名（VAT金額、プロジェクトコードなど）で理想的なテンプレートを一度作成します。当社のAIは、レシートが異なる用語を使用していても（Tax vs VAT vs Btw vs MwSt）、すべての将来のレシートをテンプレート列に自動的にマッピングします。\n\n価格：最大10個のテンプレートを無料で保存（クレジット不要）、無制限に再利用できます。各エクスポートはテンプレートの複雑さに関係なく1クレジットのみです。\n\n例：日付 | ベンダー | 正味金額 | VAT金額 | 合計 | カテゴリという列でテンプレートを作成します。処理するすべてのレシートは、この正確な形式に自動的にエクスポートされます—手動での再編成は不要です。"
+      },
+      "wrongExtraction": {
+        "question": "抽出が間違っていた場合はどうなりますか？",
+        "answer": "エクスポート前に抽出されたデータを手動で編集できます。抽出が完全に失敗した場合は、クレジットを返金いたします。"
+      },
+      "refunds": {
+        "question": "返金は可能ですか？",
+        "answer": "はい、ご満足いただけない場合、クレジット購入に対して30日間の返金保証を提供しています。"
+      },
+      "business": {
+        "question": "ビジネスで使用できますか？",
+        "answer": "もちろんです！多くの中小企業、フリーランサー、会計士が経費追跡や記帳にReceiptSortを使用しています。"
+      },
+      "software": {
+        "question": "ソフトウェアをインストールする必要がありますか？",
+        "answer": "いいえ、ReceiptSortは100%ウェブベースです。ウェブブラウザを備えた任意のデバイスからアクセスできます。"
+      }
+    }
+  },
+  "finalCTA": {
+    "title": "レシートデータの再整理をやめる準備はできましたか？",
+    "subtitle": "無料で始める：10クレジット + 10個のカスタムテンプレート。クレジットカード不要。",
+    "button": "レシート処理を開始",
+    "viewPricing": "料金を見る",
+    "trustIndicator": "フリーランサー、会計士、中小企業と同じように、独自のフォーマットでレシートを自動処理しましょう。",
+    "trustBadges": {
+      "creditsNeverExpire": "クレジットは無期限",
+      "templatesReusable": "テンプレートは無制限に再利用可能",
+      "moneyBack": "30日間返金保証",
+      "allSoftware": "全ての会計ソフトウェアに対応"
+    }
+  },
+  "auth": {
+    "loginTitle": "ログイン",
+    "loginSubtitle": "アカウントにアクセスするには認証情報を入力してください",
+    "signupTitle": "アカウントを作成",
+    "signupSubtitle": "レシートの整理を始めるためにサインアップしてください",
+    "email": "メールアドレス",
+    "emailPlaceholder": "name@example.com",
+    "password": "パスワード",
+    "passwordPlaceholder": "••••••••",
+    "confirmPassword": "パスワードを確認",
+    "fullName": "氏名",
+    "fullNamePlaceholder": "山田太郎",
+    "forgotPassword": "パスワードをお忘れですか？",
+    "noAccount": "アカウントをお持ちでないですか？",
+    "hasAccount": "すでにアカウントをお持ちですか？",
+    "signIn": "サインイン",
+    "signUp": "サインアップ",
+    "logIn": "ログイン",
+    "continueWithGoogle": "Googleで続ける",
+    "orContinueWithEmail": "またはメールアドレスで続ける",
+    "loading": "読み込み中...",
+    "termsAgree": "サインアップすることで、当社の",
+    "termsOfService": "利用規約",
+    "privacyPolicy": "プライバシーポリシー",
+    "and": "および",
+    "errors": {
+      "invalidEmail": "無効なメールアドレス",
+      "passwordMin": "パスワードは6文字以上である必要があります",
+      "fullNameMin": "氏名は2文字以上である必要があります",
+      "passwordMismatch": "パスワードが一致しません",
+      "invalidCredentials": "無効なメールアドレスまたはパスワード",
+      "emailNotConfirmed": "ログインする前にメールアドレスを確認してください",
+      "emailAlreadyRegistered": "このメールアドレスは既に登録されています",
+      "unexpectedError": "予期しないエラーが発生しました",
+      "googleSignInFailed": "Googleでのサインインに失敗しました"
+    },
+    "success": {
+      "welcomeBack": "おかえりなさい！",
+      "accountCreated": "アカウントが正常に作成されました！",
+      "checkEmail": "ログインする前にメールを確認してアカウントを確認してください"
+    }
+  },
+  "dashboard": {
+    "welcome": "おかえりなさい",
+    "overview": {
+      "title": "概要",
+      "subtitle": "レシート管理の概要です",
+      "lastExport": {
+        "never": "なし"
+      }
+    },
+    "uploadSection": {
+      "title": "レシートをアップロード",
+      "dragDrop": "レシート画像をここにドラッグ&ドロップ",
+      "dropHere": "レシートファイルをここにドロップ",
+      "clickToBrowse": "またはクリックして参照",
+      "or": "または",
+      "browse": "ファイルを参照",
+      "supported": "対応: PNG, JPG, JPEG, WEBP, TIFF, BMP, GIF, PDF (最大10MB)",
+      "supportedFormats": "対応形式: PNG, JPG, JPEG, WEBP, TIFF, BMP, GIF, PDF",
+      "maxFileSize": "最大ファイルサイズ: 1ファイルあたり10MB",
+      "multipleFiles": "複数のファイルを一度にアップロードして処理を高速化",
+      "secureStorage": "レシートは安全に保存され、AI処理の準備が整います",
+      "creditCost": "処理はレシート1枚につき1クレジットです"
+    },
+    "stats": {
+      "allTimeProcessed": "処理済み合計",
+      "receiptsUploaded": "アップロード済みレシート",
+      "mostRecentExport": "最新のエクスポート"
+    },
+    "timePeriods": {
+      "thisMonth": "今月",
+      "lastMonth": "先月",
+      "thisYear": "今年",
+      "q1": "Q1",
+      "q2": "Q2",
+      "q3": "Q3",
+      "q4": "Q4",
+      "allTime": "全期間"
+    },
+    "timeAgo": {
+      "daysAgo": "日前",
+      "dayAgo": "日前",
+      "about17HoursAgo": "約17時間前"
+    },
+    "recentUploads": {
+      "title": "最近のアップロード",
+      "subtitle": "最近アップロードされたレシート"
+    },
+    "receiptsPage": {
+      "title": "レシート",
+      "subtitle": "アップロードしたすべてのレシートを表示・管理",
+      "quickExport": "クイックエクスポート",
+      "quickSearch": "クイック検索...",
+      "allStatus": "すべてのステータス",
+      "show": "表示",
+      "filters": "フィルター",
+      "quickActions": "クイックアクション",
+      "quickActionsSubtitle": "レシートを表示するか、保留中のレシートを処理する",
+      "viewAllReceipts": "すべてのレシートを表示",
+      "exportSelected": "選択項目をエクスポート ({count})",
+      "noMatchingReceipts": "検索条件に一致するレシートがありません",
+      "dropdownMenu": {
+        "viewDetails": "詳細を表示",
+        "editData": "データを編集",
+        "delete": "削除",
+        "process": "処理 (1クレジット)",
+        "processing": "処理中...",
+        "retry": "再試行 (1クレジット)",
+        "retrying": "再試行中..."
+      },
+      "filterPanel": {
+        "search": "検索",
+        "searchPlaceholder": "店舗名、金額...",
+        "fromDate": "開始日",
+        "toDate": "終了日",
+        "pickDate": "日付を選択",
+        "minAmount": "最小金額",
+        "maxAmount": "最大金額",
+        "categories": "カテゴリ",
+        "status": "ステータス",
+        "applyFilters": "フィルターを適用",
+        "clear": "クリア",
+        "hide": "非表示"
+      },
+      "processing": {
+        "processing": "処理中...",
+        "processAllButton": "保留中をすべて処理 ({count})",
+        "dialogTitle": "保留中のレシートをすべて処理しますか？",
+        "dialogDescription": "{count}件のレシートを処理します。{count}クレジットを使用します。",
+        "receiptsToProcess": "処理するレシート：",
+        "creditsRequired": "必要なクレジット：",
+        "yourCredits": "あなたのクレジット：",
+        "insufficientCreditsWarning": "すべてのレシートを処理するには、あと{creditsNeeded}クレジット必要です。最初の{userCredits}件のレシートのみが処理されます。",
+        "processingTimeEstimate": "処理には約{seconds}秒かかります（レシートあたり1〜2秒）。",
+        "cancel": "キャンセル",
+        "processAll": "すべて処理",
+        "processPartial": "{count}件処理",
+        "toast": {
+          "successTitle": "すべてのレシートが正常に処理されました！",
+          "successDescription": "{successful}件のレシートを処理しました。{creditsUsed}クレジットを使用しました。",
+          "partialTitle": "一部失敗して処理が完了しました",
+          "partialDescription": "{successful}件成功、{failed}件失敗。{creditsUsed}クレジットを使用しました。",
+          "errorTitle": "すべてのレシートの処理に失敗しました",
+          "errorDescription": "エラーの詳細については、個別のレシートを確認してください。",
+          "failedTitle": "レシートの処理に失敗しました",
+          "unknownError": "不明なエラー"
+        }
+      },
+      "noReceipts": "レシートはまだありません",
+      "noReceiptsDescription": "最初のレシートをアップロードして開始します",
+      "uploadButton": "レシートをアップロード"
+    },
+    "receiptsTable": {
+      "title": "あなたのレシート",
+      "noReceipts": "まだレシートがありません",
+      "uploadFirst": "最初のレシートをアップロードして始めましょう",
+      "columns": {
+        "fileName": "ファイル名",
+        "date": "日付",
+        "merchant": "店舗名",
+        "amount": "金額",
+        "category": "カテゴリ",
+        "status": "ステータス",
+        "uploaded": "アップロード日",
+        "actions": "操作"
+      },
+      "status": {
+        "pending": "保留中",
+        "processing": "処理中",
+        "completed": "完了",
+        "failed": "失敗"
+      }
+    },
+    "credits": {
+      "title": "クレジット",
+      "balance": "現在の残高",
+      "creditsRemaining": "クレジット残",
+      "description": "レシート処理に利用可能なクレジット",
+      "manageSubtitle": "レシート処理のためのクレジットを管理",
+      "availableCredits": "利用可能なクレジット",
+      "buyCredits": "クレジットを購入",
+      "history": "クレジット履歴",
+      "oneTimePurchase": "単発購入",
+      "monthlySubscription": "月額サブスクリプション",
+      "packages": {
+        "title": "パッケージを選択",
+        "credits": "クレジット",
+        "mostPopular": "最も人気",
+        "bestValue": "最もお得",
+        "basic": {
+          "name": "ベーシック",
+          "description": "たまに使う方に最適",
+          "features": [
+            "10レシート処理クレジット",
+            "AI搭載データ抽出",
+            "Excel & CSV エクスポート",
+            "メールサポート",
+            "クレジットは無期限"
+          ]
+        },
+        "popular": {
+          "name": "ポピュラー",
+          "description": "小規模ビジネスに最適",
+          "features": [
+            "50レシート処理クレジット",
+            "AI搭載データ抽出",
+            "Excel & CSV エクスポート",
+            "優先メールサポート",
+            "クレジットは無期限",
+            "20%お得"
+          ]
+        },
+        "business": {
+          "name": "ビジネス",
+          "description": "大量利用者向け",
+          "features": [
+            "200レシート処理クレジット",
+            "AI搭載データ抽出",
+            "Excel & CSV エクスポート",
+            "優先メールサポート",
+            "クレジットは無期限",
+            "40%お得"
+          ]
+        }
+      },
+      "transactions": {
+        "title": "取引履歴",
+        "subtitle": "クレジット取引履歴",
+        "purchase": "購入",
+        "usage": "使用",
+        "refund": "返金",
+        "bonus": "ボーナス",
+        "purchasedBasicPackage": "ベーシックパッケージを購入",
+        "date": "日付",
+        "type": "種類",
+        "amount": "金額",
+        "description": "説明",
+        "noTransactions": "まだ取引がありません",
+        "purchaseCreditsToStart": "クレジットを購入して始めましょう",
+        "loading": "クレジット取引履歴を読み込み中...",
+        "showing": "{from}から{to}まで（全{total}件の取引）を表示",
+        "previous": "前へ",
+        "next": "次へ",
+        "page": "ページ{current}/{total}"
+      },
+      "subscriptions": {
+        "title": "月額サブスクリプション",
+        "subtitle": "毎月自動的にクレジットを取得。いつでもキャンセル可能。",
+        "bestValue": "最もお得",
+        "save": "{percent}%お得",
+        "creditsPerMonth": "月間クレジット",
+        "perMonth": "月額",
+        "receiptsPerMonth": "月間{count}件のレシート",
+        "aiPoweredExtraction": "AI搭載抽出",
+        "automaticRenewal": "毎月自動更新",
+        "prioritySupport": "優先サポート",
+        "bulkProcessing": "一括処理",
+        "cancelAnytime": "いつでもキャンセル可能",
+        "subscribe": "サブスクライブ",
+        "processing": "処理中...",
+        "disclaimer": "サブスクリプションは自動的に更新されます。アカウント設定からいつでも管理またはキャンセルできます。",
+        "plans": {
+          "basic": {
+            "name": "Basic",
+            "description": "通常のユーザーに最適"
+          },
+          "pro": {
+            "name": "Pro",
+            "description": "ヘビーユーザーに最適"
+          },
+          "business": {
+            "name": "Business",
+            "description": "大量処理が必要な企業向け"
+          }
+        }
+      }
+    },
+    "exports": {
+      "title": "エクスポート",
+      "subtitle": "レシートデータのエクスポートと管理",
+      "exportSection": {
+        "title": "レシートをエクスポート",
+        "description": "完了したレシートをフィルタリングしてエクスポート"
+      },
+      "history": {
+        "title": "エクスポート履歴",
+        "subtitle": "過去のレシートエクスポートを表示"
+      },
+      "buttons": {
+        "exportAll": "すべてエクスポート",
+        "filters": "フィルター",
+        "hide": "非表示",
+        "clearFilters": "すべてのフィルターをクリア",
+        "loading": "読み込み中..."
+      },
+      "filters": {
+        "fromDate": "開始日",
+        "toDate": "終了日",
+        "merchantName": "店舗名",
+        "amountRange": "金額範囲",
+        "min": "最小",
+        "max": "最大",
+        "pickDate": "日付を選択",
+        "searchPlaceholder": "店舗名で検索...",
+        "activeFilters": "有効なフィルター",
+        "from": "開始",
+        "to": "終了",
+        "merchant": "店舗",
+        "minAmount": "最小金額",
+        "maxAmount": "最大金額"
+      },
+      "noExports": "まだエクスポートがありません",
+      "noExportsDescription": "ダッシュボードからレシートをエクスポートすると、ここに表示されます",
+      "type": "タイプ",
+      "fileName": "ファイル名",
+      "receipts": "レシート",
+      "showingRecent": "最新のエクスポート{count}件を表示",
+      "columns": {
+        "date": "エクスポート日",
+        "receipts": "レシート",
+        "format": "フォーマット",
+        "download": "ダウンロード"
+      }
+    },
+    "profile": {
+      "title": "プロフィール設定",
+      "subtitle": "アカウント設定と設定を管理",
+      "profileInfo": "プロフィール情報",
+      "profileInfoDescription": "個人情報を更新する",
+      "loadingProfile": "プロフィールを読み込み中...",
+      "personalInfo": "個人情報",
+      "name": "名前",
+      "fullName": "フルネーム",
+      "fullNamePlaceholder": "フルネームを入力してください",
+      "email": "メールアドレス",
+      "emailCannotBeChanged": "メールアドレスは変更できません",
+      "language": "言語",
+      "timezone": "タイムゾーン",
+      "updateProfile": "プロフィールを更新",
+      "saveChanges": "変更を保存",
+      "saving": "保存中...",
+      "changePassword": "パスワードを変更",
+      "currentPassword": "現在のパスワード",
+      "newPassword": "新しいパスワード",
+      "accountInfo": "アカウント情報",
+      "accountInfoDescription": "アカウントの詳細を表示",
+      "userId": "ユーザーID",
+      "accountCreated": "アカウント作成日",
+      "lastSignIn": "最終サインイン",
+      "user": "ユーザー",
+      "signOut": "サインアウト",
+      "home": "ホーム",
+      "creditsLabel": "クレジット",
+      "toasts": {
+        "profileUpdated": "プロフィールが正常に更新されました",
+        "profileUpdateError": "プロフィールの更新に失敗しました",
+        "profileLoadError": "プロフィールの読み込みに失敗しました"
+      }
+    }
+  },
+  "pricing": {
+    "title": "シンプルで透明な料金",
+    "subtitle": "あなたに合ったプランを選択してください",
+    "subheadline": "従量課金またはサブスクリプションでお得に",
+    "currentBalance": "現在の残高",
+    "credits": "クレジット",
+    "perCredit": "クレジットあたり",
+    "perReceipt": "レシートあたり",
+    "creditPacks": "クレジットパック",
+    "creditPackagesTitle": "クレジットパッケージ",
+    "subscriptions": "サブスクリプション",
+    "buyNow": "今すぐ購入",
+    "subscribe": "サブスクライブ",
+    "popular": "最も人気",
+    "purchaseCredits": "クレジットを購入",
+    "getStarted": "始める",
+    "readyTitle": "始める準備はできましたか？",
+    "readySubtitle": "10クレジット無料、クレジットカード不要",
+    "goToDashboard": "ダッシュボードへ",
+    "startFree": "無料で始める",
+    "signIn": "サインイン",
+    "tryItFree": "無料で試す",
+    "freeCreditsNoCreditCard": "10クレジット無料 • クレジットカード不要",
+    "features": {
+      "allFeatures": "すべての機能が含まれています",
+      "aiExtraction": "AI搭載抽出",
+      "exportFormats": "Excel＆CSVエクスポート",
+      "support": "メールサポート",
+      "security": "銀行レベルのセキュリティ",
+      "gdpr": "GDPR準拠"
+    },
+    "faq": {
+      "title": "よくある質問",
+      "howCreditsWork": {
+        "question": "クレジットの仕組みは？",
+        "answer": "アップロードして処理する各レシートには1クレジットかかります。クレジットは、AIがレシートからデータの抽出に成功した場合にのみ差し引かれます。パッケージでクレジットを購入するか、割引された月額クレジットのサブスクリプションを利用できます。"
+      },
+      "doCreditsExpire": {
+        "question": "クレジットに有効期限はありますか？",
+        "answer": "いいえ、クレジットに有効期限はありません。購入したクレジットは、使用するまでアカウントに残ります。これにより、自分のペースで完全に柔軟に使用できます。"
+      },
+      "canIGetRefund": {
+        "question": "返金は受けられますか？",
+        "answer": "はい！30日間の返金保証を提供しています。サービスにご満足いただけない場合は、購入から30日以内にお問い合わせください。未使用のクレジットの全額返金を受けられます。"
+      },
+      "wrongExtraction": {
+        "question": "抽出が間違っている場合はどうなりますか？",
+        "answer": "AI抽出にエラーが含まれているか、期待に応えられない場合は、サポートチームにお問い合わせください。ケースを確認し、抽出品質が基準を下回っている場合は、無料の再試行またはクレジットの返金を提供します。"
+      },
+      "needSubscription": {
+        "question": "サブスクリプションは必要ですか？",
+        "answer": "いいえ、サブスクリプションは完全にオプションです。従量課金パッケージで必要に応じてクレジットを購入できます。割引された月額クレジットでお金を節約したい場合はサブスクリプションを利用できますが、最適な方法でサービスを自由に使用できます。"
+      }
+    }
+  },
+  "footer": {
+    "description": "企業向けAI搭載レシートデータ抽出",
+    "product": "製品",
+    "company": "会社",
+    "legal": "法的情報",
+    "support": "サポート",
+    "termsOfService": "利用規約",
+    "privacyPolicy": "プライバシーポリシー",
+    "cookiePolicy": "クッキーポリシー",
+    "allRightsReserved": "全著作権所有"
+  },
+  "navigation": {
+    "home": "ホーム",
+    "features": "機能",
+    "pricing": "料金",
+    "howItWorks": "使い方",
+    "faq": "よくある質問",
+    "contact": "お問い合わせ",
+    "dashboard": "ダッシュボード",
+    "login": "ログイン",
+    "signup": "サインアップ",
+    "about": "私たちについて",
+    "more": "もっと見る",
+    "customTemplates": "カスタムテンプレート"
+  },
+  "contact": {
+    "title": "お問い合わせ",
+    "subtitle": "ご質問はありますか？お気軽にお問い合わせください。メッセージをお送りいただければ、24時間以内にご返信いたします。",
+    "backToHome": "ホームに戻る",
+    "sendMessage": "メッセージを送信",
+    "formDescription": "以下のフォームにご記入ください。できるだけ早くご返信いたします。",
+    "name": "お名前",
+    "namePlaceholder": "お名前を入力",
+    "email": "メールアドレス",
+    "emailPlaceholder": "your@email.com",
+    "subject": "件名",
+    "subjectPlaceholder": "どのようにお手伝いできますか？",
+    "message": "メッセージ",
+    "messagePlaceholder": "お問い合わせ内容を詳しくお聞かせください...",
+    "sendButton": "メッセージを送信",
+    "sending": "送信中...",
+    "successMessage": "メッセージが正常に送信されました！24時間以内にご連絡いたします。",
+    "responseTime": "通常24時間以内にご返信いたします",
+    "preferEmail": "メールでのお問い合わせをご希望ですか？",
+    "reachDirectly": "以下のメールアドレスから直接お問い合わせいただけます：",
+    "frequentlyAskedQuestions": "よくある質問",
+    "faqDescription": "お問い合わせの前に、よくある質問で回答が見つかるかもしれません。",
+    "viewFaq": "FAQを見る",
+    "quickStartGuide": "クイックスタートガイド",
+    "quickStartDescription": "ReceiptSortが初めてですか？3つの簡単なステップで始める方法を学びましょう。",
+    "howItWorks": "使い方"
+  },
+  "creditPackages": {
+    "title": "クレジットを購入",
+    "starter": {
+      "name": "スターター",
+      "description": "サービスを試すのに最適"
+    },
+    "basic": {
+      "name": "ベーシック",
+      "description": "通常のユーザーに最適"
+    },
+    "pro": {
+      "name": "プロ",
+      "description": "ヘビーユーザーに最もお得"
+    },
+    "business": {
+      "name": "ビジネス",
+      "description": "大量処理が必要な企業向け"
+    },
+    "credits": "クレジット",
+    "perCredit": "クレジットあたり",
+    "processReceipts": "{count}件のレシートを処理",
+    "aiPoweredExtraction": "AI搭載抽出",
+    "prioritySupport": "優先サポート",
+    "bulkProcessing": "一括処理",
+    "neverExpires": "無期限",
+    "purchase": "購入",
+    "processing": "処理中...",
+    "bestValue": "最もお得",
+    "save": "{percent}%お得"
+  },
+  "receiptDetails": {
+    "title": "レシート詳細",
+    "receiptPreview": "レシートプレビュー",
+    "documentType": "書類タイプ",
+    "merchantName": "店舗名",
+    "invoiceNumber": "請求書番号",
+    "amount": "金額",
+    "currency": "通貨",
+    "receiptDate": "レシート日付",
+    "category": "カテゴリ",
+    "subtotal": "小計（税抜）",
+    "taxAmount": "税額",
+    "dueDate": "支払期限",
+    "paymentMethod": "支払方法",
+    "purchaseOrderNumber": "発注書番号",
+    "paymentReference": "支払参照番号",
+    "vendorTaxId": "業者税ID（VAT/EIN/BTW）",
+    "vendorAddress": "業者住所",
+    "lineItems": "明細項目",
+    "lineItemsCount": "明細項目（{count}件）",
+    "patientName": "患者名",
+    "medicalInformation": "医療情報",
+    "patientDob": "患者生年月日",
+    "treatmentDate": "治療日",
+    "insuranceClaimNumber": "保険請求番号",
+    "diagnosisCodes": "診断コード（ICD）",
+    "procedureCodes": "手続きコード（CPT）",
+    "providerId": "プロバイダーID（AGB/NPI）",
+    "insuranceCoveredAmount": "保険適用額",
+    "patientResponsibilityAmount": "患者負担額",
+    "insuranceBreakdown": "保険内訳",
+    "totalTreatmentCost": "治療費総額",
+    "insuranceCovered": "保険適用",
+    "youPay": "お支払い額",
+    "notes": "備考",
+    "saveChanges": "変更を保存",
+    "saving": "保存中...",
+    "delete": "削除",
+    "deleting": "削除中...",
+    "retryProcessing": "処理を再試行",
+    "retrying": "再試行中...",
+    "documentTypes": {
+      "receipt": "レシート",
+      "invoice": "請求書",
+      "medicalInvoice": "医療請求書",
+      "bill": "請求書"
+    },
+    "categories": {
+      "foodDining": "飲食",
+      "transportation": "交通",
+      "shopping": "買い物",
+      "officeSupplies": "事務用品",
+      "travel": "旅行",
+      "entertainment": "娯楽",
+      "utilities": "公共料金",
+      "healthcare": "医療",
+      "other": "その他"
+    },
+    "paymentMethods": {
+      "cash": "現金",
+      "creditCard": "クレジットカード",
+      "debitCard": "デビットカード",
+      "bankTransfer": "銀行振込",
+      "other": "その他"
+    },
+    "lineItemColumns": {
+      "lineNumber": "#",
+      "description": "説明",
+      "quantity": "数量",
+      "unitPrice": "単価",
+      "lineTotal": "合計",
+      "itemCode": "コード"
+    }
+  },
+  "billing": {
+    "title": "請求と購入履歴",
+    "description": "会計と税務申告のために購入請求書を表示およびダウンロード",
+    "noInvoices": "購入履歴なし",
+    "noInvoicesDescription": "クレジットを購入して開始し、取引の請求書を受け取ります",
+    "purchaseCredits": "クレジットを購入"
+  },
+  "account": {
+    "title": "アカウント設定",
+    "description": "アカウント情報と設定を管理",
+    "profileTitle": "プロフィール情報",
+    "profileDescription": "個人情報と連絡先の詳細",
+    "fullName": "氏名",
+    "email": "メールアドレス",
+    "userId": "ユーザーID",
+    "notSet": "未設定",
+    "creditsTitle": "クレジット残高",
+    "creditsDescription": "レシート処理の現在のクレジット残高",
+    "currentCredits": "現在のクレジット",
+    "purchaseCredits": "さらにクレジットを購入",
+    "billingTitle": "請求と請求書",
+    "billingDescription": "購入履歴を表示し、請求書をダウンロード",
+    "viewBilling": "請求履歴を表示",
+    "accountCreated": "アカウント作成日",
+    "enterName": "フルネームを入力してください",
+    "saveChanges": "変更を保存",
+    "updateSuccess": "プロフィールが正常に更新されました！",
+    "updateError": "プロフィールの更新に失敗しました。もう一度お試しください。",
+    "emailCannotChange": "メールアドレスは変更できません"
+  },
+  "whatMakesUsDifferent": {
+    "title": "ReceiptSortの違い",
+    "others": {
+      "title": "他のレシート管理ツール",
+      "fixedFormat": "彼らの固定フォーマットにエクスポート",
+      "manualReorganization": "データを手動で再整理（1文書あたり2-3分）",
+      "subscription": "月額$20-60のサブスクリプションが必要",
+      "receiptsOnly": "レシートのみ"
+    },
+    "receiptSort": {
+      "title": "ReceiptSort",
+      "badge": "より良いアプローチ",
+      "aiAdapts": "AIがあなたのテンプレートに自動的に適応",
+      "yourFormat": "データはあなたのフォーマットでエクスポート（再整理不要）",
+      "payPerDocument": "文書ごとの支払い（$0.05-0.07、クレジットは無期限）",
+      "allDocuments": "レシート、請求書、医療記録"
+    },
+    "savingsText": "手動での再整理を排除し、1文書あたり2-3分を節約します。",
+    "freeTemplates": "10個のカスタムテンプレートを無料で作成、無制限に再利用可能。",
+    "cta": "テンプレートマッピングの仕組みを見る"
+  },
+  "useCases": {
+    "title": "あなたのワークフローに合わせて設計",
+    "subtitle": "ReceiptSortはあなたの働き方に適応します—逆ではありません",
+    "items": {
+      "accountant": {
+        "tag": "最適：会計士",
+        "title": "複数のクライアントを持つ会計士",
+        "description": "5つのテンプレートを作成（クライアントごとに1つのフォーマット）。AIは全てのレシートを自動的に正しいクライアントテンプレートにマッピングします。手動での再整理なしに正確にクライアントに請求。月に15時間以上節約。"
+      },
+      "medical": {
+        "tag": "最適：医療機関",
+        "title": "医療機関",
+        "description": "カスタム保険請求テンプレートを作成。AIは医療レシートと請求書から抽出し、あなたの保険会社のフォーマットにマッピング。払い戻しのための手動データ入力が不要に。"
+      },
+      "euFreelancer": {
+        "tag": "最適：フリーランサー",
+        "title": "フリーランサー（税金/VAT申告）",
+        "description": "お住まいの国の政府要件に合わせた税務申告テンプレートを作成します。AIは異なるレシート形式（Btw、VAT、MwSt、TVA、GST、消費税）を自動的に処理します。提出用のエクスポートが可能です。"
+      },
+      "variableVolume": {
+        "tag": "最適：変動ボリューム",
+        "title": "変動ボリュームビジネス",
+        "description": "ある月は10文書、次の月は100文書を処理。使った分だけ支払い（$0.05-0.07/文書）。クレジットは無期限。無駄な月額サブスクリプションなし。"
+      }
+    }
+  },
+  "privacyPage": {
+    "backToHome": "ホームに戻る",
+    "title": "プライバシーポリシー",
+    "lastUpdated": "最終更新日：2025年10月6日",
+    "sections": {
+      "introduction": {
+        "title": "1. はじめに",
+        "content": "ReceiptSorter（「当社」）へようこそ。当社は、お客様の個人情報とプライバシー権の保護に取り組んでいます。本プライバシーポリシーは、お客様が当社のレシート処理サービスを利用する際に、当社がどのように情報を収集、使用、開示、保護するかを説明します。"
+      },
+      "informationWeCollect": {
+        "title": "2. 収集する情報",
+        "intro": "お客様から直接提供していただく情報を収集します：",
+        "items": [
+          "アカウント情報（メールアドレス、氏名）",
+          "アップロードされたレシート画像とPDFファイル",
+          "支払い情報（Stripeを通じて安全に処理）",
+          "使用データと分析"
+        ]
+      },
+      "howWeUse": {
+        "title": "3. 情報の使用方法",
+        "intro": "お客様の情報は以下の目的で使用されます：",
+        "items": [
+          "レシート処理サービスの提供と維持",
+          "AI技術を使用したレシートの処理",
+          "支払いの処理とアカウント管理",
+          "サービス更新とプロモーション通信の送信",
+          "サービスの改善と新機能の開発",
+          "法的義務の遵守"
+        ]
+      },
+      "dataSecurity": {
+        "title": "4. データセキュリティ",
+        "intro": "お客様のデータを保護するため、業界標準のセキュリティ対策を実施しています：",
+        "items": [
+          "データ送信用の256ビットSSL暗号化",
+          "アクセス制御付きの安全なクラウドストレージ",
+          "レシートファイルの90日後の自動削除",
+          "定期的なセキュリティ監査とアップデート"
+        ]
+      },
+      "dataSharing": {
+        "title": "5. データ共有",
+        "intro": "当社はお客様の個人情報を販売しません。以下の場合にデータを共有する可能性があります：",
+        "items": [
+          "サービスプロバイダー（レシート処理用のOpenAI、支払い用のStripe）",
+          "法律で義務付けられている場合の法執行機関",
+          "お客様の明示的な同意を得た商業パートナー"
+        ]
+      },
+      "yourRights": {
+        "title": "6. お客様の権利",
+        "intro": "GDPRおよびその他のプライバシー法に基づき、お客様には以下の権利があります：",
+        "items": [
+          "個人データへのアクセス",
+          "不正確なデータの訂正",
+          "データの削除を要求",
+          "移植可能な形式でのデータエクスポート",
+          "マーケティング通信のオプトアウト",
+          "監督当局への苦情申し立て"
+        ]
+      },
+      "cookies": {
+        "title": "7. Cookie",
+        "content": "当社はサービス提供のために必須のCookieと、ユーザー体験を向上させるためのオプションの分析Cookieを使用します。ブラウザ設定からCookieの設定を制御できます。"
+      },
+      "dataRetention": {
+        "title": "8. データ保持",
+        "content": "お客様のデータは、サービス提供と法的義務の遵守に必要な期間のみ保持されます。レシートファイルは90日後に自動的に削除されます。アカウントデータは削除を要求されるまで保持されます。"
+      },
+      "childrensPrivacy": {
+        "title": "9. 児童のプライバシー",
+        "content": "当社のサービスは18歳未満の児童を対象としていません。児童からデータを故意に収集することはありません。"
+      },
+      "changes": {
+        "title": "10. 本ポリシーの変更",
+        "content": "当社は本プライバシーポリシーを随時更新する場合があります。変更があった場合は、このページに新しいポリシーを掲載し、「最終更新日」を更新してお知らせします。"
+      },
+      "contact": {
+        "title": "11. お問い合わせ",
+        "intro": "本プライバシーポリシーに関するご質問は、以下までお問い合わせください：",
+        "email": "メール：support@seenano.nl",
+        "contactForm": "お問い合わせフォーム：receiptsort.com/contact"
+      }
+    }
+  },
+  "termsPage": {
+    "backToHome": "ホームに戻る",
+    "title": "利用規約",
+    "lastUpdated": "最終更新日：2025年10月6日",
+    "sections": {
+      "acceptance": {
+        "title": "1. 規約の受諾",
+        "content": "ReceiptSorter（「サービス」）にアクセスまたは使用することにより、お客様はこれらの利用規約（「規約」）に拘束されることに同意します。これらの規約に同意しない場合は、サービスを使用しないでください。"
+      },
+      "description": {
+        "title": "2. サービスの説明",
+        "content": "ReceiptSorterは、人工知能を使用してレシート画像とPDFからデータを抽出する、クラウドベースのレシート処理サービスです。本サービスでは、レシートをアップロードし、商店情報、金額、日付、その他のデータを抽出し、結果をExcelまたはCSV形式でエクスポートできます。"
+      },
+      "userAccounts": {
+        "title": "3. ユーザーアカウント",
+        "intro": "サービスを使用するには、以下が必要です：",
+        "items": [
+          "正確な情報でアカウントを作成する",
+          "アカウント認証情報のセキュリティを維持する",
+          "18歳以上である",
+          "不正アクセスを直ちに通知する",
+          "アカウント下のすべての活動に責任を持つ"
+        ]
+      },
+      "credits": {
+        "title": "4. クレジットと支払い",
+        "content": "サービスはクレジットベースのシステムで動作します。処理される各レシートは1クレジットかかります。クレジットは、Stripe決済処理を使用して当社のウェブサイトから購入できます。クレジットは無期限です。価格は通知により変更される場合があります。返金ポリシーに別途記載がない限り、すべての販売は最終的なものです。"
+      },
+      "usePolicy": {
+        "title": "5. 許容される使用",
+        "intro": "以下のことをしないことに同意します：",
+        "items": [
+          "違法、詐欺的、または有害なコンテンツをアップロードする",
+          "サービスのリバースエンジニアリングまたはハッキングを試みる",
+          "法律や規制に違反するためにサービスを使用する",
+          "アカウント認証情報を他の人と共有する",
+          "サービスを悪用するために自動化スクリプトを使用する"
+        ]
+      },
+      "intellectualProperty": {
+        "title": "6. 知的財産",
+        "content": "すべてのコンテンツ、機能、機能性を含むサービスは、ReceiptSorterが所有し、国際著作権、商標、その他の知的財産法によって保護されています。アップロードされたレシートと抽出されたデータの所有権は保持されます。"
+      },
+      "dataProcessing": {
+        "title": "7. データ処理",
+        "content": "OpenAIのGPT-4 Vision AIを使用してレシートデータを処理します。レシートファイルは安全に保存され、90日後に自動的に削除されます。データの処理方法の詳細については、プライバシーポリシーをご覧ください。"
+      },
+      "warranties": {
+        "title": "8. 保証と免責事項",
+        "content": "サービスは「現状のまま」いかなる種類の保証もなく提供されます。レシートデータ抽出の100%の精度を保証するものではありません。使用前に抽出されたデータを確認する責任があります。"
+      },
+      "limitation": {
+        "title": "9. 責任の制限",
+        "content": "法律で許可される最大限の範囲で、RECEIPTSORTはサービスの使用から生じる間接的、付随的、特別、結果的、または懲罰的損害について責任を負いません。"
+      },
+      "termination": {
+        "title": "10. 終了",
+        "content": "当社は、これらの規約の違反があった場合、いつでもアカウントを停止または終了する権利を留保します。アカウント設定からいつでもアカウントを削除できます。"
+      },
+      "changes": {
+        "title": "11. 規約の変更",
+        "content": "これらの規約はいつでも変更される場合があります。重要な変更については、電子メールまたはサービスを通じてお知らせします。変更後の継続的な使用は受諾を構成します。"
+      },
+      "governing": {
+        "title": "12. 準拠法",
+        "content": "これらの規約はオランダの法律に準拠します。すべての紛争はオランダの裁判所で解決されるものとします。"
+      },
+      "contact": {
+        "title": "13. お問い合わせ",
+        "intro": "これらの規約について質問がありますか？お問い合わせ先：",
+        "email": "メール：support@seenano.nl",
+        "contactForm": "お問い合わせフォーム：receiptsort.com/contact"
+      }
+    }
+  }
+}

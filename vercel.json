@@ -1,0 +1,13 @@
+{
+  "functions": {
+    "app/api/receipts/**/route.ts": {
+      "maxDuration": 60
+    }
+  },
+  "crons": [
+    {
+      "path": "/api/cron/cleanup-exports",
+      "schedule": "0 2 * * *"
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+'use client'
+
+import { useState } from 'react'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { Label } from '@/components/ui/label'
+import { Send, CheckCircle, AlertCircle } from 'lucide-react'
+import { Alert, AlertDescription } from '@/components/ui/alert'
+import { useTranslations } from 'next-intl'
+
+export function ContactForm() {
+  const t = useTranslations('contact')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [errorMessage, setErrorMessage] = useState('')
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitStatus('idle')
+    setErrorMessage('')
+
+    const formData = new FormData(e.currentTarget)
+
+    try {
+      // Use our API route instead of calling Web3Forms directly
+      // This avoids CORS issues and keeps the access key secure
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        body: formData,
+      })
+
+      const data = await response.json()
+
+      if (data.success) {
+        setSubmitStatus('success')
+        // Reset form
+        ;(e.target as HTMLFormElement).reset()
+        // Auto-hide success message after 5 seconds
+        setTimeout(() => setSubmitStatus('idle'), 5000)
+      } else {
+        setSubmitStatus('error')
+        setErrorMessage(data.message || 'Something went wrong. Please try again.')
+      }
+    } catch {
+      setSubmitStatus('error')
+      setErrorMessage('Network error. Please check your connection and try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  return (
+    <>
+      {submitStatus === 'success' && (
+        <Alert className="mb-4 border-green-200 bg-green-50">
+          <CheckCircle className="h-4 w-4 text-green-600" />
+          <AlertDescription className="text-green-800">
+            {t('successMessage')}
+          </AlertDescription>
+        </Alert>
+      )}
+
+      {submitStatus === 'error' && (
+        <Alert variant="destructive" className="mb-4">
+          <AlertCircle className="h-4 w-4" />
+          <AlertDescription>{errorMessage}</AlertDescription>
+        </Alert>
+      )}
+
+      <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Bot spam protection */}
+        <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
+
+        <div>
+          <Label htmlFor="name">{t('name')}</Label>
+          <Input
+            id="name"
+            name="name"
+            placeholder={t('namePlaceholder')}
+            className="mt-1.5"
+            required
+            disabled={isSubmitting}
+          />
+        </div>
+
+        <div>
+          <Label htmlFor="email">{t('email')}</Label>
+          <Input
+            id="email"
+            name="email"
+            type="email"
+            placeholder={t('emailPlaceholder')}
+            className="mt-1.5"
+            required
+            disabled={isSubmitting}
+          />
+        </div>
+
+        <div>
+          <Label htmlFor="subject">{t('subject')}</Label>
+          <Input
+            id="subject"
+            name="subject"
+            placeholder={t('subjectPlaceholder')}
+            className="mt-1.5"
+            required
+            disabled={isSubmitting}
+          />
+        </div>
+
+        <div>
+          <Label htmlFor="message">{t('message')}</Label>
+          <Textarea
+            id="message"
+            name="message"
+            placeholder={t('messagePlaceholder')}
+            rows={6}
+            className="mt-1.5"
+            required
+            disabled={isSubmitting}
+          />
+        </div>
+
+        <Button type="submit" className="w-full gap-2" disabled={isSubmitting}>
+          <Send className="h-4 w-4" />
+          {isSubmitting ? t('sending') : t('sendButton')}
+        </Button>
+
+        <p className="text-sm text-muted-foreground text-center">
+          {t('responseTime')}
+        </p>
+      </form>
+    </>
+  )
+}

@@ -1,0 +1,1153 @@
+{
+  "common": {
+    "getStarted": "Gratis Beginnen",
+    "signUp": "Aanmelden",
+    "login": "Inloggen",
+    "logout": "Uitloggen",
+    "learnMore": "Meer Informatie",
+    "tryDemo": "Probeer Demo",
+    "uploadReceipts": "Bonnetjes Uploaden",
+    "pricing": "Prijzen",
+    "features": "Kenmerken",
+    "howItWorks": "Hoe Het Werkt",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "dashboard": "Dashboard",
+    "receipts": "Bonnetjes",
+    "exports": "Exports",
+    "credits": "Credits",
+    "templates": "Sjablonen",
+    "profile": "Profiel",
+    "upload": "Uploaden",
+    "export": "Exporteren",
+    "download": "Downloaden",
+    "cancel": "Annuleren",
+    "save": "Opslaan",
+    "delete": "Verwijderen",
+    "edit": "Bewerken",
+    "close": "Sluiten",
+    "search": "Zoeken",
+    "filter": "Filteren",
+    "select": "Selecteren",
+    "loading": "Laden...",
+    "error": "Fout",
+    "success": "Succes",
+    "confirm": "Bevestigen",
+    "billing": "Facturering",
+    "account": "Account"
+  },
+  "hero": {
+    "headline": "Uw Bonnetjes, Uw Formaat, Automatisch",
+    "headlineHighlight": "Uw Formaat",
+    "subheadline": "Extraheer gegevens van bonnetjes in seconden met AI.",
+    "subheadlineDetails": "Upload bonnetjes → AI extraheert gegevens → Download Excel.",
+    "watchDemo": "Bekijk Demo",
+    "trustBadge": "Vertrouwd door 2000+ bedrijven wereldwijd",
+    "valueProps": {
+      "freeCredits": "10 gratis credits + 10 aangepaste sjablonen • Geen creditcard vereist",
+      "neverExpire": "Credits verlopen nooit • Sjablonen onbeperkt herbruikbaar",
+      "multiDocument": "Werkt met bonnetjes, facturen en medische notities"
+    },
+    "getStarted": "Gratis Beginnen",
+    "processTagline": "Uploaden → AI wijst toe aan uw sjabloon → Downloaden in uw formaat"
+  },
+  "features": {
+    "title": "Alles wat u nodig heeft om bonnetjes te organiseren",
+    "subtitle": "Gebouwd voor kleine bedrijven, freelancers en accountants die hun tijd waarderen.",
+    "items": {
+      "upload": {
+        "title": "Upload vanaf Elk Apparaat",
+        "description": "Sleep en zet bonnetjes neer van uw telefoon, e-mail of scanner. Ondersteunt alle gangbare afbeeldingsformaten (JPG, PNG, WebP, TIFF, BMP, GIF) en PDF's tot 10MB per bestand."
+      },
+      "aiExtraction": {
+        "title": "Multi-Document Intelligentie",
+        "description": "Werkt met bonnetjes, facturen EN medische notities—niet alleen bonnetjes. AI past zich naadloos aan aan verschillende documenttypen. GPT-4 Vision bereikt 98%+ nauwkeurigheid op alle formaten. Verwerkt automatisch meerdere talen en valutaformaten."
+      },
+      "export": {
+        "title": "Exporteren naar Excel of CSV",
+        "description": "Download georganiseerde spreadsheets klaar voor QuickBooks, Xero of andere boekhoudsoftware."
+      },
+      "pricing": {
+        "title": "Betaal Per Gebruik",
+        "description": "Vanaf €0,067 per bonnetje met bulkpakketten. Koop credits wanneer u ze nodig heeft, of neem een abonnement voor nog betere waarde."
+      },
+      "security": {
+        "title": "Beveiliging op Bankniveau",
+        "description": "Uw gegevens zijn versleuteld en worden nooit gedeeld. GDPR-conform. Bonnetjes worden automatisch verwijderd na 90 dagen."
+      },
+      "timeSaving": {
+        "title": "Bespaar 5+ Uur Per Week",
+        "description": "Stop met handmatige gegevensinvoer. Verwerk 100 bonnetjes in de tijd die het kost om er 1 handmatig te doen. Elk bonnetje wordt verwerkt in minder dan 5 seconden."
+      },
+      "templateMapping": {
+        "title": "AI Die Uw Formaat Leert",
+        "description": "Maak aangepaste exportsjablonen met UW kolomnamen (BTW-bedrag, Projectcode, Klant-ID, enz.). Onze AI wijst geëxtraheerde gegevens automatisch toe aan uw formaat—zelfs wanneer bonnetjes verschillende termen gebruiken (Tax vs VAT vs Btw vs BTW). Bewaar 10 sjablonen gratis, hergebruik onbeperkt. Elke export kost slechts 1 credit.",
+        "badge": "UNIEKE FUNCTIE"
+      }
+    }
+  },
+  "howItWorks": {
+    "title": "Hoe Het Werkt",
+    "subtitle": "Ga aan de slag in 4 eenvoudige stappen",
+    "description": "Van bonnetjefoto naar georganiseerde spreadsheet in minder dan een minuut",
+    "steps": {
+      "template": {
+        "title": "Ontwerp Uw Perfecte Exportformaat",
+        "description": "Maak een aangepast sjabloon met uw exacte kolomnamen en structuur. Duurt 2 minuten. Bewaar tot 10 sjablonen gratis—geen credits vereist."
+      },
+      "upload": {
+        "title": "Upload Uw Bonnetjes",
+        "description": "Sleep en zet bonnetjes, facturen of medische notities neer. Werkt met foto's of PDF's vanaf elk apparaat. Ondersteunt alle belangrijke beeldformaten."
+      },
+      "process": {
+        "title": "AI Extraheert & Koppelt aan Uw Sjabloon",
+        "description": "Onze AI leest het document en koppelt geëxtraheerde gegevens intelligent aan UW sjabloonkolommen—zelfs automatisch verschillende terminologieën afhandelend."
+      },
+      "export": {
+        "title": "Download in Uw Formaat",
+        "description": "Krijg een perfect geformatteerd Excel- of CSV-bestand dat overeenkomt met uw sjabloon—klaar om direct te importeren in uw boekhoudsysteem of in te dienen bij autoriteiten."
+      }
+    },
+    "cta": "Begin Gratis: Maak Uw Eerste Sjabloon"
+  },
+  "socialProof": {
+    "title": "Vertrouwd door bedrijven wereldwijd",
+    "stats": {
+      "receipts": "Bonnetjes Verwerkt",
+      "users": "Actieve Gebruikers",
+      "accuracy": "Gemiddelde Nauwkeurigheid",
+      "timeSaved": "Uren Bespaard",
+      "timeSavedPerDoc": "Bespaard Per Document"
+    },
+    "testimonials": {
+      "title": "Wat onze klanten zeggen",
+      "items": [
+        {
+          "quote": "De sjabloonkoppelingsfunctie is briljant. Ik heb één sjabloon gemaakt voor mijn BTW-aangiftes, en nu formatteert elk bonnetje automatisch volgens de eisen van de belastingdienst. Bespaart me 20+ minuten per maand, en ik maak geen formateerfouten meer.",
+          "name": "Lisa van Dijk",
+          "role": "Freelance Consultant, Nederland"
+        },
+        {
+          "quote": "Als eigenaar van een klein bedrijf heb ik geen tijd voor boekhouding. Deze tool is een gamechanger voor het bijhouden van uitgaven.",
+          "name": "Marcus Johnson",
+          "role": "Winkeleigenaar"
+        },
+        {
+          "quote": "Ik was sceptisch over AI-nauwkeurigheid, maar ReceiptSort heeft het 98% van de tijd bij het juiste eind. Echter, de echte gamechanger is de sjabloonkoppeling—mijn bonnetjes exporteren precies zoals mijn accountant ze nodig heeft. Geen handmatig herformatteren meer.",
+          "name": "Jennifer Martinez",
+          "role": "Eigenaar Klein Bedrijf"
+        }
+      ]
+    },
+    "trustBadges": {
+      "securePayment": "Veilige betaling via Stripe",
+      "gdpr": "GDPR-conform",
+      "encryption": "256-bit SSL Encryptie"
+    }
+  },
+  "support": {
+    "title": "Heeft u nog vragen?",
+    "subtitle": "Ons ondersteuningsteam staat voor u klaar. Neem contact op en we reageren binnen 24 uur.",
+    "emailUs": "E-mail Ons",
+    "or": "of",
+    "contactForm": "Contactformulier"
+  },
+  "faq": {
+    "title": "Veelgestelde Vragen",
+    "subtitle": "Alles wat u moet weten over ReceiptSort",
+    "items": {
+      "accuracy": {
+        "question": "Hoe nauwkeurig is de AI-extractie?",
+        "answer": "Onze AI bereikt 98%+ nauwkeurigheid bij duidelijke, standaard bonnetjes. U kunt altijd handmatig alle geëxtraheerde gegevens bewerken voordat u exporteert."
+      },
+      "formats": {
+        "question": "Welke bestandsformaten ondersteunen jullie?",
+        "answer": "We ondersteunen alle gangbare afbeeldingsformaten (JPG, PNG, JPEG, WebP, TIFF, BMP, GIF) en PDF-bestanden tot 10MB per bestand."
+      },
+      "cost": {
+        "question": "Hoeveel kost het?",
+        "answer": "We gebruiken een creditsysteem. Elk bonnetje kost 1 credit. Credits beginnen bij €0,067 per stuk voor kleine pakketten, of slechts €0,067 per stuk bij bulkaankoop (bijv. 150 voor €9,99, 1500 voor €99,99). Neem maandelijks een abonnement voor nog betere waarde."
+      },
+      "expiration": {
+        "question": "Verlopen credits?",
+        "answer": "Nee, credits verlopen nooit. Gebruik ze wanneer u ze nodig heeft."
+      },
+      "security": {
+        "question": "Zijn mijn gegevens veilig?",
+        "answer": "Ja. We gebruiken versleuteling op bankniveau (256-bit SSL) en uw bonnetjes worden automatisch verwijderd na 90 dagen. We delen uw gegevens nooit."
+      },
+      "export": {
+        "question": "Kan ik exporteren naar QuickBooks of Xero?",
+        "answer": "We exporteren naar Excel- en CSV-formaten, die compatibel zijn met QuickBooks, Xero en alle belangrijke boekhoudsoftware. Importeer het gedownloade bestand eenvoudig in uw boekhoudsysteem."
+      },
+      "customTemplates": {
+        "question": "Wat zijn Aangepaste Sjablonen en waarom heb ik ze nodig?",
+        "answer": "Aangepaste Sjablonen stellen u in staat om herbruikbare exportformaten te maken die zijn afgestemd op UW behoeften—zoals BTW-aangiften, specifieke boekhoudindelingen of verzekeringsformulieren.\n\nWaarom ze belangrijk zijn: Andere bonnetjestools exporteren naar HUN vaste formaat. U verspilt vervolgens 2-3 minuten per document met het reorganiseren van kolommen, hernoemen van headers en herformatteren om overeen te komen met uw boekhoudsysteem of overheidsvereisten.\n\nMet ReceiptSort: U maakt ÉÉN KEER uw ideale sjabloon met uw exacte kolomnamen (BTW-bedrag, Projectcode, enz.). Onze AI koppelt automatisch alle toekomstige bonnetjes aan uw sjabloonkolommen—zelfs als bonnetjes verschillende termen gebruiken (Tax vs VAT vs Btw vs BTW).\n\nPrijzen: Bewaar tot 10 sjablonen GRATIS (geen credits in rekening gebracht), gebruik ze vervolgens onbeperkt opnieuw. Elke export kost slechts 1 credit, ongeacht de complexiteit van het sjabloon.\n\nVoorbeeld: Maak een sjabloon met kolommen: Datum | Leverancier | Nettobedrag | BTW-bedrag | Totaal | Categorie. Elk bonnetje dat u verwerkt, wordt automatisch geëxporteerd naar dit exacte formaat—geen handmatige reorganisatie nodig."
+      },
+      "wrongExtraction": {
+        "question": "Wat als de extractie onjuist is?",
+        "answer": "U kunt alle geëxtraheerde gegevens handmatig bewerken voordat u exporteert. Als de extractie volledig mislukt, restitueren we het credit."
+      },
+      "refunds": {
+        "question": "Bieden jullie terugbetalingen aan?",
+        "answer": "Ja, we bieden een 30 dagen geld-terug-garantie op creditaankopen als u niet tevreden bent."
+      },
+      "business": {
+        "question": "Kan ik dit voor mijn bedrijf gebruiken?",
+        "answer": "Absoluut! Veel kleine bedrijven, freelancers en accountants gebruiken ReceiptSort voor onkostenregistratie en boekhouding."
+      },
+      "software": {
+        "question": "Moet ik software installeren?",
+        "answer": "Nee, ReceiptSort is 100% webgebaseerd. Toegang vanaf elk apparaat met een webbrowser."
+      }
+    }
+  },
+  "finalCTA": {
+    "title": "Klaar om te stoppen met het herorganiseren van bonnetjesgegevens?",
+    "subtitle": "Begin gratis: 10 credits + 10 aangepaste sjablonen. Geen creditcard vereist.",
+    "button": "Begin Met Bonnetjes Verwerken",
+    "viewPricing": "Prijzen Bekijken",
+    "trustIndicator": "Sluit je aan bij freelancers, accountants en kleine bedrijven die bonnetjes automatisch in hun eigen format verwerken.",
+    "trustBadges": {
+      "creditsNeverExpire": "Credits verlopen nooit",
+      "templatesReusable": "Sjablonen onbeperkt herbruikbaar",
+      "moneyBack": "30 dagen geld-terug-garantie",
+      "allSoftware": "Werkt met alle boekhoudsoftware"
+    }
+  },
+  "auth": {
+    "loginTitle": "Inloggen",
+    "loginSubtitle": "Voer uw inloggegevens in om toegang te krijgen tot uw account",
+    "signupTitle": "Account Aanmaken",
+    "signupSubtitle": "Meld u aan om uw bonnetjes te organiseren",
+    "email": "E-mail",
+    "emailPlaceholder": "naam@voorbeeld.nl",
+    "password": "Wachtwoord",
+    "passwordPlaceholder": "••••••••",
+    "confirmPassword": "Wachtwoord Bevestigen",
+    "fullName": "Volledige Naam",
+    "fullNamePlaceholder": "Jan Jansen",
+    "forgotPassword": "Wachtwoord vergeten?",
+    "noAccount": "Heeft u geen account?",
+    "hasAccount": "Heeft u al een account?",
+    "signIn": "Inloggen",
+    "signUp": "Aanmelden",
+    "logIn": "Inloggen",
+    "continueWithGoogle": "Doorgaan met Google",
+    "orContinueWithEmail": "OF DOORGAAN MET E-MAIL",
+    "loading": "Laden...",
+    "termsAgree": "Door u aan te melden, gaat u akkoord met onze",
+    "termsOfService": "Servicevoorwaarden",
+    "privacyPolicy": "Privacybeleid",
+    "and": "en",
+    "errors": {
+      "invalidEmail": "Ongeldig e-mailadres",
+      "passwordMin": "Wachtwoord moet minimaal 6 tekens bevatten",
+      "fullNameMin": "Volledige naam moet minimaal 2 tekens bevatten",
+      "passwordMismatch": "Wachtwoorden komen niet overeen",
+      "invalidCredentials": "Ongeldig e-mailadres of wachtwoord",
+      "emailNotConfirmed": "Verifieer uw e-mail voordat u inlogt",
+      "emailAlreadyRegistered": "Dit e-mailadres is al geregistreerd",
+      "unexpectedError": "Er is een onverwachte fout opgetreden",
+      "googleSignInFailed": "Inloggen met Google is mislukt"
+    },
+    "success": {
+      "welcomeBack": "Welkom terug!",
+      "accountCreated": "Account succesvol aangemaakt!",
+      "checkEmail": "Controleer uw e-mail om uw account te bevestigen voordat u inlogt"
+    }
+  },
+  "dashboard": {
+    "welcome": "Welkom terug",
+    "overview": {
+      "title": "Overzicht",
+      "subtitle": "Hier is een overzicht van uw bonnetjesbeheer",
+      "lastExport": {
+        "never": "Nooit"
+      }
+    },
+    "uploadSection": {
+      "title": "Bonnetjes Uploaden",
+      "dragDrop": "Sleep en zet bonnetjeafbeeldingen hier neer",
+      "dropHere": "Zet bonnetjesbestanden hier neer",
+      "clickToBrowse": "of klik om te bladeren",
+      "or": "of",
+      "browse": "Bladeren door bestanden",
+      "supported": "Ondersteunt: PNG, JPG, JPEG, WEBP, TIFF, BMP, GIF, PDF (max 10MB)",
+      "supportedFormats": "Ondersteunde formaten: PNG, JPG, JPEG, WEBP, TIFF, BMP, GIF, PDF",
+      "maxFileSize": "Maximale bestandsgrootte: 10MB per bestand",
+      "multipleFiles": "Upload meerdere bestanden tegelijk voor snellere verwerking",
+      "secureStorage": "Uw bonnetjes worden veilig opgeslagen en zijn klaar voor AI-verwerking",
+      "creditCost": "Verwerking kost 1 credit per bonnetje"
+    },
+    "stats": {
+      "allTimeProcessed": "Altijd verwerkt",
+      "receiptsUploaded": "Bonnetjes geüpload",
+      "mostRecentExport": "Meest recente export"
+    },
+    "timePeriods": {
+      "thisMonth": "Deze Maand",
+      "lastMonth": "Vorige Maand",
+      "thisYear": "Dit Jaar",
+      "q1": "Q1",
+      "q2": "Q2",
+      "q3": "Q3",
+      "q4": "Q4",
+      "allTime": "Alle Tijd"
+    },
+    "timeAgo": {
+      "daysAgo": "dagen geleden",
+      "dayAgo": "dag geleden",
+      "about17HoursAgo": "ongeveer 17 uur geleden"
+    },
+    "recentUploads": {
+      "title": "Recente Uploads",
+      "subtitle": "Uw meest recent geüploade bonnetjes"
+    },
+    "receiptsPage": {
+      "title": "Bonnetjes",
+      "subtitle": "Bekijk en beheer al uw geüploade bonnetjes",
+      "quickExport": "Snelle Export",
+      "quickSearch": "Snel zoeken...",
+      "allStatus": "Alle Status",
+      "show": "Tonen",
+      "filters": "Filters",
+      "quickActions": "Snelle Acties",
+      "viewAndExport": "Bekijken en Exporteren",
+      "quickActionsSubtitle": "Bonnetjes bekijken of openstaande verwerken",
+      "selectReceipts": "Selecteer bonnetjes om acties uit te voeren",
+      "receiptsSelected": "{count} bonnetje{count, plural, one {} other {s}} geselecteerd",
+      "exportHistory": "Exportgeschiedenis",
+      "viewDetails": "Details Bekijken",
+      "viewDetailsCount": "Details Bekijken ({count})",
+      "exportButton": "Exporteren",
+      "exportCount": "Exporteren {count}",
+      "deleteButton": "Verwijderen",
+      "deleteCount": "Verwijderen {count}",
+      "deleteConfirm": "Weet u zeker dat u {count} bonnetje{count, plural, one {} other {s}} wilt verwijderen?",
+      "deleteSuccess": "{count} bonnetje{count, plural, one {} other {s}} verwijderd",
+      "deleteFailed": "Verwijderen van bonnetjes mislukt",
+      "viewAllReceipts": "Alle Bonnetjes Bekijken",
+      "exportSelected": "Selectie Exporteren ({count})",
+      "noMatchingReceipts": "Geen bonnetjes komen overeen met uw zoekcriteria",
+      "dropdownMenu": {
+        "viewDetails": "Details Bekijken",
+        "editData": "Gegevens Bewerken",
+        "delete": "Verwijderen",
+        "process": "Verwerken (1 credit)",
+        "processing": "Verwerken...",
+        "retry": "Opnieuw Proberen (1 credit)",
+        "retrying": "Opnieuw Proberen..."
+      },
+      "filterPanel": {
+        "search": "Zoeken",
+        "searchPlaceholder": "Handelaarsnaam, bedrag...",
+        "fromDate": "Vanaf Datum",
+        "toDate": "Tot Datum",
+        "pickDate": "Kies een datum",
+        "minAmount": "Min. Bedrag",
+        "maxAmount": "Max. Bedrag",
+        "categories": "Categorieën",
+        "status": "Status",
+        "applyFilters": "Filters Toepassen",
+        "clear": "Wissen",
+        "hide": "Verbergen"
+      },
+      "processing": {
+        "processing": "Verwerken...",
+        "processAllButton": "Alle Openstaande Verwerken ({count})",
+        "dialogTitle": "Alle Openstaande Bonnetjes Verwerken?",
+        "dialogDescription": "Dit verwerkt {count} bonnetje{count, plural, one {} other {s}} met {count} credit{count, plural, one {} other {s}}.",
+        "receiptsToProcess": "Te verwerken bonnetjes:",
+        "creditsRequired": "Vereiste credits:",
+        "yourCredits": "Uw credits:",
+        "insufficientCreditsWarning": "U heeft {creditsNeeded} meer credit{creditsNeeded, plural, one {} other {s}} nodig om alle bonnetjes te verwerken. Alleen de eerste {userCredits} bonnetje{userCredits, plural, one {} other {s}} worden verwerkt.",
+        "processingTimeEstimate": "Verwerking duurt ongeveer {seconds} seconden (1-2 seconden per bonnetje).",
+        "cancel": "Annuleren",
+        "processAll": "Alle Verwerken",
+        "processPartial": "{count} Verwerken",
+        "toast": {
+          "successTitle": "Alle bonnetjes succesvol verwerkt!",
+          "successDescription": "{successful} bonnetje{successful, plural, one {} other {s}} verwerkt. {creditsUsed} credit{creditsUsed, plural, one {} other {s}} gebruikt.",
+          "partialTitle": "Verwerking voltooid met enkele mislukkingen",
+          "partialDescription": "{successful} succesvol, {failed} mislukt. {creditsUsed} credit{creditsUsed, plural, one {} other {s}} gebruikt.",
+          "errorTitle": "Alle bonnetjes konden niet worden verwerkt",
+          "errorDescription": "Controleer individuele bonnetjes voor foutdetails.",
+          "failedTitle": "Bonnetjes verwerken mislukt",
+          "unknownError": "Onbekende fout"
+        }
+      },
+      "noReceipts": "Nog geen bonnen",
+      "noReceiptsDescription": "Upload uw eerste bon om te beginnen",
+      "uploadButton": "Bon uploaden"
+    },
+    "receiptsTable": {
+      "title": "Uw Bonnetjes",
+      "noReceipts": "Nog geen bonnetjes",
+      "uploadFirst": "Upload uw eerste bonnetje om te beginnen",
+      "columns": {
+        "fileName": "Bestandsnaam",
+        "date": "Datum",
+        "merchant": "Handelaar",
+        "amount": "Bedrag",
+        "category": "Categorie",
+        "status": "Status",
+        "uploaded": "Geüpload",
+        "actions": "Acties"
+      },
+      "status": {
+        "pending": "In Afwachting",
+        "processing": "Verwerken",
+        "completed": "Voltooid",
+        "failed": "Mislukt"
+      }
+    },
+    "credits": {
+      "title": "Credits",
+      "balance": "Huidig Saldo",
+      "creditsRemaining": "credits resterend",
+      "description": "Beschikbare credits voor het verwerken van bonnetjes",
+      "manageSubtitle": "Beheer uw credits voor het verwerken van bonnetjes",
+      "availableCredits": "Uw beschikbare credits",
+      "buyCredits": "Credits Kopen",
+      "history": "Creditgeschiedenis",
+      "oneTimePurchase": "Eenmalige aankoop",
+      "monthlySubscription": "Maandelijks abonnement",
+      "packages": {
+        "title": "Kies een pakket",
+        "credits": "credits",
+        "mostPopular": "Meest Populair",
+        "bestValue": "Beste Waarde",
+        "basic": {
+          "name": "Basis",
+          "description": "Perfect voor incidenteel gebruik",
+          "features": [
+            "10 bonnetje verwerkingscredits",
+            "AI-gestuurde gegevensextractie",
+            "Excel & CSV export",
+            "E-mailondersteuning",
+            "Credits verlopen nooit"
+          ]
+        },
+        "popular": {
+          "name": "Populair",
+          "description": "Het beste voor kleine bedrijven",
+          "features": [
+            "50 bonnetje verwerkingscredits",
+            "AI-gestuurde gegevensextractie",
+            "Excel & CSV export",
+            "Prioriteit e-mailondersteuning",
+            "Credits verlopen nooit",
+            "20% besparing"
+          ]
+        },
+        "business": {
+          "name": "Zakelijk",
+          "description": "Voor gebruikers met hoog volume",
+          "features": [
+            "200 bonnetje verwerkingscredits",
+            "AI-gestuurde gegevensextractie",
+            "Excel & CSV export",
+            "Prioriteit e-mailondersteuning",
+            "Credits verlopen nooit",
+            "40% besparing"
+          ]
+        }
+      },
+      "transactions": {
+        "title": "Transactiegeschiedenis",
+        "subtitle": "Uw credittransactiegeschiedenis",
+        "purchase": "Aankoop",
+        "usage": "Gebruik",
+        "refund": "Terugbetaling",
+        "bonus": "Bonus",
+        "purchasedBasicPackage": "Basispakket gekocht",
+        "date": "Datum",
+        "type": "Type",
+        "amount": "Bedrag",
+        "description": "Beschrijving",
+        "noTransactions": "Nog geen transacties",
+        "purchaseCreditsToStart": "Koop credits om te beginnen",
+        "loading": "Uw credittransacties laden...",
+        "showing": "{from} tot {to} van {total} transacties weergeven",
+        "previous": "Vorige",
+        "next": "Volgende",
+        "page": "Pagina {current} van {total}"
+      },
+      "subscriptions": {
+        "title": "Maandelijkse Abonnementen",
+        "subtitle": "Krijg elke maand automatisch credits. Annuleer op elk moment.",
+        "bestValue": "Beste Waarde",
+        "save": "Bespaar {percent}%",
+        "creditsPerMonth": "Credits per maand",
+        "perMonth": "per maand",
+        "receiptsPerMonth": "{count} bonnetjes per maand",
+        "aiPoweredExtraction": "AI-gestuurde extractie",
+        "automaticRenewal": "Automatische maandelijkse verlenging",
+        "prioritySupport": "Prioriteitsondersteuning",
+        "bulkProcessing": "Bulkverwerking",
+        "cancelAnytime": "Annuleer op elk moment",
+        "subscribe": "Abonneren",
+        "processing": "Verwerken...",
+        "disclaimer": "Abonnementen worden automatisch verlengd. Beheer of annuleer op elk moment vanuit uw accountinstellingen.",
+        "plans": {
+          "basic": {
+            "name": "Basic",
+            "description": "Perfect voor regelmatige gebruikers"
+          },
+          "pro": {
+            "name": "Pro",
+            "description": "Beste voor veelgebruikers"
+          },
+          "business": {
+            "name": "Business",
+            "description": "Voor hoogvolume bedrijven"
+          }
+        }
+      },
+      "templates": {
+        "title": "Aangepaste Export Sjablonen",
+        "description": "Maak herbruikbare sjablonen voor BTW-aangiften, boekhouding en meer",
+        "cost": "Kosten per sjabloon",
+        "credits": "credits",
+        "maxTemplates": "Maximum sjablonen",
+        "exportCost": "Exporteren met sjabloon",
+        "free": "GRATIS",
+        "perfectFor": "Perfect voor:",
+        "useCase1": "BTW-aangiften en belastingrapportage",
+        "useCase2": "Aangepaste boekhoudformaten",
+        "useCase3": "Multi-land naleving",
+        "useCase4": "Geautomatiseerde workflows",
+        "manageButton": "Sjablonen Beheren"
+      }
+    },
+    "templates": {
+      "pageTitle": "Export Sjablonen - ReceiptSort",
+      "pageDescription": "Beheer uw aangepaste export sjablonen voor bonnen",
+      "title": "Export Sjablonen",
+      "description": "Maak aangepaste sjablonen om bonnen te exporteren in uw gewenste formaat",
+      "quota": {
+        "title": "Sjabloon Quotum",
+        "description": "Uw sjabloongebruik",
+        "remaining": "{count, plural, =0 {Geen sjablonen over} one {1 sjabloon over} other {{count} sjablonen over}}",
+        "limitReached": "U heeft het maximum aantal sjablonen bereikt. Verwijder ongebruikte sjablonen om nieuwe te maken."
+      },
+      "createButton": "Nieuw Sjabloon Maken",
+      "noTemplates": "Nog geen sjablonen gemaakt",
+      "noTemplatesDescription": "Maak uw eerste sjabloon om bonnen te exporteren in aangepaste formaten zoals BTW-aangiften",
+      "createFirstTemplate": "Maak Uw Eerste Sjabloon",
+      "exportCount": "Keer gebruikt",
+      "fieldsMapped": "Velden toegewezen",
+      "created": "Gemaakt",
+      "lastUsed": "Laatst gebruikt",
+      "deleteSuccess": "Sjabloon succesvol verwijderd",
+      "info": {
+        "title": "Hoe Aangepaste Sjablonen Werken",
+        "point1": "Betaal {credits} credits één keer om een sjabloon te maken",
+        "point2": "Exporteer onbeperkt GRATIS",
+        "point3": "Perfect voor BTW-aangiften en boekhouding",
+        "point4": "Wijs bonvelden toe aan uw sjabloonkolommen"
+      },
+      "deleteDialog": {
+        "title": "Sjabloon Verwijderen?",
+        "description": "Weet u zeker dat u \"{name}\" wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt.",
+        "warning": "Let op: Er worden geen credits terugbetaald voor verwijderde sjablonen.",
+        "deleting": "Verwijderen..."
+      },
+      "errors": {
+        "fetchFailed": "Kan sjablonen niet laden",
+        "deleteFailed": "Kan sjabloon niet verwijderen"
+      },
+      "uploadDialog": {
+        "title": "Export Sjabloon Maken",
+        "description": "Upload uw Excel-sjabloon en configureer veldtoewijzing",
+        "steps": {
+          "upload": "Uploaden",
+          "configure": "Configureren",
+          "confirm": "Bevestigen"
+        },
+        "uploading": "Sjabloon uploaden...",
+        "clickToUpload": "Klik om sjabloonbestand te uploaden",
+        "fileTypes": "Excel-bestanden (.xlsx, .xls)",
+        "maxSize": "Max bestandsgrootte: {size}MB",
+        "uploadHint": "Upload uw BTW-aangifteformulier, boekhoudsjabloon of elk Excel-bestand dat u wilt vullen met bongegevens",
+        "uploadSuccess": "Sjabloon succesvol geüpload",
+        "uploadError": "Kan sjabloon niet uploaden",
+        "fields": {
+          "name": "Sjabloonnaam",
+          "description": "Beschrijving (optioneel)",
+          "sheetName": "Bladnaam",
+          "startRow": "Startrij",
+          "mapping": "Veldtoewijzing"
+        },
+        "placeholders": {
+          "name": "bijv., BTW-aangifte Q4 2025",
+          "description": "bijv., Kwartaal BTW-rapport voor Nederland"
+        },
+        "mappingHint": "Voer de kolomletter (A, B, C, enz.) in voor elk veld dat u wilt opnemen",
+        "fieldsMapped": "velden toegewezen",
+        "next": "Volgende",
+        "confirm": {
+          "title": "Sjabloon Maken Bevestigen",
+          "creditCharge": "Dit kost {credits} credits",
+          "balance": "Uw saldo: {balance} credits",
+          "insufficientCredits": "Onvoldoende credits. Koop meer credits.",
+          "benefits": "Wat u krijgt:",
+          "benefit1": "Onbeperkt exporteren met dit sjabloon (GRATIS)",
+          "benefit2": "Automatisch uw Excel-formulieren invullen",
+          "benefit3": "Toewijzing altijd bewerken en bijwerken",
+          "saving": "Sjabloon maken...",
+          "createTemplate": "Sjabloon Maken"
+        },
+        "errors": {
+          "nameRequired": "Sjabloonnaam is verplicht",
+          "mappingRequired": "Minimaal één veldtoewijzing is verplicht"
+        },
+        "saveSuccess": "{credits} credits in rekening gebracht. Sjabloon gemaakt!",
+        "saveError": "Kan sjabloon niet maken"
+      }
+    },
+    "exports": {
+      "title": "Exports",
+      "subtitle": "Exporteer en beheer uw bonnetjesgegevens",
+      "exportSection": {
+        "title": "Bonnetjes Exporteren",
+        "description": "Filter en exporteer uw voltooide bonnetjes"
+      },
+      "history": {
+        "title": "Exportgeschiedenis",
+        "subtitle": "Bekijk uw eerdere bonnetjesexporten",
+        "autoDelete": "Bestanden worden automatisch na 30 dagen verwijderd"
+      },
+      "noExports": "Nog geen exports",
+      "noExportsDescription": "U heeft nog geen bonnetjes geëxporteerd. Upload en verwerk enkele bonnetjes om te beginnen.",
+      "type": "Type",
+      "receipts": "bonnetjes",
+      "showingRecent": "{count} meest recente export{count, plural, one {} other {s}} weergeven",
+      "fileName": "Bonnetjes-export",
+      "buttons": {
+        "exportAll": "Alles Exporteren",
+        "filters": "Filters",
+        "hide": "Verbergen",
+        "clearFilters": "Alle Filters Wissen",
+        "loading": "Laden..."
+      },
+      "filters": {
+        "fromDate": "Vanaf Datum",
+        "toDate": "Tot Datum",
+        "merchantName": "Handelaarsnaam",
+        "amountRange": "Bedragbereik",
+        "min": "Min",
+        "max": "Max",
+        "pickDate": "Kies een datum",
+        "searchPlaceholder": "Zoek handelaar...",
+        "activeFilters": "Actieve filters",
+        "from": "Van",
+        "to": "Tot",
+        "merchant": "Handelaar",
+        "minAmount": "Min. bedrag",
+        "maxAmount": "Max. bedrag"
+      },
+      "columns": {
+        "date": "Exportdatum",
+        "receipts": "Bonnetjes",
+        "format": "Formaat",
+        "download": "Downloaden",
+        "expires": "Verloopt",
+        "actions": "Acties"
+      },
+      "status": {
+        "expired": "Verlopen",
+        "daysShort": "d"
+      },
+      "actions": {
+        "download": "Downloaden",
+        "downloading": "Downloaden...",
+        "unavailable": "Niet beschikbaar"
+      }
+    },
+    "profile": {
+      "title": "Profielinstellingen",
+      "subtitle": "Beheer uw accountinstellingen en voorkeuren",
+      "profileInfo": "Profielinformatie",
+      "profileInfoDescription": "Werk uw persoonlijke informatie bij",
+      "loadingProfile": "Uw profiel laden...",
+      "personalInfo": "Persoonlijke Informatie",
+      "name": "Naam",
+      "fullName": "Volledige Naam",
+      "fullNamePlaceholder": "Voer uw volledige naam in",
+      "email": "E-mail",
+      "emailCannotBeChanged": "E-mail kan niet worden gewijzigd",
+      "language": "Taal",
+      "timezone": "Tijdzone",
+      "updateProfile": "Profiel Bijwerken",
+      "saveChanges": "Wijzigingen Opslaan",
+      "saving": "Opslaan...",
+      "changePassword": "Wachtwoord Wijzigen",
+      "currentPassword": "Huidig Wachtwoord",
+      "newPassword": "Nieuw Wachtwoord",
+      "accountInfo": "Accountinformatie",
+      "accountInfoDescription": "Bekijk uw accountgegevens",
+      "userId": "Gebruikers-ID",
+      "accountCreated": "Account Aangemaakt",
+      "lastSignIn": "Laatste Aanmelding",
+      "user": "Gebruiker",
+      "signOut": "Uitloggen",
+      "home": "Home",
+      "creditsLabel": "Credits",
+      "toasts": {
+        "profileUpdated": "Profiel succesvol bijgewerkt",
+        "profileUpdateError": "Profiel bijwerken mislukt",
+        "profileLoadError": "Profiel laden mislukt"
+      }
+    }
+  },
+  "pricing": {
+    "title": "Eenvoudige, transparante prijzen",
+    "subtitle": "Kies het plan dat bij u past",
+    "subheadline": "Betaal per gebruik of neem een abonnement en bespaar",
+    "currentBalance": "Uw huidig saldo",
+    "credits": "credits",
+    "perCredit": "per credit",
+    "creditPackagesTitle": "Creditpakketten",
+    "creditPacks": "Creditpakketten",
+    "subscriptions": "Abonnementen",
+    "purchaseCredits": "Credits Kopen",
+    "buyNow": "Nu Kopen",
+    "subscribe": "Abonneren",
+    "getStarted": "Aan de Slag",
+    "popular": "Meest Populair",
+    "readyTitle": "Klaar om te beginnen?",
+    "readySubtitle": "Kies een pakket dat bij uw behoeften past",
+    "goToDashboard": "Ga naar Dashboard",
+    "startFree": "Gratis Beginnen",
+    "signIn": "Inloggen",
+    "tryItFree": "Gratis proberen",
+    "freeCreditsNoCreditCard": "10 gratis credits • Geen creditcard vereist",
+    "features": {
+      "allFeatures": "Alle functies inbegrepen",
+      "aiExtraction": "AI-powered extractie",
+      "exportFormats": "Excel & CSV export",
+      "support": "E-mailondersteuning",
+      "security": "Beveiliging op bankniveau",
+      "gdpr": "GDPR-conform"
+    },
+    "faq": {
+      "title": "Veelgestelde Vragen",
+      "howCreditsWork": {
+        "question": "Hoe werken credits?",
+        "answer": "Elk bonnetje dat u uploadt en verwerkt kost 1 credit. Credits worden alleen gebruikt wanneer u een bonnetje verwerkt, niet bij het uploaden. U kunt credits kopen in pakketten of een abonnement nemen voor betere waarde."
+      },
+      "doCreditsExpire": {
+        "question": "Verlopen credits?",
+        "answer": "Nee, credits verlopen nooit. Koop ze wanneer u ze nodig heeft en gebruik ze naar eigen inzicht. Er zijn geen maandelijkse verplichtingen of verloopdata."
+      },
+      "canIGetRefund": {
+        "question": "Kan ik terugbetaling krijgen?",
+        "answer": "Ja, we bieden een 30 dagen geld-terug-garantie op creditaankopen. Als u om welke reden dan ook niet tevreden bent, neem dan contact met ons op voor een volledige terugbetaling."
+      },
+      "wrongExtraction": {
+        "question": "Wat als de extractie onjuist is?",
+        "answer": "U kunt alle geëxtraheerde gegevens handmatig bewerken voordat u exporteert. Als de extractie volledig mislukt, neem dan contact met ons op en restitueren we het credit."
+      },
+      "needSubscription": {
+        "question": "Heb ik een abonnement nodig?",
+        "answer": "Nee, u kunt credits kopen wanneer u ze nodig heeft zonder enige maandelijkse verplichting. Abonnementen zijn beschikbaar als u regelmatig bonnetjes verwerkt en wilt besparen."
+      }
+    }
+  },
+  "footer": {
+    "description": "AI-powered bonnetjesgegevensextractie voor bedrijven",
+    "product": "Product",
+    "company": "Bedrijf",
+    "legal": "Juridisch",
+    "support": "Ondersteuning",
+    "termsOfService": "Servicevoorwaarden",
+    "privacyPolicy": "Privacybeleid",
+    "cookiePolicy": "Cookiebeleid",
+    "allRightsReserved": "Alle rechten voorbehouden"
+  },
+  "navigation": {
+    "home": "Home",
+    "features": "Kenmerken",
+    "pricing": "Prijzen",
+    "howItWorks": "Hoe Het Werkt",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "dashboard": "Dashboard",
+    "login": "Inloggen",
+    "signup": "Aanmelden",
+    "about": "Over Ons",
+    "more": "Meer",
+    "customTemplates": "Aangepaste Sjablonen"
+  },
+  "contact": {
+    "title": "Neem Contact Op",
+    "subtitle": "Heeft u vragen? We horen graag van u. Stuur ons een bericht en we reageren binnen 24 uur.",
+    "backToHome": "Terug naar Home",
+    "sendMessage": "Stuur ons een Bericht",
+    "formDescription": "Vul het onderstaande formulier in en we nemen zo snel mogelijk contact met u op.",
+    "name": "Naam",
+    "namePlaceholder": "Uw naam",
+    "email": "E-mail",
+    "emailPlaceholder": "uw@email.com",
+    "subject": "Onderwerp",
+    "subjectPlaceholder": "Hoe kunnen we helpen?",
+    "message": "Bericht",
+    "messagePlaceholder": "Vertel ons meer over uw vraag...",
+    "sendButton": "Bericht Versturen",
+    "sending": "Verzenden...",
+    "successMessage": "Bericht succesvol verzonden! We nemen binnen 24 uur contact met u op.",
+    "responseTime": "We reageren meestal binnen 24 uur",
+    "preferEmail": "E-mail voorkeur?",
+    "reachDirectly": "U kunt ons ook direct bereiken via e-mail:",
+    "frequentlyAskedQuestions": "Veelgestelde Vragen",
+    "faqDescription": "Voordat u contact opneemt, vindt u uw antwoord mogelijk in ons FAQ-gedeelte.",
+    "viewFaq": "Bekijk FAQ",
+    "quickStartGuide": "Snelstartgids",
+    "quickStartDescription": "Nieuw bij ReceiptSort? Leer in 3 eenvoudige stappen hoe u aan de slag gaat.",
+    "howItWorks": "Hoe Het Werkt"
+  },
+  "creditPackages": {
+    "title": "Credits Kopen",
+    "starter": {
+      "name": "Starter",
+      "description": "Perfect om de service te proberen"
+    },
+    "basic": {
+      "name": "Basis",
+      "description": "Geweldig voor regelmatige gebruikers"
+    },
+    "pro": {
+      "name": "Pro",
+      "description": "Beste waarde voor veelgebruikers"
+    },
+    "business": {
+      "name": "Zakelijk",
+      "description": "Voor hoogvolume bedrijven"
+    },
+    "credits": "Credits",
+    "perCredit": "per credit",
+    "processReceipts": "{count} bonnetjes verwerken",
+    "aiPoweredExtraction": "AI-gestuurde extractie",
+    "prioritySupport": "Prioriteitsondersteuning",
+    "bulkProcessing": "Bulkverwerking",
+    "neverExpires": "Verloopt nooit",
+    "purchase": "Kopen",
+    "processing": "Verwerken...",
+    "bestValue": "Beste Waarde",
+    "save": "Bespaar {percent}%"
+  },
+  "receiptDetails": {
+    "title": "Bonnetje Details",
+    "receiptPreview": "Bonnetje Voorbeeld",
+    "documentType": "Documenttype",
+    "merchantName": "Handelaarsnaam",
+    "invoiceNumber": "Factuurnummer",
+    "amount": "Bedrag",
+    "currency": "Valuta",
+    "receiptDate": "Bonnetje Datum",
+    "category": "Categorie",
+    "subtotal": "Subtotaal (Voor Belasting)",
+    "taxAmount": "Belastingbedrag",
+    "dueDate": "Vervaldatum",
+    "paymentMethod": "Betaalmethode",
+    "purchaseOrderNumber": "Inkoopordernummer",
+    "paymentReference": "Betalingsreferentie",
+    "vendorTaxId": "Leverancier BTW-nummer",
+    "vendorAddress": "Leveranciersadres",
+    "lineItems": "Regelitems",
+    "lineItemsCount": "Regelitems ({count})",
+    "patientName": "Patiëntnaam",
+    "medicalInformation": "Medische Informatie",
+    "patientDob": "Geboortedatum Patiënt",
+    "treatmentDate": "Behandeldatum",
+    "insuranceClaimNumber": "Verzekeringsclaim Nummer",
+    "diagnosisCodes": "Diagnosecodes (ICD)",
+    "procedureCodes": "Procedurecodes (CPT)",
+    "providerId": "Zorgverlener ID (AGB/NPI)",
+    "insuranceCoveredAmount": "Door verzekeraar betaald",
+    "patientResponsibilityAmount": "Eigen bijdrage",
+    "insuranceBreakdown": "Verzekeringsuitsplitsing",
+    "totalTreatmentCost": "Totale behandelkosten",
+    "insuranceCovered": "Door verzekeraar betaald",
+    "youPay": "U betaalt",
+    "notes": "Notities",
+    "saveChanges": "Wijzigingen Opslaan",
+    "saving": "Opslaan...",
+    "delete": "Verwijderen",
+    "deleting": "Verwijderen...",
+    "retryProcessing": "Opnieuw Verwerken",
+    "retrying": "Opnieuw Proberen...",
+    "documentTypes": {
+      "receipt": "Bonnetje",
+      "invoice": "Factuur",
+      "medicalInvoice": "Medische Factuur",
+      "bill": "Rekening"
+    },
+    "categories": {
+      "foodDining": "Eten & Drinken",
+      "transportation": "Vervoer",
+      "shopping": "Winkelen",
+      "officeSupplies": "Kantoorbenodigdheden",
+      "travel": "Reizen",
+      "entertainment": "Amusement",
+      "utilities": "Nutsvoorzieningen",
+      "healthcare": "Gezondheidszorg",
+      "other": "Overige"
+    },
+    "paymentMethods": {
+      "cash": "Contant",
+      "creditCard": "Creditcard",
+      "debitCard": "Betaalpas",
+      "bankTransfer": "Bankoverschrijving",
+      "other": "Overige"
+    },
+    "lineItemColumns": {
+      "lineNumber": "#",
+      "description": "Beschrijving",
+      "quantity": "Aantal",
+      "unitPrice": "Prijs",
+      "lineTotal": "Totaal",
+      "itemCode": "Code"
+    }
+  },
+  "billing": {
+    "title": "Facturering & Aankoopgeschiedenis",
+    "description": "Bekijk en download uw aankoopfacturen voor boekhouding en belastingaangifte",
+    "noInvoices": "Geen aankoopgeschiedenis",
+    "noInvoicesDescription": "Koop credits om te beginnen en facturen voor uw transacties te ontvangen",
+    "purchaseCredits": "Credits kopen"
+  },
+  "account": {
+    "title": "Accountinstellingen",
+    "description": "Beheer uw accountinformatie en voorkeuren",
+    "profileTitle": "Profielinformatie",
+    "profileDescription": "Uw persoonlijke informatie en contactgegevens",
+    "fullName": "Volledige naam",
+    "email": "E-mailadres",
+    "userId": "Gebruikers-ID",
+    "notSet": "Niet ingesteld",
+    "creditsTitle": "Creditsaldo",
+    "creditsDescription": "Uw huidige creditsaldo voor bonverwerking",
+    "currentCredits": "Huidige credits",
+    "purchaseCredits": "Meer credits kopen",
+    "billingTitle": "Facturering & Facturen",
+    "billingDescription": "Bekijk uw aankoopgeschiedenis en download facturen",
+    "viewBilling": "Bekijk factureringsgeschiedenis",
+    "accountCreated": "Account aangemaakt op",
+    "enterName": "Voer uw volledige naam in",
+    "saveChanges": "Wijzigingen opslaan",
+    "updateSuccess": "Profiel succesvol bijgewerkt!",
+    "updateError": "Profiel bijwerken mislukt. Probeer het opnieuw.",
+    "emailCannotChange": "E-mailadres kan niet worden gewijzigd"
+  },
+  "whatMakesUsDifferent": {
+    "title": "Wat ReceiptSort Anders Maakt",
+    "others": {
+      "title": "Andere Bonnetjes-Tools",
+      "fixedFormat": "Exporteer naar HUN vaste formaat",
+      "manualReorganization": "U reorganiseert gegevens handmatig (2-3 min/document)",
+      "subscription": "$20-60/maand abonnement vereist",
+      "receiptsOnly": "Alleen bonnetjes"
+    },
+    "receiptSort": {
+      "title": "ReceiptSort",
+      "badge": "Betere Aanpak",
+      "aiAdapts": "AI past zich automatisch aan UW sjabloon aan",
+      "yourFormat": "Gegevens geëxporteerd in uw formaat (geen reorganisatie)",
+      "payPerDocument": "Betaal per document ($0.05-0.07, credits verlopen nooit)",
+      "allDocuments": "Bonnetjes, facturen EN medische notities"
+    },
+    "savingsText": "Bespaar 2-3 minuten per document door handmatige reorganisatie te elimineren.",
+    "freeTemplates": "Maak 10 aangepaste sjablonen GRATIS, hergebruik onbeperkt.",
+    "cta": "Zie Hoe Sjabloon Mapping Werkt"
+  },
+  "useCases": {
+    "title": "Gemaakt voor Uw Workflow",
+    "subtitle": "ReceiptSort past zich aan hoe U werkt—niet andersom",
+    "items": {
+      "accountant": {
+        "tag": "Perfect voor: Accountants",
+        "title": "Accountant met Meerdere Klanten",
+        "description": "Maak 5 sjablonen (één per klantformaat). AI wijst alle bonnetjes automatisch toe aan het juiste klantsjabloon. Factureer klanten nauwkeurig zonder handmatige reorganisatie. Bespaar 15+ uur per maand."
+      },
+      "medical": {
+        "tag": "Perfect voor: Medische Praktijken",
+        "title": "Medische Praktijk",
+        "description": "Maak aangepaste verzekeringsclaim sjablonen. AI extraheert uit medische bonnetjes en facturen, wijst toe aan het formaat van UW verzekeringsmaatschappij. Geen handmatige gegevensinvoer meer voor vergoedingen."
+      },
+      "euFreelancer": {
+        "tag": "Perfect voor: Freelancers",
+        "title": "Freelancer (Belasting/BTW-aangiften)",
+        "description": "Maak belastingaangiftesjablonen die voldoen aan de overheidsvereisten van uw land. AI behandelt automatisch verschillende bonnetformaten (Btw, VAT, MwSt, TVA, GST, Omzetbelasting). Export klaar voor indiening."
+      },
+      "variableVolume": {
+        "tag": "Perfect voor: Variabel Volume",
+        "title": "Variabel Volume Bedrijf",
+        "description": "Verwerk 10 documenten in de ene maand, 100 in de volgende. Betaal alleen voor wat u gebruikt ($0.05-0.07 per document). Credits verlopen nooit. Geen verspillend maandelijks abonnement."
+      }
+    }
+  },
+  "privacyPage": {
+    "backToHome": "Terug naar Home",
+    "title": "Privacybeleid",
+    "lastUpdated": "Laatst bijgewerkt: 6 oktober 2025",
+    "sections": {
+      "introduction": {
+        "title": "1. Inleiding",
+        "content": "Welkom bij ReceiptSorter (\"wij\", \"ons\"). Wij zijn toegewijd aan het beschermen van uw persoonlijke informatie en uw recht op privacy. Dit Privacybeleid legt uit hoe wij uw informatie verzamelen, gebruiken, openbaar maken en beschermen wanneer u onze bonnetjesverwerkingsservice gebruikt."
+      },
+      "informationWeCollect": {
+        "title": "2. Informatie die We Verzamelen",
+        "intro": "We verzamelen informatie die u direct aan ons verstrekt:",
+        "items": [
+          "Accountinformatie (e-mailadres, naam)",
+          "Bonnetjesafbeeldingen en PDF-bestanden die u uploadt",
+          "Betalingsinformatie (veilig verwerkt via Stripe)",
+          "Gebruiksgegevens en analyses"
+        ]
+      },
+      "howWeUse": {
+        "title": "3. Hoe We Uw Informatie Gebruiken",
+        "intro": "We gebruiken uw informatie om:",
+        "items": [
+          "Onze bonnetjesverwerkingsservice te leveren en te onderhouden",
+          "Uw bonnetjes te verwerken met AI-technologie",
+          "Betalingen te verwerken en uw account te beheren",
+          "U service-updates en promotionele berichten te sturen",
+          "Onze diensten te verbeteren en nieuwe functies te ontwikkelen",
+          "Aan wettelijke verplichtingen te voldoen"
+        ]
+      },
+      "dataSecurity": {
+        "title": "4. Gegevensbeveiliging",
+        "intro": "We implementeren industriestandaard beveiligingsmaatregelen om uw gegevens te beschermen:",
+        "items": [
+          "256-bit SSL-versleuteling voor gegevensoverdracht",
+          "Veilige cloudopslag met toegangscontroles",
+          "Automatische verwijdering van bonnetjesbestanden na 90 dagen",
+          "Regelmatige beveiligingsaudits en updates"
+        ]
+      },
+      "dataSharing": {
+        "title": "5. Gegevensdeling",
+        "intro": "We verkopen uw persoonlijke informatie niet. We kunnen uw gegevens delen met:",
+        "items": [
+          "Dienstverleners (OpenAI voor bonnetjesverwerking, Stripe voor betalingen)",
+          "Wetshandhaving indien wettelijk vereist",
+          "Zakelijke partners met uw uitdrukkelijke toestemming"
+        ]
+      },
+      "yourRights": {
+        "title": "6. Uw Rechten",
+        "intro": "Onder de AVG en andere privacywetten heeft u het recht om:",
+        "items": [
+          "Toegang tot uw persoonlijke gegevens",
+          "Onjuiste gegevens te corrigeren",
+          "Verwijdering van uw gegevens aan te vragen",
+          "Uw gegevens in een draagbaar formaat te exporteren",
+          "Af te zien van marketingcommunicatie",
+          "Een klacht in te dienen bij een toezichthoudende autoriteit"
+        ]
+      },
+      "cookies": {
+        "title": "7. Cookies",
+        "content": "We gebruiken essentiële cookies om onze service te leveren en optionele analytische cookies om de gebruikerservaring te verbeteren. U kunt cookievoorkeuren beheren via uw browserinstellingen."
+      },
+      "dataRetention": {
+        "title": "8. Gegevensbewaring",
+        "content": "We bewaren uw gegevens alleen zolang als nodig is om onze diensten te leveren en aan wettelijke verplichtingen te voldoen. Bonnetjesbestanden worden na 90 dagen automatisch verwijderd. Accountgegevens worden bewaard totdat u verwijdering aanvraagt."
+      },
+      "childrensPrivacy": {
+        "title": "9. Privacy van Kinderen",
+        "content": "Onze service is niet bedoeld voor kinderen onder de 18 jaar. We verzamelen niet bewust gegevens van kinderen."
+      },
+      "changes": {
+        "title": "10. Wijzigingen in Dit Beleid",
+        "content": "We kunnen dit Privacybeleid van tijd tot tijd bijwerken. We zullen u op de hoogte brengen van wijzigingen door het nieuwe beleid op deze pagina te plaatsen en de datum \"Laatst bijgewerkt\" bij te werken."
+      },
+      "contact": {
+        "title": "11. Neem Contact Op",
+        "intro": "Als u vragen heeft over dit Privacybeleid, neem dan contact met ons op via:",
+        "email": "E-mail: support@seenano.nl",
+        "contactForm": "Contactformulier: receiptsort.com/contact"
+      }
+    }
+  },
+  "termsPage": {
+    "backToHome": "Terug naar Home",
+    "title": "Gebruiksvoorwaarden",
+    "lastUpdated": "Laatst bijgewerkt: 6 oktober 2025",
+    "sections": {
+      "acceptance": {
+        "title": "1. Acceptatie van Voorwaarden",
+        "content": "Door ReceiptSorter (\"de Service\") te openen of te gebruiken, gaat u ermee akkoord gebonden te zijn aan deze Gebruiksvoorwaarden (\"Voorwaarden\"). Als u niet akkoord gaat met deze Voorwaarden, gebruik de Service dan niet."
+      },
+      "description": {
+        "title": "2. Beschrijving van de Service",
+        "content": "ReceiptSorter is een cloudgebaseerde bonnetjesverwerkingsservice die kunstmatige intelligentie gebruikt om gegevens te extraheren uit bonnetjesafbeeldingen en PDF's. De Service stelt u in staat bonnetjes te uploaden, informatie over handelaars, bedragen, datums en andere gegevens te extraheren, en de resultaten te exporteren naar Excel- of CSV-formaten."
+      },
+      "userAccounts": {
+        "title": "3. Gebruikersaccounts",
+        "intro": "Om de Service te gebruiken, moet u:",
+        "items": [
+          "Een account aanmaken met nauwkeurige informatie",
+          "De beveiliging van uw accountgegevens handhaven",
+          "Ten minste 18 jaar oud zijn",
+          "Ons onmiddellijk op de hoogte stellen van ongeautoriseerde toegang",
+          "Verantwoordelijk zijn voor alle activiteit onder uw account"
+        ]
+      },
+      "credits": {
+        "title": "4. Credits en Betaling",
+        "content": "De Service werkt op een creditgebaseerd systeem. Elk verwerkt bonnetje kost 1 credit. Credits kunnen worden gekocht via onze website met Stripe-betalingsverwerking. Credits verlopen nooit. Prijzen kunnen met kennisgeving worden gewijzigd. Alle verkopen zijn definitief tenzij anders vermeld in ons restitutiebeleid."
+      },
+      "usePolicy": {
+        "title": "5. Acceptabel Gebruik",
+        "intro": "U stemt ermee in om niet:",
+        "items": [
+          "Illegale, frauduleuze of schadelijke inhoud te uploaden",
+          "Te proberen de Service reverse-engineeren of te hacken",
+          "De Service te gebruiken om wetten of voorschriften te schenden",
+          "Uw accountgegevens met anderen te delen",
+          "Geautomatiseerde scripts te gebruiken om de Service te misbruiken"
+        ]
+      },
+      "intellectualProperty": {
+        "title": "6. Intellectueel Eigendom",
+        "content": "De Service, inclusief alle inhoud, functies en functionaliteit, is eigendom van ReceiptSorter en wordt beschermd door internationale auteursrecht-, handelsmerk- en andere intellectuele eigendomswetten. U behoudt het eigendom van uw geüploade bonnetjes en geëxtraheerde gegevens."
+      },
+      "dataProcessing": {
+        "title": "7. Gegevensverwerking",
+        "content": "We verwerken uw bonnetjesgegevens met behulp van OpenAI's GPT-4 Vision AI. Bonnetjesbestanden worden veilig opgeslagen en na 90 dagen automatisch verwijderd. Zie ons Privacybeleid voor details over hoe we uw gegevens verwerken."
+      },
+      "warranties": {
+        "title": "8. Garanties en Vrijwaringen",
+        "content": "DE SERVICE WORDT GELEVERD \"ZOALS HET IS\" ZONDER ENIGE GARANTIES. We garanderen geen 100% nauwkeurigheid bij het extraheren van bonnetjesgegevens. U bent verantwoordelijk voor het verifiëren van geëxtraheerde gegevens voor gebruik."
+      },
+      "limitation": {
+        "title": "9. Beperking van Aansprakelijkheid",
+        "content": "IN DE MAXIMAAL TOEGESTANE MATE DOOR DE WET, ZAL RECEIPTSORT NIET AANSPRAKELIJK ZIJN VOOR INDIRECTE, INCIDENTELE, SPECIALE, GEVOLGSCHADE OF BESTRAFFENDE SCHADE DIE VOORTVLOEIT UIT UW GEBRUIK VAN DE SERVICE."
+      },
+      "termination": {
+        "title": "10. Beëindiging",
+        "content": "We behouden ons het recht voor om uw account op elk moment op te schorten of te beëindigen wegens schending van deze Voorwaarden. U kunt uw account op elk moment verwijderen via uw accountinstellingen."
+      },
+      "changes": {
+        "title": "11. Wijzigingen in Voorwaarden",
+        "content": "We kunnen deze Voorwaarden op elk moment wijzigen. We zullen u op de hoogte stellen van belangrijke wijzigingen via e-mail of via de Service. Voortgezet gebruik na wijzigingen vormt acceptatie."
+      },
+      "governing": {
+        "title": "12. Toepasselijk Recht",
+        "content": "Deze Voorwaarden worden beheerst door de wetten van Nederland. Eventuele geschillen zullen worden opgelost in de rechtbanken van Nederland."
+      },
+      "contact": {
+        "title": "13. Contact",
+        "intro": "Vragen over deze Voorwaarden? Neem contact met ons op via:",
+        "email": "E-mail: support@seenano.nl",
+        "contactForm": "Contactformulier: receiptsort.com/contact"
+      }
+    }
+  }
+}

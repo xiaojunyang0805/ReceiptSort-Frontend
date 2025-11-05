@@ -1,0 +1,1027 @@
+{
+  "common": {
+    "getStarted": "Comenzar Gratis",
+    "signUp": "Registrarse",
+    "login": "Iniciar Sesión",
+    "logout": "Cerrar Sesión",
+    "learnMore": "Más Información",
+    "tryDemo": "Probar Demo",
+    "uploadReceipts": "Subir Recibos",
+    "pricing": "Precios",
+    "features": "Características",
+    "howItWorks": "Cómo Funciona",
+    "faq": "FAQ",
+    "contact": "Contacto",
+    "dashboard": "Panel",
+    "receipts": "Recibos",
+    "exports": "Exportaciones",
+    "credits": "Créditos",
+    "profile": "Perfil",
+    "upload": "Subir",
+    "export": "Exportar",
+    "download": "Descargar",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "close": "Cerrar",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "select": "Seleccionar",
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "confirm": "Confirmar",
+    "billing": "Facturación",
+    "account": "Cuenta"
+  },
+  "hero": {
+    "headline": "Sus Recibos, Su Formato, Automáticamente",
+    "headlineHighlight": "Su Formato",
+    "subheadline": "Extrae datos de recibos en segundos con IA.",
+    "subheadlineDetails": "Sube recibos → IA extrae datos → Descarga Excel.",
+    "watchDemo": "Ver Demo",
+    "trustBadge": "Confiado por más de 2000 empresas en todo el mundo",
+    "valueProps": {
+      "freeCredits": "10 créditos gratis + 10 plantillas personalizadas • Sin tarjeta de crédito",
+      "neverExpire": "Los créditos nunca expiran • Plantillas reutilizables ilimitadamente",
+      "multiDocument": "Funciona con recibos, facturas y notas médicas"
+    },
+    "getStarted": "Empezar Gratis",
+    "processTagline": "Subir → IA mapea a su plantilla → Descargar en su formato"
+  },
+  "features": {
+    "title": "Todo lo que necesitas para organizar recibos",
+    "subtitle": "Diseñado para pequeñas empresas, freelancers y contadores que valoran su tiempo.",
+    "items": {
+      "upload": {
+        "title": "Subir desde Cualquier Dispositivo",
+        "description": "Arrastra y suelta recibos desde tu teléfono, correo o escáner. Soporta todos los formatos de imagen comunes (JPG, PNG, WebP, TIFF, BMP, GIF) y PDFs de hasta 10MB por archivo."
+      },
+      "aiExtraction": {
+        "title": "Inteligencia Multi-Documento",
+        "description": "Funciona con recibos, facturas Y notas médicas—no solo recibos. La IA se adapta perfectamente a diferentes tipos de documentos. GPT-4 Vision logra 98%+ de precisión en todos los formatos. Maneja automáticamente múltiples idiomas y formatos de moneda."
+      },
+      "export": {
+        "title": "Exportar a Excel o CSV",
+        "description": "Descarga hojas de cálculo organizadas listas para QuickBooks, Xero o cualquier software de contabilidad."
+      },
+      "pricing": {
+        "title": "Paga Según Uses",
+        "description": "Desde $0.067 por recibo con paquetes al por mayor. Compra créditos cuando los necesites, o suscríbete para obtener aún mejor valor."
+      },
+      "security": {
+        "title": "Seguridad de Nivel Bancario",
+        "description": "Tus datos están encriptados y nunca se comparten. Cumple con GDPR. Los recibos se eliminan automáticamente después de 90 días."
+      },
+      "timeSaving": {
+        "title": "Ahorra 5+ Horas Semanales",
+        "description": "Deja la entrada manual de datos. Procesa 100 recibos en el tiempo que lleva hacer 1 manualmente. Cada recibo se procesa en menos de 5 segundos."
+      },
+      "templateMapping": {
+        "title": "IA Que Aprende Su Formato",
+        "description": "Cree plantillas de exportación personalizadas con SUS nombres de columna (Monto IVA, Código de Proyecto, ID de Cliente, etc.). Nuestra IA mapea automáticamente los datos extraídos a su formato—incluso cuando los recibos usan términos diferentes (Tax vs VAT vs Btw vs IVA). Guarde 10 plantillas gratis, reutilice ilimitadamente. Cada exportación cuesta solo 1 crédito.",
+        "badge": "FUNCIÓN ÚNICA"
+      }
+    }
+  },
+  "howItWorks": {
+    "title": "Cómo Funciona",
+    "subtitle": "Comienza en 4 simples pasos",
+    "description": "De la foto del recibo a la hoja de cálculo organizada en menos de un minuto",
+    "steps": {
+      "template": {
+        "title": "Diseñe Su Formato de Exportación Perfecto",
+        "description": "Cree una plantilla personalizada con sus nombres exactos de columna y estructura. Toma 2 minutos. Guarde hasta 10 plantillas gratis—sin cargos de créditos."
+      },
+      "upload": {
+        "title": "Suba Sus Recibos",
+        "description": "Arrastra y suelta recibos, facturas o notas médicas. Funciona con fotos o PDFs desde cualquier dispositivo. Soporta todos los formatos de imagen principales."
+      },
+      "process": {
+        "title": "IA Extrae y Mapea a Su Plantilla",
+        "description": "Nuestra IA lee el documento y mapea inteligentemente los datos extraídos a las columnas de SU plantilla—incluso manejando diferentes terminologías automáticamente."
+      },
+      "export": {
+        "title": "Descargue en Su Formato",
+        "description": "Obtenga un archivo Excel o CSV perfectamente formateado que coincida con su plantilla—listo para importar directamente a su sistema contable o presentar a las autoridades."
+      }
+    },
+    "cta": "Comience Gratis: Cree Su Primera Plantilla"
+  },
+  "socialProof": {
+    "title": "Confiado por empresas en todo el mundo",
+    "stats": {
+      "receipts": "Recibos Procesados",
+      "users": "Usuarios Activos",
+      "accuracy": "Precisión Promedio",
+      "timeSaved": "Horas Ahorradas",
+      "timeSavedPerDoc": "Ahorrado Por Documento"
+    },
+    "testimonials": {
+      "title": "Lo que dicen nuestros clientes",
+      "items": [
+        {
+          "quote": "La función de mapeo de plantillas es brillante. Creé una plantilla para mis declaraciones de IVA, y ahora cada recibo se formatea automáticamente para cumplir con los requisitos de la oficina de impuestos. Me ahorra más de 20 minutos cada mes, y nunca cometo errores de formato.",
+          "name": "Lisa van Dijk",
+          "role": "Consultora Independiente, Países Bajos"
+        },
+        {
+          "quote": "Como propietario de un pequeño negocio, no tengo tiempo para la contabilidad. Esta herramienta es un cambio radical para el seguimiento de gastos.",
+          "name": "Marcus Johnson",
+          "role": "Propietario de Tienda Minorista"
+        },
+        {
+          "quote": "Tenía dudas sobre la precisión de la IA, pero ReceiptSort acierta el 98% de las veces. Sin embargo, el verdadero cambio de juego es el mapeo de plantillas—mis recibos se exportan exactamente como mi contador los necesita. Ya no hay reformateo manual.",
+          "name": "Jennifer Martinez",
+          "role": "Propietaria de Pequeño Negocio"
+        }
+      ]
+    },
+    "trustBadges": {
+      "securePayment": "Pago seguro por Stripe",
+      "gdpr": "Cumple con GDPR",
+      "encryption": "Encriptación SSL de 256 bits"
+    }
+  },
+  "support": {
+    "title": "¿Todavía tienes preguntas?",
+    "subtitle": "Nuestro equipo de soporte está aquí para ayudarte. Ponte en contacto y te responderemos en 24 horas.",
+    "emailUs": "Envíanos un correo",
+    "or": "o",
+    "contactForm": "Formulario de contacto"
+  },
+  "faq": {
+    "title": "Preguntas Frecuentes",
+    "subtitle": "Todo lo que necesitas saber sobre ReceiptSort",
+    "items": {
+      "accuracy": {
+        "question": "¿Qué tan precisa es la extracción por IA?",
+        "answer": "Nuestra IA alcanza una precisión del 98%+ en recibos claros y estándar. Siempre puedes editar manualmente cualquier dato extraído antes de exportar."
+      },
+      "formats": {
+        "question": "¿Qué formatos de archivo soportan?",
+        "answer": "Soportamos todos los formatos de imagen comunes (JPG, PNG, JPEG, WebP, TIFF, BMP, GIF) y archivos PDF de hasta 10MB por archivo."
+      },
+      "cost": {
+        "question": "¿Cuánto cuesta?",
+        "answer": "Usamos un sistema de créditos. Cada recibo cuesta 1 crédito. Los créditos comienzan en $0.067 cada uno para paquetes pequeños, o tan bajos como $0.067 cada uno al comprar al por mayor (ej., 150 por $9.99, 1500 por $99.99). Suscríbete mensualmente para obtener aún mejor valor."
+      },
+      "expiration": {
+        "question": "¿Los créditos expiran?",
+        "answer": "No, los créditos nunca expiran. Úsalos cuando los necesites."
+      },
+      "security": {
+        "question": "¿Están seguros mis datos?",
+        "answer": "Sí. Usamos encriptación de nivel bancario (SSL de 256 bits) y tus recibos se eliminan automáticamente después de 90 días. Nunca compartimos tus datos."
+      },
+      "export": {
+        "question": "¿Puedo exportar a QuickBooks o Xero?",
+        "answer": "Exportamos a formatos Excel y CSV, que son compatibles con QuickBooks, Xero y todos los principales software de contabilidad. Simplemente importa el archivo descargado en tu sistema de contabilidad."
+      },
+      "customTemplates": {
+        "question": "¿Qué son las Plantillas Personalizadas y por qué las necesito?",
+        "answer": "Las Plantillas Personalizadas le permiten crear formatos de exportación reutilizables adaptados a SUS necesidades—como declaraciones de IVA, diseños contables específicos o formularios de seguros.\n\nPor qué importan: Otras herramientas de recibos exportan a SU formato fijo. Luego pierde 2-3 minutos por documento reorganizando columnas, renombrando encabezados y reformateando para que coincida con su sistema contable o requisitos gubernamentales.\n\nCon ReceiptSort: Crea su plantilla ideal UNA VEZ con sus nombres exactos de columna (Monto IVA, Código de Proyecto, etc.). Nuestra IA mapea automáticamente todos los recibos futuros a las columnas de su plantilla—incluso si los recibos usan términos diferentes (Tax vs VAT vs Btw vs IVA).\n\nPrecios: Guarde hasta 10 plantillas GRATIS (sin cargos de créditos), luego reutilícelas ilimitadamente. Cada exportación cuesta solo 1 crédito, independientemente de la complejidad de la plantilla.\n\nEjemplo: Cree una plantilla con columnas: Fecha | Proveedor | Monto Neto | Monto IVA | Total | Categoría. Cada recibo que procese se exportará automáticamente a este formato exacto—sin reorganización manual necesaria."
+      },
+      "wrongExtraction": {
+        "question": "¿Qué pasa si la extracción es incorrecta?",
+        "answer": "Puedes editar manualmente cualquier dato extraído antes de exportar. Si la extracción falla completamente, reembolsaremos el crédito."
+      },
+      "refunds": {
+        "question": "¿Ofrecen reembolsos?",
+        "answer": "Sí, ofrecemos una garantía de devolución de dinero de 30 días en compras de créditos si no estás satisfecho."
+      },
+      "business": {
+        "question": "¿Puedo usar esto para mi negocio?",
+        "answer": "¡Absolutamente! Muchas pequeñas empresas, freelancers y contadores usan ReceiptSort para el seguimiento de gastos y contabilidad."
+      },
+      "software": {
+        "question": "¿Necesito instalar algún software?",
+        "answer": "No, ReceiptSort es 100% basado en web. Accede desde cualquier dispositivo con un navegador web."
+      }
+    }
+  },
+  "finalCTA": {
+    "title": "¿Listo para dejar de reorganizar datos de recibos?",
+    "subtitle": "Comienza gratis: 10 créditos + 10 plantillas personalizadas. No se requiere tarjeta de crédito.",
+    "button": "Comenzar a Procesar Recibos",
+    "viewPricing": "Ver Precios",
+    "trustIndicator": "Únete a freelancers, contadores y pequeñas empresas que procesan recibos en su propio formato—automáticamente.",
+    "trustBadges": {
+      "creditsNeverExpire": "Los créditos nunca expiran",
+      "templatesReusable": "Plantillas reutilizables ilimitadamente",
+      "moneyBack": "Garantía de devolución de 30 días",
+      "allSoftware": "Funciona con todo software de contabilidad"
+    }
+  },
+  "auth": {
+    "loginTitle": "Iniciar Sesión",
+    "loginSubtitle": "Ingresa tus credenciales para acceder a tu cuenta",
+    "signupTitle": "Crear Cuenta",
+    "signupSubtitle": "Regístrate para comenzar a organizar tus recibos",
+    "email": "Correo Electrónico",
+    "emailPlaceholder": "nombre@ejemplo.com",
+    "password": "Contraseña",
+    "passwordPlaceholder": "••••••••",
+    "confirmPassword": "Confirmar Contraseña",
+    "fullName": "Nombre Completo",
+    "fullNamePlaceholder": "Juan Pérez",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "noAccount": "¿No tienes una cuenta?",
+    "hasAccount": "¿Ya tienes una cuenta?",
+    "signIn": "Iniciar Sesión",
+    "signUp": "Registrarse",
+    "logIn": "Iniciar sesión",
+    "continueWithGoogle": "Continuar con Google",
+    "orContinueWithEmail": "O CONTINUAR CON CORREO ELECTRÓNICO",
+    "loading": "Cargando...",
+    "termsAgree": "Al registrarte, aceptas nuestros",
+    "termsOfService": "Términos de Servicio",
+    "privacyPolicy": "Política de Privacidad",
+    "and": "y",
+    "errors": {
+      "invalidEmail": "Dirección de correo electrónico inválida",
+      "passwordMin": "La contraseña debe tener al menos 6 caracteres",
+      "fullNameMin": "El nombre completo debe tener al menos 2 caracteres",
+      "passwordMismatch": "Las contraseñas no coinciden",
+      "invalidCredentials": "Correo electrónico o contraseña inválidos",
+      "emailNotConfirmed": "Por favor verifica tu correo electrónico antes de iniciar sesión",
+      "emailAlreadyRegistered": "Este correo electrónico ya está registrado",
+      "unexpectedError": "Ocurrió un error inesperado",
+      "googleSignInFailed": "Error al iniciar sesión con Google"
+    },
+    "success": {
+      "welcomeBack": "¡Bienvenido de nuevo!",
+      "accountCreated": "¡Cuenta creada exitosamente!",
+      "checkEmail": "Por favor revisa tu correo electrónico para confirmar tu cuenta antes de iniciar sesión"
+    }
+  },
+  "dashboard": {
+    "welcome": "Bienvenido de nuevo",
+    "overview": {
+      "title": "Resumen",
+      "subtitle": "Aquí tienes un resumen de tu gestión de recibos",
+      "lastExport": {
+        "never": "Nunca"
+      }
+    },
+    "uploadSection": {
+      "title": "Subir Recibos",
+      "dragDrop": "Arrastra y suelta imágenes de recibos aquí",
+      "dropHere": "Suelta archivos de recibos aquí",
+      "clickToBrowse": "o haz clic para explorar",
+      "or": "o",
+      "browse": "Explorar archivos",
+      "supported": "Soporta: PNG, JPG, JPEG, WEBP, TIFF, BMP, GIF, PDF (max 10MB)",
+      "supportedFormats": "Formatos soportados: PNG, JPG, JPEG, WEBP, TIFF, BMP, GIF, PDF",
+      "maxFileSize": "Tamaño máximo de archivo: 10MB por archivo",
+      "multipleFiles": "Sube varios archivos a la vez para un procesamiento más rápido",
+      "secureStorage": "Tus recibos se almacenarán de forma segura y estarán listos para el procesamiento con IA",
+      "creditCost": "El procesamiento cuesta 1 crédito por recibo"
+    },
+    "stats": {
+      "allTimeProcessed": "Total procesado",
+      "receiptsUploaded": "Recibos subidos",
+      "mostRecentExport": "Exportación más reciente"
+    },
+    "timePeriods": {
+      "thisMonth": "Este Mes",
+      "lastMonth": "Mes Pasado",
+      "thisYear": "Este Año",
+      "q1": "Q1",
+      "q2": "Q2",
+      "q3": "Q3",
+      "q4": "Q4",
+      "allTime": "Todo el Tiempo"
+    },
+    "timeAgo": {
+      "daysAgo": "días",
+      "dayAgo": "día",
+      "about17HoursAgo": "hace aproximadamente 17 horas"
+    },
+    "recentUploads": {
+      "title": "Subidas Recientes",
+      "subtitle": "Tus recibos subidos más recientemente"
+    },
+    "receiptsPage": {
+      "title": "Recibos",
+      "subtitle": "Ver y gestionar todos tus recibos subidos",
+      "quickExport": "Exportación Rápida",
+      "quickSearch": "Búsqueda rápida...",
+      "allStatus": "Todos los Estados",
+      "show": "Mostrar",
+      "filters": "Filtros",
+      "quickActions": "Acciones Rápidas",
+      "quickActionsSubtitle": "Ver recibos o procesar los pendientes",
+      "viewAllReceipts": "Ver Todos los Recibos",
+      "exportSelected": "Exportar Seleccionados ({count})",
+      "noMatchingReceipts": "No hay recibos que coincidan con tus criterios de búsqueda",
+      "dropdownMenu": {
+        "viewDetails": "Ver Detalles",
+        "editData": "Editar Datos",
+        "delete": "Eliminar",
+        "process": "Procesar (1 crédito)",
+        "processing": "Procesando...",
+        "retry": "Reintentar (1 crédito)",
+        "retrying": "Reintentando..."
+      },
+      "filterPanel": {
+        "search": "Buscar",
+        "searchPlaceholder": "Nombre del comerciante, monto...",
+        "fromDate": "Fecha Desde",
+        "toDate": "Fecha Hasta",
+        "pickDate": "Elegir una fecha",
+        "minAmount": "Monto Mínimo",
+        "maxAmount": "Monto Máximo",
+        "categories": "Categorías",
+        "status": "Estado",
+        "applyFilters": "Aplicar Filtros",
+        "clear": "Limpiar",
+        "hide": "Ocultar"
+      },
+      "processing": {
+        "processing": "Procesando...",
+        "processAllButton": "Procesar Todos los Pendientes ({count})",
+        "dialogTitle": "¿Procesar Todos los Recibos Pendientes?",
+        "dialogDescription": "Esto procesará {count} recibo{count, plural, one {} other {s}} usando {count} crédito{count, plural, one {} other {s}}.",
+        "receiptsToProcess": "Recibos a procesar:",
+        "creditsRequired": "Créditos requeridos:",
+        "yourCredits": "Tus créditos:",
+        "insufficientCreditsWarning": "Necesitas {creditsNeeded} crédito{creditsNeeded, plural, one {} other {s}} más para procesar todos los recibos. Solo se procesarán los primeros {userCredits} recibo{userCredits, plural, one {} other {s}}.",
+        "processingTimeEstimate": "El procesamiento tomará aproximadamente {seconds} segundos (1-2 segundos por recibo).",
+        "cancel": "Cancelar",
+        "processAll": "Procesar Todos",
+        "processPartial": "Procesar {count}",
+        "toast": {
+          "successTitle": "¡Todos los recibos procesados con éxito!",
+          "successDescription": "{successful} recibo{successful, plural, one {} other {s}} procesado{successful, plural, one {} other {s}}. {creditsUsed} crédito{creditsUsed, plural, one {} other {s}} usado{creditsUsed, plural, one {} other {s}}.",
+          "partialTitle": "Procesamiento completado con algunas fallas",
+          "partialDescription": "{successful} exitoso{successful, plural, one {} other {s}}, {failed} fallido{failed, plural, one {} other {s}}. {creditsUsed} crédito{creditsUsed, plural, one {} other {s}} usado{creditsUsed, plural, one {} other {s}}.",
+          "errorTitle": "Todos los recibos fallaron al procesar",
+          "errorDescription": "Por favor, revisa los recibos individuales para detalles de error.",
+          "failedTitle": "Error al procesar recibos",
+          "unknownError": "Error desconocido"
+        }
+      },
+      "noReceipts": "Aún no hay recibos",
+      "noReceiptsDescription": "Sube tu primer recibo para comenzar",
+      "uploadButton": "Subir recibo"
+    },
+    "receiptsTable": {
+      "title": "Tus Recibos",
+      "noReceipts": "Aún no hay recibos",
+      "uploadFirst": "Sube tu primer recibo para comenzar",
+      "columns": {
+        "fileName": "Nombre del Archivo",
+        "date": "Fecha",
+        "merchant": "Comerciante",
+        "amount": "Monto",
+        "category": "Categoría",
+        "status": "Estado",
+        "uploaded": "Subido",
+        "actions": "Acciones"
+      },
+      "status": {
+        "pending": "Pendiente",
+        "processing": "Procesando",
+        "completed": "Completado",
+        "failed": "Fallido"
+      }
+    },
+    "credits": {
+      "title": "Créditos",
+      "balance": "Saldo Actual",
+      "creditsRemaining": "créditos restantes",
+      "description": "Créditos disponibles para procesar recibos",
+      "manageSubtitle": "Gestiona tus créditos para procesar recibos",
+      "availableCredits": "Tus créditos disponibles",
+      "buyCredits": "Comprar Créditos",
+      "history": "Historial de Créditos",
+      "oneTimePurchase": "Compra única",
+      "monthlySubscription": "Suscripción mensual",
+      "packages": {
+        "title": "Elige un paquete",
+        "credits": "créditos",
+        "mostPopular": "Más Popular",
+        "bestValue": "Mejor Valor",
+        "basic": {
+          "name": "Básico",
+          "description": "Perfecto para uso ocasional",
+          "features": [
+            "10 créditos de procesamiento de recibos",
+            "Extracción de datos con IA",
+            "Exportación Excel y CSV",
+            "Soporte por correo electrónico",
+            "Los créditos nunca expiran"
+          ]
+        },
+        "popular": {
+          "name": "Popular",
+          "description": "Ideal para pequeñas empresas",
+          "features": [
+            "50 créditos de procesamiento de recibos",
+            "Extracción de datos con IA",
+            "Exportación Excel y CSV",
+            "Soporte prioritario por correo",
+            "Los créditos nunca expiran",
+            "20% de ahorro"
+          ]
+        },
+        "business": {
+          "name": "Empresa",
+          "description": "Para usuarios de alto volumen",
+          "features": [
+            "200 créditos de procesamiento de recibos",
+            "Extracción de datos con IA",
+            "Exportación Excel y CSV",
+            "Soporte prioritario por correo",
+            "Los créditos nunca expiran",
+            "40% de ahorro"
+          ]
+        }
+      },
+      "transactions": {
+        "title": "Historial de Transacciones",
+        "subtitle": "Tu historial de transacciones de créditos",
+        "purchase": "Compra",
+        "usage": "Uso",
+        "refund": "Reembolso",
+        "bonus": "Bonificación",
+        "purchasedBasicPackage": "Paquete básico comprado",
+        "date": "Fecha",
+        "type": "Tipo",
+        "amount": "Monto",
+        "description": "Descripción",
+        "noTransactions": "Aún no hay transacciones",
+        "purchaseCreditsToStart": "Compra créditos para comenzar",
+        "loading": "Cargando tu historial de transacciones...",
+        "showing": "Mostrando {from} a {to} de {total} transacciones",
+        "previous": "Anterior",
+        "next": "Siguiente",
+        "page": "Página {current} de {total}"
+      },
+      "subscriptions": {
+        "title": "Suscripciones Mensuales",
+        "subtitle": "Obtén créditos automáticamente cada mes. Cancela en cualquier momento.",
+        "bestValue": "Mejor Valor",
+        "save": "Ahorra {percent}%",
+        "creditsPerMonth": "Créditos por mes",
+        "perMonth": "por mes",
+        "receiptsPerMonth": "{count} recibos por mes",
+        "aiPoweredExtraction": "Extracción con IA",
+        "automaticRenewal": "Renovación automática mensual",
+        "prioritySupport": "Soporte prioritario",
+        "bulkProcessing": "Procesamiento masivo",
+        "cancelAnytime": "Cancela en cualquier momento",
+        "subscribe": "Suscribirse",
+        "processing": "Procesando...",
+        "disclaimer": "Las suscripciones se renuevan automáticamente. Gestiona o cancela en cualquier momento desde la configuración de tu cuenta.",
+        "plans": {
+          "basic": {
+            "name": "Basic",
+            "description": "Perfecto para usuarios regulares"
+          },
+          "pro": {
+            "name": "Pro",
+            "description": "Mejor para usuarios intensivos"
+          },
+          "business": {
+            "name": "Business",
+            "description": "Para empresas de alto volumen"
+          }
+        }
+      }
+    },
+    "exports": {
+      "title": "Exportaciones",
+      "subtitle": "Exportar y gestionar tus datos de recibos",
+      "exportSection": {
+        "title": "Exportar Recibos",
+        "description": "Filtrar y exportar tus recibos completados"
+      },
+      "history": {
+        "title": "Historial de Exportaciones",
+        "subtitle": "Ver tus exportaciones de recibos pasadas"
+      },
+      "buttons": {
+        "exportAll": "Exportar Todo",
+        "filters": "Filtros",
+        "hide": "Ocultar",
+        "clearFilters": "Limpiar Todos los Filtros",
+        "loading": "Cargando..."
+      },
+      "filters": {
+        "fromDate": "Fecha Desde",
+        "toDate": "Fecha Hasta",
+        "merchantName": "Nombre del Comerciante",
+        "amountRange": "Rango de Monto",
+        "min": "Mín",
+        "max": "Máx",
+        "pickDate": "Elegir una fecha",
+        "searchPlaceholder": "Buscar por nombre de comerciante...",
+        "activeFilters": "Filtros Activos",
+        "from": "Desde",
+        "to": "Hasta",
+        "merchant": "Comerciante",
+        "minAmount": "Monto Mínimo",
+        "maxAmount": "Monto Máximo"
+      },
+      "noExports": "Aún no hay exportaciones",
+      "noExportsDescription": "Exporta recibos desde el panel para verlos aquí",
+      "type": "Tipo",
+      "fileName": "Nombre del Archivo",
+      "receipts": "recibos",
+      "showingRecent": "Mostrando {count, plural, one {la exportación más reciente} other {las {count} exportaciones más recientes}}",
+      "columns": {
+        "date": "Fecha de Exportación",
+        "receipts": "Recibos",
+        "format": "Formato",
+        "download": "Descargar"
+      }
+    },
+    "profile": {
+      "title": "Configuración del Perfil",
+      "subtitle": "Gestione la configuración de su cuenta y preferencias",
+      "profileInfo": "Información del Perfil",
+      "profileInfoDescription": "Actualice su información personal",
+      "loadingProfile": "Cargando su perfil...",
+      "personalInfo": "Información Personal",
+      "name": "Nombre",
+      "fullName": "Nombre Completo",
+      "fullNamePlaceholder": "Ingrese su nombre completo",
+      "email": "Correo Electrónico",
+      "emailCannotBeChanged": "El correo electrónico no se puede cambiar",
+      "language": "Idioma",
+      "timezone": "Zona Horaria",
+      "updateProfile": "Actualizar Perfil",
+      "saveChanges": "Guardar Cambios",
+      "saving": "Guardando...",
+      "changePassword": "Cambiar Contraseña",
+      "currentPassword": "Contraseña Actual",
+      "newPassword": "Nueva Contraseña",
+      "accountInfo": "Información de la Cuenta",
+      "accountInfoDescription": "Ver los detalles de su cuenta",
+      "userId": "ID de Usuario",
+      "accountCreated": "Cuenta Creada",
+      "lastSignIn": "Último Inicio de Sesión",
+      "user": "Usuario",
+      "signOut": "Cerrar sesión",
+      "home": "Inicio",
+      "creditsLabel": "Créditos",
+      "toasts": {
+        "profileUpdated": "Perfil actualizado exitosamente",
+        "profileUpdateError": "Error al actualizar el perfil",
+        "profileLoadError": "Error al cargar el perfil"
+      }
+    }
+  },
+  "pricing": {
+    "title": "Precios simples y transparentes",
+    "subtitle": "Elige el plan que funcione para ti",
+    "subheadline": "Paga según uses o suscríbete y ahorra",
+    "currentBalance": "Tu saldo actual",
+    "credits": "créditos",
+    "perCredit": "por crédito",
+    "perReceipt": "por recibo",
+    "creditPacks": "Paquetes de Créditos",
+    "creditPackagesTitle": "Paquetes de Créditos",
+    "subscriptions": "Suscripciones",
+    "buyNow": "Comprar Ahora",
+    "subscribe": "Suscribirse",
+    "popular": "Más Popular",
+    "purchaseCredits": "Comprar Créditos",
+    "getStarted": "Comenzar",
+    "readyTitle": "¿Listo para comenzar?",
+    "readySubtitle": "Comienza con 10 créditos gratis, sin tarjeta de crédito requerida",
+    "goToDashboard": "Ir al Panel",
+    "startFree": "Empezar Gratis",
+    "signIn": "Iniciar Sesión",
+    "tryItFree": "Pruébalo gratis",
+    "freeCreditsNoCreditCard": "10 créditos gratis • Sin tarjeta de crédito requerida",
+    "features": {
+      "allFeatures": "Todas las características incluidas",
+      "aiExtraction": "Extracción con IA",
+      "exportFormats": "Exportación Excel y CSV",
+      "support": "Soporte por correo",
+      "security": "Seguridad de nivel bancario",
+      "gdpr": "Cumple con GDPR"
+    },
+    "faq": {
+      "title": "Preguntas Frecuentes",
+      "howCreditsWork": {
+        "question": "¿Cómo funcionan los créditos?",
+        "answer": "Cada recibo que subes y procesas cuesta 1 crédito. Los créditos se deducen solo cuando la IA extrae exitosamente datos de tu recibo. Puedes comprar créditos en paquetes o suscribirte para créditos mensuales con descuento."
+      },
+      "doCreditsExpire": {
+        "question": "¿Los créditos expiran?",
+        "answer": "No, los créditos nunca expiran. Una vez que compras créditos, permanecen en tu cuenta hasta que los uses. Esto te da flexibilidad completa para usarlos a tu propio ritmo."
+      },
+      "canIGetRefund": {
+        "question": "¿Puedo obtener un reembolso?",
+        "answer": "¡Sí! Ofrecemos una garantía de devolución de dinero de 30 días. Si no estás satisfecho con nuestro servicio, contáctanos dentro de los 30 días de tu compra para un reembolso completo de créditos no utilizados."
+      },
+      "wrongExtraction": {
+        "question": "¿Qué pasa si la extracción es incorrecta?",
+        "answer": "Si la extracción por IA contiene errores o no cumple tus expectativas, contacta a nuestro equipo de soporte. Revisaremos el caso y proporcionaremos un reintento gratuito o reembolso de crédito si la calidad de extracción estuvo por debajo de nuestros estándares."
+      },
+      "needSubscription": {
+        "question": "¿Necesito una suscripción?",
+        "answer": "No, las suscripciones son completamente opcionales. Puedes comprar créditos según los necesites con nuestros paquetes de pago por uso. Las suscripciones están disponibles si quieres ahorrar dinero con créditos mensuales con descuento, pero eres libre de usar el servicio como mejor te funcione."
+      }
+    }
+  },
+  "footer": {
+    "description": "Extracción de datos de recibos con IA para empresas",
+    "product": "Producto",
+    "company": "Empresa",
+    "legal": "Legal",
+    "support": "Soporte",
+    "termsOfService": "Términos de Servicio",
+    "privacyPolicy": "Política de Privacidad",
+    "cookiePolicy": "Política de Cookies",
+    "allRightsReserved": "Todos los derechos reservados"
+  },
+  "navigation": {
+    "home": "Inicio",
+    "features": "Características",
+    "pricing": "Precios",
+    "howItWorks": "Cómo Funciona",
+    "faq": "FAQ",
+    "contact": "Contacto",
+    "dashboard": "Panel",
+    "login": "Iniciar Sesión",
+    "signup": "Registrarse",
+    "about": "Acerca de",
+    "more": "Más",
+    "customTemplates": "Plantillas Personalizadas"
+  },
+  "contact": {
+    "title": "Ponte en Contacto",
+    "subtitle": "¿Tienes preguntas? Nos encantaría saber de ti. Envíanos un mensaje y te responderemos en 24 horas.",
+    "backToHome": "Volver al Inicio",
+    "sendMessage": "Envíanos un Mensaje",
+    "formDescription": "Completa el formulario a continuación y te responderemos lo antes posible.",
+    "name": "Nombre",
+    "namePlaceholder": "Tu nombre",
+    "email": "Correo Electrónico",
+    "emailPlaceholder": "tu@correo.com",
+    "subject": "Asunto",
+    "subjectPlaceholder": "¿Cómo podemos ayudarte?",
+    "message": "Mensaje",
+    "messagePlaceholder": "Cuéntanos más sobre tu consulta...",
+    "sendButton": "Enviar Mensaje",
+    "sending": "Enviando...",
+    "successMessage": "¡Mensaje enviado con éxito! Te responderemos en 24 horas.",
+    "responseTime": "Normalmente respondemos en 24 horas",
+    "preferEmail": "¿Prefieres el correo electrónico?",
+    "reachDirectly": "También puedes contactarnos directamente por correo:",
+    "frequentlyAskedQuestions": "Preguntas Frecuentes",
+    "faqDescription": "Antes de contactarnos, podrías encontrar tu respuesta en nuestra sección de FAQ.",
+    "viewFaq": "Ver FAQ",
+    "quickStartGuide": "Guía de Inicio Rápido",
+    "quickStartDescription": "¿Nuevo en ReceiptSort? Aprende cómo empezar en 3 sencillos pasos.",
+    "howItWorks": "Cómo Funciona"
+  },
+  "creditPackages": {
+    "title": "Comprar Créditos",
+    "starter": {
+      "name": "Inicial",
+      "description": "Perfecto para probar el servicio"
+    },
+    "basic": {
+      "name": "Básico",
+      "description": "Ideal para usuarios regulares"
+    },
+    "pro": {
+      "name": "Pro",
+      "description": "Mejor valor para usuarios intensivos"
+    },
+    "business": {
+      "name": "Empresa",
+      "description": "Para negocios de alto volumen"
+    },
+    "credits": "Créditos",
+    "perCredit": "por crédito",
+    "processReceipts": "Procesar {count} recibos",
+    "aiPoweredExtraction": "Extracción con IA",
+    "prioritySupport": "Soporte prioritario",
+    "bulkProcessing": "Procesamiento masivo",
+    "neverExpires": "Nunca expira",
+    "purchase": "Comprar",
+    "processing": "Procesando...",
+    "bestValue": "Mejor Valor",
+    "save": "Ahorra {percent}%"
+  },
+  "receiptDetails": {
+    "title": "Detalles del Recibo",
+    "receiptPreview": "Vista Previa del Recibo",
+    "documentType": "Tipo de Documento",
+    "merchantName": "Nombre del Comerciante",
+    "invoiceNumber": "Número de Factura",
+    "amount": "Monto",
+    "currency": "Moneda",
+    "receiptDate": "Fecha del Recibo",
+    "category": "Categoría",
+    "subtotal": "Subtotal (Antes de Impuestos)",
+    "taxAmount": "Monto de Impuestos",
+    "dueDate": "Fecha de Vencimiento",
+    "paymentMethod": "Método de Pago",
+    "purchaseOrderNumber": "Número de Orden de Compra",
+    "paymentReference": "Referencia de Pago",
+    "vendorTaxId": "ID Fiscal del Proveedor (IVA/EIN/BTW)",
+    "vendorAddress": "Dirección del Proveedor",
+    "lineItems": "Artículos de Línea",
+    "lineItemsCount": "Artículos de Línea ({count})",
+    "patientName": "Nombre del Paciente",
+    "medicalInformation": "Información Médica",
+    "patientDob": "Fecha de Nacimiento del Paciente",
+    "treatmentDate": "Fecha de Tratamiento",
+    "insuranceClaimNumber": "Número de Reclamo de Seguro",
+    "diagnosisCodes": "Códigos de Diagnóstico (ICD)",
+    "procedureCodes": "Códigos de Procedimiento (CPT)",
+    "providerId": "ID del Proveedor (AGB/NPI)",
+    "insuranceCoveredAmount": "Monto Cubierto por Seguro",
+    "patientResponsibilityAmount": "Monto a Pagar por Paciente",
+    "insuranceBreakdown": "Desglose del Seguro",
+    "totalTreatmentCost": "Costo Total del Tratamiento",
+    "insuranceCovered": "Cubierto por Seguro",
+    "youPay": "Usted Paga",
+    "notes": "Notas",
+    "saveChanges": "Guardar Cambios",
+    "saving": "Guardando...",
+    "delete": "Eliminar",
+    "deleting": "Eliminando...",
+    "retryProcessing": "Reintentar Procesamiento",
+    "retrying": "Reintentando...",
+    "documentTypes": {
+      "receipt": "Recibo",
+      "invoice": "Factura",
+      "medicalInvoice": "Factura Médica",
+      "bill": "Cuenta"
+    },
+    "categories": {
+      "foodDining": "Comida y Restaurantes",
+      "transportation": "Transporte",
+      "shopping": "Compras",
+      "officeSupplies": "Suministros de Oficina",
+      "travel": "Viajes",
+      "entertainment": "Entretenimiento",
+      "utilities": "Servicios Públicos",
+      "healthcare": "Atención Médica",
+      "other": "Otro"
+    },
+    "paymentMethods": {
+      "cash": "Efectivo",
+      "creditCard": "Tarjeta de Crédito",
+      "debitCard": "Tarjeta de Débito",
+      "bankTransfer": "Transferencia Bancaria",
+      "other": "Otro"
+    },
+    "lineItemColumns": {
+      "lineNumber": "#",
+      "description": "Descripción",
+      "quantity": "Cant.",
+      "unitPrice": "Precio",
+      "lineTotal": "Total",
+      "itemCode": "Código"
+    }
+  },
+  "billing": {
+    "title": "Facturación e Historial de compras",
+    "description": "Vea y descargue sus facturas de compra para contabilidad y declaración de impuestos",
+    "noInvoices": "Sin historial de compras",
+    "noInvoicesDescription": "Compre créditos para comenzar y recibir facturas de sus transacciones",
+    "purchaseCredits": "Comprar créditos"
+  },
+  "account": {
+    "title": "Configuración de cuenta",
+    "description": "Administre su información de cuenta y preferencias",
+    "profileTitle": "Información de perfil",
+    "profileDescription": "Su información personal y datos de contacto",
+    "fullName": "Nombre completo",
+    "email": "Dirección de correo electrónico",
+    "userId": "ID de usuario",
+    "notSet": "No establecido",
+    "creditsTitle": "Saldo de créditos",
+    "creditsDescription": "Su saldo de créditos actual para el procesamiento de recibos",
+    "currentCredits": "Créditos actuales",
+    "purchaseCredits": "Comprar más créditos",
+    "billingTitle": "Facturación y Facturas",
+    "billingDescription": "Vea su historial de compras y descargue facturas",
+    "viewBilling": "Ver historial de facturación",
+    "accountCreated": "Cuenta creada el",
+    "enterName": "Ingrese su nombre completo",
+    "saveChanges": "Guardar cambios",
+    "updateSuccess": "¡Perfil actualizado exitosamente!",
+    "updateError": "Error al actualizar el perfil. Por favor, inténtelo de nuevo.",
+    "emailCannotChange": "La dirección de correo electrónico no se puede cambiar"
+  },
+  "whatMakesUsDifferent": {
+    "title": "Qué Hace Diferente a ReceiptSort",
+    "others": {
+      "title": "Otras Herramientas de Recibos",
+      "fixedFormat": "Exportar a SU formato fijo",
+      "manualReorganization": "Usted reorganiza datos manualmente (2-3 min/documento)",
+      "subscription": "Suscripción de $20-60/mes requerida",
+      "receiptsOnly": "Solo recibos"
+    },
+    "receiptSort": {
+      "title": "ReceiptSort",
+      "badge": "Mejor Enfoque",
+      "aiAdapts": "IA se adapta a SU plantilla automáticamente",
+      "yourFormat": "Datos exportados en su formato (sin reorganización)",
+      "payPerDocument": "Pago por documento ($0.05-0.07, créditos nunca expiran)",
+      "allDocuments": "Recibos, facturas Y notas médicas"
+    },
+    "savingsText": "Ahorre 2-3 minutos por documento eliminando la reorganización manual.",
+    "freeTemplates": "Cree 10 plantillas personalizadas GRATIS, reutilice ilimitadamente.",
+    "cta": "Ver Cómo Funciona el Mapeo de Plantillas"
+  },
+  "useCases": {
+    "title": "Diseñado para Su Flujo de Trabajo",
+    "subtitle": "ReceiptSort se adapta a cómo USTED trabaja—no al revés",
+    "items": {
+      "accountant": {
+        "tag": "Perfecto para: Contadores",
+        "title": "Contador con Múltiples Clientes",
+        "description": "Cree 5 plantillas (una por formato de cliente). IA mapea todos los recibos automáticamente a la plantilla correcta del cliente. Facture clientes con precisión sin reorganización manual. Ahorre 15+ horas por mes."
+      },
+      "medical": {
+        "tag": "Perfecto para: Prácticas Médicas",
+        "title": "Práctica Médica",
+        "description": "Cree plantillas personalizadas de reclamación de seguro. IA extrae de recibos médicos y facturas, mapea al formato de SU compañía de seguros. No más entrada manual de datos para reembolsos."
+      },
+      "euFreelancer": {
+        "tag": "Perfecto para: Freelancers",
+        "title": "Freelancer (Declaraciones de Impuestos/IVA)",
+        "description": "Cree plantillas de declaración de impuestos que coincidan con los requisitos gubernamentales de su país. La IA maneja automáticamente diferentes formatos de recibos (Btw, VAT, MwSt, TVA, IVA, GST, Impuesto de Ventas). Exportación lista para enviar."
+      },
+      "variableVolume": {
+        "tag": "Perfecto para: Volumen Variable",
+        "title": "Negocio de Volumen Variable",
+        "description": "Procese 10 documentos un mes, 100 el siguiente. Pague solo por lo que usa ($0.05-0.07 por documento). Los créditos nunca expiran. Sin suscripción mensual derrochadora."
+      }
+    }
+  },
+  "privacyPage": {
+    "backToHome": "Volver al Inicio",
+    "title": "Política de Privacidad",
+    "lastUpdated": "Última actualización: 6 de octubre de 2025",
+    "sections": {
+      "introduction": {
+        "title": "1. Introducción",
+        "content": "Bienvenido a ReceiptSorter (\"nosotros\", \"nuestro\"). Estamos comprometidos a proteger su información personal y su derecho a la privacidad. Esta Política de Privacidad explica cómo recopilamos, usamos, divulgamos y protegemos su información cuando utiliza nuestro servicio de procesamiento de recibos."
+      },
+      "informationWeCollect": {
+        "title": "2. Información que Recopilamos",
+        "intro": "Recopilamos información que nos proporciona directamente:",
+        "items": [
+          "Información de cuenta (dirección de correo electrónico, nombre)",
+          "Imágenes de recibos y archivos PDF que carga",
+          "Información de pago (procesada de forma segura a través de Stripe)",
+          "Datos de uso y analítica"
+        ]
+      },
+      "howWeUse": {
+        "title": "3. Cómo Usamos Su Información",
+        "intro": "Usamos su información para:",
+        "items": [
+          "Proporcionar y mantener nuestro servicio de procesamiento de recibos",
+          "Procesar sus recibos usando tecnología IA",
+          "Procesar pagos y administrar su cuenta",
+          "Enviarle actualizaciones del servicio y comunicaciones promocionales",
+          "Mejorar nuestros servicios y desarrollar nuevas funciones",
+          "Cumplir con obligaciones legales"
+        ]
+      },
+      "dataSecurity": {
+        "title": "4. Seguridad de Datos",
+        "intro": "Implementamos medidas de seguridad estándar de la industria para proteger sus datos:",
+        "items": [
+          "Cifrado SSL de 256 bits para transmisión de datos",
+          "Almacenamiento en la nube seguro con controles de acceso",
+          "Eliminación automática de archivos de recibos después de 90 días",
+          "Auditorías de seguridad y actualizaciones regulares"
+        ]
+      },
+      "dataSharing": {
+        "title": "5. Compartir Datos",
+        "intro": "No vendemos su información personal. Podemos compartir sus datos con:",
+        "items": [
+          "Proveedores de servicios (OpenAI para procesamiento de recibos, Stripe para pagos)",
+          "Autoridades policiales cuando lo exija la ley",
+          "Socios comerciales con su consentimiento explícito"
+        ]
+      },
+      "yourRights": {
+        "title": "6. Sus Derechos",
+        "intro": "Bajo el RGPD y otras leyes de privacidad, tiene derecho a:",
+        "items": [
+          "Acceder a sus datos personales",
+          "Corregir datos inexactos",
+          "Solicitar la eliminación de sus datos",
+          "Exportar sus datos en un formato portable",
+          "Rechazar comunicaciones de marketing",
+          "Presentar una queja ante una autoridad supervisora"
+        ]
+      },
+      "cookies": {
+        "title": "7. Cookies",
+        "content": "Usamos cookies esenciales para proporcionar nuestro servicio y cookies de análisis opcionales para mejorar la experiencia del usuario. Puede controlar las preferencias de cookies a través de la configuración de su navegador."
+      },
+      "dataRetention": {
+        "title": "8. Retención de Datos",
+        "content": "Retenemos sus datos solo el tiempo necesario para proporcionar nuestros servicios y cumplir con obligaciones legales. Los archivos de recibos se eliminan automáticamente después de 90 días. Los datos de cuenta se retienen hasta que solicite su eliminación."
+      },
+      "childrensPrivacy": {
+        "title": "9. Privacidad de Menores",
+        "content": "Nuestro servicio no está destinado a menores de 18 años. No recopilamos datos de menores a sabiendas."
+      },
+      "changes": {
+        "title": "10. Cambios a Esta Política",
+        "content": "Podemos actualizar esta Política de Privacidad de vez en cuando. Le notificaremos cualquier cambio publicando la nueva política en esta página y actualizando la fecha de \"Última actualización\"."
+      },
+      "contact": {
+        "title": "11. Contáctenos",
+        "intro": "Si tiene preguntas sobre esta Política de Privacidad, contáctenos en:",
+        "email": "Correo electrónico: support@seenano.nl",
+        "contactForm": "Formulario de contacto: receiptsort.com/contact"
+      }
+    }
+  },
+  "termsPage": {
+    "backToHome": "Volver al Inicio",
+    "title": "Términos de Servicio",
+    "lastUpdated": "Última actualización: 6 de octubre de 2025",
+    "sections": {
+      "acceptance": {
+        "title": "1. Aceptación de los Términos",
+        "content": "Al acceder o usar ReceiptSorter (\"el Servicio\"), usted acepta estar sujeto a estos Términos de Servicio (\"Términos\"). Si no está de acuerdo con estos Términos, no use el Servicio."
+      },
+      "description": {
+        "title": "2. Descripción del Servicio",
+        "content": "ReceiptSorter es un servicio de procesamiento de recibos basado en la nube que utiliza inteligencia artificial para extraer datos de imágenes de recibos y PDFs. El Servicio le permite cargar recibos, extraer información del comerciante, montos, fechas y otros datos, y exportar los resultados a formatos Excel o CSV."
+      },
+      "userAccounts": {
+        "title": "3. Cuentas de Usuario",
+        "intro": "Para usar el Servicio, debe:",
+        "items": [
+          "Crear una cuenta con información precisa",
+          "Mantener la seguridad de las credenciales de su cuenta",
+          "Tener al menos 18 años",
+          "Notificarnos inmediatamente de cualquier acceso no autorizado",
+          "Ser responsable de toda la actividad bajo su cuenta"
+        ]
+      },
+      "credits": {
+        "title": "4. Créditos y Pago",
+        "content": "El Servicio opera con un sistema basado en créditos. Cada recibo procesado cuesta 1 crédito. Los créditos se pueden comprar a través de nuestro sitio web usando el procesamiento de pagos de Stripe. Los créditos nunca expiran. Los precios están sujetos a cambios con aviso. Todas las ventas son finales a menos que se indique lo contrario en nuestra política de reembolso."
+      },
+      "usePolicy": {
+        "title": "5. Uso Aceptable",
+        "intro": "Usted acepta no:",
+        "items": [
+          "Cargar contenido ilegal, fraudulento o dañino",
+          "Intentar realizar ingeniería inversa o hackear el Servicio",
+          "Usar el Servicio para violar leyes o regulaciones",
+          "Compartir las credenciales de su cuenta con otros",
+          "Usar scripts automatizados para abusar del Servicio"
+        ]
+      },
+      "intellectualProperty": {
+        "title": "6. Propiedad Intelectual",
+        "content": "El Servicio, incluido todo el contenido, funciones y funcionalidad, es propiedad de ReceiptSorter y está protegido por leyes internacionales de derechos de autor, marcas registradas y otras leyes de propiedad intelectual. Usted conserva la propiedad de sus recibos cargados y datos extraídos."
+      },
+      "dataProcessing": {
+        "title": "7. Procesamiento de Datos",
+        "content": "Procesamos sus datos de recibos utilizando GPT-4 Vision AI de OpenAI. Los archivos de recibos se almacenan de forma segura y se eliminan automáticamente después de 90 días. Consulte nuestra Política de Privacidad para obtener detalles sobre cómo manejamos sus datos."
+      },
+      "warranties": {
+        "title": "8. Garantías y Exenciones de Responsabilidad",
+        "content": "EL SERVICIO SE PROPORCIONA \"TAL CUAL\" SIN GARANTÍAS DE NINGÚN TIPO. No garantizamos una precisión del 100% en la extracción de datos de recibos. Usted es responsable de verificar los datos extraídos antes de su uso."
+      },
+      "limitation": {
+        "title": "9. Limitación de Responsabilidad",
+        "content": "EN LA MÁXIMA MEDIDA PERMITIDA POR LA LEY, RECEIPTSORT NO SERÁ RESPONSABLE DE DAÑOS INDIRECTOS, INCIDENTALES, ESPECIALES, CONSECUENTES O PUNITIVOS QUE SURJAN DEL USO DEL SERVICIO."
+      },
+      "termination": {
+        "title": "10. Terminación",
+        "content": "Nos reservamos el derecho de suspender o terminar su cuenta en cualquier momento por violación de estos Términos. Puede eliminar su cuenta en cualquier momento a través de la configuración de su cuenta."
+      },
+      "changes": {
+        "title": "11. Cambios en los Términos",
+        "content": "Podemos modificar estos Términos en cualquier momento. Le notificaremos cambios significativos por correo electrónico o a través del Servicio. El uso continuado después de los cambios constituye aceptación."
+      },
+      "governing": {
+        "title": "12. Ley Aplicable",
+        "content": "Estos Términos se rigen por las leyes de los Países Bajos. Cualquier disputa se resolverá en los tribunales de los Países Bajos."
+      },
+      "contact": {
+        "title": "13. Contacto",
+        "intro": "¿Preguntas sobre estos Términos? Contáctenos en:",
+        "email": "Correo electrónico: support@seenano.nl",
+        "contactForm": "Formulario de contacto: receiptsort.com/contact"
+      }
+    }
+  }
+}
